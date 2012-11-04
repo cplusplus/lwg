@@ -45,7 +45,7 @@ it's a template. What is the required type?
 <li>
 <p>
 "epoch" is purposefully not defined beyond the common English
-<a href="http://www.dictionary.net/epoch">definition</a>.  The C standard
+<a href="http://definitions.dictionary.net/epoch">definition</a>.  The C standard
 also chose not to define epoch, though POSIX did.  I believe it is a strength
 of the C standard that epoch is not defined.  When it is known that two <tt>time_point</tt>s
 refer to the same epoch, then a definition of the epoch is not needed to compare

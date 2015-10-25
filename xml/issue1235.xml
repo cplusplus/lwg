@@ -3,11 +3,12 @@
   <!ENTITY nbsp "&#160;">
 ] >
 
-<issue num="1235" status="LEWG">
+<issue num="1235" status="SG6">
 <title>Issue with C++0x random number proposal</title>
 <section><sref ref="[rand.concept.dist]"/></section>
 <submitter>Matthias Troyer</submitter>
 <date>12 Oct 2009</date>
+<priority>2</priority>
 
 <discussion>
 <p>
@@ -114,6 +115,14 @@ This function can be overloaded for optimized enginges like
 <blockquote><p>
 NAD Future.  No time to add this feature for C++0X.
 </p></blockquote>
+
+<note>
+2015-10 Kona:
+</note>
+
+<p>
+Numerics SG should take this.
+</p>
 
 </discussion>
 

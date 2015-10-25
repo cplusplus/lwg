@@ -3,7 +3,7 @@
   <!ENTITY nbsp "&#160;">
 ] >
 
-<issue num="1488" status="LEWG">
+<issue num="1488" status="SG1">
 <title>Improve interoperability between the C++0x and C1x threads APIs</title>
 <section><sref ref="[thread.mutex]"/></section>
 <submitter>INCITS</submitter>

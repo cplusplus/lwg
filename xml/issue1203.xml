@@ -6,6 +6,7 @@
 <section><sref ref="[ostream.rvalue]"/><sref ref="[istream.rvalue]"/></section>
 <submitter>Howard Hinnant</submitter>
 <date>6 Sep 2009</date>
+<priority>2</priority>
 
 <discussion>
 <p>
@@ -84,6 +85,13 @@ implemented and tested.
 NAD Future.  No concensus for change.
 </p></blockquote>
 
+<note>2015-10 Kona</note>
+<p>
+  See also <a
+  href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0117r0.html">P0117</a>
+  and <a href="https://issues.isocpp.org/show_bug.cgi?id=137">LEWG137</a> on
+  easier formatting to strings.
+</p>
 </discussion>
 
 <resolution>

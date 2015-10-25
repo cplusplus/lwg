@@ -8,7 +8,8 @@
     <section><sref ref="[input.output]"/></section>
     <submitter>Martin Sebor</submitter>
     <date>18 Sep 2003</date>
-    <discussion>
+    <priority>2</priority>
+<discussion>
 
 <p>
 A third party test suite tries to exercise istream::ignore(N) with

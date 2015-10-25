@@ -3,7 +3,7 @@
   <!ENTITY nbsp "&#160;">
 ] >
 
-<issue num="961" status="LEWG">
+<issue num="961" status="SG1">
 <title>Various threading bugs #11</title>
 <section><sref ref="[thread.mutex.requirements]"/></section>
 <submitter>Pete Becker</submitter>

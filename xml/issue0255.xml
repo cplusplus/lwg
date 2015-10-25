@@ -8,6 +8,7 @@
 <section><sref ref="[streambuf]"/></section>
 <submitter>Martin Sebor</submitter>
 <date>12 Aug 2000</date>
+<priority>1</priority>
 
 <discussion>
 <p>
@@ -48,6 +49,9 @@ Move to NAD Future.
 This is related to LWG <iref ref="423"/>.
 </p>
 </blockquote>
+
+<note>2015-10 Kona</note>
+<p>Needs a paper. Find a way to let vendors schedule the ABI break.</p>
 
 </discussion>
 

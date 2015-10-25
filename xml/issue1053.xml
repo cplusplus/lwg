@@ -8,6 +8,7 @@
 <section><sref ref="[algorithms]"/></section>
 <submitter>Alisdair Meredith</submitter>
 <date>12 Mar 2009</date>
+<priority>2</priority>
 
 <discussion>
 
@@ -60,6 +61,9 @@ clearly addressed by the Summit resolution.
 <blockquote><p>
 Too inventive, too late, would really need a paper. Moved to NAD Future.
 </p></blockquote>
+
+<note>2015-10 Kona</note>
+<p>Diamond operators make this easier, but it needs a paper.</p>
 
 </discussion>
 

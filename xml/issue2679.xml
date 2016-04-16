@@ -20,6 +20,8 @@
 <p>
 The PR is fine; but bullet #1 in the report really should have a list of places to change.
 </p>
+<p>Jonathan checked throughout the library for bullet #2 and found two problems in [string.access], which have been added to the PR.
+</p>
 </discussion>
 
 <resolution>
@@ -28,6 +30,22 @@ The PR is fine; but bullet #1 in the report really should have a list of places 
 <p>
 "[...] if F has no Returns: element, a non-void return from F is specified by the <del>Returns: elements</del><ins>return statements</ins> in the code sequence."
 </p>
+
+<p>Add two '<code>return</code>' keywords to [string.access]:</p>
+
+<pre>
+  const charT&amp; front() const;
+  charT&amp; front();
+</pre>
+<p>7  <em>Requires:</em> <code>!empty()</code>.</p>
+<p>8  <em>Effects:</em> Equivalent to <code><ins>return </ins>operator[](0)</code>.</p>
+
+<pre>
+  const charT&amp; back() const;
+  charT&amp; back();
+</pre>
+<p>9  <em>Requires:</em> <code>!empty()</code>.</p>
+<p>10  <em>Effects:</em> Equivalent to <code><ins>return </ins>operator[](size() - 1)</code>.</p>
 </resolution>
 
 </issue>

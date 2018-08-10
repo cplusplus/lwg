@@ -206,10 +206,10 @@ void format_issue_as_html(lwg::issue & is,
                           std::vector<lwg::issue>::iterator first_issue,
                           std::vector<lwg::issue>::iterator last_issue,
                           lwg::section_map & section_db) {
-   // Reformt the issue text for the specified 'is' as valid HTML, replacing all the issue-list
+   // Reformat the issue text for the specified 'is' as valid HTML, replacing all the issue-list
    // specific XML markup as appropriate:
    //   tag             replacement
-   //   ---             ----------- 
+   //   ---             -----------
    //   iref            internal reference to another issue, replace with an anchor tag to that issue
    //   sref            section-tag reference, replace with formatted tag and section-number
    //   discussion      <p><b>Discussion:</b></p>CONTENTS
@@ -230,9 +230,9 @@ void format_issue_as_html(lwg::issue & is,
    // are closed.
 
    auto fix_tags = [&](std::string &s) {
-   int issue_num = is.num;     // current issue number for the issue being formatted
+   const int issue_num = is.num;         // current issue number for the issue being formatted
    std::vector<std::string> tag_stack;   // stack of open XML tags as we parse
-   std::ostringstream er;      // stream to format error messages
+   std::ostringstream er;                // stream to format error messages
 
    // cannot rewrite as range-based for-loop as the string 's' is modified within the loop
    for (std::string::size_type i{0}; i < s.size(); ++i) {
@@ -320,22 +320,38 @@ void format_issue_as_html(lwg::issue & is,
                   throw std::runtime_error{er.str()};
                };
 
-               std::string r;
                auto k = s.find('\"', i+5);
                if (k >= j) {
                   report_missing_quote(er, issue_num);
                }
+               ++k;
 
-               auto l = s.find('\"', k+1);
+               auto l = s.find('\"', k);
                if (l >= j) {
                   report_missing_quote(er, issue_num);
                }
 
-               ++k;
+               if (k < l && s[k] == '[') ++k;
+
+               int para = 0;
+               auto p = s.rfind('/', l);
+               if (p > k && p < l) {
+                  std::istringstream temp{s.substr(p + 1, l)};
+                  l = p;
+                  temp >> para;
+                  if (temp.fail()) {
+                     er.clear();
+                     er.str("");
+                     er << "bad paragraph number in sref in issue " << issue_num;
+                     throw std::runtime_error{er.str()};
+                  }
+               }
+
+               if (k < l && s[l - 1] == ']') --l;
+
                lwg::section_tag tag;
                tag.prefix = is.doc_prefix;
-               r = s.substr(k, l-k);
-               tag.name = r.substr(1, r.size() - 2);
+               tag.name = s.substr(k, l - k);
 
                // heuristic: if the name is not found using the doc_prefix, try
                // using no prefix (i.e. the C++ standard itself)
@@ -349,11 +365,11 @@ void format_issue_as_html(lwg::issue & is,
                    //std::cout << "bingo\n";
                    tag = fallback_tag;
                    //std::cout << "section_tag=\"" << tag.prefix << "\", \"" << tag.name << "\"\n";
-                 }    
+                 }
                }
 
                j -= i - 1;
-               r = lwg::format_section_tag_as_link(section_db, tag);
+               std::string r = lwg::format_section_tag_as_link(section_db, tag, para);
                s.replace(i, j, r);
                i += r.size() - 1;
                continue;
@@ -549,7 +565,7 @@ auto operator<<( std::ostream & out, discover_new_issues const & x) -> std::ostr
          out << "<li>Added the following " << item_count << " " << std::get<0>(i) << " issues: " << list_issues{std::get<1>(i)} << ".</li>\n";
       }
    }
-   
+
    if (added_issues.empty()) {
       out << "<li>No issues added.</li>\n";
    }
@@ -712,10 +728,10 @@ int main(int argc, char* argv[]) {
 
       if (path.back() != '/') { path += '/'; }
       check_is_directory(path);
-	  
+
       const std::string target_path{path + "mailing/"};
       check_is_directory(target_path);
-	  
+
 
       lwg::section_map section_db =[&path]() {
          auto filename = path + "meta-data/section.data";
@@ -736,7 +752,7 @@ int main(int argc, char* argv[]) {
          std::cout << temp << ' ' << elem.second << '\n';
       }
 #endif
- 
+
       auto const old_issues = read_issues_from_toc(read_file_into_string(path + "meta-data/lwg-toc.old.html"));
 
       auto const issues_path = path + "xml/";

@@ -11,12 +11,12 @@ namespace lwg
 
 struct section_tag
 {
-  std::string  prefix;        // example: fund.ts.v2 
+  std::string  prefix;        // example: fund.ts.v2
   std::string  name;          // example: meta.logical
 };
 
 struct section_num {
-  std::string       prefix;    // example: fund.ts.v2 
+  std::string       prefix;    // example: fund.ts.v2
   std::vector<int>  num;       // sequence of numbers corresponding to section number
                                // in relevant doc, e.g,, 17.5.2.1.4.2
 };
@@ -48,7 +48,8 @@ auto read_section_db(std::istream & stream) -> section_map;
    // from the specified 'stream', and return it as a new
    // 'section_map' object.
 
-auto format_section_tag_as_link(section_map & section_db, section_tag const & tag) -> std::string;
+auto format_section_tag_as_link(section_map & section_db,
+  section_tag const & tag, int para = 0) -> std::string;
 
 } // close namespace lwg
 

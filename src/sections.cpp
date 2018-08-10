@@ -139,7 +139,7 @@ auto lwg::read_section_db(std::istream & infile) -> section_map {
       std::string line;
       getline(infile, line);
       if (!line.empty()) {
-         // get [x.x....] symbolic tag 
+         // get [x.x....] symbolic tag
          assert(line.back() == ']');
          auto p = line.rfind('[');
          assert(p != std::string::npos);
@@ -193,7 +193,7 @@ auto lwg::read_section_db(std::istream & infile) -> section_map {
    return section_db;
 }
 
-auto lwg::format_section_tag_as_link(section_map & section_db, section_tag const & tag) -> std::string {
+auto lwg::format_section_tag_as_link(section_map & section_db, section_tag const & tag, int para) -> std::string {
    std::ostringstream o;
    const auto& num = section_db[tag];
    o << num << ' ';
@@ -201,8 +201,15 @@ auto lwg::format_section_tag_as_link(section_map & section_db, section_tag const
       o << tag;
    }
    else {
-      o << "<a href=\"https://wg21.link/" << tag.name << "\">[" << tag.name << "]</a>";
+      o << "<a href=\"https://wg21.link/" << tag.name;
+      if (para > 0) {
+         o << '#' << para;
+      }
+      o << "\">[" << tag.name << ']';
+      if (para > 0) {
+         o << '/' << para;
+      }
+      o << "</a>";
    }
    return o.str();
 }
-

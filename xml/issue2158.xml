@@ -11,29 +11,29 @@
 <discussion>
 
 <p>
-There are various operations on <tt>std::vector</tt> that can cause elements of the vector to be 
-moved from one location to another. A move operation can use either rvalue or const lvalue as 
+There are various operations on <tt>std::vector</tt> that can cause elements of the vector to be
+moved from one location to another. A move operation can use either rvalue or const lvalue as
 argument; the choice depends on the value of <tt>!is_nothrow_move_constructible&lt;T&gt;::value &amp;&amp;
-is_copy_constructible&lt;T&gt;::value</tt>, where <tt>T</tt> is the element type. Thus, some operations 
-on <tt>std::vector</tt> (e.g. 'resize' with single parameter, 'reserve', 'emplace_back') should have 
-conditional requirements. For example, let's consider the requirement for 'reserve' in N3376 &ndash; 
+is_copy_constructible&lt;T&gt;::value</tt>, where <tt>T</tt> is the element type. Thus, some operations
+on <tt>std::vector</tt> (e.g. 'resize' with single parameter, 'reserve', 'emplace_back') should have
+conditional requirements. For example, let's consider the requirement for 'reserve' in N3376 &ndash;
 <sref ref="[vector.capacity]"/>&#47;2:
 </p>
 <blockquote><p>
 <i>Requires</i>: <tt>T</tt> shall be <tt>MoveInsertable</tt> into <tt>*this</tt>.
 </p></blockquote>
 <p>
-This requirement is not sufficient if an implementation is free to select copy constructor when 
-<tt>!is_nothrow_move_constructible&lt;T&gt;::value &amp;&amp; is_copy_constructible&lt;T&gt;::value</tt> 
-evaluates to true. Unfortunately, <tt>is_copy_constructible</tt> cannot reliably determine whether 
-<tt>T</tt> is really copy-constructible. A class may contain public non-deleted copy constructor whose 
-definition does not exist or cannot be instantiated successfully (e.g., 
-<tt>std::vector&lt;std::unique_ptr&lt;int&gt;&gt;</tt> has copy constructor, but this type is not 
+This requirement is not sufficient if an implementation is free to select copy constructor when
+<tt>!is_nothrow_move_constructible&lt;T&gt;::value &amp;&amp; is_copy_constructible&lt;T&gt;::value</tt>
+evaluates to true. Unfortunately, <tt>is_copy_constructible</tt> cannot reliably determine whether
+<tt>T</tt> is really copy-constructible. A class may contain public non-deleted copy constructor whose
+definition does not exist or cannot be instantiated successfully (e.g.,
+<tt>std::vector&lt;std::unique_ptr&lt;int&gt;&gt;</tt> has copy constructor, but this type is not
 copy-constructible). Thus, the actual requirements should be:
 </p>
 <ul>
 <li><p>
-if <tt>!is_nothrow_move_constructible&lt;T&gt;::value &amp;&amp; is_copy_constructible&lt;T&gt;::value</tt> 
+if <tt>!is_nothrow_move_constructible&lt;T&gt;::value &amp;&amp; is_copy_constructible&lt;T&gt;::value</tt>
 then <tt>T</tt> shall be <tt>CopyInsertable</tt> into <tt>*this</tt>;
 </p></li>
 <li><p>
@@ -41,7 +41,7 @@ otherwise <tt>T</tt> shall be <tt>MoveInsertable</tt> into <tt>*this</tt>.
 </p></li>
 </ul>
 <p>
-Maybe it would be useful to introduce a new name for such conditional requirement (in addition to 
+Maybe it would be useful to introduce a new name for such conditional requirement (in addition to
 "<tt>CopyInsertable</tt>" and "<tt>MoveInsertable</tt>").
 </p>
 
@@ -75,7 +75,7 @@ the Allocator-aware container requirements.
 <p>Fri PM: Move to Open</p>
 
 <note>2017-11 Albuquerque Saturday issues processing</note>
-<p>There's a bunch of uses of "shall" here that are incorrect. Also, CopyInsertable contains some semantic requirements, 
+<p>There's a bunch of uses of "shall" here that are incorrect. Also, CopyInsertable contains some semantic requirements,
 which can't be checked at compile time, so 'ill-formed' is not possible for detecting that.</p>
 
 <note>2018-06 Rapperswil Wednesday issues processing</note>
@@ -169,9 +169,16 @@ This wording is relative to <a href="http://wg21.link/n4606">N4606</a>.
 <note>2018-08-23 Batavia Issues processing. Priority to 3</note>
 <p>Changed <tt>CopyInsertable</tt> -> <tt>Cpp17CopyInsertable</tt> in the resolution.</p>
 <p>Tim says that the wording is not quite right - it imposes additional requirements.</p>
-</discussion>
 
-<resolution>
+<note>20180906 Casey rebases the P/R onto N4762</note>
+<p>Tim clarifies his concerns: <tt><i>Cpp17CopyMeowable</i></tt> requires all
+mixes of constness and value categories to work, even though a typical
+implementation only makes use of one combination for these operations. Adding a
+"<i>Mandates:</i>" therefore goes beyond codifying existing practice and
+requires implementations to actively check all combinations.</p>
+
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
 <p>
 This wording is relative to <a href="http://wg21.link/n4750">N4750</a>.
 </p>
@@ -179,7 +186,7 @@ This wording is relative to <a href="http://wg21.link/n4750">N4750</a>.
 <blockquote class="note">
 <p>
 The revised wording below uses the new <i>Mandates:</i> element introduced by
-adopting <a href="http://wg21.link/p0788r3">P0788R3</a> at the Rapperswil meeting 2018 
+adopting <a href="http://wg21.link/p0788r3">P0788R3</a> at the Rapperswil meeting 2018
 and which will become a new term of art with Jonathan's omnibus paper throughout the
 Standard Library.
 </p>
@@ -200,7 +207,7 @@ Standard Library.
   <td></td>
   <td></td>
   <td>
-    <ins><i>Mandates:</i> Syntactic requirements of <tt>T</tt><br/> 
+    <ins><i>Mandates:</i> Syntactic requirements of <tt>T</tt><br/>
     is <tt>Cpp17CopyInsertable</tt> into <tt>X</tt> (see below).</ins><br/>
     <i>Requires:</i> <tt>T</tt> is <tt>Cpp17CopyInsertable</tt> into
     <tt>X</tt> <del>(see below)</del>.<br/>
@@ -213,7 +220,7 @@ Standard Library.
   <td></td>
   <td></td>
   <td>
-    <ins><i>Mandates:</i> Syntactic requirements of <tt>T</tt><br/> 
+    <ins><i>Mandates:</i> Syntactic requirements of <tt>T</tt><br/>
     is <tt>Cpp17CopyInsertable</tt> into <tt>X</tt> (see below).</ins><br/>
     <i>Requires:</i> <tt>T</tt> is <tt>Cpp17CopyInsertable</tt> into
     <tt>X</tt> <del>(see below)</del>.<br/>
@@ -233,7 +240,7 @@ Standard Library.
   <td><tt>X&amp;</tt></td>
   <td></td>
   <td>
-    <ins><i>Mandates:</i> Syntactic requirements of <tt>T</tt><br/> 
+    <ins><i>Mandates:</i> Syntactic requirements of <tt>T</tt><br/>
     is <tt>Cpp17CopyInsertable</tt> into <tt>X</tt> (see below) and
     <tt>CopyAssignable</tt>.<br/></ins>
     <ins><i>Requires:</i> <tt>T</tt> is <tt>Cpp17CopyInsertable</tt> into <tt>X</tt>
@@ -259,11 +266,103 @@ Standard Library.
   <td><tt>X&amp;</tt></td>
   <td></td>
   <td>
-    <ins><i>Mandates:</i> Syntactic requirements of <tt>T</tt> is<br/> 
+    <ins><i>Mandates:</i> Syntactic requirements of <tt>T</tt> is<br/>
     <tt>Cpp17CopyInsertable</tt> into <tt>X</tt> and <tt>CopyAssignable</tt>.<br/></ins>
     <i>Requires:</i> <tt>T</tt> is <tt>Cpp17CopyInsertable</tt> into <tt>X</tt> and
     <tt>CopyAssignable</tt>.<br/>
     post: <tt>r == a</tt>.</td>
+  <td>linear</td>
+</tr>
+</table>
+</p>
+</blockquote>
+
+</discussion>
+
+<resolution>
+<p>
+This wording is relative to <a href="http://wg21.link/n4762">N4762</a>.
+</p>
+
+<p>
+<table border="1">
+<caption><sref ref="[container.requirements.general]"/> Table 64 &mdash; Container requirements</caption>
+<tr>
+  <td><b>Expression</b></td>
+  <td><b>Return type</b></td>
+  <td><b>Operational semantics</b></td>
+  <td><b>Assertion/note/pre-/post-condition</b></td>
+  <td><b>Complexity</b></td>
+</tr>
+<tr>
+  <td><tt>X(a)</tt></td>
+  <td></td>
+  <td></td>
+  <td>
+    <ins><i>Mandates:</i> Syntactic requirements of "<tt>T</tt><br/>
+    is <tt><i>Cpp17CopyInsertable</i></tt> into <tt>X</tt>" (see below).</ins><br/>
+    <i>Requires:</i> <tt>T</tt> is <tt><i>Cpp17CopyInsertable</i></tt> into
+    <tt>X</tt> <del>(see below)</del>.<br/>
+    <i>Ensures:</i> <tt>a == X(a)</tt>.
+  </td>
+  <td>linear</td>
+</tr>
+<tr>
+  <td><tt>X u(a)</tt><br/><tt>X u = a;</tt></td>
+  <td></td>
+  <td></td>
+  <td>
+    <ins><i>Mandates:</i> Syntactic requirements of "<tt>T</tt><br/>
+    is <tt><i>Cpp17CopyInsertable</i></tt> into <tt>X</tt>" (see below).</ins><br/>
+    <i>Requires:</i> <tt>T</tt> is <tt><i>Cpp17CopyInsertable</i></tt> into
+    <tt>X</tt> <del>(see below)</del>.<br/>
+    <i>Ensures:</i> <tt>u == a</tt>.
+  </td>
+  <td>linear</td>
+</tr>
+<tr>
+  <td>[&hellip;]</td>
+  <td>[&hellip;]</td>
+  <td>[&hellip;]</td>
+  <td>[&hellip;]</td>
+  <td>[&hellip;]</td>
+</tr>
+<tr>
+  <td><tt>r = a</tt></td>
+  <td><tt>X&amp;</tt></td>
+  <td></td>
+  <td>
+    <ins><i>Mandates:</i> Syntactic requirements of "<tt>T</tt><br/>
+    is <tt><i>Cpp17CopyInsertable</i></tt> into <tt>X</tt>" (see below) and
+    <tt><i>Cpp17CopyAssignable</i></tt>.<br/></ins>
+    <ins><i>Requires:</i> <tt>T</tt> is <tt><i>Cpp17CopyInsertable</i></tt> into <tt>X</tt>
+    and <tt><i>Cpp17CopyAssignable</i></tt>.</ins><br/>
+    <i>Ensures:</i> <tt>r == a</tt>.</td>
+  <td>linear</td>
+</tr>
+</table>
+</p>
+
+<p>
+<table border="1">
+<caption><sref ref="[container.requirements.general]"/> Table 67 &mdash; Allocator-aware container requirements</caption>
+<tr>
+  <td><b>Expression</b></td>
+  <td><b>Return type</b></td>
+  <td><b>Operational semantics</b></td>
+  <td><b>Assertion/note/pre-/post-condition</b></td>
+  <td><b>Complexity</b></td>
+</tr>
+<tr>
+  <td><tt>a = t</tt></td>
+  <td><tt>X&amp;</tt></td>
+  <td></td>
+  <td>
+    <ins><i>Mandates:</i> Syntactic requirements of "<tt>T</tt> is<br/>
+    <tt><i>Cpp17CopyInsertable</i></tt> into <tt>X</tt>" and <tt><i>Cpp17CopyAssignable</i></tt>.<br/></ins>
+    <i>Requires:</i> <tt>T</tt> is <tt><i>Cpp17CopyInsertable</i></tt> into <tt>X</tt> and
+    <tt><i>Cpp17CopyAssignable</i></tt>.<br/>
+    <i>Ensures:</i> <tt>a == t</tt>.</td>
   <td>linear</td>
 </tr>
 </table>

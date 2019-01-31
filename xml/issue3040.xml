@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8' standalone='no'?>
 <!DOCTYPE issue SYSTEM "lwg-issue.dtd">
 
-<issue num="3040" status="Voting">
+<issue num="3040" status="Tentatively Ready">
 <title><tt>basic_string_view::starts_with</tt> <i>Effects</i> are incorrect</title>
 <section><sref ref="[string.view.ops]"/></section>
 <submitter>Marshall Clow</submitter>
@@ -12,7 +12,7 @@
 <p>
 The effects of <tt>starts_with</tt> are described as equivalent to <tt>return compare(0, npos, x) == 0</tt>.
 <p/>
-This is incorrect, because it returns <tt>false</tt> when you check to see if any sequence begins with the empty sequence. 
+This is incorrect, because it returns <tt>false</tt> when you check to see if any sequence begins with the empty sequence.
 (There are other failure cases, but that one's easy)
 <p/>
 As a drive-by fix, we can make the <i>Effects:</i> for <tt>starts_with</tt> and <tt>ends_with</tt> clearer.
@@ -36,7 +36,7 @@ Those are the second and proposed third changes, and they are not required.
 <pre>constexpr bool starts_with(basic_string_view x) const noexcept;</pre>
 <blockquote>
 <p>
--20- <i>Effects:</i> Equivalent to: <tt>return <ins>size() &gt;= x.size() &amp;&amp;</ins> 
+-20- <i>Effects:</i> Equivalent to: <tt>return <ins>size() &gt;= x.size() &amp;&amp;</ins>
 compare(0, <del>npos</del><ins>x.size()</ins>, x) == 0;</tt>
 </p>
 </blockquote>
@@ -48,7 +48,7 @@ compare(0, <del>npos</del><ins>x.size()</ins>, x) == 0;</tt>
 <pre>constexpr bool starts_with(charT x) const noexcept;</pre>
 <blockquote>
 <p>
--21- <i>Effects:</i> Equivalent to: <tt>return <ins>!empty() &amp;&amp; 
+-21- <i>Effects:</i> Equivalent to: <tt>return <ins>!empty() &amp;&amp;
 traits::eq(front(), x)</ins><del>starts_with(basic_string_view(&amp;x, 1))</del>;</tt>
 </p>
 </blockquote>
@@ -61,7 +61,7 @@ traits::eq(front(), x)</ins><del>starts_with(basic_string_view(&amp;x, 1))</del>
 <pre>constexpr bool ends_with(charT x) const noexcept;</pre>
 <blockquote>
 <p>
--24- <i>Effects:</i> Equivalent to: <tt>return <ins>!empty() &amp;&amp; traits::eq(back(), 
+-24- <i>Effects:</i> Equivalent to: <tt>return <ins>!empty() &amp;&amp; traits::eq(back(),
 x)</ins><del>ends_with(basic_string_view(&amp;x, 1))</del>;</tt>
 </p>
 </blockquote>
@@ -70,7 +70,7 @@ x)</ins><del>ends_with(basic_string_view(&amp;x, 1))</del>;</tt>
 </ol>
 </blockquote>
 
-<note>2018-01-23, Reopening due to a comment of Billy Robert O'Neal III requesting a change of the proposed 
+<note>2018-01-23, Reopening due to a comment of Billy Robert O'Neal III requesting a change of the proposed
 wording</note>
 <p>
 The currently suggested wording has:
@@ -103,7 +103,7 @@ It seems like it should say:
 <pre>constexpr bool starts_with(basic_string_view x) const noexcept;</pre>
 <blockquote>
 <p>
--20- <i>Effects:</i> Equivalent to: <tt>return <ins>substr(0, x.size()) == x</ins><del>compare(0, 
+-20- <i>Effects:</i> Equivalent to: <tt>return <ins>substr(0, x.size()) == x</ins><del>compare(0,
 npos, x) == 0</del>;</tt>
 </p>
 </blockquote>
@@ -115,7 +115,7 @@ npos, x) == 0</del>;</tt>
 <pre>constexpr bool starts_with(charT x) const noexcept;</pre>
 <blockquote>
 <p>
--21- <i>Effects:</i> Equivalent to: <tt>return <ins>!empty() &amp;&amp; 
+-21- <i>Effects:</i> Equivalent to: <tt>return <ins>!empty() &amp;&amp;
 traits::eq(front(), x)</ins><del>starts_with(basic_string_view(&amp;x, 1))</del>;</tt>
 </p>
 </blockquote>
@@ -128,7 +128,7 @@ traits::eq(front(), x)</ins><del>starts_with(basic_string_view(&amp;x, 1))</del>
 <pre>constexpr bool ends_with(charT x) const noexcept;</pre>
 <blockquote>
 <p>
--24- <i>Effects:</i> Equivalent to: <tt>return <ins>!empty() &amp;&amp; traits::eq(back(), 
+-24- <i>Effects:</i> Equivalent to: <tt>return <ins>!empty() &amp;&amp; traits::eq(back(),
 x)</ins><del>ends_with(basic_string_view(&amp;x, 1))</del>;</tt>
 </p>
 </blockquote>

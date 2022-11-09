@@ -36,7 +36,7 @@ namespace std::placeholders {
   <i>// M is the <del>implementation-defined</del> number of placeholders</i>
   <i>see below</i> _1;
   <i>see below</i> _2;
-              . 
+              .
               .
               .
   <i>see below</i> _M;

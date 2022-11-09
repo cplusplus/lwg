@@ -243,7 +243,7 @@ entities.</del>
 <note>2022-11-09; Ben Craig and Tomasz provides improved wording</note>
 <p>
 This new resolution merges definition of freestanding item for entity in macro int bullet lists.
-It still n addresses both 3754 and LWG <iref ref="3815"/>.
+It still addresses both 3753 and LWG <iref ref="3815"/>.
 </p>
 
 <p>
@@ -260,7 +260,7 @@ This wording is relative to <paper num="N4917"/>.
 </p>
 
 <ol>
-<li><p>Modify 16.3.3.6 <a href="https://wg21.link/freestanding.entity">[freestanding.entity]</a> as indicated:</p>
+<li><p>16.3.3.6 Modify <sref ref="[freestanding.entity]"/> as indicated:</p>
 
 <blockquote class="note">
 <p>
@@ -275,7 +275,7 @@ This wording is relative to <paper num="N4917"/>.
 -1- A <i>freestanding <del>entity</del><ins>item</ins></i> is <del>a declaration</del><ins>an entity</ins> or
 macro definition that is present in a freestanding implementation and a hosted implementation.
 <p/>
--2- Unless otherwise specified, the requirements on freestanding <del>entities</del><ins>items, except namespaces,</ins> on a freestanding implementation are the same as the corresponding requirements in a hosted implementation.
+-2- Unless otherwise specified, the requirements on freestanding <del>entities</del><ins>items, except namespaces,</ins> <del>on</del><ins>for</ins> a freestanding implementation are the same as the corresponding requirements <del>in</del><ins>for</ins> a hosted implementation.
 <p/>
 <ins>[<i>Note</i>: This implies that freestanding item enumerations have the same enumerators on freestanding implementations and hosted implementations.  
 	 Futhermore, class types have the same deduction guides and members on freestanding implementations and hosted implementations. — <i>end note</i>]</ins>
@@ -285,7 +285,7 @@ macro definition that is present in a freestanding implementation and a hosted i
 <li><p><ins>(3.1) &mdash; introduced by a declaration in the header synopsis, and</ins></p>
 <ol style="list-style-type: none">
 <li><p><ins>(3.1.1) &mdash; the declaration is followed by a comment that includes <i>freestanding</i>, or</ins></p></li>
-<li><p><ins>(3.1.2) &mdash; the header synopsis begins with a comment that includes <i>all freestanding;</i></ins></p></li>
+<li><p><ins>(3.1.2) &mdash; the header synopsis begins with a comment that includes <i>all freestanding</i>;</ins></p></li>
 </ol></li>
 <li><p><ins>(3.2) &mdash; an enclosing namespace of a freestanding item,</ins></p></li>
 <li><p><ins>(3.3) &mdash; a friend of a freestanding item,</ins></p></li>
@@ -299,7 +299,7 @@ macro definition that is present in a freestanding implementation and a hosted i
 <li><p><ins>(4.2) &mdash; the header synopsis begins with a comment that includes <i>all freestanding.</i></ins></p></li>
 </ol>
 <p/>
-<del>-3- In a header synopsis, entities followed with a comment that includes <i>freestanding</i> are a freestanding entities.</del>
+<del>-3- In a header synopsis, entities followed with a comment that includes <i>freestanding</i> are freestanding entities.</del>
 <p/>
 [Example 1: &hellip; — <i>end example</i>]
 <p/>

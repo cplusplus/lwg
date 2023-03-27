@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-03-27 at 14:46:28 UTC</p>
+<p><p>Revised 2023-03-27 at 16:46:43 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -46927,6 +46927,8 @@ Sentinel types don't seem able to be SCARY as they are dependent on iterator typ
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-03-23 <b>Last modified:</b> 2023-03-23</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.enumerate.iterator">active issues</a> in [range.enumerate.iterator].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.enumerate.iterator">issues</a> in [range.enumerate.iterator].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
@@ -47208,6 +47210,64 @@ that is convertible to <code>T&amp;</code>.
 
 </ol>
 
+
+
+
+
+
+<hr>
+<h3><a name="3912" href="#3912">3912</a><sup><a href="https://cplusplus.github.io/LWG/issue3912">(i)</a></sup>. <code>enumerate_view::iterator::operator-</code> should be <code>noexcept</code></h3>
+<p><b>Section:</b> 99 [range.enumerate.iterator] <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-03-27 <b>Last modified:</b> 2023-03-27</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.enumerate.iterator">active issues</a> in [range.enumerate.iterator].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.enumerate.iterator">issues</a> in [range.enumerate.iterator].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The distance between two <code>enumerate_view::iterator</code>
+is calculated by subtracting two integers, which never throws.
+</p>
+
+
+<p id="res-3912"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
+</p>
+
+<ol>
+<li>
+<p>
+Modify 99 [range.enumerate.iterator] as indicated:
+</p>
+<blockquote>
+<pre><code>
+namespace std::ranges {
+  template&lt;view V&gt;
+    requires <i>range-with-movable-references</i>&lt;V&gt;
+  template&lt;bool Const&gt;
+  class enumerate_view&lt;V&gt;::<i>iterator</i> {
+    [&hellip;]
+    public:
+    [&hellip;]
+    friend constexpr difference_type operator-(const iterator&amp; x, const iterator&amp; y)<ins> noexcept</ins>;
+    [&hellip;]
+  }
+  [&hellip;]
+}
+</code></pre>
+[&hellip;]
+<pre><code>
+friend constexpr difference_type operator-(const iterator&amp; x, const iterator&amp; y)<ins> noexcept</ins>;
+</code></pre>
+<p>
+-19- <i>Effects</i>:
+Equivalent to: <code>return x.<i>pos_</i> - y.<i>pos_</i>;</code>
+</p>
+</blockquote>
+</li>
+</ol>
 
 
 

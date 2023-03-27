@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Issue 3908: enumerate_view::iterator constructor is explicit</title>
+<title>Issue 3912: enumerate_view::iterator::operator- should be noexcept</title>
 <style type="text/css">
   p {text-align:justify}
   li {text-align:justify}
@@ -45,9 +45,9 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="3908" href="lwg-active.html#3908">3908</a>. <code>enumerate_view::<i>iterator</i></code> constructor is explicit</h3>
+<h3><a name="3912" href="lwg-active.html#3912">3912</a>. <code>enumerate_view::iterator::operator-</code> should be <code>noexcept</code></h3>
 <p><b>Section:</b> 99 [range.enumerate.iterator] <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-03-23 <b>Last modified:</b> 2023-03-23</p>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-03-27 <b>Last modified:</b> 2023-03-27</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.enumerate.iterator">active issues</a> in [range.enumerate.iterator].</p>
@@ -55,58 +55,48 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-<code>enumerate_view::<i>iterator</i></code> has this constructor:
-</p>
-<blockquote>
-<pre><code>    constexpr explicit
-      <i>iterator</i>(iterator_t&lt;<i>Base</i>&gt; current, difference_type pos);  <i>// exposition only</i>
-</code></pre>
-</blockquote>
-
-<p>
-In <a href="https://wg21.link/P2164R9">P2164R9</a> the detailed description of the function showed a
-default argument for the second parameter, which would justify it being
-explicit. However, that default argument was not present in the class synopsis
-and was removed from the detailed description when applying the paper to the
-draft.
+The distance between two <code>enumerate_view::iterator</code>
+is calculated by subtracting two integers, which never throws.
 </p>
 
 
-
-<p id="res-3908"><b>Proposed resolution:</b></p>
+<p id="res-3912"><b>Proposed resolution:</b></p>
 <p>
 This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
 </p>
+
 <ol>
 <li>
 <p>
-Modify the class synopsis in 99 [range.enumerate.iterator]
-as shown:
-</p>
-<blockquote><pre><code>
-    constexpr <del>explicit</del>
-      <i>iterator</i>(iterator_t&lt;<i>Base</i>&gt; current, difference_type pos);  <i>// exposition only</i>
-</code></pre></blockquote>
-</li>
-
-<li>
-<p>
-Modify the detailed description in 99 [range.enumerate.iterator]
-as shown:
+Modify 99 [range.enumerate.iterator] as indicated:
 </p>
 <blockquote>
-<pre><code>  constexpr <del>explicit</del> <i>iterator</i>(iterator_t&lt;<i>Base</i>&gt; current, difference_type pos);
+<pre><code>
+namespace std::ranges {
+  template&lt;view V&gt;
+    requires <i>range-with-movable-references</i>&lt;V&gt;
+  template&lt;bool Const&gt;
+  class enumerate_view&lt;V&gt;::<i>iterator</i> {
+    [&hellip;]
+    public:
+    [&hellip;]
+    friend constexpr difference_type operator-(const iterator&amp; x, const iterator&amp; y)<ins> noexcept</ins>;
+    [&hellip;]
+  }
+  [&hellip;]
+}
 </code></pre>
-<p>-2-
-<i>Effects</i>: Initializes <code><i>current_</i></code>
-with <code>std::move(current)</code> and <code><i>pos_</i></code> with
-<code>pos</code>.
+[&hellip;]
+<pre><code>
+friend constexpr difference_type operator-(const iterator&amp; x, const iterator&amp; y)<ins> noexcept</ins>;
+</code></pre>
+<p>
+-19- <i>Effects</i>:
+Equivalent to: <code>return x.<i>pos_</i> - y.<i>pos_</i>;</code>
 </p>
 </blockquote>
 </li>
-
 </ol>
-
 
 
 

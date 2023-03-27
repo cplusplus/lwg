@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-03-27 at 16:46:43 UTC</p>
+<p><p>Revised 2023-03-27 at 16:54:12 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -8549,7 +8549,7 @@ return <tt>traits::eof()</tt> when a read position is not available.
 The semantics of <tt>basic_stringbuf</tt> require, and existing libraries implement it so that this function makes 
 a read position available if possible to do so, e.g. if some characters were inserted into the stream since the 
 last call to <tt>overflow()</tt>, resulting in <tt>pptr() &gt; egptr()</tt>. Compare to the conceptually similar 
-D.12.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a>/15.
+D.15.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a>/15.
 </p>
 
 <p><i>[2018-06-06, Billy argues for NAD]</i></p>
@@ -10097,7 +10097,7 @@ The term "character type" is used in 3.36 <a href="https://wg21.link/defns.ntcts
 31.7.6.3.4 <a href="https://wg21.link/ostream.inserters.character">[ostream.inserters.character]</a>, but the core language only defines
 "narrow character types" (6.8.2 <a href="https://wg21.link/basic.fundamental">[basic.fundamental]</a>).
 <p/>
-"wide-character type" is used in D.22 <a href="https://wg21.link/depr.locale.stdcvt">[depr.locale.stdcvt]</a>, but the core
+"wide-character type" is used in D.26 <a href="https://wg21.link/depr.locale.stdcvt">[depr.locale.stdcvt]</a>, but the core
 language only defines a "wide-character set" and "wide-character literal".
 </p>
 
@@ -11178,7 +11178,7 @@ This is then unambiguously chosen over the other options in the preceding case. 
 
 <hr>
 <h3><a name="2478" href="#2478">2478</a><sup><a href="https://cplusplus.github.io/LWG/issue2478">(i)</a></sup>. Unclear how <tt>wstring_convert</tt> uses <tt>cvtstate</tt></h3>
-<p><b>Section:</b> D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2015-03-04 <b>Last modified:</b> 2017-04-22</p>
 <p><b>Priority: </b>4
 </p>
@@ -11205,7 +11205,7 @@ simpler ways to say so.
 
 <hr>
 <h3><a name="2479" href="#2479">2479</a><sup><a href="https://cplusplus.github.io/LWG/issue2479">(i)</a></sup>. Unclear how <tt>wbuffer_convert</tt> uses <tt>cvtstate</tt></h3>
-<p><b>Section:</b> D.23.3 <a href="https://wg21.link/depr.conversions.buffer">[depr.conversions.buffer]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.27.3 <a href="https://wg21.link/depr.conversions.buffer">[depr.conversions.buffer]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2015-03-04 <b>Last modified:</b> 2017-04-22</p>
 <p><b>Priority: </b>4
 </p>
@@ -11232,7 +11232,7 @@ state of the get area is unrelated to the put area.
 
 <hr>
 <h3><a name="2480" href="#2480">2480</a><sup><a href="https://cplusplus.github.io/LWG/issue2480">(i)</a></sup>. Error handling of <tt>wbuffer_convert</tt> unclear</h3>
-<p><b>Section:</b> D.23.3 <a href="https://wg21.link/depr.conversions.buffer">[depr.conversions.buffer]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.27.3 <a href="https://wg21.link/depr.conversions.buffer">[depr.conversions.buffer]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2015-03-04 <b>Last modified:</b> 2017-04-22</p>
 <p><b>Priority: </b>4
 </p>
@@ -11257,7 +11257,7 @@ error lose information?
 
 <hr>
 <h3><a name="2481" href="#2481">2481</a><sup><a href="https://cplusplus.github.io/LWG/issue2481">(i)</a></sup>. <tt>wstring_convert</tt> should be more precise regarding "byte-error string" etc.</h3>
-<p><b>Section:</b> D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2015-03-04 <b>Last modified:</b> 2017-04-22</p>
 <p><b>Priority: </b>4
 </p>
@@ -11266,7 +11266,7 @@ error lose information?
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Paragraph 4 of D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> introduces <tt>byte_err_string</tt> 
+Paragraph 4 of D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> introduces <tt>byte_err_string</tt> 
 as "a byte string to display on errors". What does display mean? The string is returned 
 on error, it's not displayed anywhere.
 <p/>
@@ -11723,7 +11723,7 @@ We would welcome a paper to make those definitions more explicit, and revise the
 
 <hr>
 <h3><a name="2507" href="#2507">2507</a><sup><a href="https://cplusplus.github.io/LWG/issue2507">(i)</a></sup>. <tt>codecvt_mode</tt> should be a bitmask type</h3>
-<p><b>Section:</b> D.22 <a href="https://wg21.link/depr.locale.stdcvt">[depr.locale.stdcvt]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.26 <a href="https://wg21.link/depr.locale.stdcvt">[depr.locale.stdcvt]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2015-06-08 <b>Last modified:</b> 2017-04-22</p>
 <p><b>Priority: </b>3
 </p>
@@ -22134,7 +22134,7 @@ to the first character not matching the pattern, or has the value <tt>last</tt> 
 match. If the parsed value is not in the range representable by the type of <tt>value</tt>, 
 <del><tt>value</tt> is unmodified and</del> the member <tt>ec</tt> of the return value is equal
 to <tt>errc::result_out_of_range</tt>. Otherwise, <tt>value</tt> is set to the parsed value, 
-after rounding according to <tt>round_to_nearest</tt> (17.3.4.1 <a href="https://wg21.link/round.style">[round.style]</a>), and the member 
+after rounding according to <tt>round_to_nearest</tt> (17.3.4 <a href="https://wg21.link/round.style">[round.style]</a>), and the member 
 <tt>ec</tt> is value-initialized.
 </p>
 <pre>
@@ -22821,7 +22821,7 @@ available whenever either <tt>&lt;cstdlib&gt;</tt> or <tt>&lt;cinttypes&gt;</tt>
 
 <hr>
 <h3><a name="3095" href="#3095">3095</a><sup><a href="https://cplusplus.github.io/LWG/issue3095">(i)</a></sup>. <tt>strstreambuf</tt> refers to nonexistent member of <tt>fpos</tt>, <tt>fpos::offset</tt></h3>
-<p><b>Section:</b> D.12.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.15.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Billy O'Neal III <b>Opened:</b> 2018-04-04 <b>Last modified:</b> 2020-09-06</p>
 <p><b>Priority: </b>4
 </p>
@@ -22830,7 +22830,7 @@ available whenever either <tt>&lt;cstdlib&gt;</tt> or <tt>&lt;cinttypes&gt;</tt>
 <p><b>Discussion:</b></p>
 <p>
 <tt>strstreambuf</tt> refers to a nonexistent member function of <tt>fpos</tt> in the specification of the member function
-<tt>seekpos</tt>, D.12.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a>/18 (emphasize mine): 
+<tt>seekpos</tt>, D.15.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a>/18 (emphasize mine): 
 </p>
 <blockquote><p>
 For a sequence to be positioned, if its next pointer is a null pointer, the positioning operation fails.
@@ -22854,7 +22854,7 @@ This wording is relative to <a href="https://wg21.link/n4727">N4727</a>.
 
 <ol>
 <li>
-<p>Edit D.12.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> as indicated:</p>
+<p>Edit D.15.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> as indicated:</p>
 <blockquote>
 <pre>
 pos_type seekpos(pos_type sp, ios_base::openmode which
@@ -23276,7 +23276,7 @@ namespace std {
 
 <hr>
 <h3><a name="3109" href="#3109">3109</a><sup><a href="https://cplusplus.github.io/LWG/issue3109">(i)</a></sup>. <tt>strstreambuf</tt> is copyable</h3>
-<p><b>Section:</b> D.12.2 <a href="https://wg21.link/depr.strstreambuf">[depr.strstreambuf]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.15.2 <a href="https://wg21.link/depr.strstreambuf">[depr.strstreambuf]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2018-05-02 <b>Last modified:</b> 2018-06-19</p>
 <p><b>Priority: </b>4
 </p>
@@ -25681,12 +25681,12 @@ element results in undefined behavior.
 </blockquote>
 </li>
 
-<li><p>Change D.10 <a href="https://wg21.link/depr.res.on.required">[depr.res.on.required]</a>, as indicated:</p>
+<li><p>Change D.11 <a href="https://wg21.link/depr.res.on.required">[depr.res.on.required]</a>, as indicated:</p>
 
 <blockquote class="note">
 <p>
 [<i>Drafting note:</i> Interestingly, albey the <i>Requires:</i> element has nearly vanished, the
-issue is still relevant, see D.15 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a>]
+issue is still relevant, see D.19 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a>]
 </p>
 </blockquote>
 
@@ -26651,7 +26651,7 @@ template&lt;class T&gt; void atomic_store(atomic&lt;T&gt;*, typename atomic&lt;T
 </pre></blockquote>
 <p>
 The program intends to call the "other" <tt>atomic_store</tt> from
-D.20 <a href="https://wg21.link/depr.util.smartptr.shared.atomic">[depr.util.smartptr.shared.atomic]</a>:
+D.24 <a href="https://wg21.link/depr.util.smartptr.shared.atomic">[depr.util.smartptr.shared.atomic]</a>:
 </p>
 <blockquote><pre>
 template&lt;class T&gt; void atomic_store(shared_ptr&lt;T&gt;*, shared_ptr&lt;T&gt;); <i>// #3</i>
@@ -26670,7 +26670,7 @@ argument <tt>T</tt> shall be trivially copyable"
 <p/>
 The fix is fairly straightforward since <tt>atomic&lt;T&gt;::value_type</tt> is always an alias
 for <tt>T</tt>: for those non-member atomic functions with overloads defined in
-D.20 <a href="https://wg21.link/depr.util.smartptr.shared.atomic">[depr.util.smartptr.shared.atomic]</a>, use a different form to require that <tt>T</tt>
+D.24 <a href="https://wg21.link/depr.util.smartptr.shared.atomic">[depr.util.smartptr.shared.atomic]</a>, use a different form to require that <tt>T</tt>
 in the type of the second parameter is non-deduced.
 </p>
 
@@ -29832,7 +29832,7 @@ void notify_all() noexcept;
 </blockquote>
 </li>
 
-<li><p>Modify D.26.2 <a href="https://wg21.link/depr.atomics.volatile">[depr.atomics.volatile]</a>, annex D, as indicated:</p>
+<li><p>Modify D.30.2 <a href="https://wg21.link/depr.atomics.volatile">[depr.atomics.volatile]</a>, annex D, as indicated:</p>
 
 <blockquote>
 <p>
@@ -29922,7 +29922,7 @@ code sequence containing the <tt><i>f</i></tt> invocation specified in this subc
 </blockquote>
 </li>
 
-<li><p>Modify D.26.2 <a href="https://wg21.link/depr.atomics.volatile">[depr.atomics.volatile]</a>, annex D, as indicated:</p>
+<li><p>Modify D.30.2 <a href="https://wg21.link/depr.atomics.volatile">[depr.atomics.volatile]</a>, annex D, as indicated:</p>
 
 <blockquote>
 <p>
@@ -36158,7 +36158,7 @@ template&lt;class Allocator&gt; struct hash&lt;vector&lt;bool, Allocator&gt;&gt;
 </blockquote>
 </li>
 
-<li><p>Create a new subclause [depr.vector.bool.swap] after D.21 <a href="https://wg21.link/depr.string.capacity">[depr.string.capacity]</a></p>
+<li><p>Create a new subclause [depr.vector.bool.swap] after D.25 <a href="https://wg21.link/depr.string.capacity">[depr.string.capacity]</a></p>
 
 <blockquote>
 <p>
@@ -36331,7 +36331,7 @@ template&lt;class Allocator&gt; struct hash&lt;vector&lt;bool, Allocator&gt;&gt;
 </blockquote>
 </li>
 
-<li><p>Create a new subclause [depr.vector.bool.swap] after D.21 <a href="https://wg21.link/depr.string.capacity">[depr.string.capacity]</a></p>
+<li><p>Create a new subclause [depr.vector.bool.swap] after D.25 <a href="https://wg21.link/depr.string.capacity">[depr.string.capacity]</a></p>
 
 <blockquote>
 <p>
@@ -39957,7 +39957,7 @@ constexpr auto size() const requires sized_range&lt;const V&gt; {
 
 <hr>
 <h3><a name="3731" href="#3731">3731</a><sup><a href="https://cplusplus.github.io/LWG/issue3731">(i)</a></sup>. <tt>zip_view</tt> and <tt>adjacent_view</tt> are underconstrained</h3>
-<p><b>Section:</b> 26.7.23.2 <a href="https://wg21.link/range.zip.view">[range.zip.view]</a>, 26.7.25.2 <a href="https://wg21.link/range.adjacent.view">[range.adjacent.view]</a>, 26.7.31.2 <a href="https://wg21.link/range.cartesian.view">[range.cartesian.view]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 26.7.24.2 <a href="https://wg21.link/range.zip.view">[range.zip.view]</a>, 26.7.26.2 <a href="https://wg21.link/range.adjacent.view">[range.adjacent.view]</a>, 26.7.32.2 <a href="https://wg21.link/range.cartesian.view">[range.cartesian.view]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2022-07-04 <b>Last modified:</b> 2023-02-07</p>
 <p><b>Priority: </b>3
 </p>
@@ -39965,8 +39965,8 @@ constexpr auto size() const requires sized_range&lt;const V&gt; {
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Both <tt>zip_view::<i>iterator</i></tt>'s (26.7.23.3 <a href="https://wg21.link/range.zip.iterator">[range.zip.iterator]</a>) and 
-<tt>adjacent_view::<i>iterator</i></tt>'s (26.7.25.3 <a href="https://wg21.link/range.adjacent.iterator">[range.adjacent.iterator]</a>) 
+Both <tt>zip_view::<i>iterator</i></tt>'s (26.7.24.3 <a href="https://wg21.link/range.zip.iterator">[range.zip.iterator]</a>) and 
+<tt>adjacent_view::<i>iterator</i></tt>'s (26.7.26.3 <a href="https://wg21.link/range.adjacent.iterator">[range.adjacent.iterator]</a>) 
 <tt>operator*</tt> have similar <i>Effects:</i> elements:
 </p>
 <blockquote><pre>
@@ -40034,7 +40034,7 @@ This wording is relative to <a href="https://wg21.link/N4910">N4910</a>.
 <pre>
 namespace std::ranges {
   [&hellip;]
-  <i>// 26.7.23 <a href="https://wg21.link/range.zip">[range.zip]</a>, zip view</i>
+  <i>// 26.7.24 <a href="https://wg21.link/range.zip">[range.zip]</a>, zip view</i>
   <ins>template&lt;class Ref&gt;
     concept <i>tuple-constructible-reference</i> = <i>see below</i>; <i>// exposition only</i></ins>
 
@@ -40045,7 +40045,7 @@ namespace std::ranges {
 
   [&hellip;]
 
-  <i>// 26.7.25 <a href="https://wg21.link/range.adjacent">[range.adjacent]</a>, adjacent view</i>
+  <i>// 26.7.26 <a href="https://wg21.link/range.adjacent">[range.adjacent]</a>, adjacent view</i>
   template&lt;forward_range V, size_t N&gt;
     requires view&lt;V&gt; &amp;&amp; (N &gt; 0) <ins>&amp;&amp; 
              <i>tuple-constructible-reference</i>&lt;range_reference_t&lt;V&gt;&gt;</ins>
@@ -40058,7 +40058,7 @@ namespace std::ranges {
 
 
 
-<li><p>Modify 26.7.23.2 <a href="https://wg21.link/range.zip.view">[range.zip.view]</a> as indicated:</p>
+<li><p>Modify 26.7.24.2 <a href="https://wg21.link/range.zip.view">[range.zip.view]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -40079,7 +40079,7 @@ namespace std::ranges {
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.25.2 <a href="https://wg21.link/range.adjacent.view">[range.adjacent.view]</a> as indicated:</p>
+<li><p>Modify 26.7.26.2 <a href="https://wg21.link/range.adjacent.view">[range.adjacent.view]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -40120,7 +40120,7 @@ namespace std::ranges {
     concept <i>has-tuplable-ref</i> =            // <i>exposition only</i>
       move_constructible&lt;range_reference_t&lt;R&gt;&gt;;</ins>
 
-  // <i>26.7.23 <a href="https://wg21.link/range.zip">[range.zip]</a>, zip view</i>
+  // <i>26.7.24 <a href="https://wg21.link/range.zip">[range.zip]</a>, zip view</i>
   template&lt;input_range... Views&gt;
     requires (view&lt;Views&gt; &amp;&amp; ...) &amp;&amp; (sizeof...(Views) &gt; 0) <ins>&amp;&amp;
              (<i>has-tuplable-ref</i>&lt;Views&gt; &amp;&amp; ...)</ins>
@@ -40128,14 +40128,14 @@ namespace std::ranges {
 
   [&hellip;]
 
-  // <i>26.7.25 <a href="https://wg21.link/range.adjacent">[range.adjacent]</a>, adjacent view</i>
+  // <i>26.7.26 <a href="https://wg21.link/range.adjacent">[range.adjacent]</a>, adjacent view</i>
   template&lt;forward_range V, size_t N&gt;
     requires view&lt;V&gt; &amp;&amp; (N &gt; 0) <ins>&amp;&amp; <i>has-tuplable-ref</i>&lt;V&gt;</ins>
   class adjacent_view;
 
   [&hellip;]
 
-  // <i>26.7.31 <a href="https://wg21.link/range.cartesian">[range.cartesian]</a>, cartesian product view</i>
+  // <i>26.7.32 <a href="https://wg21.link/range.cartesian">[range.cartesian]</a>, cartesian product view</i>
   template&lt;input_range First, forward_range... Vs&gt;
     requires (view&lt;First&gt; &amp;&amp; ... &amp;&amp; view&lt;Vs&gt;) <ins>&amp;&amp;
              (<i>has-tuplable-ref</i>&lt;First&gt; &amp;&amp; ... &amp;&amp; <i>has-tuplable-ref</i>&lt;Vs&gt;)</ins>
@@ -40147,7 +40147,7 @@ namespace std::ranges {
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.23.2 <a href="https://wg21.link/range.zip.view">[range.zip.view]</a> as indicated:</p>
+<li><p>Modify 26.7.24.2 <a href="https://wg21.link/range.zip.view">[range.zip.view]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -40165,7 +40165,7 @@ namespace std::ranges {
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.23.3 <a href="https://wg21.link/range.zip.iterator">[range.zip.iterator]</a> as indicated:</p>
+<li><p>Modify 26.7.24.3 <a href="https://wg21.link/range.zip.iterator">[range.zip.iterator]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -40183,7 +40183,7 @@ namespace std::ranges {
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.23.4 <a href="https://wg21.link/range.zip.sentinel">[range.zip.sentinel]</a> as indicated:</p>
+<li><p>Modify 26.7.24.4 <a href="https://wg21.link/range.zip.sentinel">[range.zip.sentinel]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -40200,7 +40200,7 @@ namespace std::ranges {
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.25.2 <a href="https://wg21.link/range.adjacent.view">[range.adjacent.view]</a> as indicated:</p>
+<li><p>Modify 26.7.26.2 <a href="https://wg21.link/range.adjacent.view">[range.adjacent.view]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -40215,7 +40215,7 @@ namespace std::ranges {
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.25.3 <a href="https://wg21.link/range.adjacent.iterator">[range.adjacent.iterator]</a> as indicated:</p>
+<li><p>Modify 26.7.26.3 <a href="https://wg21.link/range.adjacent.iterator">[range.adjacent.iterator]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -40231,7 +40231,7 @@ namespace std::ranges {
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.25.4 <a href="https://wg21.link/range.adjacent.sentinel">[range.adjacent.sentinel]</a> as indicated:</p>
+<li><p>Modify 26.7.26.4 <a href="https://wg21.link/range.adjacent.sentinel">[range.adjacent.sentinel]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -40247,7 +40247,7 @@ namespace std::ranges {
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.31.2 <a href="https://wg21.link/range.cartesian.view">[range.cartesian.view]</a> as indicated:</p>
+<li><p>Modify 26.7.32.2 <a href="https://wg21.link/range.cartesian.view">[range.cartesian.view]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -40264,7 +40264,7 @@ namespace std::ranges {
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.31.3 <a href="https://wg21.link/range.cartesian.iterator">[range.cartesian.iterator]</a> as indicated:</p>
+<li><p>Modify 26.7.32.3 <a href="https://wg21.link/range.cartesian.iterator">[range.cartesian.iterator]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -40690,7 +40690,7 @@ This issue has considerable overlap with LWG <a href="lwg-active.html#2158">2158
 <hr>
 <h3><a name="3763" href="#3763">3763</a><sup><a href="https://cplusplus.github.io/LWG/issue3763">(i)</a></sup>. Should range adaptor iterators only provide <tt>iterator_category</tt> when its 
 <tt>difference_type</tt> is not an integer-class type?</h3>
-<p><b>Section:</b> 26.6.5.3 <a href="https://wg21.link/range.repeat.iterator">[range.repeat.iterator]</a>, 26.7.31.3 <a href="https://wg21.link/range.cartesian.iterator">[range.cartesian.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 26.6.5.3 <a href="https://wg21.link/range.repeat.iterator">[range.repeat.iterator]</a>, 26.7.32.3 <a href="https://wg21.link/range.cartesian.iterator">[range.cartesian.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2022-08-27 <b>Last modified:</b> 2023-02-07</p>
 <p><b>Priority: </b>3
 </p>
@@ -40769,7 +40769,7 @@ namespace std::ranges {
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.31.3 <a href="https://wg21.link/range.cartesian.iterator">[range.cartesian.iterator]</a> as indicated:</p>
+<li><p>Modify 26.7.32.3 <a href="https://wg21.link/range.cartesian.iterator">[range.cartesian.iterator]</a> as indicated:</p>
 <blockquote>
 <blockquote>
 <pre>
@@ -40879,7 +40879,7 @@ way to use them is via <tt>use_facet</tt> on a locale, which would throw
 if they're removed (and because they were guaranteed to be present, code
 using them might have not bothered to check for them using <tt>has_facet</tt>).
 Instead of removing them, deprecate the guarantee that they're always present
-(so move them to D.24 <a href="https://wg21.link/depr.locale.category">[depr.locale.category]</a>).
+(so move them to D.28 <a href="https://wg21.link/depr.locale.category">[depr.locale.category]</a>).
 Don't bother changing the destructor.
 Victor to update wording.
 </p>
@@ -41098,7 +41098,7 @@ to or from the specialized <tt>do_in</tt> or <tt>do_out</tt> members.
 </li>
 
 
-<li><p>Modify D.24 <a href="https://wg21.link/depr.locale.category">[depr.locale.category]</a> (Deprecated locale category facets) in Annex D as indicated:</p>
+<li><p>Modify D.28 <a href="https://wg21.link/depr.locale.category">[depr.locale.category]</a> (Deprecated locale category facets) in Annex D as indicated:</p>
 
 <blockquote>
 <p>
@@ -41393,7 +41393,7 @@ format_(<ins>addressof(</ins>parse_ctx<ins>)</ins>, format_ctx, ptr_);
 
 <hr>
 <h3><a name="3777" href="#3777">3777</a><sup><a href="https://cplusplus.github.io/LWG/issue3777">(i)</a></sup>. Common <tt>cartesian_product_view</tt> produces an invalid range if the first range is input and one of the ranges is empty</h3>
-<p><b>Section:</b> 26.7.31.2 <a href="https://wg21.link/range.cartesian.view">[range.cartesian.view]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
+<p><b>Section:</b> 26.7.32.2 <a href="https://wg21.link/range.cartesian.view">[range.cartesian.view]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
  <b>Submitter:</b> Tomasz Kami&nacute;ski <b>Opened:</b> 2022-09-12 <b>Last modified:</b> 2023-02-07</p>
 <p><b>Priority: </b>2
 </p>
@@ -41442,7 +41442,7 @@ This wording is relative to <a href="https://wg21.link/N4910">N4910</a>.
 
 <ol>
 
-<li><p>Modify 26.7.31.2 <a href="https://wg21.link/range.cartesian.view">[range.cartesian.view]</a> as indicated:</p>
+<li><p>Modify 26.7.32.2 <a href="https://wg21.link/range.cartesian.view">[range.cartesian.view]</a> as indicated:</p>
 
 <blockquote class="note">
 <p>
@@ -41505,7 +41505,7 @@ return it;
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.31.3 <a href="https://wg21.link/range.cartesian.iterator">[range.cartesian.iterator]</a> as indicated:</p>
+<li><p>Modify 26.7.32.3 <a href="https://wg21.link/range.cartesian.iterator">[range.cartesian.iterator]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -43335,7 +43335,7 @@ namespace std {
 
 <hr>
 <h3><a name="3840" href="#3840">3840</a><sup><a href="https://cplusplus.github.io/LWG/issue3840">(i)</a></sup>. <tt>filesystem::u8path</tt> should be undeprecated</h3>
-<p><b>Section:</b> D.25 <a href="https://wg21.link/depr.fs.path.factory">[depr.fs.path.factory]</a> <b>Status:</b> <a href="lwg-active.html#LEWG">LEWG</a>
+<p><b>Section:</b> D.29 <a href="https://wg21.link/depr.fs.path.factory">[depr.fs.path.factory]</a> <b>Status:</b> <a href="lwg-active.html#LEWG">LEWG</a>
  <b>Submitter:</b> Daniel Krügler <b>Opened:</b> 2022-12-10 <b>Last modified:</b> 2023-01-28</p>
 <p><b>Priority: </b>3
 </p>
@@ -43426,7 +43426,7 @@ namespace std::filesystem {
 </li>
 
 <li><p>Restore the previous sub-clause [fs.path.factory] by copying the contents of 
-D.25 <a href="https://wg21.link/depr.fs.path.factory">[depr.fs.path.factory]</a> to a new sub-clause [fs.path.factory] between 
+D.29 <a href="https://wg21.link/depr.fs.path.factory">[depr.fs.path.factory]</a> to a new sub-clause [fs.path.factory] between 
 31.12.6.8 <a href="https://wg21.link/fs.path.nonmember">[fs.path.nonmember]</a> and 31.12.6.9 <a href="https://wg21.link/fs.path.hash">[fs.path.hash]</a> and without <i>Note 1</i>
 as indicated:</p>
 
@@ -43496,7 +43496,7 @@ native character set representation.</ins>
 </blockquote>
 </li>
 
-<li><p>Delete sub-clause D.25 <a href="https://wg21.link/depr.fs.path.factory">[depr.fs.path.factory]</a> in its entirety.</p>
+<li><p>Delete sub-clause D.29 <a href="https://wg21.link/depr.fs.path.factory">[depr.fs.path.factory]</a> in its entirety.</p>
 </li>
 </ol>
 
@@ -44333,7 +44333,7 @@ is important.
 
 <hr>
 <h3><a name="3864" href="#3864">3864</a><sup><a href="https://cplusplus.github.io/LWG/issue3864">(i)</a></sup>. <tt>zip</tt> over range of reference to an abstract type</h3>
-<p><b>Section:</b> 26.7.23 <a href="https://wg21.link/range.zip">[range.zip]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 26.7.24 <a href="https://wg21.link/range.zip">[range.zip]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Barry Revzin <b>Opened:</b> 2023-01-28 <b>Last modified:</b> 2023-02-06</p>
 <p><b>Priority: </b>4
 </p>
@@ -45974,7 +45974,7 @@ template&lt;class R, class T, class U <ins>= T</ins>&gt;
 [&hellip;]
 namespace std {
   [&hellip;]
-  // <i>25.3.6.2 <a href="https://wg21.link/indirectcallable.indirectinvocable">[indirectcallable.indirectinvocable]</a>, indirect callables</i>
+  // <i>25.3.6.3 <a href="https://wg21.link/indirectcallable.indirectinvocable">[indirectcallable.indirectinvocable]</a>, indirect callables</i>
   [&hellip;]
   template&lt;class F, class I1, class I2 <ins>= I1</ins>&gt;
     concept indirect_binary_predicate = <i>see below</i>; // <i>freestanding</i>
@@ -45988,7 +45988,7 @@ namespace std {
 
 </li>
 
-<li><p>Modify 25.3.6.2 <a href="https://wg21.link/indirectcallable.indirectinvocable">[indirectcallable.indirectinvocable]</a> as indicated:</p>
+<li><p>Modify 25.3.6.3 <a href="https://wg21.link/indirectcallable.indirectinvocable">[indirectcallable.indirectinvocable]</a> as indicated:</p>
 
 <blockquote>
 <p>
@@ -46923,7 +46923,7 @@ Sentinel types don't seem able to be SCARY as they are dependent on iterator typ
 
 <hr>
 <h3><a name="3908" href="#3908">3908</a><sup><a href="https://cplusplus.github.io/LWG/issue3908">(i)</a></sup>. <code>enumerate_view::<i>iterator</i></code> constructor is explicit</h3>
-<p><b>Section:</b> 99 [range.enumerate.iterator] <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 26.7.23.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-03-23 <b>Last modified:</b> 2023-03-23</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -46957,7 +46957,7 @@ This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
 <ol>
 <li>
 <p>
-Modify the class synopsis in 99 [range.enumerate.iterator]
+Modify the class synopsis in 26.7.23.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a>
 as shown:
 </p>
 <blockquote><pre><code>
@@ -46968,7 +46968,7 @@ as shown:
 
 <li>
 <p>
-Modify the detailed description in 99 [range.enumerate.iterator]
+Modify the detailed description in 26.7.23.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a>
 as shown:
 </p>
 <blockquote>
@@ -47217,7 +47217,7 @@ that is convertible to <code>T&amp;</code>.
 
 <hr>
 <h3><a name="3912" href="#3912">3912</a><sup><a href="https://cplusplus.github.io/LWG/issue3912">(i)</a></sup>. <code>enumerate_view::iterator::operator-</code> should be <code>noexcept</code></h3>
-<p><b>Section:</b> 99 [range.enumerate.iterator] <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 26.7.23.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-03-27 <b>Last modified:</b> 2023-03-27</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -47239,7 +47239,7 @@ This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
 <ol>
 <li>
 <p>
-Modify 99 [range.enumerate.iterator] as indicated:
+Modify 26.7.23.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a> as indicated:
 </p>
 <blockquote>
 <pre><code>

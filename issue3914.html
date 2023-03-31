@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta charset="utf-8">
+<title>Issue 3914: What is the "range representable by the type" for floating-point from_chars?</title>
+<style type="text/css">
+  p {text-align:justify}
+  li {text-align:justify}
+  blockquote.note
+  {
+    background-color:#E0E0E0;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+  ins {background-color:#A0FFA0}
+  del {background-color:#FFA0A0}
+  table {border-collapse: collapse;}
+  @media (prefers-color-scheme: dark) {
+     html {
+        color: #ddd;
+        background-color: black;
+     }
+     ins {
+        background-color: #225522
+     }
+     del {
+        background-color: #662222
+     }
+     a {
+        color: #6af
+     }
+     a:visited {
+        color: #6af
+     }
+     blockquote.note
+     {
+        background-color: rgba(255, 255, 255, .10)
+     }
+  }
+</style>
+</head>
+<body>
+<hr>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
+<h3><a name="3914" href="lwg-active.html#3914">3914</a>. What is the "range representable by the type" for floating-point <code>from_chars</code>?</h3>
+<p><b>Section:</b> 22.13.3 <a href="https://wg21.link/charconv.from.chars">[charconv.from.chars]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-03-29 <b>Last modified:</b> 2023-03-29</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#charconv.from.chars">active issues</a> in [charconv.from.chars].</p>
+<p><b>View all other</b> <a href="lwg-index.html#charconv.from.chars">issues</a> in [charconv.from.chars].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>22.13.3 <a href="https://wg21.link/charconv.from.chars">[charconv.from.chars]</a> says:</p>
+
+<blockquote>
+If the parsed value is not in the range representable by the type of
+<code>value</code>, <code>value</code> is unmodified
+and the member <code>ec</code> of the return value is equal to
+<code>errc::result_out_of_range</code>.
+</blockquote>
+
+<p>
+One interpretation of this is that the parsed values for the strings
+<code>"1e-10000"</code> and <code>"1e+10000"</code> are outside the
+representable range of a <code>double</code> that uses IEEE binary64 format,
+because the min/max exponents are -1022 and +1023.
+</p>
+
+<p>
+Another interpretation is that the representable range for floating-point
+types goes from negative infinity to positive infinity, so although there
+are values which cannot be represented accurately, they are still within the
+<em>range</em> of representable values. Under this interpretation, there
+are no values for which <code>from_chars</code> will leave a floating-point
+argument unmodified.
+</p>
+
+<p>
+It would be helpful to clarify the intended meaning.
+</p>
+
+
+
+<p id="res-3914"><b>Proposed resolution:</b></p>
+<p>
+</p>
+
+
+
+
+
+</body>
+</html>

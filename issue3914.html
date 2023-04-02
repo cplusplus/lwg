@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Issue 3914: What is the "range representable by the type" for floating-point from_chars?</title>
+<title>Issue 3914: Inconsistent template-head of ranges::enumerate_view</title>
 <style type="text/css">
   p {text-align:justify}
   li {text-align:justify}
@@ -45,49 +45,43 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="3914" href="lwg-active.html#3914">3914</a>. What is the "range representable by the type" for floating-point <code>from_chars</code>?</h3>
-<p><b>Section:</b> 22.13.3 <a href="https://wg21.link/charconv.from.chars">[charconv.from.chars]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-03-29 <b>Last modified:</b> 2023-03-29</p>
+<h3><a name="3914" href="lwg-active.html#3914">3914</a>. Inconsistent <i>template-head</i> of <tt>ranges::enumerate_view</tt></h3>
+<p><b>Section:</b> 26.2 <a href="https://wg21.link/ranges.syn">[ranges.syn]</a>, 26.7.23 <a href="https://wg21.link/range.enumerate">[range.enumerate]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Johel Ernesto Guerrero Pe&ntilde;a <b>Opened:</b> 2023-03-30 <b>Last modified:</b> 2023-04-02</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#charconv.from.chars">active issues</a> in [charconv.from.chars].</p>
-<p><b>View all other</b> <a href="lwg-index.html#charconv.from.chars">issues</a> in [charconv.from.chars].</p>
+<p><b>View other</b> <a href="lwg-index-open.html#ranges.syn">active issues</a> in [ranges.syn].</p>
+<p><b>View all other</b> <a href="lwg-index.html#ranges.syn">issues</a> in [ranges.syn].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
-<p>22.13.3 <a href="https://wg21.link/charconv.from.chars">[charconv.from.chars]</a> says:</p>
-
-<blockquote>
-If the parsed value is not in the range representable by the type of
-<code>value</code>, <code>value</code> is unmodified
-and the member <code>ec</code> of the return value is equal to
-<code>errc::result_out_of_range</code>.
-</blockquote>
-
 <p>
-One interpretation of this is that the parsed values for the strings
-<code>"1e-10000"</code> and <code>"1e+10000"</code> are outside the
-representable range of a <code>double</code> that uses IEEE binary64 format,
-because the min/max exponents are -1022 and +1023.
+Originally editorial issue <a href="https://github.com/cplusplus/draft/issues/6151">Editorial issue #6151</a>.
+<p/>
+The <i>template-head</i> of <tt>ranges::enumerate_view</tt> in the header synopsis
+is different from those in the class synopses of itself and its iterator/sentinel pair.
 </p>
-
-<p>
-Another interpretation is that the representable range for floating-point
-types goes from negative infinity to positive infinity, so although there
-are values which cannot be represented accurately, they are still within the
-<em>range</em> of representable values. Under this interpretation, there
-are no values for which <code>from_chars</code> will leave a floating-point
-argument unmodified.
-</p>
-
-<p>
-It would be helpful to clarify the intended meaning.
-</p>
-
 
 
 <p id="res-3914"><b>Proposed resolution:</b></p>
 <p>
+This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
 </p>
+
+<ol>
+<li>
+<p>Modify 26.2 <a href="https://wg21.link/ranges.syn">[ranges.syn]</a> as indicated:</p>
+
+<blockquote><pre>
+[&hellip;]
+// <i>26.7.23 <a href="https://wg21.link/range.enumerate">[range.enumerate]</a>, enumerate view</i>
+template&lt;<ins>view V</ins><del>input_range View</del>&gt;
+  requires <ins><i>see below</i></ins><del>view&lt;View&gt;</del>
+class enumerate_view;
+[&hellip;]
+</pre></blockquote>
+</li>
+</ol>
+
 
 
 

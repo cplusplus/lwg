@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-04-02 at 14:37:33 UTC</p>
+<p><p>Revised 2023-04-02 at 15:53:15 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -47392,6 +47392,65 @@ template&lt;<ins>view V</ins><del>input_range View</del>&gt;
 class enumerate_view;
 [&hellip;]
 </pre></blockquote>
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3><a name="3915" href="#3915">3915</a><sup><a href="https://cplusplus.github.io/LWG/issue3915">(i)</a></sup>. Redundant paragraph about expression variations</h3>
+<p><b>Section:</b> 26.4.2 <a href="https://wg21.link/range.range">[range.range]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Johel Ernesto Guerrero Pe&ntilde;a <b>Opened:</b> 2023-04-01 <b>Last modified:</b> 2023-04-02</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.range">issues</a> in [range.range].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Originally editorial issue <a href="https://github.com/cplusplus/draft/issues/4431">Editorial issue #4431</a>.
+<p/>
+Expression variations kick in for "an expression that is non-modifying for some constant lvalue operand", but 
+<tt>std::ranges::range</tt>'s is an non-constant lvalue, so 26.4.2 <a href="https://wg21.link/range.range">[range.range]</a> p2 is redundant.
+<p/>
+I suppose that the change that clarified the template parameters' <i>cv</i>-qualification for purposes of 
+equality-preservation and requiring additional variations happened concurrently with the change of 
+<tt>std::ranges::range</tt>'s operand from a forwarding reference to a non-constant lvalue reference.
+</p>
+
+
+<p id="res-3915"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
+</p>
+
+<ol>
+<li>
+<p>Modify 26.2 <a href="https://wg21.link/ranges.syn">[ranges.syn]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- The <tt>range</tt> concept defines the requirements of a type that allows iteration over its elements by providing an
+iterator and sentinel that denote the elements of the range.
+</p>
+<pre>
+template&lt;class T&gt;
+  concept range =
+    requires(T&amp; t) {
+      ranges::begin(t); // <i>sometimes equality-preserving (see below)</i>
+      ranges::end(t);
+    };
+</pre>
+<blockquote>
+<del>-2- The required expressions <tt>ranges::begin(t)</tt> and <tt>ranges::end(t)</tt> of the <tt>range</tt> 
+concept do not require implicit expression variations (18.2 <a href="https://wg21.link/concepts.equality">[concepts.equality]</a>).</del>
+<p/>
+-3- [&hellip;]
+</blockquote>
+</blockquote>
+
 </li>
 </ol>
 

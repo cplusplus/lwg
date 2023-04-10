@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-04-10 at 13:41:40 UTC</p>
+<p><p>Revised 2023-04-10 at 13:58:55 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -47727,6 +47727,35 @@ return {first, result};
 </blockquote>
 </li>
 </ol>
+
+
+
+
+
+<hr>
+<h3><a name="3919" href="#3919">3919</a><sup><a href="https://cplusplus.github.io/LWG/issue3919">(i)</a></sup>. <tt>enumerate_view</tt> may invoke UB for sized common non-forward underlying ranges</h3>
+<p><b>Section:</b> 26.7.23 <a href="https://wg21.link/range.enumerate">[range.enumerate]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Patrick Palka <b>Opened:</b> 2023-04-07 <b>Last modified:</b> 2023-04-10</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+For a sized common range, <tt>enumerate_view::end()</tt> is specified to call
+<tt>ranges::distance</tt>. But <tt>ranges::distance</tt> is not necessarily well-defined
+for a sized non-forward range after calling <tt>ranges::begin</tt> (according to
+26.4.3 <a href="https://wg21.link/range.sized">[range.sized]</a>).
+<p/>
+So for a sized common non-forward underlying range, it seems calling
+<tt>enumerate_view::begin()</tt> followed by <tt>enumerate_view::end()</tt> may invoke UB
+and thus make <tt>enumerate_view</tt> potentially unusable for such ranges.
+<p/>
+I suppose we might need to instead call and cache the result of
+<tt>ranges::distance</tt> from <tt>enumerate_view::begin()</tt> for such ranges.
+</p>
+
+
+<p id="res-3919"><b>Proposed resolution:</b></p>
 
 
 

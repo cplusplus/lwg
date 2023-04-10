@@ -51,7 +51,7 @@
 </tr>
 <tr>
 <td align="left">Date:</td>
-<td align="left"><p>Revised 2023-04-10 at 13:41:40 UTC</p>
+<td align="left"><p>Revised 2023-04-10 at 13:53:19 UTC</p>
 </td>
 </tr>
 <tr>
@@ -67,7 +67,7 @@
 <hr>
 <h3><a name="3884" href="#3884">3884</a><sup><a href="https://cplusplus.github.io/LWG/issue3884">(i)</a></sup>. <tt>flat_<i>foo</i></tt> is missing allocator-extended copy/move constructors</h3>
 <p><b>Section:</b> 24.6.9 <a href="https://wg21.link/flat.map">[flat.map]</a>, 24.6.10 <a href="https://wg21.link/flat.multimap">[flat.multimap]</a>, 24.6.11 <a href="https://wg21.link/flat.set">[flat.set]</a>, 24.6.12 <a href="https://wg21.link/flat.multiset">[flat.multiset]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
- <b>Submitter:</b> Arthur O'Dwyer <b>Opened:</b> 2023-02-06 <b>Last modified:</b> 2023-03-23</p>
+ <b>Submitter:</b> Arthur O'Dwyer <b>Opened:</b> 2023-02-06 <b>Last modified:</b> 2023-04-02</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#flat.map">active issues</a> in [flat.map].</p>
@@ -344,7 +344,7 @@ constructed with uses-allocator construction (20.2.8.2 <a href="https://wg21.lin
 <hr>
 <h3><a name="3885" href="#3885">3885</a><sup><a href="https://cplusplus.github.io/LWG/issue3885">(i)</a></sup>. '<tt>op</tt>' should be in [zombie.names]</h3>
 <p><b>Section:</b> 16.4.5.3.2 <a href="https://wg21.link/zombie.names">[zombie.names]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-02-11 <b>Last modified:</b> 2023-03-22</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-02-11 <b>Last modified:</b> 2023-03-23</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
@@ -396,7 +396,7 @@ for object-like macros in portable code:
 <hr>
 <h3><a name="3887" href="#3887">3887</a><sup><a href="https://cplusplus.github.io/LWG/issue3887">(i)</a></sup>. Version macro for <tt>allocate_at_least</tt></h3>
 <p><b>Section:</b> 17.3.2 <a href="https://wg21.link/version.syn">[version.syn]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
- <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2023-02-14 <b>Last modified:</b> 2023-03-22</p>
+ <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2023-02-14 <b>Last modified:</b> 2023-03-23</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#version.syn">active issues</a> in [version.syn].</p>
@@ -460,7 +460,7 @@ the placeholder <tt>YYYYMM</tt> by the year and month of adoption of <a href="ht
 <hr>
 <h3><a name="3893" href="#3893">3893</a><sup><a href="https://cplusplus.github.io/LWG/issue3893">(i)</a></sup>. LWG 3661 broke <tt>atomic&lt;shared_ptr&lt;T&gt;&gt; a; a = nullptr;</tt></h3>
 <p><b>Section:</b> 33.5.8.7.2 <a href="https://wg21.link/util.smartptr.atomic.shared">[util.smartptr.atomic.shared]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
- <b>Submitter:</b> Zachary Wassall <b>Opened:</b> 2023-02-22 <b>Last modified:</b> 2023-03-22</p>
+ <b>Submitter:</b> Zachary Wassall <b>Opened:</b> 2023-02-22 <b>Last modified:</b> 2023-03-23</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#util.smartptr.atomic.shared">issues</a> in [util.smartptr.atomic.shared].</p>
@@ -576,7 +576,7 @@ void operator=(shared_ptr&lt;T&gt; desired) noexcept;
 <hr>
 <h3><a name="3894" href="#3894">3894</a><sup><a href="https://cplusplus.github.io/LWG/issue3894">(i)</a></sup>. <tt>generator::promise_type::yield_value(ranges::elements_of&lt;Rng, Alloc&gt;)</tt> should not be <tt>noexcept</tt></h3>
 <p><b>Section:</b> 26.8.5 <a href="https://wg21.link/coro.generator.promise">[coro.generator.promise]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
- <b>Submitter:</b> Tim Song <b>Opened:</b> 2023-02-25 <b>Last modified:</b> 2023-03-22</p>
+ <b>Submitter:</b> Tim Song <b>Opened:</b> 2023-02-25 <b>Last modified:</b> 2023-03-23</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#coro.generator.promise">active issues</a> in [coro.generator.promise].</p>
@@ -674,7 +674,7 @@ return yield_value(ranges::elements_of(nested(
 <hr>
 <h3><a name="3903" href="#3903">3903</a><sup><a href="https://cplusplus.github.io/LWG/issue3903">(i)</a></sup>. <tt>span</tt> destructor is redundantly <tt>noexcept</tt></h3>
 <p><b>Section:</b> 24.7.2.2.1 <a href="https://wg21.link/span.overview">[span.overview]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
- <b>Submitter:</b> Ben Craig <b>Opened:</b> 2023-03-11 <b>Last modified:</b> 2023-03-22</p>
+ <b>Submitter:</b> Ben Craig <b>Opened:</b> 2023-03-11 <b>Last modified:</b> 2023-03-23</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#span.overview">active issues</a> in [span.overview].</p>

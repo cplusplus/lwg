@@ -46,12 +46,12 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3><a name="3916" href="lwg-active.html#3916">3916</a>. <tt>allocator</tt>, <tt>polymorphic_allocator</tt>, and containers should forbid <i>cv</i>-qualified types</h3>
-<p><b>Section:</b> 26.4.2 <a href="https://wg21.link/range.range">[range.range]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Stephan T. Lavavej <b>Opened:</b> 2023-04-02 <b>Last modified:</b> 2023-04-08</p>
+<p><b>Section:</b> 20.2.10 <a href="https://wg21.link/default.allocator">[default.allocator]</a>, 20.4.3.1 <a href="https://wg21.link/mem.poly.allocator.class.general">[mem.poly.allocator.class.general]</a>, 24.2 <a href="https://wg21.link/container.requirements">[container.requirements]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Stephan T. Lavavej <b>Opened:</b> 2023-04-02 <b>Last modified:</b> 2023-04-11</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#range.range">active issues</a> in [range.range].</p>
-<p><b>View all other</b> <a href="lwg-index.html#range.range">issues</a> in [range.range].</p>
+<p><b>View other</b> <a href="lwg-index-open.html#default.allocator">active issues</a> in [default.allocator].</p>
+<p><b>View all other</b> <a href="lwg-index.html#default.allocator">issues</a> in [default.allocator].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
@@ -60,7 +60,7 @@ so that the <i>Cpp17Allocator</i> requirements are specified for <i>cv</i>-unqua
 <p/>
 However, nothing in 20.2.10 <a href="https://wg21.link/default.allocator">[default.allocator]</a> restricts what <tt>T</tt> in <tt>allocator&lt;T&gt;</tt> can be, 
 except where 20.2.10.2 <a href="https://wg21.link/allocator.members">[allocator.members]</a>/2 and /6 require it to be complete for <tt>allocate()</tt> and 
-<tt>allocate_at_least()</tt> (and by implication, for <tt>deallocate()</tt>). (Long ago, allocator had member functions 
+<tt>allocate_at_least()</tt> (and by implication, for <tt>deallocate()</tt>). (Long ago, <tt>allocator</tt> had member functions 
 whose signatures implied that <tt>const</tt>-qualified types were forbidden, but those signatures were deprecated and 
 removed. This explains the phrasing of an MSVC static assertion.)
 <p/>

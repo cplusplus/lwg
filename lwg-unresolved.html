@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-04-10 at 13:59:34 UTC</p>
+<p><p>Revised 2023-04-11 at 13:12:28 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -47387,7 +47387,6 @@ class enumerate_view;
  <b>Submitter:</b> Johel Ernesto Guerrero Pe&ntilde;a <b>Opened:</b> 2023-04-01 <b>Last modified:</b> 2023-04-02</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#range.range">active issues</a> in [range.range].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.range">issues</a> in [range.range].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -47443,12 +47442,12 @@ concept do not require implicit expression variations (18.2 <a href="https://wg2
 
 <hr>
 <h3><a name="3916" href="#3916">3916</a><sup><a href="https://cplusplus.github.io/LWG/issue3916">(i)</a></sup>. <tt>allocator</tt>, <tt>polymorphic_allocator</tt>, and containers should forbid <i>cv</i>-qualified types</h3>
-<p><b>Section:</b> 26.4.2 <a href="https://wg21.link/range.range">[range.range]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Stephan T. Lavavej <b>Opened:</b> 2023-04-02 <b>Last modified:</b> 2023-04-08</p>
+<p><b>Section:</b> 20.2.10 <a href="https://wg21.link/default.allocator">[default.allocator]</a>, 20.4.3.1 <a href="https://wg21.link/mem.poly.allocator.class.general">[mem.poly.allocator.class.general]</a>, 24.2 <a href="https://wg21.link/container.requirements">[container.requirements]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Stephan T. Lavavej <b>Opened:</b> 2023-04-02 <b>Last modified:</b> 2023-04-11</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#range.range">active issues</a> in [range.range].</p>
-<p><b>View all other</b> <a href="lwg-index.html#range.range">issues</a> in [range.range].</p>
+<p><b>View other</b> <a href="lwg-index-open.html#default.allocator">active issues</a> in [default.allocator].</p>
+<p><b>View all other</b> <a href="lwg-index.html#default.allocator">issues</a> in [default.allocator].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
@@ -47457,7 +47456,7 @@ so that the <i>Cpp17Allocator</i> requirements are specified for <i>cv</i>-unqua
 <p/>
 However, nothing in 20.2.10 <a href="https://wg21.link/default.allocator">[default.allocator]</a> restricts what <tt>T</tt> in <tt>allocator&lt;T&gt;</tt> can be, 
 except where 20.2.10.2 <a href="https://wg21.link/allocator.members">[allocator.members]</a>/2 and /6 require it to be complete for <tt>allocate()</tt> and 
-<tt>allocate_at_least()</tt> (and by implication, for <tt>deallocate()</tt>). (Long ago, allocator had member functions 
+<tt>allocate_at_least()</tt> (and by implication, for <tt>deallocate()</tt>). (Long ago, <tt>allocator</tt> had member functions 
 whose signatures implied that <tt>const</tt>-qualified types were forbidden, but those signatures were deprecated and 
 removed. This explains the phrasing of an MSVC static assertion.)
 <p/>
@@ -47490,20 +47489,21 @@ MSVC had to add a <tt>static_assert</tt> to emit a clear error message.
 <hr>
 <h3><a name="3917" href="#3917">3917</a><sup><a href="https://cplusplus.github.io/LWG/issue3917">(i)</a></sup>. Validity of <tt>allocator&lt;void&gt;</tt> and possibly <tt>polymorphic_allocator&lt;void&gt;</tt> should be clarified</h3>
 <p><b>Section:</b> 20.2.10 <a href="https://wg21.link/default.allocator">[default.allocator]</a>, 20.4.3 <a href="https://wg21.link/mem.poly.allocator.class">[mem.poly.allocator.class]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Daniel Kr&uuml;gler <b>Opened:</b> 2023-04-08 <b>Last modified:</b> 2023-04-08</p>
+ <b>Submitter:</b> Daniel Kr&uuml;gler <b>Opened:</b> 2023-04-08 <b>Last modified:</b> 2023-04-11</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#default.allocator">active issues</a> in [default.allocator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#default.allocator">issues</a> in [default.allocator].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Before <a href="https://wg21.link/P0174">P0174</a> had been approved for the wording paper, the validity of using <tt>void</tt> as template parameter for
+Before <a href="https://wg21.link/P0174">P0174</a> had been approved for the working paper, the validity of using <tt>void</tt> as template argument for
 <tt>std::allocator</tt> was obvious due to the existing specification of the explicit specialization <tt>allocator&lt;void&gt;</tt>.
 <p/>
 This specialization was first moved to Annex D ([depr.default.allocator]) and later completely eradicated from the working paper via
 adoption of <a href="https://wg21.link/P0619">P0619</a>.
 <p/>
-The problem is, that since then, we have no explicit wording for <tt>std::allocator</tt> to support <tt>void</tt> as template parameter 
+The problem is that, since then, we have no explicit wording for <tt>std::allocator</tt> to support <tt>void</tt> as template argument 
 any more. We fall now under the constraints for template "components" specified in 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.functions]</a> bullet 2.5.
 </p>
 <blockquote><p>
@@ -47550,14 +47550,14 @@ and says then in p2:
 <p>
 Again, this wording is not conclusive, whether <tt>void</tt> is intended to be supported, it is certainly not completely ruled
 out, but that is not strong enough to counterpart 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.functions]</a> (2.5). It is maybe worth pointing out that
-for a while we were considering to use <tt>void</tt> as default template parameter for <tt>pmr::polymorphic_allocator</tt>,
+for a while we were considering to use <tt>void</tt> as default template argument for <tt>pmr::polymorphic_allocator</tt>,
 see e.g. <a href="https://wg21.link/P0339R0">P0339R0</a>, but that thought was later replaced by deciding for <tt>std::byte</tt> instead, which
 is a complete object type.
 <p/>
 I assume that at least the intention exists that <tt>std::allocator</tt> is intended to support incomplete types, maybe also
 for <tt>polymorphic_allocator</tt>. If <tt>polymorphic_allocator</tt> is intended to support incomplete types as well,
 we should also amend 20.4.3.3 <a href="https://wg21.link/mem.poly.allocator.mem">[mem.poly.allocator.mem]</a> p1 and p8 with a <i>Mandates:</i> element similarly as we did 
-for <tt>std::allocator</tt> via. LWG <a href="lwg-defects.html#3307">3307</a>.
+for <tt>std::allocator</tt> via LWG <a href="lwg-defects.html#3307">3307</a>.
 </p>
 
 

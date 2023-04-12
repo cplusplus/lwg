@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-04-12 at 15:23:46 UTC</p>
+<p><p>Revised 2023-04-12 at 15:32:49 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -10092,16 +10092,14 @@ constexpr istreambuf_iterator(default_sentinel_t) noexcept;
 -1- <i>Effects</i>: Initializes <tt>sbuf_</tt> with <tt>nullptr</tt>.
 </p>
 </blockquote>
-<pre><del>
-istreambuf_iterator(istream_type&amp; s) noexcept;
-</del></pre>
+<pre><del>istreambuf_iterator(istream_type&amp; s) noexcept;</del></pre>
 <blockquote>
 <p><del>
 -2- <i>Effects</i>: Initializes <tt>sbuf_</tt> with <tt>s.rdbuf()</tt>.
 </del></p>
 </blockquote>
 <pre>
-<ins>istreambuf_iterator(streambuf_type* s) noexcept;</ins>
+istreambuf_iterator(streambuf_type* s) noexcept;
 </pre>
 <blockquote class="note">
 <p>

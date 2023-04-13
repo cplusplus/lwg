@@ -47,7 +47,7 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3><a name="2366" href="lwg-active.html#2366">2366</a>. <tt>istreambuf_iterator</tt> end-of-stream equality</h3>
 <p><b>Section:</b> 25.6.4 <a href="https://wg21.link/istreambuf.iterator">[istreambuf.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hyman Rosen <b>Opened:</b> 2014-02-19 <b>Last modified:</b> 2023-04-12</p>
+ <b>Submitter:</b> Hyman Rosen <b>Opened:</b> 2014-02-19 <b>Last modified:</b> 2023-04-13</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#istreambuf.iterator">active issues</a> in [istreambuf.iterator].</p>
@@ -210,7 +210,7 @@ istreambuf_iterator&amp; operator++();
 <i>Effects</i>:
 <del>As if by <tt>sbuf_-&gt;sbumpc()</tt>.</del>
 <ins>
-Performs <tt>c_ = sbuf_-&gt;sbumpc()</tt>,
+Performs <tt>c_ = sbuf_-&gt;snextc()</tt>,
 then sets <tt>sbuf_</tt> to null
 if <tt>traits_type::eq_int_type(c_, traits_type::eof())</tt> is <tt>true</tt>.
 </ins>
@@ -228,12 +228,11 @@ if <tt>traits_type::eq_int_type(c_, traits_type::eof())</tt> is <tt>true</tt>.
 <i>Returns</i>: <tt><i>proxy</i>(sbuf_-&gt;sbumpc(), sbuf_)</tt>.
 </del>
 <br/>
-<ins><i>Effects</i>: Equivalent to:
-<pre><code><i>proxy</i> p(**this, sbuf_);
+<ins><i>Effects</i>: Equivalent to:</ins>
+<pre><ins><code><i>proxy</i> p(**this, sbuf_);
 ++*this;
 return p;
-</code></pre>
-</ins>
+</code></ins></pre>
 </p>
 </blockquote>
 <pre>

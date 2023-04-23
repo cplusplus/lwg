@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-04-23 at 13:31:02 UTC</p>
+<p><p>Revised 2023-04-23 at 13:53:44 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -48443,6 +48443,58 @@ template&lt;class T, class charT&gt;
 
 </ol>
 
+
+
+
+
+
+<hr>
+<h3><a name="3926" href="#3926">3926</a><sup><a href="https://cplusplus.github.io/LWG/issue3926">(i)</a></sup>. Which namespace <tt>std</tt> is the mentioned one?</h3>
+<p><b>Section:</b> 16.4.5.2.1 <a href="https://wg21.link/namespace.std">[namespace.std]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> jim x <b>Opened:</b> 2023-04-19 <b>Last modified:</b> 2023-04-23</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#namespace.std">issues</a> in [namespace.std].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+16.4.5.2.1 <a href="https://wg21.link/namespace.std">[namespace.std]</a> p1 says
+</p>
+<blockquote style="border-left: 3px solid #ccc;padding-left: 15px;">
+<p>
+Unless otherwise specified, the behavior of a C++ program is undefined if it adds declarations or definitions to namespace 
+<tt>std</tt> or to a namespace within namespace <tt>std</tt>.
+</p>
+</blockquote>
+<p>
+Which <tt>std</tt> namespace does the rule intend to refer to? Does the text refer to any namespace named <tt>std</tt>? 
+Consider this case:
+</p>
+<blockquote><pre>
+namespace A{
+   namespace std{  // UB or not? 
+      void show(){}
+      namespace B{
+         void fun(){}  // UB or not? 
+     }
+  }
+}
+int main(){  
+}
+</pre></blockquote>
+<p>
+A resemble usage like the above example can be seen in a <a href="https://github.com/NVIDIA/libcudacxx">libcudacxx github code</a>, 
+for example.
+<p/>
+Suggested resolution:
+<p/>
+We may want to say the namespace <tt>std</tt> only refers to the namespace whose declaration <b>inhabits</b> the global scope.
+<p/>
+16.4.5.2.1 <a href="https://wg21.link/namespace.std">[namespace.std]</a> p2, p7 that refers to namespace <tt>std</tt> have a similar issue.
+</p>
+
+
+<p id="res-3926"><b>Proposed resolution:</b></p>
 
 
 

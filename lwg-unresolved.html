@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-04-29 at 09:24:17 UTC</p>
+<p><p>Revised 2023-04-30 at 16:39:36 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -48564,6 +48564,47 @@ a[n]
 -120- <i>Remarks</i>: Required for <tt>basic_string</tt>, <tt>array</tt>, <tt>deque</tt>, and <tt>vector</tt>.
 </p>
 </blockquote>
+</blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3928" href="#3928">3928</a><sup><a href="https://cplusplus.github.io/LWG/issue3928">(i)</a></sup>. Non-top-level namespace <tt>posix</tt> shouldn't be reserved</h3>
+<p><b>Section:</b> 16.4.5.2.2 <a href="https://wg21.link/namespace.posix">[namespace.posix]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-04-29 <b>Last modified:</b> 2023-04-30</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The namespace <tt>posix</tt> is made reserved by <a href="https://wg21.link/N2667">N2667</a>. 
+<p/>
+It is clear in the paper that only <tt>::posix</tt> is intendedly reserved, 
+but the current normative wording is not clear enough on this (see also LWG <a href="lwg-active.html#3926">3926</a>).
+</p>
+
+
+<p id="res-3928"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
+</p>
+
+<ol>
+<li>
+<p>Modify 16.4.5.2.2 <a href="https://wg21.link/namespace.posix">[namespace.posix]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- The behavior of a C++ program is undefined if it adds declarations or definitions to <ins>top-level</ins>
+namespace <tt>posix</tt> or to a namespace within <ins>that</ins> namespace <del><tt>posix</tt></del> unless 
+otherwise specified. The <ins>top-level</ins> namespace <tt>posix</tt> is reserved for use by ISO/IEC/IEEE 9945
+and other POSIX standards.
+</p>
 </blockquote>
 </li>
 

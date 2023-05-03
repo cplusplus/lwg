@@ -47,7 +47,7 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3><a name="3927" href="lwg-active.html#3927">3927</a>. Unclear preconditions for <tt>operator[]</tt> for sequence containers</h3>
 <p><b>Section:</b> 24.2.4 <a href="https://wg21.link/sequence.reqmts">[sequence.reqmts]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Ville Voutilainen <b>Opened:</b> 2023-04-24 <b>Last modified:</b> 2023-04-29</p>
+ <b>Submitter:</b> Ville Voutilainen <b>Opened:</b> 2023-04-24 <b>Last modified:</b> 2023-05-03</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#sequence.reqmts">active issues</a> in [sequence.reqmts].</p>
@@ -79,7 +79,7 @@ a[n]
 <p>
 -118- <i>Result</i>: <tt>reference</tt>; <tt>const_reference</tt> for constant <tt>a</tt>
 <p/>
--119- <i><del>Returns</del><ins>Effects</ins></i>: <ins>Equivalent to</ins> <tt><ins>return</ins> *(a.begin() + n)<ins>;</ins></tt>
+-119- <i><del>Returns</del><ins>Effects</ins></i>: <ins>Equivalent to:</ins> <tt><ins>return</ins> *(a.begin() + n)<ins>;</ins></tt>
 <p/>
 -120- <i>Remarks</i>: Required for <tt>basic_string</tt>, <tt>array</tt>, <tt>deque</tt>, and <tt>vector</tt>.
 </p>

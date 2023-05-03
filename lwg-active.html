@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2023-04-30</td>
+  <td align="left">2023-05-03</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D124)</h1>
-<p><p>Revised 2023-04-30 at 16:39:36 UTC</p>
+<p><p>Revised 2023-05-03 at 12:49:20 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -50932,7 +50932,7 @@ to namespace <tt>std</tt> or to a namespace within namespace <tt>std</tt>.
 <hr>
 <h3><a name="3927" href="#3927">3927</a><sup><a href="https://cplusplus.github.io/LWG/issue3927">(i)</a></sup>. Unclear preconditions for <tt>operator[]</tt> for sequence containers</h3>
 <p><b>Section:</b> 24.2.4 <a href="https://wg21.link/sequence.reqmts">[sequence.reqmts]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Ville Voutilainen <b>Opened:</b> 2023-04-24 <b>Last modified:</b> 2023-04-29</p>
+ <b>Submitter:</b> Ville Voutilainen <b>Opened:</b> 2023-04-24 <b>Last modified:</b> 2023-05-03</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#sequence.reqmts">active issues</a> in [sequence.reqmts].</p>
@@ -50964,7 +50964,7 @@ a[n]
 <p>
 -118- <i>Result</i>: <tt>reference</tt>; <tt>const_reference</tt> for constant <tt>a</tt>
 <p/>
--119- <i><del>Returns</del><ins>Effects</ins></i>: <ins>Equivalent to</ins> <tt><ins>return</ins> *(a.begin() + n)<ins>;</ins></tt>
+-119- <i><del>Returns</del><ins>Effects</ins></i>: <ins>Equivalent to:</ins> <tt><ins>return</ins> *(a.begin() + n)<ins>;</ins></tt>
 <p/>
 -120- <i>Remarks</i>: Required for <tt>basic_string</tt>, <tt>array</tt>, <tt>deque</tt>, and <tt>vector</tt>.
 </p>

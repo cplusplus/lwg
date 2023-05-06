@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-05-06 at 15:42:31 UTC</p>
+<p><p>Revised 2023-05-06 at 15:54:29 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -48659,6 +48659,71 @@ the column title "<b>Preconditions</b>" to "<b>Mandates</b>".</p>
 <li>
 <p>Change in 21.3.7 <a href="https://wg21.link/meta.rel">[meta.rel]</a>, Table 49: Type relationship predicates [tab:meta.rel] the column 
 title "<b>Comments</b>" to "<b>Mandates</b>".</p>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3930" href="#3930">3930</a><sup><a href="https://cplusplus.github.io/LWG/issue3930">(i)</a></sup>. Simplify type trait wording</h3>
+<p><b>Section:</b> 21 <a href="https://wg21.link/meta">[meta]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2023-05-01 <b>Last modified:</b> 2023-05-06</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#meta">active issues</a> in [meta].</p>
+<p><b>View all other</b> <a href="lwg-index.html#meta">issues</a> in [meta].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+There are many traits that have a requirement that they are instantiated only if
+"<tt>T</tt> shall be a complete type, <i>cv</i> <tt>void</tt>, or an array of unknown bound."
+<p/>
+Breaking down what this means, by supporting <i>cv</i>-<tt>void</tt> and arrays of unknown
+bound (almost) the only remaining type-category is incomplete class types.
+<p/>
+The remaining edge case is incomplete enumerations, but they are required to
+have a known fixed-base, so act as complete types, they can be copied,
+assigned, etc., without knowing the names of their enumerators.
+<p/>
+Hence, I suggest clearer wording would be:
+"<tt>T</tt> shall not be an incomplete class type."
+<p/>
+This is easier to understand, as we do not need to mentally enumerate every
+type against a list to check it qualifies; it is a simpler test for the library to
+check if we were to mandate these restrictions.
+<p/>
+There are a very small number of traits with subtly different wording, where
+incomplete unions are supported, or arrays of unknown bound are not a
+concern due to invoking <tt>remove_all_extents</tt> first. The bulk of the changes
+can be made to traits with only the precise wording above though, and then
+we can review whether any of the remaining restrictions deserve a wording
+update of their own.
+</p>
+
+
+<p id="res-3930"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
+</p>
+
+<ol>
+<li>
+<p>
+Throughout 21 <a href="https://wg21.link/meta">[meta]</a> replace all occurrences of
+</p>
+<blockquote><p>
+<tt>T</tt> shall be a complete type, <i>cv</i> <tt>void</tt>, or an array of unknown bound.
+</p></blockquote>
+<p>
+by
+</p>
+<blockquote><p>
+<tt>T</tt> shall not be an incomplete class type.
+</p></blockquote>
+
 </li>
 
 </ol>

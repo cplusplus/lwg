@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-05-03 at 12:49:20 UTC</p>
+<p><p>Revised 2023-05-06 at 15:42:31 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -48606,6 +48606,59 @@ otherwise specified. The <ins>top-level</ins> namespace <tt>posix</tt> is reserv
 and other POSIX standards.
 </p>
 </blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3929" href="#3929">3929</a><sup><a href="https://cplusplus.github.io/LWG/issue3929">(i)</a></sup>. <i>Preconditions</i> for type traits should be <i>Mandates</i></h3>
+<p><b>Section:</b> 21.3.5.3 <a href="https://wg21.link/meta.unary.comp">[meta.unary.comp]</a>, 21.3.7 <a href="https://wg21.link/meta.rel">[meta.rel]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2023-05-01 <b>Last modified:</b> 2023-05-06</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Since we have adopted the <i>Constraints</i>/<i>Mandates</i>/<i>Preconditions</i> form of wording,
+"preconditions" refer to runtime requirements, not compile-time.  As such, the
+column labeled "preconditions" in Table 47: Type property predicates [tab:meta.unary.prop]
+would be better labeled as "Mandates".
+<p/>
+This is an LWG issue and not editorial, and "Mandates" would require the library
+to diagnose violations, but after reviewing all traits in this table, I believe that is
+reasonable.
+<p/>
+Table 48: Type property queries [tab:meta.unary.prop.query] shows how <i>Mandates:</i>
+elements can be integrated into the "Value" column if we preferred that approach, but for the
+number of entries in the first table seems like an aggressive change for consistency.
+<p/>
+Similarly, for Table 49: Type relationship predicates [tab:meta.rel] the "Comments"
+column serves as a "Mandates" feature without using that term, so I suggest changing
+that column title too.
+<p/>
+The other tables and type traits wording already appear to be adapted to the Mandates
+wording style.
+</p>
+
+
+<p id="res-3929"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
+</p>
+
+<ol>
+<li>
+<p>Change in 21.3.5.3 <a href="https://wg21.link/meta.unary.comp">[meta.unary.comp]</a>, Table 47: Type property predicates [tab:meta.unary.prop] 
+the column title "<b>Preconditions</b>" to "<b>Mandates</b>".</p>
+</li>
+
+<li>
+<p>Change in 21.3.7 <a href="https://wg21.link/meta.rel">[meta.rel]</a>, Table 49: Type relationship predicates [tab:meta.rel] the column 
+title "<b>Comments</b>" to "<b>Mandates</b>".</p>
 </li>
 
 </ol>

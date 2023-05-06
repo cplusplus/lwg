@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-05-06 at 16:14:38 UTC</p>
+<p><p>Revised 2023-05-06 at 16:23:01 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -32371,6 +32371,7 @@ friend bool operator==(const <i>iterator</i>&amp; x, default_sentinel_t);
  <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2020-10-27 <b>Last modified:</b> 2021-10-30</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#cmp.alg">active issues</a> in [cmp.alg].</p>
 <p><b>View all other</b> <a href="lwg-index.html#cmp.alg">issues</a> in [cmp.alg].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -48786,6 +48787,37 @@ This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
 </li>
 
 </ol>
+
+
+
+
+
+<hr>
+<h3><a name="3932" href="#3932">3932</a><sup><a href="https://cplusplus.github.io/LWG/issue3932">(i)</a></sup>. Expression-equivalence is sometimes unimplementable when passing prvalue expressions to comparison CPOs</h3>
+<p><b>Section:</b> 17.11.6 <a href="https://wg21.link/cmp.alg">[cmp.alg]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-05-04 <b>Last modified:</b> 2023-05-06</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#cmp.alg">active issues</a> in [cmp.alg].</p>
+<p><b>View all other</b> <a href="lwg-index.html#cmp.alg">issues</a> in [cmp.alg].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Currently, comparison CPOs may call ADL-found <tt>strong_order</tt>, <tt>weak_order</tt>, and <tt>partial_order</tt> 
+functions. It might be impossible to meet the expression-equivalent requirement if one passed argument is a prvalue 
+and an ADL-found function is selected, because temporary materialization must take place before entering the CPO's 
+<tt>operator()</tt>.
+<p/>
+Perhaps we should say when <tt>E</tt> or <tt>F</tt> is a prvalue expression of an object type, temporary 
+materialization takes place first, and then an xvalue referring to the temporary object is used instead of the original 
+<tt>E</tt> or <tt>F</tt>.
+<p/>
+There is currently implementation divergence in these CPOs: when performing internal comparison, libstdc++ and libc++ 
+perfect-forward arguments, while MSVC STL always treats arguments as lvalues.
+</p>
+
+
+<p id="res-3932"><b>Proposed resolution:</b></p>
 
 
 

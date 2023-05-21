@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-05-20 at 18:24:48 UTC</p>
+<p><p>Revised 2023-05-21 at 09:39:47 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -48878,9 +48878,11 @@ perfect-forward arguments, while MSVC STL always treats arguments as lvalues.
 <hr>
 <h3><a name="3933" href="#3933">3933</a><sup><a href="https://cplusplus.github.io/LWG/issue3933">(i)</a></sup>. P1467R9 accidentally changed the signatures of certain constructors of <tt>std::complex</tt></h3>
 <p><b>Section:</b> 28.4.3 <a href="https://wg21.link/complex">[complex]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-05-16 <b>Last modified:</b> 2023-05-20</p>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-05-16 <b>Last modified:</b> 2023-05-21</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#complex">active issues</a> in [complex].</p>
+<p><b>View all other</b> <a href="lwg-index.html#complex">issues</a> in [complex].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
@@ -48937,6 +48939,9 @@ functions <tt>imag</tt> and <tt>real</tt> have always been using "by-value" sign
 There exists also the possible argument to close this issue as NAD based on the argument that all existing 
 non-member operators taking a <tt>value_type</tt> argument had always been defined to use <tt>const T&amp;</tt>
 as parameter (such as the <tt>operator@(const T&amp; lhs, const complex&lt;T&gt;&amp; rhs)</tt> forms).
+<p/>
+This issue has some overlap with LWG <a href="lwg-active.html#3934">3934</a>, which suggests a yet missing specification for
+the assignment operator taking the <tt>value_type</tt> as parameter.
 </p>
 
 
@@ -48999,7 +49004,7 @@ constexpr complex(const T&amp; re = T(), const T&amp; im = T()) <ins>requires (!
 <p>
 [<i>Drafting note</i>: We have an pre-existing specification hole that the effects of the non-compound assignment 
 operator taking the <tt>value_type</tt> as parameter are nowhere specified. This is going to be submitted as a
-separate issue]
+separate issue, see LWG <a href="lwg-active.html#3934">3934</a>.]
 </p>
 </blockquote>
 
@@ -49050,6 +49055,151 @@ constexpr complex&amp; operator/=(const T&amp; rhs) <ins>requires (!floating_poi
 stores the result in <tt>*this</tt>.
 <p/>
 -8- <i>Returns</i>: <tt>*this</tt>.
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3934" href="#3934">3934</a><sup><a href="https://cplusplus.github.io/LWG/issue3934">(i)</a></sup>. <tt>std::complex&lt;T&gt;::operator=(const T&amp;)</tt> has no specification</h3>
+<p><b>Section:</b> 28.4.3 <a href="https://wg21.link/complex">[complex]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Daniel Kr&uuml;gler <b>Opened:</b> 2023-05-20 <b>Last modified:</b> 2023-05-21</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#complex">active issues</a> in [complex].</p>
+<p><b>View all other</b> <a href="lwg-index.html#complex">issues</a> in [complex].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The class template <tt>complex</tt> synopsis in 28.4.3 <a href="https://wg21.link/complex">[complex]</a> shows the following member function:
+</p>
+<blockquote><pre>
+constexpr complex&amp; operator= (const T&amp;);
+</pre></blockquote>
+<p>
+but does not specify its semantics. This affects a code example such as the following one:
+</p>
+<blockquote><pre>
+#include &lt;complex&gt;
+#include &lt;iostream&gt;
+
+int main()
+{
+  std::complex&lt;double&gt; z(1, 1);
+  z = 2;
+  std::cout &lt;&lt; z &lt;&lt; std::endl;
+}
+</pre></blockquote>
+<p>
+This problem exists since the 1998 version of the standard (at that time this was declared in subclause [lib.complex]),
+but fortunately the three major implementations all behave consistently by assigning the provided value to the real
+part and nullifying the imaginary part, causing the output <tt>(2, 0)</tt>, which is consistent with the expected
+behaviour of usual mathematical convention and that of C's built-in <tt>complex</tt> types. We should specify this.
+<p/>
+The lack of this member specification was observed while a proposed wording for LWG <a href="lwg-active.html#3933">3933</a> was prepared.
+</p>
+
+
+
+<p id="res-3934"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<blockquote class="note">
+<p>
+[<i>Drafting Note:</i> Two mutually exclusive options are prepared, depicted below by <b>Option A</b> and 
+<b>Option B</b>, respectively.] 
+</p>
+</blockquote>
+
+<p>
+<b>Option A:</b> This assumes that LWG <a href="lwg-active.html#3933">3933</a> is considered as NAD and just adds the missing prototype
+specification assuming that the parameter style of the current working draft is intended.
+</p>
+
+<ol>
+
+<li>
+<p>Add a new prototype specification at the very beginning of 28.4.5 <a href="https://wg21.link/complex.member.ops">[complex.member.ops]</a> as indicated:</p>
+
+<blockquote class="note">
+<p>
+[<i>Drafting note</i>: The wording form used below intentionally deviates from the rest of the [complex.member.ops]
+wording forms, because it seems much simpler and clearer to follow the wording forms used that specify the effects
+of <tt>imag</tt> and <tt>real</tt> functions.]
+</p>
+</blockquote>
+
+<blockquote>
+<pre>
+<ins>constexpr complex&amp; operator=(const T&amp; rhs);</ins>
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Effects</i>: Assigns the value <tt>rhs</tt> to the real component and the value <tt>T()</tt> 
+to the imaginary component of the complex value <tt>*this</tt>.</ins>
+<p/>
+<ins>-?- <i>Returns</i>: <tt>*this</tt>.</ins>
+</p>
+</blockquote>
+<pre>
+constexpr complex&amp; operator+=(const T&amp; rhs);
+</pre>
+<blockquote>
+<p>
+[&hellip;]
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+</ol>
+
+<p>
+<b>Option b:</b> This assumes that LWG <a href="lwg-active.html#3933">3933</a> will be resolved as initially presented and just adds the missing prototype
+specification assuming that the parameter style suggesting two mutually excluded overloads is intended.
+</p>
+
+<ol>
+
+<li>
+<p>Add a new prototype specification at the very beginning of 28.4.5 <a href="https://wg21.link/complex.member.ops">[complex.member.ops]</a> as indicated:</p>
+
+<blockquote class="note">
+<p>
+[<i>Drafting note</i>: The wording form used below intentionally deviates from the rest of the [complex.member.ops]
+wording forms, because it seems much simpler and clearer to follow the wording forms used that specify the effects
+of <tt>imag</tt> and <tt>real</tt> functions instead.]
+</p>
+</blockquote>
+
+<blockquote>
+<pre>
+<ins>constexpr complex&amp; operator=(T rhs) requires floating_point&lt;T&gt;;
+constexpr complex&amp; operator=(const T&amp; rhs) requires (!floating_point&lt;T&gt;);</ins>
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Effects</i>: Assigns the value <tt>rhs</tt> to the real component and the value <tt>T()</tt> 
+to the imaginary component of the complex value <tt>*this</tt>.</ins>
+<p/>
+<ins>-?- <i>Returns</i>: <tt>*this</tt>.</ins>
+</p>
+</blockquote>
+<pre>
+constexpr complex&amp; operator+=(T) requires floating_point&lt;T&gt;;
+constexpr complex&amp; operator+=(const T&amp;) requires (!floating_point&lt;T&gt;);
+</pre>
+<blockquote>
+<p>
+[&hellip;]
 </p>
 </blockquote>
 </blockquote>

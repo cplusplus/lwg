@@ -47,9 +47,11 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3><a name="3933" href="lwg-active.html#3933">3933</a>. P1467R9 accidentally changed the signatures of certain constructors of <tt>std::complex</tt></h3>
 <p><b>Section:</b> 28.4.3 <a href="https://wg21.link/complex">[complex]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-05-16 <b>Last modified:</b> 2023-05-20</p>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-05-16 <b>Last modified:</b> 2023-05-21</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#complex">active issues</a> in [complex].</p>
+<p><b>View all other</b> <a href="lwg-index.html#complex">issues</a> in [complex].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
@@ -106,6 +108,9 @@ functions <tt>imag</tt> and <tt>real</tt> have always been using "by-value" sign
 There exists also the possible argument to close this issue as NAD based on the argument that all existing 
 non-member operators taking a <tt>value_type</tt> argument had always been defined to use <tt>const T&amp;</tt>
 as parameter (such as the <tt>operator@(const T&amp; lhs, const complex&lt;T&gt;&amp; rhs)</tt> forms).
+<p/>
+This issue has some overlap with LWG <a href="lwg-active.html#3934">3934</a>, which suggests a yet missing specification for
+the assignment operator taking the <tt>value_type</tt> as parameter.
 </p>
 
 
@@ -168,7 +173,7 @@ constexpr complex(const T&amp; re = T(), const T&amp; im = T()) <ins>requires (!
 <p>
 [<i>Drafting note</i>: We have an pre-existing specification hole that the effects of the non-compound assignment 
 operator taking the <tt>value_type</tt> as parameter are nowhere specified. This is going to be submitted as a
-separate issue]
+separate issue, see LWG <a href="lwg-active.html#3934">3934</a>.]
 </p>
 </blockquote>
 

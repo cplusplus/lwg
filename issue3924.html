@@ -47,8 +47,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3><a name="3924" href="lwg-active.html#3924">3924</a>. Stop token data race avoidance requirements unclear</h3>
 <p><b>Section:</b> 33.3.1 <a href="https://wg21.link/thread.stoptoken.intro">[thread.stoptoken.intro]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Brian Bi <b>Opened:</b> 2023-04-16 <b>Last modified:</b> 2023-04-16</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Brian Bi <b>Opened:</b> 2023-04-16 <b>Last modified:</b> 2023-05-24</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -72,6 +72,20 @@ with each other, because it would be more expensive if concurrent calls with
 <tt>stop_token::operator=</tt> were also required to not race. (Also, none of these functions 
 can avoid racing with the destructor.)
 </p>
+
+<p><i>[2023-05-24; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+"What about <code>get_token</code>? <code>operator==</code>?"
+</p>
+<p>
+"Other functions like <code>get_stop_token</code> can also be called
+concurrently. I think the text is actually correct."
+</p>
+
 
 
 <p id="res-3924"><b>Proposed resolution:</b></p>

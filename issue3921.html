@@ -49,8 +49,8 @@ required to be correctly formatted?</title>
 <h3><a name="3921" href="lwg-active.html#3921">3921</a>. Is <tt>std::chrono::duration&lt;std::int64_t, std::ratio&lt;INT64_MAX - 1, INT64_MAX&gt;&gt;{40}</tt> 
 required to be correctly formatted?</h3>
 <p><b>Section:</b> 29.12 <a href="https://wg21.link/time.format">[time.format]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-04-14 <b>Last modified:</b> 2023-04-23</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-04-14 <b>Last modified:</b> 2023-05-24</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#time.format">active issues</a> in [time.format].</p>
 <p><b>View all other</b> <a href="lwg-index.html#time.format">issues</a> in [time.format].</p>
@@ -74,6 +74,17 @@ So, if it is intended that <tt>hh_mm_ss</tt> is used for formatting <tt>duration
 perhaps we should explicitly so specify in 29.12 <a href="https://wg21.link/time.format">[time.format]</a>. And we may need to 
 fix initialization of <tt>hh_mm_ss</tt> to reduce UB whenever suitable.
 </p>
+
+<p><i>[2023-05-24; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+"NAD. A compile-time error is required when ratio arithmetic overflows,
+21.4.4 <a href="https://wg21.link/ratio.arithmetic">[ratio.arithmetic]</a> p2"
+</p>
+
 
 
 <p id="res-3921"><b>Proposed resolution:</b></p>

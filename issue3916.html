@@ -47,8 +47,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3><a name="3916" href="lwg-active.html#3916">3916</a>. <tt>allocator</tt>, <tt>polymorphic_allocator</tt>, and containers should forbid <i>cv</i>-qualified types</h3>
 <p><b>Section:</b> 20.2.10 <a href="https://wg21.link/default.allocator">[default.allocator]</a>, 20.4.3.1 <a href="https://wg21.link/mem.poly.allocator.class.general">[mem.poly.allocator.class.general]</a>, 24.2 <a href="https://wg21.link/container.requirements">[container.requirements]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Stephan T. Lavavej <b>Opened:</b> 2023-04-02 <b>Last modified:</b> 2023-04-11</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Stephan T. Lavavej <b>Opened:</b> 2023-04-02 <b>Last modified:</b> 2023-05-24</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#default.allocator">active issues</a> in [default.allocator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#default.allocator">issues</a> in [default.allocator].</p>
@@ -82,6 +82,13 @@ if <tt>polymorphic_allocator</tt> is supposed to accept <tt>void</tt>.) This wou
 While it may seem arcane, attempting to form <tt>vector&lt;const T&gt;</tt> is a common novice mistake &mdash; so common that 
 MSVC had to add a <tt>static_assert</tt> to emit a clear error message.
 </p>
+
+<p><i>[2023-05-24; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
 
 
 <p id="res-3916"><b>Proposed resolution:</b></p>

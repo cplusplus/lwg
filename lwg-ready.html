@@ -51,7 +51,7 @@
 </tr>
 <tr>
 <td align="left">Date:</td>
-<td align="left"><p>Revised 2023-05-30 at 17:12:44 UTC</p>
+<td align="left"><p>Revised 2023-06-01 at 14:08:14 UTC</p>
 </td>
 </tr>
 <tr>
@@ -64,6 +64,153 @@
 </tr>
 </table>
 <h2>Ready Issues</h2>
+<hr>
+<h3><a name="2994" href="#2994">2994</a><sup><a href="https://cplusplus.github.io/LWG/issue2994">(i)</a></sup>. Needless UB for <tt>basic_string</tt> and <tt>basic_string_view</tt></h3>
+<p><b>Section:</b> 23.2 <a href="https://wg21.link/char.traits">[char.traits]</a>, 23.4.3.2 <a href="https://wg21.link/string.require">[string.require]</a>, 23.3.3 <a href="https://wg21.link/string.view.template">[string.view.template]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Gennaro Prota <b>Opened:</b> 2017-07-03 <b>Last modified:</b> 2023-06-01</p>
+<p><b>Priority: </b>3
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#char.traits">issues</a> in [char.traits].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<tt>basic_string</tt> and <tt>basic_string_view</tt> involve undefined behavior in a few cases where it's 
+simple for the implementation to add a <tt>static_assert</tt> and make the program ill-formed.
+<p/>
+With regards to basic_string, 23.2 <a href="https://wg21.link/char.traits">[char.traits]</a>/3 states:
+</p>
+<blockquote><p>
+<tt>Traits::char_type</tt> shall be the same as <tt>CharT</tt>.
+</p></blockquote>
+<p>
+Here, the implementation can add a <tt>static_assert</tt> using the <tt>is_same</tt>
+type trait. Similar issues exist in 23.4.3.2 <a href="https://wg21.link/string.require">[string.require]</a> and, for
+<tt>basic_string_view</tt>, in 23.3.3 <a href="https://wg21.link/string.view.template">[string.view.template]</a>/1. 
+</p>
+
+<p><i>[2017-07 Toronto Tuesday PM issue prioritization]</i></p>
+
+<p>Priority 3; need to check general container requirements</p>
+
+<p>Partially by the adoption of <a href="https://wg21.link/P1148">P1148</a> in San Diego.</p>
+<p>Tim opines: "the remainder deals with allocator value type mismatch, which I think is NAD."</p>
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
+
+<p>
+This wording is relative to <a href="https://wg21.link/n4659">N4659</a>.
+</p>
+
+<ol>
+<li><p>Edit 23.2 <a href="https://wg21.link/char.traits">[char.traits]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-3- To specialize those templates to generate a string or iostream class to handle a particular character container
+type <tt>CharT</tt>, that and its related character traits class <tt>Traits</tt> are passed as a pair of parameters to 
+the string or iostream template as parameters <tt>charT</tt> and <tt>traits</tt>. <ins>If</ins> <tt>Traits::char_type</tt> 
+<del>shall be the same</del> <ins>is not the same type</ins> as <tt>CharT</tt><ins>, the program is ill-formed</ins>.
+</p>
+</blockquote>
+</li>
+
+<li><p>Edit 23.4.3.2 <a href="https://wg21.link/string.require">[string.require]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-3- In every specialization <tt>basic_string&lt;charT, traits, Allocator&gt;</tt>, <ins>if</ins> <del>the type</del> 
+<tt>allocator_traits&lt;Allocator&gt;::value_type</tt> <del>shall name the same type</del> <ins>is not the 
+same type</ins> as <tt>charT</tt><ins>, the program is ill-formed</ins>. 
+Every object of type <tt>basic_string&lt;charT, traits, Allocator&gt;</tt> shall use an object of type 
+<tt>Allocator</tt> to allocate and free storage for the contained <tt>charT</tt> objects as needed. The 
+<tt>Allocator</tt> object used shall be obtained as described in 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>. 
+In every specialization <tt>basic_string&lt;charT, traits, Allocator&gt;</tt>, the type <tt>traits</tt> 
+shall satisfy the character traits requirements (23.2 <a href="https://wg21.link/char.traits">[char.traits]</a>)<ins>. If</ins><del>, and the type</del> 
+<tt>traits::char_type</tt> <del>shall name the same type</del> <ins>is not the same type</ins> as <tt>charT</tt><ins>, 
+the program is ill-formed</ins>.
+</p>
+</blockquote>
+</li>
+
+<li><p>Edit 23.3.3 <a href="https://wg21.link/string.view.template">[string.view.template]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- In every specialization <tt>basic_string_view&lt;charT, traits&gt;</tt>, the type <tt>traits</tt> shall satisfy the character
+traits requirements (23.2 <a href="https://wg21.link/char.traits">[char.traits]</a>)<ins>. If</ins><del>, and the type</del> <tt>traits::char_type</tt> <del>shall 
+name the same type</del> <ins>is not the same type</ins> as <tt>charT</tt><ins>, the program is ill-formed</ins>.
+</p>
+</blockquote>
+</li>
+
+</ol>
+</blockquote>
+
+<p><i>[2023-05-15; Jonathan Wakely provides improved wording]</i></p>
+
+<p>
+As noted above, most of this issue was resolved by <a href="https://wg21.link/P1148R0">P1148R0</a>.
+The remainder is the change to make it ill-formed if the allocator has the wrong
+<code>value_type</code>, but since <a href="https://wg21.link/P1463R1">P1463R1</a> that is already part of
+the Allocator-aware container requirements, which apply to <code>basic_string</code>.
+</p>
+
+
+<p><i>[2023-06-01; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after eight votes in favour during reflector poll.
+</p>
+<p>
+There was a request to editorially move the added text in <i>Note 1</i> into
+<i>Note 2</i> after this is approved.
+</p>
+
+
+
+<p id="res-2994"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+<li><p>Edit 23.4.3.2 <a href="https://wg21.link/string.require">[string.require]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-3- <del>In every specialization <tt>basic_string&lt;charT, traits, Allocator&gt;</tt>, the type
+<tt>allocator_traits&lt;Allocator&gt;::value_type</tt> shall name the same type as <tt>charT</tt>.</del>
+Every object of type <tt>basic_string&lt;charT, traits, Allocator&gt;</tt> shall use an object of type
+<tt>Allocator</tt> to allocate and free storage for the contained <tt>charT</tt> objects as needed. The
+In every specialization <tt>basic_string&lt;charT, traits, Allocator&gt;</tt>, the type <tt>traits</tt>
+shall satisfy the character traits requirements (23.2 <a href="https://wg21.link/char.traits">[char.traits]</a>).
+</p>
+<p>
+[<i>Note 1</i>:
+Every specialization <code>basic_string&lt;charT, traits, Allocator&gt;</code>
+is an allocator-aware container, but does not use the allocator’s
+<code>construct</code> and <code>destroy</code> member functions
+(24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>).
+<ins>
+The program is ill-formed if <code>Allocator::value_type</code>
+is not the same type as <code>charT</code>.
+</ins>
+&mdash; <i>end note</i>]
+</p>
+<p>
+[<i>Note 2</i>:
+The program is ill-formed if <code>traits::char_type</code>
+is not the same type as <code>charT</code>.
+&mdash; <i>end note</i>]
+</p>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
 <hr>
 <h3><a name="3884" href="#3884">3884</a><sup><a href="https://cplusplus.github.io/LWG/issue3884">(i)</a></sup>. <tt>flat_<i>foo</i></tt> is missing allocator-extended copy/move constructors</h3>
 <p><b>Section:</b> 24.6.9 <a href="https://wg21.link/flat.map">[flat.map]</a>, 24.6.10 <a href="https://wg21.link/flat.multimap">[flat.multimap]</a>, 24.6.11 <a href="https://wg21.link/flat.set">[flat.set]</a>, 24.6.12 <a href="https://wg21.link/flat.multiset">[flat.multiset]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
@@ -1154,6 +1301,487 @@ a[n]
 -119- <i><del>Returns</del><ins>Effects</ins></i>: <ins>Equivalent to:</ins> <tt><ins>return</ins> *(a.begin() + n)<ins>;</ins></tt>
 <p/>
 -120- <i>Remarks</i>: Required for <tt>basic_string</tt>, <tt>array</tt>, <tt>deque</tt>, and <tt>vector</tt>.
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3935" href="#3935">3935</a><sup><a href="https://cplusplus.github.io/LWG/issue3935">(i)</a></sup>. <tt>template&lt;class X&gt; constexpr complex&amp; operator=(const complex&lt;X&gt;&amp;)</tt> has no specification</h3>
+<p><b>Section:</b> 28.4.3 <a href="https://wg21.link/complex">[complex]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Daniel Kr&uuml;gler <b>Opened:</b> 2023-05-21 <b>Last modified:</b> 2023-06-01</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#complex">active issues</a> in [complex].</p>
+<p><b>View all other</b> <a href="lwg-index.html#complex">issues</a> in [complex].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The class template <tt>complex</tt> synopsis in 28.4.3 <a href="https://wg21.link/complex">[complex]</a> shows the following member function template:
+</p>
+<blockquote><pre>
+template&lt;class X&gt; constexpr complex&amp; operator= (const complex&lt;X&gt;&amp;);
+</pre></blockquote>
+<p>
+but does not specify its semantics. This affects a code example such as the following one:
+</p>
+<blockquote><pre>
+#include &lt;complex&gt;
+
+int main()
+{
+  std::complex&lt;double&gt; zd(1, 1);
+  std::complex&lt;float&gt; zf(2, 0);
+  zd = zf;
+}
+</pre></blockquote>
+<p>
+This problem exists since the 1998 version of the standard (at that time this was declared in subclause [lib.complex]),
+and even though this looks like a "copy-assignment-like" operation, its effects aren't implied by our general
+16.3.3.4 <a href="https://wg21.link/functions.within.classes">[functions.within.classes]</a> wording (a function template is never considered as copy assignment operator,
+see 11.4.6 <a href="https://wg21.link/class.copy.assign">[class.copy.assign]</a>).
+<p/>
+It should be point out that the refactoring done by <a href="https://wg21.link/P1467R9">P1467R9</a> had caused some other members to become finally
+specified that were not specified before, but in addition to LWG <a href="lwg-active.html#3934">3934</a>'s observation about the missing
+specification of the assignment operator taking a value type as parameter, this is now an additional currently unspecified 
+member, but unaffected by any decision on LWG <a href="lwg-active.html#3933">3933</a>.
+</p>
+
+
+<p><i>[2023-06-01; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after eight votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-3935"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+<ol>
+
+<li>
+<p>Add a new prototype specification between the current paragraphs 8 and 9 of 28.4.5 <a href="https://wg21.link/complex.member.ops">[complex.member.ops]</a> as indicated:</p>
+
+<blockquote class="note">
+<p>
+[<i>Drafting note</i>: Similar to the proposed wording for LWG <a href="lwg-active.html#3934">3934</a>, the wording form used below intentionally 
+deviates from the rest of the [complex.member.ops] wording forms, because it seems much simpler and clearer to follow the wording 
+forms used that specify the effects of <tt>imag</tt> and <tt>real</tt> functions plus borrowing relevant parts from 
+28.4.4 <a href="https://wg21.link/complex.members">[complex.members]</a> p2.]
+</p>
+</blockquote>
+
+<blockquote>
+<pre>
+constexpr complex&amp; operator/=(const T&amp; rhs);
+</pre>
+<blockquote>
+<p>
+[&hellip;]
+</p>
+</blockquote>
+<pre>
+<ins>template&lt;class X&gt; constexpr complex&amp; operator=(const complex&lt;X&gt;&amp; rhs);</ins>
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Effects</i>: Assigns the value <tt>rhs.real()</tt> to the real part and the value 
+<tt>rhs.imag()</tt> to the imaginary part of the complex value <tt>*this</tt>.</ins>
+<p/>
+<ins>-?- <i>Returns</i>: <tt>*this</tt>.</ins>
+</p>
+</blockquote>
+<pre>
+template&lt;class X&gt; constexpr complex&amp; operator+=(const complex&lt;X&gt;&amp; rhs);
+</pre>
+<blockquote>
+<p>
+[&hellip;]
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+
+<hr>
+<h3><a name="3938" href="#3938">3938</a><sup><a href="https://cplusplus.github.io/LWG/issue3938">(i)</a></sup>. Cannot use <code>std::expected</code> monadic ops with move-only <code>error_type</code></h3>
+<p><b>Section:</b> 22.8.6.7 <a href="https://wg21.link/expected.object.monadic">[expected.object.monadic]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-05-25 <b>Last modified:</b> 2023-06-01</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#expected.object.monadic">issues</a> in [expected.object.monadic].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The monadic ops for <code>std::expected</code> are specified in terms of calls
+to <code>value()</code> and <code>error()</code>, but LWG <a href="lwg-defects.html#3843">3843</a>
+("<code>std::expected&lt;T,E&gt;::value()&amp;</code> assumes <code>E</code>
+is copy constructible") added additional <i>Mandates</i> requirements to
+<code>value()</code>. This means that you can never call <code>value()</code>
+for a move-only <code>error_type</code>, even the overloads of
+<code>value()</code> with rvalue ref-qualifiers.
+</p>
+<p>
+The changes to <code>value()</code> are because it needs to be able to throw a
+<code>bad_expected_access&lt;E&gt;</code> which requires a copyable <code>E</code>.
+But in the monadic ops we know it can't throw, because we always check.
+All the monadic ops are of the form:
+</p>
+<blockquote>
+<pre><code>if (has_value())
+  <i>do something with</i> value();
+else
+  <i>do something with</i> error();
+</code></pre></blockquote>
+<p>
+We know that <code>value()</code> won't throw here, but because we use
+"<i>Effects</i>: Equivalent to ..." the requirement for <code>E</code>
+to be copyable is inherited from <code>value()</code>.
+</p>
+<p>
+Should we have changed the monadic ops to use <code>operator*()</code>
+instead of <code>value()</code>?
+For example, for the first <code>and_then</code> overloads the change would be:
+</p>
+<blockquote>
+-4- <i>Effects</i>: Equivalent to:
+<blockquote>
+<pre><code>if (has_value())
+  return invoke(std::forward&lt;F&gt;(f), <del>value()</del><ins>**this</ins>);
+else
+  return U(unexpect, error());
+</code></pre></blockquote>
+</blockquote>
+
+<p><i>[2023-06-01; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after seven votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-3938"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+<li>
+<p>
+For each <i>Effects</i>: element in 22.8.6.7 <a href="https://wg21.link/expected.object.monadic">[expected.object.monadic]</a>,
+replace <code>value()</code> with <code>**this</code> as indicated:
+</p>
+
+<blockquote>
+<pre><code>
+template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) &amp;;
+template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) const &amp;;
+</code></pre>
+<p>-1- Let <code>U</code> be
+<code>remove_cvref_t&lt;invoke_result_t&lt;F, decltype(<del>value()</del><ins>**this</ins>)&gt;&gt;</code>.
+</p>
+<p>-2- <i>Constraints</i>:
+<code>is_constructible_v&lt;E, decltype(error())&gt;</code>
+is <code>true</code>.
+</p>
+<p>-3- <i>Mandates</i>:
+<code>U</code> is a specialization of <code>expected</code> and
+<code>is_same_v&lt;U::error_type, E&gt;</code> is <code>true</code>.
+</p>
+<p>-4- <i>Effects</i>: Equivalent to:</p>
+<blockquote>
+<pre><code>if (has_value())
+  return invoke(std::forward&lt;F&gt;(f), <del>value()</del><ins>**this</ins>);
+else
+  return U(unexpect, error());
+</code></pre>
+</blockquote>
+
+<pre><code>
+template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) &amp;&amp;;
+template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) const &amp;&amp;;
+</code></pre>
+<p>-5- Let <code>U</code> be
+<code>remove_cvref_t&lt;invoke_result_t&lt;F, decltype(std::move(<del>value()</del><ins>**this</ins>))&gt;&gt;</code>.
+</p>
+<p>-6- <i>Constraints</i>:
+<code>is_constructible_v&lt;E, decltype(std::move(error()))&gt;</code>
+is <code>true</code>.
+</p>
+<p>-7- <i>Mandates</i>:
+<code>U</code> is a specialization of <code>expected</code> and
+<code>is_same_v&lt;U::error_type, E&gt;</code> is <code>true</code>.
+</p>
+<p>-8- <i>Effects</i>: Equivalent to:</p>
+<blockquote>
+<pre><code>if (has_value())
+  return invoke(std::forward&lt;F&gt;(f), std::move(<del>value()</del><ins>**this</ins>));
+else
+  return U(unexpect, std::move(error()));
+</code></pre>
+</blockquote>
+
+<pre><code>
+template&lt;class F&gt; constexpr auto or_else(F&amp;&amp; f) &amp;;
+template&lt;class F&gt; constexpr auto or_else(F&amp;&amp; f) const &amp;;
+</code></pre>
+<p>-9- Let <code>G</code> be
+<code>remove_cvref_t&lt;invoke_result_t&lt;F, decltype(error())&gt;&gt;</code>.
+</p>
+<p>-10- <i>Constraints</i>:
+<code>is_constructible_v&lt;T, decltype(<del>value()</del><ins>**this</ins>)&gt;</code>
+is <code>true</code>.
+</p>
+<p>-11- <i>Mandates</i>:
+<code>G</code> is a specialization of <code>expected</code> and
+<code>is_same_v&lt;G::value_type, T&gt;</code> is <code>true</code>.
+</p>
+<p>-12- <i>Effects</i>: Equivalent to:</p>
+<blockquote>
+<pre><code>if (has_value())
+  return G(in_place, <del>value()</del><ins>**this</ins>);
+else
+  return invoke(std::forward&lt;F&gt;(f), error());
+</code></pre>
+</blockquote>
+
+<pre><code>
+template&lt;class F&gt; constexpr auto or_else(F&amp;&amp; f) &amp;&amp;;
+template&lt;class F&gt; constexpr auto or_else(F&amp;&amp; f) const &amp;&amp;;
+</code></pre>
+<p>-13- Let <code>G</code> be
+<code>remove_cvref_t&lt;invoke_result_t&lt;F, decltype(std::move(error()))&gt;&gt;</code>.
+</p>
+<p>-14- <i>Constraints</i>:
+<code>is_constructible_v&lt;T, decltype(std::move(<del>value()</del><ins>**this</ins>))&gt;</code>
+is <code>true</code>.
+</p>
+<p>-15- <i>Mandates</i>:
+<code>G</code> is a specialization of <code>expected</code> and
+<code>is_same_v&lt;G::value_type, T&gt;</code> is <code>true</code>.
+</p>
+<p>-16- <i>Effects</i>: Equivalent to:</p>
+<blockquote>
+<pre><code>if (has_value())
+  return G(in_place, std::move(<del>value()</del><ins>**this</ins>));
+else
+  return invoke(std::forward&lt;F&gt;(f), std::move(error()));
+</code></pre>
+</blockquote>
+
+<pre><code>
+template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) &amp;;
+template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) const &amp;;
+</code></pre>
+<p>-17- Let <code>U</code> be
+<code>remove_cv_t&lt;invoke_result_t&lt;F, decltype(<del>value()</del><ins>**this</ins>)&gt;&gt;</code>.
+</p>
+<p>-18- <i>Constraints</i>:
+<code>is_constructible_v&lt;E, decltype(error())&gt;</code>
+is <code>true</code>.
+</p>
+<p>-19- <i>Mandates</i>:
+<code>U</code> is a valid value type for <code>expected</code>.
+If <code>is_void_v&lt;U&gt;</code> is <code>false</code>, the declaration
+<pre><code>  U u(invoke(std::forward&lt;F&gt;(f), <del>value()</del><ins>**this</ins>));</code></pre>
+is well-formed.
+
+</p>
+<p>-20- <i>Effects</i>:
+<ol style="list-style-type: none">
+<li> (20.1) &mdash;
+If <code>has_value()</code> is <code>false</code>,
+returns <code>expected&lt;U, E&gt;(unexpect, error())</code>.
+</li>
+<li> (20.2) &mdash;
+Otherwise, if <code>is_void_v&lt;U&gt;</code> is <code>false</code>,
+returns an <code>expected&lt;U, E&gt;</code> object whose
+<code><i>has_val</i></code> member is <code>true</code> and
+<code><i>val</i></code> member is direct-non-list-initialized with
+<code>invoke(std::forward&lt;F&gt;(f), <del>value()</del><ins>**this</ins>)</code>.
+</li>
+<li> (20.3) &mdash;
+Otherwise, evaluates
+<code>invoke(std::forward&lt;F&gt;(f), <del>value()</del><ins>**this</ins>)</code>
+and then returns <code>expected&lt;U, E&gt;()</code>.
+</li>
+</ol>
+</p>
+
+<pre><code>
+template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) &amp;&amp;;
+template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) const &amp;&amp;;
+</code></pre>
+<p>-21- Let <code>U</code> be
+<code>remove_cv_t&lt;invoke_result_t&lt;F, decltype(std::move(<del>value()</del><ins>**this</ins>))&gt;&gt;</code>.
+</p>
+<p>-22- <i>Constraints</i>:
+<code>is_constructible_v&lt;E, decltype(std::move(error()))&gt;</code>
+is <code>true</code>.
+</p>
+<p>-23- <i>Mandates</i>:
+<code>U</code> is a valid value type for <code>expected</code>.
+If <code>is_void_v&lt;U&gt;</code> is <code>false</code>, the declaration
+<pre><code>  U u(invoke(std::forward&lt;F&gt;(f), std::move(<del>value()</del><ins>**this</ins>)));</code></pre>
+is well-formed <del>for some invented variable <code>u</code></del>.
+<blockquote class="note">
+<p>
+[<i>Drafting Note:</i>
+The removal of "for some invented variable u" in paragraph 23
+is a drive-by fix for consistency with paragraphs 19, 27 and 31.]
+</p>
+</blockquote>
+</p>
+<p>-24- <i>Effects</i>:
+<ol style="list-style-type: none">
+<li> (24.1) &mdash;
+If <code>has_value()</code> is <code>false</code>,
+returns <code>expected&lt;U, E&gt;(unexpect, error())</code>.
+</li>
+<li> (24.2) &mdash;
+Otherwise, if <code>is_void_v&lt;U&gt;</code> is <code>false</code>,
+returns an <code>expected&lt;U, E&gt;</code> object whose
+<code><i>has_val</i></code> member is <code>true</code> and
+<code><i>val</i></code> member is direct-non-list-initialized with
+<code>invoke(std::forward&lt;F&gt;(f), std::move(<del>value()</del><ins>**this</ins>))</code>.
+</li>
+<li> (24.3) &mdash;
+Otherwise, evaluates
+<code>invoke(std::forward&lt;F&gt;(f), std::move(<del>value()</del><ins>**this</ins>))</code>
+and then returns <code>expected&lt;U, E&gt;()</code>.
+</li>
+</ol>
+</p>
+
+<pre><code>
+template&lt;class F&gt; constexpr auto transform_error(F&amp;&amp; f) &amp;;
+template&lt;class F&gt; constexpr auto transform_error(F&amp;&amp; f) const &amp;;
+</code></pre>
+<p>-25- Let <code>G</code> be
+<code>remove_cv_t&lt;invoke_result_t&lt;F, decltype(error())&gt;&gt;</code>.
+</p>
+<p>-26- <i>Constraints</i>:
+<code>is_constructible_v&lt;T, decltype(<del>value()</del><ins>**this</ins>)&gt;</code>
+is <code>true</code>.
+</p>
+<p>-27- <i>Mandates</i>:
+<code>G</code> is a valie template argument for <code>unexpected</code>
+( [unexpected.un.general])
+and the declaration
+<pre><code>  G g(invoke(std::forward&lt;F&gt;(f), error()));</code></pre>
+is well-formed.
+</p>
+<p>-28- <i>Returns</i>:
+If <code>has_value()</code> is <code>true</code>,
+<code>expected&lt;T, G&gt;(in_place, <del>value()</del><ins>**this</ins>);</code>;
+otherwise, an <code>expected&lt;T, G&gt;</code> object whose
+<code><i>has_val</i></code> member is <code>false</code>
+and <code><i>unex</i></code> member is direct-non-list-initialized with
+<code>invoke(std::forward&lt;F&gt;(f), error())</code>.
+</p>
+
+<pre><code>
+template&lt;class F&gt; constexpr auto transform_error(F&amp;&amp; f) &amp;&amp;;
+template&lt;class F&gt; constexpr auto transform_error(F&amp;&amp; f) const &amp;&amp;;
+</code></pre>
+<p>-29- Let <code>G</code> be
+<code>remove_cv_t&lt;invoke_result_t&lt;F, decltype(std::move(error()))&gt;&gt;</code>.
+</p>
+<p>-30- <i>Constraints</i>:
+<code>is_constructible_v&lt;T, decltype(std::move(<del>value()</del><ins>**this</ins>))&gt;</code>
+is <code>true</code>.
+</p>
+<p>-31- <i>Mandates</i>:
+<code>G</code> is a valie template argument for <code>unexpected</code>
+( [unexpected.un.general])
+and the declaration
+<pre><code>  G g(invoke(std::forward&lt;F&gt;(f), std::move(error())));</code></pre>
+is well-formed.
+</p>
+<p>-32- <i>Returns</i>:
+If <code>has_value()</code> is <code>true</code>,
+<code>expected&lt;T, G&gt;(in_place, std::move(<del>value()</del><ins>**this</ins>));</code>;
+otherwise, an <code>expected&lt;T, G&gt;</code> object whose
+<code><i>has_val</i></code> member is <code>false</code>
+and <code><i>unex</i></code> member is direct-non-list-initialized with
+<code>invoke(std::forward&lt;F&gt;(f), std::move(error()))</code>.
+</p>
+
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3><a name="3940" href="#3940">3940</a><sup><a href="https://cplusplus.github.io/LWG/issue3940">(i)</a></sup>. <tt>std::expected&lt;void, E&gt;::value()</tt> also needs <tt>E</tt> to be copy constructible</h3>
+<p><b>Section:</b> 22.8.7.6 <a href="https://wg21.link/expected.void.obs">[expected.void.obs]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-05-26 <b>Last modified:</b> 2023-06-01</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+LWG <a href="lwg-defects.html#3843">3843</a> added <i>Mandates:</i> to <tt>std::expected::value</tt>, but the similar handling is 
+missing for <tt>expected&lt;<i>cv</i> void, E&gt;</tt>.
+</p>
+
+<p><i>[2023-06-01; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after seven votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-3940"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+<li>
+<p>Modify 22.8.7.6 <a href="https://wg21.link/expected.void.obs">[expected.void.obs]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+constexpr void value() const &amp;;
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Mandates:</i> <tt>is_copy_constructible_v&lt;E&gt;</tt> is <tt>true</tt>.</ins>
+<p/>
+-3- <i>Throws:</i> <tt>bad_expected_access(error())</tt> if <tt>has_value()</tt> is <tt>false</tt>.
+</p>
+</blockquote>
+<pre>
+constexpr void value() &amp;&amp;;
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Mandates:</i> <tt>is_copy_constructible_v&lt;E&gt;</tt> is <tt>true</tt> and 
+<tt>is_move_constructible_v&lt;E&gt;</tt> is <tt>true</tt>.</ins>
+<p/>
+-4- <i>Throws:</i> <tt>bad_expected_access(std::move(error()))</tt> if <tt>has_value()</tt> is <tt>false</tt>.
 </p>
 </blockquote>
 </blockquote>

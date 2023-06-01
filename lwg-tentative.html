@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-06-01 at 14:08:14 UTC</p>
+<p><p>Revised 2023-06-01 at 14:49:41 UTC</p>
 </p><h2>Tentative Issues</h2>
 <hr>
 <h3><a name="2457" href="#2457">2457</a><sup><a href="https://cplusplus.github.io/LWG/issue2457">(i)</a></sup>. <tt>std::begin()</tt> and <tt>std::end()</tt> do not support multi-dimensional arrays correctly</h3>
@@ -1498,6 +1498,190 @@ namespace std {
 
 
 <hr>
+<h3><a name="3908" href="#3908">3908</a><sup><a href="https://cplusplus.github.io/LWG/issue3908">(i)</a></sup>. <code>enumerate_view::<i>iterator</i></code> constructor is explicit</h3>
+<p><b>Section:</b> 26.7.23.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-03-23 <b>Last modified:</b> 2023-06-01</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.enumerate.iterator">active issues</a> in [range.enumerate.iterator].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.enumerate.iterator">issues</a> in [range.enumerate.iterator].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively NAD">Tentatively NAD</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>enumerate_view::<i>iterator</i></code> has this constructor:
+</p>
+<blockquote>
+<pre><code>    constexpr explicit
+      <i>iterator</i>(iterator_t&lt;<i>Base</i>&gt; current, difference_type pos);  <i>// exposition only</i>
+</code></pre>
+</blockquote>
+
+<p>
+In <a href="https://wg21.link/P2164R9">P2164R9</a> the detailed description of the function showed a
+default argument for the second parameter, which would justify it being
+explicit. However, that default argument was not present in the class synopsis
+and was removed from the detailed description when applying the paper to the
+draft.
+</p>
+
+<p><i>[2023-06-01; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively NAD after four votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-3908"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
+</p>
+<ol>
+<li>
+<p>
+Modify the class synopsis in 26.7.23.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a>
+as shown:
+</p>
+<blockquote><pre><code>
+    constexpr <del>explicit</del>
+      <i>iterator</i>(iterator_t&lt;<i>Base</i>&gt; current, difference_type pos);  <i>// exposition only</i>
+</code></pre></blockquote>
+</li>
+
+<li>
+<p>
+Modify the detailed description in 26.7.23.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a>
+as shown:
+</p>
+<blockquote>
+<pre><code>  constexpr <del>explicit</del> <i>iterator</i>(iterator_t&lt;<i>Base</i>&gt; current, difference_type pos);
+</code></pre>
+<p>-2-
+<i>Effects</i>: Initializes <code><i>current_</i></code>
+with <code>std::move(current)</code> and <code><i>pos_</i></code> with
+<code>pos</code>.
+</p>
+</blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+
+<hr>
+<h3><a name="3909" href="#3909">3909</a><sup><a href="https://cplusplus.github.io/LWG/issue3909">(i)</a></sup>. Issues about <code>viewable_range</code></h3>
+<p><b>Section:</b> 99 [ranges.refinements], 26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-03-27 <b>Last modified:</b> 2023-06-01</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively NAD">Tentatively NAD</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+After LWG <a href="lwg-defects.html#3724">3724</a>, <code>views::all</code> is well-constrained for view types,
+and the constraints are stronger than <code>viewable_range</code>.
+The difference is that given an expression such that <code>decltype</code> gives <code>R</code>,
+when <code>decay_t&lt;R&gt;</code> is a view type and the implicit conversion of <code>R</code>
+to <code>decay_t&lt;R&gt;</code> is forbidden, <code>views::all</code> rejects the expression,
+but <code>viewable_range</code> may accept <code>R</code>.
+So I think we should remove the additional constraints on <code>views::all_t</code>.
+</p>
+<p>
+While <code>viewable_range</code> is probably not introducing any additional constraint within the standard library,
+I think it is still useful to express the constraints on <code>views::all</code>,
+so it should be slightly adjusted to match <code>views::all</code>.
+</p>
+<p>
+Furthermore, <code>viewable_range</code> is currently used in 26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a>,
+but given <a href="https://wg21.link/P2378R3">P2378R3</a> relaxed the requirements for range adaptor closure objects,
+I think we should also apply similar relaxation for range adaptor objects.
+This should have no impact on standard range adaptor objects.
+</p>
+
+<p><i>[2023-06-01; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively NAD after three votes in favour during reflector poll.
+</p>
+<p>
+"First change is pointless. Second change is a duplicate of <a href="lwg-active.html#3896">3896</a>.
+Range adaptors return a view over their first argument, so they need to
+require it's a <code>viewable_range</code>."
+</p>
+
+
+
+<p id="res-3909"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
+</p>
+
+<ol>
+<li>
+<p>
+Change the definition of <code>views::all_t</code> in 26.2 <a href="https://wg21.link/ranges.syn">[ranges.syn]</a> as indicated:
+</p>
+<blockquote><pre><code>
+   template&lt;<del>viewable_range</del><ins>class</ins> R&gt;
+      using all_t = decltype(all(declval&lt;R&gt;()));          // freestanding
+</code></pre>
+</blockquote>
+</li>
+<li>
+<p>
+Change the definition of <code>viewable_range</code> in 26.4.5 <a href="https://wg21.link/range.refinements">[range.refinements]</a> as indicated:
+</p>
+<blockquote>
+<p>-6-
+The <code>viewable_range</code> concept specifies the requirements of a <code>range</code> type
+that can be converted to a view safely.
+</p>
+<pre><code>
+template&lt;class T&gt;
+  concept viewable_range =
+    range&lt;T&gt; &amp;&amp;
+    ((view&lt;remove_cvref_t&lt;T&gt;&gt; &amp;&amp; <del>constructible_from&lt;remove_cvref_t&lt;T&gt;, T&gt;</del> <ins>convertible_to&lt;T, remove_cvref_t&lt;T&gt;&gt;</ins>) ||
+     (!view&lt;remove_cvref_t&lt;T&gt;&gt; &amp;&amp;
+      (is_lvalue_reference_v&lt;T&gt; || (movable&lt;remove_reference_t&lt;T&gt;&gt; &amp;&amp; !<i>is-initializer-list</i>&lt;T&gt;))));
+</code></pre>
+</blockquote>
+</li>
+<li>
+<p>
+Change 26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a> as indicated:
+</p>
+<blockquote>
+<p>-6-
+A <i>range adaptor object</i> is a customization point object (16.3.3.3.5 <a href="https://wg21.link/customization.point.object">[customization.point.object]</a>)
+that accepts a <code><del>viewable_range</del><ins>range</ins></code> as its first argument
+and returns a view.
+</p>
+<p>
+[&hellip;]
+</p>
+<p>-8-
+If a range adaptor object <code>adaptor</code> accepts more than one argument,
+then let <code>range</code> be an expression such that <code>decltype((range))</code>
+models <code><del>viewable_range</del><ins>range</ins></code>,
+let <code>args...</code> be arguments such that <code>adaptor(range, args...)</code>
+is a well-formed expression as specified in the rest of subclause 26.7 <a href="https://wg21.link/range.adaptors">[range.adaptors]</a>,
+and let <code>BoundArgs</code> be a pack that denotes <code>decay_t&lt;decltype((args))&gt;...</code>.
+The expression <code>adaptor(args...)</code> produces a range adaptor closure object
+<code>f</code> that is a perfect forwarding call wrapper (22.10.4 <a href="https://wg21.link/func.require">[func.require]</a>)
+with the following properties: [...]
+</p>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
 <h3><a name="3912" href="#3912">3912</a><sup><a href="https://cplusplus.github.io/LWG/issue3912">(i)</a></sup>. <code>enumerate_view::iterator::operator-</code> should be <code>noexcept</code></h3>
 <p><b>Section:</b> 26.7.23.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-03-27 <b>Last modified:</b> 2023-05-24</p>
@@ -1778,6 +1962,89 @@ a[n]
 </p>
 </blockquote>
 </blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3930" href="#3930">3930</a><sup><a href="https://cplusplus.github.io/LWG/issue3930">(i)</a></sup>. Simplify type trait wording</h3>
+<p><b>Section:</b> 21 <a href="https://wg21.link/meta">[meta]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+ <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2023-05-01 <b>Last modified:</b> 2023-06-01</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#meta">active issues</a> in [meta].</p>
+<p><b>View all other</b> <a href="lwg-index.html#meta">issues</a> in [meta].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively NAD">Tentatively NAD</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+There are many traits that have a requirement that they are instantiated only if
+"<tt>T</tt> shall be a complete type, <i>cv</i> <tt>void</tt>, or an array of unknown bound."
+<p/>
+Breaking down what this means, by supporting <i>cv</i>-<tt>void</tt> and arrays of unknown
+bound (almost) the only remaining type-category is incomplete class types.
+<p/>
+The remaining edge case is incomplete enumerations, but they are required to
+have a known fixed-base, so act as complete types, they can be copied,
+assigned, etc., without knowing the names of their enumerators.
+<p/>
+Hence, I suggest clearer wording would be:
+"<tt>T</tt> shall not be an incomplete class type."
+<p/>
+This is easier to understand, as we do not need to mentally enumerate every
+type against a list to check it qualifies; it is a simpler test for the library to
+check if we were to mandate these restrictions.
+<p/>
+There are a very small number of traits with subtly different wording, where
+incomplete unions are supported, or arrays of unknown bound are not a
+concern due to invoking <tt>remove_all_extents</tt> first. The bulk of the changes
+can be made to traits with only the precise wording above though, and then
+we can review whether any of the remaining restrictions deserve a wording
+update of their own.
+</p>
+
+<p><i>[2023-06-01; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively NAD after four votes in favour during reflector poll,
+including a request to withdraw the issue from the submitter.
+</p>
+<p>
+Incomplete enumeration types are found within the <i>enum-specifier</i>
+of an enum without a fixed underlying type:
+<pre><code>
+enum E {
+    A = sizeof(E) // error, E is incomplete at this point
+};
+</code></pre>
+and we definitely can't provide an underlying type for this case.
+</p>
+
+
+
+<p id="res-3930"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
+</p>
+
+<ol>
+<li>
+<p>
+Throughout 21 <a href="https://wg21.link/meta">[meta]</a> replace all occurrences of
+</p>
+<blockquote><p>
+<tt>T</tt> shall be a complete type, <i>cv</i> <tt>void</tt>, or an array of unknown bound.
+</p></blockquote>
+<p>
+by
+</p>
+<blockquote><p>
+<tt>T</tt> shall not be an incomplete class type.
+</p></blockquote>
+
 </li>
 
 </ol>

@@ -49,7 +49,7 @@
 <p>This document is the Index by Section for the <a href="lwg-active.html">Library Active Issues List</a>, <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.</p>
 <h2>Index by Section</h2>
 <p><a href="lwg-index-open.html">(view only non-Ready open issues)</a></p>
-<p><p>Revised 2023-06-01 at 14:08:14 UTC</p>
+<p><p>Revised 2023-06-01 at 14:49:41 UTC</p>
 </p><h2><a name="Section 2"></a>Section 2 (2 issues)</h2>
 <table border="1" cellpadding="4">
 <tr>
@@ -4798,7 +4798,7 @@ derived types as always equal</td>
 <td align="left">20.3.1.3.5 [unique.ptr.single.observers]<a name="unique.ptr.single.observers"></a></td>
 <td align="left"><code>unique_ptr</code>'s <code>operator*</code> is missing a mandate</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -5926,7 +5926,7 @@ use <tt>allocator_traits</tt></td>
 </tr>
 <tr>
 <td align="right"><a href="lwg-active.html#3930">3930</a><sup><a href="https://cplusplus.github.io/LWG/issue3930">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3930"></a></td>
+<td align="left"><a href="lwg-active.html#NAD">Tentatively NAD</a><a name="3930"></a></td>
 <td align="left">21 [meta]<a name="meta"></a></td>
 <td align="left">Simplify type trait wording</td>
 <td align="center">Yes</td>
@@ -16368,21 +16368,21 @@ should be fully <tt>constexpr</tt></td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3913">3913</a><sup><a href="https://cplusplus.github.io/LWG/issue3913">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3913"></a></td>
-<td align="left">26.2 [ranges.syn]</td>
-<td align="left"><code>ranges::const_iterator_t&lt;range R&gt;</code> fails to accept arrays of unknown bound</td>
-<td align="center">Yes</td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
 <td align="right"><a href="lwg-active.html#3729">3729</a><sup><a href="https://cplusplus.github.io/LWG/issue3729">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="3729"></a></td>
 <td align="left">26.2 [ranges.syn]</td>
 <td align="left"><tt>std::tuple_element_t&lt;std::ranges::subrange&lt;I, S, K&gt;&gt;</tt> should remove top-level <i>cv</i>-qualifiers</td>
 <td align="center">Yes</td>
 <td align="center">4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="right"><a href="lwg-active.html#3913">3913</a><sup><a href="https://cplusplus.github.io/LWG/issue3913">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#SG9">SG9</a><a name="3913"></a></td>
+<td align="left">26.2 [ranges.syn]</td>
+<td align="left"><code>ranges::const_iterator_t&lt;range R&gt;</code> fails to accept arrays of unknown bound</td>
+<td align="center">Yes</td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -16761,7 +16761,7 @@ does not constrain <tt>I</tt> to be <tt>copyable</tt> when <tt>N == 0</tt></td>
 <td align="left">26.6 [range.factories]<a name="range.factories"></a></td>
 <td align="left">Can iterator types of range adaptors and range factories be SCARY?</td>
 <td align="center"><font color="red">No</font></td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -17672,7 +17672,7 @@ constraints</td>
 </tr>
 <tr>
 <td align="right"><a href="lwg-active.html#3908">3908</a><sup><a href="https://cplusplus.github.io/LWG/issue3908">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3908"></a></td>
+<td align="left"><a href="lwg-active.html#NAD">Tentatively NAD</a><a name="3908"></a></td>
 <td align="left">26.7.23.3 [range.enumerate.iterator]</td>
 <td align="left"><code>enumerate_view::<i>iterator</i></code> constructor is explicit</td>
 <td align="center">Yes</td>
@@ -19508,11 +19508,11 @@ specified to make <tt><i>N</i></tt> copies of <tt>T</tt> into the destination ra
 </tr>
 <tr>
 <td align="right"><a href="lwg-active.html#3918">3918</a><sup><a href="https://cplusplus.github.io/LWG/issue3918">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3918"></a></td>
+<td align="left"><a href="lwg-active.html#LEWG">LEWG</a><a name="3918"></a></td>
 <td align="left">27.11.6 [uninitialized.move]<a name="uninitialized.move"></a></td>
 <td align="left"><tt>std::uninitialized_move/_n</tt> and guaranteed copy elision</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -27083,18 +27083,9 @@ but never move construct the parameters</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3941">3941</a><sup><a href="https://cplusplus.github.io/LWG/issue3941">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3941"></a></td>
-<td align="left">33.5.4 [atomics.order]<a name="atomics.order"></a></td>
-<td align="left">&sect;[atomics.order] inadvertently prohibits widespread implementation techniques</td>
-<td align="center"><font color="red">No</font></td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
 <td align="right"><a href="lwg-active.html#3268">3268</a><sup><a href="https://cplusplus.github.io/LWG/issue3268">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="3268"></a></td>
-<td align="left">33.5.4 [atomics.order]</td>
+<td align="left">33.5.4 [atomics.order]<a name="atomics.order"></a></td>
 <td align="left"><tt>memory_order::memory_order_foo</tt> broken in C++20</td>
 <td align="center">Yes</td>
 <td align="center">4</td>
@@ -27117,6 +27108,15 @@ but never move construct the parameters</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center"></td>
 <td align="left"><a href="lwg-closed.html#1458">1458</a></td>
+</tr>
+<tr>
+<td align="right"><a href="lwg-active.html#3941">3941</a><sup><a href="https://cplusplus.github.io/LWG/issue3941">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#SG1">SG1</a><a name="3941"></a></td>
+<td align="left">33.5.4 [atomics.order]</td>
+<td align="left">&sect;[atomics.order] inadvertently prohibits widespread implementation techniques</td>
+<td align="center"><font color="red">No</font></td>
+<td align="center">3</td>
+<td align="left"></td>
 </tr>
 <tr>
 <td align="right"><a href="lwg-defects.html#2130">2130</a><sup><a href="https://cplusplus.github.io/LWG/issue2130">(i)</a></sup></td>
@@ -29640,7 +29640,7 @@ synchronization requirements</td>
 </tr>
 <tr>
 <td align="right"><a href="lwg-active.html#3909">3909</a><sup><a href="https://cplusplus.github.io/LWG/issue3909">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3909"></a></td>
+<td align="left"><a href="lwg-active.html#NAD">Tentatively NAD</a><a name="3909"></a></td>
 <td align="left">99 [ranges.refinements]<a name="ranges.refinements"></a></td>
 <td align="left">Issues about <code>viewable_range</code></td>
 <td align="center">Yes</td>

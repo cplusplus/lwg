@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2023-06-12</td>
+  <td align="left">2023-06-13</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-06-12 at 12:00:38 UTC</p>
+<p><p>Revised 2023-06-13 at 07:02:09 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -31994,7 +31994,7 @@ determination above is also modeled</ins>.</p></li>
 <hr>
 <h3><a name="3431" href="#3431">3431</a><sup><a href="https://cplusplus.github.io/LWG/issue3431">(i)</a></sup>. <tt>&lt;=&gt;</tt> for containers should require <tt>three_way_comparable&lt;T&gt;</tt> instead of <tt>&lt;=&gt;</tt></h3>
 <p><b>Section:</b> 24.2.2.4 <a href="https://wg21.link/container.opt.reqmts">[container.opt.reqmts]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2020-04-17 <b>Last modified:</b> 2022-04-24</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2020-04-17 <b>Last modified:</b> 2023-06-13</p>
 <p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -32130,9 +32130,9 @@ linear
 
 <p><i>[2022-04-24; Daniel rebases wording on <a href="https://wg21.link/N4910">N4910</a>]</i></p>
 
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
 
-
-<p id="res-3431"><b>Proposed resolution:</b></p>
 <p>
 This wording is relative to <a href="https://wg21.link/N4910">N4910</a>.
 </p>
@@ -32150,6 +32150,48 @@ a &lt;=&gt; b
 <p/>
 -3- <i>Preconditions:</i> Either <del><tt>&lt;=&gt;</tt> is defined for values of type (possibly <tt>const</tt>)</del> 
 <tt>T</tt> <ins>satisfies <tt>three_way_comparable</tt></ins>, or <tt>&lt;</tt> is defined for values of type 
+(possibly <tt>const</tt>) <tt>T</tt> and <tt>&lt;</tt> is a total ordering relationship.
+<p/>
+-4- <i>Returns:</i> <tt>lexicographical_compare_three_way(a.begin(), a.end(), b.begin(), b.end(),
+<i>synth-three-way</i>)</tt>
+<p/>
+[<i>Note 1</i>: The algorithm <tt>lexicographical_compare_three_way</tt> is defined in Clause 27. &mdash; <i>end note</i>]
+<p/>
+-5- <i>Complexity:</i> Linear.
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+</ol>
+</blockquote>
+
+<p><i>[2023-06-13; Varna]</i></p>
+
+<p>
+The group liked the previously suggested wording but would prefer to say "models" instead of "satisfies"
+in preconditions.
+</p>
+
+
+<p id="res-3431"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+<li><p>Modify 24.2.2.4 <a href="https://wg21.link/container.opt.reqmts">[container.opt.reqmts]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+a &lt;=&gt; b
+</pre>
+<blockquote>
+<p>
+-2- <i>Result:</i> <tt><i>synth-three-way-result</i>&lt;X::value_type&gt;</tt>.
+<p/>
+-3- <i>Preconditions:</i> Either <del><tt>&lt;=&gt;</tt> is defined for values of type (possibly <tt>const</tt>)</del> 
+<tt>T</tt> <ins>models <tt>three_way_comparable</tt></ins>, or <tt>&lt;</tt> is defined for values of type 
 (possibly <tt>const</tt>) <tt>T</tt> and <tt>&lt;</tt> is a total ordering relationship.
 <p/>
 -4- <i>Returns:</i> <tt>lexicographical_compare_three_way(a.begin(), a.end(), b.begin(), b.end(),

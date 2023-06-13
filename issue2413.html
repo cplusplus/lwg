@@ -44,15 +44,14 @@
 </head>
 <body>
 <hr>
-<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="2413" href="lwg-active.html#2413">2413</a>. <tt>assert</tt> macro is overconstrained</h3>
-<p><b>Section:</b> 19.3 <a href="https://wg21.link/assertions">[assertions]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> David Krauss <b>Opened:</b> 2014-06-25 <b>Last modified:</b> 2014-11-03</p>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#NAD">NAD</a> status.</em></p>
+<h3><a name="2413" href="lwg-closed.html#2413">2413</a>. <tt>assert</tt> macro is overconstrained</h3>
+<p><b>Section:</b> 19.3 <a href="https://wg21.link/assertions">[assertions]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+ <b>Submitter:</b> David Krauss <b>Opened:</b> 2014-06-25 <b>Last modified:</b> 2023-06-13</p>
 <p><b>Priority: </b>4
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#assertions">active issues</a> in [assertions].</p>
 <p><b>View all other</b> <a href="lwg-index.html#assertions">issues</a> in [assertions].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 When <tt>NDEBUG</tt> is defined, <tt>assert</tt> must expand exactly to the token sequence <tt>((void)0)</tt>, with no 
@@ -72,6 +71,13 @@ debug mode. Shouldn't release mode preserve hints?
 Daniel:
 <p/>
 The corresponding resolution should take care not to conflict with the intention behind LWG <a href="lwg-defects.html#2234">2234</a>.
+</p>
+<p><i>[2023-06-13, Varna; Status changed: New &rarr; NAD.]</i></p>
+
+<p>
+Only observable by stringifying an assert expression anyway,
+so arguably allowed by implementations anyway.
+Needs a paper to make changes here, or incorporate into <a href="https://wg21.link/P2884">P2884</a>.
 </p>
 
 

@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-06-13 at 19:46:20 UTC</p>
+<p><p>Revised 2023-06-13 at 20:01:40 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -49453,6 +49453,47 @@ Set priority to 3 after reflector poll.
 
 
 <p id="res-3945"><b>Proposed resolution:</b></p>
+
+
+
+
+
+<hr>
+<h3><a name="3946" href="#3946">3946</a><sup><a href="https://cplusplus.github.io/LWG/issue3946">(i)</a></sup>. The definition of <tt>const_iterator_t</tt> should be reworked</h3>
+<p><b>Section:</b> 26.2 <a href="https://wg21.link/ranges.syn">[ranges.syn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Christopher Di Bella <b>Opened:</b> 2023-06-13 <b>Last modified:</b> 2023-06-13</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#ranges.syn">active issues</a> in [ranges.syn].</p>
+<p><b>View all other</b> <a href="lwg-index.html#ranges.syn">issues</a> in [ranges.syn].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+During the reflector discussion of <a href="https://wg21.link/P2836">P2836</a>, consensus was reached that <tt>const_iterator_t&lt;R&gt;</tt> 
+doesn't necessarily provide the same type as <tt>decltype(ranges::cbegin(r))</tt>, and that it should be changed to 
+the proposed resolution below so that they're consistent.
+</p>
+
+
+<p id="res-3946"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+<li><p>Modify 26.2 <a href="https://wg21.link/ranges.syn">[ranges.syn]</a>, header <tt>&lt;ranges&gt;</tt> synopsis, as indicated:</p>
+
+<blockquote>
+<pre>
+[&hellip;]
+template&lt;range R&gt;
+  using const_iterator_t = <ins>decltype(ranges::cbegin(declval&lt;R&amp;&gt;()))</ins><del>const_iterator&lt;iterator_t&lt;R&gt;&gt;</del>; // <i>freestanding</i>
+[&hellip;]
+</pre>
+</blockquote>
+</li>
+
+</ol>
 
 
 

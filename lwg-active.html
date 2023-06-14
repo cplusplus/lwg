@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-06-14 at 16:06:39 UTC</p>
+<p><p>Revised 2023-06-14 at 20:45:27 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -11655,7 +11655,7 @@ The term "character type" is used in 3.36 <a href="https://wg21.link/defns.ntcts
 language only defines a "wide-character set" and "wide-character literal".
 </p>
 
-<p><i>[2023-06-14; Daniel comments]</i></p>
+<p><i>[2023-06-14; Varna; Daniel comments and provides wording]</i></p>
 
 <p>
 Given the resolution of <a href="https://wg21.link/P2314">P2314</a> which had introduced to
@@ -11712,9 +11712,9 @@ This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
 
 <blockquote class="note">
 <p>
-[<i>Drafting note:</i> The more interpretation of "character container type" instead of character type by
-the meaning of the core language seems safe here. It seems reasonable that an implementation allows more then
-the core character types, but still could request additional constraints imposed on them. Even if an implementation
+[<i>Drafting note:</i> The more general interpretation of "character container type" instead of character type by
+the meaning of the core language seems safe here. It seems reasonable that an implementation allows more than
+the core language character types, but still could impose additional constraints imposed on them. Even if an implementation
 does never intend to support anything beyond <tt>char</tt> and <tt>wchar_t</tt>, the wording below is harmless.
 One alternative could be here to use the even more general term "char-like types" from 23.1 <a href="https://wg21.link/strings.general">[strings.general]</a>, 
 but I'm unconvinced that this buys us much]
@@ -11736,7 +11736,7 @@ requirements for a character on which any of the iostream components can be inst
 
 <blockquote class="note">
 <p>
-[<i>Drafting note:</i> The wording here seems to refer to the pure core language wording form of a character type.]
+[<i>Drafting note:</i> The wording here seems to refer to the pure core language wording meaning of a character type.]
 </p>
 </blockquote>
 
@@ -11753,7 +11753,7 @@ integral conversion specifier as indicated in Table 110.
 
 <blockquote class="note">
 <p>
-[<i>Drafting note:</i> Similar to 30.3.1.2.1 <a href="https://wg21.link/locale.category">[locale.category]</a> above the more interpretation of "character container type" 
+[<i>Drafting note:</i> Similar to 30.3.1.2.1 <a href="https://wg21.link/locale.category">[locale.category]</a> above the more general interpretation of "character container type" 
 instead of character type by the meaning of the core language seems safe here. ]
 </p>
 </blockquote>

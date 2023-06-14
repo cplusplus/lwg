@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-06-14 at 06:50:15 UTC</p>
+<p><p>Revised 2023-06-14 at 07:43:18 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -190,6 +190,8 @@ ownership of it.
 <li><b>Details:</b><ul>
 <li>Added the following 2 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3946">3946</a>.</li>
 <li>Changed the following 17 issues to Voting (from Tentatively Ready): <a href="lwg-active.html#2994">2994</a>, <a href="lwg-active.html#3884">3884</a>, <a href="lwg-active.html#3885">3885</a>, <a href="lwg-active.html#3887">3887</a>, <a href="lwg-active.html#3893">3893</a>, <a href="lwg-active.html#3894">3894</a>, <a href="lwg-active.html#3903">3903</a>, <a href="lwg-active.html#3904">3904</a>, <a href="lwg-active.html#3905">3905</a>, <a href="lwg-active.html#3912">3912</a>, <a href="lwg-active.html#3914">3914</a>, <a href="lwg-active.html#3915">3915</a>, <a href="lwg-active.html#3925">3925</a>, <a href="lwg-active.html#3927">3927</a>, <a href="lwg-active.html#3935">3935</a>, <a href="lwg-active.html#3938">3938</a>, <a href="lwg-active.html#3940">3940</a>.</li>
+<li>Changed the following 2 issues to Ready (from New): <a href="lwg-active.html#3203">3203</a>, <a href="lwg-active.html#3749">3749</a>.</li>
+<li>Changed the following issue to Ready (from Open): <a href="lwg-active.html#3305">3305</a>.</li>
 <li>Changed the following issue to Open (from New): <a href="lwg-active.html#3343">3343</a>.</li>
 <li>Changed the following issue to Resolved (from New): <a href="lwg-defects.html#3861">3861</a>.</li>
 <li>Changed the following issue to NAD (from New): <a href="lwg-closed.html#2413">2413</a>.</li>
@@ -27437,13 +27439,13 @@ impose said requirements.</p>
 
 <hr>
 <h3><a name="3203" href="#3203">3203</a><sup><a href="https://cplusplus.github.io/LWG/issue3203">(i)</a></sup>. <tt>span</tt> element access invalidation</h3>
-<p><b>Section:</b> 24.7.2.2.1 <a href="https://wg21.link/span.overview">[span.overview]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Johel Ernesto Guerrero Pe&ntilde;a <b>Opened:</b> 2019-05-04 <b>Last modified:</b> 2023-06-13</p>
+<p><b>Section:</b> 24.7.2.2.1 <a href="https://wg21.link/span.overview">[span.overview]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
+ <b>Submitter:</b> Johel Ernesto Guerrero Pe&ntilde;a <b>Opened:</b> 2019-05-04 <b>Last modified:</b> 2023-06-14</p>
 <p><b>Priority: </b>2
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#span.overview">active issues</a> in [span.overview].</p>
 <p><b>View all other</b> <a href="lwg-index.html#span.overview">issues</a> in [span.overview].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Ready">Ready</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 <tt>span</tt> doesn't explicitly point out when its accessed elements are invalidated like <tt>string_view</tt> 
@@ -27492,6 +27494,10 @@ invalidates pointers, iterators, and references returned from <tt>str</tt>'s mem
 <p>
 The group also suggested to adjust 23.3.3.1 <a href="https://wg21.link/string.view.template.general">[string.view.template.general]</a> p2 similarly.
 </p>
+
+<p><i>[2023-06-14 Varna; Move to Ready]</i></p>
+
+
 
 
 <p id="res-3203"><b>Proposed resolution:</b></p>
@@ -29875,13 +29881,13 @@ requirements <del>and refer to elements implicitly convertible to <tt>value_type
 
 <hr>
 <h3><a name="3305" href="#3305">3305</a><sup><a href="https://cplusplus.github.io/LWG/issue3305">(i)</a></sup>. <tt>any_cast&lt;void&gt;</tt></h3>
-<p><b>Section:</b> 22.7.5 <a href="https://wg21.link/any.nonmembers">[any.nonmembers]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
- <b>Submitter:</b> John Shaw <b>Opened:</b> 2019-10-16 <b>Last modified:</b> 2022-02-03</p>
+<p><b>Section:</b> 22.7.5 <a href="https://wg21.link/any.nonmembers">[any.nonmembers]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
+ <b>Submitter:</b> John Shaw <b>Opened:</b> 2019-10-16 <b>Last modified:</b> 2023-06-14</p>
 <p><b>Priority: </b>2
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#any.nonmembers">active issues</a> in [any.nonmembers].</p>
 <p><b>View all other</b> <a href="lwg-index.html#any.nonmembers">issues</a> in [any.nonmembers].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Ready">Ready</a> status.</p>
 <p><b>Discussion:</b></p>
 <blockquote><pre>
 any foo;
@@ -29903,9 +29909,9 @@ We need to handle the <tt>T = void</tt> case, probably by just explicitly return
 <p>Poll "should it return nullptr" was 0-4-5-5-1.</p>
 <p><i>[2022-02 Currently ill-formed in MSVC ("error C2338: std::any cannot contain void") and returns null pointer in libstdc++ and libc++.]</i></p>
 
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
 
-
-<p id="res-3305"><b>Proposed resolution:</b></p>
 <p>This wording is relative to <a href="https://wg21.link/n4835">N4835</a>.</p>
 
 <ol>
@@ -29922,6 +29928,50 @@ template&lt;class T&gt;
 <p>
 -9- <i>Returns:</i> If <tt>operand != nullptr &amp;&amp; operand-&gt;type() == typeid(T) <ins>&amp;&amp; 
 is_object_v&lt;T&gt;</ins></tt>, a pointer to the object contained by <tt>operand</tt>; otherwise, 
+<tt>nullptr</tt>.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+
+</blockquote>
+
+<p><i>[2023-06-14 Varna; Jonathan provides improved wording]</i></p>
+
+<p><i>[2023-06-14 Varna; Move to Ready]</i></p>
+
+<p>Poll: 7-0-1</p>
+
+
+
+<p id="res-3305"><b>Proposed resolution:</b></p>
+
+<p>This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.</p>
+
+<ol>
+<li><p>Modify 22.7.5 <a href="https://wg21.link/any.nonmembers">[any.nonmembers]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class T&gt;
+  const T* any_cast(const any* operand) noexcept;
+template&lt;class T&gt;
+  T* any_cast(any* operand) noexcept;
+</pre>
+<blockquote>
+<p>
+<ins>
+-8-
+<i>Mandates</i>:
+<code>is_void_v&lt;T&gt;</code> is <code>false</code>.
+</ins>
+</p>
+<p>
+-9-
+<i>Returns</i>: If <tt>operand != nullptr &amp;&amp; operand-&gt;type() == typeid(T)</tt> <ins>is <code>true</code></ins>, a pointer to the object contained by <tt>operand</tt>; otherwise,
 <tt>nullptr</tt>.
 <p/>
 [&hellip;]
@@ -32056,7 +32106,7 @@ determination above is also modeled</ins>.</p></li>
 <hr>
 <h3><a name="3431" href="#3431">3431</a><sup><a href="https://cplusplus.github.io/LWG/issue3431">(i)</a></sup>. <tt>&lt;=&gt;</tt> for containers should require <tt>three_way_comparable&lt;T&gt;</tt> instead of <tt>&lt;=&gt;</tt></h3>
 <p><b>Section:</b> 24.2.2.4 <a href="https://wg21.link/container.opt.reqmts">[container.opt.reqmts]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2020-04-17 <b>Last modified:</b> 2023-06-13</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2020-04-17 <b>Last modified:</b> 2023-06-14</p>
 <p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -32234,6 +32284,8 @@ a &lt;=&gt; b
 The group liked the previously suggested wording but would prefer to say "models" instead of "satisfies"
 in preconditions.
 </p>
+<p><i>[2023-06-14 Varna; Move to Ready]</i></p>
+
 
 
 <p id="res-3431"><b>Proposed resolution:</b></p>
@@ -42529,11 +42581,11 @@ template&lt;common_with&lt;I&gt; I2&gt;
 
 <hr>
 <h3><a name="3749" href="#3749">3749</a><sup><a href="https://cplusplus.github.io/LWG/issue3749">(i)</a></sup>. <tt>common_iterator</tt> should handle integer-class difference types</h3>
-<p><b>Section:</b> 25.5.5 <a href="https://wg21.link/iterators.common">[iterators.common]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2022-08-01 <b>Last modified:</b> 2023-06-13</p>
+<p><b>Section:</b> 25.5.5 <a href="https://wg21.link/iterators.common">[iterators.common]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2022-08-01 <b>Last modified:</b> 2023-06-14</p>
 <p><b>Priority: </b>2
 </p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Ready">Ready</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 The partial specialization of <tt>iterator_traits</tt> for <tt>common_iterator</tt> is defined in 
@@ -42684,6 +42736,8 @@ and <tt><i>j</i></tt> is <tt>y.v_.index()</tt>.
 </blockquote>
 
 <p><i>[2023-06-13; Varna; Tomasz provides wording]</i></p>
+
+<p><i>[2023-06-14 Varna; Move to Ready]</i></p>
 
 
 

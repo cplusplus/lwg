@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-06-14 at 06:47:09 UTC</p>
+<p><p>Revised 2023-06-14 at 06:50:15 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -49489,7 +49489,7 @@ This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
 template&lt;range R&gt;
   using const_iterator_t = <ins>decltype(ranges::cbegin(declval&lt;R&amp;&gt;()))</ins><del>const_iterator&lt;iterator_t&lt;R&gt;&gt;</del>; // <i>freestanding</i>
 template&lt;range R&gt;
-  using const_sentinel_t = <ins>decltype(ranges::cend(declval&lt;R&amp;&gt;()))</ins><del>const_sentinel&lt;sentinel_t&lt;R&gt;&gt;</del>; // <i>freestanding</i>
+  using const_sentinel_t = <ins>decltype(ranges::cend(declval&lt;R&amp;&gt;()))</ins><del>const_sentinel&lt;sentinel_t&lt;R&gt;&gt;</del>;   // <i>freestanding</i>
 [&hellip;]
 </pre>
 </blockquote>

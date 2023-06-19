@@ -44,15 +44,14 @@
 </head>
 <body>
 <hr>
-<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Voting">Voting</a> status.</em></p>
-<h3><a name="3904" href="lwg-active.html#3904">3904</a>. <tt>lazy_split_view::<i>outer-iterator</i></tt>'s <tt>const</tt>-converting constructor isn't setting <tt><i>trailing_empty_</i></tt></h3>
-<p><b>Section:</b> 26.7.16.3 <a href="https://wg21.link/range.lazy.split.outer">[range.lazy.split.outer]</a> <b>Status:</b> <a href="lwg-active.html#Voting">Voting</a>
- <b>Submitter:</b> Patrick Palka <b>Opened:</b> 2023-03-13 <b>Last modified:</b> 2023-06-12</p>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#WP">WP</a> status.</em></p>
+<h3><a name="3904" href="lwg-defects.html#3904">3904</a>. <tt>lazy_split_view::<i>outer-iterator</i></tt>'s <tt>const</tt>-converting constructor isn't setting <tt><i>trailing_empty_</i></tt></h3>
+<p><b>Section:</b> 26.7.16.3 <a href="https://wg21.link/range.lazy.split.outer">[range.lazy.split.outer]</a> <b>Status:</b> <a href="lwg-active.html#WP">WP</a>
+ <b>Submitter:</b> Patrick Palka <b>Opened:</b> 2023-03-13 <b>Last modified:</b> 2023-06-19</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#range.lazy.split.outer">active issues</a> in [range.lazy.split.outer].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.lazy.split.outer">issues</a> in [range.lazy.split.outer].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#Voting">Voting</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#WP">WP</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 It seems the <tt>const</tt>-converting constructor for <tt>lazy_split_view</tt>'s iterator fails
@@ -72,6 +71,8 @@ auto k = r.end(); // <span style="color:red;font-weight:bolder">k.trailing_empty
 <p>
 Set status to Tentatively Ready after five votes in favour during reflector poll.
 </p>
+
+<p><i>[2023-06-17 Approved in Varna. Status changed: Voting &rarr; WP.]</i></p>
 
 
 

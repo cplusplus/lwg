@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2023-06-19</td>
+  <td align="left">2023-06-25</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-06-19 at 14:52:05 UTC</p>
+<p><p>Revised 2023-06-25 at 08:23:56 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -182,13 +182,13 @@ ownership of it.
 <ul>
 <li>D125: 2023-06-09 Post-Varna<ul>
 <li><b>Summary:</b><ul>
-<li>413 open issues, down by 17.</li>
+<li>414 open issues, down by 16.</li>
 <li>3020 closed issues, up by 20.</li>
 <li>35 reassigned issues, down by 1.</li>
-<li>3468 issues total, up by 2.</li>
+<li>3469 issues total, up by 3.</li>
 </ul></li>
 <li><b>Details:</b><ul>
-<li>Added the following 2 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3946">3946</a>.</li>
+<li>Added the following 3 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3946">3946</a>, <a href="lwg-active.html#3947">3947</a>.</li>
 <li>Changed the following 5 issues to Ready (from New): <a href="lwg-active.html#3203">3203</a>, <a href="lwg-active.html#3431">3431</a>, <a href="lwg-active.html#3749">3749</a>, <a href="lwg-active.html#3892">3892</a>, <a href="lwg-active.html#3897">3897</a>.</li>
 <li>Changed the following issue to Ready (from Open): <a href="lwg-active.html#3305">3305</a>.</li>
 <li>Changed the following issue to Open (from New): <a href="lwg-active.html#3343">3343</a>.</li>
@@ -51785,6 +51785,72 @@ template&lt;range R&gt;
 template&lt;range R&gt;
   using const_sentinel_t = <ins>decltype(ranges::cend(declval&lt;R&amp;&gt;()))</ins><del>const_sentinel&lt;sentinel_t&lt;R&gt;&gt;</del>;   // <i>freestanding</i>
 [&hellip;]
+</pre>
+</blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3947" href="#3947">3947</a><sup><a href="https://cplusplus.github.io/LWG/issue3947">(i)</a></sup>. Unexpected constraints on <tt>adjacent_transform_view::base()</tt></h3>
+<p><b>Section:</b> 26.7.27.2 <a href="https://wg21.link/range.adjacent.transform.view">[range.adjacent.transform.view]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Bo Persson <b>Opened:</b> 2023-06-17 <b>Last modified:</b> 2023-06-25</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+In section 26.7.27.2 <a href="https://wg21.link/range.adjacent.transform.view">[range.adjacent.transform.view]</a> the class
+<tt>ranges::adjacent_transform_view</tt> got two new <tt>base()</tt> members from
+<a href="lwg-defects.html#3848">3848</a>.
+<p/>
+The first one looks like
+</p>
+<blockquote><pre>
+constexpr V base() const &amp; requires copy_constructible&lt;<i>InnerView</i>&gt;
+{ return <i>inner_</i>.base(); }
+</pre></blockquote>
+<p>
+Here the requirement is that <tt><i>InnerView</i></tt> is copy constructible, when it in
+fact returns an object of type <tt>V</tt>. That seems odd.
+<p/>
+I would expect the constraint to instead be <tt>copy_constructible&lt;V&gt;</tt>.
+</p>
+
+
+<p id="res-3947"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+<li><p>Modify 26.7.27.2 <a href="https://wg21.link/range.adjacent.transform.view">[range.adjacent.transform.view]</a>, class template 
+<tt>adjacent_transform_view</tt> synopsis, as indicated:</p>
+
+<blockquote>
+<pre>
+namespace std::ranges {
+  template&lt;forward_range V, move_constructible F, size_t N&gt;
+    requires view&lt;V&gt; &amp;&amp; (N &gt; 0) &amp;&amp; is_object_v&lt;F&gt; &amp;&amp;
+      regular_invocable&lt;F&amp;, <i>REPEAT</i>(range_reference_t&lt;V&gt;, N)...&gt; &amp;&amp;
+      <i>can-reference</i>&lt;invoke_result_t&lt;F&amp;, <i>REPEAT</i>(range_reference_t&lt;V&gt;, N)...&gt;&gt;
+  class adjacent_transform_view : public view_interface&lt;adjacent_transform_view&lt;V, F, N&gt;&gt; {
+    [&hellip;]
+    adjacent_view&lt;V, N&gt; <i>inner_</i>; // <i>exposition only</i>
+    
+    using <i>InnerView</i> = adjacent_view&lt;V, N&gt;; // <i>exposition only</i>
+    [&hellip;]
+  public:
+    [&hellip;]
+    constexpr V base() const &amp; requires copy_constructible&lt;<ins>V</ins><del><i>InnerView</i></del>&gt; { return <i>inner_</i>.base(); }
+    constexpr V base() &amp;&amp; { return std::move(<i>inner_</i>).base(); }
+    [&hellip;]
+  };
+}
 </pre>
 </blockquote>
 </li>

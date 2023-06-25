@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-06-25 at 09:24:01 UTC</p>
+<p><p>Revised 2023-06-25 at 10:48:45 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -182,13 +182,13 @@ ownership of it.
 <ul>
 <li>D125: 2023-06-09 Post-Varna<ul>
 <li><b>Summary:</b><ul>
-<li>416 open issues, down by 14.</li>
+<li>417 open issues, down by 13.</li>
 <li>3020 closed issues, up by 20.</li>
 <li>35 reassigned issues, down by 1.</li>
-<li>3471 issues total, up by 5.</li>
+<li>3472 issues total, up by 6.</li>
 </ul></li>
 <li><b>Details:</b><ul>
-<li>Added the following 5 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3946">3946</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>.</li>
+<li>Added the following 6 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3946">3946</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>.</li>
 <li>Changed the following 5 issues to Ready (from New): <a href="lwg-active.html#3203">3203</a>, <a href="lwg-active.html#3431">3431</a>, <a href="lwg-active.html#3749">3749</a>, <a href="lwg-active.html#3892">3892</a>, <a href="lwg-active.html#3897">3897</a>.</li>
 <li>Changed the following issue to Ready (from Open): <a href="lwg-active.html#3305">3305</a>.</li>
 <li>Changed the following issue to Open (from New): <a href="lwg-active.html#3343">3343</a>.</li>
@@ -51960,6 +51960,320 @@ This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
 -2- The specialization <tt>atomic&lt;bool&gt;</tt> is a standard-layout struct. <ins>It has a trivial destructor.</ins>
 </p>
 </blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3950" href="#3950">3950</a><sup><a href="https://cplusplus.github.io/LWG/issue3950">(i)</a></sup>. <tt>std::basic_string_view</tt> comparison operators are overspecified</h3>
+<p><b>Section:</b> 23.3.2 <a href="https://wg21.link/string.view.synop">[string.view.synop]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Giuseppe D'Angelo <b>Opened:</b> 2023-06-21 <b>Last modified:</b> 2023-06-25</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The <tt>&lt;string_view&gt;</tt> synopsis in 23.3.2 <a href="https://wg21.link/string.view.synop">[string.view.synop]</a> has these signatures
+for <tt>operator==</tt> and <tt>operator&lt;=&gt;</tt>:
+</p>
+<blockquote><pre>
+// <i>23.3.4 <a href="https://wg21.link/string.view.comparison">[string.view.comparison]</a>, non-member comparison functions</i>
+template&lt;class charT, class traits&gt;
+  constexpr bool operator==(basic_string_view&lt;charT, traits&gt; x,
+                            basic_string_view&lt;charT, traits&gt; y) noexcept;
+template&lt;class charT, class traits&gt;
+  constexpr see below operator&lt;=&gt;(basic_string_view&lt;charT, traits&gt; x,
+                                  basic_string_view&lt;charT, traits&gt; y) noexcept;
+
+// <i>see 23.3.4 <a href="https://wg21.link/string.view.comparison">[string.view.comparison]</a>, sufficient additional overloads of comparison functions</i>
+</pre></blockquote>
+<p>
+In 23.3.4 <a href="https://wg21.link/string.view.comparison">[string.view.comparison]</a>, paragraph 1 states that "Implementations
+shall provide sufficient additional overloads" so that all comparisons
+between a <tt>basic_string_view&lt;C, T&gt;</tt> object and an object of a type
+convertible to <tt>basic_string_view&lt;C, T&gt;</tt> work (with the reasonable
+semantics).
+<p/>
+The associated Example 1 proposes this implementation strategy for
+<tt>operator==</tt>:
+</p>
+<blockquote><pre>
+template&lt;class charT, class traits&gt;
+  constexpr bool operator==(basic_string_view&lt;charT, traits&gt; lhs,
+                            basic_string_view&lt;charT, traits&gt; rhs) noexcept {
+    return lhs.compare(rhs) == 0;
+  }
+template&lt;class charT, class traits&gt;
+  constexpr bool operator==(basic_string_view&lt;charT, traits&gt; lhs,
+                            type_identity_t&lt;basic_string_view&lt;charT, traits&gt;&gt; rhs) noexcept {
+    return lhs.compare(rhs) == 0;
+  }
+</pre></blockquote>
+<p>
+With the current semantics of rewritten candidates for the comparison
+operators, it is however superfluous to actually specify both overloads
+(the same applies for <tt>operator&lt;=&gt;</tt>).
+<p/>
+The second overload (using <tt>type_identity_t</tt>) is indeed necessary to
+implement the "sufficient additional overloads" part of 23.3.4 <a href="https://wg21.link/string.view.comparison">[string.view.comparison]</a>, 
+but it is also sufficient, as all the following cases
+</p>
+<ul>
+<li><p><tt>sv == sv</tt></p></li>
+<li><p><tt>sv == <i>convertible_to_sv</i></tt></p></li>
+<li><p><tt><i>convertible_to_sv</i> == sv</tt></p></li>
+</ul>
+<p>
+can in fact use it (directly, or after being rewritten e.g. with the
+arguments swapped).
+<p/>
+The reason why we still do have both operators seems to be historical;
+there is an explanation offered <a href="https://stackoverflow.com/a/70851101">here</a> by Barry Revzin.
+<p/>
+Basically, there were three overloads before a bunch of papers regarding
+<tt>operator&lt;=&gt;</tt> and <tt>operator==</tt> were merged:
+</p>
+<ol>
+<li><p><tt>operator==(<i>bsv</i>, <i>bsv</i>)</tt> to deal with <tt>sv == sv</tt>;</p></li>
+<li><p><tt>operator==(<i>bsv</i>, type_identity_t&lt;<i>bsv</i>&gt;)</tt> and</p></li>
+<li><p><tt>operator==(type_identity_t&lt;<i>bsv</i>&gt;, <i>bsv</i>)</tt> to deal with 
+<tt>sv == <i>convertible_to_sv</i></tt> and vice versa.</p></li>
+</ol>
+<p>
+Overload (1) was necessary because with only (2) and (3) a call like 
+<tt>sv == sv</tt> would otherwise be ambiguous. With the adoption of the rewriting
+rules, overload (3) has been dropped, without realizing that overload
+(1) would then become redundant.
+<p/>
+The specification of these overloads can be greatly simplified by
+adjusting the signatures to explicitly use <tt>type_identity_t</tt>.
+</p>
+
+
+<p id="res-3950"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+<li><p>Modify 23.3.2 <a href="https://wg21.link/string.view.synop">[string.view.synop]</a>, header <tt>&lt;string_view&gt;</tt> synopsis, as indicated:</p>
+
+<blockquote>
+<pre>
+[&hellip;]
+// <i>23.3.4 <a href="https://wg21.link/string.view.comparison">[string.view.comparison]</a>, non-member comparison functions</i>
+template&lt;class charT, class traits&gt;
+  constexpr bool operator==(basic_string_view&lt;charT, traits&gt; x,
+                            <ins>type_identity_t&lt;</ins>basic_string_view&lt;charT, traits&gt;<ins>&gt;</ins> y) noexcept;
+
+template&lt;class charT, class traits&gt;
+  constexpr <i>see below</i> operator&lt;=&gt;(basic_string_view&lt;charT, traits&gt; x,
+                                  <ins>type_identity_t&lt;</ins>basic_string_view&lt;charT, traits&gt;<ins>&gt;</ins> y) noexcept;
+<del>// <i>see 23.3.4 <a href="https://wg21.link/string.view.comparison">[string.view.comparison]</a>, sufficient additional overloads of comparison functions</i></del>
+[&hellip;]
+</pre>
+</blockquote>
+</li>
+
+<li><p>Modify 23.3.4 <a href="https://wg21.link/string.view.comparison">[string.view.comparison]</a> as indicated:</p>
+
+<blockquote>
+<p>
+<del>-1- Let <tt>S</tt> be <tt>basic_string_view&lt;charT, traits&gt;</tt>, and <tt>sv</tt> be an instance of <tt>S</tt>. 
+Implementations shall provide sufficient additional overloads marked <tt>constexpr</tt> and <tt>noexcept</tt> so that an 
+object <tt>t</tt> with an implicit conversion to <tt>S</tt> can be compared according to Table 81 
+[tab:string.view.comparison.overloads].</del>
+</p>
+
+<table border="1">
+<caption><del>Table 81: Additional <tt>basic_string_view</tt> comparison overloads [tab:string.view.comparison.overloads]</del></caption>
+<tr>
+<th align="center"><del>Expression</del></th>
+<th align="center"><del>Equivalent to</del></th>
+</tr>
+
+<tr>
+<td><del>
+<tt>t == sv</tt>
+</del></td>
+<td><del>
+<tt>S(t) == sv</tt>
+</del></td>
+</tr>
+
+<tr>
+<td><del>
+<tt>sv == t</tt>
+</del></td>
+<td><del>
+<tt>sv == S(t)</tt>
+</del></td>
+</tr>
+
+<tr>
+<td><del>
+<tt>t != sv</tt>
+</del></td>
+<td><del>
+<tt>S(t) != sv</tt>
+</del></td>
+</tr>
+
+<tr>
+<td><del>
+<tt>sv != t</tt>
+</del></td>
+<td><del>
+<tt>sv != S(t)</tt>
+</del></td>
+</tr>
+
+<tr>
+<td><del>
+<tt>t &lt; sv</tt>
+</del></td>
+<td><del>
+<tt>S(t) &lt; sv</tt>
+</del></td>
+</tr>
+
+<tr>
+<td><del>
+<tt>sv &lt; t</tt>
+</del></td>
+<td><del>
+<tt>sv &lt; S(t)</tt>
+</del></td>
+</tr>
+
+<tr>
+<td><del>
+<tt>t &gt; sv</tt>
+</del></td>
+<td><del>
+<tt>S(t) &gt; sv</tt>
+</del></td>
+</tr>
+
+<tr>
+<td><del>
+<tt>sv &gt; t</tt>
+</del></td>
+<td><del>
+<tt>sv &gt; S(t)</tt>
+</del></td>
+</tr>
+
+<tr>
+<td><del>
+<tt>t &lt;= sv</tt>
+</del></td>
+<td><del>
+<tt>S(t) &lt;= sv</tt>
+</del></td>
+</tr>
+
+<tr>
+<td><del>
+<tt>sv &lt;= t</tt>
+</del></td>
+<td><del>
+<tt>sv &lt;= S(t)</tt>
+</del></td>
+</tr>
+
+<tr>
+<td><del>
+<tt>t &gt;= sv</tt>
+</del></td>
+<td><del>
+<tt>S(t) &gt;= sv</tt>
+</del></td>
+</tr>
+
+<tr>
+<td><del>
+<tt>sv &gt;= t</tt>
+</del></td>
+<td><del>
+<tt>sv &gt;= S(t)</tt>
+</del></td>
+</tr>
+
+<tr>
+<td><del>
+<tt>t &lt;=&gt; sv</tt>
+</del></td>
+<td><del>
+<tt>S(t) &lt;=&gt; sv</tt>
+</del></td>
+</tr>
+
+<tr>
+<td><del>
+<tt>sv &lt;=&gt; t</tt>
+</del></td>
+<td><del>
+<tt>sv &lt;=&gt; S(t)</tt>
+</del></td>
+</tr>
+
+</table>
+<p>
+<del>[<i>Example 1</i>: A sample conforming implementation for <tt>operator==</tt> would be:</del>
+</p>
+<blockquote><pre>
+<del>template&lt;class charT, class traits&gt;
+  constexpr bool operator==(basic_string_view&lt;charT, traits&gt; lhs,
+                            basic_string_view&lt;charT, traits&gt; rhs) noexcept {
+    return lhs.compare(rhs) == 0;
+  }
+template&lt;class charT, class traits&gt;
+  constexpr bool operator==(basic_string_view&lt;charT, traits&gt; lhs,
+                            type_identity_t&lt;basic_string_view&lt;charT, traits&gt;&gt; rhs) noexcept {
+    return lhs.compare(rhs) == 0;
+  }</del>
+</pre></blockquote>
+<p>
+<del>&mdash; <i>end example</i>]</del>
+</p>
+<pre>
+template&lt;class charT, class traits&gt;
+  constexpr bool operator==(basic_string_view&lt;charT, traits&gt; lhs,
+                            <ins>type_identity_t&lt;</ins>basic_string_view&lt;charT, traits&gt;<ins>&gt;</ins> rhs) noexcept;
+
+</pre>
+<blockquote>
+<p>
+-2- <i>Returns:</i> <tt>lhs.compare(rhs) == 0</tt>.
+</p>
+</blockquote>
+<pre>
+template&lt;class charT, class traits&gt;
+  constexpr <i>see below</i> operator&lt;=&gt;(basic_string_view&lt;charT, traits&gt; lhs,
+                                  <ins>type_identity_t&lt;</ins>basic_string_view&lt;charT, traits&gt;<ins>&gt;</ins> rhs) noexcept;
+</pre>
+<blockquote>
+<p>
+-3- Let <tt>R</tt> denote the type <tt>traits::comparison_category</tt> if that <i>qualified-id</i> is valid and denotes a
+type (13.10.3 <a href="https://wg21.link/temp.deduct">[temp.deduct]</a>), otherwise <tt>R</tt> is <tt>weak_ordering</tt>.
+<p/>
+-4- <i>Mandates</i>; <tt>R</tt> denotes a comparison category type (17.11.2 <a href="https://wg21.link/cmp.categories">[cmp.categories]</a>).
+<p/>
+-5- <i>Returns</i>: <tt>static_cast&lt;R&gt;(lhs.compare(rhs) &lt;=&gt; 0)</tt>.
+<p/>
+<ins> [<i>Note</i>: The usage of <tt>type_identity_t</tt> as parameter ensures that an object of type 
+<tt>basic_string_view&lt;charT, traits&gt;</tt> can always be compared with an object of a type <tt>T</tt> 
+with an implicit conversion to <tt>basic_string_view&lt;charT, traits&gt;</tt>, and vice versa, as per 
+12.2.2.3 <a href="https://wg21.link/over.match.oper">[over.match.oper]</a>. &mdash; <i>end note</i>]</ins>
+</p>
+</blockquote>
+</blockquote>
+
 </li>
 
 </ol>

@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-06-25 at 08:40:57 UTC</p>
+<p><p>Revised 2023-06-25 at 09:24:01 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -182,13 +182,13 @@ ownership of it.
 <ul>
 <li>D125: 2023-06-09 Post-Varna<ul>
 <li><b>Summary:</b><ul>
-<li>415 open issues, down by 15.</li>
+<li>416 open issues, down by 14.</li>
 <li>3020 closed issues, up by 20.</li>
 <li>35 reassigned issues, down by 1.</li>
-<li>3470 issues total, up by 4.</li>
+<li>3471 issues total, up by 5.</li>
 </ul></li>
 <li><b>Details:</b><ul>
-<li>Added the following 4 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3946">3946</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>.</li>
+<li>Added the following 5 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3946">3946</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>.</li>
 <li>Changed the following 5 issues to Ready (from New): <a href="lwg-active.html#3203">3203</a>, <a href="lwg-active.html#3431">3431</a>, <a href="lwg-active.html#3749">3749</a>, <a href="lwg-active.html#3892">3892</a>, <a href="lwg-active.html#3897">3897</a>.</li>
 <li>Changed the following issue to Ready (from Open): <a href="lwg-active.html#3305">3305</a>.</li>
 <li>Changed the following issue to Open (from New): <a href="lwg-active.html#3343">3343</a>.</li>
@@ -51912,6 +51912,53 @@ template&lt;input_range R&gt;
 template&lt;class T&gt;
 constexpr auto <i>as-const-pointer</i>(const T* p) <ins>noexcept</ins> { return p; }    // <i>exposition only</i>
 </pre>
+</blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3949" href="#3949">3949</a><sup><a href="https://cplusplus.github.io/LWG/issue3949">(i)</a></sup>. <tt>std::atomic&lt;bool&gt;</tt>'s trivial destructor dropped in C++17 spec wording</h3>
+<p><b>Section:</b> 33.5.8.1 <a href="https://wg21.link/atomics.types.generic.general">[atomics.types.generic.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jeremy Hurwitz <b>Opened:</b> 2023-06-20 <b>Last modified:</b> 2023-06-25</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<tt>std::atomic&lt;bool&gt;</tt> was originally required to have a trivial default constructor and a trivial destructor 
+[C++11 <a href="https://wg21.link/N3337#page=1118">N3337</a>: Section [atomics.types.generic], Paragraph 5], 
+the same as the integral [C++11 <a href="https://wg21.link/N3337#page=1118">N3337</a>: Section [atomics.types.generic], 
+Paragraph 5] and pointer specializations [C++11 <a href="https://wg21.link/N3337#page=1119">N3337</a>: 
+Section [atomics.types.generic], Paragraph 6]. <a href="https://wg21.link/P0558">P0558</a> rearranged the text, 
+accidentally (as far as we can tell) removing the constructor and destructor requirements from <tt>std::atomic&lt;bool&gt;</tt>,
+which has the surprising effect that <tt>std::atomic&lt;bool&gt;</tt> has no longer the same constructor/destructor 
+guarantees as <tt>std::atomic&lt;int&gt;</tt>.
+<p/>
+C++20 removed the "trivial default constructor" requirement from all specializations. A specialization for floating-point 
+types was added with a trivial destructor [<a href="https://wg21.link/N4861#page=1548">N4861</a>: Section [atomics.types.float], 
+Paragraph 2)].
+</p>
+
+
+<p id="res-3949"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+<li><p>Modify 33.5.8.1 <a href="https://wg21.link/atomics.types.generic.general">[atomics.types.generic.general]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- [&hellip;]
+<p/>
+-2- The specialization <tt>atomic&lt;bool&gt;</tt> is a standard-layout struct. <ins>It has a trivial destructor.</ins>
+</p>
 </blockquote>
 </li>
 

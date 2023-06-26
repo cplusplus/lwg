@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-06-26 at 11:24:01 UTC</p>
+<p><p>Revised 2023-06-26 at 15:26:33 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -20490,7 +20490,7 @@ The type of <tt>*first</tt> shall satisfy the requirements of <tt>MoveConstructi
 <hr>
 <h3><a name="3044" href="#3044">3044</a><sup><a href="https://cplusplus.github.io/LWG/issue3044">(i)</a></sup>. Strange specification of <tt>max_size()</tt> for an allocator</h3>
 <p><b>Section:</b> 16.4.4.6 <a href="https://wg21.link/allocator.requirements">[allocator.requirements]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jon Cohen <b>Opened:</b> 2017-12-06 <b>Last modified:</b> 2022-04-25</p>
+ <b>Submitter:</b> Jon Cohen <b>Opened:</b> 2017-12-06 <b>Last modified:</b> 2023-06-26</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#allocator.requirements">active issues</a> in [allocator.requirements].</p>
@@ -20536,7 +20536,7 @@ exceptions has not been added. IMO this position should be reconsidered to follo
 <p>
 The phrase "the largest value that can meaningfully be passed to <tt>X::allocate()</tt>" is meaningless. Is it a 
 requirement on the caller, so that larger values must not be passed? Or a hint from the allocator implementor that larger 
-values will produce a <tt>bad_alloc exception</tt>? Can the return value change dynamically, based on the free memory 
+values will produce a <tt>bad_alloc</tt> exception? Can the return value change dynamically, based on the free memory
 available to the allocator?! &mdash; LWG <a href="lwg-closed.html#197">197</a> says it can't change.
 <p/>
 As noted in the LWG <a href="lwg-defects.html#2162">2162</a> comments, we don't currently guarantee it can be called on a <tt>const</tt> object 

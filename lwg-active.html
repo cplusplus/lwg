@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2023-06-25</td>
+  <td align="left">2023-06-26</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-06-25 at 11:52:58 UTC</p>
+<p><p>Revised 2023-06-26 at 11:24:01 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -182,13 +182,13 @@ ownership of it.
 <ul>
 <li>D125: 2023-06-09 Post-Varna<ul>
 <li><b>Summary:</b><ul>
-<li>417 open issues, down by 13.</li>
+<li>418 open issues, down by 12.</li>
 <li>3020 closed issues, up by 20.</li>
 <li>35 reassigned issues, down by 1.</li>
-<li>3472 issues total, up by 6.</li>
+<li>3473 issues total, up by 7.</li>
 </ul></li>
 <li><b>Details:</b><ul>
-<li>Added the following 6 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3946">3946</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>.</li>
+<li>Added the following 7 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3946">3946</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>, <a href="lwg-active.html#3951">3951</a>.</li>
 <li>Changed the following 5 issues to Ready (from New): <a href="lwg-active.html#3203">3203</a>, <a href="lwg-active.html#3431">3431</a>, <a href="lwg-active.html#3749">3749</a>, <a href="lwg-active.html#3892">3892</a>, <a href="lwg-active.html#3897">3897</a>.</li>
 <li>Changed the following issue to Ready (from Open): <a href="lwg-active.html#3305">3305</a>.</li>
 <li>Changed the following issue to Open (from New): <a href="lwg-active.html#3343">3343</a>.</li>
@@ -52314,6 +52314,80 @@ with an implicit conversion to <tt>basic_string_view&lt;charT, traits&gt;</tt>, 
 
 </li>
 
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3951" href="#3951">3951</a><sup><a href="https://cplusplus.github.io/LWG/issue3951">(i)</a></sup>. &sect;[expected.object.swap]: Using <tt>value()</tt> instead of <tt>has_value()</tt></h3>
+<p><b>Section:</b> 22.8.6.5 <a href="https://wg21.link/expected.object.swap">[expected.object.swap]</a>, 22.8.7.5 <a href="https://wg21.link/expected.void.swap">[expected.void.swap]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Ben Craig <b>Opened:</b> 2023-06-25 <b>Last modified:</b> 2023-06-26</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+22.8.6.5 <a href="https://wg21.link/expected.object.swap">[expected.object.swap]</a> p2 has the following text in it:
+</p>
+<blockquote><p>
+For the case where <tt>rhs.value()</tt> is <tt>false</tt> and <tt>this-&gt;has_value()</tt> is <tt>true</tt>, equivalent to: [&hellip;]
+</p></blockquote>
+<p>
+The table preceding that text is a table of <tt>this-&gt;has_value()</tt> vs. <tt>rhs.has_value()</tt>. The <tt>rhs.value()</tt> 
+in the text is almost certainly a typo, as a <tt>.value()</tt> call here doesn't make any sense, especially if this is an 
+<tt>expected&lt;<i>non-bool</i>, E&gt;</tt>.
+<p/>
+The same issue is there for 22.8.7.5 <a href="https://wg21.link/expected.void.swap">[expected.void.swap]</a> p2.
+</p>
+
+
+<p id="res-3951"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+<li><p>Modify 22.8.6.5 <a href="https://wg21.link/expected.object.swap">[expected.object.swap]</a> as indicated:</p>
+
+
+<blockquote>
+<pre>
+constexpr void swap(expected&amp; rhs) noexcept(<i>see below</i>);
+</pre>
+<blockquote>
+<p>
+-1- [&hellip;]
+<p/>
+-2- <i>Effects</i>: See Table 63 [tab:expected.object.swap].
+<p/>
+For the case where <tt>rhs.<ins>has_</ins>value()</tt> is <tt>false</tt> and <tt>this-&gt;has_value()</tt> is <tt>true</tt>, equivalent to: [&hellip;]
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+
+<li><p>Modify 22.8.7.5 <a href="https://wg21.link/expected.void.swap">[expected.void.swap]</a> as indicated:</p>
+
+
+<blockquote>
+<pre>
+constexpr void swap(expected&amp; rhs) noexcept(<i>see below</i>);
+</pre>
+<blockquote>
+<p>
+-1- [&hellip;]
+<p/>
+-2- <i>Effects</i>: See Table 64 [tab:expected.void.swap].
+<p/>
+For the case where <tt>rhs.<ins>has_</ins>value()</tt> is <tt>false</tt> and <tt>this-&gt;has_value()</tt> is <tt>true</tt>, equivalent to: [&hellip;]
+</p>
+</blockquote>
+</blockquote>
+
+</li>
 </ol>
 
 

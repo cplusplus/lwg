@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-07-02 at 09:56:39 UTC</p>
+<p><p>Revised 2023-07-02 at 10:04:44 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -48983,6 +48983,121 @@ namespace std {
 </blockquote>
 
 </li>
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3953" href="#3953">3953</a><sup><a href="https://cplusplus.github.io/LWG/issue3953">(i)</a></sup>. <tt>iter_move</tt> for <tt>common_iterator</tt> and <tt>counted_iterator</tt> should return <tt>decltype(auto)</tt></h3>
+<p><b>Section:</b> 25.5.5.7 <a href="https://wg21.link/common.iter.cust">[common.iter.cust]</a>, 25.5.7.7 <a href="https://wg21.link/counted.iter.cust">[counted.iter.cust]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-06-30 <b>Last modified:</b> 2023-07-02</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Although the customized <tt>iter_move</tt> of both requires the underlying iterator <tt>I</tt> to be <tt>input_iterator</tt>, 
+they still explicitly specify the return type as <tt>iter_rvalue_reference_t&lt;I&gt;</tt>,
+which makes it always instantiated.
+</p>
+<p>
+From the point of view that its validity is only specified in the <tt>input_iterator</tt> concept, it would be better to remove such 
+unnecessary type instantiation, which does not make much sense for an <tt>output_iterator</tt> even if it is still valid.
+</p>
+
+
+<p id="res-3953"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+<li><p>Modify 25.5.5.1 <a href="https://wg21.link/common.iterator">[common.iterator]</a>, class template <tt>common_iterator</tt> synopsis, as indicated:</p>
+
+
+<blockquote>
+<pre>
+namespace std {
+  template&lt;input_or_output_iterator I, sentinel_for&lt;I&gt; S&gt;
+    requires (!same_as&lt;I, S&gt; &amp;&amp; copyable&lt;I&gt;)
+  class common_iterator {
+  public:
+    [&hellip;]
+    friend constexpr <del>iter_rvalue_reference_t&lt;I&gt;</del><ins>decltype(auto)</ins> iter_move(const common_iterator&amp; i)
+      noexcept(noexcept(ranges::iter_move(declval&lt;const I&amp;&gt;())))
+        requires input_iterator&lt;I&gt;;
+    [&hellip;]
+  };
+  [&hellip;]
+}
+</pre>
+</blockquote>
+
+</li>
+
+<li><p>Modify 25.5.5.7 <a href="https://wg21.link/common.iter.cust">[common.iter.cust]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+friend constexpr <del>iter_rvalue_reference_t&lt;I&gt;</del><ins>decltype(auto)</ins> iter_move(const common_iterator&amp; i)
+  noexcept(noexcept(ranges::iter_move(declval&lt;const I&amp;&gt;())))
+    requires input_iterator&lt;I&gt;;
+</pre>
+<blockquote>
+<p>
+-1- <i>Preconditions</i>: [&hellip;]
+<p/>
+-2- <i>Effects</i>: Equivalent to: <tt>return ranges::iter_move(get&lt;I&gt;(i.v_));</tt>
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+
+<li><p>Modify 25.5.7.1 <a href="https://wg21.link/counted.iterator">[counted.iterator]</a>, class template <tt>counted_iterator</tt> synopsis, as indicated:</p>
+
+
+<blockquote>
+<pre>
+namespace std {
+  template&lt;input_or_output_iterator I&gt;
+  class counted_iterator {
+  public:
+    [&hellip;]
+    friend constexpr <del>iter_rvalue_reference_t&lt;I&gt;</del><ins>decltype(auto)</ins> iter_move(const counted_iterator&amp; i)
+      noexcept(noexcept(ranges::iter_move(i.current)))
+        requires input_iterator&lt;I&gt;;
+    [&hellip;]
+  };
+  [&hellip;]
+}
+</pre>
+</blockquote>
+
+</li>
+
+<li><p>Modify 25.5.7.7 <a href="https://wg21.link/counted.iter.cust">[counted.iter.cust]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+friend constexpr <del>iter_rvalue_reference_t&lt;I&gt;</del><ins>decltype(auto)</ins> 
+  iter_move(const counted_iterator&amp; i)
+    noexcept(noexcept(ranges::iter_move(i.current)))
+    requires input_iterator&lt;I&gt;;
+</pre>
+<blockquote>
+<p>
+-1- <i>Preconditions</i>: [&hellip;]
+<p/>
+-2- <i>Effects</i>: Equivalent to: <tt>return ranges::iter_move(i.current);</tt>
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+
 </ol>
 
 

@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-07-17 at 15:23:06 UTC</p>
+<p><p>Revised 2023-07-17 at 15:54:07 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -182,14 +182,14 @@ ownership of it.
 <ul>
 <li>D125: 2023-06-09 Post-Varna<ul>
 <li><b>Summary:</b><ul>
-<li>424 open issues, down by 6.</li>
+<li>425 open issues, down by 5.</li>
 <li>3020 closed issues, up by 20.</li>
 <li>35 reassigned issues, down by 1.</li>
-<li>3479 issues total, up by 13.</li>
+<li>3480 issues total, up by 14.</li>
 </ul></li>
 <li><b>Details:</b><ul>
 <li>Added the following Ready issue: <a href="lwg-active.html#3946">3946</a>.</li>
-<li>Added the following 12 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>, <a href="lwg-active.html#3951">3951</a>, <a href="lwg-active.html#3952">3952</a>, <a href="lwg-active.html#3953">3953</a>, <a href="lwg-active.html#3954">3954</a>, <a href="lwg-active.html#3955">3955</a>, <a href="lwg-active.html#3956">3956</a>, <a href="lwg-active.html#3957">3957</a>.</li>
+<li>Added the following 13 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>, <a href="lwg-active.html#3951">3951</a>, <a href="lwg-active.html#3952">3952</a>, <a href="lwg-active.html#3953">3953</a>, <a href="lwg-active.html#3954">3954</a>, <a href="lwg-active.html#3955">3955</a>, <a href="lwg-active.html#3956">3956</a>, <a href="lwg-active.html#3957">3957</a>, <a href="lwg-active.html#3958">3958</a>.</li>
 <li>Changed the following 6 issues to Ready (from New): <a href="lwg-active.html#2392">2392</a>, <a href="lwg-active.html#3203">3203</a>, <a href="lwg-active.html#3431">3431</a>, <a href="lwg-active.html#3749">3749</a>, <a href="lwg-active.html#3892">3892</a>, <a href="lwg-active.html#3897">3897</a>.</li>
 <li>Changed the following issue to Ready (from Open): <a href="lwg-active.html#3305">3305</a>.</li>
 <li>Changed the following issue to Open (from New): <a href="lwg-active.html#3343">3343</a>.</li>
@@ -52935,6 +52935,124 @@ equivalent to <tt>*p</tt>.</p>
 </ol>
 </blockquote>
 
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3958" href="#3958">3958</a><sup><a href="https://cplusplus.github.io/LWG/issue3958">(i)</a></sup>. <tt>ranges::to</tt> should prioritize the "<tt>reserve</tt>" branch</h3>
+<p><b>Section:</b> 26.5.7.2 <a href="https://wg21.link/range.utility.conv.to">[range.utility.conv.to]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-07-17 <b>Last modified:</b> 2023-07-17</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.utility.conv.to">active issues</a> in [range.utility.conv.to].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.utility.conv.to">issues</a> in [range.utility.conv.to].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+When the constructed range object has no range version constructor, <tt>ranges::to</tt> falls into a 
+branch designed specifically for C++17-compliant containers, which calls the legacy constructor that 
+accepts an iterator pair with <tt>C(ranges::begin(r), ranges::end(r), std::forward&lt;Args&gt;(args)...)</tt>.    
+<p/>
+However, this kind of initialization may bring some performance issues, because we split the original 
+range into pairs of iterators, which may lose information contained in the original range, for example:
+</p>
+<blockquote><pre>
+#include &lt;boost/container/vector.hpp&gt;
+#include &lt;sstream&gt;
+#include &lt;ranges&gt;
+
+int main() {
+  std::istringstream ints("1 2 3 4 5");
+  std::ranges::subrange s(std::istream_iterator&lt;int&gt;(ints),
+                          std::istream_iterator&lt;int&gt;(),
+                          5);
+  auto r = std::ranges::to&lt;boost::container::vector&gt;(s); // <span style="color:red;font-weight:bolder">discard size info</span>
+}
+</pre></blockquote>
+<p>
+Above, <tt>subrange</tt> saves the size information of the stream, but <tt>ranges::to</tt> only extracts 
+its iterator pair to create the object, so that the original size information is discarded, resulting in 
+unnecessary allocations.
+<p/>
+I believe we should prefer to use the "<tt>reserve</tt>" branch here because it is really designed for this situation.
+</p>
+
+
+<p id="res-3958"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 26.5.7.2 <a href="https://wg21.link/range.utility.conv.to">[range.utility.conv.to]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class C, input_range R, class... Args&gt; requires (!view&lt;C&gt;)
+  constexpr C to(R&amp;&amp; r, Args&amp;&amp;... args);
+</pre>
+<blockquote>
+<p>
+-1- <i>Mandates</i>: <tt>C</tt> is a cv-unqualified class type.
+</p>
+<p>
+-2- <i>Returns</i>: An object of type <tt>C</tt> constructed from the elements of <tt>r</tt> in the following manner:
+</p>
+<ol style="list-style-type: none">
+<li><p>(2.1) &mdash; If <tt>C</tt> does not satisfy <tt>input_range</tt> or <tt>convertible_to&lt;range_reference_t&lt;R&gt;, 
+range_value_t&lt;C&gt;&gt;</tt> is <tt>true</tt>:</p></li>
+<ol style="list-style-type: none">
+<li><p>(2.1.1) &mdash; If <tt>constructible_from&lt;C, R, Args...&gt;</tt> is <tt>true</tt>:</p>
+<blockquote><tt>C(std::forward&lt;R&gt;(r), std::forward&lt;Args&gt;(args)...)</tt></blockquote></li>
+<li><p>(2.1.2) &mdash; Otherwise, if <tt>constructible_from&lt;C, from_range_t, R, Args...&gt;</tt> is <tt>true</tt>:</p>
+<blockquote><tt>C(from_range, std::forward&lt;R&gt;(r), std::forward&lt;Args&gt;(args)...)</tt></blockquote></li>
+<li><p><del>(2.1.3) &mdash; Otherwise, if</del></p></li>
+<ol style="list-style-type: none">
+<li><p><del>(2.1.3.1) &mdash; <tt>common_range&lt;R&gt;</tt> is <tt>true</tt>,</del></p></li>
+<li><p><del>(2.1.3.2) &mdash; the <i>qualified-id</i>  
+<tt>iterator_traits&lt;iterator_t&lt;R&gt;&gt;::iterator_category</tt> is valid and denotes a type that models 
+<tt>derived_from&lt;input_iterator_tag&gt;</tt>, and</del></p></li>
+<li><p><del>(2.1.3.3) &mdash; <tt>constructible_from&lt;C, iterator_t&lt;R&gt;, sentinel_t&lt;R&gt;, Args...&gt;</tt> 
+is <tt>true</tt>:</del></p>
+<blockquote><pre><del>C(ranges::begin(r), ranges::end(r), std::forward&lt;Args&gt;(args)...)</del></pre></blockquote></li>
+</ol>
+<li><p>(2.1.4) &mdash; Otherwise, if</p></li>
+<ol style="list-style-type: none">
+<li><p>(2.1.4.1) &mdash; <tt>constructible_from&lt;C, Args...&gt;</tt> is <tt>true</tt>, and</p></li>
+<li><p>(2.1.4.2) &mdash; <tt><i>container-insertable</i>&lt;C, range_reference_t&lt;R&gt;&gt;</tt> is <tt>true</tt>:</p>
+<blockquote><pre>
+C c(std::forward&lt;Args&gt;(args)...);
+if constexpr (sized_range&lt;R&gt; &amp;&amp; <i>reservable-container</i>&lt;C&gt;)
+  c.reserve(static_cast&lt;range_size_t&lt;C&gt;&gt;(ranges::size(r)));
+ranges::copy(r, <i>container-inserter</i>&lt;range_reference_t&lt;R&gt;&gt;(c));
+</pre></blockquote></li>
+</ol>
+<li><p><ins>(?.?.?) &mdash; Otherwise, if</ins></p></li>
+<ol style="list-style-type: none">
+<li><p><ins>(?.?.?.?) &mdash; <tt>common_range&lt;R&gt;</tt> is <tt>true</tt>,</ins></p></li>
+<li><p><ins>(?.?.?.?) &mdash; the <i>qualified-id</i> <tt>iterator_traits&lt;iterator_t&lt;R&gt;&gt;::iterator_category</tt> 
+is valid and denotes a type that models <tt>derived_from&lt;input_iterator_tag&gt;</tt>, and</ins></p></li>
+<li><p><ins>(?.?.?.?) &mdash; <tt>constructible_from&lt;C, iterator_t&lt;R&gt;, sentinel_t&lt;R&gt;, Args...&gt;</tt> 
+is <tt>true</tt>:</ins></p>
+<blockquote><pre><ins>C(ranges::begin(r), ranges::end(r), std::forward&lt;Args&gt;(args)...)</ins></pre></blockquote></li>
+</ol>
+</ol>
+<li><p>(2.2) &mdash; Otherwise, if <tt>input_range&lt;range_reference_t&lt;R&gt;&gt;</tt> is <tt>true</tt>:</p>
+<blockquote><pre>
+to&lt;C&gt;(r | views::transform([](auto&amp;&amp; elem) {
+  return to&lt;range_value_t&lt;C&gt;&gt;(std::forward&lt;decltype(elem)&gt;(elem));
+}), std::forward&lt;Args&gt;(args)...);
+</pre></blockquote></li>
+<li><p>(2.3) &mdash; Otherwise, the program is ill-formed.</p></li>
+</ol>
+</blockquote>
+</blockquote>
 </li>
 
 </ol>

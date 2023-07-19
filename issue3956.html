@@ -47,7 +47,7 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3><a name="3956" href="lwg-active.html#3956">3956</a>. <code>chrono::parse</code> uses <code>from_stream</code> as a customization point</h3>
 <p><b>Section:</b> 29.13 <a href="https://wg21.link/time.parse">[time.parse]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-07-15 <b>Last modified:</b> 2023-07-15</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-07-15 <b>Last modified:</b> 2023-07-19</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#time.parse">issues</a> in [time.parse].</p>
@@ -57,7 +57,7 @@
 29.13 <a href="https://wg21.link/time.parse">[time.parse]</a> says: "Each <code>parse</code> overload specified
 in this subclause calls <code>from_stream</code> unqualified,
 so as to enable argument dependent lookup (6.5.4 <a href="https://wg21.link/basic.lookup.argdep">[basic.lookup.argdep]</a>)."
-That name should be added to  [content] along with
+That name should be added to 16.4.2.2 <a href="https://wg21.link/contents">[contents]</a> along with
 <code>swap</code>,
 <code>make_error_code</code>, and
 <code>make_error_condition</code>.

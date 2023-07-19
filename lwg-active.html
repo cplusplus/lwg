@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2023-07-17</td>
+  <td align="left">2023-07-19</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-07-17 at 15:54:07 UTC</p>
+<p><p>Revised 2023-07-19 at 20:51:21 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -52819,7 +52819,7 @@ return static_cast&lt;difference_type&gt;(x.<i>current_</i>) - static_cast&lt;di
 <hr>
 <h3><a name="3956" href="#3956">3956</a><sup><a href="https://cplusplus.github.io/LWG/issue3956">(i)</a></sup>. <code>chrono::parse</code> uses <code>from_stream</code> as a customization point</h3>
 <p><b>Section:</b> 29.13 <a href="https://wg21.link/time.parse">[time.parse]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-07-15 <b>Last modified:</b> 2023-07-15</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-07-15 <b>Last modified:</b> 2023-07-19</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#time.parse">issues</a> in [time.parse].</p>
@@ -52829,7 +52829,7 @@ return static_cast&lt;difference_type&gt;(x.<i>current_</i>) - static_cast&lt;di
 29.13 <a href="https://wg21.link/time.parse">[time.parse]</a> says: "Each <code>parse</code> overload specified
 in this subclause calls <code>from_stream</code> unqualified,
 so as to enable argument dependent lookup (6.5.4 <a href="https://wg21.link/basic.lookup.argdep">[basic.lookup.argdep]</a>)."
-That name should be added to  [content] along with
+That name should be added to 16.4.2.2 <a href="https://wg21.link/contents">[contents]</a> along with
 <code>swap</code>,
 <code>make_error_code</code>, and
 <code>make_error_condition</code>.

@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-07-23 at 15:52:22 UTC</p>
+<p><p>Revised 2023-07-28 at 11:51:40 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -49294,6 +49294,7 @@ return static_cast&lt;difference_type&gt;(x.<i>current_</i>) - static_cast&lt;di
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-07-15 <b>Last modified:</b> 2023-07-19</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#time.parse">active issues</a> in [time.parse].</p>
 <p><b>View all other</b> <a href="lwg-index.html#time.parse">issues</a> in [time.parse].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -49562,6 +49563,75 @@ Should we make the constructor take a <tt>const</tt> reference?
 
 
 <p id="res-3959"><b>Proposed resolution:</b></p>
+
+
+
+
+
+<hr>
+<h3><a name="3960" href="#3960">3960</a><sup><a href="https://cplusplus.github.io/LWG/issue3960">(i)</a></sup>. How does <tt>chrono::parse</tt> handle duplicated data?</h3>
+<p><b>Section:</b> 29.13 <a href="https://wg21.link/time.parse">[time.parse]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-07-28 <b>Last modified:</b> 2023-07-28</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#time.parse">active issues</a> in [time.parse].</p>
+<p><b>View all other</b> <a href="lwg-index.html#time.parse">issues</a> in [time.parse].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+A call to <tt>chrono::parse</tt> can encounter redundant or contradictory
+data, e.g.
+<pre><blockquote>stringstream("2023 2022") >> chrono::parse("%Y %C%y", yr);
+</blockquote></pre>
+or even simpler:
+<pre><blockquote>stringstream("2023 2022") >> chrono::parse("%Y %Y", yr);
+</blockquote></pre>
+These cases can both be successfully parsed, as the input stream contains the
+expected values in the expected format. But what value will <tt>yr</tt> have
+after it returns?
+</p>
+
+
+<p id="res-3960"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 29.13 <a href="https://wg21.link/time.parse">[time.parse]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-17-
+If the <tt>from_stream</tt> overload fails to parse everything specified by
+the format string, or if insufficient information is parsed to specify
+a complete duration, time point, or calendrical data structure,
+<tt>setstate(ios_base::failbit)</tt> is called on the <tt>basic_istream</tt>.
+</p>
+<p><ins>
+-?-
+A format string can contain multiple flags that correspond to the same
+information, (e.g., <tt>"%Y %C%y"</tt> or <tt>"%R %H:%M"</tt>). If such a
+format string is successfully parsed but the extracted dates or times are
+not consistent, the value assigned to the <tt>tp</tt> argument is unspecified.
+</ins>
+</p>
+<p><ins>
+[<i>Example</i>:
+</ins>
+<pre><blockquote><ins>chrono::year y;
+stringstream("1905 1915") >> parse("%Y %C%y", y);
+</ins></blockquote></pre>
+<ins>
+The value of <tt>y</tt> is unspecified; <tt>y.ok()</tt> can be <tt>false</tt>.
+&mdash; <i>end example</i>]
+</ins>
+</p>
+
+</blockquote>
+</li>
+</ol>
 
 
 

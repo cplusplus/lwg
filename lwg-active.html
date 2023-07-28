@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-07-28 at 16:35:02 UTC</p>
+<p><p>Revised 2023-07-28 at 17:03:29 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -182,14 +182,14 @@ ownership of it.
 <ul>
 <li>D125: 2023-06-09 Post-Varna<ul>
 <li><b>Summary:</b><ul>
-<li>428 open issues, down by 2.</li>
+<li>429 open issues, down by 1.</li>
 <li>3020 closed issues, up by 20.</li>
 <li>35 reassigned issues, down by 1.</li>
-<li>3483 issues total, up by 17.</li>
+<li>3484 issues total, up by 18.</li>
 </ul></li>
 <li><b>Details:</b><ul>
 <li>Added the following Ready issue: <a href="lwg-active.html#3946">3946</a>.</li>
-<li>Added the following 16 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>, <a href="lwg-active.html#3951">3951</a>, <a href="lwg-active.html#3952">3952</a>, <a href="lwg-active.html#3953">3953</a>, <a href="lwg-active.html#3954">3954</a>, <a href="lwg-active.html#3955">3955</a>, <a href="lwg-active.html#3956">3956</a>, <a href="lwg-active.html#3957">3957</a>, <a href="lwg-active.html#3958">3958</a>, <a href="lwg-active.html#3959">3959</a>, <a href="lwg-active.html#3960">3960</a>, <a href="lwg-active.html#3961">3961</a>.</li>
+<li>Added the following 17 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>, <a href="lwg-active.html#3951">3951</a>, <a href="lwg-active.html#3952">3952</a>, <a href="lwg-active.html#3953">3953</a>, <a href="lwg-active.html#3954">3954</a>, <a href="lwg-active.html#3955">3955</a>, <a href="lwg-active.html#3956">3956</a>, <a href="lwg-active.html#3957">3957</a>, <a href="lwg-active.html#3958">3958</a>, <a href="lwg-active.html#3959">3959</a>, <a href="lwg-active.html#3960">3960</a>, <a href="lwg-active.html#3961">3961</a>, <a href="lwg-active.html#3962">3962</a>.</li>
 <li>Changed the following 6 issues to Ready (from New): <a href="lwg-active.html#2392">2392</a>, <a href="lwg-active.html#3203">3203</a>, <a href="lwg-active.html#3431">3431</a>, <a href="lwg-active.html#3749">3749</a>, <a href="lwg-active.html#3892">3892</a>, <a href="lwg-active.html#3897">3897</a>.</li>
 <li>Changed the following issue to Ready (from Open): <a href="lwg-active.html#3305">3305</a>.</li>
 <li>Changed the following issue to Open (from New): <a href="lwg-active.html#3343">3343</a>.</li>
@@ -53280,6 +53280,84 @@ before extracting any characters.
 </ins>
 &mdash; <i>end example</i>]
 </p>
+
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3962" href="#3962">3962</a><sup><a href="https://cplusplus.github.io/LWG/issue3962">(i)</a></sup>. What is the "decimal precision of the input"?</h3>
+<p><b>Section:</b> 29.13 <a href="https://wg21.link/time.parse">[time.parse]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-07-28 <b>Last modified:</b> 2023-07-28</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#time.parse">active issues</a> in [time.parse].</p>
+<p><b>View all other</b> <a href="lwg-index.html#time.parse">issues</a> in [time.parse].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+</p>
+
+<p>
+The %j flag talks about "the type being parsed" and %S talks about
+"the input time" and "the input", but doesn't really define which types
+those are.
+</p>
+
+
+
+<p id="res-3962"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 29.13 <a href="https://wg21.link/time.parse">[time.parse]</a> as indicated:</p>
+
+<blockquote>
+<p>
+<ins>
+-?-
+In Table 102 the type <tt>Parsable</tt> denotes the type of the second
+argument to <tt>from_stream</tt>.
+</ins>
+</p>
+
+<table>
+<tr><td><tt style="padding:3em; text-align: center">%j</tt></td>
+<td>
+If <del>the type being parsed</del> <ins>Parsable</ins>
+is a specialization of <tt>duration</tt>, a decimal number of days.
+</td></tr>
+<tr><td>&nbsp;</td><td></td></tr>
+<tr><td><tt style="padding:3em; text-align: center">%S</tt></td>
+<td>
+The seconds as a decimal number.
+The modified command <tt>%<i>N</i>S</tt> specifies the maximum number of
+characters to read.
+If <i>N</i> is not specified, the default is 2
+<ins>if <tt>Parsable</tt> is a calendrical type (29.8 <a href="https://wg21.link/time.cal">[time.cal]</a>)</ins>
+<del>if the input time has a precision convertible to seconds</del>.
+Otherwise the default width is determined by the decimal precision of
+<del>the input</del> <ins><tt>Parsable</tt>,
+determined in the same manner as <tt>hh_mm_ss::fractional_width</tt>
+(29.9 <a href="https://wg21.link/time.hms">[time.hms]</a>). If the number of fractional decimal digits for
+the type is zero, then the default for <i>N</i> is 2. Otherwise, it is
+3 + W, where W is the number of fractional decimal digits.
+If N is less than 3, the field is interpreted as a decimal integer, otherwise
+</ins><del>and</del>
+the field is interpreted as a <tt>long double</tt> in a fixed format.
+If encountered, the locale determines the decimal point character.
+Leading zeroes are permitted but not required.
+The modified command <tt>%OS</tt> interprets the locale's alternative
+representation.
+</td></tr>
+</table>
 
 </blockquote>
 </li>

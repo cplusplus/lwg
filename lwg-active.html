@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2023-07-28</td>
+  <td align="left">2023-07-29</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-07-28 at 17:03:29 UTC</p>
+<p><p>Revised 2023-07-29 at 14:51:04 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -182,14 +182,14 @@ ownership of it.
 <ul>
 <li>D125: 2023-06-09 Post-Varna<ul>
 <li><b>Summary:</b><ul>
-<li>429 open issues, down by 1.</li>
+<li>430 open issues, up by 0.</li>
 <li>3020 closed issues, up by 20.</li>
 <li>35 reassigned issues, down by 1.</li>
-<li>3484 issues total, up by 18.</li>
+<li>3485 issues total, up by 19.</li>
 </ul></li>
 <li><b>Details:</b><ul>
 <li>Added the following Ready issue: <a href="lwg-active.html#3946">3946</a>.</li>
-<li>Added the following 17 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>, <a href="lwg-active.html#3951">3951</a>, <a href="lwg-active.html#3952">3952</a>, <a href="lwg-active.html#3953">3953</a>, <a href="lwg-active.html#3954">3954</a>, <a href="lwg-active.html#3955">3955</a>, <a href="lwg-active.html#3956">3956</a>, <a href="lwg-active.html#3957">3957</a>, <a href="lwg-active.html#3958">3958</a>, <a href="lwg-active.html#3959">3959</a>, <a href="lwg-active.html#3960">3960</a>, <a href="lwg-active.html#3961">3961</a>, <a href="lwg-active.html#3962">3962</a>.</li>
+<li>Added the following 18 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>, <a href="lwg-active.html#3951">3951</a>, <a href="lwg-active.html#3952">3952</a>, <a href="lwg-active.html#3953">3953</a>, <a href="lwg-active.html#3954">3954</a>, <a href="lwg-active.html#3955">3955</a>, <a href="lwg-active.html#3956">3956</a>, <a href="lwg-active.html#3957">3957</a>, <a href="lwg-active.html#3958">3958</a>, <a href="lwg-active.html#3959">3959</a>, <a href="lwg-active.html#3960">3960</a>, <a href="lwg-active.html#3961">3961</a>, <a href="lwg-active.html#3962">3962</a>, <a href="lwg-active.html#3963">3963</a>.</li>
 <li>Changed the following 6 issues to Ready (from New): <a href="lwg-active.html#2392">2392</a>, <a href="lwg-active.html#3203">3203</a>, <a href="lwg-active.html#3431">3431</a>, <a href="lwg-active.html#3749">3749</a>, <a href="lwg-active.html#3892">3892</a>, <a href="lwg-active.html#3897">3897</a>.</li>
 <li>Changed the following issue to Ready (from Open): <a href="lwg-active.html#3305">3305</a>.</li>
 <li>Changed the following issue to Open (from New): <a href="lwg-active.html#3343">3343</a>.</li>
@@ -53358,6 +53358,60 @@ The modified command <tt>%OS</tt> interprets the locale's alternative
 representation.
 </td></tr>
 </table>
+
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3963" href="#3963">3963</a><sup><a href="https://cplusplus.github.io/LWG/issue3963">(i)</a></sup>. Different <tt>std::flat_map</tt>/<tt>std::flat_multimap</tt> specializations should be able to share same nested classes</h3>
+<p><b>Section:</b> 24.6.9.2 <a href="https://wg21.link/flat.map.defn">[flat.map.defn]</a>, 24.6.10.2 <a href="https://wg21.link/flat.multimap.defn">[flat.multimap.defn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-07-24 <b>Last modified:</b> 2023-07-29</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#flat.map.defn">issues</a> in [flat.map.defn].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Per current wording, <tt>std::flat_map&lt;K, V, C1, KCont, VCont&gt;::containers</tt> and 
+<tt>std::flat_multimap&lt;K, V, C2, KCont, VCont&gt;::containers</tt> need to be different types 
+since they are specified as nested classes. Likewise, 
+<tt>std::flat_map&lt;K, V, C, KCont1, VCont1&gt;::value_compare</tt> and 
+<tt>std::flat_multimap&lt;K, V, C, KCont2, VCont2&gt;::value_compare</tt> also need to be different types.
+<p/>
+It may be better to allow implementations to make different <tt>std::flat_map</tt>/<tt>std::flat_multimap</tt> 
+specializations share same nested classes.
+</p>
+
+
+<p id="res-3963"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+
+<li><p>Add the new paragraph after 24.6.9.2 <a href="https://wg21.link/flat.map.defn">[flat.map.defn]</a> p1 and 24.6.10.2 <a href="https://wg21.link/flat.multimap.defn">[flat.multimap.defn]</a> p1 (twice):</p>
+
+<blockquote class="note">
+<p>
+[<i>Drafting note</i>: The intent is to keep the property that key/mapped types, key/mapped containers, 
+and the comparator type are not the associated types of these nested classes during ADL. ]
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+<ins>
+-?- Implementations may define member types <tt>containers</tt> and <tt>value_compare</tt> as nested 
+classes of another templated class and introduce them as <i>typedef-name</i>s. Implementations shall ensure that 
+these nested classes are not themselves class templates and have the specified names.
+</ins>
+</p>
 
 </blockquote>
 </li>

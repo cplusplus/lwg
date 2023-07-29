@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-07-28 at 17:03:29 UTC</p>
+<p><p>Revised 2023-07-29 at 14:51:04 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -49830,6 +49830,60 @@ The modified command <tt>%OS</tt> interprets the locale's alternative
 representation.
 </td></tr>
 </table>
+
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3963" href="#3963">3963</a><sup><a href="https://cplusplus.github.io/LWG/issue3963">(i)</a></sup>. Different <tt>std::flat_map</tt>/<tt>std::flat_multimap</tt> specializations should be able to share same nested classes</h3>
+<p><b>Section:</b> 24.6.9.2 <a href="https://wg21.link/flat.map.defn">[flat.map.defn]</a>, 24.6.10.2 <a href="https://wg21.link/flat.multimap.defn">[flat.multimap.defn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-07-24 <b>Last modified:</b> 2023-07-29</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#flat.map.defn">issues</a> in [flat.map.defn].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Per current wording, <tt>std::flat_map&lt;K, V, C1, KCont, VCont&gt;::containers</tt> and 
+<tt>std::flat_multimap&lt;K, V, C2, KCont, VCont&gt;::containers</tt> need to be different types 
+since they are specified as nested classes. Likewise, 
+<tt>std::flat_map&lt;K, V, C, KCont1, VCont1&gt;::value_compare</tt> and 
+<tt>std::flat_multimap&lt;K, V, C, KCont2, VCont2&gt;::value_compare</tt> also need to be different types.
+<p/>
+It may be better to allow implementations to make different <tt>std::flat_map</tt>/<tt>std::flat_multimap</tt> 
+specializations share same nested classes.
+</p>
+
+
+<p id="res-3963"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+
+<li><p>Add the new paragraph after 24.6.9.2 <a href="https://wg21.link/flat.map.defn">[flat.map.defn]</a> p1 and 24.6.10.2 <a href="https://wg21.link/flat.multimap.defn">[flat.multimap.defn]</a> p1 (twice):</p>
+
+<blockquote class="note">
+<p>
+[<i>Drafting note</i>: The intent is to keep the property that key/mapped types, key/mapped containers, 
+and the comparator type are not the associated types of these nested classes during ADL. ]
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+<ins>
+-?- Implementations may define member types <tt>containers</tt> and <tt>value_compare</tt> as nested 
+classes of another templated class and introduce them as <i>typedef-name</i>s. Implementations shall ensure that 
+these nested classes are not themselves class templates and have the specified names.
+</ins>
+</p>
 
 </blockquote>
 </li>

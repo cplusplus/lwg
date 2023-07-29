@@ -47,7 +47,7 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3><a name="3960" href="lwg-active.html#3960">3960</a>. How does <tt>chrono::parse</tt> handle duplicated data?</h3>
 <p><b>Section:</b> 29.13 <a href="https://wg21.link/time.parse">[time.parse]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-07-28 <b>Last modified:</b> 2023-07-28</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-07-28 <b>Last modified:</b> 2023-07-29</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#time.parse">active issues</a> in [time.parse].</p>
@@ -57,10 +57,10 @@
 <p>
 A call to <tt>chrono::parse</tt> can encounter redundant or contradictory
 data, e.g.
-<pre><blockquote>stringstream("2023 2022") >> chrono::parse("%Y %C%y", yr);
+<pre><blockquote>stringstream("2023 2022") &gt;&gt; chrono::parse("%Y %C%y", yr);
 </blockquote></pre>
 or even simpler:
-<pre><blockquote>stringstream("2023 2022") >> chrono::parse("%Y %Y", yr);
+<pre><blockquote>stringstream("2023 2022") &gt;&gt; chrono::parse("%Y %Y", yr);
 </blockquote></pre>
 These cases can both be successfully parsed, as the input stream contains the
 expected values in the expected format. But what value will <tt>yr</tt> have
@@ -97,7 +97,7 @@ not consistent, the value assigned to the <tt>tp</tt> argument is unspecified.
 [<i>Example</i>:
 </ins>
 <pre><blockquote><ins>chrono::year y;
-stringstream("1905 1915") >> parse("%Y %C%y", y);
+stringstream("1905 1915") &gt;&gt; parse("%Y %C%y", y);
 </ins></blockquote></pre>
 <ins>
 The value of <tt>y</tt> is unspecified; <tt>y.ok()</tt> can be <tt>false</tt>.

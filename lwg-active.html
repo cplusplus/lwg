@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-07-29 at 15:40:52 UTC</p>
+<p><p>Revised 2023-07-29 at 16:08:47 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -182,14 +182,14 @@ ownership of it.
 <ul>
 <li>D125: 2023-06-09 Post-Varna<ul>
 <li><b>Summary:</b><ul>
-<li>430 open issues, up by 0.</li>
+<li>431 open issues, up by 1.</li>
 <li>3020 closed issues, up by 20.</li>
 <li>35 reassigned issues, down by 1.</li>
-<li>3485 issues total, up by 19.</li>
+<li>3486 issues total, up by 20.</li>
 </ul></li>
 <li><b>Details:</b><ul>
 <li>Added the following Ready issue: <a href="lwg-active.html#3946">3946</a>.</li>
-<li>Added the following 18 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>, <a href="lwg-active.html#3951">3951</a>, <a href="lwg-active.html#3952">3952</a>, <a href="lwg-active.html#3953">3953</a>, <a href="lwg-active.html#3954">3954</a>, <a href="lwg-active.html#3955">3955</a>, <a href="lwg-active.html#3956">3956</a>, <a href="lwg-active.html#3957">3957</a>, <a href="lwg-active.html#3958">3958</a>, <a href="lwg-active.html#3959">3959</a>, <a href="lwg-active.html#3960">3960</a>, <a href="lwg-active.html#3961">3961</a>, <a href="lwg-active.html#3962">3962</a>, <a href="lwg-active.html#3963">3963</a>.</li>
+<li>Added the following 19 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>, <a href="lwg-active.html#3951">3951</a>, <a href="lwg-active.html#3952">3952</a>, <a href="lwg-active.html#3953">3953</a>, <a href="lwg-active.html#3954">3954</a>, <a href="lwg-active.html#3955">3955</a>, <a href="lwg-active.html#3956">3956</a>, <a href="lwg-active.html#3957">3957</a>, <a href="lwg-active.html#3958">3958</a>, <a href="lwg-active.html#3959">3959</a>, <a href="lwg-active.html#3960">3960</a>, <a href="lwg-active.html#3961">3961</a>, <a href="lwg-active.html#3962">3962</a>, <a href="lwg-active.html#3963">3963</a>, <a href="lwg-active.html#3964">3964</a>.</li>
 <li>Changed the following 6 issues to Ready (from New): <a href="lwg-active.html#2392">2392</a>, <a href="lwg-active.html#3203">3203</a>, <a href="lwg-active.html#3431">3431</a>, <a href="lwg-active.html#3749">3749</a>, <a href="lwg-active.html#3892">3892</a>, <a href="lwg-active.html#3897">3897</a>.</li>
 <li>Changed the following issue to Ready (from Open): <a href="lwg-active.html#3305">3305</a>.</li>
 <li>Changed the following issue to Open (from New): <a href="lwg-active.html#3343">3343</a>.</li>
@@ -53470,6 +53470,71 @@ these nested classes are not themselves class templates and have the specified n
 </ins>
 </p>
 
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3964" href="#3964">3964</a><sup><a href="https://cplusplus.github.io/LWG/issue3964">(i)</a></sup>. <tt>std::atan2</tt> and <tt>std::pow</tt> overloads that take two <tt>std::valarray</tt> parameters 
+should require the arguments to have the same length</h3>
+<p><b>Section:</b> 28.6.3.3 <a href="https://wg21.link/valarray.transcend">[valarray.transcend]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-07-28 <b>Last modified:</b> 2023-07-29</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+All binary operation between <tt>std::valarray</tt>s expect them to have the same length. 
+But <tt>std::atan2</tt> and <tt>std::pow</tt> lack such <i>Preconditions</i>.
+</p>
+
+
+<p id="res-3964"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 28.6.3.3 <a href="https://wg21.link/valarray.transcend">[valarray.transcend]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class T&gt; valarray&lt;T&gt; abs (const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; acos (const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; asin (const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; atan (const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; atan2(const valarray&lt;T&gt;&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; atan2(const valarray&lt;T&gt;&amp;, const typename valarray&lt;T&gt;::value_type&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; atan2(const typename valarray&lt;T&gt;::value_type&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; cos (const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; cosh (const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; exp (const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; log (const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; log10(const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; pow (const valarray&lt;T&gt;&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; pow (const valarray&lt;T&gt;&amp;, const typename valarray&lt;T&gt;::value_type&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; pow (const typename valarray&lt;T&gt;::value_type&amp;, const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; sin (const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; sinh (const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; sqrt (const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; tan (const valarray&lt;T&gt;&amp;);
+template&lt;class T&gt; valarray&lt;T&gt; tanh (const valarray&lt;T&gt;&amp;);
+</pre>
+<blockquote>
+<p>
+-1- <i>Mandates</i>: A unique function with the indicated name can be applied (unqualified) to an operand of
+type <tt>T</tt>. This function returns a value of type <tt>T</tt> or which can be unambiguously implicitly converted to
+type <tt>T</tt>.
+<p/>
+<ins>-?- <i>Preconditions</i>: For <tt>atan2</tt> and <tt>pow</tt> overloads that take two <tt>valarray</tt> parameters, 
+the corresponding array arguments have the same length.</ins>
+</p>
+</blockquote>
 </blockquote>
 </li>
 </ol>

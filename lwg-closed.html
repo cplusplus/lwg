@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2023-08-05</td>
+  <td align="left">2023-08-06</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Closed Issues List (Revision D125)</h1>
-<p><p>Revised 2023-08-05 at 12:07:58 UTC</p>
+<p><p>Revised 2023-08-06 at 17:06:31 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -49463,7 +49463,7 @@ The current specification is clear about the implications described by the issue
 <hr>
 <h3><a name="2402" href="#2402">2402</a><sup><a href="https://cplusplus.github.io/LWG/issue2402">(i)</a></sup>. <tt>basic_string(const basic_string&amp; str, size_type pos, size_type n = npos)</tt> shouldn't use <tt>Allocator()</tt></h3>
 <p><b>Section:</b> 23.4.3.3 <a href="https://wg21.link/string.cons">[string.cons]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
- <b>Submitter:</b> Stephan T. Lavavej <b>Opened:</b> 2014-06-14 <b>Last modified:</b> 2016-03-07</p>
+ <b>Submitter:</b> Stephan T. Lavavej <b>Opened:</b> 2014-06-14 <b>Last modified:</b> 2023-08-06</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#string.cons">issues</a> in [string.cons].</p>
@@ -49548,17 +49548,27 @@ There are two patterns that are at work here:
 The constructors in question are not copy constructors. I do not think it is compelling that the allocator should come 
 from its argument any more than it should come from any other object that happens to supply characters for a string 
 constructor.
+</p>
 
 <p><i>[2016-03 Jacksonville]</i></p>
 
+<p>
 Closed as NAD, noting that <a href="lwg-defects.html#2583">2583</a> is a related issue.
+</p>
+
+<p><i>[2023-08-5; Arthur O'Dwyer comments]</i></p>
+
+<p>
+<a href="https://wg21.link/P2438">P2438</a> added a constructor from <tt>basic_string&amp;&amp;</tt> which also default-constructs the allocator. 
+JW's second argument above ("[the] proposed change does nothing") does not apply after P2438, but his first 
+("this is not a copy operation") is unchanged.
 </p>
 
 <p>
 <strong>Previous resolution [SUPERSEDED]:</strong>
 </p>
 <blockquote class="note">
-<p>This wording is relative to N3936.</p>
+<p>This wording is relative to <a href="https://wg21.link/N3936">N3936</a>.</p>
 
 <ol>
 <li><p>Change 23.4.3 <a href="https://wg21.link/basic.string">[basic.string]</a> p5, class template <tt>basic_string</tt> synopsis, as indicated:</p>

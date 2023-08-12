@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-08-12 at 13:39:19 UTC</p>
+<p><p>Revised 2023-08-12 at 14:11:51 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -50517,6 +50517,88 @@ values represented by successive bits are additive, begin with 1, and are multip
 powers of 2, except perhaps for the bit with the highest position. (Adapted from the American National 
 Dictionary for Information Processing Systems.)</ins>
 </p>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3969" href="#3969">3969</a><sup><a href="https://cplusplus.github.io/LWG/issue3969">(i)</a></sup>. <tt>std::ranges::fold_left_first_with_iter</tt> should be more ADL-proof</h3>
+<p><b>Section:</b> 27.6.18 <a href="https://wg21.link/alg.fold">[alg.fold]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-10 <b>Last modified:</b> 2023-08-12</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#alg.fold">issues</a> in [alg.fold].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The following program is currently ill-formed, because 27.6.18 <a href="https://wg21.link/alg.fold">[alg.fold]</a>/10 requires evaluating 
+<tt>*init</tt>, where <tt>init</tt> is an object of an <tt>optional</tt> specialization, which triggers 
+ADL and finds unwanted overloads.
+</p>
+<blockquote><pre>
+#include &lt;algorithm&gt;
+#include &lt;optional&gt;
+
+namespace myns {
+  struct Foo {};
+  
+  void operator*(std::optional&lt;Foo&gt;&amp;);
+  void operator*(const std::optional&lt;Foo&gt;&amp;);
+}
+
+int main()
+{
+  myns::Foo x[1]{};
+  std::ranges::fold_left_first_with_iter(x, []&lt;class T&gt;(T lhs, T) { return lhs; });
+}
+</pre></blockquote>
+<p>
+I think only the member <tt>operator*</tt> overload is intendedly used.
+</p>
+
+
+<p id="res-3969"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+
+<li><p>Modify the 27.6.18 <a href="https://wg21.link/alg.fold">[alg.fold]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;input_iterator I, sentinel_for&lt;I&gt; S,
+         <i>indirectly-binary-left-foldable</i>&lt;iter_value_t&lt;I&gt;, I&gt; F&gt;
+  requires constructible_from&lt;iter_value_t&lt;I&gt;, iter_reference_t&lt;I&gt;&gt;
+  constexpr <i>see below</i> ranges::fold_left_first_with_iter(I first, S last, F f);
+template&lt;input_range R, <i>indirectly-binary-left-foldable</i>&lt;range_value_t&lt;R&gt;, iterator_t&lt;R&gt;&gt; F&gt;
+  requires constructible_from&lt;range_value_t&lt;R&gt;, range_reference_t&lt;R&gt;&gt;
+  constexpr <i>see below</i> ranges::fold_left_first_with_iter(R&amp;&amp; r, F f);
+</pre>
+<blockquote>
+<p>
+-9- Let <tt>U</tt> be
+</p>
+<blockquote><pre>
+decltype(ranges::fold_left(std::move(first), last, iter_value_t&lt;I&gt;(*first), f))
+</pre></blockquote>
+<p>
+-10- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+if (first == last)
+  return {std::move(first), optional&lt;U&gt;()};
+optional&lt;U&gt; init(in_place, *first);
+for (++first; first != last; ++first)
+  <del>*init</del><ins>init.operator*()</ins> = invoke(f, std::move(<del>*init</del><ins>init.operator*()</ins>), *first);
+return {std::move(first), std::move(init)};
+</pre></blockquote>
+</blockquote>
 </blockquote>
 </li>
 </ol>

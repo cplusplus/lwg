@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2023-08-12</td>
+  <td align="left">2023-08-13</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-08-12 at 14:11:51 UTC</p>
+<p><p>Revised 2023-08-13 at 08:50:37 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -53986,7 +53986,7 @@ traits to give results consistent with exception specifications.
 <hr>
 <h3><a name="3968" href="#3968">3968</a><sup><a href="https://cplusplus.github.io/LWG/issue3968">(i)</a></sup>. <tt>std::endian::native</tt> value should be more specific about object representations</h3>
 <p><b>Section:</b> 22.15.8 <a href="https://wg21.link/bit.endian">[bit.endian]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Brian Bi <b>Opened:</b> 2023-08-06 <b>Last modified:</b> 2023-08-12</p>
+ <b>Submitter:</b> Brian Bi <b>Opened:</b> 2023-08-06 <b>Last modified:</b> 2023-08-13</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -54040,11 +54040,14 @@ of <tt>endian::little</tt> and <tt>endian::big</tt>.</ins></p></li>
 <li><p><ins>Otherwise, <tt>endian::native</tt> is not equal to either <tt>endian::big</tt> or <tt>endian::little</tt>.</ins></p></li>
 </ul>
 <p>
+<ins>Otherwise, <tt>endian::native</tt> is not equal to either <tt>endian::big</tt> or <tt>endian::little</tt>.</ins>
+</p>
+<blockquote><p>
 <ins>footnote ?) A positional representation for integers that uses the binary digits 0 and 1, in which the 
 values represented by successive bits are additive, begin with 1, and are multiplied by successive integral 
 powers of 2, except perhaps for the bit with the highest position. (Adapted from the American National 
 Dictionary for Information Processing Systems.)</ins>
-</p>
+</p></blockquote>
 </blockquote>
 </li>
 </ol>

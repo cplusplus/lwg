@@ -268,7 +268,7 @@ basic_stringbuf&lt;charT, traits, Allocator&gt;* rdbuf() const;
 
 <li>
 <p>
-Change 31.10.3.2 <a href="https://wg21.link/ifstream.cons">[ifstream.cons]</a> as indicated:
+Change 31.10.4.2 <a href="https://wg21.link/ifstream.cons">[ifstream.cons]</a> as indicated:
 </p>
 <blockquote>
 <pre>
@@ -279,7 +279,7 @@ basic_ifstream();
 -1- <i>Effects:</i> Constructs an object of class <tt>basic_ifstream&lt;charT, traits&gt;</tt>,
 initializing the base class with <tt>basic_istream&lt;charT, traits&gt;(<del>&amp;</del><ins>addressof(</ins>sb<ins>)</ins>)</tt>
 (31.7.5.2.2 <a href="https://wg21.link/istream.cons">[istream.cons]</a>) and initializing <tt>sb</tt> with 
-<tt>basic_filebuf&lt;charT, traits&gt;()</tt> (31.10.2.2 <a href="https://wg21.link/filebuf.cons">[filebuf.cons]</a>).
+<tt>basic_filebuf&lt;charT, traits&gt;()</tt> (31.10.3.2 <a href="https://wg21.link/filebuf.cons">[filebuf.cons]</a>).
 </p>
 </blockquote>
 <pre>
@@ -293,7 +293,7 @@ explicit basic_ifstream(const filesystem::path::value_type* s,
 -2- <i>Effects:</i> Constructs an object of class <tt>basic_ifstream&lt;charT, traits&gt;</tt>,
 initializing the base class with <tt>basic_istream&lt;charT, traits&gt;(<del>&amp;</del><ins>addressof(</ins>sb<ins>)</ins>)</tt>
 (31.7.5.2.2 <a href="https://wg21.link/istream.cons">[istream.cons]</a>) and initializing <tt>sb</tt> with 
-<tt>basic_filebuf&lt;charT, traits&gt;()</tt> (31.10.2.2 <a href="https://wg21.link/filebuf.cons">[filebuf.cons]</a>), then calls 
+<tt>basic_filebuf&lt;charT, traits&gt;()</tt> (31.10.3.2 <a href="https://wg21.link/filebuf.cons">[filebuf.cons]</a>), then calls 
 <tt>rdbuf()-&gt;open(s, mode | ios_base::in)</tt>. If that function returns a null pointer, calls <tt>setstate(failbit)</tt>.
 </p>
 </blockquote>
@@ -314,7 +314,7 @@ is called to install the contained <tt>basic_filebuf</tt>.
 
 <li>
 <p>
-Change 31.10.3.4 <a href="https://wg21.link/ifstream.members">[ifstream.members]</a> p1 as indicated:
+Change 31.10.4.4 <a href="https://wg21.link/ifstream.members">[ifstream.members]</a> p1 as indicated:
 </p>
 <blockquote>
 <pre>
@@ -330,7 +330,7 @@ basic_filebuf&lt;charT, traits&gt;* rdbuf() const;
 
 <li>
 <p>
-Change 31.10.4.2 <a href="https://wg21.link/ofstream.cons">[ofstream.cons]</a> as indicated:
+Change 31.10.5.2 <a href="https://wg21.link/ofstream.cons">[ofstream.cons]</a> as indicated:
 </p>
 <blockquote>
 <pre>
@@ -341,7 +341,7 @@ basic_ofstream();
 -1- <i>Effects:</i> Constructs an object of class <tt>basic_ofstream&lt;charT, traits&gt;</tt>,
 initializing the base class with <tt>basic_ostream&lt;charT, traits&gt;(<del>&amp;</del><ins>addressof(</ins>sb<ins>)</ins>)</tt>
 (31.7.6.2.2 <a href="https://wg21.link/ostream.cons">[ostream.cons]</a>) and initializing <tt>sb</tt> with 
-<tt>basic_filebuf&lt;charT, traits&gt;()</tt> (31.10.2.2 <a href="https://wg21.link/filebuf.cons">[filebuf.cons]</a>).
+<tt>basic_filebuf&lt;charT, traits&gt;()</tt> (31.10.3.2 <a href="https://wg21.link/filebuf.cons">[filebuf.cons]</a>).
 </p>
 </blockquote>
 <pre>
@@ -355,7 +355,7 @@ explicit basic_ofstream(const filesystem::path::value_type* s,
 -2- <i>Effects:</i> Constructs an object of class <tt>basic_ofstream&lt;charT, traits&gt;</tt>,
 initializing the base class with <tt>basic_ostream&lt;charT, traits&gt;(<del>&amp;</del><ins>addressof(</ins>sb<ins>)</ins>)</tt>
 (31.7.6.2.2 <a href="https://wg21.link/ostream.cons">[ostream.cons]</a>) and initializing <tt>sb</tt> with 
-<tt>basic_filebuf&lt;charT, traits&gt;()</tt> (31.10.2.2 <a href="https://wg21.link/filebuf.cons">[filebuf.cons]</a>), then calls 
+<tt>basic_filebuf&lt;charT, traits&gt;()</tt> (31.10.3.2 <a href="https://wg21.link/filebuf.cons">[filebuf.cons]</a>), then calls 
 <tt>rdbuf()-&gt;open(s, mode | ios_base::out)</tt>. If that function returns a null pointer, calls <tt>setstate(failbit)</tt>.
 </p>
 </blockquote>
@@ -376,7 +376,7 @@ is called to install the contained <tt>basic_filebuf</tt>.
 
 <li>
 <p>
-Change 31.10.4.4 <a href="https://wg21.link/ofstream.members">[ofstream.members]</a> p1 as indicated:
+Change 31.10.5.4 <a href="https://wg21.link/ofstream.members">[ofstream.members]</a> p1 as indicated:
 </p>
 <blockquote>
 <pre>
@@ -392,7 +392,7 @@ basic_filebuf&lt;charT, traits&gt;* rdbuf() const;
 
 <li>
 <p>
-Change 31.10.5.2 <a href="https://wg21.link/fstream.cons">[fstream.cons]</a> as indicated:
+Change 31.10.6.2 <a href="https://wg21.link/fstream.cons">[fstream.cons]</a> as indicated:
 </p>
 <blockquote>
 <pre>
@@ -440,7 +440,7 @@ is called to install the contained <tt>basic_filebuf</tt>.
 
 <li>
 <p>
-Change 31.10.5.4 <a href="https://wg21.link/fstream.members">[fstream.members]</a> p1 as indicated:
+Change 31.10.6.4 <a href="https://wg21.link/fstream.members">[fstream.members]</a> p1 as indicated:
 </p>
 <blockquote>
 <pre>

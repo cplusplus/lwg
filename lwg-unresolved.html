@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-08-26 at 10:48:05 UTC</p>
+<p><p>Revised 2023-08-26 at 10:50:56 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -650,7 +650,7 @@ The headers <tt>&lt;array&gt;</tt> [&hellip;] define class templates that meet t
 24.3.7.1 <a href="https://wg21.link/array.overview">[array.overview]</a> paragraph 1:
 </p>
 <blockquote><p>
-[&hellip;] An <tt>array</tt> is a contiguous container (24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>).
+[&hellip;] An <tt>array</tt> is a contiguous container (24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>).
 </p></blockquote>
 <p>
 In <a href="https://github.com/cplusplus/draft/issues/5916#issuecomment-1291327657">this comment</a>, 
@@ -1430,7 +1430,7 @@ expressed in terms of the number on the contained objects by an exception of the
 <p>This wording is relative to <a href="https://wg21.link/n4810">N4810</a>.</p>
 
 <ol>
-<li><p>Modify 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> as indicated:</p>
+<li><p>Modify 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> as indicated:</p>
 
 <blockquote>
 <p>
@@ -1452,7 +1452,7 @@ solely in terms of the number of operations on the contained objects. [<i>Exampl
 <li><p>[&hellip;]</p></li>
 <li><p>(11.23) &mdash; [&hellip;]</p></li>
 <li><p><ins>(11.?) &mdash; Notwithstanding the complexity requirements restrictions of 
-24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>, the complexity form <tt>&#x1d4aa;(n)</tt> describes 
+24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>, the complexity form <tt>&#x1d4aa;(n)</tt> describes 
 the number of operations on buckets.</ins></p></li>
 </ol>
 </p>
@@ -2586,7 +2586,7 @@ been part of the intent here.
 
 <hr>
 <h3><a name="1521" href="#1521">1521</a><sup><a href="https://cplusplus.github.io/LWG/issue1521">(i)</a></sup>. Requirements on internal pointer representations in containers</h3>
-<p><b>Section:</b> 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
+<p><b>Section:</b> 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
  <b>Submitter:</b> Mike Spertus <b>Opened:</b> 2010-10-16 <b>Last modified:</b> 2019-01-20</p>
 <p><b>Priority: </b>3
 </p>
@@ -2657,7 +2657,7 @@ specification.
 
 <p id="res-1521"><b>Proposed resolution:</b></p>
 <p>
-Add to the end of 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> p. 8:
+Add to the end of 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> p. 8:
 </p>
 <blockquote><p>
 [..] In all container types defined in this Clause, the member <tt>get_allocator()</tt> returns 
@@ -2873,7 +2873,7 @@ iter_type do_get(iter_type s, iter_type end, ios_base&amp; f,
 </p></blockquote></blockquote>
 </li>
 
-<li><p>24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> p. 6:</p>
+<li><p>24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> p. 6:</p>
 
 <blockquote><p>
 [&hellip;]  <tt>end()</tt> returns an iterator which is the past-the-end <ins>(25.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a>)</ins> 
@@ -4554,7 +4554,7 @@ The <tt>swap</tt> case still needs solving. Still need a survey.
 
 <hr>
 <h3><a name="2152" href="#2152">2152</a><sup><a href="https://cplusplus.github.io/LWG/issue2152">(i)</a></sup>. Instances of standard container types are not swappable</h3>
-<p><b>Section:</b> 16.4.4.3 <a href="https://wg21.link/swappable.requirements">[swappable.requirements]</a>, 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#LEWG">LEWG</a>
+<p><b>Section:</b> 16.4.4.3 <a href="https://wg21.link/swappable.requirements">[swappable.requirements]</a>, 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#LEWG">LEWG</a>
  <b>Submitter:</b> Robert Shearer <b>Opened:</b> 2012-04-13 <b>Last modified:</b> 2020-09-06</p>
 <p><b>Priority: </b>3
 </p>
@@ -4568,7 +4568,7 @@ when two objects are <em>swappable with</em> one another, and a unary notion def
 former with respect to all values of the same type.
 <p/>
 Let <tt>T</tt> be a container type based on a non-propagating allocator whose instances do not necessarily 
-compare equal. Then sub-clause 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> p7 implies that no object <tt>t</tt> 
+compare equal. Then sub-clause 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> p7 implies that no object <tt>t</tt> 
 of type <tt>T</tt> is swappable (by the unary definition).
 <p/>
 Throughout the standard it is the unary definition of "swappable" that is listed as a requirement (with the 
@@ -4590,7 +4590,7 @@ places that reference the unary "swappable" definition, to instead use the binar
 (over a domain appropriate to the context). The unary definition of "swappable" could then be removed from the 
 standard.
 </li>
-<li>Modify sub-clause 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> such that objects of standard container types 
+<li>Modify sub-clause 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> such that objects of standard container types 
 are "swappable" by the unary definition.
 </li>
 </ol>
@@ -4689,7 +4689,7 @@ Apply <a href="https://wg21.link/P0178">P0178</a>.
 
 <hr>
 <h3><a name="2153" href="#2153">2153</a><sup><a href="https://cplusplus.github.io/LWG/issue2153">(i)</a></sup>. Narrowing of the non-member <tt>swap</tt> contract</h3>
-<p><b>Section:</b> 22.2.2 <a href="https://wg21.link/utility.swap">[utility.swap]</a>, 16.4.4.3 <a href="https://wg21.link/swappable.requirements">[swappable.requirements]</a>, 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#LEWG">LEWG</a>
+<p><b>Section:</b> 22.2.2 <a href="https://wg21.link/utility.swap">[utility.swap]</a>, 16.4.4.3 <a href="https://wg21.link/swappable.requirements">[swappable.requirements]</a>, 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#LEWG">LEWG</a>
  <b>Submitter:</b> Robert Shearer <b>Opened:</b> 2012-04-13 <b>Last modified:</b> 2020-10-02</p>
 <p><b>Priority: </b>2
 </p>
@@ -5133,7 +5133,7 @@ This wording is relative to <a href="https://wg21.link/n4606">N4606</a>.
 
 <p>
 <table border="1">
-<caption> 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> Table 80 &mdash; Container requirements </caption>
+<caption> 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> Table 80 &mdash; Container requirements </caption>
 <tr>
   <td><b>Expression</b></td>
   <td><b>Return type</b></td>
@@ -5185,7 +5185,7 @@ This wording is relative to <a href="https://wg21.link/n4606">N4606</a>.
 
 <p>
 <table border="1">
-<caption> 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> Table 83 &mdash; Allocator-aware container requirements </caption>
+<caption> 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> Table 83 &mdash; Allocator-aware container requirements </caption>
 <tr>
   <td><b>Expression</b></td>
   <td><b>Return type</b></td>
@@ -5237,7 +5237,7 @@ Standard Library.
 
 <p>
 <table border="1">
-<caption> 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> Table 77 &mdash; Container requirements </caption>
+<caption> 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> Table 77 &mdash; Container requirements </caption>
 <tr>
   <td><b>Expression</b></td>
   <td><b>Return type</b></td>
@@ -5296,7 +5296,7 @@ Standard Library.
 
 <p>
 <table border="1">
-<caption> 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> Table 80 &mdash; Allocator-aware container requirements </caption>
+<caption> 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> Table 80 &mdash; Allocator-aware container requirements </caption>
 <tr>
   <td><b>Expression</b></td>
   <td><b>Return type</b></td>
@@ -6893,7 +6893,7 @@ same underlying sequence.</ins>
 <p>
 Table 102 in 24.2.7 <a href="https://wg21.link/associative.reqmts">[associative.reqmts]</a>/8 states on expression <tt>a.key_comp()</tt> that it 
 "returns the comparison object out of which a was constructed". At the same time, 
-24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>/8 states (starting in the third line) that 
+24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>/8 states (starting in the third line) that 
 "...Any <tt>Compare</tt>, <tt>Pred</tt>, or <tt>Hash</tt> objects belonging to <tt>a</tt> and <tt>b</tt> 
 shall be swappable and <em>shall be exchanged</em> by unqualified calls to non-member swap...". This is 
 problematic for any compliant implementation, since once swapped the container cannot return the comparison 
@@ -6904,13 +6904,13 @@ of underspecified behavior: The new standard has made an effort in regards to al
 specifies what happens to stateful allocator objects. It has even specified what happens to stateful <tt>hasher</tt> 
 and <tt>key_equal</tt> members of unordered containers (they propagate), but it says nothing about stateful 
 comparison objects of (ordered) associative containers, except for the statement in 
-24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>/8 referred above and only related to <tt>swap</tt>.
+24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>/8 referred above and only related to <tt>swap</tt>.
 <p/>
 For example, it is unclear to me what is specified to happen on an assignment: should the comparison object 
 be copied/moved along with the elements, or should the left-hand side object keep its own?
 Maybe this has been intentionally left unspecified with the purpose of compatibility with C++98, which I 
 understand it specified that comparison objects were kept for the entire life of the container (like allocators) 
-&mdash; an unfortunate choice. But anyway, the segment of 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> quoted 
+&mdash; an unfortunate choice. But anyway, the segment of 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> quoted 
 above seems to break any possible backwards compatibility with C++98 in this regard.
 <p/>
 Therefore, taking into consideration consistency with how this is dealed with for unordered associative 
@@ -8509,7 +8509,7 @@ perform comparisons on values of the input type, or might it even perform hetero
 
 <hr>
 <h3><a name="2269" href="#2269">2269</a><sup><a href="https://cplusplus.github.io/LWG/issue2269">(i)</a></sup>. Container iterators and argument-dependent lookup</h3>
-<p><b>Section:</b> 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Matt Austern <b>Opened:</b> 2013-06-26 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>4
 </p>
@@ -8571,7 +8571,7 @@ return <tt>traits::eof()</tt> when a read position is not available.
 The semantics of <tt>basic_stringbuf</tt> require, and existing libraries implement it so that this function makes 
 a read position available if possible to do so, e.g. if some characters were inserted into the stream since the 
 last call to <tt>overflow()</tt>, resulting in <tt>pptr() &gt; egptr()</tt>. Compare to the conceptually similar 
-D.15.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a>/15.
+D.14.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a>/15.
 </p>
 
 <p><i>[2018-06-06, Billy argues for NAD]</i></p>
@@ -8810,7 +8810,7 @@ construct" in the definition of Jonathan's suggestion of "valid in a contrived a
 I would like to point out that given the new definition of "valid in a contrived argument deduction context", there are several other 
 places of the Library specification that could take advantage of this wording to improve the existing specification, such as 
 22.10.17.3 <a href="https://wg21.link/func.wrap.func">[func.wrap.func]</a> p2, most functions in 20.2.9.3 <a href="https://wg21.link/allocator.traits.members">[allocator.traits.members]</a>, and the <tt>**Insertable</tt>, 
-<tt>EmplaceConstructible</tt>, and <tt>Erasable</tt> definitions in 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>, but given that
+<tt>EmplaceConstructible</tt>, and <tt>Erasable</tt> definitions in 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>, but given that
 these are not fully described in terms of the aforementioned wording <em>yet</em>, I would recommend to fix them by a separate issue 
 once the committee has agreed on following the suggestion presented by this issue.
 </p>
@@ -9235,7 +9235,7 @@ vector(size_type count, const T&amp; value, const Allocator&amp; alloc = Allocat
 
 <hr>
 <h3><a name="2321" href="#2321">2321</a><sup><a href="https://cplusplus.github.io/LWG/issue2321">(i)</a></sup>. Moving containers should (usually) be required to preserve iterators</h3>
-<p><b>Section:</b> 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
+<p><b>Section:</b> 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
  <b>Submitter:</b> Stephan T. Lavavej <b>Opened:</b> 2013-09-21 <b>Last modified:</b> 2023-01-20</p>
 <p><b>Priority: </b>3
 </p>
@@ -9244,7 +9244,7 @@ vector(size_type count, const T&amp; value, const Allocator&amp; alloc = Allocat
 <p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>/10 says that unless otherwise specified, "no <tt>swap()</tt> function invalidates 
+24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>/10 says that unless otherwise specified, "no <tt>swap()</tt> function invalidates 
 any references, pointers, or iterators referring to the elements of the containers being swapped. [<i>Note:</i> The <tt>end()</tt> 
 iterator does not refer to any element, so it may be invalidated. &mdash; <i>end note</i>]". However, move constructors and move 
 assignment operators aren't given similar invalidation guarantees. The guarantees need several exceptions, so I do not believe 
@@ -9308,7 +9308,7 @@ changes added to the container requirements by LWG <a href="lwg-defects.html#283
 <p>This wording is relative to N3691.</p>
 
 <ol>
-<li><p>In 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>/10 change as indicated:</p>
+<li><p>In 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>/10 change as indicated:</p>
 
 <blockquote><p>
 -10- Unless otherwise specified (see 23.2.4.1, 23.2.5.1, 23.3.3.4, and 23.3.7.5) all container types defined in this
@@ -10841,7 +10841,7 @@ I conclude the following from the wording:
 <li><p>The allocator is not required to call the copy constructor if the
 arguments (args) is a single (potentially const) lvalue of the value
 type. Similarly for a non-const rvalue + move constructor. See also
-24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> p15 which seems to try to require
+24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> p15 which seems to try to require
 this, but is not sufficient:
 That paragraph specifies the semantics of the allocator's operations,
 but not which constructors of the value type are used, if any.
@@ -11049,7 +11049,7 @@ Solution 2 requires changing both the implementation of the default
 allocator (add a conditional <tt>noexcept</tt>) and <tt>vector</tt> (replace
 <tt>is_move_constructible</tt> with an allocator-targeted check).
 It does not impose additional restrictions on the allocator (other than
-24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> p15),
+24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> p15),
 and works nicely even if the move constructor of a <tt>MoveInsertable</tt> type is private or deleted
 (the allocator might be a friend of the value type).
 <p/>
@@ -11559,7 +11559,7 @@ is a core constant expression.</ins></p></li>
 The typical use-case of <tt>std::initializer_list&lt;T&gt;</tt> is for a pass-by-value parameter of <tt>T</tt>'s constructor. 
 However, this contravenes 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.functions]</a>/2.5 because <tt>initializer_list</tt> doesn't specifically allow 
 incomplete types (as do for example <tt>std::unique_ptr</tt> (20.3.1 <a href="https://wg21.link/unique.ptr">[unique.ptr]</a>/5) and 
-<tt>std::enable_shared_from_this</tt> (20.3.2.5 <a href="https://wg21.link/util.smartptr.enab">[util.smartptr.enab]</a>/2)).
+<tt>std::enable_shared_from_this</tt> (20.3.2.7 <a href="https://wg21.link/util.smartptr.enab">[util.smartptr.enab]</a>/2)).
 <p/>
 A resolution would be to copy-paste the relevant text from such a paragraph.
 </p>
@@ -12420,7 +12420,7 @@ Which means that the character class matching worked, but not the matching to th
 
 <hr>
 <h3><a name="2547" href="#2547">2547</a><sup><a href="https://cplusplus.github.io/LWG/issue2547">(i)</a></sup>. Container requirements (and other library text) should say "strict total order", not just "total order"</h3>
-<p><b>Section:</b> 22.10.8 <a href="https://wg21.link/comparisons">[comparisons]</a>, 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>, 33.4.3.2 <a href="https://wg21.link/thread.thread.id">[thread.thread.id]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 22.10.8 <a href="https://wg21.link/comparisons">[comparisons]</a>, 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>, 33.4.3.2 <a href="https://wg21.link/thread.thread.id">[thread.thread.id]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Matt Austern <b>Opened:</b> 2015-10-08 <b>Last modified:</b> 2015-10-21</p>
 <p><b>Priority: </b>3
 </p>
@@ -12430,7 +12430,7 @@ Which means that the character class matching worked, but not the matching to th
 <p><b>Discussion:</b></p>
 <p>
 A number of places in the library, including 22.10.8 <a href="https://wg21.link/comparisons">[comparisons]</a>/14, the Optional container requirements in 
-24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>, and 33.4.3.2 <a href="https://wg21.link/thread.thread.id">[thread.thread.id]</a>/8, use the phrase "total order". 
+24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>, and 33.4.3.2 <a href="https://wg21.link/thread.thread.id">[thread.thread.id]</a>/8, use the phrase "total order". 
 Unfortunately, that phrase is ambiguous. In mathematics, the most common definition is that a relation <tt>&le;</tt> is 
 a total order if it's total, transitive, and antisymmetric in the sense that <tt>x&le;y &#x2227; y&le;x &rArr; x=y</tt>. 
 What we really want is a strict total order: a relation <tt>&lt;</tt> is a strict total order if it's total, transitive, and 
@@ -12724,7 +12724,7 @@ constexpr <ins>reference</ins><del><i>unspecified</i></del> operator[](differenc
 
 <hr>
 <h3><a name="2599" href="#2599">2599</a><sup><a href="https://cplusplus.github.io/LWG/issue2599">(i)</a></sup>. Library incomplete type permission phrase is unclear</h3>
-<p><b>Section:</b> 22.2.6 <a href="https://wg21.link/declval">[declval]</a>, 20.3.1 <a href="https://wg21.link/unique.ptr">[unique.ptr]</a>, 20.3.1.2.1 <a href="https://wg21.link/unique.ptr.dltr.general">[unique.ptr.dltr.general]</a>, 20.3.2.2 <a href="https://wg21.link/util.smartptr.shared">[util.smartptr.shared]</a>, 20.3.2.3 <a href="https://wg21.link/util.smartptr.weak">[util.smartptr.weak]</a>, 20.3.2.5 <a href="https://wg21.link/util.smartptr.enab">[util.smartptr.enab]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 22.2.6 <a href="https://wg21.link/declval">[declval]</a>, 20.3.1 <a href="https://wg21.link/unique.ptr">[unique.ptr]</a>, 20.3.1.2.1 <a href="https://wg21.link/unique.ptr.dltr.general">[unique.ptr.dltr.general]</a>, 20.3.2.2 <a href="https://wg21.link/util.smartptr.shared">[util.smartptr.shared]</a>, 20.3.2.3 <a href="https://wg21.link/util.smartptr.weak">[util.smartptr.weak]</a>, 20.3.2.7 <a href="https://wg21.link/util.smartptr.enab">[util.smartptr.enab]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Zhihao Yuan <b>Opened:</b> 2016-03-08 <b>Last modified:</b> 2016-04-16</p>
 <p><b>Priority: </b>3
 </p>
@@ -17118,7 +17118,7 @@ Yes, we're still lacking text for that (and maybe Nina's old text helps for that
 <p><i>[2020-12-14; Jiang An comments]</i></p>
 
 <p>
-The item "constexpr functions" is also used in 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>/14 and 
+The item "constexpr functions" is also used in 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>/14 and 
 25.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a>/16, and such usage should also be modified by this issue here.
 </p>
 
@@ -22840,7 +22840,7 @@ available whenever either <tt>&lt;cstdlib&gt;</tt> or <tt>&lt;cinttypes&gt;</tt>
 
 <hr>
 <h3><a name="3095" href="#3095">3095</a><sup><a href="https://cplusplus.github.io/LWG/issue3095">(i)</a></sup>. <tt>strstreambuf</tt> refers to nonexistent member of <tt>fpos</tt>, <tt>fpos::offset</tt></h3>
-<p><b>Section:</b> D.15.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.14.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Billy O'Neal III <b>Opened:</b> 2018-04-04 <b>Last modified:</b> 2020-09-06</p>
 <p><b>Priority: </b>4
 </p>
@@ -22849,7 +22849,7 @@ available whenever either <tt>&lt;cstdlib&gt;</tt> or <tt>&lt;cinttypes&gt;</tt>
 <p><b>Discussion:</b></p>
 <p>
 <tt>strstreambuf</tt> refers to a nonexistent member function of <tt>fpos</tt> in the specification of the member function
-<tt>seekpos</tt>, D.15.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a>/18 (emphasize mine): 
+<tt>seekpos</tt>, D.14.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a>/18 (emphasize mine): 
 </p>
 <blockquote><p>
 For a sequence to be positioned, if its next pointer is a null pointer, the positioning operation fails.
@@ -22873,7 +22873,7 @@ This wording is relative to <a href="https://wg21.link/n4727">N4727</a>.
 
 <ol>
 <li>
-<p>Edit D.15.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> as indicated:</p>
+<p>Edit D.14.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> as indicated:</p>
 <blockquote>
 <pre>
 pos_type seekpos(pos_type sp, ios_base::openmode which
@@ -23307,7 +23307,7 @@ namespace std {
 
 <hr>
 <h3><a name="3109" href="#3109">3109</a><sup><a href="https://cplusplus.github.io/LWG/issue3109">(i)</a></sup>. <tt>strstreambuf</tt> is copyable</h3>
-<p><b>Section:</b> D.15.2 <a href="https://wg21.link/depr.strstreambuf">[depr.strstreambuf]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.14.2 <a href="https://wg21.link/depr.strstreambuf">[depr.strstreambuf]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2018-05-02 <b>Last modified:</b> 2018-06-19</p>
 <p><b>Priority: </b>4
 </p>
@@ -24484,7 +24484,7 @@ the type <tt>allocator_traits&lt;Y&gt;</tt>
 <ins><tt>Z</tt></ins>
 </td>
 <td>
-<ins>an allocator-aware container type (24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>)</ins>
+<ins>an allocator-aware container type (24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>)</ins>
 </td>
 </tr>
 
@@ -25712,12 +25712,12 @@ element results in undefined behavior.
 </blockquote>
 </li>
 
-<li><p>Change D.11 <a href="https://wg21.link/depr.res.on.required">[depr.res.on.required]</a>, as indicated:</p>
+<li><p>Change  [depr.res.on.required], as indicated:</p>
 
 <blockquote class="note">
 <p>
 [<i>Drafting note:</i> Interestingly, albey the <i>Requires:</i> element has nearly vanished, the
-issue is still relevant, see D.19 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a>]
+issue is still relevant, see D.18 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a>]
 </p>
 </blockquote>
 
@@ -26400,7 +26400,7 @@ macros", as indicated:</p>
 
 <hr>
 <h3><a name="3219" href="#3219">3219</a><sup><a href="https://cplusplus.github.io/LWG/issue3219">(i)</a></sup>. <tt>std::array</tt> overview container requirements are incorrect</h3>
-<p><b>Section:</b> 24.3.7.1 <a href="https://wg21.link/array.overview">[array.overview]</a>, 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 24.3.7.1 <a href="https://wg21.link/array.overview">[array.overview]</a>, 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Nevin Liber &amp; Christian Trott <b>Opened:</b> 2019-06-13 <b>Last modified:</b> 2022-04-24</p>
 <p><b>Priority: </b>3
 </p>
@@ -26428,7 +26428,7 @@ not constant complexity.</p></li>
 <p>This wording is relative to <a href="https://wg21.link/N4810">N4810</a>.</p>
 
 <ol>
-<li><p>Modify 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>, Table 62 &mdash; "Container requirements",
+<li><p>Modify 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>, Table 62 &mdash; "Container requirements",
 as indicated (This table can be identified by the "section" identifier [tab:container.req] in the next
 working draft):</p>
 
@@ -26642,7 +26642,7 @@ template&lt;class T&gt; void atomic_store(atomic&lt;T&gt;*, typename atomic&lt;T
 </pre></blockquote>
 <p>
 The program intends to call the "other" <tt>atomic_store</tt> from
-D.24 <a href="https://wg21.link/depr.util.smartptr.shared.atomic">[depr.util.smartptr.shared.atomic]</a>:
+D.23 <a href="https://wg21.link/depr.util.smartptr.shared.atomic">[depr.util.smartptr.shared.atomic]</a>:
 </p>
 <blockquote><pre>
 template&lt;class T&gt; void atomic_store(shared_ptr&lt;T&gt;*, shared_ptr&lt;T&gt;); <i>// #3</i>
@@ -26661,7 +26661,7 @@ argument <tt>T</tt> shall be trivially copyable"
 <p/>
 The fix is fairly straightforward since <tt>atomic&lt;T&gt;::value_type</tt> is always an alias
 for <tt>T</tt>: for those non-member atomic functions with overloads defined in
-D.24 <a href="https://wg21.link/depr.util.smartptr.shared.atomic">[depr.util.smartptr.shared.atomic]</a>, use a different form to require that <tt>T</tt>
+D.23 <a href="https://wg21.link/depr.util.smartptr.shared.atomic">[depr.util.smartptr.shared.atomic]</a>, use a different form to require that <tt>T</tt>
 in the type of the second parameter is non-deduced.
 </p>
 
@@ -28330,7 +28330,7 @@ Perhaps this means "value-initialized" or "default-initialized" instead of merel
 
 <hr>
 <h3><a name="3339" href="#3339">3339</a><sup><a href="https://cplusplus.github.io/LWG/issue3339">(i)</a></sup>. Move-constructed empty-container capacity</h3>
-<p><b>Section:</b> 23.4.3 <a href="https://wg21.link/basic.string">[basic.string]</a>, 24.3.11 <a href="https://wg21.link/vector">[vector]</a>, 24.5.4 <a href="https://wg21.link/unord.map">[unord.map]</a>, 24.5.6 <a href="https://wg21.link/unord.set">[unord.set]</a>, 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 23.4.3 <a href="https://wg21.link/basic.string">[basic.string]</a>, 24.3.11 <a href="https://wg21.link/vector">[vector]</a>, 24.5.4 <a href="https://wg21.link/unord.map">[unord.map]</a>, 24.5.6 <a href="https://wg21.link/unord.set">[unord.set]</a>, 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Nathan Myers <b>Opened:</b> 2019-11-17 <b>Last modified:</b> 2020-09-06</p>
 <p><b>Priority: </b>3
 </p>
@@ -30746,7 +30746,7 @@ template&lt;class charT,
 </pre>
 <blockquote>
 <p>
--22- <i>Constraints:</i> <tt>Allocator</tt> is a type that qualifies as an allocator (24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>).
+-22- <i>Constraints:</i> <tt>Allocator</tt> is a type that qualifies as an allocator (24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>).
 </p>
 </blockquote>
 </blockquote>
@@ -33395,7 +33395,7 @@ including all functions from the C standard library. However, C17 (and the lates
 allows taking address of a C standard library function in 7.1.4/1.
 <p/>
 Should we require something like "every function from the C standard library is addressable unless it is overloaded", 
-in order to minimize the incompatibility with C? Or explicitly say something in C.7 <a href="https://wg21.link/diff.library">[diff.library]</a> if 
+in order to minimize the incompatibility with C? Or explicitly say something in C.8 <a href="https://wg21.link/diff.library">[diff.library]</a> if 
 such requirement is not wanted?
 </p>
 
@@ -35238,7 +35238,7 @@ a decision]
 <p>
 -1- The class template <tt>basic_stacktrace</tt> satisfies the requirements of an allocator-aware container 
 (Table 80 [tab:container.alloc.req]), a sequence container (24.2.4 <a href="https://wg21.link/sequence.reqmts">[sequence.reqmts]</a>), 
-<ins>a contiguous container,</ins> and a reversible container (24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>) 
+<ins>a contiguous container,</ins> and a reversible container (24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>) 
 except that [&hellip;]
 </p>
 </blockquote>
@@ -35858,7 +35858,7 @@ template&lt;class Allocator&gt; struct hash&lt;vector&lt;bool, Allocator&gt;&gt;
 </blockquote>
 </li>
 
-<li><p>Create a new subclause [depr.vector.bool.swap] after D.25 <a href="https://wg21.link/depr.string.capacity">[depr.string.capacity]</a></p>
+<li><p>Create a new subclause [depr.vector.bool.swap] after D.24 <a href="https://wg21.link/depr.string.capacity">[depr.string.capacity]</a></p>
 
 <blockquote>
 <p>
@@ -36031,7 +36031,7 @@ template&lt;class Allocator&gt; struct hash&lt;vector&lt;bool, Allocator&gt;&gt;
 </blockquote>
 </li>
 
-<li><p>Create a new subclause [depr.vector.bool.swap] after D.25 <a href="https://wg21.link/depr.string.capacity">[depr.string.capacity]</a></p>
+<li><p>Create a new subclause [depr.vector.bool.swap] after D.24 <a href="https://wg21.link/depr.string.capacity">[depr.string.capacity]</a></p>
 
 <blockquote>
 <p>
@@ -44994,7 +44994,7 @@ which was <a href="https://wg21.link/P0896R4">P0896R4</a>, and which introduced 
 both the <tt>std::ranges</tt> and the <tt>std</tt> forms of <tt>destroy_at</tt>, so it seems plausible to suggest a new, specific feature 
 macro for both <tt>destroy_at</tt> function templates. This is what the proposed wording does.
 <p/>
-LWG should clarify whether an entry to C.1 <a href="https://wg21.link/diff.cpp20">[diff.cpp20]</a> should be added as well.
+LWG should clarify whether an entry to C.2 <a href="https://wg21.link/diff.cpp20">[diff.cpp20]</a> should be added as well.
 </p>
 
 <p><i>[2023-03-22; Reflector poll]</i></p>
@@ -47455,7 +47455,7 @@ See also issue <a href="lwg-active.html#2939">2939</a>. We should not turn the p
 <p><i>[2023-06-12; Varna]</i></p>
 
 <p>During the review <a href="https://wg21.link/P2874R1">P2874R1</a> the group decided to not change the now decided for
-<i>Preconditions:</i> element in D.19 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a> p3 into a <i>Mandates:</i> element 
+<i>Preconditions:</i> element in D.18 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a> p3 into a <i>Mandates:</i> element 
 but would like to solve this by this issue.</p>
 
 
@@ -50639,7 +50639,7 @@ This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
 <blockquote>
 <pre>
 [&hellip;]
-<i>//  [mdspan.submdspan], submdspan creation</i>
+<i>// 24.7.3.7 <a href="https://wg21.link/mdspan.submdspan">[mdspan.submdspan]</a>, submdspan creation</i>
 template&lt;class OffsetType, class LengthType, class StrideType&gt;
   struct strided_slice;
 

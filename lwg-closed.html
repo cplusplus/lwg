@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Closed Issues List (Revision D125)</h1>
-<p><p>Revised 2023-08-26 at 10:48:05 UTC</p>
+<p><p>Revised 2023-08-26 at 10:50:56 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -1305,7 +1305,7 @@ this is the intent of the LWG.</p>
 
 <hr>
 <h3><a name="65" href="#65">65</a><sup><a href="https://cplusplus.github.io/LWG/issue65">(i)</a></sup>. Underspecification of strstreambuf::seekoff</h3>
-<p><b>Section:</b> D.15.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> D.14.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Matt Austern <b>Opened:</b> 1998-08-18 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -4306,7 +4306,7 @@ want to pass temporaries as traits or tag types in generic code.
 
 <hr>
 <h3><a name="267" href="#267">267</a><sup><a href="https://cplusplus.github.io/LWG/issue267">(i)</a></sup>. interaction of strstreambuf::overflow() and seekoff()</h3>
-<p><b>Section:</b> D.15.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> D.14.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Martin Sebor <b>Opened:</b> 2000-10-05 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -4373,7 +4373,7 @@ behavior of the program is undefined.
 <p id="res-267"><b>Proposed resolution:</b></p>
 
 
-   <p>Change the last sentence of D.15.2 <a href="https://wg21.link/depr.strstreambuf">[depr.strstreambuf]</a> paragraph 4 from</p>
+   <p>Change the last sentence of D.14.2 <a href="https://wg21.link/depr.strstreambuf">[depr.strstreambuf]</a> paragraph 4 from</p>
 
       <blockquote><p>
       Otherwise, seeklow equals gbeg and seekhigh is either pend, if
@@ -8920,7 +8920,7 @@ standard facets.
 
 <hr>
 <h3><a name="454" href="#454">454</a><sup><a href="https://cplusplus.github.io/LWG/issue454">(i)</a></sup>. <tt>basic_filebuf::open</tt> should accept <tt>wchar_t</tt> names</h3>
-<p><b>Section:</b> 31.10.2.4 <a href="https://wg21.link/filebuf.members">[filebuf.members]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 31.10.3.4 <a href="https://wg21.link/filebuf.members">[filebuf.members]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Bill Plauger <b>Opened:</b> 2004-01-30 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -12953,7 +12953,7 @@ Berlin: Some support, not universal, for respecting the explicit qualifier.
 
 <hr>
 <h3><a name="544" href="#544">544</a><sup><a href="https://cplusplus.github.io/LWG/issue544">(i)</a></sup>. minor NULL problems in C.2</h3>
-<p><b>Section:</b> C.7 <a href="https://wg21.link/diff.library">[diff.library]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
+<p><b>Section:</b> C.8 <a href="https://wg21.link/diff.library">[diff.library]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
  <b>Submitter:</b> Martin Sebor <b>Opened:</b> 2005-11-25 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -14075,7 +14075,7 @@ No consensus for a change.
 
 <hr>
 <h3><a name="580" href="#580">580</a><sup><a href="https://cplusplus.github.io/LWG/issue580">(i)</a></sup>. unused allocator members</h3>
-<p><b>Section:</b> 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
+<p><b>Section:</b> 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
  <b>Submitter:</b> Martin Sebor <b>Opened:</b> 2006-06-14 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -14135,7 +14135,7 @@ pre-Oxford:  Martin provided wording.
 <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2810.pdf">N2810</a>
 (allocator defects), address all of these points EXCEPT <tt>max_size()</tt>.
 So, I would add a note to that affect and re-class the defect as belonging
-to section 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>.
+to section 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>.
 </p></blockquote>
 
 <p><i>[
@@ -14692,7 +14692,7 @@ Proposed Disposition: Open
 
 <hr>
 <h3><a name="587" href="#587">587</a><sup><a href="https://cplusplus.github.io/LWG/issue587">(i)</a></sup>. iststream ctor missing description</h3>
-<p><b>Section:</b> D.15.3.2 <a href="https://wg21.link/depr.istrstream.cons">[depr.istrstream.cons]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
+<p><b>Section:</b> D.14.3.2 <a href="https://wg21.link/depr.istrstream.cons">[depr.istrstream.cons]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
  <b>Submitter:</b> Martin Sebor <b>Opened:</b> 2006-06-22 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -15055,7 +15055,7 @@ Recommend NAD / Editorial.  The proposed resolution is accepted as editorial.
 
 <hr>
 <h3><a name="592" href="#592">592</a><sup><a href="https://cplusplus.github.io/LWG/issue592">(i)</a></sup>. Incorrect treatment of rdbuf()->close() return type</h3>
-<p><b>Section:</b> 31.10.3.4 <a href="https://wg21.link/ifstream.members">[ifstream.members]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
+<p><b>Section:</b> 31.10.4.4 <a href="https://wg21.link/ifstream.members">[ifstream.members]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
  <b>Submitter:</b> Christopher Kohlhoff <b>Opened:</b> 2006-08-17 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -15085,7 +15085,7 @@ correct for basic_ofstream.
 
 <p id="res-592"><b>Proposed resolution:</b></p>
 <p>
-Change 31.10.3.4 <a href="https://wg21.link/ifstream.members">[ifstream.members]</a>, p5:
+Change 31.10.4.4 <a href="https://wg21.link/ifstream.members">[ifstream.members]</a>, p5:
 </p>
 
 <blockquote><p>
@@ -15096,7 +15096,7 @@ calls <tt>setstate(failbit)</tt> (which may throw <tt>ios_base::failure</tt>
 </p></blockquote>
 
 <p>
-Change 31.10.5.4 <a href="https://wg21.link/fstream.members">[fstream.members]</a>, p5:
+Change 31.10.6.4 <a href="https://wg21.link/fstream.members">[fstream.members]</a>, p5:
 </p>
 
 <blockquote><p>
@@ -16061,7 +16061,7 @@ Oxford:  Editorial.
 
 <hr>
 <h3><a name="642" href="#642">642</a><sup><a href="https://cplusplus.github.io/LWG/issue642">(i)</a></sup>. Invalidated fstream footnotes in N2134</h3>
-<p><b>Section:</b> 31.10.3.4 <a href="https://wg21.link/ifstream.members">[ifstream.members]</a>, 31.10.4.4 <a href="https://wg21.link/ofstream.members">[ofstream.members]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
+<p><b>Section:</b> 31.10.4.4 <a href="https://wg21.link/ifstream.members">[ifstream.members]</a>, 31.10.5.4 <a href="https://wg21.link/ofstream.members">[ofstream.members]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
  <b>Submitter:</b> Daniel Kr&uuml;gler <b>Opened:</b> 2007-02-20 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -16111,7 +16111,7 @@ they where needed for that time).
 
 <p id="res-642"><b>Proposed resolution:</b></p>
 <p>
-In 31.10.3.4 <a href="https://wg21.link/ifstream.members">[ifstream.members]</a>, remove footnote:
+In 31.10.4.4 <a href="https://wg21.link/ifstream.members">[ifstream.members]</a>, remove footnote:
 </p>
 
 <blockquote><p>
@@ -16119,7 +16119,7 @@ In 31.10.3.4 <a href="https://wg21.link/ifstream.members">[ifstream.members]</a>
 </p></blockquote>
 
 <p>
-In 31.10.4.4 <a href="https://wg21.link/ofstream.members">[ofstream.members]</a>, remove footnote:
+In 31.10.5.4 <a href="https://wg21.link/ofstream.members">[ofstream.members]</a>, remove footnote:
 </p>
 
 <blockquote><p>
@@ -22470,7 +22470,7 @@ Bill responds that the stream is now closed,
 and any status bits remain unchanged.
 </p>
 <p>
-See the description of <tt>close()</tt> in 31.10.5.4 <a href="https://wg21.link/fstream.members">[fstream.members]</a>.
+See the description of <tt>close()</tt> in 31.10.6.4 <a href="https://wg21.link/fstream.members">[fstream.members]</a>.
 </p>
 <p>
 We prefer not to add wording to say that nothing changes.
@@ -30473,7 +30473,7 @@ this topic. We recommend no action until a paper is available.
 
 <hr>
 <h3><a name="1035" href="#1035">1035</a><sup><a href="https://cplusplus.github.io/LWG/issue1035">(i)</a></sup>. <tt>&lt;array&gt;::swap</tt> can invalidate references, pointers, and iterators</h3>
-<p><b>Section:</b> 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2009-03-12 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -34320,7 +34320,7 @@ bitset.</ins>
 
 <hr>
 <h3><a name="1115" href="#1115">1115</a><sup><a href="https://cplusplus.github.io/LWG/issue1115">(i)</a></sup>. <tt>va_copy</tt> missing from Standard macros table</h3>
-<p><b>Section:</b> C.7 <a href="https://wg21.link/diff.library">[diff.library]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
+<p><b>Section:</b> C.8 <a href="https://wg21.link/diff.library">[diff.library]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
  <b>Submitter:</b> Miles Zhao <b>Opened:</b> 2009-05-23 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -34328,7 +34328,7 @@ bitset.</ins>
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD Editorial">NAD Editorial</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-In "Table 122 &mdash; Standard macros" of C.7 <a href="https://wg21.link/diff.library">[diff.library]</a>, which lists the 56 macros
+In "Table 122 &mdash; Standard macros" of C.8 <a href="https://wg21.link/diff.library">[diff.library]</a>, which lists the 56 macros
 inherited from C library, <tt>va_copy</tt> seems to be missing. But in
 "Table 21 &mdash; Header <tt>&lt;cstdarg&gt;</tt> synopsis" (17.13 <a href="https://wg21.link/support.runtime">[support.runtime]</a>), there is.
 </p>
@@ -34347,7 +34347,7 @@ will move to Tentatively Ready
 
 <p id="res-1115"><b>Proposed resolution:</b></p>
 <p>
-Add <tt>va_copy</tt> to Table 122 -- Standard macros in C.7 <a href="https://wg21.link/diff.library">[diff.library]</a>.
+Add <tt>va_copy</tt> to Table 122 -- Standard macros in C.8 <a href="https://wg21.link/diff.library">[diff.library]</a>.
 </p>
 
 
@@ -35490,7 +35490,7 @@ Adopt <a href="https://wg21.link/n3002.pdf">N3002</a>.
 
 <hr>
 <h3><a name="1155" href="#1155">1155</a><sup><a href="https://cplusplus.github.io/LWG/issue1155">(i)</a></sup>. Reference should be to C99</h3>
-<p><b>Section:</b> C.7 <a href="https://wg21.link/diff.library">[diff.library]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
+<p><b>Section:</b> C.8 <a href="https://wg21.link/diff.library">[diff.library]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
  <b>Submitter:</b> LWG <b>Opened:</b> 2009-06-28 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -39506,7 +39506,7 @@ Solved as proposed by LWG <a href="lwg-defects.html#704">704</a>.
 <p id="res-1301"><b>Proposed resolution:</b></p>
 
 <p>
-Change 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>/10:
+Change 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>/10:
 </p>
 
 <blockquote>
@@ -40155,7 +40155,7 @@ to be <tt>nullptr</tt></ins>.
 </p></blockquote>
 
 <p>
-C.7.3.7 <a href="https://wg21.link/diff.null">[diff.null]</a>
+C.8.3.7 <a href="https://wg21.link/diff.null">[diff.null]</a>
 </p>
 
 <blockquote><p>
@@ -42245,7 +42245,7 @@ only in their use of these types.
 
 <hr>
 <h3><a name="1415" href="#1415">1415</a><sup><a href="https://cplusplus.github.io/LWG/issue1415">(i)</a></sup>. Iterator stability bans the short-string optimization</h3>
-<p><b>Section:</b> 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
+<p><b>Section:</b> 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
  <b>Submitter:</b> INCITS <b>Opened:</b> 2010-08-25 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -44547,7 +44547,7 @@ while allowing code in other scopes to use them as identifiers. &mdash; <i>end n
 </p></blockquote>
 </li>
 
-<li><p>In C.7 <a href="https://wg21.link/diff.library">[diff.library]</a> add "stderr", "stdin", and "stdout" to 
+<li><p>In C.8 <a href="https://wg21.link/diff.library">[diff.library]</a> add "stderr", "stdin", and "stdout" to 
 Table 150 &mdash; Standard values:</p>
 
 <blockquote>
@@ -45958,7 +45958,7 @@ element types directed to the LEWG in the future.
 
 <hr>
 <h3><a name="2167" href="#2167">2167</a><sup><a href="https://cplusplus.github.io/LWG/issue2167">(i)</a></sup>. Copy assignment requirements of Containers</h3>
-<p><b>Section:</b> 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Dean Michael Berris <b>Opened:</b> 2012-07-13 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -46029,7 +46029,7 @@ this issue remains NAD though.
 <p>This wording is relative to N3376.</p>
 
 <ol>
-<li><p>Change Table 96 &mdash; "Container requirements" in 24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>:</p>
+<li><p>Change Table 96 &mdash; "Container requirements" in 24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>:</p>
 
 <table border="1">
 <caption>Table 96 &mdash; Container requirements</caption>
@@ -46135,7 +46135,7 @@ lvalue <del>, respectively,</del> of type <tt>T</tt>.
 
 <hr>
 <h3><a name="2178" href="#2178">2178</a><sup><a href="https://cplusplus.github.io/LWG/issue2178">(i)</a></sup>. <tt>Allocator</tt> requirement changes not mentioned Annex C</h3>
-<p><b>Section:</b> 16.4.4.6 <a href="https://wg21.link/allocator.requirements">[allocator.requirements]</a>, C.7 <a href="https://wg21.link/diff.library">[diff.library]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">Pending NAD Editorial</a>
+<p><b>Section:</b> 16.4.4.6 <a href="https://wg21.link/allocator.requirements">[allocator.requirements]</a>, C.8 <a href="https://wg21.link/diff.library">[diff.library]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">Pending NAD Editorial</a>
  <b>Submitter:</b> Nevin Liber <b>Opened:</b> 2012-08-14 <b>Last modified:</b> 2016-11-21</p>
 <p><b>Priority: </b>3
 </p>
@@ -46147,7 +46147,7 @@ lvalue <del>, respectively,</del> of type <tt>T</tt>.
 <p>
 Given that a number of things were removed from the allocator requirements (<tt>reference</tt>, <tt>const_reference</tt>, 
 <tt>address()</tt> in 16.4.4.6 <a href="https://wg21.link/allocator.requirements">[allocator.requirements]</a>), it seems that these incompatible changes should be 
-mentioned in Annex C.7 <a href="https://wg21.link/diff.library">[diff.library]</a>, more specifically in [diff.cpp03].
+mentioned in Annex C.8 <a href="https://wg21.link/diff.library">[diff.library]</a>, more specifically in [diff.cpp03].
 </p>
 
 <p><i>[
@@ -46236,7 +46236,7 @@ Alisdair agrees in principle, but concerned with adding yet more constructors to
 
 <hr>
 <h3><a name="2201" href="#2201">2201</a><sup><a href="https://cplusplus.github.io/LWG/issue2201">(i)</a></sup>. Missing macro entries from C standard library</h3>
-<p><b>Section:</b> C.7 <a href="https://wg21.link/diff.library">[diff.library]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
+<p><b>Section:</b> C.8 <a href="https://wg21.link/diff.library">[diff.library]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
  <b>Submitter:</b> Kevin McCarty <b>Opened:</b> 2012-02-03 <b>Last modified:</b> 2016-11-28</p>
 <p><b>Priority: </b>2
 </p>
@@ -46245,7 +46245,7 @@ Alisdair agrees in principle, but concerned with adding yet more constructors to
 <p><b>Discussion:</b></p>
 
 <p>
-It seems that in C.7 <a href="https://wg21.link/diff.library">[diff.library]</a>, Table 150 the following macros from  [c.limits], Table 31 
+It seems that in C.8 <a href="https://wg21.link/diff.library">[diff.library]</a>, Table 150 the following macros from  [c.limits], Table 31 
 are missing:
 </p>
 <blockquote><pre>
@@ -46254,7 +46254,7 @@ LLONG_MAX
 ULLONG_MAX
 </pre></blockquote>
 <p>
-In addition in C.7 <a href="https://wg21.link/diff.library">[diff.library]</a>, Table 150 the following macros from  [c.limits], Table 32 
+In addition in C.8 <a href="https://wg21.link/diff.library">[diff.library]</a>, Table 150 the following macros from  [c.limits], Table 32 
 are missing:
 </p>
 <blockquote><pre>
@@ -46262,7 +46262,7 @@ DECIMAL_DIG
 FLT_EVAL_METHOD
 </pre></blockquote>
 <p>
-Furtheron it seems that in C.7 <a href="https://wg21.link/diff.library">[diff.library]</a>, Table 149/150 further macros are missing as well, e.g. 
+Furtheron it seems that in C.8 <a href="https://wg21.link/diff.library">[diff.library]</a>, Table 149/150 further macros are missing as well, e.g. 
 <tt>HUGE_VALF</tt>, <tt>INFINITY</tt>, etc.
 </p>
 
@@ -49481,7 +49481,7 @@ But this implies that <tt>basic_string(str, pos)</tt> and <tt>basic_string(str, 
 instead of getting an allocator from <tt>str</tt>.
 <p/>
 23.4.3.2 <a href="https://wg21.link/string.require">[string.require]</a> p3 says "The <tt>Allocator</tt> object used shall be obtained as described in 23.2.1."  
-24.2.2.1 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> p8 says "Copy constructors for these container types obtain an allocator 
+24.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a> p8 says "Copy constructors for these container types obtain an allocator 
 by calling <tt>allocator_traits&lt;allocator_type&gt;::select_on_container_copy_construction</tt> on the allocator 
 belonging to the container being copied.", but this isn't exactly a copy constructor. Then it talks about move constructors 
 (which this definitely isn't), and finally says that "All other constructors for these container types take a 

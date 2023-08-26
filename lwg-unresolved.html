@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-08-13 at 08:50:37 UTC</p>
+<p><p>Revised 2023-08-26 at 10:42:27 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -50602,6 +50602,54 @@ for (++first; first != last; ++first)
 return {std::move(first), std::move(init)};
 </pre></blockquote>
 </blockquote>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3970" href="#3970">3970</a><sup><a href="https://cplusplus.github.io/LWG/issue3970">(i)</a></sup>. &sect;[mdspan.syn] Missing definition of <tt>full_extent_t</tt> and <tt>full_extent</tt></h3>
+<p><b>Section:</b> 24.7.3.2 <a href="https://wg21.link/mdspan.syn">[mdspan.syn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> S. B. Tam <b>Opened:</b> 2023-08-16 <b>Last modified:</b> 2023-08-26</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<tt>submdspan</tt> uses a type called <tt>full_extent_t</tt>, but there isn't a definition for that type.
+<p/>
+It appears that <tt>full_extent_t</tt> (along with <tt>full_extent</tt>) was proposed in <a href="https://wg21.link/P0009">P0009</a> 
+before <tt>submdspan</tt> was moved into its own paper, and its definition failed to be included in 
+<a href="https://wg21.link/P2630">P2630</a> Submdspan.
+</p>
+
+
+<p id="res-3970"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 24.7.3.2 <a href="https://wg21.link/mdspan.syn">[mdspan.syn]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+[&hellip;]
+<i>//  [mdspan.submdspan], submdspan creation</i>
+template&lt;class OffsetType, class LengthType, class StrideType&gt;
+  struct strided_slice;
+
+template&lt;class LayoutMapping&gt;
+  struct submdspan_mapping_result;
+  
+<ins>struct full_extent_t { explicit full_extent_t() = default; };
+inline constexpr full_extent_t full_extent{};</ins>
+[&hellip;]
+</pre>
 </blockquote>
 </li>
 </ol>

@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2023-08-13</td>
+  <td align="left">2023-08-26</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-08-13 at 08:50:37 UTC</p>
+<p><p>Revised 2023-08-26 at 10:42:27 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -182,14 +182,14 @@ ownership of it.
 <ul>
 <li>D125: 2023-06-09 Post-Varna<ul>
 <li><b>Summary:</b><ul>
-<li>436 open issues, up by 6.</li>
+<li>437 open issues, up by 7.</li>
 <li>3020 closed issues, up by 20.</li>
 <li>35 reassigned issues, down by 1.</li>
-<li>3491 issues total, up by 25.</li>
+<li>3492 issues total, up by 26.</li>
 </ul></li>
 <li><b>Details:</b><ul>
 <li>Added the following Ready issue: <a href="lwg-active.html#3946">3946</a>.</li>
-<li>Added the following 24 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>, <a href="lwg-active.html#3951">3951</a>, <a href="lwg-active.html#3952">3952</a>, <a href="lwg-active.html#3953">3953</a>, <a href="lwg-active.html#3954">3954</a>, <a href="lwg-active.html#3955">3955</a>, <a href="lwg-active.html#3956">3956</a>, <a href="lwg-active.html#3957">3957</a>, <a href="lwg-active.html#3958">3958</a>, <a href="lwg-active.html#3959">3959</a>, <a href="lwg-active.html#3960">3960</a>, <a href="lwg-active.html#3961">3961</a>, <a href="lwg-active.html#3962">3962</a>, <a href="lwg-active.html#3963">3963</a>, <a href="lwg-active.html#3964">3964</a>, <a href="lwg-active.html#3965">3965</a>, <a href="lwg-active.html#3966">3966</a>, <a href="lwg-active.html#3967">3967</a>, <a href="lwg-active.html#3968">3968</a>, <a href="lwg-active.html#3969">3969</a>.</li>
+<li>Added the following 25 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>, <a href="lwg-active.html#3951">3951</a>, <a href="lwg-active.html#3952">3952</a>, <a href="lwg-active.html#3953">3953</a>, <a href="lwg-active.html#3954">3954</a>, <a href="lwg-active.html#3955">3955</a>, <a href="lwg-active.html#3956">3956</a>, <a href="lwg-active.html#3957">3957</a>, <a href="lwg-active.html#3958">3958</a>, <a href="lwg-active.html#3959">3959</a>, <a href="lwg-active.html#3960">3960</a>, <a href="lwg-active.html#3961">3961</a>, <a href="lwg-active.html#3962">3962</a>, <a href="lwg-active.html#3963">3963</a>, <a href="lwg-active.html#3964">3964</a>, <a href="lwg-active.html#3965">3965</a>, <a href="lwg-active.html#3966">3966</a>, <a href="lwg-active.html#3967">3967</a>, <a href="lwg-active.html#3968">3968</a>, <a href="lwg-active.html#3969">3969</a>, <a href="lwg-active.html#3970">3970</a>.</li>
 <li>Changed the following 6 issues to Ready (from New): <a href="lwg-active.html#2392">2392</a>, <a href="lwg-active.html#3203">3203</a>, <a href="lwg-active.html#3431">3431</a>, <a href="lwg-active.html#3749">3749</a>, <a href="lwg-active.html#3892">3892</a>, <a href="lwg-active.html#3897">3897</a>.</li>
 <li>Changed the following issue to Ready (from Open): <a href="lwg-active.html#3305">3305</a>.</li>
 <li>Changed the following issue to Open (from New): <a href="lwg-active.html#3343">3343</a>.</li>
@@ -54130,6 +54130,54 @@ for (++first; first != last; ++first)
 return {std::move(first), std::move(init)};
 </pre></blockquote>
 </blockquote>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3970" href="#3970">3970</a><sup><a href="https://cplusplus.github.io/LWG/issue3970">(i)</a></sup>. &sect;[mdspan.syn] Missing definition of <tt>full_extent_t</tt> and <tt>full_extent</tt></h3>
+<p><b>Section:</b> 24.7.3.2 <a href="https://wg21.link/mdspan.syn">[mdspan.syn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> S. B. Tam <b>Opened:</b> 2023-08-16 <b>Last modified:</b> 2023-08-26</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<tt>submdspan</tt> uses a type called <tt>full_extent_t</tt>, but there isn't a definition for that type.
+<p/>
+It appears that <tt>full_extent_t</tt> (along with <tt>full_extent</tt>) was proposed in <a href="https://wg21.link/P0009">P0009</a> 
+before <tt>submdspan</tt> was moved into its own paper, and its definition failed to be included in 
+<a href="https://wg21.link/P2630">P2630</a> Submdspan.
+</p>
+
+
+<p id="res-3970"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 24.7.3.2 <a href="https://wg21.link/mdspan.syn">[mdspan.syn]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+[&hellip;]
+<i>//  [mdspan.submdspan], submdspan creation</i>
+template&lt;class OffsetType, class LengthType, class StrideType&gt;
+  struct strided_slice;
+
+template&lt;class LayoutMapping&gt;
+  struct submdspan_mapping_result;
+  
+<ins>struct full_extent_t { explicit full_extent_t() = default; };
+inline constexpr full_extent_t full_extent{};</ins>
+[&hellip;]
+</pre>
 </blockquote>
 </li>
 </ol>

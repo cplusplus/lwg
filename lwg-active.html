@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-08-26 at 10:50:56 UTC</p>
+<p><p>Revised 2023-08-26 at 11:18:37 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -182,14 +182,14 @@ ownership of it.
 <ul>
 <li>D125: 2023-06-09 Post-Varna<ul>
 <li><b>Summary:</b><ul>
-<li>437 open issues, up by 7.</li>
+<li>438 open issues, up by 8.</li>
 <li>3020 closed issues, up by 20.</li>
 <li>35 reassigned issues, down by 1.</li>
-<li>3492 issues total, up by 26.</li>
+<li>3493 issues total, up by 27.</li>
 </ul></li>
 <li><b>Details:</b><ul>
 <li>Added the following Ready issue: <a href="lwg-active.html#3946">3946</a>.</li>
-<li>Added the following 25 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>, <a href="lwg-active.html#3951">3951</a>, <a href="lwg-active.html#3952">3952</a>, <a href="lwg-active.html#3953">3953</a>, <a href="lwg-active.html#3954">3954</a>, <a href="lwg-active.html#3955">3955</a>, <a href="lwg-active.html#3956">3956</a>, <a href="lwg-active.html#3957">3957</a>, <a href="lwg-active.html#3958">3958</a>, <a href="lwg-active.html#3959">3959</a>, <a href="lwg-active.html#3960">3960</a>, <a href="lwg-active.html#3961">3961</a>, <a href="lwg-active.html#3962">3962</a>, <a href="lwg-active.html#3963">3963</a>, <a href="lwg-active.html#3964">3964</a>, <a href="lwg-active.html#3965">3965</a>, <a href="lwg-active.html#3966">3966</a>, <a href="lwg-active.html#3967">3967</a>, <a href="lwg-active.html#3968">3968</a>, <a href="lwg-active.html#3969">3969</a>, <a href="lwg-active.html#3970">3970</a>.</li>
+<li>Added the following 26 New issues: <a href="lwg-active.html#3945">3945</a>, <a href="lwg-active.html#3947">3947</a>, <a href="lwg-active.html#3948">3948</a>, <a href="lwg-active.html#3949">3949</a>, <a href="lwg-active.html#3950">3950</a>, <a href="lwg-active.html#3951">3951</a>, <a href="lwg-active.html#3952">3952</a>, <a href="lwg-active.html#3953">3953</a>, <a href="lwg-active.html#3954">3954</a>, <a href="lwg-active.html#3955">3955</a>, <a href="lwg-active.html#3956">3956</a>, <a href="lwg-active.html#3957">3957</a>, <a href="lwg-active.html#3958">3958</a>, <a href="lwg-active.html#3959">3959</a>, <a href="lwg-active.html#3960">3960</a>, <a href="lwg-active.html#3961">3961</a>, <a href="lwg-active.html#3962">3962</a>, <a href="lwg-active.html#3963">3963</a>, <a href="lwg-active.html#3964">3964</a>, <a href="lwg-active.html#3965">3965</a>, <a href="lwg-active.html#3966">3966</a>, <a href="lwg-active.html#3967">3967</a>, <a href="lwg-active.html#3968">3968</a>, <a href="lwg-active.html#3969">3969</a>, <a href="lwg-active.html#3970">3970</a>, <a href="lwg-active.html#3971">3971</a>.</li>
 <li>Changed the following 6 issues to Ready (from New): <a href="lwg-active.html#2392">2392</a>, <a href="lwg-active.html#3203">3203</a>, <a href="lwg-active.html#3431">3431</a>, <a href="lwg-active.html#3749">3749</a>, <a href="lwg-active.html#3892">3892</a>, <a href="lwg-active.html#3897">3897</a>.</li>
 <li>Changed the following issue to Ready (from Open): <a href="lwg-active.html#3305">3305</a>.</li>
 <li>Changed the following issue to Open (from New): <a href="lwg-active.html#3343">3343</a>.</li>
@@ -46900,6 +46900,8 @@ template&lt;class T, <ins>input_or_output_iterator</ins><del>output_iterator&lt;
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-02-04 <b>Last modified:</b> 2023-02-10</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.join.with.view">active issues</a> in [range.join.with.view].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.join.with.view">issues</a> in [range.join.with.view].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
@@ -54181,6 +54183,46 @@ inline constexpr full_extent_t full_extent{};</ins>
 </blockquote>
 </li>
 </ol>
+
+
+
+
+
+<hr>
+<h3><a name="3971" href="#3971">3971</a><sup><a href="https://cplusplus.github.io/LWG/issue3971">(i)</a></sup>. Join ranges of rvalue references with ranges of prvalues</h3>
+<p><b>Section:</b> 26.7.15.2 <a href="https://wg21.link/range.join.with.view">[range.join.with.view]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-21 <b>Last modified:</b> 2023-08-26</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.join.with.view">active issues</a> in [range.join.with.view].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.join.with.view">issues</a> in [range.join.with.view].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The issue that <tt>concat_view</tt> implicitly breaks equality-preserving by concatenating range of references with range 
+of prvalues seems to be reflected in <tt>join_view</tt> as well.
+<p/>
+When the reference of the inner range is <tt>string&amp;&amp;</tt> and the reference of the pattern range is prvalue 
+<tt>string</tt>, dereferencing its iterator will move the elements of the inner range to the returned <tt>string</tt>, 
+which makes the second dereference get an empty <tt>string</tt> (<a href="https://godbolt.org/z/5YYzK5qsr">demo</a>):
+</p>
+<blockquote>
+<pre>
+vector v1{"hello"s};
+vector v2{"world"s};
+vector v{v1 | views::as_rvalue, v2 | views::as_rvalue};
+auto pattern = views::iota(0, 1) | views::transform([](int) { return ", "s; });
+ranges::forward_range auto joined = v | views::join_with(pattern);
+fmt::print("{}\n", joined); // ["hello", ", ", "world"]
+fmt::print("{}\n", joined); // <span style="color:red;font-weight:bolder">["", ", ", ""]</span>
+</pre>
+</blockquote>
+
+<p>Not sure if we should ban such less common case.</p>
+
+
+<p id="res-3971"><b>Proposed resolution:</b></p>
+
 
 
 

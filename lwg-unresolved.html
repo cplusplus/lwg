@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-08-26 at 10:50:56 UTC</p>
+<p><p>Revised 2023-08-26 at 11:18:37 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -44218,6 +44218,8 @@ template&lt;class T, <ins>input_or_output_iterator</ins><del>output_iterator&lt;
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-02-04 <b>Last modified:</b> 2023-02-10</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.join.with.view">active issues</a> in [range.join.with.view].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.join.with.view">issues</a> in [range.join.with.view].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
@@ -50653,6 +50655,46 @@ inline constexpr full_extent_t full_extent{};</ins>
 </blockquote>
 </li>
 </ol>
+
+
+
+
+
+<hr>
+<h3><a name="3971" href="#3971">3971</a><sup><a href="https://cplusplus.github.io/LWG/issue3971">(i)</a></sup>. Join ranges of rvalue references with ranges of prvalues</h3>
+<p><b>Section:</b> 26.7.15.2 <a href="https://wg21.link/range.join.with.view">[range.join.with.view]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-21 <b>Last modified:</b> 2023-08-26</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.join.with.view">active issues</a> in [range.join.with.view].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.join.with.view">issues</a> in [range.join.with.view].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The issue that <tt>concat_view</tt> implicitly breaks equality-preserving by concatenating range of references with range 
+of prvalues seems to be reflected in <tt>join_view</tt> as well.
+<p/>
+When the reference of the inner range is <tt>string&amp;&amp;</tt> and the reference of the pattern range is prvalue 
+<tt>string</tt>, dereferencing its iterator will move the elements of the inner range to the returned <tt>string</tt>, 
+which makes the second dereference get an empty <tt>string</tt> (<a href="https://godbolt.org/z/5YYzK5qsr">demo</a>):
+</p>
+<blockquote>
+<pre>
+vector v1{"hello"s};
+vector v2{"world"s};
+vector v{v1 | views::as_rvalue, v2 | views::as_rvalue};
+auto pattern = views::iota(0, 1) | views::transform([](int) { return ", "s; });
+ranges::forward_range auto joined = v | views::join_with(pattern);
+fmt::print("{}\n", joined); // ["hello", ", ", "world"]
+fmt::print("{}\n", joined); // <span style="color:red;font-weight:bolder">["", ", ", ""]</span>
+</pre>
+</blockquote>
+
+<p>Not sure if we should ban such less common case.</p>
+
+
+<p id="res-3971"><b>Proposed resolution:</b></p>
+
 
 
 

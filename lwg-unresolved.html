@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-09-17 at 17:49:55 UTC</p>
+<p><p>Revised 2023-09-17 at 18:17:52 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -51241,7 +51241,7 @@ sentence, such as an <tt>allocator_type</tt> member. Perhaps we want to say a co
 type <tt>X</tt> is allocator-aware using allocator <tt>A</tt> if [&hellip;], and then that <tt>basic_string</tt> and
 containers that are not otherwise allocator aware are are treated as-if they were
 allocator-aware using <tt>std::allocator&lt;typename X::value_type&gt;</tt> (where <tt>value_type</tt>
-is already guaranteed to exist by the basic container requirements).
+is already guaranteed to exist by the <i>container</i> requirements, 24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a> p1).
 </p>
 
 

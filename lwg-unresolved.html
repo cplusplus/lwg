@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-09-23 at 12:42:32 UTC</p>
+<p><p>Revised 2023-09-23 at 12:53:44 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -18397,6 +18397,7 @@ what we optimize).
  <b>Submitter:</b> Eric Fiselier <b>Opened:</b> 2017-02-06 <b>Last modified:</b> 2020-09-06</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#tuple.creation">active issues</a> in [tuple.creation].</p>
 <p><b>View all other</b> <a href="lwg-index.html#tuple.creation">issues</a> in [tuple.creation].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -51403,6 +51404,40 @@ constexpr bitmask operator~(bitmask X) <ins>noexcept</ins> {
 </li>
 
 </ol>
+
+
+
+
+
+<hr>
+<h3><a name="3978" href="#3978">3978</a><sup><a href="https://cplusplus.github.io/LWG/issue3978">(i)</a></sup>. The "no effect" requirement for <tt>std::ignore</tt> is unimplementable for <tt>volatile</tt> bit-fields</h3>
+<p><b>Section:</b> 22.4.5 <a href="https://wg21.link/tuple.creation">[tuple.creation]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-19 <b>Last modified:</b> 2023-09-23</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#tuple.creation">active issues</a> in [tuple.creation].</p>
+<p><b>View all other</b> <a href="lwg-index.html#tuple.creation">issues</a> in [tuple.creation].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+22.4.5 <a href="https://wg21.link/tuple.creation">[tuple.creation]</a>/5 currently says:
+</p>
+<blockquote style="border-left: 3px solid #ccc;padding-left: 15px;"><p>
+[&hellip;] When an argument in <tt>t</tt> is <tt>ignore</tt>, assigning any value to the corresponding tuple element has no effect.
+</p></blockquote>
+<p>
+which is unimplementable for <tt>volatile</tt>-qualified bit-field glvalues.
+<p/>
+In order to passing such a value to the <tt>operator=</tt> function, a distinct object needs to be created and thus the read from 
+the <tt>volatile</tt> glvalue, which is a side effect (6.9.1 <a href="https://wg21.link/intro.execution">[intro.execution]</a>/7), is unavoidable.
+<p/>
+<a href="https://wg21.link/P2968R0">P2968R0</a> addresses the impossibility of assignment from <tt>void</tt> values, but doesn't talk about 
+<tt>volatile</tt> bit-fields. Perhaps we should explicitly say that the program is ill-formed if a <tt>volatile</tt> bit-field 
+value is assigned to <tt>std::ignore</tt> (which is implemented in libstdc++ and MSVC STL, but not in libc++).
+</p>
+
+
+<p id="res-3978"><b>Proposed resolution:</b></p>
 
 
 

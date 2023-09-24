@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2023-09-23</td>
+  <td align="left">2023-09-24</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-09-23 at 14:31:02 UTC</p>
+<p><p>Revised 2023-09-24 at 09:44:03 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -54276,7 +54276,7 @@ which ultimately results in <tt>string_view</tt> being referenced to a local var
 <hr>
 <h3><a name="3973" href="#3973">3973</a><sup><a href="https://cplusplus.github.io/LWG/issue3973">(i)</a></sup>. Monadic operations should be ADL-proof</h3>
 <p><b>Section:</b> 22.8.6.7 <a href="https://wg21.link/expected.object.monadic">[expected.object.monadic]</a>, 22.5.3.7 <a href="https://wg21.link/optional.monadic">[optional.monadic]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-10 <b>Last modified:</b> 2023-09-19</p>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-10 <b>Last modified:</b> 2023-09-24</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#expected.object.monadic">issues</a> in [expected.object.monadic].</p>
@@ -54309,7 +54309,7 @@ This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
 
 <ol>
 
-<li><p>Modify the 22.8.6.7 <a href="https://wg21.link/expected.object.monadic">[expected.object.monadic]</a> as indicated:</p>
+<li><p>Modify 22.8.6.7 <a href="https://wg21.link/expected.object.monadic">[expected.object.monadic]</a> as indicated:</p>
 
 <blockquote class="note">
 <p>
@@ -54499,7 +54499,7 @@ otherwise, an <tt>expected&lt;T, G&gt;</tt> object whose <tt><i>has_val</i></tt>
 </blockquote>
 </li>
 
-<li><p>Modify the 22.5.3.7 <a href="https://wg21.link/optional.monadic">[optional.monadic]</a> as indicated:</p>
+<li><p>Modify 22.5.3.7 <a href="https://wg21.link/optional.monadic">[optional.monadic]</a> as indicated:</p>
 
 
 <blockquote class="note">
@@ -54606,7 +54606,7 @@ direct-non-list-initialized with <tt>invoke(std::forward&lt;F&gt;(f), std::move(
 <hr>
 <h3><a name="3974" href="#3974">3974</a><sup><a href="https://cplusplus.github.io/LWG/issue3974">(i)</a></sup>. <tt>mdspan::operator[]</tt> should not copy <tt>OtherIndexTypes</tt></h3>
 <p><b>Section:</b> 24.7.3.6.3 <a href="https://wg21.link/mdspan.mdspan.members">[mdspan.mdspan.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Casey Carter <b>Opened:</b> 2023-08-12 <b>Last modified:</b> 2023-09-16</p>
+ <b>Submitter:</b> Casey Carter <b>Opened:</b> 2023-08-12 <b>Last modified:</b> 2023-09-24</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -54666,7 +54666,7 @@ This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
 
 <ol>
 
-<li><p>Modify the 24.7.3.6.3 <a href="https://wg21.link/mdspan.mdspan.members">[mdspan.mdspan.members]</a> as indicated:</p>
+<li><p>Modify 24.7.3.6.3 <a href="https://wg21.link/mdspan.mdspan.members">[mdspan.mdspan.members]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -54708,7 +54708,7 @@ return operator[](<ins>extents_type::<i>index-cast</i>(</ins>as_const(indices[P]
 <hr>
 <h3><a name="3975" href="#3975">3975</a><sup><a href="https://cplusplus.github.io/LWG/issue3975">(i)</a></sup>. Specializations of <tt>basic_format_context</tt> should not be permitted</h3>
 <p><b>Section:</b> 22.14.6.6 <a href="https://wg21.link/format.context">[format.context]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Brian Bi <b>Opened:</b> 2023-08-13 <b>Last modified:</b> 2023-09-23</p>
+ <b>Submitter:</b> Brian Bi <b>Opened:</b> 2023-08-13 <b>Last modified:</b> 2023-09-24</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#format.context">issues</a> in [format.context].</p>
@@ -54774,7 +54774,7 @@ This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
 
 <ol>
 
-<li><p>Modify the 22.14.6.6 <a href="https://wg21.link/format.context">[format.context]</a> as indicated:</p>
+<li><p>Modify 22.14.6.6 <a href="https://wg21.link/format.context">[format.context]</a> as indicated:</p>
 
 <blockquote>
 <p>
@@ -54790,7 +54790,7 @@ no diagnostic required.</ins>
 
 </li>
 
-<li><p>Modify the 22.14.6.5 <a href="https://wg21.link/format.parse.ctx">[format.parse.ctx]</a> as indicated:</p>
+<li><p>Modify 22.14.6.5 <a href="https://wg21.link/format.parse.ctx">[format.parse.ctx]</a> as indicated:</p>
 
 <blockquote>
 <p>
@@ -54849,7 +54849,7 @@ is already guaranteed to exist by the <i>container</i> requirements, 24.2.2.2 <a
 <hr>
 <h3><a name="3977" href="#3977">3977</a><sup><a href="https://cplusplus.github.io/LWG/issue3977">(i)</a></sup>. <tt>constexpr</tt> and <tt>noexcept</tt> for operators for bitmask types</h3>
 <p><b>Section:</b> 16.3.3.3.3 <a href="https://wg21.link/bitmask.types">[bitmask.types]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-19 <b>Last modified:</b> 2023-09-23</p>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-19 <b>Last modified:</b> 2023-09-24</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#bitmask.types">active issues</a> in [bitmask.types].</p>
@@ -54880,7 +54880,7 @@ This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
 
 <ol>
 
-<li><p>Modify the 16.3.3.3.3 <a href="https://wg21.link/bitmask.types">[bitmask.types]</a> as indicated:</p>
+<li><p>Modify 16.3.3.3.3 <a href="https://wg21.link/bitmask.types">[bitmask.types]</a> as indicated:</p>
 
 <blockquote>
 <p>
@@ -54974,7 +54974,7 @@ value is assigned to <tt>std::ignore</tt> (which is implemented in libstdc++ and
 <hr>
 <h3><a name="3979" href="#3979">3979</a><sup><a href="https://cplusplus.github.io/LWG/issue3979">(i)</a></sup>. Should we reject <tt>std::bind_front&lt;42&gt;()</tt> and its friends?</h3>
 <p><b>Section:</b> 22.10.13 <a href="https://wg21.link/func.not.fn">[func.not.fn]</a>, 22.10.14 <a href="https://wg21.link/func.bind.partial">[func.bind.partial]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2023-09-23</p>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2023-09-24</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#func.not.fn">issues</a> in [func.not.fn].</p>
@@ -54998,7 +54998,7 @@ This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
 
 <ol>
 
-<li><p>Modify the 22.10.13 <a href="https://wg21.link/func.not.fn">[func.not.fn]</a> as indicated:</p>
+<li><p>Modify 22.10.13 <a href="https://wg21.link/func.not.fn">[func.not.fn]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -55018,7 +55018,7 @@ template&lt;auto f&gt; constexpr <i>unspecified</i> not_fn() noexcept;
 
 </li>
 
-<li><p>Modify the 22.10.14 <a href="https://wg21.link/func.bind.partial">[func.bind.partial]</a> as indicated:</p>
+<li><p>Modify 22.10.14 <a href="https://wg21.link/func.bind.partial">[func.bind.partial]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -55055,7 +55055,7 @@ template&lt;auto f, class... Args&gt;
 <hr>
 <h3><a name="3980" href="#3980">3980</a><sup><a href="https://cplusplus.github.io/LWG/issue3980">(i)</a></sup>. The read exclusive ownership of an atomic read-modify-write operation and whether its read and write are two operations are unclear</h3>
 <p><b>Section:</b> 33.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> jim x <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2023-09-23</p>
+ <b>Submitter:</b> jim x <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2023-09-24</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#atomics.order">active issues</a> in [atomics.order].</p>
@@ -55153,7 +55153,7 @@ This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
 
 <ol>
 
-<li><p>Modify the 33.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> as indicated:</p>
+<li><p>Modify 33.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> as indicated:</p>
 
 <blockquote>
 <p>
@@ -55176,7 +55176,7 @@ modification order<del>) written before the write associated with the read-modif
 <hr>
 <h3><a name="3981" href="#3981">3981</a><sup><a href="https://cplusplus.github.io/LWG/issue3981">(i)</a></sup>. Range adaptor closure object is underspecified for its return type</h3>
 <p><b>Section:</b> 26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2023-09-23</p>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2023-09-24</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#range.adaptor.object">issues</a> in [range.adaptor.object].</p>
@@ -55219,7 +55219,7 @@ This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
 
 <ol>
 
-<li><p>Modify the 26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a> as indicated:</p>
+<li><p>Modify 26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a> as indicated:</p>
 
 <blockquote>
 <p>
@@ -55252,7 +55252,7 @@ then the implementation ensures that <tt>t</tt> is a range adaptor closure objec
 <hr>
 <h3><a name="3982" href="#3982">3982</a><sup><a href="https://cplusplus.github.io/LWG/issue3982">(i)</a></sup>. <tt><i>is-derived-from-view-interface</i></tt> should require that <tt>T</tt> is derived from <tt>view_interface&lt;T&gt;</tt></h3>
 <p><b>Section:</b> 26.4.4 <a href="https://wg21.link/range.view">[range.view]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2023-09-23</p>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2023-09-24</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#range.view">issues</a> in [range.view].</p>
@@ -55272,7 +55272,7 @@ This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
 
 <ol>
 
-<li><p>Modify the 26.4.4 <a href="https://wg21.link/range.view">[range.view]</a> as indicated:</p>
+<li><p>Modify 26.4.4 <a href="https://wg21.link/range.view">[range.view]</a> as indicated:</p>
 
 <blockquote>
 <pre>

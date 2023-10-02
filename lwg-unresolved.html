@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-10-02 at 13:59:15 UTC</p>
+<p><p>Revised 2023-10-02 at 14:19:16 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -51968,10 +51968,6 @@ However, the earliest requirement that <tt>C</tt> not be a view was still impose
 although it is unclear why <i>Constraints</i> were used in the first place, such a way of kicking out the function candidate 
 does bring undesirable hard errors and poor diagnostics (<a href="https://godbolt.org/z/K1f15K71n">demo</a>):
 </p>
-<p>
-I think consistent use of <i>Mandates</i> for template parameter <tt>C</tt> is more appropriate, as <tt>static_assert</tt> 
-provide clearer and more readable diagnostics.
-</p>
 <blockquote><pre>
 #include &lt;ranges&gt;
 
@@ -51981,6 +51977,10 @@ int main() {
   auto drop = iota | std::ranges::to&lt;std::ranges::drop_view&gt;(5); // <span style="color:red;font-weight:bolder">poor diagnostics</span>
 }
 </pre></blockquote>
+<p>
+I think consistent use of <i>Mandates</i> for template parameter <tt>C</tt> is more appropriate, as <tt>static_assert</tt> 
+provide clearer and more readable diagnostics.
+</p>
 
 
 <p id="res-3985"><b>Proposed resolution:</b></p>
@@ -52051,6 +52051,40 @@ template&lt;template&lt;class...&gt; class C, class... Args&gt;
 </li>
 
 </ol>
+
+
+
+
+
+<hr>
+<h3><a name="3986" href="#3986">3986</a><sup><a href="https://cplusplus.github.io/LWG/issue3986">(i)</a></sup>. <tt>basic_const_iterator</tt> doesn't work with <tt>optional</tt></h3>
+<p><b>Section:</b> 25.5.3 <a href="https://wg21.link/const.iterators">[const.iterators]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-26 <b>Last modified:</b> 2023-10-02</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#const.iterators">issues</a> in [const.iterators].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The heterogeneous comparison operators of <tt>basic_const_iterator</tt> only constrain type <tt>I</tt> to be 
+comparable with the underlying iterator type, which allows non-iterator types such as <tt>optional</tt>, and 
+the heterogeneous comparison operators of the latter would make the situation worse 
+(<a href="https://godbolt.org/z/76evPfGnh">demo</a>):
+</p>
+<blockquote><pre>
+#include &lt;iterator&gt;
+#include &lt;optional&gt;
+  
+int main() {
+  std::basic_const_iterator&lt;const int*&gt; it;
+  std::optional opt{it};
+  auto c = opt &lt; it; // <span style="color:red;font-weight:bolder">infinite meta-recursion</span>
+  auto d = it - opt; // <span style="color:red;font-weight:bolder">infinite meta-recursion</span>
+}
+</pre></blockquote>
+
+
+<p id="res-3986"><b>Proposed resolution:</b></p>
 
 
 

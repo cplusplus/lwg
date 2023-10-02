@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-10-02 at 14:35:54 UTC</p>
+<p><p>Revised 2023-10-02 at 14:59:03 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -52062,6 +52062,7 @@ template&lt;template&lt;class...&gt; class C, class... Args&gt;
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-26 <b>Last modified:</b> 2023-10-02</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#const.iterators">active issues</a> in [const.iterators].</p>
 <p><b>View all other</b> <a href="lwg-index.html#const.iterators">issues</a> in [const.iterators].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -52124,6 +52125,86 @@ This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
 <tt>&lt;string&gt;</tt>, <tt>&lt;string_view&gt;</tt>, <tt>&lt;unordered_map&gt;</tt>, <tt>&lt;unordered_set&gt;</tt>, 
 and <tt>&lt;vector&gt;</tt>.
 </p>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3988" href="#3988">3988</a><sup><a href="https://cplusplus.github.io/LWG/issue3988">(i)</a></sup>. <tt>basic_const_iterator(T&amp;&amp;)</tt> constructor is redundant</h3>
+<p><b>Section:</b> 25.5.3 <a href="https://wg21.link/const.iterators">[const.iterators]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-27 <b>Last modified:</b> 2023-10-02</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#const.iterators">active issues</a> in [const.iterators].</p>
+<p><b>View all other</b> <a href="lwg-index.html#const.iterators">issues</a> in [const.iterators].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The <tt>basic_const_iterator(T&amp;&amp; t)</tt> constructor constrains the template <tt>T</tt> to be 
+implicitly converted to the underlying iterator type <tt>I</tt> and initializes it via forwarding <tt>t</tt>, 
+which seems redundant and introduces inconsistency as <tt>basic_const_iterator(I i)</tt> already handles such case:
+</p>
+<blockquote><pre>
+#include &lt;iterator&gt;
+  
+int main() {
+  int* p;
+  std::reverse_iterator&lt;const int*&gt; ri(p);     // calls reverse_iterator(I i)
+  std::move_iterator&lt;const int*&gt; mi(p);        // calls move_iterator(I i)
+  std::basic_const_iterator&lt;const int*&gt; ci(p); // calls basic_const_iterator(T&amp;&amp; t) not basic_const_iterator(I i)
+}
+</pre></blockquote>
+
+
+<p id="res-3988"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 25.5.3.3 <a href="https://wg21.link/const.iterators.iterator">[const.iterators.iterator]</a>, class template <tt>basic_const_iterator</tt> synopsis, as indicated:</p>
+
+<blockquote>
+<pre>
+namespace std {
+  [&hellip;]
+
+  template&lt;input_iterator Iterator&gt;
+  class basic_const_iterator {
+    [&hellip;]
+    constexpr basic_const_iterator(Iterator current);
+    [&hellip;]
+    <del>template&lt;<i>different-from</i>&lt;basic_const_iterator&gt; T&gt;
+        requires convertible_to&lt;T, Iterator&gt;
+      constexpr basic_const_iterator(T&amp;&amp; current);</del>
+    [&hellip;]
+  };
+}
+</pre>
+</blockquote>
+
+</li>
+
+<li><p>Modify 25.5.3.5 <a href="https://wg21.link/const.iterators.ops">[const.iterators.ops]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+<del>template&lt;<i>different-from</i>&lt;basic_const_iterator&gt; T&gt;
+  requires convertible_to&lt;T, Iterator&gt;
+  constexpr basic_const_iterator(T&amp;&amp; current);</del>
+</pre>
+<blockquote>
+<p>
+<del>-3- <i>Effects</i>: Initializes <tt><i>current_</i></tt> with <tt>std::forward&lt;T&gt;(current)</tt>.</del>
+</p>
+</blockquote>
 </blockquote>
 
 </li>

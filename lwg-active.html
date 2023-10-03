@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-10-03 at 09:12:04 UTC</p>
+<p><p>Revised 2023-10-03 at 09:52:58 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -55305,7 +55305,7 @@ other type <tt><ins>U</ins><del>V</del></tt>.
 <hr>
 <h3><a name="3983" href="#3983">3983</a><sup><a href="https://cplusplus.github.io/LWG/issue3983">(i)</a></sup>. <tt>ranges::to</tt> adaptors are underconstrained</h3>
 <p><b>Section:</b> 26.5.7.3 <a href="https://wg21.link/range.utility.conv.adaptors">[range.utility.conv.adaptors]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-23 <b>Last modified:</b> 2023-09-24</p>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-23 <b>Last modified:</b> 2023-10-03</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -55330,8 +55330,9 @@ int main() {
 }
 </pre></blockquote>
 
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
 
-<p id="res-3983"><b>Proposed resolution:</b></p>
 <p>
 This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
 </p>
@@ -55386,6 +55387,52 @@ perfect forwarding call wrapper (22.10.4 <a href="https://wg21.link/func.require
 <p/>
 [&hellip;]
 </p>
+</blockquote>
+</blockquote>
+
+</li>
+
+</ol>
+</blockquote>
+
+<p><i>[2023-09-28; Hewill provides alternative wording]</i></p>
+
+
+
+<p id="res-3983"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 26.5.7.3 <a href="https://wg21.link/range.utility.conv.adaptors">[range.utility.conv.adaptors]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class C, class... Args&gt; requires (!view&lt;C&gt;)
+  constexpr auto to(Args&amp;&amp;... args);
+template&lt;template&lt;class...&gt; class C, class... Args&gt;
+  constexpr auto to(Args&amp;&amp;... args);
+</pre>
+<blockquote>
+<p>
+-1- <i>Mandates</i>: For the first overload, <tt>C</tt> is a cv-unqualified class type.
+<p/>
+-2- <i>Returns</i>: A range adaptor closure object (26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a>) <tt>f</tt> that is a 
+perfect forwarding call wrapper (22.10.4 <a href="https://wg21.link/func.require">[func.require]</a>) with the following properties:
+</p>
+<ol style="list-style-type:none">
+<li><p>(2.1) &mdash; It has no target object.</p></li>
+<li><p>(2.2) &mdash; Its bound argument entities <tt>bound_args</tt> consist of objects of types <tt>decay_t&lt;Args&gt;...</tt> 
+direct-non-list-initialized with <tt>std::forward&lt;Args&gt;(args)...</tt>, respectively. </p></li>
+<li><p>(2.3) &mdash; Its call pattern is <tt>to&lt;C&gt;(r, bound_args...)</tt>, where <tt>r</tt> is the argument used in a 
+function call expression of <tt>f</tt>.</p></li>
+</ol>
+<p><ins>
+-?- <i>Remarks</i>: The expression <tt>to(args...)</tt> is well-formed if and only if the initialization of the bound argument entities 
+of the result, as specified above, are all well-formed.
+</ins></p>
 </blockquote>
 </blockquote>
 

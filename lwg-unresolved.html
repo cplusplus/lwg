@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-10-03 at 10:10:23 UTC</p>
+<p><p>Revised 2023-10-03 at 10:25:52 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -52346,6 +52346,76 @@ from different views on the same underlying range is well-defined.
 
 
 <p id="res-3989"><b>Proposed resolution:</b></p>
+
+
+
+
+
+<hr>
+<h3><a name="3990" href="#3990">3990</a><sup><a href="https://cplusplus.github.io/LWG/issue3990">(i)</a></sup>. Program-defined specializations of <tt>std::tuple</tt> and <tt>std::variant</tt> can't be properly supported</h3>
+<p><b>Section:</b> 22.4.4 <a href="https://wg21.link/tuple.tuple">[tuple.tuple]</a>, 22.6.3.1 <a href="https://wg21.link/variant.variant.general">[variant.variant.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-29 <b>Last modified:</b> 2023-10-03</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#tuple.tuple">issues</a> in [tuple.tuple].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Currently, program-defined specializations of <tt>std::tuple</tt> and <tt>std::variant</tt> are not explicitly disallowed. 
+However, they can't be properly supported by standard library implementations, because the corresponding <tt>std::get</tt> 
+function templates have to inspect the implementation details of these types, and users have no way to make <tt>std::get</tt> 
+behave correctly for a program-defined specializations.
+<p/>
+Perhaps we should explicitly disallow specializing <tt>std::tuple</tt> and <tt>std::variant</tt>.
+</p>
+
+
+<p id="res-3990"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 22.4.4 <a href="https://wg21.link/tuple.tuple">[tuple.tuple]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+namespace std {
+  template&lt;class... Types&gt;
+  class tuple {
+    [&hellip;]
+  };
+
+  [&hellip;]
+}
+</pre>
+</blockquote>
+<blockquote>
+<p>
+<ins>-?- If a program declares an explicit or partial specialization of <tt>tuple</tt>, 
+the program is ill-formed, no diagnostic required.</ins>
+</p>
+</blockquote>
+
+</li>
+
+<li><p>Modify 22.6.3.1 <a href="https://wg21.link/variant.variant.general">[variant.variant.general]</a> as indicated:</p>
+
+<blockquote>
+<p>
+[&hellip;]
+<p/>
+-3- A program that instantiates the definition of <tt>variant</tt> with no template arguments is ill-formed.
+<p/>
+<ins>-?- If a program declares an explicit or partial specialization of <tt>variant</tt>, 
+the program is ill-formed, no diagnostic required.</ins>
+</p>
+</blockquote>
+
+</li>
+
+</ol>
 
 
 

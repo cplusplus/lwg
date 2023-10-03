@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2023-10-02</td>
+  <td align="left">2023-10-03</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-10-02 at 14:59:03 UTC</p>
+<p><p>Revised 2023-10-03 at 09:12:04 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -55664,9 +55664,9 @@ and <tt>&lt;vector&gt;</tt>.
 
 
 <hr>
-<h3><a name="3988" href="#3988">3988</a><sup><a href="https://cplusplus.github.io/LWG/issue3988">(i)</a></sup>. <tt>basic_const_iterator(T&amp;&amp;)</tt> constructor is redundant</h3>
-<p><b>Section:</b> 25.5.3 <a href="https://wg21.link/const.iterators">[const.iterators]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-27 <b>Last modified:</b> 2023-10-02</p>
+<h3><a name="3988" href="#3988">3988</a><sup><a href="https://cplusplus.github.io/LWG/issue3988">(i)</a></sup>. Should <tt>as_const_view</tt> and <tt>basic_const_iterator</tt> provide <tt>base()</tt>?</h3>
+<p><b>Section:</b> 25.5.3 <a href="https://wg21.link/const.iterators">[const.iterators]</a>, 26.7.21.2 <a href="https://wg21.link/range.as.const.view">[range.as.const.view]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-28 <b>Last modified:</b> 2023-10-03</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#const.iterators">active issues</a> in [const.iterators].</p>
@@ -55674,20 +55674,33 @@ and <tt>&lt;vector&gt;</tt>.
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-The <tt>basic_const_iterator(T&amp;&amp; t)</tt> constructor constrains the template <tt>T</tt> to be 
-implicitly converted to the underlying iterator type <tt>I</tt> and initializes it via forwarding <tt>t</tt>, 
-which seems redundant and introduces inconsistency as <tt>basic_const_iterator(I i)</tt> already handles such case:
+Currently, both <tt>as_const_view</tt> and <tt>basic_const_iterator</tt> provide <tt>base()</tt> members to 
+return the underlying range and iterator, which seems to expose vulnerabilities in modifying them:
 </p>
 <blockquote><pre>
-#include &lt;iterator&gt;
-  
+#include &lt;vector&gt;
+#include &lt;ranges&gt;
+
 int main() {
-  int* p;
-  std::reverse_iterator&lt;const int*&gt; ri(p);     // calls reverse_iterator(I i)
-  std::move_iterator&lt;const int*&gt; mi(p);        // calls move_iterator(I i)
-  std::basic_const_iterator&lt;const int*&gt; ci(p); // calls basic_const_iterator(T&amp;&amp; t) not basic_const_iterator(I i)
+  std::vector v{1, 2, 3};
+  
+  auto f = [](std::span&lt;int&gt;::const_iterator i) {
+    *i.base() = 4;
+  };
+  f(std::span{v}.cbegin());
+
+  auto g = [](const std::ranges::constant_range auto&amp; r) {
+    r.begin().base()[1] = 5;
+    r.base()[2] = 6;
+  };
+  g(std::ranges::as_const_view(v));
+
+  // v now becomes [4, 5, 6]
 }
 </pre></blockquote>
+<p>
+I don't think such a shortcut should be provided as it doesn't seem to be the intention and could be harmful.
+</p>
 
 
 <p id="res-3988"><b>Proposed resolution:</b></p>
@@ -55707,11 +55720,8 @@ namespace std {
   template&lt;input_iterator Iterator&gt;
   class basic_const_iterator {
     [&hellip;]
-    constexpr basic_const_iterator(Iterator current);
-    [&hellip;]
-    <del>template&lt;<i>different-from</i>&lt;basic_const_iterator&gt; T&gt;
-        requires convertible_to&lt;T, Iterator&gt;
-      constexpr basic_const_iterator(T&amp;&amp; current);</del>
+    <del>constexpr const Iterator&amp; base() const &amp; noexcept;</del>
+    <del>constexpr Iterator base() &amp;&amp;;</del>
     [&hellip;]
   };
 }
@@ -55724,15 +55734,40 @@ namespace std {
 
 <blockquote>
 <pre>
-<del>template&lt;<i>different-from</i>&lt;basic_const_iterator&gt; T&gt;
-  requires convertible_to&lt;T, Iterator&gt;
-  constexpr basic_const_iterator(T&amp;&amp; current);</del>
+<del>constexpr const Iterator&amp; base() const &amp; noexcept;</del>
 </pre>
 <blockquote>
 <p>
-<del>-3- <i>Effects</i>: Initializes <tt><i>current_</i></tt> with <tt>std::forward&lt;T&gt;(current)</tt>.</del>
+<del>-4- <i>Effects</i>: Equivalent to: <tt>return <i>current_</i>;</tt></del>
 </p>
 </blockquote>
+<pre>
+<del>constexpr Iterator base() &amp;&amp;;</del>
+</pre>
+<blockquote>
+<p>
+<del>-5- <i>Effects</i>: Equivalent to: <tt>return std::move(<i>current_</i>);</tt></del>
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+
+<li><p>Modify 26.7.21.2 <a href="https://wg21.link/range.as.const.view">[range.as.const.view]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+namespace std::ranges {
+  template&lt;view V&gt;
+    requires input_range&lt;V&gt;
+  class as_const_view : public view_interface&lt;as_const_view&lt;V&gt;&gt; {
+    [&hellip;]
+    <del>constexpr V base() const &amp; requires copy_constructible&lt;V&gt; { return <i>base_</i>; }</del>
+    <del>constexpr V base() &amp;&amp; { return std::move(<i>base_</i>); }</del>
+    [&hellip;]
+  };
+}
+</pre>
 </blockquote>
 
 </li>

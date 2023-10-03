@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-10-03 at 10:25:52 UTC</p>
+<p><p>Revised 2023-10-03 at 10:46:55 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -21637,6 +21637,7 @@ throw an exception of type <tt>domain_error</tt>, or is it that they behave as s
  <b>Submitter:</b> Antony Polukhin <b>Opened:</b> 2018-02-20 <b>Last modified:</b> 2020-09-06</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#variant.assign">active issues</a> in [variant.assign].</p>
 <p><b>View all other</b> <a href="lwg-index.html#variant.assign">issues</a> in [variant.assign].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -52411,6 +52412,77 @@ the program is ill-formed, no diagnostic required.</ins>
 <ins>-?- If a program declares an explicit or partial specialization of <tt>variant</tt>, 
 the program is ill-formed, no diagnostic required.</ins>
 </p>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3991" href="#3991">3991</a><sup><a href="https://cplusplus.github.io/LWG/issue3991">(i)</a></sup>. <tt>variant</tt>'s move constructor should not be guaranteed to produce a valueless by exception state</h3>
+<p><b>Section:</b> 22.6.3.4 <a href="https://wg21.link/variant.assign">[variant.assign]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Brian Bi <b>Opened:</b> 2023-08-29 <b>Last modified:</b> 2023-10-03</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#variant.assign">active issues</a> in [variant.assign].</p>
+<p><b>View all other</b> <a href="lwg-index.html#variant.assign">issues</a> in [variant.assign].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+22.6.3.4 <a href="https://wg21.link/variant.assign">[variant.assign]</a> bullet 8.4 states that an alternative-changing move assignment on <tt>std::variant</tt> 
+is equivalent to a call to <tt>emplace</tt>. However, bullet 10.1 also states that if the construction of the new 
+alternative exits via an exception, then the destination of the assignment is guaranteed to become valueless 
+by exception. This is inconsistent with the specification of <tt>emplace</tt>, 22.6.3.5 <a href="https://wg21.link/variant.mod">[variant.mod]</a>/11, 
+which permits (but does not require) the variant to become valueless.
+</p>
+
+
+<p id="res-3991"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 22.6.3.4 <a href="https://wg21.link/variant.assign">[variant.assign]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+constexpr variant&amp; operator=(variant&amp;&amp; rhs) noexcept(<i>see below</i>);
+</pre>
+<blockquote>
+<p>
+-6- Let <tt><i>j</i></tt> be <tt>rhs.index()</tt>.
+<p/>
+[&hellip;]
+<p/>
+-8- <i>Effects</i>:
+</p>
+<ol style="list-style-type:none">
+<li><p>(8.1) &mdash; If neither <tt>*this</tt> nor <tt>rhs</tt> holds a value, there is no effect.</p></li>
+<li><p>(8.2) &mdash; Otherwise, if <tt>*this</tt> holds a value but <tt>rhs</tt> does not, destroys the value 
+contained in <tt>*this</tt> and sets <tt>*this</tt> to not hold a value.</p></li>
+<li><p>(8.3) &mdash; Otherwise, if <tt>index() == <i>j</i></tt>, assigns <tt>get&lt;<i>j</i>&gt;(std::move(rhs))</tt> 
+to the value contained in <tt>*this</tt>.</p></li>
+<li><p>(8.4) &mdash; Otherwise, equivalent to <tt>emplace&lt;<i>j</i>&gt;(get&lt;<i>j</i>&gt;(std::move(rhs)))</tt>.</p></li>
+</ol>
+<p>
+[&hellip;]
+<p/>
+-10- <i>Remarks:</i> [&hellip;]
+</p>
+<ol style="list-style-type:none">
+<li><p><del>(10.1) &mdash; If an exception is thrown during the call to <tt>T<sub><i>j</i></sub></tt>'s move construction 
+(with <tt><i>j</i></tt> being <tt>rhs.index()</tt>), the <tt>variant</tt> will hold no value.</del></p></li>
+<li><p><del>(10.2) &mdash;</del> If an exception is thrown during the call to <tt>T<sub><i>j</i></sub></tt>'s move assignment, 
+the state of the contained value is as defined by the exception safety guarantee of <tt>T<sub><i>j</i></sub></tt>'s move 
+assignment; <tt>index()</tt> will be <tt><i>j</i></tt>.</p></li>
+</ol>
+</blockquote>
 </blockquote>
 
 </li>

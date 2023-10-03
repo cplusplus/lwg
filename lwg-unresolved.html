@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-10-03 at 09:52:58 UTC</p>
+<p><p>Revised 2023-10-03 at 10:10:23 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -18099,6 +18099,7 @@ template &lt;class Iterator1, class Iterator2&gt;
  <b>Submitter:</b> Switzerland <b>Opened:</b> 2017-02-03 <b>Last modified:</b> 2017-07-15</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#string.view">active issues</a> in [string.view].</p>
 <p><b>View all other</b> <a href="lwg-index.html#string.view">issues</a> in [string.view].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#LEWG">LEWG</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -52292,6 +52293,59 @@ namespace std::ranges {
 </li>
 
 </ol>
+
+
+
+
+
+<hr>
+<h3><a name="3989" href="#3989">3989</a><sup><a href="https://cplusplus.github.io/LWG/issue3989">(i)</a></sup>. The whole range for an iterator obtained from a <tt>std::span</tt> or <tt>std::basic_string_view</tt> is not clear</h3>
+<p><b>Section:</b> 23.3 <a href="https://wg21.link/string.view">[string.view]</a>, 24.7.2.2 <a href="https://wg21.link/views.span">[views.span]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-29 <b>Last modified:</b> 2023-10-03</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#string.view">active issues</a> in [string.view].</p>
+<p><b>View all other</b> <a href="lwg-index.html#string.view">issues</a> in [string.view].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+It is unclear whether the following program has undefined behavior:
+</p>
+<blockquote><pre>
+#include &lt;cassert&gt;
+#include &lt;span&gt;
+#include &lt;string_view&gt;
+
+int main()
+{
+  int arr[2]{42, 84};
+  std::span&lt;int&gt; sp1{arr, 1};
+  std::span&lt;int&gt; sp2{arr + 1, 1};
+
+  assert(sp2.begin() - sp1.begin() == 1); // Is this well-defined?
+  assert(sp2.begin() == sp1.end());       // ditto
+  assert(*sp1.end() == 84);               // ditto
+
+  const char str[]{"string"};
+  std::string_view sv1{str, 3};
+  std::string_view sv2{str + 3, 3};
+
+  assert(sv2.begin() - sv1.begin() == 3); // Is this well-defined?
+  assert(sv2.begin() == sv1.end());       // ditto
+  assert(*sv1.end() == 'i');              // ditto
+}
+</pre></blockquote>
+<p>
+Currently MSVC STL strictly diagnose the arithmetic between different <tt>span</tt>s/<tt>basic_string_view</tt>s, 
+even the views are on the same underlying range (see <a href="https://github.com/microsoft/STL/issues/1435">this Github issue</a>). 
+libstdc++ and libc++ silently accept these operations.
+<p/>
+Perhaps the standard should clarify what the whole ranges are when determining whether operations between iterators 
+from different views on the same underlying range is well-defined.
+</p>
+
+
+<p id="res-3989"><b>Proposed resolution:</b></p>
 
 
 

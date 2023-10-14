@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-10-14 at 15:19:56 UTC</p>
+<p><p>Revised 2023-10-14 at 15:41:18 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -51653,6 +51653,7 @@ modification order<del>) written before the write associated with the read-modif
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2023-09-24</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.adaptor.object">active issues</a> in [range.adaptor.object].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.adaptor.object">issues</a> in [range.adaptor.object].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -52639,6 +52640,77 @@ expressions, and no exception is thrown.</ins>
 </li>
 
 </ol>
+
+
+
+
+
+<hr>
+<h3><a name="3994" href="#3994">3994</a><sup><a href="https://cplusplus.github.io/LWG/issue3994">(i)</a></sup>. <tt>adaptor(args...)(r)</tt> is not equivalent to <tt>std::bind_back(adaptor, args...)(r)</tt></h3>
+<p><b>Section:</b> 26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-10-11 <b>Last modified:</b> 2023-10-14</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.adaptor.object">active issues</a> in [range.adaptor.object].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.adaptor.object">issues</a> in [range.adaptor.object].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a> p8 specifies that:
+</p>
+<blockquote><p> 
+The expression <tt>adaptor(args...)</tt> produces a range adaptor closure object <tt>f</tt> that is a perfect forwarding 
+call wrapper (22.10.4 <a href="https://wg21.link/func.require">[func.require]</a>) with the following properties:
+</p></blockquote>
+<p>
+According to the subsequent description, it can be inferred that the behavior is similar to 
+<tt>std::bind_back(adaptor, args...)</tt> which also returns a perfect forwarding call wrapper.
+<p/>
+Among them, "A <i>perfect forwarding call wrapper</i> is an argument forwarding call wrapper 
+that forwards its state entities to the underlying call expression" according to <a href="https://wg21.link/func.require">[func.require]</a>/4, and call wrapper in <a href="https://wg21.link/func.require">[func.require]</a>/3 is described as:
+</p>
+<blockquote><p>
+Every call wrapper (22.10.3 <a href="https://wg21.link/func.def">[func.def]</a>) meets the <i>Cpp17MoveConstructible</i> and <i>Cpp17Destructible</i> requirements.
+</p></blockquote>
+<p>
+In order to conform with the specification, standard functions that return perfect forwarding call wrappers such as 
+<tt>std::bind_front/back</tt> and <tt>std::not_fn</tt> all <i>Mandates</i> that 
+<tt>(is_constructible_v&lt;BoundArgs, Args&gt; &amp;&amp; ...)</tt> and 
+<tt>(is_move_constructible_v&lt;BoundArgs&gt; &amp;&amp; ...)</tt> are each <tt>true</tt>, 
+the former condition corresponds to 26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a> p8:
+</p>
+<blockquote><p>
+The expression <tt>adaptor(args...)</tt> is well-formed if and only if the initialization of the bound argument 
+entities of the result, as specified above, are all well-formed.
+</p></blockquote>
+<p>
+However, the latter does not have a corresponding description in <tt>&lt;ranges&gt;</tt>. In other words, range 
+adaptor objects do not explicitly indicate that the bound argument must be move-constructible.
+This results in implementation divergence for some uncommon types (<a href="https://godbolt.org/z/r6Gq8W6qe">demo</a>):
+</p>
+<blockquote><pre>
+#include &lt;ranges&gt;
+#include &lt;string_view&gt;
+
+constexpr struct WeirdFive {
+  WeirdFive() = default;
+  WeirdFive(const WeirdFive&amp;) = default;
+  constexpr operator int() const { return 5; }
+
+  WeirdFive(WeirdFive&amp;&amp;) = delete;
+} five;
+
+constexpr std::string_view sv{"hello"};
+static_assert(sv == std::views::take(five)(sv)); // <span style="color:red;font-weight:bolder">libstdc++/libc++ reject, MSVC-STL accepts</span>
+</pre></blockquote>
+<p>
+Above, libstdc++ always moves arguments into internal members, which leads to hard errors in the member initializer list;
+libc++ uses <tt>std::bind_back</tt> for argument binding, which also leads to hard errors in the function body as the 
+former requires arguments to be move-constructible; MSVC-STL is the most compliant with current wording.
+</p>
+
+
+<p id="res-3994"><b>Proposed resolution:</b></p>
 
 
 

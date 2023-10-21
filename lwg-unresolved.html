@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-10-21 at 09:33:27 UTC</p>
+<p><p>Revised 2023-10-21 at 09:46:14 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -52916,6 +52916,38 @@ usage in <tt>&lt;chrono&gt;</tt></a>).
 
 
 <p id="res-3997"><b>Proposed resolution:</b></p>
+
+
+
+
+
+<hr>
+<h3><a name="3998" href="#3998">3998</a><sup><a href="https://cplusplus.github.io/LWG/issue3998">(i)</a></sup>. Constants in <tt>std::regex_constants</tt> should be allowed to be enumerators</h3>
+<p><b>Section:</b> 32.4 <a href="https://wg21.link/re.const">[re.const]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-10-18 <b>Last modified:</b> 2023-10-21</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#re.const">issues</a> in [re.const].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Currently, MSVC STL and libc++ implement constants in <tt>std::regex_constants</tt> as 
+enumerators of unscoped enumerations, while the standard specify them to be <tt>constexpr</tt> variables.
+<p/>
+<a href="https://github.com/microsoft/STL/issues/4100#issuecomment-1767717721">Casey Carter argued</a> 
+that it would be better to make these constants prvalues to avoid wasting space in object files. And 
+presumably almost all users just use their values without odr-using them or relying on their value category.
+<p/>
+Perhaps we should allow these constants to be enumerators of the corresponding type (<tt>syntax_option_type</tt>, 
+<tt>match_flag_type</tt>, or <tt>error_type</tt>) if the corresponding type is an enumeration.
+<p/>
+Notes: since C++20, we can even make the enumeration types scoped and expose the enumerators to the 
+namespace by using-declaration or using-enum-declaration. <a href="https://wg21.link/P0439R0">P0439R0</a> might be related, 
+since it changed former enumerators to <tt>constexpr</tt> variables.
+</p>
+
+
+<p id="res-3998"><b>Proposed resolution:</b></p>
 
 
 

@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-10-17 at 18:24:02 UTC</p>
+<p><p>Revised 2023-10-21 at 09:33:27 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -36174,6 +36174,8 @@ part of <tt><i>F</i></tt>. &mdash; <i>end note</i>]</ins>
  <b>Submitter:</b> Mark de Wever <b>Opened:</b> 2021-11-14 <b>Last modified:</b> 2022-01-30</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#format.syn">active issues</a> in [format.syn].</p>
+<p><b>View all other</b> <a href="lwg-index.html#format.syn">issues</a> in [format.syn].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
@@ -52880,6 +52882,40 @@ namespace std {
 </li>
 
 </ol>
+
+
+
+
+
+<hr>
+<h3><a name="3997" href="#3997">3997</a><sup><a href="https://cplusplus.github.io/LWG/issue3997">(i)</a></sup>. <tt>std::formatter</tt> specializations should be consistently restricted to supported character types</h3>
+<p><b>Section:</b> 22.14.1 <a href="https://wg21.link/format.syn">[format.syn]</a>, 29.2 <a href="https://wg21.link/time.syn">[time.syn]</a>, 33.4.3.2 <a href="https://wg21.link/thread.thread.id">[thread.thread.id]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-10-15 <b>Last modified:</b> 2023-10-21</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#format.syn">active issues</a> in [format.syn].</p>
+<p><b>View all other</b> <a href="lwg-index.html#format.syn">issues</a> in [format.syn].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+22.14.6.3 <a href="https://wg21.link/format.formatter.spec">[format.formatter.spec]</a>/2 requires some <tt>std::formatter</tt> specializations are only enabled 
+for character types <tt>char</tt> and <tt>wchar_t</tt>. But for specializations that are explicitly shown in 
+the synopses (22.14.1 <a href="https://wg21.link/format.syn">[format.syn]</a>, 29.2 <a href="https://wg21.link/time.syn">[time.syn]</a>, and 33.4.3.2 <a href="https://wg21.link/thread.thread.id">[thread.thread.id]</a>), 
+there is no such restrictions for <tt>charT</tt>. The difference may be observable via the <tt>std::formattable</tt> 
+concept, e.g. <tt>std::formattable&lt;std::chrono::second, char8_t&gt;</tt> is currently satisfied, even though 
+there would be a hard error during formatting due to <tt><i>STATICALLY-WIDEN</i></tt>.
+<p/>
+Perhaps we should introduce an exposition-only concept that is only satisfied (and modeled) by <tt>char</tt> and 
+<tt>wchar_t</tt> for now, and constrain the <tt>charT</tt> template parameter of all <tt>std::formatter</tt> 
+specializations that are explicitly mentioned in synopses with that concept. This is what libc++ currently 
+implements (e.g. the 
+<a href="https://github.com/llvm/llvm-project/blob/6dfea561ba96974b205c31546c5e2069429c75b1/libcxx/include/__format/concepts.h#L32-L38"><tt>__fmt_char_type</tt></a> 
+concept and <a href="https://github.com/llvm/llvm-project/blob/main/libcxx/include/__chrono/formatter.h#L580-L825">its 
+usage in <tt>&lt;chrono&gt;</tt></a>).
+</p>
+
+
+<p id="res-3997"><b>Proposed resolution:</b></p>
 
 
 

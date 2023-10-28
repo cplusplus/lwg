@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-10-27 at 21:24:12 UTC</p>
+<p><p>Revised 2023-10-28 at 12:39:35 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -52402,6 +52402,66 @@ namespace std {
     memory_order_release = release, memory_order_acq_rel = acq_rel, memory_order_seq_cst = seq_cst</ins>
   };
 }</pre></blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="4000" href="#4000">4000</a><sup><a href="https://cplusplus.github.io/LWG/issue4000">(i)</a></sup>. <tt>flat_map::insert_range</tt>'s <i>Effects</i> is not quite right</h3>
+<p><b>Section:</b> 24.6.9.6 <a href="https://wg21.link/flat.map.modifiers">[flat.map.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-10-23 <b>Last modified:</b> 2023-10-28</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<tt>flat_map::insert_range</tt> adds elements to the <tt>containers</tt> member via:
+</p>
+<blockquote><pre>
+for (const auto&amp; e : rg) {
+  c.keys.insert(c.keys.end(), e.first);
+  c.values.insert(c.values.end(), e.second);
+}
+</pre></blockquote>
+<p>
+which is incorrect because <tt>rg</tt>'s value type may not be a <tt>pair</tt> (<tt>tuple</tt>, for instance), 
+which means that <tt>.first</tt> and <tt>.second</tt> are not valid in such cases.
+</p>
+
+
+<p id="res-4000"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4964">N4964</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 24.6.9.6 <a href="https://wg21.link/flat.map.modifiers">[flat.map.modifiers]</a> as indicated:</p>
+
+<blockquote><pre>
+template&lt;<i>container-compatible-range</i>&lt;value_type&gt; R&gt;
+  void insert_range(R&amp;&amp; rg);
+</pre>
+<blockquote>
+<p>
+-12- <i>Effects</i>: Adds elements to <tt>c</tt> as if by:
+</p>
+<blockquote><pre>
+for (<ins>value_type</ins><del>const auto&amp;</del> e : rg) {
+  c.keys.insert(c.keys.end(), <ins>std::move(</ins>e.first<ins>)</ins>);
+  c.values.insert(c.values.end(), <ins>std::move(</ins>e.second<ins>)</ins>);
+}
+</pre></blockquote>
+<p>
+[&hellip;]
+</p>
+</blockquote>
+</blockquote>
 
 </li>
 

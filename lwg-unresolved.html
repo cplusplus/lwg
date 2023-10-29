@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-10-29 at 12:49:36 UTC</p>
+<p><p>Revised 2023-10-29 at 13:16:13 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -52731,78 +52731,6 @@ return *ranges::prev(<ins><i>common-arg-end</i></ins><del>ranges::end</del>(<i>d
 </pre></blockquote>
 </blockquote>
 </blockquote>
-
-</li>
-
-</ol>
-
-
-
-
-
-<hr>
-<h3><a name="4004" href="#4004">4004</a><sup><a href="https://cplusplus.github.io/LWG/issue4004">(i)</a></sup>. It is underspecified in which header <tt>std::formatter</tt> specializations for container adaptors are provided</h3>
-<p><b>Section:</b> 24.6.13 <a href="https://wg21.link/container.adaptors.format">[container.adaptors.format]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-10-29 <b>Last modified:</b> 2023-10-29</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View all other</b> <a href="lwg-index.html#container.adaptors.format">issues</a> in [container.adaptors.format].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-<a href="https://wg21.link/P2286R8">P2286R8</a> added <tt>std::formatter</tt> specializations for container adaptors, but didn't show them 
-in synopses of headers. Presumably these specializations should be provided in <tt>&lt;stack&gt;</tt> and <tt>&lt;queue&gt;</tt>.
-</p>
-
-
-<p id="res-4004"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4964">N4964</a>.
-</p>
-
-<ol>
-
-<li><p>Modify 24.6.2 <a href="https://wg21.link/queue.syn">[queue.syn]</a>, header <tt>&lt;queue&gt;</tt> synopsis, as indicated:</p>
-
-<blockquote><pre>
-[&hellip;]
-namespace std {
-  // <i>24.6.6 <a href="https://wg21.link/queue">[queue]</a>, class template</i> queue
-  template&lt;class T, class Container = deque&lt;T&gt;&gt; class queue;
-  [&hellip;]
-  template&lt;class T, class Container, class Alloc&gt;
-    struct uses_allocator&lt;queue&lt;T, Container&gt;, Alloc&gt;;
-  <ins>template&lt;class charT, class T, formattable&lt;charT&gt; Container&gt;
-    struct formatter&lt;queue&lt;T, Container&gt;, charT&gt;;</ins>
-    
-  // <i>24.6.7 <a href="https://wg21.link/priority.queue">[priority.queue]</a>, class template</i> priority_queue
-  template&lt;class T, class Container = vector&lt;T&gt;,
-           class Compare = less&lt;typename Container::value_type&gt;&gt;
-  class priority_queue;
-  [&hellip;]
-  template&lt;class T, class Container, class Compare, class Alloc&gt;
-    struct uses_allocator&lt;priority_queue&lt;T, Container, Compare>,&gt;, Alloc&gt;;
-  <ins>template&lt;class charT, class T, formattable&lt;charT&gt; Container, class Compare&gt;
-    struct formatter&lt;priority_queue&lt;T, Container, Compare&gt;, charT&gt;;</ins>
-}
-</pre></blockquote>
-
-</li>
-
-<li><p>Modify 24.6.3 <a href="https://wg21.link/stack.syn">[stack.syn]</a>, header <tt>&lt;stack&gt;</tt> synopsis, as indicated:</p>
-
-<blockquote><pre>
-[&hellip;]
-namespace std {
-  // <i>24.6.8 <a href="https://wg21.link/stack">[stack]</a>, class template</i> stack
-  template&lt;class T, class Container = deque&lt;T&gt;&gt; class stack;
-  [&hellip;]
-  template&lt;class T, class Container, class Alloc&gt;
-    struct uses_allocator&lt;stack&lt;T, Container&gt;, Alloc&gt;;
-  <ins>template&lt;class charT, class T, formattable&lt;charT&gt; Container&gt;
-    struct formatter&lt;stack&lt;T, Container&gt;, charT&gt;;</ins>
-}
-</pre></blockquote>
 
 </li>
 

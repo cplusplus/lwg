@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-10-30 at 17:20:43 UTC</p>
+<p><p>Revised 2023-10-30 at 17:24:08 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -50081,336 +50081,6 @@ which ultimately results in <tt>string_view</tt> being referenced to a local var
 
 
 <hr>
-<h3><a name="3973" href="#3973">3973</a><sup><a href="https://cplusplus.github.io/LWG/issue3973">(i)</a></sup>. Monadic operations should be ADL-proof</h3>
-<p><b>Section:</b> 22.8.6.7 <a href="https://wg21.link/expected.object.monadic">[expected.object.monadic]</a>, 22.5.3.7 <a href="https://wg21.link/optional.monadic">[optional.monadic]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-10 <b>Last modified:</b> 2023-09-24</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View all other</b> <a href="lwg-index.html#expected.object.monadic">issues</a> in [expected.object.monadic].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-LWG <a href="lwg-defects.html#3938">3938</a> switched to use <tt>**this</tt> to access the value stored in <tt>std::expected</tt>. 
-However, as shown in LWG <a href="lwg-active.html#3969">3969</a>, <tt>**this</tt> can trigger ADL and find an unwanted overload, 
-and thus may caused unintended behavior.
-<p/>
-Current implementations behave correctly (<a href="https://godbolt.org/z/3b1Tbs1jd">Godbolt link</a>): they 
-don't direct use <tt>**this</tt>, but use the name of the union member instead.
-<p/>
-Moreover, <a href="https://wg21.link/P2407R5">P2407R5</a> will change the monadic operations of <tt>std::optional</tt> to use <tt>**this</tt>, 
-which is also problematic.
-</p>
-
-<p><i>[2023-09-19; Wording update]</i></p>
-
-<p>
-Several people preferred to replace <tt>operator*()</tt> by the corresponding union members, so this part of the proposed wording 
-has been adjusted, which is a rather mechanical replacement.
-</p>
-
-
-<p id="res-3973"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
-</p>
-
-<ol>
-
-<li><p>Modify 22.8.6.7 <a href="https://wg21.link/expected.object.monadic">[expected.object.monadic]</a> as indicated:</p>
-
-<blockquote class="note">
-<p>
-[<i>Drafting note:</i> Effectively replace all occurrences of <tt>**this</tt> by <tt><i>val</i></tt>, except for <tt>decltype</tt>.]
-</p>
-</blockquote>
-
-<blockquote>
-<pre>
-template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) &amp;;
-template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) const &amp;;
-</pre>
-<blockquote>
-<p>
--1- Let <tt>U</tt> be <tt>remove_cvref_t&lt;invoke_result_t&lt;F, decltype(<del>**this</del><ins>(<i>val</i>)</ins>)&gt;&gt;</tt>.
-<p/>
--2- [&hellip;]
-<p/>
--3- [&hellip;]
-<p/>
--4- <i>Effects</i>: Equivalent to:
-</p>
-<blockquote><pre>
-if (has_value())
-  return invoke(std::forward&lt;F&gt;(f), <del>**this</del><ins><i>val</i></ins>);
-else
-  return U(unexpect, error());
-</pre></blockquote>
-</blockquote>
-<pre>
-template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) &amp;&amp;;
-template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) const &amp;&amp;;
-</pre>
-<blockquote>
-<p>
--5- Let <tt>U</tt> be <tt>remove_cvref_t&lt;invoke_result_t&lt;F, decltype((std::move(<del>**this</del><ins><i>val</i></ins>))&gt;&gt;</tt>.
-<p/>
--6- [&hellip;]
-<p/>
--7- [&hellip;]
-<p/>
--8- <i>Effects</i>: Equivalent to:
-</p>
-<blockquote><pre>
-if (has_value())
-  return invoke(std::forward&lt;F&gt;(f), std::move(<del>**this</del><ins><i>val</i></ins>));
-else
-  return U(unexpect, std::move(error()));
-</pre></blockquote>
-</blockquote>
-<pre>
-template&lt;class F&gt; constexpr auto or_else(F&amp;&amp; f) &amp;;
-template&lt;class F&gt; constexpr auto or_else(F&amp;&amp; f) const &amp;;
-</pre>
-<blockquote>
-<p>
--9- Let <tt>G</tt> be <tt>remove_cvref_t&lt;invoke_result_t&lt;F, decltype(error())&gt;&gt;</tt>.
-<p/>
--10- <i>Constraints</i>: <tt>is_constructible_v&lt;T, decltype(<del>**this</del><ins>(<i>val</i>)</ins>)&gt;</tt> is <tt>true</tt>.
-<p/>
--11- [&hellip;]
-<p/>
--12- <i>Effects</i>: Equivalent to:
-</p>
-<blockquote><pre>
-if (has_value())
-  return G(in_place, <del>**this</del><ins><i>val</i></ins>);
-else
-  return invoke(std::forward&lt;F&gt;(f), error());
-</pre></blockquote>
-</blockquote>
-<pre>
-template&lt;class F&gt; constexpr auto or_else(F&amp;&amp; f) &amp;&amp;;
-template&lt;class F&gt; constexpr auto or_else(F&amp;&amp; f) const &amp;&amp;;
-</pre>
-<blockquote>
-<p>
--13- Let <tt>G</tt> be <tt>remove_cvref_t&lt;invoke_result_t&lt;F, decltype(std::move(error()))&gt;&gt;</tt>.
-<p/>
--14- <i>Constraints</i>: <tt>is_constructible_v&lt;T, decltype(std::move(<del>**this</del><ins><i>val</i></ins>))&gt;</tt> is <tt>true</tt>.
-<p/>
--15- [&hellip;]
-<p/>
--16- <i>Effects</i>: Equivalent to:
-</p>
-<blockquote><pre>
-if (has_value())
-  return G(in_place, std::move(<del>**this</del><ins><i>val</i></ins>));
-else
-  return invoke(std::forward&lt;F&gt;(f), std::move(error()));
-</pre></blockquote>
-</blockquote>
-<pre>
-template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) &amp;;
-template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) const &amp;;
-</pre>
-<blockquote>
-<p>
--17- Let <tt>U</tt> be <tt>remove_cvref_t&lt;invoke_result_t&lt;F, decltype(<del>**this</del><ins>(<i>val</i>)</ins>)&gt;&gt;</tt>.
-<p/>
--18- [&hellip;]
-<p/>
--19- <i>Mandates</i>: <tt>U</tt> is a valid value type for <tt>expected</tt>. If <tt>is_void_v&lt;U&gt;</tt> is <tt>false</tt>, 
-the declaration
-</p>
-<blockquote><pre>
-U u(invoke(std::forward&lt;F&gt;(f), <del>**this</del><ins><i>val</i></ins>));
-</pre></blockquote>
-<p>
-is well-formed.
-<p/>
--20- <i>Effects</i>:
-</p>
-<ol style="list-style-type: none">
-<li><p>(20.1) &mdash; [&hellip;]</p></li>
-<li><p>(20.2) &mdash; Otherwise, if <tt>is_void_v&lt;U&gt;</tt> is <tt>false</tt>, returns an <tt>expected&lt;U, E&gt;</tt> 
-object whose <tt><i>has_val</i></tt> member is <tt>true</tt> and <tt><i>val</i></tt> member is direct-non-list-initialized 
-with <tt>invoke(std::forward&lt;F&gt;(f), <del>**this</del><ins><i>val</i></ins>)</tt>.</p></li>
-<li><p>(20.3) &mdash; Otherwise, evaluates <tt>invoke(std::forward&lt;F&gt;(f), <del>**this</del><ins><i>val</i></ins>)</tt> 
-and then returns <tt>expected&lt;U, E&gt;()</tt>.</p></li>
-</ol>
-</blockquote>
-<pre>
-template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) &amp;&amp;;
-template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) const &amp;&amp;;
-</pre>
-<blockquote>
-<p>
--21- Let <tt>U</tt> be <tt>remove_cvref_t&lt;invoke_result_t&lt;F, decltype(std::move(<del>**this</del><ins><i>val</i></ins>))&gt;&gt;</tt>.
-<p/>
--22- [&hellip;]
-<p/>
--23- <i>Mandates</i>: <tt>U</tt> is a valid value type for <tt>expected</tt>. If <tt>is_void_v&lt;U&gt;</tt> is <tt>false</tt>, 
-the declaration
-</p>
-<blockquote><pre>
-U u(invoke(std::forward&lt;F&gt;(f), std::move(<del>**this</del><ins><i>val</i></ins>)));
-</pre></blockquote>
-<p>
-is well-formed.
-<p/>
--24- <i>Effects</i>:
-</p>
-<ol style="list-style-type: none">
-<li><p>(24.1) &mdash; [&hellip;]</p></li>
-<li><p>(24.2) &mdash; Otherwise, if <tt>is_void_v&lt;U&gt;</tt> is <tt>false</tt>, returns an <tt>expected&lt;U, E&gt;</tt> 
-object whose <tt><i>has_val</i></tt> member is <tt>true</tt> and <tt><i>val</i></tt> member is direct-non-list-initialized 
-with <tt>invoke(std::forward&lt;F&gt;(f), std::move(<del>**this</del><ins><i>val</i></ins>))</tt>.</p></li>
-<li><p>(24.3) &mdash; Otherwise, evaluates <tt>invoke(std::forward&lt;F&gt;(f), std::move(<del>**this</del><ins><i>val</i></ins>))</tt> 
-and then returns <tt>expected&lt;U, E&gt;()</tt>.</p></li>
-</ol>
-</blockquote>
-<pre>
-template&lt;class F&gt; constexpr auto transform_error(F&amp;&amp; f) &amp;;
-template&lt;class F&gt; constexpr auto transform_error(F&amp;&amp; f) const &amp;;
-</pre>
-<blockquote>
-<p>
--25- Let <tt>G</tt> be <tt>remove_cvref_t&lt;invoke_result_t&lt;F, decltype(error())&gt;&gt;</tt>.
-<p/>
--26- <i>Constraints</i>: <tt>is_constructible_v&lt;T, decltype(<del>**this</del><ins>(<i>val</i>)</ins>)&gt;</tt> is <tt>true</tt>.
-<p/>
--27- <i>Mandates</i>: [&hellip;]
-<p/>
--28- <i>Returns</i>: If <tt>has_value()</tt> is <tt>true</tt>, <tt>expected&lt;T, G&gt;(in_place, <del>**this</del><ins><i>val</i></ins>)</tt>; 
-otherwise, an <tt>expected&lt;T, G&gt;</tt> object whose <tt><i>has_val</i></tt> member is <tt>false</tt> and 
-<tt><i>unex</i></tt> member is direct-non-list-initialized with <tt>invoke(std::forward&lt;F&gt;(f), error())</tt>.
-</p>
-</blockquote>
-<pre>
-template&lt;class F&gt; constexpr auto transform_error(F&amp;&amp; f) &amp;&amp;;
-template&lt;class F&gt; constexpr auto transform_error(F&amp;&amp; f) const &amp;&amp;;
-</pre>
-<blockquote>
-<p>
--29- Let <tt>G</tt> be <tt>remove_cvref_t&lt;invoke_result_t&lt;F, decltype(std::move(error()))&gt;&gt;</tt>.
-<p/>
--30- <i>Constraints</i>: <tt>is_constructible_v&lt;T, decltype(std::move(<del>**this</del><ins><i>val</i></ins>))&gt;</tt> is <tt>true</tt>.
-<p/>
--31- <i>Mandates</i>: [&hellip;]
-<p/>
--32- <i>Returns</i>: If <tt>has_value()</tt> is <tt>true</tt>, <tt>expected&lt;T, G&gt;(in_place, std::move(<del>**this</del><ins><i>val</i></ins>))</tt>; 
-otherwise, an <tt>expected&lt;T, G&gt;</tt> object whose <tt><i>has_val</i></tt> member is <tt>false</tt> and 
-<tt><i>unex</i></tt> member is direct-non-list-initialized with <tt>invoke(std::forward&lt;F&gt;(f), std::move(error()))</tt>.
-</p>
-</blockquote>
-</blockquote>
-</li>
-
-<li><p>Modify 22.5.3.7 <a href="https://wg21.link/optional.monadic">[optional.monadic]</a> as indicated:</p>
-
-
-<blockquote class="note">
-<p>
-[<i>Drafting note:</i> Effectively replace all occurrences of <tt>value()</tt> by <tt>*val</tt>.]
-</p>
-</blockquote>
-
-<blockquote>
-<pre>
-template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) &amp;;
-template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) const &amp;;
-</pre>
-<blockquote>
-<p>
--1- Let <tt>U</tt> be <tt>invoke_result_t&lt;F, decltype(<del>value()</del><ins>*val</ins>)&gt;</tt>.
-<p/>
--2- [&hellip;]
-<p/>
--3- <i>Effects</i>: Equivalent to:
-</p>
-<blockquote><pre>
-if (*this) {
-  return invoke(std::forward&lt;F&gt;(f), <del>value()</del><ins>*val</ins>);
-} else {
-  return remove_cvref_t&lt;U&gt;();
-}
-</pre></blockquote>
-</blockquote>
-<pre>
-template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) &amp;&amp;;
-template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) const &amp;&amp;;
-</pre>
-<blockquote>
-<p>
--4- Let <tt>U</tt> be <tt>invoke_result_t&lt;F, decltype(std::move(<del>value()</del><ins>*val</ins>))&gt;</tt>.
-<p/>
--5- [&hellip;]
-<p/>
--6- <i>Effects</i>: Equivalent to:
-</p>
-<blockquote><pre>
-if (*this) {
-  return invoke(std::forward&lt;F&gt;(f), std::move(<del>value()</del><ins>*val</ins>));
-} else {
-  return remove_cvref_t&lt;U&gt;();
-}
-</pre></blockquote>
-</blockquote>
-<pre>
-template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) &amp;;
-template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) const &amp;;
-</pre>
-<blockquote>
-<p>
--7- Let <tt>U</tt> be <tt>remove_cv_t&lt;invoke_result_t&lt;F, decltype(<del>value()</del><ins>*val</ins>)&gt;&gt;</tt>.
-<p/>
--8- <i>Mandates</i>: <tt>U</tt> is a non-array object type other than <tt>in_place_t</tt> or <tt>nullopt_t</tt>. The declaration
-</p>
-<blockquote><pre>
-U u(invoke(std::forward&lt;F&gt;(f), <del>value()</del><ins>*val</ins>));
-</pre></blockquote>
-<p>
-is well-formed for some invented variable <tt>u</tt>.
-<p/>
-[&hellip;]
-<p/>
--9- <i>Returns</i>: If <tt>*this</tt> contains a value, an <tt>optional&lt;U&gt;</tt> object whose contained value is 
-direct-non-list-initialized with <tt>invoke(std::forward&lt;F&gt;(f), <del>value()</del><ins>*val</ins>)</tt>; otherwise, 
-<tt>optional&lt;U&gt;()</tt>.
-</p>
-</blockquote>
-<pre>
-template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) &amp;&amp;;
-template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) const &amp;&amp;;
-</pre>
-<blockquote>
-<p>
--10- Let <tt>U</tt> be <tt>remove_cv_t&lt;invoke_result_t&lt;F, decltype(std::move(<del>value()</del><ins>*val</ins>))&gt;&gt;</tt>.
-<p/>
--11- <i>Mandates</i>: <tt>U</tt> is a non-array object type other than <tt>in_place_t</tt> or <tt>nullopt_t</tt>. The declaration
-</p>
-<blockquote><pre>
-U u(invoke(std::forward&lt;F&gt;(f), std::move(<del>value()</del><ins>*val</ins>)));
-</pre></blockquote>
-<p>
-is well-formed for some invented variable <tt>u</tt>.
-<p/>
-[&hellip;]
-<p/>
--12- <i>Returns</i>: If <tt>*this</tt> contains a value, an <tt>optional&lt;U&gt;</tt> object whose contained value is 
-direct-non-list-initialized with <tt>invoke(std::forward&lt;F&gt;(f), std::move(<del>value()</del><ins>*val</ins>))</tt>; otherwise, 
-<tt>optional&lt;U&gt;()</tt>.
-</p>
-</blockquote>
-</blockquote>
-</li>
-</ol>
-
-
-
-
-
-<hr>
 <h3><a name="3974" href="#3974">3974</a><sup><a href="https://cplusplus.github.io/LWG/issue3974">(i)</a></sup>. <tt>mdspan::operator[]</tt> should not copy <tt>OtherIndexTypes</tt></h3>
 <p><b>Section:</b> 24.7.3.6.3 <a href="https://wg21.link/mdspan.mdspan.members">[mdspan.mdspan.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Casey Carter <b>Opened:</b> 2023-08-12 <b>Last modified:</b> 2023-09-24</p>
@@ -50515,8 +50185,8 @@ return operator[](<ins>extents_type::<i>index-cast</i>(</ins>as_const(indices[P]
 <hr>
 <h3><a name="3975" href="#3975">3975</a><sup><a href="https://cplusplus.github.io/LWG/issue3975">(i)</a></sup>. Specializations of <tt>basic_format_context</tt> should not be permitted</h3>
 <p><b>Section:</b> 22.14.6.6 <a href="https://wg21.link/format.context">[format.context]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Brian Bi <b>Opened:</b> 2023-08-13 <b>Last modified:</b> 2023-09-24</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Brian Bi <b>Opened:</b> 2023-08-13 <b>Last modified:</b> 2023-10-30</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#format.context">issues</a> in [format.context].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -50566,6 +50236,13 @@ Library creates or refers to an instantiation of <tt>basic_format_context</tt>),
 that specification does not allow to construct an object a non-zero <tt>num_args_</tt> or with the type information necessary 
 for the <tt>check_dynamic_spec*</tt> functions, so the library has an unspecified way to realize this.
 </p>
+
+<p><i>[2023-10-30; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
 
 
 <p id="res-3975"><b>Proposed resolution:</b></p>
@@ -50981,83 +50658,6 @@ modification order<del>) written before the write associated with the read-modif
 
 
 <hr>
-<h3><a name="3981" href="#3981">3981</a><sup><a href="https://cplusplus.github.io/LWG/issue3981">(i)</a></sup>. Range adaptor closure object is underspecified for its return type</h3>
-<p><b>Section:</b> 26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2023-09-24</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#range.adaptor.object">active issues</a> in [range.adaptor.object].</p>
-<p><b>View all other</b> <a href="lwg-index.html#range.adaptor.object">issues</a> in [range.adaptor.object].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-In order to provide pipe support for user-defined range adaptors, <a href="https://wg21.link/P2387R3">P2387R3</a> 
-removed the specification that the adaptor closure object returns a view, which conforms to the wording of <tt>ranges::to</tt>.
-<p/>
-However, the current wording seems to be too low-spec so that the range adaptor closure object can return any type 
-or even <tt>void</tt>. This makes it possible to break the previous specification when returning types that don't make sense, 
-<a href="https://godbolt.org/z/Y4nvjY3xj">for example</a>:
-</p>
-<blockquote>
-<pre>
-#include &lt;ranges&gt;
-
-struct Closure : std::ranges::range_adaptor_closure&lt;Closure&gt; {
-  struct NonCopyable {
-    NonCopyable(const NonCopyable&amp;) = delete;
-  };
-
-  const NonCopyable&amp; operator()(std::ranges::range auto&amp;&amp;);
-};
-
-auto r = std::views::iota(0) | Closure{}; // <span style="color:red;font-weight:bolder">hard error in stdlibc++ and MSVC-STL</span>
-</pre></blockquote>
-<p>
-Above, since the return type of the pipeline operator is declared as <tt>auto</tt>, this causes the deleted 
-copy constructor to be invoked in the function body and produces a hard error.
-<p/>
-The proposed resolution adds a specification for the range adaptor closure object to return a <i>cv</i>-unqualified class type.
-</p>
-
-
-<p id="res-3981"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
-</p>
-
-<ol>
-
-<li><p>Modify 26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a> as indicated:</p>
-
-<blockquote>
-<p>
--1- A <i>range adaptor closure object</i> is a unary function object that accepts a range argument. For a range adaptor
-closure object <tt>C</tt> and an expression <tt>R</tt> such that <tt>decltype((R))</tt> models <tt>range</tt>, the 
-following expressions are equivalent:
-</p>
-<p>[&hellip;]</p>
-<p>
--2- Given an object <tt>t</tt> of type <tt>T</tt>, where
-</p>
-<ol style="list-style-type: none">
-<li><p>(2.1) &mdash; <tt>t</tt> is a unary function object that accepts a range argument <ins>and returns a 
-<i>cv</i>-unqualified class object</ins>,</p></li>
-<p>[&hellip;]</p>
-</ol>
-<p>
-then the implementation ensures that <tt>t</tt> is a range adaptor closure object.
-</p>
-</blockquote>
-
-</li>
-
-</ol>
-
-
-
-
-
-<hr>
 <h3><a name="3983" href="#3983">3983</a><sup><a href="https://cplusplus.github.io/LWG/issue3983">(i)</a></sup>. <tt>ranges::to</tt> adaptors are underconstrained</h3>
 <p><b>Section:</b> 26.5.7.3 <a href="https://wg21.link/range.utility.conv.adaptors">[range.utility.conv.adaptors]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-23 <b>Last modified:</b> 2023-10-03</p>
@@ -51400,8 +51000,8 @@ template&lt;template&lt;class...&gt; class C, class... Args&gt;
 <hr>
 <h3><a name="3986" href="#3986">3986</a><sup><a href="https://cplusplus.github.io/LWG/issue3986">(i)</a></sup>. <tt>basic_const_iterator</tt> doesn't work with <tt>optional</tt></h3>
 <p><b>Section:</b> 25.5.3 <a href="https://wg21.link/const.iterators">[const.iterators]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-26 <b>Last modified:</b> 2023-10-02</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-26 <b>Last modified:</b> 2023-10-30</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#const.iterators">active issues</a> in [const.iterators].</p>
 <p><b>View all other</b> <a href="lwg-index.html#const.iterators">issues</a> in [const.iterators].</p>
@@ -51424,6 +51024,13 @@ int main() {
   auto d = it - opt; // <span style="color:red;font-weight:bolder">infinite meta-recursion</span>
 }
 </pre></blockquote>
+
+<p><i>[2023-10-30; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
 
 
 <p id="res-3986"><b>Proposed resolution:</b></p>
@@ -51478,13 +51085,13 @@ and <tt>&lt;vector&gt;</tt>.
 
 <hr>
 <h3><a name="3988" href="#3988">3988</a><sup><a href="https://cplusplus.github.io/LWG/issue3988">(i)</a></sup>. Should <tt>as_const_view</tt> and <tt>basic_const_iterator</tt> provide <tt>base()</tt>?</h3>
-<p><b>Section:</b> 25.5.3 <a href="https://wg21.link/const.iterators">[const.iterators]</a>, 26.7.21.2 <a href="https://wg21.link/range.as.const.view">[range.as.const.view]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-28 <b>Last modified:</b> 2023-10-03</p>
-<p><b>Priority: </b>Not Prioritized
+<p><b>Section:</b> 25.5.3 <a href="https://wg21.link/const.iterators">[const.iterators]</a>, 26.7.21.2 <a href="https://wg21.link/range.as.const.view">[range.as.const.view]</a> <b>Status:</b> <a href="lwg-active.html#SG9">SG9</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-28 <b>Last modified:</b> 2023-10-30</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#const.iterators">active issues</a> in [const.iterators].</p>
 <p><b>View all other</b> <a href="lwg-index.html#const.iterators">issues</a> in [const.iterators].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#SG9">SG9</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 Currently, both <tt>as_const_view</tt> and <tt>basic_const_iterator</tt> provide <tt>base()</tt> members to 
@@ -51514,6 +51121,14 @@ int main() {
 <p>
 I don't think such a shortcut should be provided as it doesn't seem to be the intention and could be harmful.
 </p>
+
+<p><i>[2023-10-30; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+Send to SG9.
+</p>
+
 
 
 <p id="res-3988"><b>Proposed resolution:</b></p>
@@ -51594,8 +51209,8 @@ namespace std::ranges {
 <hr>
 <h3><a name="3989" href="#3989">3989</a><sup><a href="https://cplusplus.github.io/LWG/issue3989">(i)</a></sup>. The whole range for an iterator obtained from a <tt>std::span</tt> or <tt>std::basic_string_view</tt> is not clear</h3>
 <p><b>Section:</b> 23.3 <a href="https://wg21.link/string.view">[string.view]</a>, 24.7.2.2 <a href="https://wg21.link/views.span">[views.span]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-29 <b>Last modified:</b> 2023-10-03</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-29 <b>Last modified:</b> 2023-10-30</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#string.view">active issues</a> in [string.view].</p>
 <p><b>View all other</b> <a href="lwg-index.html#string.view">issues</a> in [string.view].</p>
@@ -51636,6 +51251,16 @@ libstdc++ and libc++ silently accept these operations.
 Perhaps the standard should clarify what the whole ranges are when determining whether operations between iterators 
 from different views on the same underlying range is well-defined.
 </p>
+
+<p><i>[2023-10-30; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+Libc++ diagnoses the example with the right macros defined.
+"Should <code>substr</code> and <code>remove_suffix</code> tighten the
+bounds or copy them from the original view?"
+</p>
+
 
 
 <p id="res-3989"><b>Proposed resolution:</b></p>
@@ -51866,8 +51491,8 @@ value to be <tt>&#x1d4aa;(1)</tt> <i>end note</i>]</ins>
 <hr>
 <h3><a name="3993" href="#3993">3993</a><sup><a href="https://cplusplus.github.io/LWG/issue3993">(i)</a></sup>. The <tt>parse</tt> function of a <i>BasicFormatter</i> type needs to be <tt>constexpr</tt></h3>
 <p><b>Section:</b> 22.14.6.1 <a href="https://wg21.link/formatter.requirements">[formatter.requirements]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-10-10 <b>Last modified:</b> 2023-10-14</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-10-10 <b>Last modified:</b> 2023-10-30</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#formatter.requirements">issues</a> in [formatter.requirements].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -51878,6 +51503,19 @@ compile-time format string, the <tt>parse</tt> functions of the formatters need 
 currently there is seemingly no requirement for the <tt>parse</tt> function to be <tt>constexpr</tt>, 
 and hence whether a format string is correct for formatted types may be not well-defined at compile-time.
 </p>
+
+<p><i>[2023-10-30; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+"Should be OK to provide a non-constexpr <code>parse</code> if you only use it
+with <code>std::vformat</code> and not <code>std::format</code>."
+"Only the <code>std::formatter</code> specializations in the standard library
+should be required to have constexpr <code>parse</code>."
+"No need to require this, but a note with this text explaining when a call
+to <code>parse</code> can be a constant expression might be nice."
+</p>
+
 
 
 <p id="res-3993"><b>Proposed resolution:</b></p>

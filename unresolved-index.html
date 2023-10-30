@@ -49,7 +49,7 @@
 <p>This document is the Index by Section for the <a href="lwg-active.html">Library Active Issues List</a>, <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.</p>
 <h2>Index by Section</h2>
 <p><a href="lwg-index-open.html">(view only non-Ready open issues)</a></p>
-<p><p>Revised 2023-10-29 at 13:16:13 UTC</p>
+<p><p>Revised 2023-10-30 at 17:20:43 UTC</p>
 </p><h2><a name="Section 3"></a>Section 3 (1 issues)</h2>
 <p><a href="lwg-index-open.html#Section 3">(view only non-Ready open issues)</a></p>
 <table border="1" cellpadding="4">
@@ -1434,7 +1434,7 @@ the evaluation of type traits</td>
 <td align="left">22.6.3.4 [variant.assign]<a name="variant.assign"></a></td>
 <td align="left"><tt>variant</tt>'s move assignment should not be guaranteed to produce a valueless by exception state</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -2257,7 +2257,7 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left">24.6.9.1 [flat.map.overview]<a name="flat.map.overview"></a></td>
 <td align="left">The <tt>value_type</tt> and <tt>reference</tt> members of <tt>std::flat_(multi)map::(const_)iterator</tt> are unclear</td>
 <td align="center"><font color="red">No</font></td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -2293,7 +2293,7 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left">24.7.3 [views.multidim]<a name="views.multidim"></a></td>
 <td align="left">Issue with custom index conversion in <tt>&lt;mdspan&gt;</tt></td>
 <td align="center"><font color="red">No</font></td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -2324,7 +2324,7 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left">25.2 [iterator.synopsis]<a name="iterator.synopsis"></a></td>
 <td align="left"><tt>iter_common_reference_t</tt> does not conform to the definition of <tt>indirectly_readable</tt></td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -2608,7 +2608,7 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left"></td>
 </tr>
 </table>
-<h2><a name="Section 26"></a>Section 26 (43 issues)</h2>
+<h2><a name="Section 26"></a>Section 26 (41 issues)</h2>
 <p><a href="lwg-index-open.html#Section 26">(view only non-Ready open issues)</a></p>
 <table border="1" cellpadding="4">
 <tr>
@@ -2639,15 +2639,6 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3982">3982</a><sup><a href="https://cplusplus.github.io/LWG/issue3982">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3982"></a></td>
-<td align="left">26.4.4 [range.view]<a name="range.view"></a></td>
-<td align="left"><tt><i>is-derived-from-view-interface</i></tt> should require that <tt>T</tt> is derived from <tt>view_interface&lt;T&gt;</tt></td>
-<td align="center">Yes</td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
 <td align="right"><a href="lwg-active.html#3896">3896</a><sup><a href="https://cplusplus.github.io/LWG/issue3896">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="3896"></a></td>
 <td align="left">26.4.5 [range.refinements]<a name="range.refinements"></a></td>
@@ -2671,7 +2662,7 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left">26.5.7.2 [range.utility.conv.to]<a name="range.utility.conv.to"></a></td>
 <td align="left"><tt>ranges::to</tt> should <i>Mandates</i> <tt>C</tt> not to be view</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -2679,15 +2670,6 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left"><a href="lwg-active.html#New">New</a><a name="3984"></a></td>
 <td align="left">26.5.7.2 [range.utility.conv.to]</td>
 <td align="left"><tt>ranges::to</tt>'s recursion branch may be ill-formed</td>
-<td align="center">Yes</td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="right"><a href="lwg-active.html#3958">3958</a><sup><a href="https://cplusplus.github.io/LWG/issue3958">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3958"></a></td>
-<td align="left">26.5.7.2 [range.utility.conv.to]</td>
-<td align="left"><tt>ranges::to</tt> should prioritize the "<tt>reserve</tt>" branch</td>
 <td align="center">Yes</td>
 <td align="center"></td>
 <td align="left"></td>
@@ -2780,7 +2762,7 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left">26.6.5.2 [range.repeat.view]<a name="range.repeat.view"></a></td>
 <td align="left">Add <tt>noexcept</tt> to several <tt>repeat_view[::<i>iterator</i>]</tt> member functions</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -2857,19 +2839,19 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3971">3971</a><sup><a href="https://cplusplus.github.io/LWG/issue3971">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3971"></a></td>
+<td align="right"><a href="lwg-active.html#3873">3873</a><sup><a href="https://cplusplus.github.io/LWG/issue3873">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3873"></a></td>
 <td align="left">26.7.15.2 [range.join.with.view]<a name="range.join.with.view"></a></td>
-<td align="left">Join ranges of rvalue references with ranges of prvalues</td>
+<td align="left"><tt>join_with_view</tt>'s <tt>const begin</tt> is underconstrained</td>
 <td align="center"><font color="red">No</font></td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3873">3873</a><sup><a href="https://cplusplus.github.io/LWG/issue3873">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3873"></a></td>
+<td align="right"><a href="lwg-active.html#3971">3971</a><sup><a href="https://cplusplus.github.io/LWG/issue3971">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#SG9">SG9</a><a name="3971"></a></td>
 <td align="left">26.7.15.2 [range.join.with.view]</td>
-<td align="left"><tt>join_with_view</tt>'s <tt>const begin</tt> is underconstrained</td>
+<td align="left">Join ranges of rvalue references with ranges of prvalues</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
 <td align="left"></td>
@@ -3333,7 +3315,7 @@ specified to make <tt><i>N</i></tt> copies of <tt>T</tt> into the destination ra
 <td align="left"><tt>std::atan2</tt> and <tt>std::pow</tt> overloads that take two <tt>std::valarray</tt> parameters 
 should require the arguments to have the same length</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">4</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -3504,9 +3486,18 @@ required to be correctly formatted?</td>
 <td align="left"></td>
 </tr>
 <tr>
+<td align="right"><a href="lwg-active.html#3956">3956</a><sup><a href="https://cplusplus.github.io/LWG/issue3956">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3956"></a></td>
+<td align="left">29.13 [time.parse]<a name="time.parse"></a></td>
+<td align="left"><code>chrono::parse</code> uses <code>from_stream</code> as a customization point</td>
+<td align="center"><font color="red">No</font></td>
+<td align="center">3</td>
+<td align="left"></td>
+</tr>
+<tr>
 <td align="right"><a href="lwg-active.html#3960">3960</a><sup><a href="https://cplusplus.github.io/LWG/issue3960">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="3960"></a></td>
-<td align="left">29.13 [time.parse]<a name="time.parse"></a></td>
+<td align="left">29.13 [time.parse]</td>
 <td align="left">How does <tt>chrono::parse</tt> handle duplicated data?</td>
 <td align="center">Yes</td>
 <td align="center"></td>
@@ -3527,15 +3518,6 @@ required to be correctly formatted?</td>
 <td align="left">29.13 [time.parse]</td>
 <td align="left">What is the "decimal precision of the input"?</td>
 <td align="center">Yes</td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="right"><a href="lwg-active.html#3956">3956</a><sup><a href="https://cplusplus.github.io/LWG/issue3956">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3956"></a></td>
-<td align="left">29.13 [time.parse]</td>
-<td align="left"><code>chrono::parse</code> uses <code>from_stream</code> as a customization point</td>
-<td align="center"><font color="red">No</font></td>
 <td align="center"></td>
 <td align="left"></td>
 </tr>

@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-10-29 at 13:16:13 UTC</p>
+<p><p>Revised 2023-10-30 at 17:20:43 UTC</p>
 </p><h2>Tentative Issues</h2>
 <hr>
 <h3><a name="2457" href="#2457">2457</a><sup><a href="https://cplusplus.github.io/LWG/issue2457">(i)</a></sup>. <tt>std::begin()</tt> and <tt>std::end()</tt> do not support multi-dimensional arrays correctly</h3>
@@ -1398,6 +1398,132 @@ equivalent to <tt>*p</tt>.</p>
 
 
 <hr>
+<h3><a name="3958" href="#3958">3958</a><sup><a href="https://cplusplus.github.io/LWG/issue3958">(i)</a></sup>. <tt>ranges::to</tt> should prioritize the "<tt>reserve</tt>" branch</h3>
+<p><b>Section:</b> 26.5.7.2 <a href="https://wg21.link/range.utility.conv.to">[range.utility.conv.to]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-07-17 <b>Last modified:</b> 2023-10-30</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.utility.conv.to">active issues</a> in [range.utility.conv.to].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.utility.conv.to">issues</a> in [range.utility.conv.to].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively NAD">Tentatively NAD</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+When the constructed range object has no range version constructor, <tt>ranges::to</tt> falls into a 
+branch designed specifically for C++17-compliant containers, which calls the legacy constructor that 
+accepts an iterator pair with <tt>C(ranges::begin(r), ranges::end(r), std::forward&lt;Args&gt;(args)...)</tt>.    
+<p/>
+However, this kind of initialization may bring some performance issues, because we split the original 
+range into pairs of iterators, which may lose information contained in the original range, for example:
+</p>
+<blockquote><pre>
+#include &lt;boost/container/vector.hpp&gt;
+#include &lt;sstream&gt;
+#include &lt;ranges&gt;
+
+int main() {
+  std::istringstream ints("1 2 3 4 5");
+  std::ranges::subrange s(std::istream_iterator&lt;int&gt;(ints),
+                          std::istream_iterator&lt;int&gt;(),
+                          5);
+  auto r = std::ranges::to&lt;boost::container::vector&gt;(s); // <span style="color:red;font-weight:bolder">discard size info</span>
+}
+</pre></blockquote>
+<p>
+Above, <tt>subrange</tt> saves the size information of the stream, but <tt>ranges::to</tt> only extracts 
+its iterator pair to create the object, so that the original size information is discarded, resulting in 
+unnecessary allocations.
+<p/>
+I believe we should prefer to use the "<tt>reserve</tt>" branch here because it is really designed for this situation.
+</p>
+
+<p><i>[2023-10-30; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively NAD after reflector poll.
+"This optimizes exotic cases at the expense of realistic cases."
+</p>
+
+
+
+<p id="res-3958"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 26.5.7.2 <a href="https://wg21.link/range.utility.conv.to">[range.utility.conv.to]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class C, input_range R, class... Args&gt; requires (!view&lt;C&gt;)
+  constexpr C to(R&amp;&amp; r, Args&amp;&amp;... args);
+</pre>
+<blockquote>
+<p>
+-1- <i>Mandates</i>: <tt>C</tt> is a cv-unqualified class type.
+</p>
+<p>
+-2- <i>Returns</i>: An object of type <tt>C</tt> constructed from the elements of <tt>r</tt> in the following manner:
+</p>
+<ol style="list-style-type: none">
+<li><p>(2.1) &mdash; If <tt>C</tt> does not satisfy <tt>input_range</tt> or <tt>convertible_to&lt;range_reference_t&lt;R&gt;, 
+range_value_t&lt;C&gt;&gt;</tt> is <tt>true</tt>:</p></li>
+<ol style="list-style-type: none">
+<li><p>(2.1.1) &mdash; If <tt>constructible_from&lt;C, R, Args...&gt;</tt> is <tt>true</tt>:</p>
+<blockquote><tt>C(std::forward&lt;R&gt;(r), std::forward&lt;Args&gt;(args)...)</tt></blockquote></li>
+<li><p>(2.1.2) &mdash; Otherwise, if <tt>constructible_from&lt;C, from_range_t, R, Args...&gt;</tt> is <tt>true</tt>:</p>
+<blockquote><tt>C(from_range, std::forward&lt;R&gt;(r), std::forward&lt;Args&gt;(args)...)</tt></blockquote></li>
+<li><p><del>(2.1.3) &mdash; Otherwise, if</del></p></li>
+<ol style="list-style-type: none">
+<li><p><del>(2.1.3.1) &mdash; <tt>common_range&lt;R&gt;</tt> is <tt>true</tt>,</del></p></li>
+<li><p><del>(2.1.3.2) &mdash; the <i>qualified-id</i>  
+<tt>iterator_traits&lt;iterator_t&lt;R&gt;&gt;::iterator_category</tt> is valid and denotes a type that models 
+<tt>derived_from&lt;input_iterator_tag&gt;</tt>, and</del></p></li>
+<li><p><del>(2.1.3.3) &mdash; <tt>constructible_from&lt;C, iterator_t&lt;R&gt;, sentinel_t&lt;R&gt;, Args...&gt;</tt> 
+is <tt>true</tt>:</del></p>
+<blockquote><pre><del>C(ranges::begin(r), ranges::end(r), std::forward&lt;Args&gt;(args)...)</del></pre></blockquote></li>
+</ol>
+<li><p>(2.1.4) &mdash; Otherwise, if</p></li>
+<ol style="list-style-type: none">
+<li><p>(2.1.4.1) &mdash; <tt>constructible_from&lt;C, Args...&gt;</tt> is <tt>true</tt>, and</p></li>
+<li><p>(2.1.4.2) &mdash; <tt><i>container-insertable</i>&lt;C, range_reference_t&lt;R&gt;&gt;</tt> is <tt>true</tt>:</p>
+<blockquote><pre>
+C c(std::forward&lt;Args&gt;(args)...);
+if constexpr (sized_range&lt;R&gt; &amp;&amp; <i>reservable-container</i>&lt;C&gt;)
+  c.reserve(static_cast&lt;range_size_t&lt;C&gt;&gt;(ranges::size(r)));
+ranges::copy(r, <i>container-inserter</i>&lt;range_reference_t&lt;R&gt;&gt;(c));
+</pre></blockquote></li>
+</ol>
+<li><p><ins>(?.?.?) &mdash; Otherwise, if</ins></p></li>
+<ol style="list-style-type: none">
+<li><p><ins>(?.?.?.?) &mdash; <tt>common_range&lt;R&gt;</tt> is <tt>true</tt>,</ins></p></li>
+<li><p><ins>(?.?.?.?) &mdash; the <i>qualified-id</i> <tt>iterator_traits&lt;iterator_t&lt;R&gt;&gt;::iterator_category</tt> 
+is valid and denotes a type that models <tt>derived_from&lt;input_iterator_tag&gt;</tt>, and</ins></p></li>
+<li><p><ins>(?.?.?.?) &mdash; <tt>constructible_from&lt;C, iterator_t&lt;R&gt;, sentinel_t&lt;R&gt;, Args...&gt;</tt> 
+is <tt>true</tt>:</ins></p>
+<blockquote><pre><ins>C(ranges::begin(r), ranges::end(r), std::forward&lt;Args&gt;(args)...)</ins></pre></blockquote></li>
+</ol>
+</ol>
+<li><p>(2.2) &mdash; Otherwise, if <tt>input_range&lt;range_reference_t&lt;R&gt;&gt;</tt> is <tt>true</tt>:</p>
+<blockquote><pre>
+to&lt;C&gt;(r | views::transform([](auto&amp;&amp; elem) {
+  return to&lt;range_value_t&lt;C&gt;&gt;(std::forward&lt;decltype(elem)&gt;(elem));
+}), std::forward&lt;Args&gt;(args)...);
+</pre></blockquote></li>
+<li><p>(2.3) &mdash; Otherwise, the program is ill-formed.</p></li>
+</ol>
+</blockquote>
+</blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
 <h3><a name="3965" href="#3965">3965</a><sup><a href="https://cplusplus.github.io/LWG/issue3965">(i)</a></sup>. Incorrect example in [format.string.escaped] p3 for formatting of combining characters</h3>
 <p><b>Section:</b> 22.14.6.4 <a href="https://wg21.link/format.string.escaped">[format.string.escaped]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
  <b>Submitter:</b> Tom Honermann <b>Opened:</b> 2023-07-31 <b>Last modified:</b> 2023-10-27</p>
@@ -1557,6 +1683,73 @@ inline constexpr full_extent_t full_extent{};</ins>
 </pre>
 </blockquote>
 </li>
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3982" href="#3982">3982</a><sup><a href="https://cplusplus.github.io/LWG/issue3982">(i)</a></sup>. <tt><i>is-derived-from-view-interface</i></tt> should require that <tt>T</tt> is derived from <tt>view_interface&lt;T&gt;</tt></h3>
+<p><b>Section:</b> 26.4.4 <a href="https://wg21.link/range.view">[range.view]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2023-10-30</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.view">issues</a> in [range.view].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively NAD">Tentatively NAD</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Currently, the wording of <tt><i>is-derived-from-view-interface</i></tt> only detects whether type <tt>T</tt> is unambiguously 
+derived from one base class <tt>view_interface&lt;U&gt;</tt> where <tt>U</tt> is not required to be <tt>T</tt>, which is not 
+the intention of CRTP.
+</p>
+
+<p><i>[2023-10-30; Reflector poll]</i></p>
+
+<p>Set status to Tentatively NAD.
+The wording correctly handles the case where T derives from <code>Base</code>
+which derives from <code>view_interface&lt;Base&gt;</code>.
+We don't want it to only be satisfied for direct inheritance from
+<code>view_interface&lt;T&gt;</code>, but from any specialization of
+<code>view_interface</code>.
+Previously the concept only checked for inheritance from <code>view_base</code>
+but it was changed when <code>view_interface</code> stopped inheriting from
+<code>view_base</code>.
+</p>
+
+
+
+<p id="res-3982"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 26.4.4 <a href="https://wg21.link/range.view">[range.view]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class T&gt;
+  constexpr bool <i>is-derived-from-view-interface</i> = <i>see below</i>;            // exposition only
+template&lt;class T&gt;
+  constexpr bool enable_view =
+    derived_from&lt;T, view_base&gt; || <i>is-derived-from-view-interface</i>&lt;T&gt;;
+</pre>
+<blockquote>
+<p>
+-6- For a type <tt>T</tt>, <tt><i>is-derived-from-view-interface</i>&lt;T&gt;</tt>
+is <tt>true</tt> if and only if <tt>T</tt> has exactly one public base class
+<tt>view_interface&lt;<ins>T</ins><del>U</del>&gt;</tt> <del>for some type <tt>U</tt></del> and
+<tt>T</tt> has no base classes of type <tt>view_interface&lt;<ins>U</ins><del>V</del>&gt;</tt> for any
+other type <tt><ins>U</ins><del>V</del></tt>.
+<p/>
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+
 </ol>
 
 

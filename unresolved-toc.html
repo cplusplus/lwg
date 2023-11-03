@@ -48,7 +48,7 @@
 <p>Reference ISO/IEC IS 14882:2020(E)</p>
 <p>This document is the Table of Contents for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.</p>
-<p><p>Revised 2023-10-30 at 17:24:08 UTC</p>
+<p><p>Revised 2023-11-03 at 18:10:08 UTC</p>
 </p><table border="1" cellpadding="4">
 <tr>
   <td align="center"><a href="lwg-toc.html"><b>Issue</b></a></td>
@@ -4030,7 +4030,7 @@ and user requirements</td>
 <td align="left">29.13 [time.parse]<a name="time.parse"></a></td>
 <td align="left">How does <tt>chrono::parse</tt> handle duplicated data?</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4039,7 +4039,7 @@ and user requirements</td>
 <td align="left">29.13 [time.parse]</td>
 <td align="left">Does <tt>chrono::parse</tt> check format strings?</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4048,7 +4048,7 @@ and user requirements</td>
 <td align="left">29.13 [time.parse]</td>
 <td align="left">What is the "decimal precision of the input"?</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4057,7 +4057,7 @@ and user requirements</td>
 <td align="left">24.6.9.2 [flat.map.defn]<a name="flat.map.defn"></a></td>
 <td align="left">Different <tt>std::flat_map</tt>/<tt>std::flat_multimap</tt> specializations should be able to share same nested classes</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4103,7 +4103,7 @@ should require the arguments to have the same length</td>
 <td align="left">27.6.18 [alg.fold]<a name="alg.fold"></a></td>
 <td align="left"><tt>std::ranges::fold_left_first_with_iter</tt> should be more ADL-proof</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4121,16 +4121,7 @@ should require the arguments to have the same length</td>
 <td align="left">26.7.15.3 [range.join.with.iterator]<a name="range.join.with.iterator"></a></td>
 <td align="left">Issues with <tt>join_with_view::<i>iterator</i></tt>'s <tt>iter_swap</tt></td>
 <td align="center"><font color="red">No</font></td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="right"><a href="lwg-active.html#3974">3974</a><sup><a href="https://cplusplus.github.io/LWG/issue3974">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3974"></a></td>
-<td align="left">24.7.3.6.3 [mdspan.mdspan.members]<a name="mdspan.mdspan.members"></a></td>
-<td align="left"><tt>mdspan::operator[]</tt> should not copy <tt>OtherIndexTypes</tt></td>
-<td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">2</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4166,7 +4157,7 @@ should require the arguments to have the same length</td>
 <td align="left">22.4.5 [tuple.creation]<a name="tuple.creation"></a></td>
 <td align="left">The "no effect" requirement for <tt>std::ignore</tt> is unimplementable for <tt>volatile</tt> bit-fields</td>
 <td align="center"><font color="red">No</font></td>
-<td align="center"></td>
+<td align="center">4</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4179,21 +4170,12 @@ should require the arguments to have the same length</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3980">3980</a><sup><a href="https://cplusplus.github.io/LWG/issue3980">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3980"></a></td>
-<td align="left">33.5.4 [atomics.order]<a name="atomics.order"></a></td>
-<td align="left">The read exclusive ownership of an atomic read-modify-write operation and whether its read and write are two operations are unclear</td>
-<td align="center">Yes</td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
 <td align="right"><a href="lwg-active.html#3983">3983</a><sup><a href="https://cplusplus.github.io/LWG/issue3983">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="3983"></a></td>
 <td align="left">26.5.7.3 [range.utility.conv.adaptors]<a name="range.utility.conv.adaptors"></a></td>
 <td align="left"><tt>ranges::to</tt> adaptors are underconstrained</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4202,7 +4184,7 @@ should require the arguments to have the same length</td>
 <td align="left">26.5.7.2 [range.utility.conv.to]<a name="range.utility.conv.to"></a></td>
 <td align="left"><tt>ranges::to</tt>'s recursion branch may be ill-formed</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4224,18 +4206,9 @@ should require the arguments to have the same length</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3987">3987</a><sup><a href="https://cplusplus.github.io/LWG/issue3987">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3987"></a></td>
-<td align="left">25.7 [iterator.range]<a name="iterator.range"></a></td>
-<td align="left">Including <tt>&lt;flat_<i>foo</i>&gt;</tt> doesn't provide <tt>std::begin/end</tt></td>
-<td align="center">Yes</td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
 <td align="right"><a href="lwg-active.html#3988">3988</a><sup><a href="https://cplusplus.github.io/LWG/issue3988">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#SG9">SG9</a><a name="3988"></a></td>
-<td align="left">25.5.3 [const.iterators]<a name="const.iterators"></a></td>
+<td align="left">25.5.3 [const.iterators]</td>
 <td align="left">Should <tt>as_const_view</tt> and <tt>basic_const_iterator</tt> provide <tt>base()</tt>?</td>
 <td align="center">Yes</td>
 <td align="center">3</td>
@@ -4248,15 +4221,6 @@ should require the arguments to have the same length</td>
 <td align="left">The whole range for an iterator obtained from a <tt>std::span</tt> or <tt>std::basic_string_view</tt> is not clear</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="right"><a href="lwg-active.html#3990">3990</a><sup><a href="https://cplusplus.github.io/LWG/issue3990">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3990"></a></td>
-<td align="left">22.4.4 [tuple.tuple]<a name="tuple.tuple"></a></td>
-<td align="left">Program-defined specializations of <tt>std::tuple</tt> and <tt>std::variant</tt> can't be properly supported</td>
-<td align="center">Yes</td>
-<td align="center"></td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4292,7 +4256,7 @@ should require the arguments to have the same length</td>
 <td align="left">26.7.2 [range.adaptor.object]<a name="range.adaptor.object"></a></td>
 <td align="left"><tt>adaptor(args...)(r)</tt> is not equivalent to <tt>std::bind_back(adaptor, args...)(r)</tt></td>
 <td align="center"><font color="red">No</font></td>
-<td align="center"></td>
+<td align="center">4</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4305,21 +4269,12 @@ should require the arguments to have the same length</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3996">3996</a><sup><a href="https://cplusplus.github.io/LWG/issue3996">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3996"></a></td>
-<td align="left">25.3.6.4 [projected]<a name="projected"></a></td>
-<td align="left"><tt>projected&lt;I, identity&gt;</tt> should just be <tt>I</tt></td>
-<td align="center">Yes</td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
 <td align="right"><a href="lwg-active.html#3997">3997</a><sup><a href="https://cplusplus.github.io/LWG/issue3997">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="3997"></a></td>
 <td align="left">22.14.1 [format.syn]<a name="format.syn"></a></td>
 <td align="left"><tt>std::formatter</tt> specializations should be consistently restricted to supported character types</td>
 <td align="center"><font color="red">No</font></td>
-<td align="center"></td>
+<td align="center">4</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4337,7 +4292,7 @@ should require the arguments to have the same length</td>
 <td align="left">33.5.4 [atomics.order]<a name="atomics.order"></a></td>
 <td align="left">P0439R0 changed the value category of memory order constants</td>
 <td align="center">Yes</td>
-<td align="center"></td>
+<td align="center">4</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4345,15 +4300,6 @@ should require the arguments to have the same length</td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="4000"></a></td>
 <td align="left">24.6.9.6 [flat.map.modifiers]<a name="flat.map.modifiers"></a></td>
 <td align="left"><tt>flat_map::insert_range</tt>'s <i>Effects</i> is not quite right</td>
-<td align="center">Yes</td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="right"><a href="lwg-active.html#4001">4001</a><sup><a href="https://cplusplus.github.io/LWG/issue4001">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="4001"></a></td>
-<td align="left">26.6.4.2 [range.iota.view]<a name="range.iota.view"></a></td>
-<td align="left"><tt>iota_view</tt> should provide <tt>empty</tt></td>
 <td align="center">Yes</td>
 <td align="center"></td>
 <td align="left"></td>

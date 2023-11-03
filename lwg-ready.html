@@ -51,7 +51,7 @@
 </tr>
 <tr>
 <td align="left">Date:</td>
-<td align="left"><p>Revised 2023-10-30 at 17:24:08 UTC</p>
+<td align="left"><p>Revised 2023-11-03 at 18:10:08 UTC</p>
 </td>
 </tr>
 <tr>
@@ -2369,6 +2369,352 @@ direct-non-list-initialized with <tt>invoke(std::forward&lt;F&gt;(f), std::move(
 </blockquote>
 </blockquote>
 </li>
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3974" href="#3974">3974</a><sup><a href="https://cplusplus.github.io/LWG/issue3974">(i)</a></sup>. <tt>mdspan::operator[]</tt> should not copy <tt>OtherIndexTypes</tt></h3>
+<p><b>Section:</b> 24.7.3.6.3 <a href="https://wg21.link/mdspan.mdspan.members">[mdspan.mdspan.members]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Casey Carter <b>Opened:</b> 2023-08-12 <b>Last modified:</b> 2023-11-03</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The wording for <tt>mdspan</tt>'s <tt>operator[]</tt> overloads that accept <tt>span</tt> and <tt>array</tt> is in 
+24.7.3.6.3 <a href="https://wg21.link/mdspan.mdspan.members">[mdspan.mdspan.members]</a> paragraphs 5 and 6:
+</p>
+<blockquote><pre>
+template&lt;class OtherIndexType&gt;
+  constexpr reference operator[](span&lt;OtherIndexType, rank()&gt; indices) const;
+template&lt;class OtherIndexType&gt;
+  constexpr reference operator[](const array&lt;OtherIndexType, rank()&gt;&amp; indices) const;
+</pre>
+<p>
+-5- <i>Constraints</i>:
+</p>
+<ol style="list-style-type: none">
+<li><p>(5.1) &mdash; <tt>is_convertible_v&lt;const OtherIndexType&amp;, index_type&gt;</tt> is <tt>true</tt>, and</p></li>
+<li><p>(5.2) &mdash; <tt>is_nothrow_constructible_v&lt;index_type, const OtherIndexType&amp;&gt;</tt> is <tt>true</tt>.</p></li>
+</ol>
+<p>
+-6- <i>Effects</i>: Let <tt>P</tt> be a parameter pack such that
+</p>
+<blockquote><pre>
+is_same_v&lt;make_index_sequence&lt;rank()&gt;, index_sequence&lt;P...&gt;&gt;
+</pre></blockquote>
+<p>
+is <tt>true</tt>. Equivalent to:
+</p>
+<blockquote><pre>
+return operator[](as_const(indices[P])...);
+</pre></blockquote>
+</blockquote>
+<p>
+The equivalent code calls the other <tt>operator[]</tt> overload:
+</p>
+<blockquote><pre>
+template&lt;class... OtherIndexTypes&gt;
+  constexpr reference operator[](OtherIndexTypes... indices) const;
+</pre></blockquote>
+<p>
+with a pack of <tt>const OtherIndexType</tt> lvalues, but we notably haven't required <tt>OtherIndexTypes</tt> to be copyable &mdash; 
+we only require that we can convert them to <tt>index_type</tt>. While one could argue that the use in "<i>Effects</i>: equivalent to" 
+implies a requirement of copyability, it's odd that this implicit requirement would be the only requirement for copyable 
+<tt>OtherIndexTypes</tt> in the spec. We could fix this by changing the <tt>operator[]</tt> overload accepting <tt>OtherIndexTypes</tt> 
+to take them by <tt>const&amp;</tt>, but that would be inconsistent with virtually every other place in the spec where types 
+convertible to <tt>index_type</tt> are taken by-value. I think the best localized fix is to perform the conversion to <tt>index_type</tt> 
+in the "<i>Effects</i>: equivalent to" code so the actual arguments have type <tt>index_type</tt> which we know is copyable.
+</p>
+
+<p><i>[2023-11-02; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after eight votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-3974"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 24.7.3.6.3 <a href="https://wg21.link/mdspan.mdspan.members">[mdspan.mdspan.members]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class OtherIndexType&gt;
+  constexpr reference operator[](span&lt;OtherIndexType, rank()&gt; indices) const;
+template&lt;class OtherIndexType&gt;
+  constexpr reference operator[](const array&lt;OtherIndexType, rank()&gt;&amp; indices) const;
+</pre>
+<blockquote>
+<p>
+-5- <i>Constraints</i>:
+</p>
+<ol style="list-style-type: none">
+<li><p>(5.1) &mdash; <tt>is_convertible_v&lt;const OtherIndexType&amp;, index_type&gt;</tt> is <tt>true</tt>, and</p></li>
+<li><p>(5.2) &mdash; <tt>is_nothrow_constructible_v&lt;index_type, const OtherIndexType&amp;&gt;</tt> is <tt>true</tt>.</p></li>
+</ol>
+<p>
+-6- <i>Effects</i>: Let <tt>P</tt> be a parameter pack such that
+</p>
+<blockquote><pre>
+is_same_v&lt;make_index_sequence&lt;rank()&gt;, index_sequence&lt;P...&gt;&gt;
+</pre></blockquote>
+<p>
+is <tt>true</tt>. Equivalent to:
+</p>
+<blockquote><pre>
+return operator[](<ins>extents_type::<i>index-cast</i>(</ins>as_const(indices[P])<ins>)</ins>...);
+</pre></blockquote>
+</blockquote>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3987" href="#3987">3987</a><sup><a href="https://cplusplus.github.io/LWG/issue3987">(i)</a></sup>. Including <tt>&lt;flat_<i>foo</i>&gt;</tt> doesn't provide <tt>std::begin/end</tt></h3>
+<p><b>Section:</b> 25.7 <a href="https://wg21.link/iterator.range">[iterator.range]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-27 <b>Last modified:</b> 2023-11-03</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#iterator.range">active issues</a> in [iterator.range].</p>
+<p><b>View all other</b> <a href="lwg-index.html#iterator.range">issues</a> in [iterator.range].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+It seems that 25.7 <a href="https://wg21.link/iterator.range">[iterator.range]</a> should also add <tt>&lt;flat_<i>foo</i>&gt;</tt> to the list as the 
+latter provides a series of range access member functions such as <tt>begin/end</tt>.
+</p>
+
+<p><i>[2023-11-02; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after nine votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-3987"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 25.7 <a href="https://wg21.link/iterator.range">[iterator.range]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- In addition to being available via inclusion of the <tt>&lt;iterator&gt;</tt> header, the function templates in
+[iterator.range] are available when any of the following headers are included: <tt>&lt;array&gt;</tt>,
+<tt>&lt;deque&gt;</tt>, <ins><tt>&lt;flat_map&gt;</tt>, <tt>&lt;flat_set&gt;</tt>,</ins> <tt>&lt;forward_list&gt;</tt>, 
+<tt>&lt;list&gt;</tt>, <tt>&lt;map&gt;</tt>, <tt>&lt;regex&gt;</tt>, <tt>&lt;set&gt;</tt>, <tt>&lt;span&gt;</tt>, 
+<tt>&lt;string&gt;</tt>, <tt>&lt;string_view&gt;</tt>, <tt>&lt;unordered_map&gt;</tt>, <tt>&lt;unordered_set&gt;</tt>, 
+and <tt>&lt;vector&gt;</tt>.
+</p>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="3990" href="#3990">3990</a><sup><a href="https://cplusplus.github.io/LWG/issue3990">(i)</a></sup>. Program-defined specializations of <tt>std::tuple</tt> and <tt>std::variant</tt> can't be properly supported</h3>
+<p><b>Section:</b> 22.4.4 <a href="https://wg21.link/tuple.tuple">[tuple.tuple]</a>, 22.6.3.1 <a href="https://wg21.link/variant.variant.general">[variant.variant.general]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-29 <b>Last modified:</b> 2023-11-03</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#tuple.tuple">issues</a> in [tuple.tuple].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Currently, program-defined specializations of <tt>std::tuple</tt> and <tt>std::variant</tt> are not explicitly disallowed. 
+However, they can't be properly supported by standard library implementations, because the corresponding <tt>std::get</tt> 
+function templates have to inspect the implementation details of these types, and users have no way to make <tt>std::get</tt> 
+behave correctly for a program-defined specializations.
+<p/>
+Perhaps we should explicitly disallow specializing <tt>std::tuple</tt> and <tt>std::variant</tt>.
+</p>
+
+<p><i>[2023-11-02; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after five votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-3990"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 22.4.4 <a href="https://wg21.link/tuple.tuple">[tuple.tuple]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+namespace std {
+  template&lt;class... Types&gt;
+  class tuple {
+    [&hellip;]
+  };
+
+  [&hellip;]
+}
+</pre>
+</blockquote>
+<blockquote>
+<p>
+<ins>-?- If a program declares an explicit or partial specialization of <tt>tuple</tt>, 
+the program is ill-formed, no diagnostic required.</ins>
+</p>
+</blockquote>
+
+</li>
+
+<li><p>Modify 22.6.3.1 <a href="https://wg21.link/variant.variant.general">[variant.variant.general]</a> as indicated:</p>
+
+<blockquote>
+<p>
+[&hellip;]
+<p/>
+-3- A program that instantiates the definition of <tt>variant</tt> with no template arguments is ill-formed.
+<p/>
+<ins>-?- If a program declares an explicit or partial specialization of <tt>variant</tt>, 
+the program is ill-formed, no diagnostic required.</ins>
+</p>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="4001" href="#4001">4001</a><sup><a href="https://cplusplus.github.io/LWG/issue4001">(i)</a></sup>. <tt>iota_view</tt> should provide <tt>empty</tt></h3>
+<p><b>Section:</b> 26.6.4.2 <a href="https://wg21.link/range.iota.view">[range.iota.view]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-10-27 <b>Last modified:</b> 2023-11-03</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.iota.view">active issues</a> in [range.iota.view].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.iota.view">issues</a> in [range.iota.view].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+When <tt>iota_view</tt>'s template parameter is not an integer type and does not model <tt><i>advanceable</i></tt>, 
+its <tt>size</tt> member will not be provided as constraints are not satisfied.
+<p/>
+If the type further fails to model the <tt>incrementable</tt>, this results in its <tt>view_interface</tt> base being 
+unable to synthesize a valid <tt>empty</tt> member as <tt>iota_view</tt> will just be an <tt>input_range</tt> 
+(<a href="https://godbolt.org/z/hG9GWvv97">demo</a>):
+</p>
+<blockquote><pre>
+#include &lt;ranges&gt;
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
+
+int main() {
+  std::vector&lt;int&gt; v;
+  auto it = std::back_inserter(v);
+  auto s = std::ranges::subrange(it, std::unreachable_sentinel);
+  auto r = std::views::iota(it);
+  std::cout &lt;&lt; s.empty() &lt;&lt; "\n"; // 0
+  std::cout &lt;&lt; r.empty() &lt;&lt; "\n"; // <span style="color:red;font-weight:bolder">ill-formed</span>
+}
+</pre></blockquote>
+<p>
+This seems to be an oversight. I don't see a reason why <tt>iota_view</tt> doesn't provide <tt>empty</tt> 
+as it does store the start and end like <tt>subrange</tt>, in which case it's easy to tell if it's empty 
+just by comparing the two.
+</p>
+
+<p><i>[2023-11-02; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after seven votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4001"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4964">N4964</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 26.6.4.2 <a href="https://wg21.link/range.iota.view">[range.iota.view]</a>, class template <tt>iota_view</tt> synopsis, as indicated:</p>
+
+<blockquote>
+<blockquote><pre>
+namespace std::ranges {
+  [&hellip;]
+  template&lt;weakly_incrementable W, semiregular Bound = unreachable_sentinel_t&gt;
+    requires <i>weakly-equality-comparable-with</i>&lt;W, Bound&gt; &amp;&amp; copyable&lt;W&gt;
+  class iota_view : public view_interface&lt;iota_view&lt;W, Bound&gt;&gt; {
+  private:
+    [&hellip;]
+    W <i>value_</i> = W();                     // <i>exposition only</i>
+    Bound <i>bound_</i> = Bound();             // <i>exposition only</i>
+  public:
+    [&hellip;]
+    constexpr <i>iterator</i> begin() const;
+    constexpr auto end() const;
+    constexpr <i>iterator</i> end() const requires same_as&lt;W, Bound&gt;;
+
+    <ins>constexpr bool empty() const;</ins>
+    constexpr auto size() const requires <i>see below</i>;
+  };
+  [&hellip;]
+}
+</pre></blockquote>
+<p>
+[&hellip;]
+</p>
+<pre>
+constexpr <i>iterator</i> end() const requires same_as&lt;W, Bound&gt;;
+</pre>
+<blockquote>
+<p>
+-14- <i>Effects</i>: Equivalent to: <tt>return <i>iterator</i>{<i>bound_</i>};</tt> 
+</p>
+</blockquote>
+<pre>
+<ins>constexpr bool empty() const;</ins>
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Effects</i>: Equivalent to: <tt>return <i>value_</i> == <i>bound_</i>;</tt></ins>
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+
 </ol>
 
 

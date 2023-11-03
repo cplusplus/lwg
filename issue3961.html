@@ -47,8 +47,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3><a name="3961" href="lwg-active.html#3961">3961</a>. Does <tt>chrono::parse</tt> check format strings?</h3>
 <p><b>Section:</b> 29.13 <a href="https://wg21.link/time.parse">[time.parse]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-07-28 <b>Last modified:</b> 2023-07-29</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-07-28 <b>Last modified:</b> 2023-11-03</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#time.parse">active issues</a> in [time.parse].</p>
 <p><b>View all other</b> <a href="lwg-index.html#time.parse">issues</a> in [time.parse].</p>
@@ -95,6 +95,13 @@ Can a conforming implementation validate the format string before extracting
 any characters, and fail early if parsing the actual istream contents can never
 succeed? Or is <tt>parse("%a", sec)</tt> required to try to parse a valid
 weekday name before setting <tt>failbit</tt>?
+</p>
+
+
+<p><i>[2023-11-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
 </p>
 
 

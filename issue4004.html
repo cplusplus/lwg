@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Issue 4004: It is underspecified in which header std::formatter specializations for container adaptors are provided</title>
+<title>Issue 4004: The load and store operation in &sect;[atomics.order] p1 is ambiguous</title>
 <style type="text/css">
   p {text-align:justify}
   li {text-align:justify}
@@ -45,72 +45,66 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="4004" href="lwg-active.html#4004">4004</a>. It is underspecified in which header <tt>std::formatter</tt> specializations for container adaptors are provided</h3>
-<p><b>Section:</b> 24.6.13 <a href="https://wg21.link/container.adaptors.format">[container.adaptors.format]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-10-29 <b>Last modified:</b> 2023-10-29</p>
+<h3><a name="4004" href="lwg-active.html#4004">4004</a>. The load and store operation in &sect;[atomics.order] p1 is ambiguous</h3>
+<p><b>Section:</b> 33.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> jim x <b>Opened:</b> 2023-10-30 <b>Last modified:</b> 2023-11-04</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
-<p><b>View all other</b> <a href="lwg-index.html#container.adaptors.format">issues</a> in [container.adaptors.format].</p>
+<p><b>View other</b> <a href="lwg-index-open.html#atomics.order">active issues</a> in [atomics.order].</p>
+<p><b>View all other</b> <a href="lwg-index.html#atomics.order">issues</a> in [atomics.order].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-<a href="https://wg21.link/P2286R8">P2286R8</a> added <tt>std::formatter</tt> specializations for container adaptors, but didn't show them 
-in synopses of headers. Presumably these specializations should be provided in <tt>&lt;stack&gt;</tt> and <tt>&lt;queue&gt;</tt>.
+33.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> p1 says:
+</p>
+<blockquote style="border-left: 3px solid #ccc;padding-left: 15px;">
+<ol style="list-style-type: none">
+<li><p>(1.2) &mdash; <tt>memory_order::release</tt>, <tt>memory_order::acq_rel</tt>, and <tt>memory_order::seq_cst</tt>: a store operation 
+performs a release operation on the affected memory location.</p></li>
+<li><p>(1.3) &mdash; <tt>memory_order::consume</tt>: a load operation performs a consume operation on the affected memory location. 
+[&hellip;]</p></li>
+<li><p>(1.4) &mdash; <tt>memory_order::acquire</tt>, <tt>memory_order::acq_rel</tt>, and <tt>memory_order::seq_cst</tt>: a 
+load operation performs an acquire operation on the affected memory location.</p></li>
+</ol>
+</blockquote>
+<p>
+What do the store and load operations intend to mean in this context? If there is no extra specification, 
+it is easy to consider them as the operations performed by the non-static member functions "store" and "load" 
+defined in the <tt>atomic</tt> class (template).
+<p/>
+33.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> p2 says
+</p>
+<blockquote style="border-left: 3px solid #ccc;padding-left: 15px;">
+<p>
+An atomic operation <i>A</i> that performs a release operation on an atomic object <i>M</i> synchronizes with 
+an atomic operation <i>B</i> that performs an acquire operation on <i>M</i> and takes its value from any side 
+effect in the release sequence headed by <i>A</i>.
+</p>
+</blockquote>
+<p>
+According to the above interpretation, <i>A</i> is an operation performed by the non-static member function 
+<tt>store</tt>, however, I think the following example can establish the synchronization relationship
+</p>
+<blockquote><pre>
+std::atomic&lt;int&gt; x{0};
+Thread 1:
+int expected = 0;
+x.compare_exchange_strong(expected, 1, memory_order::release, memory_order::relaxed ); //#1
+
+Thread 2:
+int expected = 1;
+while(x.compare_exchange_strong( expected, 2, memory_order::acquire, memory_order::relaxed )){} // #2
+</pre></blockquote>
+<p>
+Assuming the RMW operations are successful in the two threads, I think <tt>#1</tt> intends to perform a 
+release operation while <tt>#2</tt> performs an acquire operation, and hence they can establish the 
+synchronization relationship, however, they both are RMW operations.
+<p/>
+It should be clearly defined which are store operations and which are load operations. 
 </p>
 
 
 <p id="res-4004"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4964">N4964</a>.
-</p>
-
-<ol>
-
-<li><p>Modify 24.6.2 <a href="https://wg21.link/queue.syn">[queue.syn]</a>, header <tt>&lt;queue&gt;</tt> synopsis, as indicated:</p>
-
-<blockquote><pre>
-[&hellip;]
-namespace std {
-  // <i>24.6.6 <a href="https://wg21.link/queue">[queue]</a>, class template</i> queue
-  template&lt;class T, class Container = deque&lt;T&gt;&gt; class queue;
-  [&hellip;]
-  template&lt;class T, class Container, class Alloc&gt;
-    struct uses_allocator&lt;queue&lt;T, Container&gt;, Alloc&gt;;
-  <ins>template&lt;class charT, class T, formattable&lt;charT&gt; Container&gt;
-    struct formatter&lt;queue&lt;T, Container&gt;, charT&gt;;</ins>
-    
-  // <i>24.6.7 <a href="https://wg21.link/priority.queue">[priority.queue]</a>, class template</i> priority_queue
-  template&lt;class T, class Container = vector&lt;T&gt;,
-           class Compare = less&lt;typename Container::value_type&gt;&gt;
-  class priority_queue;
-  [&hellip;]
-  template&lt;class T, class Container, class Compare, class Alloc&gt;
-    struct uses_allocator&lt;priority_queue&lt;T, Container, Compare>,&gt;, Alloc&gt;;
-  <ins>template&lt;class charT, class T, formattable&lt;charT&gt; Container, class Compare&gt;
-    struct formatter&lt;priority_queue&lt;T, Container, Compare&gt;, charT&gt;;</ins>
-}
-</pre></blockquote>
-
-</li>
-
-<li><p>Modify 24.6.3 <a href="https://wg21.link/stack.syn">[stack.syn]</a>, header <tt>&lt;stack&gt;</tt> synopsis, as indicated:</p>
-
-<blockquote><pre>
-[&hellip;]
-namespace std {
-  // <i>24.6.8 <a href="https://wg21.link/stack">[stack]</a>, class template</i> stack
-  template&lt;class T, class Container = deque&lt;T&gt;&gt; class stack;
-  [&hellip;]
-  template&lt;class T, class Container, class Alloc&gt;
-    struct uses_allocator&lt;stack&lt;T, Container&gt;, Alloc&gt;;
-  <ins>template&lt;class charT, class T, formattable&lt;charT&gt; Container&gt;
-    struct formatter&lt;stack&lt;T, Container&gt;, charT&gt;;</ins>
-}
-</pre></blockquote>
-
-</li>
-
-</ol>
 
 
 

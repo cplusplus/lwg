@@ -49,7 +49,7 @@
 <p>This document is the Index by Section for the <a href="lwg-active.html">Library Active Issues List</a>, <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.</p>
 <h2>Index by Section</h2>
 <p><a href="lwg-index-open.html">(view only non-Ready open issues)</a></p>
-<p><p>Revised 2023-11-07 at 21:42:58 UTC</p>
+<p><p>Revised 2023-11-07 at 22:41:01 UTC</p>
 </p><h2><a name="Section 2"></a>Section 2 (2 issues)</h2>
 <table border="1" cellpadding="4">
 <tr>
@@ -10172,7 +10172,7 @@ presentation types misformat negative numbers</td>
 </tr>
 <tr>
 <td align="right"><a href="lwg-active.html#3975">3975</a><sup><a href="https://cplusplus.github.io/LWG/issue3975">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3975"></a></td>
+<td align="left"><a href="lwg-active.html#Ready">Ready</a><a name="3975"></a></td>
 <td align="left">22.14.6.6 [format.context]<a name="format.context"></a></td>
 <td align="left">Specializations of <tt>basic_format_context</tt> should not be permitted</td>
 <td align="center">Yes</td>
@@ -16035,20 +16035,20 @@ those from the same range</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3986">3986</a><sup><a href="https://cplusplus.github.io/LWG/issue3986">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3986"></a></td>
+<td align="right"><a href="lwg-active.html#3988">3988</a><sup><a href="https://cplusplus.github.io/LWG/issue3988">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#Ready">Ready</a><a name="3988"></a></td>
 <td align="left">25.5.3 [const.iterators]<a name="const.iterators"></a></td>
-<td align="left"><tt>basic_const_iterator</tt> doesn't work with <tt>optional</tt></td>
-<td align="center"><font color="red">No</font></td>
+<td align="left">Should <tt>as_const_view</tt> and <tt>basic_const_iterator</tt> provide <tt>base()</tt>?</td>
+<td align="center">Yes</td>
 <td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3988">3988</a><sup><a href="https://cplusplus.github.io/LWG/issue3988">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#SG9">SG9</a><a name="3988"></a></td>
+<td align="right"><a href="lwg-active.html#3986">3986</a><sup><a href="https://cplusplus.github.io/LWG/issue3986">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3986"></a></td>
 <td align="left">25.5.3 [const.iterators]</td>
-<td align="left">Should <tt>as_const_view</tt> and <tt>basic_const_iterator</tt> provide <tt>base()</tt>?</td>
-<td align="center">Yes</td>
+<td align="left"><tt>basic_const_iterator</tt> doesn't work with <tt>optional</tt></td>
+<td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
 <td align="left"></td>
 </tr>
@@ -16710,15 +16710,6 @@ should be fully <tt>constexpr</tt></td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3913">3913</a><sup><a href="https://cplusplus.github.io/LWG/issue3913">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#Open">Open</a><a name="3913"></a></td>
-<td align="left">26.2 [ranges.syn]</td>
-<td align="left"><code>ranges::const_iterator_t&lt;range R&gt;</code> fails to accept arrays of unknown bound</td>
-<td align="center">Yes</td>
-<td align="center">3</td>
-<td align="left"></td>
-</tr>
-<tr>
 <td align="right"><a href="lwg-defects.html#3914">3914</a><sup><a href="https://cplusplus.github.io/LWG/issue3914">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#WP">WP</a><a name="3914"></a></td>
 <td align="left">26.2 [ranges.syn]</td>
@@ -16788,6 +16779,15 @@ should be fully <tt>constexpr</tt></td>
 <td align="left"><tt>tuple_element_t</tt> is also wrong for <tt>const subrange</tt></td>
 <td align="center">Yes</td>
 <td align="center">0</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="right"><a href="lwg-closed.html#3913">3913</a><sup><a href="https://cplusplus.github.io/LWG/issue3913">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#NAD">NAD</a><a name="3913"></a></td>
+<td align="left">26.2 [ranges.syn]</td>
+<td align="left"><code>ranges::const_iterator_t&lt;range R&gt;</code> fails to accept arrays of unknown bound</td>
+<td align="center">Yes</td>
+<td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -17053,21 +17053,21 @@ does not constrain <tt>I</tt> to be <tt>copyable</tt> when <tt>N == 0</tt></td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3958">3958</a><sup><a href="https://cplusplus.github.io/LWG/issue3958">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#NAD">Tentatively NAD</a><a name="3958"></a></td>
-<td align="left">26.5.7.2 [range.utility.conv.to]<a name="range.utility.conv.to"></a></td>
-<td align="left"><tt>ranges::to</tt> should prioritize the "<tt>reserve</tt>" branch</td>
-<td align="center">Yes</td>
-<td align="center"></td>
-<td align="left"></td>
-</tr>
-<tr>
 <td align="right"><a href="lwg-active.html#3984">3984</a><sup><a href="https://cplusplus.github.io/LWG/issue3984">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3984"></a></td>
-<td align="left">26.5.7.2 [range.utility.conv.to]</td>
+<td align="left"><a href="lwg-active.html#Ready">Ready</a><a name="3984"></a></td>
+<td align="left">26.5.7.2 [range.utility.conv.to]<a name="range.utility.conv.to"></a></td>
 <td align="left"><tt>ranges::to</tt>'s recursion branch may be ill-formed</td>
 <td align="center">Yes</td>
 <td align="center">3</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="right"><a href="lwg-active.html#3958">3958</a><sup><a href="https://cplusplus.github.io/LWG/issue3958">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#NAD">Tentatively NAD</a><a name="3958"></a></td>
+<td align="left">26.5.7.2 [range.utility.conv.to]</td>
+<td align="left"><tt>ranges::to</tt> should prioritize the "<tt>reserve</tt>" branch</td>
+<td align="center">Yes</td>
+<td align="center"></td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -22551,7 +22551,7 @@ with POSIX spec</td>
 </tr>
 <tr>
 <td align="right"><a href="lwg-active.html#3767">3767</a><sup><a href="https://cplusplus.github.io/LWG/issue3767">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#Open">Open</a><a name="3767"></a></td>
+<td align="left"><a href="lwg-active.html#Ready">Ready</a><a name="3767"></a></td>
 <td align="left">30.3.1.2.1 [locale.category]<a name="locale.category"></a></td>
 <td align="left"><tt>codecvt&lt;char<i>N</i>_t, char8_t, mbstate_t&gt;</tt> incorrectly added to locale</td>
 <td align="center">Yes</td>

@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-11-18 at 12:06:47 UTC</p>
+<p><p>Revised 2023-11-18 at 12:34:29 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -51070,6 +51070,86 @@ if constexpr (<i>StoreSize</i>) <ins>{
 }</ins>
 return *this;
 </pre></blockquote>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="4011" href="#4011">4011</a><sup><a href="https://cplusplus.github.io/LWG/issue4011">(i)</a></sup>. "<i>Effects</i>: Equivalent to return" in [span.elem]</h3>
+<p><b>Section:</b> 24.7.2.2.6 <a href="https://wg21.link/span.elem">[span.elem]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Arthur O'Dwyer <b>Opened:</b> 2023-11-09 <b>Last modified:</b> 2023-11-18</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+In reviewing the wording for <a href="https://wg21.link/P2821">P2821</a> <tt>span.at()</tt>, it had been noticed that 
+24.7.2.2.6 <a href="https://wg21.link/span.elem">[span.elem]</a> uses a lot of "<i>Effects</i>: Equivalent to return [&hellip;];" which 
+could be simply "<i>Returns</i>:  [&hellip;]".
+<p/>
+For comparison, 23.3.3.6 <a href="https://wg21.link/string.view.access">[string.view.access]</a> uses "<i>Returns</i>: ..." instead, so I 
+suggest that 24.7.2.2.6 <a href="https://wg21.link/span.elem">[span.elem]</a> should be consistent with that.
+</p>
+
+
+<p id="res-4011"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4964">N4964</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 24.7.2.2.6 <a href="https://wg21.link/span.elem">[span.elem]</a> as indicated:</p>
+
+<pre>
+constexpr reference operator[](size_type idx) const;
+</pre>
+<blockquote>
+<p>
+-1- <i>Preconditions</i>: <tt>idx &lt; size()</tt> is <tt>true</tt>.
+<p/>
+-2- <i><del>Effects</del><ins>Returns</ins></i>: <del>Equivalent to:</del> <tt><del>return</del> *(data() + idx)<del>;</del></tt><ins>.</ins>
+<p/>
+<ins>-?- <i>Throws</i>: Nothing.</ins>
+</p>
+</blockquote>
+<pre>
+constexpr reference front() const;
+</pre>
+<blockquote>
+<p>
+-3- <i>Preconditions</i>: <tt>empty()</tt> is <tt>false</tt>.
+<p/>
+-4- <i><del>Effects</del><ins>Returns</ins></i>: <del>Equivalent to:</del> <tt><del>return</del> *data()<del>;</del></tt><ins>.</ins>
+<p/>
+<ins>-?- <i>Throws</i>: Nothing.</ins>
+</p>
+</blockquote>
+<pre>
+constexpr reference back() const;
+</pre>
+<blockquote>
+<p>
+-5- <i>Preconditions</i>: <tt>empty()</tt> is <tt>false</tt>.
+<p/>
+-6- <i><del>Effects</del><ins>Returns</ins></i>: <del>Equivalent to:</del> <tt><del>return</del> *(data() + (size() - 1))<del>;</del></tt><ins>.</ins>
+<p/>
+<ins>-?- <i>Throws</i>: Nothing.</ins>
+</p>
+</blockquote>
+<pre>
+constexpr pointer data() const noexcept;
+</pre>
+<blockquote>
+<p>
+-7- <i><del>Effects</del><ins>Returns</ins></i>: <del>Equivalent to:</del> <tt><del>return</del> <i>data_</i><del>;</del></tt><ins>.</ins>
+</p>
 </blockquote>
 
 </li>

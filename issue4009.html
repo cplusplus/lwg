@@ -80,7 +80,6 @@ This wording is relative to <a href="https://wg21.link/N4964">N4964</a>.
 
 <li><p>Modify 26.7.12.2 <a href="https://wg21.link/range.drop.view">[range.drop.view]</a> as indicated:</p>
 
-<blockquote>
 <pre>
 constexpr auto begin()
   requires (!(<i>simple-view</i>&lt;V&gt; &amp;&amp;
@@ -119,7 +118,6 @@ constexpr auto begin() const
 <blockquote>
 <p><ins>-?- <i>Returns</i>: <tt>ranges::begin(<i>base_</i>) + (ranges::distance(<i>base_</i>) - 
 range_difference_t&lt;const V&gt;(size()))</tt>.</ins></p>
-</blockquote>
 </blockquote>
 
 </li>

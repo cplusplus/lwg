@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-11-18 at 11:27:39 UTC</p>
+<p><p>Revised 2023-11-18 at 12:01:28 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -50970,7 +50970,6 @@ This wording is relative to <a href="https://wg21.link/N4964">N4964</a>.
 
 <li><p>Modify 26.7.12.2 <a href="https://wg21.link/range.drop.view">[range.drop.view]</a> as indicated:</p>
 
-<blockquote>
 <pre>
 constexpr auto begin()
   requires (!(<i>simple-view</i>&lt;V&gt; &amp;&amp;
@@ -51009,7 +51008,6 @@ constexpr auto begin() const
 <blockquote>
 <p><ins>-?- <i>Returns</i>: <tt>ranges::begin(<i>base_</i>) + (ranges::distance(<i>base_</i>) - 
 range_difference_t&lt;const V&gt;(size()))</tt>.</ins></p>
-</blockquote>
 </blockquote>
 
 </li>

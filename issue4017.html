@@ -47,7 +47,7 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3><a name="4017" href="lwg-active.html#4017">4017</a>. Behavior of <tt>std::views::split</tt> on an empty range</h3>
 <p><b>Section:</b> 26.7.17.3 <a href="https://wg21.link/range.split.iterator">[range.split.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Barry Revzin <b>Opened:</b> 2023-11-19 <b>Last modified:</b> 2023-11-25</p>
+ <b>Submitter:</b> David Stone <b>Opened:</b> 2023-11-19 <b>Last modified:</b> 2023-11-25</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -95,7 +95,7 @@ to initialize <tt><i>trailing_empty_</i></tt> to <tt><i>cur_</i> == <i>next_</i>
 <tt><i>trailing_empty_</i></tt> is typically <tt>false</tt>, but if we're empty on initialization then we 
 have to have a trailing empty range).
 <p/>
-The following demo shows my implementation from <a href="https://wg21.link/P2210">P2210</a>, adjusted to fix this: 
+The following demo shows Barry Revzin's implementation from <a href="https://wg21.link/P2210">P2210</a>, adjusted to fix this: 
 <a href="https://godbolt.org/z/axWb64j9f">godbolt.org/z/axWb64j9f</a>
 </p>
 

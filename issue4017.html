@@ -46,8 +46,8 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3><a name="4017" href="lwg-active.html#4017">4017</a>. Behavior of <tt>std::views::split</tt> on an empty range</h3>
-<p><b>Section:</b> 26.7.17.3 <a href="https://wg21.link/range.split.iterator">[range.split.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> David Stone <b>Opened:</b> 2023-11-19 <b>Last modified:</b> 2023-11-25</p>
+<p><b>Section:</b> 26.7.17.3 <a href="https://wg21.link/range.split.iterator">[range.split.iterator]</a>, 26.7.16.3 <a href="https://wg21.link/range.lazy.split.outer">[range.lazy.split.outer]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> David Stone <b>Opened:</b> 2023-11-19 <b>Last modified:</b> 2023-11-27</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -118,6 +118,22 @@ constexpr <i>iterator</i>(split_view&amp; parent, iterator_t&lt;V&gt; current, s
 -1- <i>Effects</i>: Initializes <tt><i>parent_</i></tt> with <tt>addressof(parent)</tt>, <tt><i>cur_</i></tt> with 
 <tt>std::move(current)</tt>, <del>and</del> <tt><i>next_</i></tt> with <tt>std::move(next)</tt><ins>, and
 <tt><i>trailing_empty_</i></tt> with <tt><i>cur_</i> == <i>next_</i>.begin()</tt></ins>.
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+<li><p>Modify 26.7.16.3 <a href="https://wg21.link/range.lazy.split.outer">[range.lazy.split.outer]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+constexpr <i>outer-iterator</i>(<i>Parent</i>&amp; parent, iterator_t&lt;<i>Base</i>&gt; current)
+  requires forward_range&lt;<i>Base</i>&gt;;
+</pre>
+<blockquote>
+<p>
+-3- <i>Effects</i>: Initializes <tt><i>parent_</i></tt> with <tt>addressof(parent)</tt><ins>,</ins> <del>and</del> <tt><i>current_</i></tt> 
+with <tt>std::move(current)</tt><ins>, and <tt><i>trailing_empty_</i></tt> with <tt><i>current_</i> == ranges::end(parent)</tt></ins>.
 </p>
 </blockquote>
 </blockquote>

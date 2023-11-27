@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-11-27 at 15:54:35 UTC</p>
+<p><p>Revised 2023-11-27 at 16:49:27 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -52413,8 +52413,8 @@ ranges::<del>copy</del><ins>for_each</ins>(r, <i>container-<del>inserter</del><i
 
 <hr>
 <h3><a name="4017" href="#4017">4017</a><sup><a href="https://cplusplus.github.io/LWG/issue4017">(i)</a></sup>. Behavior of <tt>std::views::split</tt> on an empty range</h3>
-<p><b>Section:</b> 26.7.17.3 <a href="https://wg21.link/range.split.iterator">[range.split.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> David Stone <b>Opened:</b> 2023-11-19 <b>Last modified:</b> 2023-11-25</p>
+<p><b>Section:</b> 26.7.17.3 <a href="https://wg21.link/range.split.iterator">[range.split.iterator]</a>, 26.7.16.3 <a href="https://wg21.link/range.lazy.split.outer">[range.lazy.split.outer]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> David Stone <b>Opened:</b> 2023-11-19 <b>Last modified:</b> 2023-11-27</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -52485,6 +52485,22 @@ constexpr <i>iterator</i>(split_view&amp; parent, iterator_t&lt;V&gt; current, s
 -1- <i>Effects</i>: Initializes <tt><i>parent_</i></tt> with <tt>addressof(parent)</tt>, <tt><i>cur_</i></tt> with 
 <tt>std::move(current)</tt>, <del>and</del> <tt><i>next_</i></tt> with <tt>std::move(next)</tt><ins>, and
 <tt><i>trailing_empty_</i></tt> with <tt><i>cur_</i> == <i>next_</i>.begin()</tt></ins>.
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+<li><p>Modify 26.7.16.3 <a href="https://wg21.link/range.lazy.split.outer">[range.lazy.split.outer]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+constexpr <i>outer-iterator</i>(<i>Parent</i>&amp; parent, iterator_t&lt;<i>Base</i>&gt; current)
+  requires forward_range&lt;<i>Base</i>&gt;;
+</pre>
+<blockquote>
+<p>
+-3- <i>Effects</i>: Initializes <tt><i>parent_</i></tt> with <tt>addressof(parent)</tt><ins>,</ins> <del>and</del> <tt><i>current_</i></tt> 
+with <tt>std::move(current)</tt><ins>, and <tt><i>trailing_empty_</i></tt> with <tt><i>current_</i> == ranges::end(parent)</tt></ins>.
 </p>
 </blockquote>
 </blockquote>

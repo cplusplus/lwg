@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-11-27 at 16:49:27 UTC</p>
+<p><p>Revised 2023-11-27 at 17:14:02 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -56390,8 +56390,9 @@ constexpr <i>outer-iterator</i>(<i>Parent</i>&amp; parent, iterator_t&lt;<i>Base
 </pre>
 <blockquote>
 <p>
--3- <i>Effects</i>: Initializes <tt><i>parent_</i></tt> with <tt>addressof(parent)</tt><ins>,</ins> <del>and</del> <tt><i>current_</i></tt> 
-with <tt>std::move(current)</tt><ins>, and <tt><i>trailing_empty_</i></tt> with <tt><i>current_</i> == ranges::end(parent)</tt></ins>.
+-3- <i>Effects</i>: Initializes <tt><i>parent_</i></tt> with <tt>addressof(parent)</tt><ins>,</ins> <del>and</del> 
+<tt><i>current_</i></tt> with <tt>std::move(current)</tt><ins>, and <tt><i>trailing_empty_</i></tt> with 
+<tt><i>current_</i> == ranges::end(parent.<i>base_</i>)</tt></ins>.
 </p>
 </blockquote>
 </blockquote>

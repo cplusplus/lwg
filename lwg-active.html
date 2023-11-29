@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2023-11-27</td>
+  <td align="left">2023-11-29</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2023-11-27 at 17:14:02 UTC</p>
+<p><p>Revised 2023-11-29 at 16:23:33 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -55400,7 +55400,7 @@ to
 <hr>
 <h3><a name="4015" href="#4015">4015</a><sup><a href="https://cplusplus.github.io/LWG/issue4015">(i)</a></sup>. LWG 3973 broke <code>const</code> overloads of <code>std::optional</code> monadic operations</h3>
 <p><b>Section:</b> 22.5.3.7 <a href="https://wg21.link/optional.monadic">[optional.monadic]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-11-24 <b>Last modified:</b> 2023-11-26</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-11-24 <b>Last modified:</b> 2023-11-29</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -55492,7 +55492,7 @@ namespace std {
     <ins>bool <i>has_val</i>; // <i>exposition only</i>
     union {</ins>
       T <ins><i>val</i></ins><del>*val</del>; // <i>exposition only</i>
-    <ins>}</ins>
+    <ins>};</ins>
   };
   
   [&hellip;]

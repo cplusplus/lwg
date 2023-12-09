@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-12-09 at 16:08:15 UTC</p>
+<p><p>Revised 2023-12-09 at 16:22:38 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -52954,6 +52954,71 @@ representation of the century.</td>
 </blockquote>
 </li>
 </ol>
+
+
+
+
+
+<hr>
+<h3><a name="4023" href="#4023">4023</a><sup><a href="https://cplusplus.github.io/LWG/issue4023">(i)</a></sup>. Preconditions of <tt>std::basic_streambuf::setg/setp</tt></h3>
+<p><b>Section:</b> 31.6.3.4 <a href="https://wg21.link/streambuf.protected">[streambuf.protected]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-08 <b>Last modified:</b> 2023-12-09</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+It seems that operations of <tt>std::basic_streambuf</tt> expect that
+</p>
+<ul>
+<li><p><tt>[eback(), egptr())</tt> is a valid range and <tt>gptr()</tt> points into that range, and</p></li>
+<li><p><tt>[pbase(), pptr())</tt> is a valid range and <tt>epptr()</tt> points into that range.</p></li>
+</ul>
+<p>
+However, it is currently not specified for <tt>setg/setp</tt> that such invariants need to be established.
+</p>
+
+
+<p id="res-4023"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4964">N4964</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 31.6.3.4.2 <a href="https://wg21.link/streambuf.get.area">[streambuf.get.area]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+void setg(char_type* gbeg, char_type* gnext, char_type* gend);
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Preconditions</i>: <tt>[gbeg,  gnext)</tt>, <tt>[gbeg, gend)</tt>, and <tt>[gnext, gend)</tt> are all valid ranges.</ins>
+<p/>
+-5- <i>Postconditions</i>: <tt>gbeg == eback()</tt>, <tt>gnext == gptr()</tt>, and <tt>gend == egptr()</tt> are all <tt>true</tt>.
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+<li><p>Modify 31.6.3.4.3 <a href="https://wg21.link/streambuf.put.area">[streambuf.put.area]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+void setp(char_type* pbeg, char_type* pend);
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Preconditions</i>: <tt>[pbeg, pend)</tt> is a valid range.</ins>
+<p/>
+-5- <i>Postconditions</i>: <tt>pbeg == pbase()</tt>, <tt>pbeg == pptr()</tt>, and <tt>pend == epptr()</tt> are all <tt>true</tt>.
+</p>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+
 
 
 

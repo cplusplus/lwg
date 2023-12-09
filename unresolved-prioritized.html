@@ -48,7 +48,7 @@
 <p>Reference ISO/IEC IS 14882:2020(E)</p>
 <p>This document is the Table of Contents for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.</p>
-<p><p>Revised 2023-12-09 at 16:08:15 UTC</p>
+<p><p>Revised 2023-12-09 at 16:22:38 UTC</p>
 </p><h2><a name="Priority 2"</a>Priority 2 (37 issues)</h2>
 <table border="1" cellpadding="4">
 <tr>
@@ -3905,11 +3905,11 @@ should require the arguments to have the same length</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#2265">2265</a><sup><a href="https://cplusplus.github.io/LWG/issue2265">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#Open">Open</a><a name="2265"></a></td>
+<td align="right"><a href="lwg-active.html#3999">3999</a><sup><a href="https://cplusplus.github.io/LWG/issue3999">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3999"></a></td>
 <td align="left">33.5.4 [atomics.order]<a name="atomics.order"></a></td>
-<td align="left">29.3p9 appears to rule out some acceptable executions</td>
-<td align="center"><font color="red">No</font></td>
+<td align="left">P0439R0 changed the value category of memory order constants</td>
+<td align="center">Yes</td>
 <td align="center">4</td>
 <td align="left"></td>
 </tr>
@@ -3923,11 +3923,11 @@ should require the arguments to have the same length</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3999">3999</a><sup><a href="https://cplusplus.github.io/LWG/issue3999">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3999"></a></td>
+<td align="right"><a href="lwg-active.html#2265">2265</a><sup><a href="https://cplusplus.github.io/LWG/issue2265">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#Open">Open</a><a name="2265"></a></td>
 <td align="left">33.5.4 [atomics.order]</td>
-<td align="left">P0439R0 changed the value category of memory order constants</td>
-<td align="center">Yes</td>
+<td align="left">29.3p9 appears to rule out some acceptable executions</td>
+<td align="center"><font color="red">No</font></td>
 <td align="center">4</td>
 <td align="left"></td>
 </tr>
@@ -3968,28 +3968,19 @@ should require the arguments to have the same length</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#2478">2478</a><sup><a href="https://cplusplus.github.io/LWG/issue2478">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="2478"></a></td>
-<td align="left">D.27.2 [depr.conversions.string]<a name="depr.conversions.string"></a></td>
-<td align="left">Unclear how <tt>wstring_convert</tt> uses <tt>cvtstate</tt></td>
-<td align="center"><font color="red">No</font></td>
-<td align="center">4</td>
-<td align="left"></td>
-</tr>
-<tr>
 <td align="right"><a href="lwg-active.html#2481">2481</a><sup><a href="https://cplusplus.github.io/LWG/issue2481">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="2481"></a></td>
-<td align="left">D.27.2 [depr.conversions.string]</td>
+<td align="left">D.27.2 [depr.conversions.string]<a name="depr.conversions.string"></a></td>
 <td align="left"><tt>wstring_convert</tt> should be more precise regarding "byte-error string" etc.</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">4</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#2479">2479</a><sup><a href="https://cplusplus.github.io/LWG/issue2479">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="2479"></a></td>
-<td align="left">D.27.3 [depr.conversions.buffer]<a name="depr.conversions.buffer"></a></td>
-<td align="left">Unclear how <tt>wbuffer_convert</tt> uses <tt>cvtstate</tt></td>
+<td align="right"><a href="lwg-active.html#2478">2478</a><sup><a href="https://cplusplus.github.io/LWG/issue2478">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="2478"></a></td>
+<td align="left">D.27.2 [depr.conversions.string]</td>
+<td align="left">Unclear how <tt>wstring_convert</tt> uses <tt>cvtstate</tt></td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">4</td>
 <td align="left"></td>
@@ -3997,14 +3988,23 @@ should require the arguments to have the same length</td>
 <tr>
 <td align="right"><a href="lwg-active.html#2480">2480</a><sup><a href="https://cplusplus.github.io/LWG/issue2480">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="2480"></a></td>
-<td align="left">D.27.3 [depr.conversions.buffer]</td>
+<td align="left">D.27.3 [depr.conversions.buffer]<a name="depr.conversions.buffer"></a></td>
 <td align="left">Error handling of <tt>wbuffer_convert</tt> unclear</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">4</td>
 <td align="left"></td>
 </tr>
+<tr>
+<td align="right"><a href="lwg-active.html#2479">2479</a><sup><a href="https://cplusplus.github.io/LWG/issue2479">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="2479"></a></td>
+<td align="left">D.27.3 [depr.conversions.buffer]</td>
+<td align="left">Unclear how <tt>wbuffer_convert</tt> uses <tt>cvtstate</tt></td>
+<td align="center"><font color="red">No</font></td>
+<td align="center">4</td>
+<td align="left"></td>
+</tr>
 </table>
-<h2><a name="Priority 99"</a>Not Prioritized (48 issues)</h2>
+<h2><a name="Priority 99"</a>Not Prioritized (49 issues)</h2>
 <table border="1" cellpadding="4">
 <tr>
   <td align="center"><a href="lwg-toc.html"><b>Issue</b></a></td>
@@ -4143,20 +4143,20 @@ should require the arguments to have the same length</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#2884">2884</a><sup><a href="https://cplusplus.github.io/LWG/issue2884">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#LEWG">LEWG</a><a name="2884"></a></td>
+<td align="right"><a href="lwg-active.html#2885">2885</a><sup><a href="https://cplusplus.github.io/LWG/issue2885">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#LEWG">LEWG</a><a name="2885"></a></td>
 <td align="left">24 [containers]<a name="containers"></a></td>
-<td align="left">Relational operators for containers should sfinae; if the underlying type is not comparable, neither should the container be</td>
+<td align="left">The relational operators of <tt>optional</tt> and <tt>variant</tt> completely reflect the semantics of the element 
+types &mdash; this is inconsistent with other types in the library</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center"></td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#2885">2885</a><sup><a href="https://cplusplus.github.io/LWG/issue2885">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#LEWG">LEWG</a><a name="2885"></a></td>
+<td align="right"><a href="lwg-active.html#2884">2884</a><sup><a href="https://cplusplus.github.io/LWG/issue2884">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#LEWG">LEWG</a><a name="2884"></a></td>
 <td align="left">24 [containers]</td>
-<td align="left">The relational operators of <tt>optional</tt> and <tt>variant</tt> completely reflect the semantics of the element 
-types &mdash; this is inconsistent with other types in the library</td>
+<td align="left">Relational operators for containers should sfinae; if the underlying type is not comparable, neither should the container be</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center"></td>
 <td align="left"></td>
@@ -4198,19 +4198,19 @@ types &mdash; this is inconsistent with other types in the library</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#4020">4020</a><sup><a href="https://cplusplus.github.io/LWG/issue4020">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="4020"></a></td>
+<td align="right"><a href="lwg-active.html#4021">4021</a><sup><a href="https://cplusplus.github.io/LWG/issue4021">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="4021"></a></td>
 <td align="left">24.7.3.3.2 [mdspan.extents.expo]<a name="mdspan.extents.expo"></a></td>
-<td align="left"><tt>extents::<i>index-cast</i></tt> weirdness</td>
+<td align="left"><tt>mdspan::is_always_<i>meow</i>()</tt> should be <tt>noexcept</tt></td>
 <td align="center">Yes</td>
 <td align="center"></td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#4021">4021</a><sup><a href="https://cplusplus.github.io/LWG/issue4021">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="4021"></a></td>
+<td align="right"><a href="lwg-active.html#4020">4020</a><sup><a href="https://cplusplus.github.io/LWG/issue4020">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="4020"></a></td>
 <td align="left">24.7.3.3.2 [mdspan.extents.expo]</td>
-<td align="left"><tt>mdspan::is_always_<i>meow</i>()</tt> should be <tt>noexcept</tt></td>
+<td align="left"><tt>extents::<i>index-cast</i></tt> weirdness</td>
 <td align="center">Yes</td>
 <td align="center"></td>
 <td align="left"></td>
@@ -4234,20 +4234,20 @@ types &mdash; this is inconsistent with other types in the library</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#4008">4008</a><sup><a href="https://cplusplus.github.io/LWG/issue4008">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="4008"></a></td>
+<td align="right"><a href="lwg-active.html#4018">4018</a><sup><a href="https://cplusplus.github.io/LWG/issue4018">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="4018"></a></td>
 <td align="left">26.5.7.2 [range.utility.conv.to]<a name="range.utility.conv.to"></a></td>
-<td align="left">&sect;[range.utility.conv.to] <tt>ranges::to</tt> may cause infinite recursion if <tt>range_value_t&lt;C&gt;</tt> 
-is a non-move-constructible range</td>
+<td align="left"><tt>ranges::to</tt>'s copy branch is underconstrained</td>
 <td align="center">Yes</td>
 <td align="center"></td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#4018">4018</a><sup><a href="https://cplusplus.github.io/LWG/issue4018">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="4018"></a></td>
+<td align="right"><a href="lwg-active.html#4008">4008</a><sup><a href="https://cplusplus.github.io/LWG/issue4008">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="4008"></a></td>
 <td align="left">26.5.7.2 [range.utility.conv.to]</td>
-<td align="left"><tt>ranges::to</tt>'s copy branch is underconstrained</td>
+<td align="left">&sect;[range.utility.conv.to] <tt>ranges::to</tt> may cause infinite recursion if <tt>range_value_t&lt;C&gt;</tt> 
+is a non-move-constructible range</td>
 <td align="center">Yes</td>
 <td align="center"></td>
 <td align="left"></td>
@@ -4338,6 +4338,15 @@ is a non-move-constructible range</td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="4022"></a></td>
 <td align="left">29.12 [time.format]<a name="time.format"></a></td>
 <td align="left">Ambiguity in the formatting of negative years with format specifier <tt>%C</tt></td>
+<td align="center">Yes</td>
+<td align="center"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="right"><a href="lwg-active.html#4023">4023</a><sup><a href="https://cplusplus.github.io/LWG/issue4023">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="4023"></a></td>
+<td align="left">31.6.3.4 [streambuf.protected]<a name="streambuf.protected"></a></td>
+<td align="left">Preconditions of <tt>std::basic_streambuf::setg/setp</tt></td>
 <td align="center">Yes</td>
 <td align="center"></td>
 <td align="left"></td>

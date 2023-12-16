@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-12-10 at 10:19:54 UTC</p>
+<p><p>Revised 2023-12-16 at 14:02:31 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -53014,6 +53014,70 @@ void setp(char_type* pbeg, char_type* pend);
 </blockquote>
 </li>
 </ol>
+
+
+
+
+
+
+<hr>
+<h3><a name="4024" href="#4024">4024</a><sup><a href="https://cplusplus.github.io/LWG/issue4024">(i)</a></sup>. Underspecified destruction of objects created in <tt>std::make_shared_for_overwrite/std::allocate_shared_for_overwrite</tt></h3>
+<p><b>Section:</b> 20.3.2.2.7 <a href="https://wg21.link/util.smartptr.shared.create">[util.smartptr.shared.create]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-16 <b>Last modified:</b> 2023-12-16</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#util.smartptr.shared.create">active issues</a> in [util.smartptr.shared.create].</p>
+<p><b>View all other</b> <a href="lwg-index.html#util.smartptr.shared.create">issues</a> in [util.smartptr.shared.create].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Currently, only destructions of non-array (sub)objects created in <tt>std::make_shared</tt> and <tt>std::allocate_shared</tt> 
+are specified in 20.3.2.2.7 <a href="https://wg21.link/util.smartptr.shared.create">[util.smartptr.shared.create]</a>. Presumably, objects created in 
+<tt>std::make_shared_for_overwrite</tt> and <tt>std::allocate_shared_for_overwrite</tt> should be destroyed by plain 
+destructor calls.
+</p>
+
+
+<p id="res-4024"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4964">N4964</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 20.3.2.2.7 <a href="https://wg21.link/util.smartptr.shared.create">[util.smartptr.shared.create]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class T, ...&gt;
+  shared_ptr&lt;T&gt; make_shared(<i>args</i>);
+template&lt;class T, class A, ...&gt;
+  shared_ptr&lt;T&gt; allocate_shared(const A&amp; a, <i>args</i>);
+template&lt;class T, ...&gt;
+  shared_ptr&lt;T&gt; make_shared_for_overwrite(<i>args</i>);
+template&lt;class T, class A, ...&gt;
+  shared_ptr&lt;T&gt; allocate_shared_for_overwrite(const A&amp; a, <i>args</i>);
+</pre>
+<blockquote>
+<p>
+[&hellip;]
+<p/>
+-7- <i>Remarks:</i>
+</p>
+<ol style="list-style-type: none">
+<li><p>[&hellip;]</p></li>
+<li><p>(7.11) &mdash; When a (sub)object of non-array type <tt>U</tt> that was initialized by 
+<tt>make_shared</tt><ins>, <tt>make_shared_for_overwrite</tt>, or <tt>allocate_shared_for_overwrite</tt></ins> 
+is to be destroyed, it is destroyed via the expression <tt>pv-&gt;~U()</tt> where <tt>pv</tt> points to that 
+object of type <tt>U</tt>.</p></li>
+<li><p>[&hellip;]</p></li>
+</ol>
+</blockquote>
+</blockquote>
+</li>
+
+</ol>
+
 
 
 

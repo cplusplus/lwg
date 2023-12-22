@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-12-22 at 14:02:08 UTC</p>
+<p><p>Revised 2023-12-22 at 14:17:36 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -53626,6 +53626,56 @@ constexpr const_reverse_iterator crend() const noexcept;</del>
 <del>-4- <i>Returns</i>: An iterator which is semantically equivalent to <tt>reverse_iterator(begin())</tt>.</del>
 </p>
 </blockquote>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+
+
+<hr>
+<h3><a name="4030" href="#4030">4030</a><sup><a href="https://cplusplus.github.io/LWG/issue4030">(i)</a></sup>. Clarify whether arithmetic expressions in [numeric.sat.func] are mathematical or C++</h3>
+<p><b>Section:</b> 99 [numeric.sat.func] <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Thomas K&ouml;ppe <b>Opened:</b> 2023-12-18 <b>Last modified:</b> 2023-12-22</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+During the application of <a href="https://wg21.link/P0543R0">P0543R0</a>, "Saturation arithmetic", it was pointed out that it 
+might not be entirely clear what we want something like "<tt>x</tt> + <tt>y</tt>" to mean. The paper does not 
+suggest any formatting for those symbols, and a non-normative note explains that the intention is for 
+the expression to be considered mathematically.
+<p/>
+I wonder if this is clear enough. Notes are not normative, and the document "shall be usable without notes". 
+I have formatted this as <tt>$\tcode{x} + \tcode{y}$</tt> throughout, i.e. the variables are in code font, 
+but the symbol is maths, not code. This is quite subtle. (See also 
+<a href="https://github.com/cplusplus/draft/pull/6686">GitHub discussion</a>.)
+<p/>
+I think it would be an improvement if we simply made the note not be a note. It seems to contain entirely reasonable, mandatory content.
+</p>
+
+
+<p id="res-4030"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971">N4971</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 99 [numeric.sat.func] as indicated:</p>
+
+<blockquote>
+<p>
+-1- <del>[<i>Note 1</i>:</del> In the following descriptions, an arithmetic operation is performed as a mathematical 
+operation with infinite range and then it is determined whether the mathematical result fits into the result type. 
+<del>&mdash; <i>end note</i>]</del>
+</p>
 </blockquote>
 
 </li>

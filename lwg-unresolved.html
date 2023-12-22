@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2023-12-16 at 14:02:31 UTC</p>
+<p><p>Revised 2023-12-22 at 10:29:33 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -53072,6 +53072,60 @@ is to be destroyed, it is destroyed via the expression <tt>pv-&gt;~U()</tt> wher
 object of type <tt>U</tt>.</p></li>
 <li><p>[&hellip;]</p></li>
 </ol>
+</blockquote>
+</blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+
+
+<hr>
+<h3><a name="4025" href="#4025">4025</a><sup><a href="https://cplusplus.github.io/LWG/issue4025">(i)</a></sup>. Move assignment operator of <tt>std::expected&lt;<i>cv</i> void, E&gt;</tt> should not be conditionally deleted</h3>
+<p><b>Section:</b> 22.8.7.4 <a href="https://wg21.link/expected.void.assign">[expected.void.assign]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-16 <b>Last modified:</b> 2023-12-22</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#expected.void.assign">issues</a> in [expected.void.assign].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+It seems intended that copy functions of <tt>std::optional</tt>, <tt>std::variant</tt>, and <tt>std::expected</tt> 
+are conditionally deleted, while move functions are constrained. However, the move assignment operator of 
+<tt>std::expected&lt;<i>cv</i> void, E&gt;</tt> is currently conditionally deleted, which is inconsistent.
+</p>
+
+
+<p id="res-4025"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971">N4971</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 22.8.7.4 <a href="https://wg21.link/expected.void.assign">[expected.void.assign]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+constexpr expected&amp; operator=(expected&amp;&amp; rhs) noexcept(<i>see below</i>);
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Constraints</i>: <tt>is_move_constructible_v&lt;E&gt;</tt> is <tt>true</tt> and 
+<tt>is_move_assignable_v&lt;E&gt;</tt> is <tt>true</tt>.</ins>
+<p/>
+[&hellip;]
+<p/>
+-6- <i>Remarks</i>: The exception specification is equivalent to <tt>is_nothrow_move_constructible_v&lt;E&gt; &amp;&amp;
+is_nothrow_move_assignable_v&lt;E&gt;</tt>.
+<p/>
+<del>-7- This operator is defined as deleted unless <tt>is_move_constructible_v&lt;E&gt;</tt> is <tt>true</tt> 
+and <tt>is_move_assignable_v&lt;E&gt;</tt> is <tt>true</tt>.</del>
+</p>
 </blockquote>
 </blockquote>
 </li>

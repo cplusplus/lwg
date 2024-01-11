@@ -47,8 +47,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3><a name="4014" href="lwg-active.html#4014">4014</a>. LWG 3809 changes behavior of some existing <tt>std::subtract_with_carry_engine</tt> code</h3>
 <p><b>Section:</b> 28.5.4.4 <a href="https://wg21.link/rand.eng.sub">[rand.eng.sub]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Matt Stephanson <b>Opened:</b> 2023-11-15 <b>Last modified:</b> 2023-11-19</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Matt Stephanson <b>Opened:</b> 2023-11-15 <b>Last modified:</b> 2024-01-11</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#rand.eng.sub">issues</a> in [rand.eng.sub].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -144,6 +144,27 @@ truncated from <tt>result_type</tt> to <tt>uint_least32_t</tt> before the reduct
 change the result. It also breaks the existing behavior that two seeds are equivalent if they're in the same 
 congruence class modulo the divisor.
 </p>
+
+<p><i>[2024-01-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+
+<p><i>[2024-01-11; Jonathan comments]</i></p>
+
+<p>
+More precisely, the resolution forces <code>value</code> to be <i>converted</i>
+to <code>uint_least32_t</code>, which doesn't necessarily truncate, and if it
+does truncate, it doesn't necessarily change the value.
+But it will truncate whenever <code>value_type</code> is wider than
+<code>uint_least32_t</code>,
+e.g. for 32-bit <code>uint_least32_t</code> you get a different result for
+<code>std::ranlux48_base(UINT_MAX + 1LL)()</code>.
+The new proposed resolution below restores the old behaviour for that type.
+</p>
+
+</p>
+
 
 
 <p id="res-4014"><b>Proposed resolution:</b></p>

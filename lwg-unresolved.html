@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2024-01-13 at 14:21:36 UTC</p>
+<p><p>Revised 2024-01-13 at 15:01:24 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -53839,6 +53839,73 @@ is a well-formed expression. For the first two overloads:
 [&hellip;]
 </p>
 </blockquote>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+
+
+<hr>
+<h3><a name="4033" href="#4033">4033</a><sup><a href="https://cplusplus.github.io/LWG/issue4033">(i)</a></sup>. &sect;[macro.names] defining macros after importing the standard library</h3>
+<p><b>Section:</b> 16.4.5.3.3 <a href="https://wg21.link/macro.names">[macro.names]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2023-12-27 <b>Last modified:</b> 2024-01-13</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#macro.names">issues</a> in [macro.names].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+There are several places where the standard talks about what happens when including
+a header, and only sometimes do we address the notion of importing a header unit, or
+importing a standard library module.
+
+One global concern is that 16.4.5.3.3 <a href="https://wg21.link/macro.names">[macro.names]</a> prohibits users defining macros with a name
+that matches a name from any standard library header, but only if a standard library header
+is included. We should maintain that same prohibition on importing a standard header unit,
+and importing a standard library module.
+
+In general, we probably want some front matter to address the include vs. import wording
+issue in one place, rather than trying to update every usage &mdash; if it is already there I could
+not find it. It is also likely that some uses will want to say specific things about import vs.
+include and those cases will be handed to audit for if we have blanket front-matter wording.
+
+I also question whether "shall not" is the right way to prohibit users defining macros in their
+own code. Must a "shall not" restriction be diagnosed? I think the "right" answer is to make
+the program ill-formed, no diagnostic required. That is a foul answer, but UB does not really
+fit as there is no actual behavior to be undefined, unless we mean the process of translating
+the program is undefined, in which case IFNDR is the better way to say that.
+
+If we expect implementations to diagnose users defining macros that match library names we
+should say so more clearly, but I am not aware of any current tool-chain that does so.
+</p>
+
+
+<p id="res-4033"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971">N4971</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 16.4.5.3.3 <a href="https://wg21.link/macro.names">[macro.names]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- <ins>If a translation unit includes a standard header, imports a standard header unit, or imports a
+standard library module, and provides a name specified in the standard library as an argument to <tt>#define</tt> 
+or <tt>#undef</tt>, the program is ill-formed, no diagnostic required</ins><del>A translation unit that includes 
+a standard library header shall not <tt>#define</tt> or <tt>#undef</tt> names declared in any standard library header</del>.
+<p/>
+-2- A translation unit shall not <tt>#define</tt> or <tt>#undef</tt> names lexically identical to keywords, to the identifiers 
+listed in Table [tab:lex.name.special], or to the <i>attribute-token</i>s described in 9.12 <a href="https://wg21.link/dcl.attr">[dcl.attr]</a>, except that 
+the names <tt>likely</tt> and <tt>unlikely</tt> may be defined as function-like macros (15.6 <a href="https://wg21.link/cpp.replace">[cpp.replace]</a>).
+</p>
 </blockquote>
 
 </li>

@@ -133,7 +133,7 @@ model <tt>three_way_comparable_with</tt></ins>.
 (3.1) &mdash; If the expression <tt>std​::​forward&lt;T&gt;(t) &lt;=&gt; std​::​forward&lt;U&gt;(u)</tt>
 results in a call to a built-in operator <tt>&lt;=&gt;</tt> comparing pointers of type <tt>P</tt>,
 returns <tt>strong_­ordering​::​less</tt> if (the converted value of) <tt>t</tt> precedes <tt>u</tt> in
-the implementation-defined strict total order over pointers (3.27 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>),
+the implementation-defined strict total order over pointers (3.26 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>),
 <tt>strong_­ordering​::​greater</tt> if <tt>u</tt> precedes <tt>t</tt>, and otherwise <tt>strong_­ordering​::​equal</tt>.
 </p>
 </li>
@@ -188,7 +188,7 @@ model <tt>equality_comparable_with</tt></ins>.
 results in a call to a built-in operator <tt>==</tt> comparing pointers of type <tt>P</tt>,
 returns <tt>false</tt> if either (the converted value of) <tt>t</tt> precedes <tt>u</tt> or <tt>u</tt>
 precedes <tt>t</tt> in the implementation-defined strict total order over pointers
-(3.27 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) and otherwise <tt>true</tt>.
+(3.26 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) and otherwise <tt>true</tt>.
 </p>
 </li>
 <li><p>
@@ -279,7 +279,7 @@ or <tt>ranges::equal_to{}(ET, EU)</tt> is <tt>true</tt>.
 (7.1) &mdash; If the expression <tt>std​::​forward&lt;T&gt;(t) &lt; std​::​forward&lt;U&gt;(u)</tt>
 results in a call to a built-in operator <tt>&lt;</tt> comparing pointers of type <tt>P</tt>,
 returns <tt>true</tt> if (the converted value of) <tt>t</tt> precedes <tt>u</tt> in the
-implementation-defined strict total order over pointers (3.27 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>)
+implementation-defined strict total order over pointers (3.26 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>)
 and otherwise <tt>false</tt>.
 </p>
 </li>

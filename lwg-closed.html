@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Closed Issues List (Revision D125)</h1>
-<p><p>Revised 2024-01-13 at 15:01:24 UTC</p>
+<p><p>Revised 2024-01-13 at 15:30:48 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -1312,7 +1312,7 @@ this is the intent of the LWG.</p>
 
 <hr>
 <h3><a name="65" href="#65">65</a><sup><a href="https://cplusplus.github.io/LWG/issue65">(i)</a></sup>. Underspecification of strstreambuf::seekoff</h3>
-<p><b>Section:</b> D.14.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> D.13.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Matt Austern <b>Opened:</b> 1998-08-18 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -4313,7 +4313,7 @@ want to pass temporaries as traits or tag types in generic code.
 
 <hr>
 <h3><a name="267" href="#267">267</a><sup><a href="https://cplusplus.github.io/LWG/issue267">(i)</a></sup>. interaction of strstreambuf::overflow() and seekoff()</h3>
-<p><b>Section:</b> D.14.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> D.13.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Martin Sebor <b>Opened:</b> 2000-10-05 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -4380,7 +4380,7 @@ behavior of the program is undefined.
 <p id="res-267"><b>Proposed resolution:</b></p>
 
 
-   <p>Change the last sentence of D.14.2 <a href="https://wg21.link/depr.strstreambuf">[depr.strstreambuf]</a> paragraph 4 from</p>
+   <p>Change the last sentence of D.13.2 <a href="https://wg21.link/depr.strstreambuf">[depr.strstreambuf]</a> paragraph 4 from</p>
 
       <blockquote><p>
       Otherwise, seeklow equals gbeg and seekhigh is either pend, if
@@ -14699,7 +14699,7 @@ Proposed Disposition: Open
 
 <hr>
 <h3><a name="587" href="#587">587</a><sup><a href="https://cplusplus.github.io/LWG/issue587">(i)</a></sup>. iststream ctor missing description</h3>
-<p><b>Section:</b> D.14.3.2 <a href="https://wg21.link/depr.istrstream.cons">[depr.istrstream.cons]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
+<p><b>Section:</b> D.13.3.2 <a href="https://wg21.link/depr.istrstream.cons">[depr.istrstream.cons]</a> <b>Status:</b> <a href="lwg-active.html#NAD Editorial">NAD Editorial</a>
  <b>Submitter:</b> Martin Sebor <b>Opened:</b> 2006-06-22 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -18019,7 +18019,7 @@ different, a string abstraction in its own right.
 
 <hr>
 <h3><a name="721" href="#721">721</a><sup><a href="https://cplusplus.github.io/LWG/issue721">(i)</a></sup>. <tt>wstring_convert</tt> inconsistensies</h3>
-<p><b>Section:</b> D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Bo Persson <b>Opened:</b> 2007-08-27 <b>Last modified:</b> 2017-04-22</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -25186,7 +25186,7 @@ Remove p.13+p.14
 
 <hr>
 <h3><a name="917" href="#917">917</a><sup><a href="https://cplusplus.github.io/LWG/issue917">(i)</a></sup>. Redundant move-assignment operator of <tt>tuple</tt> should be removed</h3>
-<p><b>Section:</b> 22.4.4.1 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Daniel Kr&uuml;gler <b>Opened:</b> 2008-10-04 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -25274,7 +25274,7 @@ requires HasAssign&lt;Types, RvalueOf&lt;UTypes&gt;::type&gt;...
 </li>
 <li>
 <p>
-In 22.4.4.1 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a>, starting just before p. 11 please remove
+In 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a>, starting just before p. 11 please remove
 as indicated:
 </p>
 
@@ -25300,7 +25300,7 @@ element of <tt>*this</tt>.</del>
 
 <hr>
 <h3><a name="918" href="#918">918</a><sup><a href="https://cplusplus.github.io/LWG/issue918">(i)</a></sup>. Swap for tuple needs to be conceptualized</h3>
-<p><b>Section:</b> 22.4.4.3 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a> <b>Status:</b> <a href="lwg-active.html#NAD Concepts">NAD Concepts</a>
+<p><b>Section:</b> 22.4.4.4 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a> <b>Status:</b> <a href="lwg-active.html#NAD Concepts">NAD Concepts</a>
  <b>Submitter:</b> Daniel Kr&uuml;gler <b>Opened:</b> 2008-10-04 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -25367,7 +25367,7 @@ void swap(tuple&lt;Types...&gt;&amp; x, tuple&lt;Types...&gt;&amp; y);
 <li>
 <p>
 In 22.4.4 <a href="https://wg21.link/tuple.tuple">[tuple.tuple]</a>, class <tt>tuple</tt> definition and in
-22.4.4.3 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a>, change
+22.4.4.4 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a>, change
 </p>
 
 <blockquote><pre>
@@ -25378,7 +25378,7 @@ In 22.4.4 <a href="https://wg21.link/tuple.tuple">[tuple.tuple]</a>, class <tt>t
 
 <li>
 <p>
-In 22.4.4.3 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a> remove the current requires-clause, which says:
+In 22.4.4.4 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a> remove the current requires-clause, which says:
 </p>
 
 <blockquote><p>
@@ -32510,7 +32510,7 @@ template &lt;class... UTypes&gt;
 </pre></blockquote>
 
 <p>
-[NB.: The corresponding prototypes do already exist in 22.4.4.1 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a>/7+8]
+[NB.: The corresponding prototypes do already exist in 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a>/7+8]
 </p>
 
 
@@ -37267,7 +37267,7 @@ void swap(tuple&amp;<del>&amp;</del>)
 
 <li>
 <p>
-Change 22.4.4.3 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a> before 1 as indicated:
+Change 22.4.4.4 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a> before 1 as indicated:
 </p>
 
 <blockquote><pre>
@@ -46377,7 +46377,7 @@ Strike the note,  [reverse.iter.op.star]/2:
 
 <hr>
 <h3><a name="2226" href="#2226">2226</a><sup><a href="https://cplusplus.github.io/LWG/issue2226">(i)</a></sup>. <tt>wstring_convert</tt> methods do not take allocator instance</h3>
-<p><b>Section:</b> D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Glen Fernandes <b>Opened:</b> 2012-12-14 <b>Last modified:</b> 2019-02-26</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -46387,7 +46387,7 @@ Strike the note,  [reverse.iter.op.star]/2:
 <p><b>Discussion:</b></p>
 
 <p>
-The <tt>wstring_convert</tt> class template, described in D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a>, does not 
+The <tt>wstring_convert</tt> class template, described in D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a>, does not 
 support custom stateful allocators. It only supports custom stateless allocators.
 <p/>
 The <tt>to_bytes</tt> member function returns <tt>basic_string&lt;char, char_traits&lt;char&gt;, Byte_alloc&gt;</tt>  
@@ -46429,7 +46429,7 @@ the C++11 allocator model to know that this is the addition to make?</p>
 <p>This wording is relative to N3485.</p>
 
 <ol>
-<li><p>In D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a>/2 and /6 "Class template <tt>wstring_convert</tt> synopsis" change the overloads 
+<li><p>In D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a>/2 and /6 "Class template <tt>wstring_convert</tt> synopsis" change the overloads 
 of the member function <tt>from_bytes()</tt> so that all four overloads take an additional parameter
 which is an instance of <tt>Wide_alloc</tt>:</p>
 
@@ -46441,7 +46441,7 @@ wide_string from_bytes(const char *first, const char *last<ins>, const Wide_allo
 </pre></blockquote>
 </li>
 
-<li><p>In D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> /8 specify that this <tt>Wide_alloc</tt> allocator parameter is used to
+<li><p>In D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> /8 specify that this <tt>Wide_alloc</tt> allocator parameter is used to
 construct the <tt>wide_string</tt> object returned from the function:</p>
 
 <p>
@@ -46463,7 +46463,7 @@ from the function.</ins></p></li>
 </ul>
 </li>
 
-<li><p>In D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a>/2 and /12 "Class template <tt>wstring_convert</tt> synopsis" change the overloads 
+<li><p>In D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a>/2 and /12 "Class template <tt>wstring_convert</tt> synopsis" change the overloads 
 of the member function <tt>to_bytes()</tt> so that all four overloads take an additional parameter
 which is an instance of <tt>Byte_alloc</tt>:</p>
 
@@ -46475,7 +46475,7 @@ byte_string to_bytes(const Elem *first, const Elem *last<ins>, const Byte_alloc&
 </pre></blockquote>
 </li>
 
-<li><p>In D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> /13 specify that this <tt>Byte_alloc</tt> allocator parameter is used to
+<li><p>In D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> /13 specify that this <tt>Byte_alloc</tt> allocator parameter is used to
 construct the <tt>byte_string</tt> object returned from the function:</p>
 
 <p>
@@ -53146,7 +53146,7 @@ template&lt;class charT, class traits&gt;
 
 <hr>
 <h3><a name="2854" href="#2854">2854</a><sup><a href="https://cplusplus.github.io/LWG/issue2854">(i)</a></sup>. <tt>wstring_convert</tt> provides no indication of incomplete input or output</h3>
-<p><b>Section:</b> D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> PowerGamer <b>Opened:</b> 2017-01-08 <b>Last modified:</b> 2017-06-05</p>
 <p><b>Priority: </b>3
 </p>
@@ -53590,7 +53590,7 @@ in mind before it went into the working draft.
 
 <hr>
 <h3><a name="2896" href="#2896">2896</a><sup><a href="https://cplusplus.github.io/LWG/issue2896">(i)</a></sup>. The contents of <tt>&lt;codecvt&gt;</tt> are underspecified</h3>
-<p><b>Section:</b> D.26 <a href="https://wg21.link/depr.locale.stdcvt">[depr.locale.stdcvt]</a> <b>Status:</b> <a href="lwg-active.html#Dup">Dup</a>
+<p><b>Section:</b> 99 [depr.locale.stdcvt] <b>Status:</b> <a href="lwg-active.html#Dup">Dup</a>
  <b>Submitter:</b> Great Britain <b>Opened:</b> 2017-02-03 <b>Last modified:</b> 2017-04-22</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -55732,7 +55732,7 @@ even if we wanted to support it.
 
 <hr>
 <h3><a name="3440" href="#3440">3440</a><sup><a href="https://cplusplus.github.io/LWG/issue3440">(i)</a></sup>. Aggregate-paren-init breaks direct-initializing a <tt>tuple</tt> or <tt>optional</tt> from <tt>{<i>aggregate-member-value</i>}</tt></h3>
-<p><b>Section:</b> 22.4.4.1 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a>, 22.5.3.2 <a href="https://wg21.link/optional.ctor">[optional.ctor]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a>, 22.5.3.2 <a href="https://wg21.link/optional.ctor">[optional.ctor]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Ville Voutilainen <b>Opened:</b> 2020-05-01 <b>Last modified:</b> 2020-11-09</p>
 <p><b>Priority: </b>2
 </p>
@@ -55800,7 +55800,7 @@ No consensus for change. Close as Not a defect.
 <p>This wording is relative to <a href="https://wg21.link/n4861">N4861</a>.</p>
 
 <ol>
-<li><p>Modify 22.4.4.1 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> as indicated:</p>
+<li><p>Modify 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> as indicated:</p>
 
 <blockquote>
 <pre>

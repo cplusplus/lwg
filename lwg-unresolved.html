@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2024-01-13 at 15:01:24 UTC</p>
+<p><p>Revised 2024-01-13 at 15:30:48 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -4572,7 +4572,7 @@ compare equal. Then sub-clause 24.2.2 <a href="https://wg21.link/container.requi
 of type <tt>T</tt> is swappable (by the unary definition).
 <p/>
 Throughout the standard it is the unary definition of "swappable" that is listed as a requirement (with the 
-exceptions of 22.2.2 <a href="https://wg21.link/utility.swap">[utility.swap]</a> p4, 22.3.2 <a href="https://wg21.link/pairs.pair">[pairs.pair]</a> p31, 22.4.4.3 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a> p2, 
+exceptions of 22.2.2 <a href="https://wg21.link/utility.swap">[utility.swap]</a> p4, 22.3.2 <a href="https://wg21.link/pairs.pair">[pairs.pair]</a> p31, 22.4.4.4 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a> p2, 
 27.7.3 <a href="https://wg21.link/alg.swap">[alg.swap]</a> p2, and 27.7.3 <a href="https://wg21.link/alg.swap">[alg.swap]</a> p6, which use the binary definition). This renders 
 many of the mutating sequence algorithms of sub-clause 27.7 <a href="https://wg21.link/alg.modifying.operations">[alg.modifying.operations]</a>, for example, 
 inapplicable to sequences of standard container types, even where every element of the sequence is swappable 
@@ -8571,7 +8571,7 @@ return <tt>traits::eof()</tt> when a read position is not available.
 The semantics of <tt>basic_stringbuf</tt> require, and existing libraries implement it so that this function makes 
 a read position available if possible to do so, e.g. if some characters were inserted into the stream since the 
 last call to <tt>overflow()</tt>, resulting in <tt>pptr() &gt; egptr()</tt>. Compare to the conceptually similar 
-D.14.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a>/15.
+D.13.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a>/15.
 </p>
 
 <p><i>[2018-06-06, Billy argues for NAD]</i></p>
@@ -8635,7 +8635,7 @@ position available, the function alters the read end pointer <tt>egptr()</tt> to
 
 <hr>
 <h3><a name="2289" href="#2289">2289</a><sup><a href="https://cplusplus.github.io/LWG/issue2289">(i)</a></sup>. <tt>constexpr</tt> guarantees of defaulted functions still insufficient</h3>
-<p><b>Section:</b> 22.3.2 <a href="https://wg21.link/pairs.pair">[pairs.pair]</a>, 22.4.4.1 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a>, 29.5 <a href="https://wg21.link/time.duration">[time.duration]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
+<p><b>Section:</b> 22.3.2 <a href="https://wg21.link/pairs.pair">[pairs.pair]</a>, 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a>, 29.5 <a href="https://wg21.link/time.duration">[time.duration]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
  <b>Submitter:</b> Daniel Kr&uuml;gler <b>Opened:</b> 2013-09-09 <b>Last modified:</b> 2020-06-13</p>
 <p><b>Priority: </b>3
 </p>
@@ -8696,7 +8696,7 @@ if all required element-wise initializations would be constant initializers for 
 </blockquote>
 </li>
 
-<li><p>Change 22.4.4.1 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> p2 as indicated:</p>
+<li><p>Change 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> p2 as indicated:</p>
 
 <blockquote>
 <p>
@@ -11248,7 +11248,7 @@ This is then unambiguously chosen over the other options in the preceding case. 
 
 <hr>
 <h3><a name="2478" href="#2478">2478</a><sup><a href="https://cplusplus.github.io/LWG/issue2478">(i)</a></sup>. Unclear how <tt>wstring_convert</tt> uses <tt>cvtstate</tt></h3>
-<p><b>Section:</b> D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2015-03-04 <b>Last modified:</b> 2017-04-22</p>
 <p><b>Priority: </b>4
 </p>
@@ -11275,7 +11275,7 @@ simpler ways to say so.
 
 <hr>
 <h3><a name="2479" href="#2479">2479</a><sup><a href="https://cplusplus.github.io/LWG/issue2479">(i)</a></sup>. Unclear how <tt>wbuffer_convert</tt> uses <tt>cvtstate</tt></h3>
-<p><b>Section:</b> D.27.3 <a href="https://wg21.link/depr.conversions.buffer">[depr.conversions.buffer]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.23.3 <a href="https://wg21.link/depr.conversions.buffer">[depr.conversions.buffer]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2015-03-04 <b>Last modified:</b> 2017-04-22</p>
 <p><b>Priority: </b>4
 </p>
@@ -11302,7 +11302,7 @@ state of the get area is unrelated to the put area.
 
 <hr>
 <h3><a name="2480" href="#2480">2480</a><sup><a href="https://cplusplus.github.io/LWG/issue2480">(i)</a></sup>. Error handling of <tt>wbuffer_convert</tt> unclear</h3>
-<p><b>Section:</b> D.27.3 <a href="https://wg21.link/depr.conversions.buffer">[depr.conversions.buffer]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.23.3 <a href="https://wg21.link/depr.conversions.buffer">[depr.conversions.buffer]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2015-03-04 <b>Last modified:</b> 2017-04-22</p>
 <p><b>Priority: </b>4
 </p>
@@ -11327,7 +11327,7 @@ error lose information?
 
 <hr>
 <h3><a name="2481" href="#2481">2481</a><sup><a href="https://cplusplus.github.io/LWG/issue2481">(i)</a></sup>. <tt>wstring_convert</tt> should be more precise regarding "byte-error string" etc.</h3>
-<p><b>Section:</b> D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2015-03-04 <b>Last modified:</b> 2017-04-22</p>
 <p><b>Priority: </b>4
 </p>
@@ -11336,7 +11336,7 @@ error lose information?
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Paragraph 4 of D.27.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> introduces <tt>byte_err_string</tt> 
+Paragraph 4 of D.23.2 <a href="https://wg21.link/depr.conversions.string">[depr.conversions.string]</a> introduces <tt>byte_err_string</tt> 
 as "a byte string to display on errors". What does display mean? The string is returned 
 on error, it's not displayed anywhere.
 <p/>
@@ -11459,7 +11459,7 @@ The libc++ and MSVC STL implementations only support flat address spaces, and al
 The libstdc++ implementation casts pointer values to <tt>uintptr_t</tt> if the direct comparison result is unusable 
 in constant evaluation.
 <p/>
-So, I think that we can specify that the implementation-defined strict total order (3.27 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) 
+So, I think that we can specify that the implementation-defined strict total order (3.26 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) 
 generates a core constant expression if and only if the corresponding underlying comparison expression comparing 
 pointer values is a core constant expression. No any other case should be a core constant expression, otherwise 
 we should also make the underlying comparison expression a core constant expression.
@@ -11480,7 +11480,7 @@ and <tt>std::is_constant_evaluated</tt>.
 <p>
 -2- For templates <tt>less</tt>, <tt>greater</tt>, <tt>less_equal</tt>, and <tt>greater_equal</tt>, the specializations 
 for any pointer type yield a result consistent with the implementation-defined strict total order over pointers 
-(3.27 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>). [<i>Note 1</i>: If <tt>a &lt; b</tt> is well-defined for pointers <tt>a</tt> and 
+(3.26 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>). [<i>Note 1</i>: If <tt>a &lt; b</tt> is well-defined for pointers <tt>a</tt> and 
 <tt>b</tt> of type <tt>P</tt>, then <tt>(a &lt; b) == less&lt;P&gt;()(a, b)</tt>, <tt>(a &gt; b) == greater&lt;P&gt;()(a, b)</tt>, 
 and so forth. &mdash; <i>end note</i>] For template specializations <tt>less&lt;void&gt;</tt>, <tt>greater&lt;void&gt;</tt>, 
 <tt>less_equal&lt;void&gt;</tt>, and <tt>greater_equal&lt;void&gt;</tt>, if the call operator calls a built-in operator 
@@ -11500,7 +11500,7 @@ built-in comparison expression is a core constant expression.</ins>
 <li><p>(3.1) &mdash; If the expression <tt>std::forward&lt;T&gt;(t) == std::forward&lt;U&gt;(u)</tt> results in a call 
 to a built-in operator <tt>==</tt> comparing pointers: returns <tt>false</tt> if either (the converted value of) <tt>t</tt> 
 precedes <tt>u</tt> or <tt>u</tt> precedes <tt>t</tt> in the implementation-defined strict total order over pointers 
-(3.27 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) and otherwise <tt>true</tt>. <ins>The result is a core constant expression if and only 
+(3.26 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) and otherwise <tt>true</tt>. <ins>The result is a core constant expression if and only 
 if <tt>std::forward&lt;T&gt;(t) == std::forward&lt;U&gt;(u)</tt> is a core constant expression.</ins></p></li>
 <li><p>(3.2) &mdash; Otherwise, equivalent to: <tt>return std::forward&lt;T&gt;(t) == std::forward&lt;U&gt;(u);</tt></p></li>
 </ol>
@@ -11515,7 +11515,7 @@ if <tt>std::forward&lt;T&gt;(t) == std::forward&lt;U&gt;(u)</tt> is a core const
 <ol style="list-style-type: none">
 <li><p>(7.1) &mdash; If the expression <tt>std::forward&lt;T&gt;(t) &lt; std::forward&lt;U&gt;(u)</tt> results in a call 
 to a built-in operator <tt>&lt;</tt> comparing pointers: returns <tt>true</tt> if (the converted value of) <tt>t</tt> 
-precedes <tt>u</tt> in the implementation-defined strict total order over pointers (3.27 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) and 
+precedes <tt>u</tt> in the implementation-defined strict total order over pointers (3.26 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) and 
 otherwise <tt>false</tt>. <ins>The result is a core constant expression if and only 
 if <tt>std::forward&lt;T&gt;(t) &lt; std::forward&lt;U&gt;(u)</tt> is a core constant expression.</ins></p></li>
 <li><p>(7.2) &mdash; Otherwise, equivalent to: <tt>return std::forward&lt;T&gt;(t) &lt; std::forward&lt;U&gt;(u);</tt></p></li>
@@ -11531,7 +11531,7 @@ if <tt>std::forward&lt;T&gt;(t) &lt; std::forward&lt;U&gt;(u)</tt> is a core con
 <ol style="list-style-type: none">
 <li><p>(3.1) &mdash; If the expression <tt>std::forward&lt;T&gt;(t) &lt;=&gt; std::forward&lt;U&gt;(u)</tt> results in a call 
 to a built-in operator <tt>&lt;=&gt;</tt> comparing pointers: returns <tt>strong_ordering::less</tt> if (the converted value 
-of) <tt>t</tt> precedes <tt>u</tt> in the implementation-defined strict total order over pointers (3.27 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>), 
+of) <tt>t</tt> precedes <tt>u</tt> in the implementation-defined strict total order over pointers (3.26 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>), 
 <tt>strong_ordering::greater</tt> if <tt>u</tt> precedes <tt>t</tt>, and otherwise <tt>strong_ordering::equal</tt>. 
 <ins>The result is a core constant expression if and only if <tt>std::forward&lt;T&gt;(t) &lt;=&gt; std::forward&lt;U&gt;(u)</tt> 
 is a core constant expression.</ins></p></li>
@@ -11793,7 +11793,7 @@ We would welcome a paper to make those definitions more explicit, and revise the
 
 <hr>
 <h3><a name="2507" href="#2507">2507</a><sup><a href="https://cplusplus.github.io/LWG/issue2507">(i)</a></sup>. <tt>codecvt_mode</tt> should be a bitmask type</h3>
-<p><b>Section:</b> D.26 <a href="https://wg21.link/depr.locale.stdcvt">[depr.locale.stdcvt]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 99 [depr.locale.stdcvt] <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2015-06-08 <b>Last modified:</b> 2017-04-22</p>
 <p><b>Priority: </b>3
 </p>
@@ -12084,7 +12084,7 @@ but <tt>generate_canonical</tt> is defined to return a result in the range [0, 1
 
 <hr>
 <h3><a name="2528" href="#2528">2528</a><sup><a href="https://cplusplus.github.io/LWG/issue2528">(i)</a></sup>. Order of <tt>std::tuple</tt> construction unspecified</h3>
-<p><b>Section:</b> 22.4.4.1 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Brian Rodriguez <b>Opened:</b> 2015-08-25 <b>Last modified:</b> 2017-02-19</p>
 <p><b>Priority: </b>3
 </p>
@@ -12139,7 +12139,7 @@ in the same order as its type list e.g. <tt>A{}, B{}, ..., Y{}, Z{}</tt>.
 <p/>
 When <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2010/n3140.html">N3140</a> became accepted, wording had been
 added that gives at least an indication of requiring element initialization in the order of the declaration of the template
-parameters. This argumentation can be based on 22.4.4.1 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> p3 (emphasize mine):
+parameters. This argumentation can be based on 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> p3 (emphasize mine):
 </p>
 <blockquote><p>
 -3- In the constructor descriptions that follow, let <tt><i>i</i></tt> be in the range <tt>[0,sizeof...(Types))</tt> 
@@ -17165,7 +17165,7 @@ constexpr function</del><ins>can be used in a constant expression</ins>.
 
 <li>
 <p>
-Modify 22.4.4.1 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> as indicated:
+Modify 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> as indicated:
 </p>
 <blockquote>
 <p>
@@ -17669,7 +17669,7 @@ could really be described as "modify[ing] a property of a type".
 
 <hr>
 <h3><a name="2846" href="#2846">2846</a><sup><a href="https://cplusplus.github.io/LWG/issue2846">(i)</a></sup>. Undefined phrase "effectively cast"</h3>
-<p><b>Section:</b> 28.4.9 <a href="https://wg21.link/cmplx.over">[cmplx.over]</a>, 28.7.1 <a href="https://wg21.link/cmath.syn">[cmath.syn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 28.4.10 <a href="https://wg21.link/cmplx.over">[cmplx.over]</a>, 28.7.1 <a href="https://wg21.link/cmath.syn">[cmath.syn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jens Maurer <b>Opened:</b> 2016-12-15 <b>Last modified:</b> 2019-03-18</p>
 <p><b>Priority: </b>3
 </p>
@@ -17697,8 +17697,8 @@ spelled out somewhere, e.g. in the library definitions section.
 
 <p>
 I decided to use the form "implicitly converted" and to refer to 7.3 <a href="https://wg21.link/conv">[conv]</a> for 28.7.1 <a href="https://wg21.link/cmath.syn">[cmath.syn]</a> and
-28.4.9 <a href="https://wg21.link/cmplx.over">[cmplx.over]</a>, because those conversions can all be done implicitly. This also holds for the 
-<tt>pow</tt> specification 28.4.9 <a href="https://wg21.link/cmplx.over">[cmplx.over]</a> p3, because the described conversions of
+28.4.10 <a href="https://wg21.link/cmplx.over">[cmplx.over]</a>, because those conversions can all be done implicitly. This also holds for the 
+<tt>pow</tt> specification 28.4.10 <a href="https://wg21.link/cmplx.over">[cmplx.over]</a> p3, because the described conversions of
 <tt>complex&lt;T&gt;</tt> to <tt>complex&lt;U&gt;</tt> involve only the need of non-explicit constructors.
 </p>
 
@@ -17707,7 +17707,7 @@ I decided to use the form "implicitly converted" and to refer to 7.3 <a href="ht
 <p>This wording is relative to <a href="https://wg21.link/n4810">N4810</a>.</p>
 
 <ol>
-<li><p>Change 28.4.9 <a href="https://wg21.link/cmplx.over">[cmplx.over]</a>, as indicated:</p>
+<li><p>Change 28.4.10 <a href="https://wg21.link/cmplx.over">[cmplx.over]</a>, as indicated:</p>
 
 <blockquote>
 <p>
@@ -20538,7 +20538,7 @@ are not required to diagnose such invalid specializations, but also don't have t
 <blockquote>
 <p>
 -1- <tt>reference_wrapper&lt;T&gt;</tt> is a <tt>CopyConstructible</tt> and <tt>CopyAssignable</tt> wrapper around a reference 
-to an object or function of type <tt>T</tt>. <ins><tt>T</tt> shall be a referenceable type (3.45 <a href="https://wg21.link/defns.referenceable">[defns.referenceable]</a>) that 
+to an object or function of type <tt>T</tt>. <ins><tt>T</tt> shall be a referenceable type (3.43 <a href="https://wg21.link/defns.referenceable">[defns.referenceable]</a>) that 
 is not a reference type.</ins>
 <p/>
 -2- <tt>reference_wrapper&lt;T&gt;</tt> shall be a trivially copyable type (6.8 <a href="https://wg21.link/basic.types">[basic.types]</a>).
@@ -20573,7 +20573,7 @@ and because such an element is rarely used to specify class templates. If the co
 the equivalent wording would be:
 </p>
 <blockquote><p>
-<i>Mandates:</i> <tt>reference_wrapper</tt> is instantiated with a referenceable type (3.45 <a href="https://wg21.link/defns.referenceable">[defns.referenceable]</a>) 
+<i>Mandates:</i> <tt>reference_wrapper</tt> is instantiated with a referenceable type (3.43 <a href="https://wg21.link/defns.referenceable">[defns.referenceable]</a>) 
 as the argument for the template parameter <tt>T</tt>.
 </p></blockquote>
 
@@ -20588,7 +20588,7 @@ as the argument for the template parameter <tt>T</tt>.
 <p>
 -1- <tt>reference_wrapper&lt;T&gt;</tt> is a <i>Cpp17CopyConstructible</i> and <i>Cpp17CopyAssignable</i> wrapper around a reference
 to an object or function of type <tt>T</tt>. <ins>If <tt>reference_wrapper</tt> is instantiated with a non-referenceable type 
-(3.45 <a href="https://wg21.link/defns.referenceable">[defns.referenceable]</a>) as the argument for the template parameter <tt>T</tt>, the program is ill-formed.</ins>
+(3.43 <a href="https://wg21.link/defns.referenceable">[defns.referenceable]</a>) as the argument for the template parameter <tt>T</tt>, the program is ill-formed.</ins>
 <p/>
 -2- <tt>reference_wrapper&lt;T&gt;</tt> is a trivially copyable type (6.8 <a href="https://wg21.link/basic.types">[basic.types]</a>).
 <p/>
@@ -22845,7 +22845,7 @@ available whenever either <tt>&lt;cstdlib&gt;</tt> or <tt>&lt;cinttypes&gt;</tt>
 
 <hr>
 <h3><a name="3095" href="#3095">3095</a><sup><a href="https://cplusplus.github.io/LWG/issue3095">(i)</a></sup>. <tt>strstreambuf</tt> refers to nonexistent member of <tt>fpos</tt>, <tt>fpos::offset</tt></h3>
-<p><b>Section:</b> D.14.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.13.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Billy O'Neal III <b>Opened:</b> 2018-04-04 <b>Last modified:</b> 2020-09-06</p>
 <p><b>Priority: </b>4
 </p>
@@ -22854,7 +22854,7 @@ available whenever either <tt>&lt;cstdlib&gt;</tt> or <tt>&lt;cinttypes&gt;</tt>
 <p><b>Discussion:</b></p>
 <p>
 <tt>strstreambuf</tt> refers to a nonexistent member function of <tt>fpos</tt> in the specification of the member function
-<tt>seekpos</tt>, D.14.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a>/18 (emphasize mine): 
+<tt>seekpos</tt>, D.13.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a>/18 (emphasize mine): 
 </p>
 <blockquote><p>
 For a sequence to be positioned, if its next pointer is a null pointer, the positioning operation fails.
@@ -22878,7 +22878,7 @@ This wording is relative to <a href="https://wg21.link/n4727">N4727</a>.
 
 <ol>
 <li>
-<p>Edit D.14.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> as indicated:</p>
+<p>Edit D.13.2.4 <a href="https://wg21.link/depr.strstreambuf.virtuals">[depr.strstreambuf.virtuals]</a> as indicated:</p>
 <blockquote>
 <pre>
 pos_type seekpos(pos_type sp, ios_base::openmode which
@@ -23312,7 +23312,7 @@ namespace std {
 
 <hr>
 <h3><a name="3109" href="#3109">3109</a><sup><a href="https://cplusplus.github.io/LWG/issue3109">(i)</a></sup>. <tt>strstreambuf</tt> is copyable</h3>
-<p><b>Section:</b> D.14.2 <a href="https://wg21.link/depr.strstreambuf">[depr.strstreambuf]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> D.13.2 <a href="https://wg21.link/depr.strstreambuf">[depr.strstreambuf]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2018-05-02 <b>Last modified:</b> 2018-06-19</p>
 <p><b>Priority: </b>4
 </p>
@@ -25722,7 +25722,7 @@ element results in undefined behavior.
 <blockquote class="note">
 <p>
 [<i>Drafting note:</i> Interestingly, albey the <i>Requires:</i> element has nearly vanished, the
-issue is still relevant, see D.18 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a>]
+issue is still relevant, see D.16 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a>]
 </p>
 </blockquote>
 
@@ -26647,7 +26647,7 @@ template&lt;class T&gt; void atomic_store(atomic&lt;T&gt;*, typename atomic&lt;T
 </pre></blockquote>
 <p>
 The program intends to call the "other" <tt>atomic_store</tt> from
-D.23 <a href="https://wg21.link/depr.util.smartptr.shared.atomic">[depr.util.smartptr.shared.atomic]</a>:
+D.21 <a href="https://wg21.link/depr.util.smartptr.shared.atomic">[depr.util.smartptr.shared.atomic]</a>:
 </p>
 <blockquote><pre>
 template&lt;class T&gt; void atomic_store(shared_ptr&lt;T&gt;*, shared_ptr&lt;T&gt;); <i>// #3</i>
@@ -26666,7 +26666,7 @@ argument <tt>T</tt> shall be trivially copyable"
 <p/>
 The fix is fairly straightforward since <tt>atomic&lt;T&gt;::value_type</tt> is always an alias
 for <tt>T</tt>: for those non-member atomic functions with overloads defined in
-D.23 <a href="https://wg21.link/depr.util.smartptr.shared.atomic">[depr.util.smartptr.shared.atomic]</a>, use a different form to require that <tt>T</tt>
+D.21 <a href="https://wg21.link/depr.util.smartptr.shared.atomic">[depr.util.smartptr.shared.atomic]</a>, use a different form to require that <tt>T</tt>
 in the type of the second parameter is non-deduced.
 </p>
 
@@ -28460,7 +28460,7 @@ as per <a href="https://wg21.link/p2408">P2408</a>.
 
 <hr>
 <h3><a name="3342" href="#3342">3342</a><sup><a href="https://cplusplus.github.io/LWG/issue3342">(i)</a></sup>. Library wording uses "initializes <tt>x</tt> with <tt>y</tt>", which is underspecified</h3>
-<p><b>Section:</b> 22.3.2 <a href="https://wg21.link/pairs.pair">[pairs.pair]</a>, 22.4.4.1 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a>, 22.6.3.2 <a href="https://wg21.link/variant.ctor">[variant.ctor]</a>, 33.5.8.7.2 <a href="https://wg21.link/util.smartptr.atomic.shared">[util.smartptr.atomic.shared]</a>, 20.5.3 <a href="https://wg21.link/allocator.adaptor.cnstr">[allocator.adaptor.cnstr]</a>, 22.14.6.5 <a href="https://wg21.link/format.parse.ctx">[format.parse.ctx]</a>, 22.14.8.1 <a href="https://wg21.link/format.arg">[format.arg]</a>, 24.6 <a href="https://wg21.link/container.adaptors">[container.adaptors]</a>, 25.5 <a href="https://wg21.link/predef.iterators">[predef.iterators]</a>, 26.5.4.2 <a href="https://wg21.link/range.subrange.ctor">[range.subrange.ctor]</a>, 26.6 <a href="https://wg21.link/range.factories">[range.factories]</a>, 26.7 <a href="https://wg21.link/range.adaptors">[range.adaptors]</a>, 27.10 <a href="https://wg21.link/numeric.ops">[numeric.ops]</a>, 29.9 <a href="https://wg21.link/time.hms">[time.hms]</a>, 32.11 <a href="https://wg21.link/re.iter">[re.iter]</a>, 33.5.8 <a href="https://wg21.link/atomics.types.generic">[atomics.types.generic]</a>, 33.5.9 <a href="https://wg21.link/atomics.nonmembers">[atomics.nonmembers]</a>, 33.3 <a href="https://wg21.link/thread.stoptoken">[thread.stoptoken]</a>, 33.4 <a href="https://wg21.link/thread.threads">[thread.threads]</a>, 33.6 <a href="https://wg21.link/thread.mutex">[thread.mutex]</a>, 33.8 <a href="https://wg21.link/thread.sema">[thread.sema]</a>, 33.9 <a href="https://wg21.link/thread.coord">[thread.coord]</a>, 33.10 <a href="https://wg21.link/futures">[futures]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 22.3.2 <a href="https://wg21.link/pairs.pair">[pairs.pair]</a>, 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a>, 22.6.3.2 <a href="https://wg21.link/variant.ctor">[variant.ctor]</a>, 33.5.8.7.2 <a href="https://wg21.link/util.smartptr.atomic.shared">[util.smartptr.atomic.shared]</a>, 20.5.3 <a href="https://wg21.link/allocator.adaptor.cnstr">[allocator.adaptor.cnstr]</a>, 22.14.6.5 <a href="https://wg21.link/format.parse.ctx">[format.parse.ctx]</a>, 22.14.8.1 <a href="https://wg21.link/format.arg">[format.arg]</a>, 24.6 <a href="https://wg21.link/container.adaptors">[container.adaptors]</a>, 25.5 <a href="https://wg21.link/predef.iterators">[predef.iterators]</a>, 26.5.4.2 <a href="https://wg21.link/range.subrange.ctor">[range.subrange.ctor]</a>, 26.6 <a href="https://wg21.link/range.factories">[range.factories]</a>, 26.7 <a href="https://wg21.link/range.adaptors">[range.adaptors]</a>, 27.10 <a href="https://wg21.link/numeric.ops">[numeric.ops]</a>, 29.9 <a href="https://wg21.link/time.hms">[time.hms]</a>, 32.11 <a href="https://wg21.link/re.iter">[re.iter]</a>, 33.5.8 <a href="https://wg21.link/atomics.types.generic">[atomics.types.generic]</a>, 33.5.9 <a href="https://wg21.link/atomics.nonmembers">[atomics.nonmembers]</a>, 33.3 <a href="https://wg21.link/thread.stoptoken">[thread.stoptoken]</a>, 33.4 <a href="https://wg21.link/thread.threads">[thread.threads]</a>, 33.6 <a href="https://wg21.link/thread.mutex">[thread.mutex]</a>, 33.8 <a href="https://wg21.link/thread.sema">[thread.sema]</a>, 33.9 <a href="https://wg21.link/thread.coord">[thread.coord]</a>, 33.10 <a href="https://wg21.link/futures">[futures]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Richard Smith <b>Opened:</b> 2019-11-21 <b>Last modified:</b> 2019-12-08</p>
 <p><b>Priority: </b>3
 </p>
@@ -29811,7 +29811,7 @@ void notify_all() noexcept;
 </blockquote>
 </li>
 
-<li><p>Modify D.30.2 <a href="https://wg21.link/depr.atomics.volatile">[depr.atomics.volatile]</a>, annex D, as indicated:</p>
+<li><p>Modify D.26.2 <a href="https://wg21.link/depr.atomics.volatile">[depr.atomics.volatile]</a>, annex D, as indicated:</p>
 
 <blockquote>
 <p>
@@ -29901,7 +29901,7 @@ code sequence containing the <tt><i>f</i></tt> invocation specified in this subc
 </blockquote>
 </li>
 
-<li><p>Modify D.30.2 <a href="https://wg21.link/depr.atomics.volatile">[depr.atomics.volatile]</a>, annex D, as indicated:</p>
+<li><p>Modify D.26.2 <a href="https://wg21.link/depr.atomics.volatile">[depr.atomics.volatile]</a>, annex D, as indicated:</p>
 
 <blockquote>
 <p>
@@ -32831,7 +32831,7 @@ changes the definition of program-defined type.
 
 <hr>
 <h3><a name="3513" href="#3513">3513</a><sup><a href="https://cplusplus.github.io/LWG/issue3513">(i)</a></sup>. Fix definition of program-defined based on its uses</h3>
-<p><b>Section:</b> 3.43 <a href="https://wg21.link/defns.prog.def.type">[defns.prog.def.type]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 3.41 <a href="https://wg21.link/defns.prog.def.type">[defns.prog.def.type]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Johel Ernesto Guerrero Pe&ntilde;a <b>Opened:</b> 2020-12-29 <b>Last modified:</b> 2021-01-30</p>
 <p><b>Priority: </b>3
 </p>
@@ -32889,7 +32889,7 @@ This wording is relative to <a href="https://wg21.link/n4878">N4878</a>.
 </p>
 
 <ol>
-<li><p>Modify 3.43 <a href="https://wg21.link/defns.prog.def.type">[defns.prog.def.type]</a> as indicated:</p>
+<li><p>Modify 3.41 <a href="https://wg21.link/defns.prog.def.type">[defns.prog.def.type]</a> as indicated:</p>
 
 <blockquote>
 <b>3.43 [defns.prog.def.type]</b><br/>
@@ -33784,7 +33784,7 @@ or any exception thrown by the initialization of the objects returned by the
 
 <hr>
 <h3><a name="3583" href="#3583">3583</a><sup><a href="https://cplusplus.github.io/LWG/issue3583">(i)</a></sup>. Clarify if/when short circuiting applies to conditions in <i>Constraints:</i> elements</h3>
-<p><b>Section:</b> 22.4.4.1 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2021-08-23 <b>Last modified:</b> 2021-09-20</p>
 <p><b>Priority: </b>3
 </p>
@@ -33794,7 +33794,7 @@ or any exception thrown by the initialization of the objects returned by the
 <p><b>Discussion:</b></p>
 <p>
 We do not specify whether or not short-circuiting is expected to happen for individual conditions stated in a <i>Constraints:</i> 
-element. For example, 22.4.4.1 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> p12 says:
+element. For example, 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> p12 says:
 </p>
 <blockquote><p>
 <i>Constraints:</i> <tt>sizeof...(Types)</tt> equals <tt>sizeof...(UTypes)</tt> and <tt>sizeof...(Types) &le; 1</tt> and 
@@ -35868,7 +35868,7 @@ template&lt;class Allocator&gt; struct hash&lt;vector&lt;bool, Allocator&gt;&gt;
 </blockquote>
 </li>
 
-<li><p>Create a new subclause [depr.vector.bool.swap] after D.24 <a href="https://wg21.link/depr.string.capacity">[depr.string.capacity]</a></p>
+<li><p>Create a new subclause [depr.vector.bool.swap] after  [depr.string.capacity]</p>
 
 <blockquote>
 <p>
@@ -36041,7 +36041,7 @@ template&lt;class Allocator&gt; struct hash&lt;vector&lt;bool, Allocator&gt;&gt;
 </blockquote>
 </li>
 
-<li><p>Create a new subclause [depr.vector.bool.swap] after D.24 <a href="https://wg21.link/depr.string.capacity">[depr.string.capacity]</a></p>
+<li><p>Create a new subclause [depr.vector.bool.swap] after  [depr.string.capacity]</p>
 
 <blockquote>
 <p>
@@ -36730,8 +36730,8 @@ values of type <tt>I</tt> and <tt>S</tt>.
 </p>
 </blockquote>
 <p>
-It should also be emphasized that the definitions of move construction (3.34 <a href="https://wg21.link/defns.move.constr">[defns.move.constr]</a>) and
-move assignment (3.33 <a href="https://wg21.link/defns.move.assign">[defns.move.assign]</a>) are compatible even for copyable input iterator types, 
+It should also be emphasized that the definitions of move construction (3.32 <a href="https://wg21.link/defns.move.constr">[defns.move.constr]</a>) and
+move assignment (3.31 <a href="https://wg21.link/defns.move.assign">[defns.move.assign]</a>) are compatible even for copyable input iterator types, 
 because these definitions refer just to expression conditions, and not to concrete operator overloads. So as long
 as an implementation applies these expression conditions, we are safe.
 </p>
@@ -42437,7 +42437,7 @@ namespace std {
 
 <hr>
 <h3><a name="3840" href="#3840">3840</a><sup><a href="https://cplusplus.github.io/LWG/issue3840">(i)</a></sup>. <tt>filesystem::u8path</tt> should be undeprecated</h3>
-<p><b>Section:</b> D.29 <a href="https://wg21.link/depr.fs.path.factory">[depr.fs.path.factory]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
+<p><b>Section:</b> D.25 <a href="https://wg21.link/depr.fs.path.factory">[depr.fs.path.factory]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
  <b>Submitter:</b> Daniel Krügler <b>Opened:</b> 2022-12-10 <b>Last modified:</b> 2023-05-30</p>
 <p><b>Priority: </b>3
 </p>
@@ -42534,7 +42534,7 @@ namespace std::filesystem {
 </li>
 
 <li><p>Restore the previous sub-clause [fs.path.factory] by copying the contents of 
-D.29 <a href="https://wg21.link/depr.fs.path.factory">[depr.fs.path.factory]</a> to a new sub-clause [fs.path.factory] between 
+D.25 <a href="https://wg21.link/depr.fs.path.factory">[depr.fs.path.factory]</a> to a new sub-clause [fs.path.factory] between 
 31.12.6.8 <a href="https://wg21.link/fs.path.nonmember">[fs.path.nonmember]</a> and 31.12.6.9 <a href="https://wg21.link/fs.path.hash">[fs.path.hash]</a> and without <i>Note 1</i>
 as indicated:</p>
 
@@ -42604,7 +42604,7 @@ native character set representation.</ins>
 </blockquote>
 </li>
 
-<li><p>Delete sub-clause D.29 <a href="https://wg21.link/depr.fs.path.factory">[depr.fs.path.factory]</a> in its entirety.</p>
+<li><p>Delete sub-clause D.25 <a href="https://wg21.link/depr.fs.path.factory">[depr.fs.path.factory]</a> in its entirety.</p>
 </li>
 </ol>
 
@@ -43895,7 +43895,7 @@ namespace std {
     <ins>template&lt;<i>tuple-like</i> UTuple&gt;
       friend constexpr <i>see below</i> operator&lt;=&gt;(const tuple&amp;, const UTuple&amp;);</ins>
 
-    // <i>22.4.4.3 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a>, tuple swap</i>
+    // <i>22.4.4.4 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a>, tuple swap</i>
     constexpr void swap(tuple&amp;) noexcept(<i>see below</i>);
     constexpr void swap(const tuple&amp;) const noexcept(<i>see below</i>);
   };
@@ -44026,7 +44026,7 @@ namespace std {
     <ins>template&lt;<i>tuple-like</i> UTuple&gt;
       friend constexpr <i>see below</i> operator&lt;=&gt;(const tuple&amp;, const UTuple&amp;);</ins>
 
-    // <i>22.4.4.3 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a>, tuple swap</i>
+    // <i>22.4.4.4 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a>, tuple swap</i>
     constexpr void swap(tuple&amp;) noexcept(<i>see below</i>);
     constexpr void swap(const tuple&amp;) const noexcept(<i>see below</i>);
   };
@@ -46872,7 +46872,7 @@ See also issue <a href="lwg-active.html#2939">2939</a>. We should not turn the p
 <p><i>[2023-06-12; Varna]</i></p>
 
 <p>During the review <a href="https://wg21.link/P2874R1">P2874R1</a> the group decided to not change the now decided for
-<i>Preconditions:</i> element in D.18 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a> p3 into a <i>Mandates:</i> element 
+<i>Preconditions:</i> element in D.16 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a> p3 into a <i>Mandates:</i> element 
 but would like to solve this by this issue.</p>
 
 
@@ -50608,14 +50608,14 @@ It should be clearly defined which are store operations and which are load opera
 
 <hr>
 <h3><a name="4005" href="#4005">4005</a><sup><a href="https://cplusplus.github.io/LWG/issue4005">(i)</a></sup>. "Required behavior" too narrowly defined</h3>
-<p><b>Section:</b> 3.49 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a>, 16.3.2.4 <a href="https://wg21.link/structure.specifications">[structure.specifications]</a>, 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.functions]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 3.46 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a>, 16.3.2.4 <a href="https://wg21.link/structure.specifications">[structure.specifications]</a>, 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.functions]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2023-11-03 <b>Last modified:</b> 2023-11-04</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-The library's definition of the term "required behavior" (3.49 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a>) makes it specific to 
+The library's definition of the term "required behavior" (3.46 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a>) makes it specific to 
 certain replaceable functions such as the replaceable global allocation functions. Notably, it is not one of the elements 
 that are allowed to appear in the descriptions of general function semantics. That is, it isn't in the list in 
 16.3.2.4 <a href="https://wg21.link/structure.specifications">[structure.specifications]</a> p3.
@@ -50630,7 +50630,7 @@ customizable but the customizations are required to behave a certain way.
 <b>Daniel:</b>
 <p/>
 Bullet (2.4) of 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.functions]</a> also contradicts to the more narrow definition of 
-3.49 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a> by suddenly extending it to "destructor operations".
+3.46 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a> by suddenly extending it to "destructor operations".
 </p>
 
 
@@ -53662,7 +53662,7 @@ constexpr const_reverse_iterator crend() const noexcept;</del>
 
 <hr>
 <h3><a name="4030" href="#4030">4030</a><sup><a href="https://cplusplus.github.io/LWG/issue4030">(i)</a></sup>. Clarify whether arithmetic expressions in [numeric.sat.func] are mathematical or C++</h3>
-<p><b>Section:</b> 99 [numeric.sat.func] <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 27.10.17.1 <a href="https://wg21.link/numeric.sat.func">[numeric.sat.func]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Thomas K&ouml;ppe <b>Opened:</b> 2023-12-18 <b>Last modified:</b> 2023-12-22</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -53690,7 +53690,7 @@ This wording is relative to <a href="https://wg21.link/N4971">N4971</a>.
 
 <ol>
 
-<li><p>Modify 99 [numeric.sat.func] as indicated:</p>
+<li><p>Modify 27.10.17.1 <a href="https://wg21.link/numeric.sat.func">[numeric.sat.func]</a> as indicated:</p>
 
 <blockquote>
 <p>

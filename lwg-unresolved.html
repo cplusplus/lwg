@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2024-01-13 at 17:00:33 UTC</p>
+<p><p>Revised 2024-01-13 at 17:19:56 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -54174,6 +54174,97 @@ projection<del>, if any</del>.
 <p/>
 <del>-16- <i>Remarks</i>: An invocation may explicitly specify an argument for the template parameter <tt>T</tt> 
 of the overloads in namespace <tt>std</tt>.</del>
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+
+
+<hr>
+<h3><a name="4035" href="#4035">4035</a><sup><a href="https://cplusplus.github.io/LWG/issue4035">(i)</a></sup>. <tt>single_view</tt> should provide <tt>empty</tt></h3>
+<p><b>Section:</b> 16.4.5.3.3 <a href="https://wg21.link/macro.names">[macro.names]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-12-31 <b>Last modified:</b> 2024-01-13</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#macro.names">active issues</a> in [macro.names].</p>
+<p><b>View all other</b> <a href="lwg-index.html#macro.names">issues</a> in [macro.names].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Although <tt>single_view::empty</tt> can be synthesized through <tt>view_interface</tt>,
+it seems more worthwhile to provide a static <tt>empty</tt> for it which eliminates the 
+need to pass in an object parameter, guarantees <tt>noexcept</tt>-ness, and is consistent 
+with the design of <tt>empty_view</tt> (<a href="https://godbolt.org/z/Yr6bhM11n">demo</a>):
+</p>
+<blockquote>
+<pre>
+#include &lt;ranges&gt;
+auto empty = std::views::empty&lt;int&gt;;
+static_assert(noexcept(empty.empty()));
+static_assert(noexcept(empty.size()));
+auto single = std::views::single(0);
+static_assert(noexcept(single.empty())); // <span style="color:red;font-weight:bolder">fire</span>
+static_assert(noexcept(single.size()));
+</pre>
+</blockquote>
+
+
+<p id="res-4035"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971">N4971</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 26.6.3.2 <a href="https://wg21.link/range.single.view">[range.single.view]</a> as indicated:</p>
+
+<blockquote>
+<blockquote>
+<pre>
+namespace std::ranges {
+  template&lt;move_constructible T&gt;
+    requires is_object_v&lt;T&gt;
+  class single_view : public view_interface&lt;single_view&lt;T&gt;&gt; {
+    [&hellip;]
+  public:
+    [&hellip;]
+    constexpr T* begin() noexcept;
+    constexpr const T* begin() const noexcept;
+    constexpr T* end() noexcept;
+    constexpr const T* end() const noexcept;
+    <ins>static constexpr bool empty() noexcept;</ins>
+    static constexpr size_t size() noexcept;
+    constexpr T* data() noexcept;
+    constexpr const T* data() const noexcept;
+  };
+  [&hellip;]
+}
+</pre>
+</blockquote>
+[&hellip;]
+<pre>
+constexpr T* end() noexcept;
+constexpr const T* end() const noexcept;
+</pre>
+<blockquote>
+<p>
+-5- <i>Effects</i>: Equivalent to: <tt>return data() + 1;</tt>
+</p>
+</blockquote>
+<pre>
+<ins>static constexpr bool empty() noexcept;</ins>
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Effects</i>: Equivalent to: <tt>return false;</tt></ins>
 </p>
 </blockquote>
 </blockquote>

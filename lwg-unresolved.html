@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2024-01-14 at 07:44:00 UTC</p>
+<p><p>Revised 2024-01-14 at 07:56:30 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -54332,6 +54332,71 @@ This wording is relative to <a href="https://wg21.link/N4971">N4971</a>.
 </pre>
 </blockquote>
 </blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+
+
+<hr>
+<h3><a name="4037" href="#4037">4037</a><sup><a href="https://cplusplus.github.io/LWG/issue4037">(i)</a></sup>. Static data members of <tt>ctype_base</tt> are not yet required to be usable in constant expressions</h3>
+<p><b>Section:</b> 30.4.2.1 <a href="https://wg21.link/category.ctype.general">[category.ctype.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-12 <b>Last modified:</b> 2024-01-14</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+It may be desired that static data members <tt>ctype_base</tt> are "real constants", i.e. usable in constant expressions. 
+However, this is not strictly required because <tt>mask</tt> is only required to be a bitmask type that can be a class type, 
+which makes the plain <tt>const</tt> potentially insufficient.
+</p>
+
+
+<p id="res-4037"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971">N4971</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 30.4.2.1 <a href="https://wg21.link/category.ctype.general">[category.ctype.general]</a> as indicated:</p>
+
+<blockquote>
+<blockquote>
+<pre>
+namespace std {
+  class ctype_base {
+  public:
+    using mask = <i>see below</i>;
+
+    // <i>numeric values are for exposition only.</i>
+    static const<ins>expr</ins> mask space  = 1 &lt;&lt; 0;
+    static const<ins>expr</ins> mask print  = 1 &lt;&lt; 1;
+    static const<ins>expr</ins> mask cntrl  = 1 &lt;&lt; 2;
+    static const<ins>expr</ins> mask upper  = 1 &lt;&lt; 3;
+    static const<ins>expr</ins> mask lower  = 1 &lt;&lt; 4;
+    static const<ins>expr</ins> mask alpha  = 1 &lt;&lt; 5;
+    static const<ins>expr</ins> mask digit  = 1 &lt;&lt; 6;
+    static const<ins>expr</ins> mask punct  = 1 &lt;&lt; 7;
+    static const<ins>expr</ins> mask xdigit = 1 &lt;&lt; 8;
+    static const<ins>expr</ins> mask blank  = 1 &lt;&lt; 9;
+    static const<ins>expr</ins> mask alnum  = alpha | digit;
+    static const<ins>expr</ins> mask graph  = alnum | punct;
+  };
+}
+</pre>
+</blockquote>
+<p>
+-1- The type mask is a bitmask type (16.3.3.3.3 <a href="https://wg21.link/bitmask.types">[bitmask.types]</a>).
+</p>
+</blockquote>
+
 
 </li>
 

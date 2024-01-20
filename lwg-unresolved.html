@@ -43,7 +43,7 @@
 </style>
 </head>
 <body>
-<p><p>Revised 2024-01-16 at 12:33:45 UTC</p>
+<p><p>Revised 2024-01-20 at 18:39:04 UTC</p>
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -54456,6 +54456,80 @@ denote <code>const char*</code>.
 is a constexpr iterator (25.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a>).
 </ins>
 </p>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="4039" href="#4039">4039</a><sup><a href="https://cplusplus.github.io/LWG/issue4039">(i)</a></sup>. &sect;[ostream.formatted.print]: Inappropriate usage of <tt>badbit</tt> in definition of 
+<tt>vprint_unicode</tt>/<tt>vprint_nonunicode</tt></h3>
+<p><b>Section:</b> 31.7.6.3.5 <a href="https://wg21.link/ostream.formatted.print">[ostream.formatted.print]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jan Kokemüller <b>Opened:</b> 2024-01-13 <b>Last modified:</b> 2024-01-20</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+In section 31.7.6.3.5 <a href="https://wg21.link/ostream.formatted.print">[ostream.formatted.print]</a>, bullet 3.2 there is a mention of <tt>badbit</tt>:
+</p>
+<blockquote>
+<p>
+any exception thrown by the call to <tt>vformat</tt> is propagated without regard to the
+value of <tt>os.exceptions()</tt> and without turning on <tt>ios_base::badbit</tt> in the error state of <tt>os</tt>.
+</p>
+</blockquote>
+<p>
+Now the affected functions <tt>vprint_unicode</tt> and <tt>vprint_nonunicode</tt> are specified to behave as 
+formatted output functions (31.7.6.3.1 <a href="https://wg21.link/ostream.formatted.reqmts">[ostream.formatted.reqmts]</a>), which distinguishes two phases:
+</p>
+<ol>
+<li><p>Output <em>generation</em>, which would call <tt>setstate(ios_base::failbit)</tt> in case of a failure
+(which may throw an exception)</p></li>
+<li><p>The actual output itself, which would call <tt>setstate(ios_base::badbit)</tt> in case of an exception</p></li>
+</ol>
+<p>
+The <tt>vformat</tt> call is obviously part of the first phase (since it generates the output sequence and not
+yet the actual output), and any failure here (such as an exception) would under regular formatted output function 
+rules set <tt>ios_base::failbit</tt> and <em>not</em> <tt>ios_base::badbit</tt> (the latter would indicate a loss 
+of the actual output sequence integrity and is therefore set by the second phase in case of an exception).
+<p/>
+Therefore mentioning <tt>ios_base::badbit</tt> in (3.2) doesn't really make sense, it could only meaningfully 
+refer to <tt>ios_base::failbit</tt> instead.
+</p>
+
+
+<p id="res-4039"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971">N4971</a>.
+</p>
+
+<ol>
+<li><p>Modify 31.7.6.3.5 <a href="https://wg21.link/ostream.formatted.print">[ostream.formatted.print]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+void vprint_unicode(ostream&amp; os, string_view fmt, format_args args);
+void vprint_nonunicode(ostream&amp; os, string_view fmt, format_args args);
+</pre>
+<blockquote>
+<p>
+-3- <i>Effects</i>: Behaves as a formatted output function (31.7.6.3.1 <a href="https://wg21.link/ostream.formatted.reqmts">[ostream.formatted.reqmts]</a>) 
+of <tt>os</tt>, except that:
+</p>
+<ol style="list-style-type: none">
+<li><p>(3.1) &mdash; failure to generate output is reported as specified below, and</p></li>
+<li><p>(3.2) &mdash; any exception thrown by the call to <tt>vformat</tt> is propagated without regard 
+to the value of <tt>os.exceptions()</tt> and without turning on <tt>ios_base::<ins>failbit</ins><del>badbit</del></tt> 
+in the error state of <tt>os</tt>.</p></li>
+</ol>
+<p>
+[&hellip;]
+</p>
+</blockquote>
 </blockquote>
 </li>
 </ol>

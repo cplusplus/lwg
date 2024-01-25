@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-01-24</td>
+  <td align="left">2024-01-25</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p><p>Revised 2024-01-24 at 21:13:11 UTC</p>
+<p><p>Revised 2024-01-25 at 09:52:34 UTC</p>
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -59007,7 +59007,7 @@ implementations are encouraged to diagnose invalid code units.
 <hr>
 <h3><a name="4045" href="#4045">4045</a><sup><a href="https://cplusplus.github.io/LWG/issue4045">(i)</a></sup>. <code>tuple</code> can create dangling references from <code><i>tuple-like</i></code></h3>
 <p><b>Section:</b> 22.4.4.2 <a href="https://wg21.link/tuple.cnstr">[tuple.cnstr]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-01-24 <b>Last modified:</b> 2024-01-24</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-01-24 <b>Last modified:</b> 2024-01-25</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#tuple.cnstr">active issues</a> in [tuple.cnstr].</p>
@@ -59065,6 +59065,7 @@ Let <code>I</code> be the pack <code>0, 1, ..., (sizeof...(Types) - 1)</code>.
 </p>
 <p>-29-
 <i>Constraints</i>:
+</p>
 <ol style="list-style-type: none">
 <li>(29.1) &ndash;
 <code><i>different-from</i>&lt;UTuple, tuple&gt;</code>
@@ -59090,7 +59091,6 @@ or (when <code>Types...</code> expands to <code>T</code>)
 are both <code>false</code>.
 </li>
 </ol>
-</p>
 <p>-30- <i>Effects</i>:
 For all <i>i</i>,
 initializes the <i>i</i><sup>th</sup> element of <code>*this</code>
@@ -59098,15 +59098,17 @@ with <code>get&lt;i&gt;(std::forward&lt;UTuple&gt;(u))</code>.
 </p>
 <p>-31- <i>Remarks</i>:
 The expression inside <code>explicit</code> is equivalent to:
+</p>
 <pre><code>  !(is_convertible_v&lt;decltype(get&lt;I&gt;(std::forward&lt;UTuple&gt;(u))), Types&gt; &amp;&amp; ...)
 </code></pre>
-</p>
 <p>
 <ins>
 The constructor is defined as deleted if
 </ins>
+</p>
 <pre><code><ins>  (reference_constructs_from_temporary_v&lt;Types, decltype(get&lt;I&gt;(std::forward&lt;UTuple&gt;(u)))&gt; || ...)</ins>
 </code></pre>
+<p>
 <ins>
 is <code>true</code>.
 </ins>

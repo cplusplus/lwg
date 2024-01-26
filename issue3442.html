@@ -94,9 +94,9 @@ namespace N {
 
 int main() {
   N::X a, b;
-  S::swap(a, b);  // (1) prints `std` in both cases
+  S::swap(a, b);  // (1) prints `<code>std</code>` in both cases
   using S::swap;
-  swap(a, b);     // (2) prints `std` with `-DCPO`, and `mine` without.
+  swap(a, b);     // (2) prints `<code>std</code>` with `<code>-DCPO</code>`, and `<code>mine</code>` without.
 }
 </pre></blockquote>
 </li>

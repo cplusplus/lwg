@@ -63,12 +63,12 @@ dereference (and, in all likelihood, a crash), as demonstrated in this
 <a href="https://godbolt.org/z/cGs9jW1c6">demo link</a>:
 </p>
 <blockquote><pre>
-// Assuming `OuterIter` is an alias for `outer-iterator` of
-// some `lazy_split_view` instantiation.
+// Assuming `<code>OuterIter</code>` is an alias for `<code>outer-iterator</code>` of
+// some `<code>lazy_split_view</code>` instantiation.
 OuterIter o;
 o == std::default_sentinel; // Null pointer dereference
 
-InnerIter i; // Similar to `OuterIter` above.
+InnerIter i; // Similar to `<code>OuterIter</code>` above.
 i == std::default_sentinel; // Null pointer dereference
 </pre></blockquote>
 <p>

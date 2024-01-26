@@ -87,7 +87,7 @@ auto f(std::chrono::month_day_last mdl) {
 <p>
 Both libstdc++ and libc++ produce a compile-time error, claiming that the
 argument does not contain the information, while MSVC STL throws
-<tt>format_error</tt> at run time unless <tt>mdl</tt> is `January/last`,
+<tt>format_error</tt> at run time unless <tt>mdl</tt> is `<code>January/last</code>`,
 in which case the function returns "031".
 </p>
 <p>

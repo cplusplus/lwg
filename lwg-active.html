@@ -50,7 +50,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-01-25</td>
+  <td align="left">2024-01-26</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -62,7 +62,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-01-25 at 15:04:38 UTC
+<p>Revised 2024-01-26 at 11:43:16 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -11194,7 +11194,7 @@ with a C11 <tt>_Generic</tt> selection (works in clang):
 [<i>Drafting note:</i> This is a sample wording fixing only one case;
  I'm just too lazy to copy-paste it before we discussed whether
  the solution is worth and sufficient (for example, should the
- other `charT`s like `unsigned char` just don't compile without
+ other `<code>charT</code>`s like `<code>unsigned char</code>` just don't compile without
  supplying those arguments?  I hope so). &mdash; <i>end drafting note</i>]
 
 <ol>
@@ -39784,7 +39784,7 @@ type to satisfy the exposition-only concept <tt><i>tiny-range</i></tt>. Trying t
 in the <a href="https://godbolt.org/z/37bs9hq1T">demo link</a>:
 </p>
 <blockquote><pre>
-// Assuming `InputRange` and `TinyRange` are valid types satisfying the
+// Assuming `<code>InputRange</code>` and `<code>TinyRange</code>` are valid types satisfying the
 // corresponding concepts.
 std::ranges::lazy_split_view view{InputRange(), TinyRange()}; // Compiler error
 </pre></blockquote>
@@ -39926,12 +39926,12 @@ dereference (and, in all likelihood, a crash), as demonstrated in this
 <a href="https://godbolt.org/z/cGs9jW1c6">demo link</a>:
 </p>
 <blockquote><pre>
-// Assuming `OuterIter` is an alias for `outer-iterator` of
-// some `lazy_split_view` instantiation.
+// Assuming `<code>OuterIter</code>` is an alias for `<code>outer-iterator</code>` of
+// some `<code>lazy_split_view</code>` instantiation.
 OuterIter o;
 o == std::default_sentinel; // Null pointer dereference
 
-InnerIter i; // Similar to `OuterIter` above.
+InnerIter i; // Similar to `<code>OuterIter</code>` above.
 i == std::default_sentinel; // Null pointer dereference
 </pre></blockquote>
 <p>
@@ -45422,7 +45422,7 @@ auto f(std::chrono::month_day_last mdl) {
 <p>
 Both libstdc++ and libc++ produce a compile-time error, claiming that the
 argument does not contain the information, while MSVC STL throws
-<tt>format_error</tt> at run time unless <tt>mdl</tt> is `January/last`,
+<tt>format_error</tt> at run time unless <tt>mdl</tt> is `<code>January/last</code>`,
 in which case the function returns "031".
 </p>
 <p>

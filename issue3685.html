@@ -69,7 +69,7 @@ type to satisfy the exposition-only concept <tt><i>tiny-range</i></tt>. Trying t
 in the <a href="https://godbolt.org/z/37bs9hq1T">demo link</a>:
 </p>
 <blockquote><pre>
-// Assuming `InputRange` and `TinyRange` are valid types satisfying the
+// Assuming `<code>InputRange</code>` and `<code>TinyRange</code>` are valid types satisfying the
 // corresponding concepts.
 std::ranges::lazy_split_view view{InputRange(), TinyRange()}; // Compiler error
 </pre></blockquote>

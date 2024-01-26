@@ -7,6 +7,8 @@
 <style type="text/css">
   p {text-align:justify}
   li {text-align:justify}
+  pre code.backtick::before { content: "`" }
+  pre code.backtick::after { content: "`" }
   blockquote.note
   {
     background-color:#E0E0E0;
@@ -212,7 +214,7 @@ calls within std.
 
 <p>
 This wording I suggested would also make overloads visible in the same scope as
-the `<code>using std::swap</code>` valid for Swappable requirements; a more complex wording
+the <code class='backtick'>using std::swap</code> valid for Swappable requirements; a more complex wording
 limiting the non-ADL overload set to std::swap might be required.
 </p>
 </blockquote>

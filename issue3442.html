@@ -7,6 +7,8 @@
 <style type="text/css">
   p {text-align:justify}
   li {text-align:justify}
+  pre code.backtick::before { content: "`" }
+  pre code.backtick::after { content: "`" }
   blockquote.note
   {
     background-color:#E0E0E0;
@@ -94,9 +96,9 @@ namespace N {
 
 int main() {
   N::X a, b;
-  S::swap(a, b);  // (1) prints `<code>std</code>` in both cases
+  S::swap(a, b);  // (1) prints <code class='backtick'>std</code> in both cases
   using S::swap;
-  swap(a, b);     // (2) prints `<code>std</code>` with `<code>-DCPO</code>`, and `<code>mine</code>` without.
+  swap(a, b);     // (2) prints <code class='backtick'>std</code> with <code class='backtick'>-DCPO</code>, and <code class='backtick'>mine</code> without.
 }
 </pre></blockquote>
 </li>

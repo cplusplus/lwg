@@ -8,6 +8,8 @@ inner-iterator with std::default_sentinel results in null pointer dereference</t
 <style type="text/css">
   p {text-align:justify}
   li {text-align:justify}
+  pre code.backtick::before { content: "`" }
+  pre code.backtick::after { content: "`" }
   blockquote.note
   {
     background-color:#E0E0E0;
@@ -63,12 +65,12 @@ dereference (and, in all likelihood, a crash), as demonstrated in this
 <a href="https://godbolt.org/z/cGs9jW1c6">demo link</a>:
 </p>
 <blockquote><pre>
-// Assuming `<code>OuterIter</code>` is an alias for `<code>outer-iterator</code>` of
-// some `<code>lazy_split_view</code>` instantiation.
+// Assuming <code class='backtick'>OuterIter</code> is an alias for <code class='backtick'>outer-iterator</code> of
+// some <code class='backtick'>lazy_split_view</code> instantiation.
 OuterIter o;
 o == std::default_sentinel; // Null pointer dereference
 
-InnerIter i; // Similar to `<code>OuterIter</code>` above.
+InnerIter i; // Similar to <code class='backtick'>OuterIter</code> above.
 i == std::default_sentinel; // Null pointer dereference
 </pre></blockquote>
 <p>

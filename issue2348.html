@@ -7,6 +7,8 @@
 <style type="text/css">
   p {text-align:justify}
   li {text-align:justify}
+  pre code.backtick::before { content: "`" }
+  pre code.backtick::after { content: "`" }
   blockquote.note
   {
     background-color:#E0E0E0;
@@ -95,7 +97,7 @@ with a C11 <tt>_Generic</tt> selection (works in clang):
 [<i>Drafting note:</i> This is a sample wording fixing only one case;
  I'm just too lazy to copy-paste it before we discussed whether
  the solution is worth and sufficient (for example, should the
- other `<code>charT</code>`s like `<code>unsigned char</code>` just don't compile without
+ other <code class='backtick'>charT</code>s like <code class='backtick'>unsigned char</code> just don't compile without
  supplying those arguments?  I hope so). &mdash; <i>end drafting note</i>]
 
 <ol>

@@ -7,6 +7,8 @@
 <style type="text/css">
   p {text-align:justify}
   li {text-align:justify}
+  pre code.backtick::before { content: "`" }
+  pre code.backtick::after { content: "`" }
   blockquote.note
   {
     background-color:#E0E0E0;
@@ -43,7 +45,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-01-26 at 11:43:16 UTC
+<p>Revised 2024-01-26 at 17:29:59 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -9823,7 +9825,7 @@ with a C11 <tt>_Generic</tt> selection (works in clang):
 [<i>Drafting note:</i> This is a sample wording fixing only one case;
  I'm just too lazy to copy-paste it before we discussed whether
  the solution is worth and sufficient (for example, should the
- other `<code>charT</code>`s like `<code>unsigned char</code>` just don't compile without
+ other <code class='backtick'>charT</code>s like <code class='backtick'>unsigned char</code> just don't compile without
  supplying those arguments?  I hope so). &mdash; <i>end drafting note</i>]
 
 <ol>
@@ -38226,7 +38228,7 @@ type to satisfy the exposition-only concept <tt><i>tiny-range</i></tt>. Trying t
 in the <a href="https://godbolt.org/z/37bs9hq1T">demo link</a>:
 </p>
 <blockquote><pre>
-// Assuming `<code>InputRange</code>` and `<code>TinyRange</code>` are valid types satisfying the
+// Assuming <code class='backtick'>InputRange</code> and <code class='backtick'>TinyRange</code> are valid types satisfying the
 // corresponding concepts.
 std::ranges::lazy_split_view view{InputRange(), TinyRange()}; // Compiler error
 </pre></blockquote>
@@ -38368,12 +38370,12 @@ dereference (and, in all likelihood, a crash), as demonstrated in this
 <a href="https://godbolt.org/z/cGs9jW1c6">demo link</a>:
 </p>
 <blockquote><pre>
-// Assuming `<code>OuterIter</code>` is an alias for `<code>outer-iterator</code>` of
-// some `<code>lazy_split_view</code>` instantiation.
+// Assuming <code class='backtick'>OuterIter</code> is an alias for <code class='backtick'>outer-iterator</code> of
+// some <code class='backtick'>lazy_split_view</code> instantiation.
 OuterIter o;
 o == std::default_sentinel; // Null pointer dereference
 
-InnerIter i; // Similar to `<code>OuterIter</code>` above.
+InnerIter i; // Similar to <code class='backtick'>OuterIter</code> above.
 i == std::default_sentinel; // Null pointer dereference
 </pre></blockquote>
 <p>
@@ -43269,7 +43271,7 @@ auto f(std::chrono::month_day_last mdl) {
 <p>
 Both libstdc++ and libc++ produce a compile-time error, claiming that the
 argument does not contain the information, while MSVC STL throws
-<tt>format_error</tt> at run time unless <tt>mdl</tt> is `<code>January/last</code>`,
+<tt>format_error</tt> at run time unless <tt>mdl</tt> is <code class='backtick'>January/last</code>,
 in which case the function returns "031".
 </p>
 <p>

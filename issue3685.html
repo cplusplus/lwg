@@ -7,6 +7,8 @@
 <style type="text/css">
   p {text-align:justify}
   li {text-align:justify}
+  pre code.backtick::before { content: "`" }
+  pre code.backtick::after { content: "`" }
   blockquote.note
   {
     background-color:#E0E0E0;
@@ -69,7 +71,7 @@ type to satisfy the exposition-only concept <tt><i>tiny-range</i></tt>. Trying t
 in the <a href="https://godbolt.org/z/37bs9hq1T">demo link</a>:
 </p>
 <blockquote><pre>
-// Assuming `<code>InputRange</code>` and `<code>TinyRange</code>` are valid types satisfying the
+// Assuming <code class='backtick'>InputRange</code> and <code class='backtick'>TinyRange</code> are valid types satisfying the
 // corresponding concepts.
 std::ranges::lazy_split_view view{InputRange(), TinyRange()}; // Compiler error
 </pre></blockquote>

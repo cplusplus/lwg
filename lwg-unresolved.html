@@ -45,7 +45,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-01-27 at 16:43:18 UTC
+<p>Revised 2024-01-27 at 16:52:48 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -46704,6 +46704,7 @@ returns <tt>true</tt>. Registration of a callback synchronizes with the invocati
  <b>Submitter:</b> jim x <b>Opened:</b> 2023-04-19 <b>Last modified:</b> 2023-05-24</p>
 <p><b>Priority: </b>4
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#namespace.std">active issues</a> in [namespace.std].</p>
 <p><b>View all other</b> <a href="lwg-index.html#namespace.std">issues</a> in [namespace.std].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -55257,6 +55258,39 @@ Perhaps we should conditionally relax the requirements when the underlying conta
 
 
 <p id="res-4046"><b>Proposed resolution:</b></p>
+
+
+
+
+
+<hr>
+<h3><a name="4047" href="#4047">4047</a><sup><a href="https://cplusplus.github.io/LWG/issue4047">(i)</a></sup>. Explicitly specifying template arguments for <tt>std::swap</tt> should not be supported</h3>
+<p><b>Section:</b> 16.4.5.2.1 <a href="https://wg21.link/namespace.std">[namespace.std]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-25 <b>Last modified:</b> 2024-01-27</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#namespace.std">active issues</a> in [namespace.std].</p>
+<p><b>View all other</b> <a href="lwg-index.html#namespace.std">issues</a> in [namespace.std].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<tt>std::swap</tt> overloads are separately declared in many standard library headers. It is likely expected 
+that when a program includes correct headers for standard library types to be swapped, a <tt>std::swap</tt> call, 
+with template argument deduced from arguments, selects the correct overload.
+<p/>
+However, if one explicitly specifies template arguments for a <tt>std::swap</tt> call, there would be possibly 
+undesired overloads for which templates arguments are fully obtained, and thus undesired instantiation and 
+ill-formed may be triggered.
+<p/>
+Perhaps we should explicitly state that explicitly specifying templates for <tt>std::swap</tt> is unsupported 
+(having unspecified effects and possibly ill-formed), like taking address of non-address functions 
+(16.4.5.2.1 <a href="https://wg21.link/namespace.std">[namespace.std]</a>/6) and explicitly specifying template arguments for most standard algorithms 
+(27.2 <a href="https://wg21.link/algorithms.requirements">[algorithms.requirements]</a>/15), to avoid possible reading that there are some guarantees, derived 
+from signatures of overloads, for doing so.
+</p>
+
+
+<p id="res-4047"><b>Proposed resolution:</b></p>
 
 
 

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta charset="utf-8">
+<title>Issue 4047: Explicitly specifying template arguments for std::swap should not be supported</title>
+<style type="text/css">
+  p {text-align:justify}
+  li {text-align:justify}
+  pre code.backtick::before { content: "`" }
+  pre code.backtick::after { content: "`" }
+  blockquote.note
+  {
+    background-color:#E0E0E0;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+  ins {background-color:#A0FFA0}
+  del {background-color:#FFA0A0}
+  table {border-collapse: collapse;}
+  @media (prefers-color-scheme: dark) {
+     html {
+        color: #ddd;
+        background-color: black;
+     }
+     ins {
+        background-color: #225522
+     }
+     del {
+        background-color: #662222
+     }
+     a {
+        color: #6af
+     }
+     a:visited {
+        color: #6af
+     }
+     blockquote.note
+     {
+        background-color: rgba(255, 255, 255, .10)
+     }
+  }
+</style>
+</head>
+<body>
+<hr>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
+<h3><a name="4047" href="lwg-active.html#4047">4047</a>. Explicitly specifying template arguments for <tt>std::swap</tt> should not be supported</h3>
+<p><b>Section:</b> 16.4.5.2.1 <a href="https://wg21.link/namespace.std">[namespace.std]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-25 <b>Last modified:</b> 2024-01-27</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#namespace.std">active issues</a> in [namespace.std].</p>
+<p><b>View all other</b> <a href="lwg-index.html#namespace.std">issues</a> in [namespace.std].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<tt>std::swap</tt> overloads are separately declared in many standard library headers. It is likely expected 
+that when a program includes correct headers for standard library types to be swapped, a <tt>std::swap</tt> call, 
+with template argument deduced from arguments, selects the correct overload.
+<p/>
+However, if one explicitly specifies template arguments for a <tt>std::swap</tt> call, there would be possibly 
+undesired overloads for which templates arguments are fully obtained, and thus undesired instantiation and 
+ill-formed may be triggered.
+<p/>
+Perhaps we should explicitly state that explicitly specifying templates for <tt>std::swap</tt> is unsupported 
+(having unspecified effects and possibly ill-formed), like taking address of non-address functions 
+(16.4.5.2.1 <a href="https://wg21.link/namespace.std">[namespace.std]</a>/6) and explicitly specifying template arguments for most standard algorithms 
+(27.2 <a href="https://wg21.link/algorithms.requirements">[algorithms.requirements]</a>/15), to avoid possible reading that there are some guarantees, derived 
+from signatures of overloads, for doing so.
+</p>
+
+
+<p id="res-4047"><b>Proposed resolution:</b></p>
+
+
+
+
+
+</body>
+</html>

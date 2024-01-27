@@ -45,7 +45,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-01-26 at 17:29:59 UTC
+<p>Revised 2024-01-27 at 16:35:45 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -54592,7 +54592,7 @@ reading seems to be justified by 16.4.2.2 <a href="https://wg21.link/contents">[
 <hr>
 <h3><a name="4041" href="#4041">4041</a><sup><a href="https://cplusplus.github.io/LWG/issue4041">(i)</a></sup>. The requirements on literal type in [concept.swappable] should be removed</h3>
 <p><b>Section:</b> 18.4.9 <a href="https://wg21.link/concept.swappable">[concept.swappable]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-20 <b>Last modified:</b> 2024-01-21</p>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-20 <b>Last modified:</b> 2024-01-27</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#concept.swappable">issues</a> in [concept.swappable].</p>
@@ -54661,7 +54661,6 @@ T t2(std::move(E2));
 <p>
 are constant subexpressions.
 </p></li>
-<li><p>(2.4) &mdash; Otherwise, <tt>ranges::swap(E1, E2)</tt> is ill-formed.</p></li>
 </ol>
 <p>
 <tt>noexcept(S)</tt> is equal to <tt>is_nothrow_move_constructible_v&lt;T&gt; &amp;&amp; is_nothrow_move_assignable_v&lt;T&gt;</tt>.

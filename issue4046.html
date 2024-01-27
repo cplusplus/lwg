@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta charset="utf-8">
+<title>Issue 4046: Effects of inserting into or erasing from flat container adaptors when an exception is thrown need to be more permissive</title>
+<style type="text/css">
+  p {text-align:justify}
+  li {text-align:justify}
+  pre code.backtick::before { content: "`" }
+  pre code.backtick::after { content: "`" }
+  blockquote.note
+  {
+    background-color:#E0E0E0;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+  ins {background-color:#A0FFA0}
+  del {background-color:#FFA0A0}
+  table {border-collapse: collapse;}
+  @media (prefers-color-scheme: dark) {
+     html {
+        color: #ddd;
+        background-color: black;
+     }
+     ins {
+        background-color: #225522
+     }
+     del {
+        background-color: #662222
+     }
+     a {
+        color: #6af
+     }
+     a:visited {
+        color: #6af
+     }
+     blockquote.note
+     {
+        background-color: rgba(255, 255, 255, .10)
+     }
+  }
+</style>
+</head>
+<body>
+<hr>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
+<h3><a name="4046" href="lwg-active.html#4046">4046</a>. Effects of inserting into or erasing from flat container adaptors when an exception is thrown need to be more permissive</h3>
+<p><b>Section:</b> 24.2.7.2 <a href="https://wg21.link/associative.reqmts.except">[associative.reqmts.except]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-23 <b>Last modified:</b> 2024-01-27</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The issue was originally discovered while implementing <tt>flat_(multi_)set</tt> in MSVC STL 
+(<a href="https://github.com/microsoft/STL/issues/4059">microsoft/STL#4059</a>).
+<p/>
+Currently, the effects of inserting a single element into or erasing elements from a flat container 
+adaptor when an exception is thrown, are implicitly specified in 24.2.7.2 <a href="https://wg21.link/associative.reqmts.except">[associative.reqmts.except]</a>.
+<p/>
+However, given erasing elements from a <tt>vector</tt> or a <tt>deque</tt> generally needs to assign elements, 
+which is not guaranteed to be non-throwing, it seems unreasonable to require <tt>erase</tt> of flat container 
+adaptors not to throw in such a case. Likewise, as inserting a single value into <tt>deque</tt> is not 
+guaranteed to be effectless when an exception is thrown, so flat container adaptors are unlike to provide such 
+a guarantee.
+<p/>
+Perhaps we should conditionally relax the requirements when the underlying containers can't provide them.
+</p>
+
+
+<p id="res-4046"><b>Proposed resolution:</b></p>
+
+
+
+
+
+</body>
+</html>

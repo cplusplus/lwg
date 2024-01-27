@@ -45,7 +45,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-01-27 at 16:35:45 UTC
+<p>Revised 2024-01-27 at 16:39:09 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -55226,6 +55226,37 @@ is <code>true</code>.
 </blockquote>
 </li>
 </ol>
+
+
+
+
+
+<hr>
+<h3><a name="4046" href="#4046">4046</a><sup><a href="https://cplusplus.github.io/LWG/issue4046">(i)</a></sup>. Effects of inserting into or erasing from flat container adaptors when an exception is thrown need to be more permissive</h3>
+<p><b>Section:</b> 24.2.7.2 <a href="https://wg21.link/associative.reqmts.except">[associative.reqmts.except]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-23 <b>Last modified:</b> 2024-01-27</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The issue was originally discovered while implementing <tt>flat_(multi_)set</tt> in MSVC STL 
+(<a href="https://github.com/microsoft/STL/issues/4059">microsoft/STL#4059</a>).
+<p/>
+Currently, the effects of inserting a single element into or erasing elements from a flat container 
+adaptor when an exception is thrown, are implicitly specified in 24.2.7.2 <a href="https://wg21.link/associative.reqmts.except">[associative.reqmts.except]</a>.
+<p/>
+However, given erasing elements from a <tt>vector</tt> or a <tt>deque</tt> generally needs to assign elements, 
+which is not guaranteed to be non-throwing, it seems unreasonable to require <tt>erase</tt> of flat container 
+adaptors not to throw in such a case. Likewise, as inserting a single value into <tt>deque</tt> is not 
+guaranteed to be effectless when an exception is thrown, so flat container adaptors are unlike to provide such 
+a guarantee.
+<p/>
+Perhaps we should conditionally relax the requirements when the underlying containers can't provide them.
+</p>
+
+
+<p id="res-4046"><b>Proposed resolution:</b></p>
 
 
 

@@ -50,7 +50,7 @@
 <p>Reference ISO/IEC IS 14882:2020(E)</p>
 <p>This document is the Table of Contents for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.</p>
-<p>Revised 2024-01-27 at 16:35:45 UTC
+<p>Revised 2024-01-27 at 16:39:09 UTC
 </p><h2><a name="Priority 2"</a>Priority 2 (38 issues)</h2>
 <table border="1" cellpadding="4">
 <tr>
@@ -1695,10 +1695,10 @@ not copy) their predicate object</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3297">3297</a><sup><a href="https://cplusplus.github.io/LWG/issue3297">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3297"></a></td>
+<td align="right"><a href="lwg-active.html#2206">2206</a><sup><a href="https://cplusplus.github.io/LWG/issue2206">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#Open">Open</a><a name="2206"></a></td>
 <td align="left">24.2.4 [sequence.reqmts]<a name="sequence.reqmts"></a></td>
-<td align="left">Useless sequence container requirement</td>
+<td align="left">Inaccuracy in <tt>initializer_list</tt> constructor requirements</td>
 <td align="center">Yes</td>
 <td align="center">3</td>
 <td align="left"></td>
@@ -1713,10 +1713,10 @@ not copy) their predicate object</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#2206">2206</a><sup><a href="https://cplusplus.github.io/LWG/issue2206">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#Open">Open</a><a name="2206"></a></td>
+<td align="right"><a href="lwg-active.html#3297">3297</a><sup><a href="https://cplusplus.github.io/LWG/issue3297">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3297"></a></td>
 <td align="left">24.2.4 [sequence.reqmts]</td>
-<td align="left">Inaccuracy in <tt>initializer_list</tt> constructor requirements</td>
+<td align="left">Useless sequence container requirement</td>
 <td align="center">Yes</td>
 <td align="center">3</td>
 <td align="left"></td>
@@ -1731,21 +1731,21 @@ not copy) their predicate object</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3227">3227</a><sup><a href="https://cplusplus.github.io/LWG/issue3227">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3227"></a></td>
+<td align="right"><a href="lwg-active.html#2362">2362</a><sup><a href="https://cplusplus.github.io/LWG/issue2362">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="2362"></a></td>
 <td align="left">24.2.7 [associative.reqmts]<a name="associative.reqmts"></a></td>
-<td align="left">Ambiguity issue for <tt>extract</tt> in ordered and unordered associative containers</td>
-<td align="center">Yes</td>
+<td align="left">unique, associative <tt>emplace()</tt> should not move/copy the <tt>mapped_type</tt> constructor 
+arguments when no insertion happens</td>
+<td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#2362">2362</a><sup><a href="https://cplusplus.github.io/LWG/issue2362">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="2362"></a></td>
+<td align="right"><a href="lwg-active.html#3227">3227</a><sup><a href="https://cplusplus.github.io/LWG/issue3227">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3227"></a></td>
 <td align="left">24.2.7 [associative.reqmts]</td>
-<td align="left">unique, associative <tt>emplace()</tt> should not move/copy the <tt>mapped_type</tt> constructor 
-arguments when no insertion happens</td>
-<td align="center"><font color="red">No</font></td>
+<td align="left">Ambiguity issue for <tt>extract</tt> in ordered and unordered associative containers</td>
+<td align="center">Yes</td>
 <td align="center">3</td>
 <td align="left"></td>
 </tr>
@@ -1777,9 +1777,18 @@ arguments when no insertion happens</td>
 <td align="left"></td>
 </tr>
 <tr>
+<td align="right"><a href="lwg-active.html#3578">3578</a><sup><a href="https://cplusplus.github.io/LWG/issue3578">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3578"></a></td>
+<td align="left">24.2.7.1 [associative.reqmts.general]<a name="associative.reqmts.general"></a></td>
+<td align="left">Iterator SCARYness in the context of associative container merging</td>
+<td align="center"><font color="red">No</font></td>
+<td align="center">3</td>
+<td align="left"></td>
+</tr>
+<tr>
 <td align="right"><a href="lwg-active.html#3577">3577</a><sup><a href="https://cplusplus.github.io/LWG/issue3577">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="3577"></a></td>
-<td align="left">24.2.7.1 [associative.reqmts.general]<a name="associative.reqmts.general"></a></td>
+<td align="left">24.2.7.1 [associative.reqmts.general]</td>
 <td align="left">Merging an (unordered) associative container with itself</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
@@ -1791,15 +1800,6 @@ arguments when no insertion happens</td>
 <td align="left">24.2.7.1 [associative.reqmts.general]</td>
 <td align="left">Replacement of keys in associative containers</td>
 <td align="center">Yes</td>
-<td align="center">3</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="right"><a href="lwg-active.html#3578">3578</a><sup><a href="https://cplusplus.github.io/LWG/issue3578">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3578"></a></td>
-<td align="left">24.2.7.1 [associative.reqmts.general]</td>
-<td align="left">Iterator SCARYness in the context of associative container merging</td>
-<td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
 <td align="left"></td>
 </tr>
@@ -2084,10 +2084,10 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3439">3439</a><sup><a href="https://cplusplus.github.io/LWG/issue3439">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3439"></a></td>
+<td align="right"><a href="lwg-active.html#2931">2931</a><sup><a href="https://cplusplus.github.io/LWG/issue2931">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#Open">Open</a><a name="2931"></a></td>
 <td align="left">25.4.3 [iterator.operations]</td>
-<td align="left">"<tt>Distance</tt>" template parameter is underspecified</td>
+<td align="left">Missed optimization opportunity with single-argument <tt>std::next</tt></td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
 <td align="left"></td>
@@ -2102,10 +2102,10 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#2931">2931</a><sup><a href="https://cplusplus.github.io/LWG/issue2931">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#Open">Open</a><a name="2931"></a></td>
+<td align="right"><a href="lwg-active.html#3439">3439</a><sup><a href="https://cplusplus.github.io/LWG/issue3439">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3439"></a></td>
 <td align="left">25.4.3 [iterator.operations]</td>
-<td align="left">Missed optimization opportunity with single-argument <tt>std::next</tt></td>
+<td align="left">"<tt>Distance</tt>" template parameter is underspecified</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
 <td align="left"></td>
@@ -2174,19 +2174,19 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3188">3188</a><sup><a href="https://cplusplus.github.io/LWG/issue3188">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3188"></a></td>
+<td align="right"><a href="lwg-active.html#2366">2366</a><sup><a href="https://cplusplus.github.io/LWG/issue2366">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="2366"></a></td>
 <td align="left">25.6.4 [istreambuf.iterator]<a name="istreambuf.iterator"></a></td>
-<td align="left"><tt>istreambuf_iterator::pointer</tt> should not be <i>unspecified</i></td>
+<td align="left"><tt>istreambuf_iterator</tt> end-of-stream equality</td>
 <td align="center">Yes</td>
 <td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#2366">2366</a><sup><a href="https://cplusplus.github.io/LWG/issue2366">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="2366"></a></td>
+<td align="right"><a href="lwg-active.html#3188">3188</a><sup><a href="https://cplusplus.github.io/LWG/issue3188">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3188"></a></td>
 <td align="left">25.6.4 [istreambuf.iterator]</td>
-<td align="left"><tt>istreambuf_iterator</tt> end-of-stream equality</td>
+<td align="left"><tt>istreambuf_iterator::pointer</tt> should not be <i>unspecified</i></td>
 <td align="center">Yes</td>
 <td align="center">3</td>
 <td align="left"></td>
@@ -2247,19 +2247,19 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#4002">4002</a><sup><a href="https://cplusplus.github.io/LWG/issue4002">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="4002"></a></td>
+<td align="right"><a href="lwg-active.html#3846">3846</a><sup><a href="https://cplusplus.github.io/LWG/issue3846">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3846"></a></td>
 <td align="left">26.6.4.3 [range.iota.iterator]<a name="range.iota.iterator"></a></td>
-<td align="left">The definition of <tt>iota_view::<i>iterator</i>::iterator_concept</tt> should be improved</td>
+<td align="left"><tt>iota_view::<i>iterator</i>::operator-</tt> is overconstrained</td>
 <td align="center">Yes</td>
 <td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3846">3846</a><sup><a href="https://cplusplus.github.io/LWG/issue3846">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3846"></a></td>
+<td align="right"><a href="lwg-active.html#4002">4002</a><sup><a href="https://cplusplus.github.io/LWG/issue4002">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="4002"></a></td>
 <td align="left">26.6.4.3 [range.iota.iterator]</td>
-<td align="left"><tt>iota_view::<i>iterator</i>::operator-</tt> is overconstrained</td>
+<td align="left">The definition of <tt>iota_view::<i>iterator</i>::iterator_concept</tt> should be improved</td>
 <td align="center">Yes</td>
 <td align="center">3</td>
 <td align="left"></td>
@@ -2357,19 +2357,19 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3685">3685</a><sup><a href="https://cplusplus.github.io/LWG/issue3685">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3685"></a></td>
+<td align="right"><a href="lwg-active.html#3599">3599</a><sup><a href="https://cplusplus.github.io/LWG/issue3599">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3599"></a></td>
 <td align="left">26.7.16.2 [range.lazy.split.view]<a name="range.lazy.split.view"></a></td>
-<td align="left">In <tt>lazy_split_view</tt>, CTAD doesn't work when given an <tt>input_range</tt> input and a <tt><i>tiny-range</i></tt> pattern</td>
+<td align="left">The <tt>const</tt> overload of <tt>lazy_split_view::begin</tt> should be constrained by <tt>const Pattern</tt></td>
 <td align="center">Yes</td>
 <td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3599">3599</a><sup><a href="https://cplusplus.github.io/LWG/issue3599">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3599"></a></td>
+<td align="right"><a href="lwg-active.html#3685">3685</a><sup><a href="https://cplusplus.github.io/LWG/issue3685">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3685"></a></td>
 <td align="left">26.7.16.2 [range.lazy.split.view]</td>
-<td align="left">The <tt>const</tt> overload of <tt>lazy_split_view::begin</tt> should be constrained by <tt>const Pattern</tt></td>
+<td align="left">In <tt>lazy_split_view</tt>, CTAD doesn't work when given an <tt>input_range</tt> input and a <tt><i>tiny-range</i></tt> pattern</td>
 <td align="center">Yes</td>
 <td align="center">3</td>
 <td align="left"></td>
@@ -2431,19 +2431,19 @@ should not be constrained</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#2963">2963</a><sup><a href="https://cplusplus.github.io/LWG/issue2963">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="2963"></a></td>
+<td align="right"><a href="lwg-active.html#1238">1238</a><sup><a href="https://cplusplus.github.io/LWG/issue1238">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#Open">Open</a><a name="1238"></a></td>
 <td align="left">27 [algorithms]<a name="algorithms"></a></td>
-<td align="left">Algorithms with underspecified iterator requirements</td>
+<td align="left">Defining algorithms taking iterator for range</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#1238">1238</a><sup><a href="https://cplusplus.github.io/LWG/issue1238">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#Open">Open</a><a name="1238"></a></td>
+<td align="right"><a href="lwg-active.html#2963">2963</a><sup><a href="https://cplusplus.github.io/LWG/issue2963">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="2963"></a></td>
 <td align="left">27 [algorithms]</td>
-<td align="left">Defining algorithms taking iterator for range</td>
+<td align="left">Algorithms with underspecified iterator requirements</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
 <td align="left"></td>
@@ -2539,9 +2539,18 @@ should not be constrained</td>
 <td align="left"></td>
 </tr>
 <tr>
+<td align="right"><a href="lwg-active.html#3628">3628</a><sup><a href="https://cplusplus.github.io/LWG/issue3628">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3628"></a></td>
+<td align="left">27.11 [specialized.algorithms]<a name="specialized.algorithms"></a></td>
+<td align="left">"<i>Effects:</i> Equivalent to:" and uninitialized memory algorithms</td>
+<td align="center"><font color="red">No</font></td>
+<td align="center">3</td>
+<td align="left"></td>
+</tr>
+<tr>
 <td align="right"><a href="lwg-active.html#3063">3063</a><sup><a href="https://cplusplus.github.io/LWG/issue3063">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="3063"></a></td>
-<td align="left">27.11 [specialized.algorithms]<a name="specialized.algorithms"></a></td>
+<td align="left">27.11 [specialized.algorithms]</td>
 <td align="left">Parallel algorithms in <tt>&lt;memory&gt;</tt> are underspecified</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
@@ -2552,15 +2561,6 @@ should not be constrained</td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="3064"></a></td>
 <td align="left">27.11 [specialized.algorithms]</td>
 <td align="left">How do uninitialized memory algorithms obtain pointer without undefined behavior?</td>
-<td align="center"><font color="red">No</font></td>
-<td align="center">3</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="right"><a href="lwg-active.html#3628">3628</a><sup><a href="https://cplusplus.github.io/LWG/issue3628">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3628"></a></td>
-<td align="left">27.11 [specialized.algorithms]</td>
-<td align="left">"<i>Effects:</i> Equivalent to:" and uninitialized memory algorithms</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
 <td align="left"></td>
@@ -2738,9 +2738,18 @@ required to be correctly formatted?</td>
 <td align="left"></td>
 </tr>
 <tr>
+<td align="right"><a href="lwg-active.html#3960">3960</a><sup><a href="https://cplusplus.github.io/LWG/issue3960">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3960"></a></td>
+<td align="left">29.13 [time.parse]<a name="time.parse"></a></td>
+<td align="left">How does <tt>chrono::parse</tt> handle duplicated data?</td>
+<td align="center">Yes</td>
+<td align="center">3</td>
+<td align="left"></td>
+</tr>
+<tr>
 <td align="right"><a href="lwg-active.html#3956">3956</a><sup><a href="https://cplusplus.github.io/LWG/issue3956">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="3956"></a></td>
-<td align="left">29.13 [time.parse]<a name="time.parse"></a></td>
+<td align="left">29.13 [time.parse]</td>
 <td align="left"><code>chrono::parse</code> uses <code>from_stream</code> as a customization point</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
@@ -2751,15 +2760,6 @@ required to be correctly formatted?</td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="3962"></a></td>
 <td align="left">29.13 [time.parse]</td>
 <td align="left">What is the "decimal precision of the input"?</td>
-<td align="center">Yes</td>
-<td align="center">3</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="right"><a href="lwg-active.html#3960">3960</a><sup><a href="https://cplusplus.github.io/LWG/issue3960">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3960"></a></td>
-<td align="left">29.13 [time.parse]</td>
-<td align="left">How does <tt>chrono::parse</tt> handle duplicated data?</td>
 <td align="center">Yes</td>
 <td align="center">3</td>
 <td align="left"></td>
@@ -2954,19 +2954,19 @@ required to be correctly formatted?</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3497">3497</a><sup><a href="https://cplusplus.github.io/LWG/issue3497">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3497"></a></td>
+<td align="right"><a href="lwg-active.html#3496">3496</a><sup><a href="https://cplusplus.github.io/LWG/issue3496">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3496"></a></td>
 <td align="left">31.11.2.4 [syncstream.syncbuf.members]<a name="syncstream.syncbuf.members"></a></td>
-<td align="left">Postconditions for <tt>basic_syncbuf::emit()</tt></td>
+<td align="left">What does "uniquely associated" mean for <tt>basic_syncbuf::emit()</tt>?</td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3496">3496</a><sup><a href="https://cplusplus.github.io/LWG/issue3496">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3496"></a></td>
+<td align="right"><a href="lwg-active.html#3497">3497</a><sup><a href="https://cplusplus.github.io/LWG/issue3497">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3497"></a></td>
 <td align="left">31.11.2.4 [syncstream.syncbuf.members]</td>
-<td align="left">What does "uniquely associated" mean for <tt>basic_syncbuf::emit()</tt>?</td>
+<td align="left">Postconditions for <tt>basic_syncbuf::emit()</tt></td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">3</td>
 <td align="left"></td>
@@ -3916,20 +3916,20 @@ should require the arguments to have the same length</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3268">3268</a><sup><a href="https://cplusplus.github.io/LWG/issue3268">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="3268"></a></td>
+<td align="right"><a href="lwg-active.html#2265">2265</a><sup><a href="https://cplusplus.github.io/LWG/issue2265">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#Open">Open</a><a name="2265"></a></td>
 <td align="left">33.5.4 [atomics.order]<a name="atomics.order"></a></td>
-<td align="left"><tt>memory_order::memory_order_foo</tt> broken in C++20</td>
-<td align="center">Yes</td>
+<td align="left">29.3p9 appears to rule out some acceptable executions</td>
+<td align="center"><font color="red">No</font></td>
 <td align="center">4</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#2265">2265</a><sup><a href="https://cplusplus.github.io/LWG/issue2265">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#Open">Open</a><a name="2265"></a></td>
+<td align="right"><a href="lwg-active.html#3268">3268</a><sup><a href="https://cplusplus.github.io/LWG/issue3268">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="3268"></a></td>
 <td align="left">33.5.4 [atomics.order]</td>
-<td align="left">29.3p9 appears to rule out some acceptable executions</td>
-<td align="center"><font color="red">No</font></td>
+<td align="left"><tt>memory_order::memory_order_foo</tt> broken in C++20</td>
+<td align="center">Yes</td>
 <td align="center">4</td>
 <td align="left"></td>
 </tr>
@@ -3997,25 +3997,25 @@ should require the arguments to have the same length</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#2480">2480</a><sup><a href="https://cplusplus.github.io/LWG/issue2480">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="2480"></a></td>
-<td align="left">D.23.3 [depr.conversions.buffer]<a name="depr.conversions.buffer"></a></td>
-<td align="left">Error handling of <tt>wbuffer_convert</tt> unclear</td>
-<td align="center"><font color="red">No</font></td>
-<td align="center">4</td>
-<td align="left"></td>
-</tr>
-<tr>
 <td align="right"><a href="lwg-active.html#2479">2479</a><sup><a href="https://cplusplus.github.io/LWG/issue2479">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="2479"></a></td>
-<td align="left">D.23.3 [depr.conversions.buffer]</td>
+<td align="left">D.23.3 [depr.conversions.buffer]<a name="depr.conversions.buffer"></a></td>
 <td align="left">Unclear how <tt>wbuffer_convert</tt> uses <tt>cvtstate</tt></td>
 <td align="center"><font color="red">No</font></td>
 <td align="center">4</td>
 <td align="left"></td>
 </tr>
+<tr>
+<td align="right"><a href="lwg-active.html#2480">2480</a><sup><a href="https://cplusplus.github.io/LWG/issue2480">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="2480"></a></td>
+<td align="left">D.23.3 [depr.conversions.buffer]</td>
+<td align="left">Error handling of <tt>wbuffer_convert</tt> unclear</td>
+<td align="center"><font color="red">No</font></td>
+<td align="center">4</td>
+<td align="left"></td>
+</tr>
 </table>
-<h2><a name="Priority 99"</a>Not Prioritized (70 issues)</h2>
+<h2><a name="Priority 99"</a>Not Prioritized (71 issues)</h2>
 <table border="1" cellpadding="4">
 <tr>
   <td align="center"><a href="lwg-toc.html"><b>Issue</b></a></td>
@@ -4281,6 +4281,15 @@ types &mdash; this is inconsistent with other types in the library</td>
 <td align="left"></td>
 </tr>
 <tr>
+<td align="right"><a href="lwg-active.html#4046">4046</a><sup><a href="https://cplusplus.github.io/LWG/issue4046">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="4046"></a></td>
+<td align="left">24.2.7.2 [associative.reqmts.except]<a name="associative.reqmts.except"></a></td>
+<td align="left">Effects of inserting into or erasing from flat container adaptors when an exception is thrown need to be more permissive</td>
+<td align="center"><font color="red">No</font></td>
+<td align="center"></td>
+<td align="left"></td>
+</tr>
+<tr>
 <td align="right"><a href="lwg-active.html#3959">3959</a><sup><a href="https://cplusplus.github.io/LWG/issue3959">(i)</a></sup></td>
 <td align="left"><a href="lwg-active.html#New">New</a><a name="3959"></a></td>
 <td align="left">24.6.9 [flat.map]<a name="flat.map"></a></td>
@@ -4353,20 +4362,20 @@ types &mdash; this is inconsistent with other types in the library</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#4008">4008</a><sup><a href="https://cplusplus.github.io/LWG/issue4008">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="4008"></a></td>
+<td align="right"><a href="lwg-active.html#4018">4018</a><sup><a href="https://cplusplus.github.io/LWG/issue4018">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="4018"></a></td>
 <td align="left">26.5.7.2 [range.utility.conv.to]<a name="range.utility.conv.to"></a></td>
-<td align="left">&sect;[range.utility.conv.to] <tt>ranges::to</tt> may cause infinite recursion if <tt>range_value_t&lt;C&gt;</tt> 
-is a non-move-constructible range</td>
+<td align="left"><tt>ranges::to</tt>'s copy branch is underconstrained</td>
 <td align="center">Yes</td>
 <td align="center"></td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#4018">4018</a><sup><a href="https://cplusplus.github.io/LWG/issue4018">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#New">New</a><a name="4018"></a></td>
+<td align="right"><a href="lwg-active.html#4008">4008</a><sup><a href="https://cplusplus.github.io/LWG/issue4008">(i)</a></sup></td>
+<td align="left"><a href="lwg-active.html#New">New</a><a name="4008"></a></td>
 <td align="left">26.5.7.2 [range.utility.conv.to]</td>
-<td align="left"><tt>ranges::to</tt>'s copy branch is underconstrained</td>
+<td align="left">&sect;[range.utility.conv.to] <tt>ranges::to</tt> may cause infinite recursion if <tt>range_value_t&lt;C&gt;</tt> 
+is a non-move-constructible range</td>
 <td align="center">Yes</td>
 <td align="center"></td>
 <td align="left"></td>

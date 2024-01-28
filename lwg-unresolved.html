@@ -45,7 +45,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-01-27 at 17:13:43 UTC
+<p>Revised 2024-01-28 at 11:35:44 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -55361,6 +55361,53 @@ object <tt>u</tt>, for which <tt><del>find(x) == find(u)</del><ins>equal_range(x
 is <tt>true</tt>.
 </p>
 </blockquote>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3><a name="4049" href="#4049">4049</a><sup><a href="https://cplusplus.github.io/LWG/issue4049">(i)</a></sup>. C <tt>&lt;<i>foo</i>.h&gt;</tt> headers not in freestanding</h3>
+<p><b>Section:</b> 16.4.2 <a href="https://wg21.link/organization">[organization]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Ben Craig <b>Opened:</b> 2024-01-26 <b>Last modified:</b> 2024-01-28</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+There are many C-ish <tt>&lt;c<i>foo</i>&gt;</tt> headers in freestanding. There isn't anything that 
+requires the matching C <tt>&lt;<i>foo</i>.h&gt;</tt> headers to be in freestanding.
+</p>
+
+
+<p id="res-4049"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971">N4971</a>.
+</p>
+
+<ol>
+<li><p>Modify 16.4.2.3 <a href="https://wg21.link/headers">[headers]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-9- 17.14 <a href="https://wg21.link/support.c.headers">[support.c.headers]</a>, C standard library headers, describes the effects of using the 
+<tt><i>name</i>.h</tt> (C header) form in a C++ program. <ins>The <tt><i>name</i>.h</tt> form is the 
+<i>corresponding C header form</i>.</ins>
+</p>
+</blockquote>
+</li>
+
+<li><p>Modify 16.4.2.5 <a href="https://wg21.link/compliance">[compliance]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- A freestanding implementation has an implementation-defined set of headers. This set shall include at least
+the headers shown in Table 27 <ins>and the corresponding C header form (16.4.2.3 <a href="https://wg21.link/headers">[headers]</a>) of each of the 
+C++ headers for C library facilities (Table 25) included in Table 27</ins>.
+</p>
 </blockquote>
 </li>
 </ol>

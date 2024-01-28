@@ -45,7 +45,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-01-28 at 12:55:06 UTC
+<p>Revised 2024-01-28 at 13:28:43 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3><a name="423" href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <tt>streamsize</tt> in iostreams</h3>
@@ -55451,7 +55451,7 @@ auto take_and_drop = std::views::drop(5)
 
 // The type of iota is drop_view&lt;take_view&lt;drop_view&lt;take_view&lt;drop_view&lt;iota_view&lt;int, unreachable_sentinel_t&gt;&gt;&gt;&gt;&gt;&gt;, which is indeed a template bloat.
 auto iota = std::views::iota(0) | take_and_drop;
-static_assert(!std::ranges::sized_range&lt;decltype(iota)&gt;); // <span style="color:red;font-weight:bolder">failed</span>
+static_assert(std::ranges::sized_range&lt;decltype(iota)&gt;); // <span style="color:red;font-weight:bolder">failed</span>
 
 // The type of repeat is simply std::ranges::repeat_view&lt;int, long&gt;
 std::ranges::sized_range auto repeat = std::views::repeat(0) | take_and_drop; // ok

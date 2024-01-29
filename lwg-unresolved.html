@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-01-29 at 12:49:18 UTC
+<p>Revised 2024-01-29 at 13:26:49 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -228,7 +228,7 @@ no longer true, since the referred to pre-C++11 concept paper wording <a href="h
 of the working paper.
 <p/>
 It also has been observed, that the "convertible to <code>bool</code>" part has since been resolved
-by <a href="https://wg21.link/P1964">P1964</a> and the follow-up paper <a href="https://wg21.link/P2167">P2167</a>.
+by <a href="https://wg21.link/P1964" title=" Wording for boolean-testable">P1964</a> and the follow-up paper <a href="https://wg21.link/P2167" title=" Improved Proposed Wording for LWG 2114 (contextually convertible to bool)">P2167</a>.
 <p/>
 Also LWG <a href="lwg-active.html#3105" title="T1 is convertible to T2">3105</a> has a lot of overlap with this issue.
 </p>
@@ -15182,11 +15182,11 @@ be defined to nonsense values for integer types.
 
 <p><i>[2018-11 San Diego Thursday night issue processing]</i></p>
 
-<p>See Walter's paper <a href="https://wg21.link/P0437">P0437</a> for ideas and/or future directions.</p>
+<p>See Walter's paper <a href="https://wg21.link/P0437" title=" Numeric Traits for the Standard Library">P0437</a> for ideas and/or future directions.</p>
 
 <p><i>[2023-04]</i></p>
 
-<p>See Walter's paper <a href="https://wg21.link/P1841">P1841</a> for the preferred direction.</p>
+<p>See Walter's paper <a href="https://wg21.link/P1841" title=" Wording for Individually Specializable Numeric Traits">P1841</a> for the preferred direction.</p>
 
 
 <p id="res-2730"><b>Proposed resolution:</b></p>
@@ -36384,7 +36384,7 @@ then refer to [tab:format.type.int].
 <p/> 
 I can come up with many interpretations for what could happen when <code>'c'</code> is used with <code>charT</code> 
 or <code>bool</code>, but the following table is what msvc does right now (throws is the same as does not 
-compile after <a href="https://wg21.link/P2216">P2216</a> in all these cases, although not in general for <code>'c'</code>):
+compile after <a href="https://wg21.link/P2216" title=" std::format improvements">P2216</a> in all these cases, although not in general for <code>'c'</code>):
 </p>
 <blockquote>
 <table border="1">
@@ -36878,7 +36878,7 @@ Presumably we should make the <code>std::hash</code> specialization conditionall
 
 <p>
 Set priority to 3 after reflector poll.
-Would be resolved by <a href="https://wg21.link/P1642">P1642</a> for C++23,
+Would be resolved by <a href="https://wg21.link/P1642" title=" Freestanding Library: Easy [utilities], [ranges], and [iterators]">P1642</a> for C++23,
 but it's still a defect in C++20.
 </p>
 
@@ -37505,7 +37505,7 @@ contains, we require implementations to use the <code>common_type</code> of thei
 (per 26.7.14.3 <a href="https://wg21.link/range.join.iterator">[range.join.iterator]</a> p3), which may lead to UB. As we already have provided 
 implementation freedom to define extended integer-like types we should make provision for them 
 to be used here as well. The same issue applies to the <code>join_with_view</code> as proposed by
-<a href="https://wg21.link/P2441">P2441</a>.
+<a href="https://wg21.link/P2441" title=" views::join_with">P2441</a>.
 </p>
 
 <p><i>[2022-03-04; Reflector poll]</i></p>
@@ -40538,7 +40538,7 @@ This issue has considerable overlap with LWG <a href="lwg-active.html#2158" titl
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-After <a href="https://wg21.link/P2259">P2259</a>, the range adaptor' iterators only provide <code>iterator_category</code> member when 
+After <a href="https://wg21.link/P2259" title=" Repairing input range adaptors and counted_iterator">P2259</a>, the range adaptor' iterators only provide <code>iterator_category</code> member when 
 the underlying range models <code>forward_range</code>, which is mainly based on the premise that all valid C++20 
 forward iterators meet the C++17 input iterator requirements.
 <p/>
@@ -41114,7 +41114,7 @@ then we can always "<code>get</code>" and return a reference. This is not the ca
 Set priority to 2 after reflector poll.
 </p>
 <p>
-"The actual issue is that <a href="https://wg21.link/P2165">P2165</a> broke
+"The actual issue is that <a href="https://wg21.link/P2165" title=" Compatibility between tuple, pair and tuple-like objects">P2165</a> broke
 <code><i>has-tuple-element</i></code> for this case. We should unbreak it."
 </p>
 
@@ -41812,7 +41812,7 @@ expects the century to be nonnegative, but the glibc implementation
 better result, because it consistently interprets <code>%C</code> and <code>%y</code> as the quotient and remainder 
 of floored division by 100.
 <p/>
-Howard Hinnant, coauthor of the original 29.12 <a href="https://wg21.link/time.format">[time.format]</a> wording in <a href="https://wg21.link/P0355">P0355</a> adds:
+Howard Hinnant, coauthor of the original 29.12 <a href="https://wg21.link/time.format">[time.format]</a> wording in <a href="https://wg21.link/P0355" title=" Extending <chrono> to Calendars and Time Zones">P0355</a> adds:
 </p>
 <blockquote style="border-left: 3px solid #ccc;padding-left: 15px;">
 <p>
@@ -42477,7 +42477,7 @@ The deprecation note suggests that one should use <code>std::u8string</code> ins
 an additional transformation and doesn't work without <code>reinterpret_cast</code>.
 <p/>
 Even in the presence of <code>char8_t</code>, legacy code bases often are still ABI-bound to <code>char</code>. 
-In the future we may solve this problem using the tools provided by <a href="https://wg21.link/P2626">P2626</a> instead, 
+In the future we may solve this problem using the tools provided by <a href="https://wg21.link/P2626" title=" charN_t incremental adoption: Casting pointers of UTF character types">P2626</a> instead, 
 but right now this is not part of the standard and it wasn't at the time when <code>u8path</code> became 
 deprecated. 
 This is in my opinion a good reason to undeprecate <code>u8path</code> <em>now</em> and decide later on the 
@@ -43842,7 +43842,7 @@ The intent is that it should be defined as a hidden friend in <code>tuple</code>
 <p/>
 The current specification is confusing as to which class should contain that hidden friend, or how to otherwise 
 implement that adl only restriction. (An hostile reading may consider it to be a hidden friend of <code>UTuple</code>), 
-and does not follow the guidance of <a href="https://wg21.link/P1601">P1601</a> "Recommendations for Specifying ``Hidden Friends''".
+and does not follow the guidance of <a href="https://wg21.link/P1601" title=" Recommendations for Specifying “Hidden Friends”">P1601</a> "Recommendations for Specifying ``Hidden Friends''".
 <p/>
 We should consider making these <code>operator==</code> and <code>operator&lt;=&gt;</code> overloads hidden friends of 
 <code>tuple</code>, i.e.
@@ -45986,11 +45986,11 @@ Set priority to 3 after reflector poll.
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Before <a href="https://wg21.link/P0174">P0174</a> had been approved for the working paper, the validity of using <code>void</code> as template argument for
+Before <a href="https://wg21.link/P0174" title=" Deprecating Vestigial Library Parts in C++17">P0174</a> had been approved for the working paper, the validity of using <code>void</code> as template argument for
 <code>std::allocator</code> was obvious due to the existing specification of the explicit specialization <code>allocator&lt;void&gt;</code>.
 <p/>
 This specialization was first moved to Annex D ([depr.default.allocator]) and later completely eradicated from the working paper via
-adoption of <a href="https://wg21.link/P0619">P0619</a>.
+adoption of <a href="https://wg21.link/P0619" title=" Reviewing Deprecated Facilities of C++17 for C++20">P0619</a>.
 <p/>
 The problem is that, since then, we have no explicit wording for <code>std::allocator</code> to support <code>void</code> as template argument 
 any more. We fall now under the constraints for template "components" specified in 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.functions]</a> bullet 2.5.
@@ -46153,7 +46153,7 @@ but no further process is done since then.
 Set priority to 3 after reflector poll. Send to LEWG.
 </p>
 <p>
-"<a href="https://wg21.link/P2283">P2283</a> wants to remove guaranteed elision here."
+"<a href="https://wg21.link/P2283" title=" constexpr for specialized memory algorithms">P2283</a> wants to remove guaranteed elision here."
 "Poorly motivated, not clear anybody is using these algos with proxy iterators."
 "Consider using <code>iter_move</code> in the move algos."
 </p>
@@ -46447,7 +46447,7 @@ and user requirements</h3>
 <p>
 The wording of 17.3.5.1 <a href="https://wg21.link/numeric.limits.general">[numeric.limits.general]</a> seemingly has not been gone through a similar thorough 
 rewording review which we performed in the past to clean-up the working draft as we did via the series of 
-"Mandating" papers by Marshall Clow (<a href="https://wg21.link/P1458">P1458</a> - <a href="https://wg21.link/P1465">P1465</a> and even more).
+"Mandating" papers by Marshall Clow (<a href="https://wg21.link/P1458" title=" Mandating the Standard Library: Clause 16 - Language support library">P1458</a> - <a href="https://wg21.link/P1465" title=" Function optimization hint attributes: [[always_inline]], [[never_inline]]">P1465</a> and even more).
 <p/>
 17.3.5.1 <a href="https://wg21.link/numeric.limits.general">[numeric.limits.general]</a> contains several nowadays inappropriate wording forms, which don't 
 distinguish well enough between requirements imposed on implementations (Where we shouldn't use "shall" wording 
@@ -46466,7 +46466,7 @@ for the (library-provided) integer-class types (25.3.4.4 <a href="https://wg21.l
 says, we already have at least one exception, where the library is required to specialize <code>numeric_limits</code>
 for a non-arithmetic type. We should make that a bit clearer here as well.
 <p/>
-This issue is related to LWG <a href="lwg-active.html#3922" title="It's unclear whether numeric_limits can be specialized by users">3922</a> and paper <a href="https://wg21.link/P1841">P1841</a>.
+This issue is related to LWG <a href="lwg-active.html#3922" title="It's unclear whether numeric_limits can be specialized by users">3922</a> and paper <a href="https://wg21.link/P1841" title=" Wording for Individually Specializable Numeric Traits">P1841</a>.
 </p>
 
 <p><i>[2023-05-24; Reflector poll]</i></p>
@@ -47498,7 +47498,7 @@ Set priority to 3 after reflector poll.
 <p><b>Discussion:</b></p>
 <p>
 [Discovered by Ori Lahav, lead author of <a href="https://plv.mpi-sws.org/scfix/paper.pdf">Repairing Sequential Consistency in C/C++11</a>,
-which <a href="https://wg21.link/P0668">P0668</a> more or less tried to implement. This description also includes observations 
+which <a href="https://wg21.link/P0668" title=" Revising the C++ memory model">P0668</a> more or less tried to implement. This description also includes observations 
 from Olivier Giroux and David Goldblatt.]
 <p/>
 Currently, we require that the sequential consistency order S is consistent with the extended coherence order, 
@@ -47543,7 +47543,7 @@ issue with the underlying paper.
 <p/>
 I have not yet wrapped my head around this sufficiently to be able to suggest a solution, or to understand how difficult 
 that will be. This happened as a consequence of attempting to strengthen SC fences, and <em>not</em> fixing the Power 
-compilation problem (<a href="https://wg21.link/P0668">P0668</a>). So we could probably improve matters by reverting the strengthening of sc fences. 
+compilation problem (<a href="https://wg21.link/P0668" title=" Revising the C++ memory model">P0668</a>). So we could probably improve matters by reverting the strengthening of sc fences. 
 Clearly, we'd prefer to avoid that. We could just adopt the formulation in the paper, though that seems even harder to motivate 
 informally. Fundamentally, it feels like we inadvertently strengthened (and broke) the semantics of ordinary sc operations, 
 when we intended to only affect fences. The original paper makes more of a distinction there. The question is how we can 
@@ -49402,7 +49402,7 @@ value is assigned to <code>std::ignore</code> (which is implemented in libstdc++
 <p>
 Set priority to 4 after reflector poll.
 "Specify it as code."
-"<a href="https://wg21.link/P2968">P2968</a> should fix this."
+"<a href="https://wg21.link/P2968" title=" Make std::ignore a first-class object">P2968</a> should fix this."
 </p>
 
 
@@ -49960,7 +49960,7 @@ assignment; <code>index()</code> will be <code><i>j</i></code>.</p></li>
 <p><b>Discussion:</b></p>
 <p>
 Recent discussions on <a href="https://github.com/llvm/llvm-project/issues/64644">llvm-64644</a>
-came to the conclusion that <code>basic_stringbuf() &amp;&amp;</code> introduced by <a href="https://wg21.link/P0408">P0408</a>
+came to the conclusion that <code>basic_stringbuf() &amp;&amp;</code> introduced by <a href="https://wg21.link/P0408" title=" Efficient Access to basic_stringbuf’s Buffer">P0408</a>
 might just copy the underlying buffer into a string object and not actually move the allocated space. 
 While the wording tried to encourage that, especially with the postcondition that the buffer must 
 be empty afterwards, it failed to specify that the move is never a copy.
@@ -51115,7 +51115,7 @@ return *this;
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-In reviewing the wording for <a href="https://wg21.link/P2821">P2821</a> <code>span.at()</code>, it had been noticed that 
+In reviewing the wording for <a href="https://wg21.link/P2821" title=" span.at()">P2821</a> <code>span.at()</code>, it had been noticed that 
 24.7.2.2.6 <a href="https://wg21.link/span.elem">[span.elem]</a> uses a lot of "<i>Effects</i>: Equivalent to return [&hellip;];" which 
 could be simply "<i>Returns</i>:  [&hellip;]".
 <p/>
@@ -51273,7 +51273,7 @@ namespace std::ranges {
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-After <a href="https://wg21.link/P2325">P2325</a>, there is no reason for <code>lazy_split_view::<i>outer-iterator</i>::value_type</code> 
+After <a href="https://wg21.link/P2325" title=" Views should not be required to be default constructible">P2325</a>, there is no reason for <code>lazy_split_view::<i>outer-iterator</i>::value_type</code> 
 to provide a default constructor, which only leads to <a href="https://godbolt.org/z/rM4WdMz79">unexpected behavior</a>:
 </p>
 <blockquote><pre>
@@ -52496,7 +52496,7 @@ The output of this program (as specified today) is
 <p>
 The principle set out in LWG <a href="lwg-defects.html#3478" title="views::split drops trailing empty range">3478</a> is that splitting a sequence containing <code>N</code> 
 delimiters should lead to <code>N+1</code> subranges. That principle was broken if the <code>N</code>-th 
-delimiter was at the end of the sequence, which was fixed by <a href="https://wg21.link/P2210">P2210</a>. 
+delimiter was at the end of the sequence, which was fixed by <a href="https://wg21.link/P2210" title=" Superior String Splitting">P2210</a>. 
 <p/>
 However, the principle is still broken if the sequence contains zero delimiters. A non-empty sequence 
 will split into one range, but an empty sequence will split into zero ranges. That last line is incorrect 
@@ -52509,7 +52509,7 @@ to initialize <code><i>trailing_empty_</i></code> to <code><i>cur_</i> == <i>nex
 <code><i>trailing_empty_</i></code> is typically <code>false</code>, but if we're empty on initialization then we 
 have to have a trailing empty range).
 <p/>
-The following demo shows Barry Revzin's implementation from <a href="https://wg21.link/P2210">P2210</a>, adjusted to fix this: 
+The following demo shows Barry Revzin's implementation from <a href="https://wg21.link/P2210" title=" Superior String Splitting">P2210</a>, adjusted to fix this: 
 <a href="https://godbolt.org/z/axWb64j9f">godbolt.org/z/axWb64j9f</a>
 </p>
 
@@ -53438,7 +53438,7 @@ namespace std::ranges {
 <p>
 The current specification for <code>std::is_convertible</code> is sensitive to the requirements for the <code>return</code> 
 statements. As a result, the requirements were accidentally changed by <a href="https://wg21.link/P0135R1" title=" Wording for guaranteed copy elision through simplified value categories">P0135R1</a> and then changed back by 
-CWG issue <a href="https://wg21.link/cwg2426">2426</a>. The current revision of <a href="https://wg21.link/P2748">P2748</a> also plans to 
+CWG issue <a href="https://wg21.link/cwg2426">2426</a>. The current revision of <a href="https://wg21.link/P2748" title=" Disallow Binding a Returned Glvalue to a Temporary">P2748</a> also plans to 
 change the wording for <code>std::is_convertible</code> to avoid actual behavioral changing.
 <p/>
 IMO it's better to specify <code>std::is_convertible</code> in a such way that is independent to <code>return</code> statements. 
@@ -54815,7 +54815,7 @@ as defined by 30.6.2.2 <a href="https://wg21.link/text.encoding.general">[text.e
 This means that the encoding referred to by notes in the C++ standard
 (31.12.6.2 <a href="https://wg21.link/fs.path.generic">[fs.path.generic]</a>, 30.4.4.1.3 <a href="https://wg21.link/facet.numpunct.virtuals">[facet.numpunct.virtuals]</a>)
 and by an example in the <code>std::text_encoding</code> proposal
-(<a href="https://wg21.link/P1885">P1885</a>) isn't actually usable in portable code.
+(<a href="https://wg21.link/P1885" title=" Naming Text Encodings to Demystify Them">P1885</a>) isn't actually usable in portable code.
 So <code>std::text_encoding("ASCII")</code> creates an object with
 <code>mib() == std::text_encoding::other</code>, which is not the same
 encoding as <code>std::text_encoding("US-ASCII")</code>.
@@ -55328,7 +55328,7 @@ while those for <code>std::flat_set</code> and <code>std::flat_map</code> (24.6.
 During implementing <code>std::flat_set</code> in MSVC STL, it was reported 
 (<a href="https://github.com/microsoft/STL/issues/4105">microsoft/STL#4105</a>) that the current preconditions 
 for <code>std::flat_set::insert</code> can lead to inconsistent results. Tim Song told that the current preconditions 
-were copied from old revisions of <a href="https://wg21.link/P2363">P2363</a>. So, presumably we should change these preconditions for 
+were copied from old revisions of <a href="https://wg21.link/P2363" title=" Extending associative containers with the remaining heterogeneous overloads">P2363</a>. So, presumably we should change these preconditions for 
 flat container adaptors to consistently use <code>equal_range</code>.
 </p>
 

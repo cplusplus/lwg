@@ -83,7 +83,7 @@ The issue was introduced when adding <code>codecvt&lt;char[16|32]_t, char, mbsta
 place. Likely it was trying to do a minimal amount of changes and copied the wording for 
 <code>codecvt&lt;wchar_t, char, mbstate_t&gt;</code> but unfortunately didn't consider encoding implications.
 <p/>
-<a href="https://wg21.link/P0482">P0482</a> changed <code>char</code> to <code>char8_t</code> in these facets which 
+<a href="https://wg21.link/P0482" title=" char8_t: A type for UTF-8 characters and strings (Revision 6)">P0482</a> changed <code>char</code> to <code>char8_t</code> in these facets which 
 made the issue more glaring but unfortunately, despite the breaking change, it failed to address it.
 <p/>
 Apart from an obvious design mistake this also adds a small overhead for every locale 

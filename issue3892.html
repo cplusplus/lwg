@@ -100,7 +100,7 @@ std::string s = std::format("{}", std::vector&lt;std::vector&lt;std::string&gt;&
 With the current specification <code>s</code> is <code>[[a, b, c]]</code> instead of <code>[["a, b", "c"]]</code>, i.e. strings 
 in the output are not correctly escaped. The same is true for nested tuples and combinations of tuples and ranges.
 <p/>
-The fix approved by LEWG as part of <a href="https://wg21.link/P2733">P2733</a> (which was trying to address a different issue) is to 
+The fix approved by LEWG as part of <a href="https://wg21.link/P2733" title=" Fix handling of empty specifiers in std::format">P2733</a> (which was trying to address a different issue) is to 
 always call <code>parse</code> <a href="https://github.com/cplusplus/papers/issues/1426#issuecomment-1420017182">for underlying formatter</a>. 
 Additionally the standard should clarify that <i>format-spec</i> cannot start with <code>'}'</code> because that's the 
 implicit assumption in range formatting and what happens when <i>format-spec</i> is not present.

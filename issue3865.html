@@ -78,7 +78,7 @@ int main() {
 }
 </pre></blockquote>
 <p>
-This is currently valid C++23 code, but wasn't before <a href="https://wg21.link/P2165">P2165</a> (Compatibility between <code>tuple</code>, <code>pair</code> 
+This is currently valid C++23 code, but wasn't before <a href="https://wg21.link/P2165" title=" Compatibility between tuple, pair and tuple-like objects">P2165</a> (Compatibility between <code>tuple</code>, <code>pair</code> 
 and <i>tuple-like</i> objects). Before P2165, <code>zip(a, b)</code> returned a range whose reference was 
 <code>std::pair&lt;int&amp;, int&amp;&gt;</code> and whose <code>value_type</code> was <code>std::pair&lt;int, int&gt;</code> and 
 <code>std::pair</code>, unlike <code>std::tuple</code>, does not have any heterogeneous comparisons &mdash; which is required to 

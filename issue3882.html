@@ -79,7 +79,7 @@ The intent is that it should be defined as a hidden friend in <code>tuple</code>
 <p/>
 The current specification is confusing as to which class should contain that hidden friend, or how to otherwise 
 implement that adl only restriction. (An hostile reading may consider it to be a hidden friend of <code>UTuple</code>), 
-and does not follow the guidance of <a href="https://wg21.link/P1601">P1601</a> "Recommendations for Specifying ``Hidden Friends''".
+and does not follow the guidance of <a href="https://wg21.link/P1601" title=" Recommendations for Specifying “Hidden Friends”">P1601</a> "Recommendations for Specifying ``Hidden Friends''".
 <p/>
 We should consider making these <code>operator==</code> and <code>operator&lt;=&gt;</code> overloads hidden friends of 
 <code>tuple</code>, i.e.

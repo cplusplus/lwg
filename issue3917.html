@@ -66,11 +66,11 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Before <a href="https://wg21.link/P0174">P0174</a> had been approved for the working paper, the validity of using <code>void</code> as template argument for
+Before <a href="https://wg21.link/P0174" title=" Deprecating Vestigial Library Parts in C++17">P0174</a> had been approved for the working paper, the validity of using <code>void</code> as template argument for
 <code>std::allocator</code> was obvious due to the existing specification of the explicit specialization <code>allocator&lt;void&gt;</code>.
 <p/>
 This specialization was first moved to Annex D ([depr.default.allocator]) and later completely eradicated from the working paper via
-adoption of <a href="https://wg21.link/P0619">P0619</a>.
+adoption of <a href="https://wg21.link/P0619" title=" Reviewing Deprecated Facilities of C++17 for C++20">P0619</a>.
 <p/>
 The problem is that, since then, we have no explicit wording for <code>std::allocator</code> to support <code>void</code> as template argument 
 any more. We fall now under the constraints for template "components" specified in 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.functions]</a> bullet 2.5.

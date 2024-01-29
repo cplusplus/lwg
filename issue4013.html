@@ -65,7 +65,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-After <a href="https://wg21.link/P2325">P2325</a>, there is no reason for <code>lazy_split_view::<i>outer-iterator</i>::value_type</code> 
+After <a href="https://wg21.link/P2325" title=" Views should not be required to be default constructible">P2325</a>, there is no reason for <code>lazy_split_view::<i>outer-iterator</i>::value_type</code> 
 to provide a default constructor, which only leads to <a href="https://godbolt.org/z/rM4WdMz79">unexpected behavior</a>:
 </p>
 <blockquote><pre>

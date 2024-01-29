@@ -106,7 +106,7 @@ template&lt;class F&gt; function&amp; operator=(F&amp;&amp;);
 </pre></blockquote>
 <p>
 The positive side-effect of this is that it automatically implements a solution to
-a problem similar to that mentioned in issue <a href="lwg-defects.html#1234">1234</a>.
+a problem similar to that mentioned in issue <a href="lwg-defects.html#1234" title="&quot;Do the right thing&quot; and NULL">1234</a>.
 <p/>
 It would be possible to apply similar constraints to the member signatures
 </p>
@@ -190,7 +190,7 @@ constructor and fails.
 [<em>Editorial comment</em>: The removal of the seemingly additional no-throw
 requirements of copy constructor and destructor of <code>A</code> is recommended,
 because they are already part of the Allocator requirements. Similar clean-up
-has been suggested by <a href="lwg-defects.html#2070">2070</a> &mdash; <em>end comment</em>]</p>
+has been suggested by <a href="lwg-defects.html#2070" title="allocate_shared should use allocator_traits&lt;A&gt;::construct">2070</a> &mdash; <em>end comment</em>]</p>
 
 <blockquote>
 <pre>

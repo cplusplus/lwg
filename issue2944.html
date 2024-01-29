@@ -65,7 +65,8 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#C++20">C++20</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-The wording simplification in LWG <a href="lwg-defects.html#2905">2905</a> accidentally deleted the
+The wording simplification in LWG <a href="lwg-defects.html#2905" title="is_constructible_v&lt;unique_ptr&lt;P, D&gt;, P, D const &amp;&gt; should be false when 
+D is not copy constructible">2905</a> accidentally deleted the
 requirement that construction of the deleter doesn't throw an
 exception. While this isn't the end of the world since any exception
 will just run into the noexcept on the constructor and result in a

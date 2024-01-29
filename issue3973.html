@@ -65,14 +65,14 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#WP">WP</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-LWG <a href="lwg-defects.html#3938">3938</a> switched to use <code>**this</code> to access the value stored in <code>std::expected</code>. 
-However, as shown in LWG <a href="lwg-active.html#3969">3969</a>, <code>**this</code> can trigger ADL and find an unwanted overload, 
+LWG <a href="lwg-defects.html#3938" title="Cannot use std::expected monadic ops with move-only error_type">3938</a> switched to use <code>**this</code> to access the value stored in <code>std::expected</code>. 
+However, as shown in LWG <a href="lwg-active.html#3969" title="std::ranges::fold_left_first_with_iter should be more ADL-proof">3969</a>, <code>**this</code> can trigger ADL and find an unwanted overload, 
 and thus may caused unintended behavior.
 <p/>
 Current implementations behave correctly (<a href="https://godbolt.org/z/3b1Tbs1jd">Godbolt link</a>): they 
 don't direct use <code>**this</code>, but use the name of the union member instead.
 <p/>
-Moreover, <a href="https://wg21.link/P2407R5">P2407R5</a> will change the monadic operations of <code>std::optional</code> to use <code>**this</code>, 
+Moreover, <a href="https://wg21.link/P2407R5" title=" Freestanding Library: Partial Classes">P2407R5</a> will change the monadic operations of <code>std::optional</code> to use <code>**this</code>, 
 which is also problematic.
 </p>
 
@@ -95,7 +95,7 @@ Set status to Tentatively Ready after five votes in favour during reflector poll
 
 <p id="res-3973"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+This wording is relative to <a href="https://wg21.link/N4958" title=" Working Draft, Programming Languages — C++">N4958</a>.
 </p>
 
 <ol>

@@ -130,7 +130,7 @@ is a very natural assumption and all delegations of the comparison functions of 
 other API type <code>Y</code> in third-party code does so assuming that copy-initialization semantics will
 just work.
 <p/>
-The actual reason for using the newer terminology can be rooted back to LWG <a href="lwg-defects.html#556">556</a>. My hypotheses 
+The actual reason for using the newer terminology can be rooted back to LWG <a href="lwg-defects.html#556" title="Is Compare a BinaryPredicate?">556</a>. My hypotheses 
 is that the resolution of that issue also needs a slight correction. Why so?
 <p/>
 The reason for opening that issue were worries based on the previous "convertible to <code>bool</code>"
@@ -161,20 +161,20 @@ The problem here is not that we have two different definitions of <code>Predicat
 is confusing, but this fact alone is not a defect. The first (minor) problem is that this definition does not properly 
 apply to function objects that are function pointers, because <code>operator()</code> is not defined in a strict sense. 
 But the actually worse second problem is that this wording has the very <code>same</code> problem that has originally lead to
-LWG <a href="lwg-defects.html#556">556</a>! We only need to look at 33.7.4 <a href="https://wg21.link/thread.condition.condvar">[thread.condition.condvar]</a> p15 to recognice this:
+LWG <a href="lwg-defects.html#556" title="Is Compare a BinaryPredicate?">556</a>! We only need to look at 33.7.4 <a href="https://wg21.link/thread.condition.condvar">[thread.condition.condvar]</a> p15 to recognice this:
 </p>
 <blockquote><pre>
 while (!pred())
   wait(lock);
 </pre></blockquote>
 <p>
-The negation expression here looks very familiar to the example provided in LWG <a href="lwg-defects.html#556">556</a> and is sensitive
+The negation expression here looks very familiar to the example provided in LWG <a href="lwg-defects.html#556" title="Is Compare a BinaryPredicate?">556</a> and is sensitive
 to the same "unusual proxy" problem. Changing the 33.2.1 <a href="https://wg21.link/thread.req.paramname">[thread.req.paramname]</a> wording to a corresponding
 "contextual conversion to <code>bool</code>" wouldn't work either, because existing specifications rely on "convertible
 to <code>bool</code>", e.g. 33.7.4 <a href="https://wg21.link/thread.condition.condvar">[thread.condition.condvar]</a> p32+33+42 or 33.7.5 <a href="https://wg21.link/thread.condition.condvarany">[thread.condition.condvarany]</a> 
 p25+26+32+33.
 <p/>
-To summarize: I believe that LWG <a href="lwg-defects.html#556">556</a> was not completely resolved. A pessimistic interpretation is,
+To summarize: I believe that LWG <a href="lwg-defects.html#556" title="Is Compare a BinaryPredicate?">556</a> was not completely resolved. A pessimistic interpretation is,
 that even with the current wording based on "contextually convertible to <code>bool</code>" the actual problem of that 
 issue has <em>not</em> been fixed. What actually needs to be required here is some normative wording that basically
 expresses something along the lines of:
@@ -244,7 +244,7 @@ if (cond &amp;&amp; !pred(args))
 These are real examples taken from Dinkumware's implementation. There are others that would be realistic 
 ("<code>pred(args) &amp;&amp; cond</code>", "<code>cond || pred(args)</code>", etc.)
 <p/>
-Although negation was mentioned in this issue's Discussion section, and in LWG <a href="lwg-defects.html#556">556</a>'s, the current proposed 
+Although negation was mentioned in this issue's Discussion section, and in LWG <a href="lwg-defects.html#556" title="Is Compare a BinaryPredicate?">556</a>'s, the current proposed 
 resolution doesn't fix this problem. Requiring <code>pred(args)</code> to be implicitly and contextually convertible to <code>bool</code> 
 doesn't prevent <code>operator!()</code> from being overloaded and returning <code>std::string</code> (as a wacky example). More 
 ominously, it doesn't prevent <code>operator&amp;&amp;()</code> and <code>operator||()</code> from being overloaded and destroying 
@@ -685,7 +685,7 @@ break any short-circuiting semantics.
 </li>
 <li>
 <p>
-I decided to separate LWG <a href="lwg-defects.html#2587">2587</a>/<a href="lwg-defects.html#2588">2588</a> from this issue. Both these issues aren't exactly the
+I decided to separate LWG <a href="lwg-defects.html#2587" title="&quot;Convertible to bool&quot; requirement in conjunction and disjunction">2587</a>/<a href="lwg-defects.html#2588" title="[fund.ts.v2] &quot;Convertible to bool&quot; requirement in conjunction and disjunction">2588</a> from this issue. Both these issues aren't exactly the
 same but depending on the committee's position, their resolution might benefit from the new vocabulary introduced
 here.
 </p>
@@ -695,7 +695,7 @@ here.
 <p><i>[2021-06-25; Daniel comments]</i></p>
 
 <p>
-The paper <a href="https://wg21.link/P2167R1">P2167R1</a> is provided to resolve this issue.
+The paper <a href="https://wg21.link/P2167R1" title=" Improved Proposed Wording for LWG 2114 (contextually convertible to bool)">P2167R1</a> is provided to resolve this issue.
 </p>
 
 <p><i>[2022-05-01; Daniel comments]</i></p>
@@ -1384,7 +1384,7 @@ The paper <a href="https://isocpp.org/files/papers/P2167R3.html">P2167R3</a> has
 solve this issue.
 </p>
 
-<p><i>[2022-11-22 Resolved by <a href="https://wg21.link/P2167R3">P2167R3</a> accepted in Kona. Status changed: Open &rarr; Resolved.]</i></p>
+<p><i>[2022-11-22 Resolved by <a href="https://wg21.link/P2167R3" title=" Improved Proposed Wording for LWG 2114 (contextually convertible to bool)">P2167R3</a> accepted in Kona. Status changed: Open &rarr; Resolved.]</i></p>
 
 
 

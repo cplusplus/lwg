@@ -70,7 +70,7 @@ specializations of <code>pair</code> in 20.2.8.2 <a href="https://wg21.link/allo
 <p/>
 Currently MSVC STL only considered <i>cv</i>-unqualified pair types as such specializations, 
 while libstdc++ accept both <i>cv</i>-unqualified and <code>const</code>-qualified pair types as 
-such specializations. The resolution of LWG <a href="lwg-defects.html#3525">3525</a> uses <code>remove_cv_t</code>,
+such specializations. The resolution of LWG <a href="lwg-defects.html#3525" title="uses_allocator_construction_args fails to handle types convertible to pair">3525</a> uses <code>remove_cv_t</code>,
 which possibly imply that the specialization of pair may be <i>cv</i>-qualified.
 <p/>
 The difference can be observed via the following program:
@@ -141,7 +141,7 @@ Set priority to 2 after reflector poll.
 <p><strong>Previous resolution [SUPERSEDED]:</strong></p>
 <blockquote class="note">
 <p>
-This wording is relative to <a href="https://wg21.link/N4910">N4910</a>.
+This wording is relative to <a href="https://wg21.link/N4910" title=" Working Draft, Standard for Programming Language C++">N4910</a>.
 </p>
 
 <ul>
@@ -172,7 +172,7 @@ a specialization of <code>pair</code>
 <p id="res-3677"><b>Proposed resolution:</b></p>
 
 <p>
-This wording is relative to <a href="https://wg21.link/N4917">N4917</a>.
+This wording is relative to <a href="https://wg21.link/N4917" title=" Working Draft, Standard for Programming Language C++">N4917</a>.
 </p>
 
 <ol>

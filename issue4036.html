@@ -80,7 +80,7 @@ which implicitly specifies that <code>__alignof_is_defined</code> is also provid
 specified that the macro is provided in <code>&lt;stdaligh.h&gt;</code>.
 <p/>
 However, there's no explicit mentioning of <code>__alignof_is_defined</code> in the C++ standard wording. 
-And D.11 <a href="https://wg21.link/depr.c.macros">[depr.c.macros]</a>/1 (added by LWG <a href="lwg-defects.html#3827">3827</a>) seemingly contradicts with 
+And D.11 <a href="https://wg21.link/depr.c.macros">[depr.c.macros]</a>/1 (added by LWG <a href="lwg-defects.html#3827" title="Deprecate &lt;stdalign.h&gt; and &lt;stdbool.h&gt; macros">3827</a>) seemingly contradicts with 
 17.14.4 <a href="https://wg21.link/stdalign.h.syn">[stdalign.h.syn]</a> and only makes <code>__alignas_is_defined</code> deprecated.
 <p/>
 It seems that we should explicitly mention <code>__alignof_is_defined</code> in D.11 <a href="https://wg21.link/depr.c.macros">[depr.c.macros]</a> 
@@ -90,7 +90,7 @@ at this moment.
 
 <p id="res-4036"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4971">N4971</a>.
+This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
 </p>
 
 <ol>

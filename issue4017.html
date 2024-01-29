@@ -91,7 +91,7 @@ The output of this program (as specified today) is
 []
 </pre></blockquote>
 <p>
-The principle set out in LWG <a href="lwg-defects.html#3478">3478</a> is that splitting a sequence containing <code>N</code> 
+The principle set out in LWG <a href="lwg-defects.html#3478" title="views::split drops trailing empty range">3478</a> is that splitting a sequence containing <code>N</code> 
 delimiters should lead to <code>N+1</code> subranges. That principle was broken if the <code>N</code>-th 
 delimiter was at the end of the sequence, which was fixed by <a href="https://wg21.link/P2210">P2210</a>. 
 <p/>
@@ -113,7 +113,7 @@ The following demo shows Barry Revzin's implementation from <a href="https://wg2
 
 <p id="res-4017"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4964">N4964</a>.
+This wording is relative to <a href="https://wg21.link/N4964" title=" Working Draft, Programming Languages — C++">N4964</a>.
 </p>
 
 <ol>

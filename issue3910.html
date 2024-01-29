@@ -65,7 +65,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-LWG <a href="lwg-defects.html#3878">3878</a> specified the effects of importing standard library modules on initialization.
+LWG <a href="lwg-defects.html#3878" title="import std; should guarantee initialization of standard iostreams objects">3878</a> specified the effects of importing standard library modules on initialization.
 However, the effects of including <code>&lt;iostream&gt;</code> are not yet precisely specified.
 A hostile reading may consider this to allow the <code>ios_base::Init</code> variable to be
 a function-local static variable or an inline variable, which defeats the purpose.
@@ -81,7 +81,7 @@ Set priority to 4 after reflector poll.
 
 <p id="res-3910"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
+This wording is relative to <a href="https://wg21.link/N4944" title=" Working Draft, Standard for Programming Language C++">N4944</a>.
 </p>
 
 <ol>

@@ -120,13 +120,13 @@ and says then in p2:
 Again, this wording is not conclusive, whether <code>void</code> is intended to be supported, it is certainly not completely ruled
 out, but that is not strong enough to counterpart 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.functions]</a> (2.5). It is maybe worth pointing out that
 for a while we were considering to use <code>void</code> as default template argument for <code>pmr::polymorphic_allocator</code>,
-see e.g. <a href="https://wg21.link/P0339R0">P0339R0</a>, but that thought was later replaced by deciding for <code>std::byte</code> instead, which
+see e.g. <a href="https://wg21.link/P0339R0" title=" polymorphic_allocator<void> as a vocabulary type">P0339R0</a>, but that thought was later replaced by deciding for <code>std::byte</code> instead, which
 is a complete object type.
 <p/>
 I assume that at least the intention exists that <code>std::allocator</code> is intended to support incomplete types, maybe also
 for <code>polymorphic_allocator</code>. If <code>polymorphic_allocator</code> is intended to support incomplete types as well,
 we should also amend 20.4.3.3 <a href="https://wg21.link/mem.poly.allocator.mem">[mem.poly.allocator.mem]</a> p1 and p8 with a <i>Mandates:</i> element similarly as we did 
-for <code>std::allocator</code> via LWG <a href="lwg-defects.html#3307">3307</a>.
+for <code>std::allocator</code> via LWG <a href="lwg-defects.html#3307" title="std::allocator&lt;void&gt;().allocate(n)">3307</a>.
 </p>
 
 <p><i>[2023-05-24; Reflector poll]</i></p>
@@ -139,7 +139,7 @@ Set priority to 3 after reflector poll.
 
 <p id="res-3917"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
+This wording is relative to <a href="https://wg21.link/N4944" title=" Working Draft, Standard for Programming Language C++">N4944</a>.
 </p>
 
 <ol>

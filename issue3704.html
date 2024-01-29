@@ -64,7 +64,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#C++23">C++23</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-The restored <code>erase(iterator)</code> overloads introduced by LWG <a href="lwg-defects.html#2059">2059</a> would be duplicates 
+The restored <code>erase(iterator)</code> overloads introduced by LWG <a href="lwg-defects.html#2059" title="C++0x ambiguity problem with map::erase">2059</a> would be duplicates 
 of the <code>erase(const_iterator)</code> ones if <code>iterator</code> and <code>const_iterator</code> are the same 
 type, which is allowed for sets.
 <p/>
@@ -90,7 +90,7 @@ Set status to Tentatively Ready after seven votes in favour during reflector pol
 
 <p id="res-3704"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4910">N4910</a>.
+This wording is relative to <a href="https://wg21.link/N4910" title=" Working Draft, Standard for Programming Language C++">N4910</a>.
 </p>
 
 <ol>

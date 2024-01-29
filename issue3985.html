@@ -66,7 +66,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-In order to solve issues in LWG <a href="lwg-defects.html#3787">3787</a> and LWG <a href="lwg-defects.html#3847">3847</a> that the template parameter <code>C</code> 
+In order to solve issues in LWG <a href="lwg-defects.html#3787" title="ranges::to's template parameter C should not be a reference type">3787</a> and LWG <a href="lwg-defects.html#3847" title="ranges::to can still return views">3847</a> that the template parameter <code>C</code> 
 can be specified as an unreasonable type, <code>ranges::to</code> adds a <i>Mandates</i> that requires <code>C</code> to be a 
 <i>cv</i>-unqualified class type.
 </p>
@@ -99,7 +99,7 @@ Set priority to 3 after reflector poll.
 
 <p id="res-3985"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+This wording is relative to <a href="https://wg21.link/N4958" title=" Working Draft, Programming Languages — C++">N4958</a>.
 </p>
 
 <ol>

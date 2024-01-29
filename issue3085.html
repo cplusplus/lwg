@@ -84,7 +84,7 @@ assert(std::char_traits&lt;char&gt;::compare(p, "aab", 3) == 0);
 </pre></blockquote>
 <p>
 If the intention is to allow <code>memcpy</code> as a valid implementation then the precondition is 
-wrong (unfortunately nobody realized this when fixing <code>char_traits::move</code> in LWG DR <a href="lwg-defects.html#7">7</a>). 
+wrong (unfortunately nobody realized this when fixing <code>char_traits::move</code> in LWG DR <a href="lwg-defects.html#7" title="String clause minor problems">7</a>). 
 If the intention is to require <code>memmove</code> then it is strange to have separate <code>copy</code> and 
 <code>move</code> functions that both use <code>memmove</code>.
 <p/>
@@ -108,12 +108,12 @@ assert(s == "aab");
 
 <p>No consensus for direction; revisit in San Diego. Status to Open.</p>
 
-<p><i>[2022-04-25; Daniel rebases wording on <a href="https://wg21.link/N4910">N4910</a>]</i></p>
+<p><i>[2022-04-25; Daniel rebases wording on <a href="https://wg21.link/N4910" title=" Working Draft, Standard for Programming Language C++">N4910</a>]</i></p>
 
 <p><strong>Previous resolution [SUPERSEDED]:</strong></p>
 <blockquote class="note">
 <p>
-This wording is relative to <a href="https://wg21.link/N4910">N4910</a>.
+This wording is relative to <a href="https://wg21.link/N4910" title=" Working Draft, Standard for Programming Language C++">N4910</a>.
 </p>
 
 <p>

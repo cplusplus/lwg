@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-01-29 at 11:35:50 UTC
+<p>Revised 2024-01-29 at 12:49:18 UTC
 </p><h2>Tentative Issues</h2>
 <hr>
 <h3 id="2457"><a href="#2457">2457</a><sup><a href="https://cplusplus.github.io/LWG/issue2457">(i)</a></sup>. <code>std::begin()</code> and <code>std::end()</code> do not support multi-dimensional arrays correctly</h3>
@@ -153,7 +153,7 @@ Use <code>views::join</code> or <code>mdspan</code> instead.
 <p><b>View all issues with</b> <a href="lwg-status.html#Tentatively NAD">Tentatively NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-<a href="https://wg21.link/P0433R2">P0433R2</a>, the proposal for adding deduction guides to the standard library, contained a 
+<a href="https://wg21.link/P0433R2" title=" Toward a resolution of US7 and US14: Integrating template deduction for class templates into the standard library">P0433R2</a>, the proposal for adding deduction guides to the standard library, contained a 
 recommendation to use <code>__cpp_lib_deduction_guides</code> as a feature test macro. However, it appears that this feature test macro has been accidentally omitted from the Standard when the paper was applied and probably needs to be added back.
 </p>
 
@@ -162,7 +162,7 @@ recommendation to use <code>__cpp_lib_deduction_guides</code> as a feature test 
 </p>
 <blockquote class="note">
 <p>
-This wording is relative to <a href="https://wg21.link/N4901">N4901</a>.
+This wording is relative to <a href="https://wg21.link/N4901" title=" Working Draft, Standard for Programming Language C++">N4901</a>.
 </p>
 
 <ol>
@@ -192,7 +192,7 @@ no other macro is associated with such a large set of headers (20 headers in tot
 record-holder is <code>__cpp_lib_nonmember_container_access</code> with 12 headers). For this reason, it should 
 be considered whether perhaps the new macro should only be defined in <code>&lt;version&gt;</code> (which would, 
 however, make it an outlier). The proposed wording currently contains an exhaustive list (note that the 
-deduction guides for <code>&lt;mutex&gt;</code> were removed by LWG <a href="lwg-defects.html#2981">2981</a>).
+deduction guides for <code>&lt;mutex&gt;</code> were removed by LWG <a href="lwg-defects.html#2981" title="Remove redundant deduction guides from standard library">2981</a>).
 </p>
 
 <p><i>[2022-01-30; Reflector poll]</i></p>
@@ -216,7 +216,7 @@ by a single number."
 
 <p id="res-3635"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4901">N4901</a>.
+This wording is relative to <a href="https://wg21.link/N4901" title=" Working Draft, Standard for Programming Language C++">N4901</a>.
 </p>
 
 <ol>
@@ -297,7 +297,7 @@ Set priority to 4 after reflector poll. Send to LEWG.
 
 <p id="res-3714"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4910">N4910</a>.
+This wording is relative to <a href="https://wg21.link/N4910" title=" Working Draft, Standard for Programming Language C++">N4910</a>.
 </p>
 
 <ol>
@@ -524,7 +524,7 @@ constexpr <del>explicit</del> chunk_by_view(V base, Pred pred);
 <p><b>View all issues with</b> <a href="lwg-status.html#Tentatively NAD">Tentatively NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-LWG <a href="lwg-defects.html#3870">3870</a> made <code>std::construct_at</code> unable to create an object of a <i>cv</i>-qualified type, 
+LWG <a href="lwg-defects.html#3870" title="Remove voidify">3870</a> made <code>std::construct_at</code> unable to create an object of a <i>cv</i>-qualified type, 
 which affects <code>std::uninitialized_construct_using_allocator</code>. However, uses-allocator construction is 
 currently not required to be equivalent to some call to <code>std::uninitialized_construct_using_allocator</code>, 
 which possibly implies that uses-allocator construction of a <i>cv</i>-qualified type may still be required to be 
@@ -568,7 +568,7 @@ uses-allocator construction of a const type, so we can't make it ill-formed.
 </blockquote>
 
 <p>
-In <a href="https://wg21.link/P2164R9">P2164R9</a> the detailed description of the function showed a
+In <a href="https://wg21.link/P2164R9" title=" views::enumerate">P2164R9</a> the detailed description of the function showed a
 default argument for the second parameter, which would justify it being
 explicit. However, that default argument was not present in the class synopsis
 and was removed from the detailed description when applying the paper to the
@@ -585,7 +585,7 @@ Set status to Tentatively NAD after four votes in favour during reflector poll.
 
 <p id="res-3908"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
+This wording is relative to <a href="https://wg21.link/N4944" title=" Working Draft, Standard for Programming Language C++">N4944</a>.
 </p>
 <ol>
 <li>
@@ -631,7 +631,7 @@ with <code>std::move(current)</code> and <code><i>pos_</i></code> with
 <p><b>View all issues with</b> <a href="lwg-status.html#Tentatively NAD">Tentatively NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-After LWG <a href="lwg-defects.html#3724">3724</a>, <code>views::all</code> is well-constrained for view types,
+After LWG <a href="lwg-defects.html#3724" title="decay-copy should be constrained">3724</a>, <code>views::all</code> is well-constrained for view types,
 and the constraints are stronger than <code>viewable_range</code>.
 The difference is that given an expression such that <code>decltype</code> gives <code>R</code>,
 when <code>decay_t&lt;R&gt;</code> is a view type and the implicit conversion of <code>R</code>
@@ -657,7 +657,7 @@ This should have no impact on standard range adaptor objects.
 Set status to Tentatively NAD after three votes in favour during reflector poll.
 </p>
 <p>
-"First change is pointless. Second change is a duplicate of <a href="lwg-active.html#3896">3896</a>.
+"First change is pointless. Second change is a duplicate of <a href="lwg-active.html#3896" title="The definition of viewable_range is not quite right">3896</a>.
 Range adaptors return a view over their first argument, so they need to
 require it's a <code>viewable_range</code>."
 </p>
@@ -666,7 +666,7 @@ require it's a <code>viewable_range</code>."
 
 <p id="res-3909"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
+This wording is relative to <a href="https://wg21.link/N4944" title=" Working Draft, Standard for Programming Language C++">N4944</a>.
 </p>
 
 <ol>
@@ -789,7 +789,7 @@ and we definitely can't provide an underlying type for this case.
 
 <p id="res-3930"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
+This wording is relative to <a href="https://wg21.link/N4944" title=" Working Draft, Standard for Programming Language C++">N4944</a>.
 </p>
 
 <ol>
@@ -849,7 +849,7 @@ Let implementations decide when to apply these attributes.
 
 <p id="res-3936"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+This wording is relative to <a href="https://wg21.link/N4950" title=" Working Draft, Standard for Programming Language C++">N4950</a>.
 </p>
 
 <blockquote class="note">
@@ -960,7 +960,7 @@ Set status to Tentatively NAD after reflector poll.
 
 <p id="res-3958"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+This wording is relative to <a href="https://wg21.link/N4950" title=" Working Draft, Standard for Programming Language C++">N4950</a>.
 </p>
 
 <ol>
@@ -1137,7 +1137,7 @@ Relevant discussion can be seen <a href="https://github.com/cplusplus/CWG/issues
 
 <p id="res-3980"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+This wording is relative to <a href="https://wg21.link/N4958" title=" Working Draft, Programming Languages — C++">N4958</a>.
 </p>
 
 <ol>
@@ -1173,7 +1173,7 @@ modification order<del>) written before the write associated with the read-modif
 <p><b>View all issues with</b> <a href="lwg-status.html#Tentatively NAD">Tentatively NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-In order to provide pipe support for user-defined range adaptors, <a href="https://wg21.link/P2387R3">P2387R3</a> 
+In order to provide pipe support for user-defined range adaptors, <a href="https://wg21.link/P2387R3" title=" Pipe support for user-defined range adaptors">P2387R3</a> 
 removed the specification that the adaptor closure object returns a view, which conforms to the wording of <code>ranges::to</code>.
 <p/>
 However, the current wording seems to be too low-spec so that the range adaptor closure object can return any type 
@@ -1213,7 +1213,7 @@ not <code>auto(C(R))</code>."
 
 <p id="res-3981"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+This wording is relative to <a href="https://wg21.link/N4958" title=" Working Draft, Programming Languages — C++">N4958</a>.
 </p>
 
 <ol>
@@ -1280,7 +1280,7 @@ but it was changed when <code>view_interface</code> stopped inheriting from
 
 <p id="res-3982"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+This wording is relative to <a href="https://wg21.link/N4958" title=" Working Draft, Programming Languages — C++">N4958</a>.
 </p>
 
 <ol>
@@ -1382,7 +1382,7 @@ so this is just lying unless we special-case identity everywhere."
 
 <p id="res-3996"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4958">N4958</a>.
+This wording is relative to <a href="https://wg21.link/N4958" title=" Working Draft, Programming Languages — C++">N4958</a>.
 </p>
 
 <ol>
@@ -1463,7 +1463,7 @@ for random-access sized ranges by having <code>ranges::end</code> return
 
 <p id="res-4003"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4964">N4964</a>.
+This wording is relative to <a href="https://wg21.link/N4964" title=" Working Draft, Programming Languages — C++">N4964</a>.
 </p>
 
 <ol>

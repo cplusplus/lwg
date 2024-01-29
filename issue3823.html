@@ -77,7 +77,7 @@ an array is always an aggregate, we don't need a complete element type to know t
 </p>
 
 <p>
-Historically the <code>is_aggregate</code> was introduced by LWG <a href="lwg-defects.html#2911">2911</a> as part of the resolution of the NB comments.
+Historically the <code>is_aggregate</code> was introduced by LWG <a href="lwg-defects.html#2911" title="An is_aggregate type trait is needed">2911</a> as part of the resolution of the NB comments.
 The comment proposed to introduce this trait with requirement "<code>remove_all_extents_t&lt;T&gt;</code> shall 
 be a complete type, an array type, or (possibly <i>cv</i>-qualified) <code>void</code>.",
 that is close to resolution proposed in this issue.
@@ -94,7 +94,7 @@ is never an array type.
 
 <p id="res-3823"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4917">N4917</a>.
+This wording is relative to <a href="https://wg21.link/N4917" title=" Working Draft, Standard for Programming Language C++">N4917</a>.
 </p>
 
 <ol>

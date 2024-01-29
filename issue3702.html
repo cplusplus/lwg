@@ -64,7 +64,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#C++23">C++23</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-After LWG <a href="lwg-defects.html#3692">3692</a>, <code>zip_view::<i>iterator</i></code> only provides <code>operator&lt;=&gt;</code>. 
+After LWG <a href="lwg-defects.html#3692" title="zip_view::iterator's operator&lt;=&gt; is overconstrained">3692</a>, <code>zip_view::<i>iterator</i></code> only provides <code>operator&lt;=&gt;</code>. 
 Since the comparison of <code>zip_transform_view::<i>iterator</i></code> uses <code>zip_view::<i>iterator</i></code>'s 
 <code>operator&lt;=&gt;</code>, it is possible to remove <code>zip_transform_view::<i>iterator</i></code>'s 
 <code>operator&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> and just detect if <code><i>ziperator</i></code>'s 
@@ -90,7 +90,7 @@ Set status to Tentatively Ready after five votes in favour during reflector poll
 
 <p id="res-3702"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4910">N4910</a>.
+This wording is relative to <a href="https://wg21.link/N4910" title=" Working Draft, Standard for Programming Language C++">N4910</a>.
 </p>
 
 <ol>

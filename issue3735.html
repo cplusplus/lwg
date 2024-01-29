@@ -68,7 +68,7 @@
 <code>N</code> is given at compile time.
 <p/>
 Since the case where <code>N</code> is <code>0</code> does not make sense for <code>slide_view</code>, 
-LWG <a href="lwg-defects.html#3711">3711</a> and LWG <a href="lwg-defects.html#3712">3712</a> added preconditions to the constructor and 
+LWG <a href="lwg-defects.html#3711" title="Missing preconditions for slide_view constructor">3711</a> and LWG <a href="lwg-defects.html#3712" title="chunk_view and slide_view should not be default_initializable">3712</a> added preconditions to the constructor and 
 removed the default constructor, respectively.
 <p/>
 But for <code>views::adjacent</code>, we can still specify <code>N</code> to be <code>0</code>. According to 
@@ -99,7 +99,7 @@ it for consistency with <code>views::slide</code>.
 
 <p id="res-3735"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4910">N4910</a>.
+This wording is relative to <a href="https://wg21.link/N4910" title=" Working Draft, Standard for Programming Language C++">N4910</a>.
 </p>
 
 <ol>

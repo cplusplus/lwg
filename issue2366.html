@@ -95,7 +95,7 @@ the iterators should compare equal.
 
 <p>
 I agree that they should compare equal, but that's in conflict with the
-resolution of LWG <a href="lwg-defects.html#2544">2544</a>, which says that <code>begin</code>
+resolution of LWG <a href="lwg-defects.html#2544" title="istreambuf_iterator(basic_streambuf&lt;charT, traits&gt;* s) effects unclear when s is 0">2544</a>, which says that <code>begin</code>
 must not be at end-of-stream because <code>&amp;buf</code> is not null.
 </p>
 
@@ -105,7 +105,7 @@ must not be at end-of-stream because <code>&amp;buf</code> is not null.
 
 
 <p id="res-2366"><b>Proposed resolution:</b></p>
-<p>This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.</p>
+<p>This wording is relative to <a href="https://wg21.link/N4944" title=" Working Draft, Standard for Programming Language C++">N4944</a>.</p>
 
 <ol>
 <li>

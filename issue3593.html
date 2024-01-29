@@ -65,7 +65,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#C++23">C++23</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-LWG <a href="lwg-defects.html#3391">3391</a> and <a href="lwg-defects.html#3533">3533</a> changed some iterators' <code>base() const &amp;</code> from returning value to 
+LWG <a href="lwg-defects.html#3391" title="Problems with counted_iterator/move_iterator::base() const &amp;">3391</a> and <a href="lwg-defects.html#3533" title="Make base() const &amp; consistent across iterator wrappers that supports input_iterators">3533</a> changed some iterators' <code>base() const &amp;</code> from returning value to 
 returning <code>const</code> reference, which also prevents them from throwing exceptions, we should add <code>noexcept</code> for them. 
 Also, <code>lazy_split_view::<i>outer-iterator</i>::value_type::end()</code> can be <code>noexcept</code> since it only returns 
 <code>default_sentinel</code>.

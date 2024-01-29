@@ -66,7 +66,7 @@
 <p><b>Discussion:</b></p>
 <p>
 The monadic ops for <code>std::expected</code> are specified in terms of calls
-to <code>value()</code> and <code>error()</code>, but LWG <a href="lwg-defects.html#3843">3843</a>
+to <code>value()</code> and <code>error()</code>, but LWG <a href="lwg-defects.html#3843" title="std::expected&lt;T,E&gt;::value() &amp; assumes E is copy constructible">3843</a>
 ("<code>std::expected&lt;T,E&gt;::value()&amp;</code> assumes <code>E</code>
 is copy constructible") added additional <i>Mandates</i> requirements to
 <code>value()</code>. This means that you can never call <code>value()</code>
@@ -117,7 +117,7 @@ Set status to Tentatively Ready after seven votes in favour during reflector pol
 
 <p id="res-3938"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
+This wording is relative to <a href="https://wg21.link/N4950" title=" Working Draft, Standard for Programming Language C++">N4950</a>.
 </p>
 
 <ol>

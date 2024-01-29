@@ -65,7 +65,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#C++23">C++23</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-<a href="https://wg21.link/P2418R2">P2418R2</a> changed <code>basic_format_arg</code>'s constructor to take a forwarding
+<a href="https://wg21.link/P2418R2" title=" Add support for std::generator-like types to std::format">P2418R2</a> changed <code>basic_format_arg</code>'s constructor to take a forwarding
 reference but didn't change 22.14.8.1 <a href="https://wg21.link/format.arg">[format.arg]</a>/5 which inspects various
 properties of <code>T</code>. Now that the deduced type can be <i>cvref</i>-qualified,
 they need to be removed before the checks.
@@ -85,7 +85,7 @@ forming dangling references.
 <p><strong>Previous resolution [SUPERSEDED]:</strong></p>
 <blockquote class="note">
 <p>
-This wording is relative to <a href="https://wg21.link/N4901">N4901</a>.
+This wording is relative to <a href="https://wg21.link/N4901" title=" Working Draft, Standard for Programming Language C++">N4901</a>.
 </p>
 
 <ol>
@@ -146,7 +146,7 @@ are unnecessary (arguments are always lvalues), and so using <code>T&amp;</code>
 would be simpler.
 </p>
 <p>
-In order to resolve the overload ambiguities discussed in <a href="lwg-defects.html#3718">3718</a>
+In order to resolve the overload ambiguities discussed in <a href="lwg-defects.html#3718" title="P2418R2 broke the overload resolution for std::basic_format_arg">3718</a>
 replace all unary constructor overloads with a single constructor that works
 for any formattable type.
 </p>
@@ -155,7 +155,7 @@ for any formattable type.
 <blockquote class="note">
 
 <p>
-This wording is relative to <a href="https://wg21.link/N4917">N4917</a>.
+This wording is relative to <a href="https://wg21.link/N4917" title=" Working Draft, Standard for Programming Language C++">N4917</a>.
 </p>
 
 <ol>
@@ -355,7 +355,7 @@ Move to Immediate for C++23
 <p id="res-3631"><b>Proposed resolution:</b></p>
 
 <p>
-This wording is relative to <a href="https://wg21.link/N4917">N4917</a>.
+This wording is relative to <a href="https://wg21.link/N4917" title=" Working Draft, Standard for Programming Language C++">N4917</a>.
 </p>
 
 <ol>

@@ -65,7 +65,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#Resolved">Resolved</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-This issue was split off from <a href="lwg-closed.html#892">892</a> at the request of the LWG.
+This issue was split off from <a href="lwg-closed.html#892" title="Forward_list issues...">892</a> at the request of the LWG.
 </p>
 
 <p><i>[
@@ -207,7 +207,7 @@ or giving up such functionality.
 </li>
 
 <li>
-As stated in the discussion of <a href="lwg-closed.html#892">892</a>, and reienforced by point 2 above,
+As stated in the discussion of <a href="lwg-closed.html#892" title="Forward_list issues...">892</a>, and reienforced by point 2 above,
 a <code>splice_after</code> should work on the source range <code>(first, last]</code>
 if the operation is to be <i>&#927;</i>(1).  When splicing an entire list <code>x</code> the
 algorithm needs <code>(x.before_begin(), x.end()-1]</code>.  Unfortunately <code>x.end()-1</code>
@@ -242,7 +242,7 @@ Move to Review.
 <p>
 We may need a new issue to correct splice_after, because it may no
 longer be correct to accept an rvalues as an argument. Merge may be
-affected, too. This might be issue <a href="lwg-defects.html#1133">1133</a>. (Howard: confirmed)
+affected, too. This might be issue <a href="lwg-defects.html#1133" title="Does N2844 break current specification of list::splice?">1133</a>. (Howard: confirmed)
 </p>
 <p>
 Move this to Ready, but the Requires clause of the second form of
@@ -286,7 +286,7 @@ Move to Ready, with the changes described above. (Howard: awaiting note from Ala
 
 <p id="res-897"><b>Proposed resolution:</b></p>
 <p>
-Wording below assumes issue <a href="lwg-defects.html#878">878</a> is accepted, but this issue is
+Wording below assumes issue <a href="lwg-defects.html#878" title="forward_list preconditions">878</a> is accepted, but this issue is
 independent of that issue.
 </p>
 

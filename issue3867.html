@@ -74,7 +74,7 @@ However, currently <code>std::basic_osyncstream</code>'s move assignment operato
 <code>std::basic_syncbuf</code>'s is not. So when an exception is thrown from move assignment between <code>std::basic_syncbuf</code> 
 objects, <code>std::terminate</code> should be called.
 <p/>
-It's clarified in LWG <a href="lwg-defects.html#3498">3498</a> that an exception can escape from <code>std::basic_syncbuf</code>'s move 
+It's clarified in LWG <a href="lwg-defects.html#3498" title="Inconsistent noexcept-specifiers for basic_syncbuf">3498</a> that an exception can escape from <code>std::basic_syncbuf</code>'s move 
 assignment operator. Is there any reason that an exception shouldn't escape from <code>std::basic_osyncstream</code>'s 
 move assignment operator? 
 </p>
@@ -91,7 +91,7 @@ Set status to Tentatively Ready after seven votes in favour during reflector pol
 
 <p id="res-3867"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4928">N4928</a>.
+This wording is relative to <a href="https://wg21.link/N4928" title=" Working Draft, Standard for Programming Language C++">N4928</a>.
 </p>
 
 <ol>

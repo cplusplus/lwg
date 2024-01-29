@@ -65,7 +65,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#WP">WP</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-LWG <a href="lwg-defects.html#3661">3661</a>, "<code>constinit atomic&lt;shared_ptr&lt;T&gt;&gt; a(nullptr);</code> should work" 
+LWG <a href="lwg-defects.html#3661" title="constinit atomic&lt;shared_ptr&lt;T&gt;&gt; a(nullptr); should work">3661</a>, "<code>constinit atomic&lt;shared_ptr&lt;T&gt;&gt; a(nullptr);</code> should work" 
 added the following to <code>atomic&lt;shared_ptr&lt;T&gt;&gt;</code>:
 </p>
 <blockquote><pre>
@@ -86,7 +86,7 @@ void operator=(const atomic&amp;) = delete;          // #1
 void operator=(shared_ptr&lt;T&gt; desired) noexcept;  // #2
 </pre></blockquote>
 <p>
-Prior to LWG <a href="lwg-defects.html#3661">3661</a>, the assignment in the example unambiguously matches #2. #1 is not viable because 
+Prior to LWG <a href="lwg-defects.html#3661" title="constinit atomic&lt;shared_ptr&lt;T&gt;&gt; a(nullptr); should work">3661</a>, the assignment in the example unambiguously matches #2. #1 is not viable because 
 <code>nullptr_t</code> is not convertible to <code>atomic&lt;shared_ptr&lt;T&gt;&gt;</code>. After LWG 3611, #1 is viable 
 and the assignment is ambiguous between #1 and #2.
 <p/>
@@ -116,7 +116,7 @@ Set status to Tentatively Ready after six votes in favour during reflector poll.
 
 <p id="res-3893"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4928">N4928</a>.
+This wording is relative to <a href="https://wg21.link/N4928" title=" Working Draft, Standard for Programming Language C++">N4928</a>.
 </p>
 
 <ol>

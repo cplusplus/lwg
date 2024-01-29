@@ -82,7 +82,7 @@ the concepts require substantial syntax &mdash; but slightly misleading. It is, 
 <code>iterator_category</code> which must not denote a type derived from a tag that corresponds to a stronger category 
 than that iterator implements.
 <p/>
-It's worth pointing out, that LWG <a href="lwg-defects.html#3313">3313</a> fixed the constraints on <code>operator--()</code> and 
+It's worth pointing out, that LWG <a href="lwg-defects.html#3313" title="join_view::iterator::operator-- is incorrectly constrained">3313</a> fixed the constraints on <code>operator--()</code> and 
 <code>operator--(int)</code> by adding the <code>common_range</code> requirements, but failed to make a consistent change 
 to the definitions of <code>iterator_concept</code> and <code>iterator_category</code>.
 </p>

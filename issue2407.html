@@ -67,7 +67,7 @@ explicit</title>
 <p><b>View all issues with</b> <a href="lwg-status.html#C++17">C++17</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-LWG <a href="lwg-defects.html#2097">2097</a>'s resolution was slightly too aggressive. It constrained 
+LWG <a href="lwg-defects.html#2097" title="packaged_task constructors should be constrained">2097</a>'s resolution was slightly too aggressive. It constrained 
 <code>packaged_task(allocator_arg_t, const Allocator&amp;, F&amp;&amp;)</code>, but that's unnecessary because 
 <code>packaged_task</code> doesn't have any other three-argument constructors. Additionally, it's marked as 
 <code>explicit</code> (going back to WP N2798 when <code>packaged_task</code> first appeared) which is unnecessary.

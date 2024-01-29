@@ -72,7 +72,9 @@ to mean that there is no <code>common_type_t&lt;void, void&gt;</code>. Is that i
 <p><i>[2016-08-11, Daniel comments]</i></p>
 
 <p>
-This is strongly related to LWG <a href="lwg-defects.html#2465">2465</a>. It should be considered to resolve <a href="lwg-defects.html#2465">2465</a>
+This is strongly related to LWG <a href="lwg-defects.html#2465" title="SFINAE-friendly common_type is nearly impossible to specialize
+correctly and regresses key functionality">2465</a>. It should be considered to resolve <a href="lwg-defects.html#2465" title="SFINAE-friendly common_type is nearly impossible to specialize
+correctly and regresses key functionality">2465</a>
 by this revised wording.
 </p>
 
@@ -116,7 +118,8 @@ as <code>common_type_t&lt;C, R...&gt;</code>. Otherwise, there shall be no membe
 </ol>
 </blockquote>
 </li>
-<li><p> The following wording is a merge of the above with the current proposed resolution of <a href="lwg-defects.html#2465">2465</a>, to provide 
+<li><p> The following wording is a merge of the above with the current proposed resolution of <a href="lwg-defects.html#2465" title="SFINAE-friendly common_type is nearly impossible to specialize
+correctly and regresses key functionality">2465</a>, to provide 
 editorial guidance if both proposed resolutions are accepted:</p>
 
 <blockquote>

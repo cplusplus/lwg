@@ -66,7 +66,7 @@
 <p><b>Discussion:</b></p>
 <p>
 <code>directory_entry</code> has a conversion function to <code>const path&amp;</code> and depends on <code>path</code>'s stream insertion 
-operator for stream insertion support, which is now broken after LWG <a href="lwg-defects.html#2989">2989</a> made it a hidden friend.
+operator for stream insertion support, which is now broken after LWG <a href="lwg-defects.html#2989" title="path's stream insertion operator lets you insert everything under the sun">2989</a> made it a hidden friend.
 <p/>
 This does not appear to be intended.
 </p>

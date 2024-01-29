@@ -84,14 +84,14 @@ int main() {
 </pre>
 </blockquote>
 <p>
-Before LWG <a href="lwg-defects.html#3392">3392</a>, we had a single iterator-pair overload:
+Before LWG <a href="lwg-defects.html#3392" title="ranges::distance() cannot be used on a move-only iterator with a sized sentinel">3392</a>, we had a single iterator-pair overload:
 </p>
 <blockquote><pre>
 template&lt;input_or_output_iterator I, sentinel_for&lt;I&gt; S&gt;
   constexpr iter_difference_t&lt;I&gt; distance(I first, S last);
 </pre></blockquote>
 <p>
-which works fine for C pointers. After LWG <a href="lwg-defects.html#3392">3392</a>, we have two
+which works fine for C pointers. After LWG <a href="lwg-defects.html#3392" title="ranges::distance() cannot be used on a move-only iterator with a sized sentinel">3392</a>, we have two
 iterator-pair overloads:
 </p>
 <blockquote><pre>
@@ -122,7 +122,7 @@ Set priority to 2 after reflector poll.
 </p>
 <blockquote class="note">
 <p>
-This wording is relative to <a href="https://wg21.link/N4901">N4901</a>. 
+This wording is relative to <a href="https://wg21.link/N4901" title=" Working Draft, Standard for Programming Language C++">N4901</a>. 
 </p>
 
 <blockquote class="note">
@@ -193,7 +193,7 @@ template&lt;<ins>class</ins><del>input_or_output_iterator</del> I, sized_sentine
 
 <p id="res-3664"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4901">N4901</a>. 
+This wording is relative to <a href="https://wg21.link/N4901" title=" Working Draft, Standard for Programming Language C++">N4901</a>. 
 </p>
 
 <blockquote class="note">

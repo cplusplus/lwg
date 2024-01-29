@@ -65,7 +65,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Issue <a href="lwg-defects.html#386">386</a> changed the return type of <code>reverse_iterator::operator[]</code> to unspecified. However,
+Issue <a href="lwg-defects.html#386" title="Reverse iterator's operator[] has impossible return type">386</a> changed the return type of <code>reverse_iterator::operator[]</code> to unspecified. However,
 as of N3066, the return type of a random access iterator's <code>operator[]</code> shall be convertible to <code>reference</code>;
 thus the return type of <code>reverse_iterator::operator[]</code> should be <code>reference</code> (and it is in all common
 implementations).
@@ -80,7 +80,7 @@ use <code>reference</code> instead of <code><i>unspecified</i></code>.
 
 <p id="res-2595"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4885">N4885</a>.
+This wording is relative to <a href="https://wg21.link/N4885" title=" Working Draft, Standard for Programming Language C++">N4885</a>.
 </p>
 
 <ol>

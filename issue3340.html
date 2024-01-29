@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 3340: Formatting functions should throw on argument/format string mismatch in &sect;[format.functions]</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#C++20">C++20</a> status.</em></p>
-<h3><a name="3340" href="lwg-defects.html#3340">3340</a>. Formatting functions should throw on argument/format string mismatch in &sect;[format.functions]</h3>
+<h3 id="3340"><a href="lwg-defects.html#3340">3340</a>. Formatting functions should throw on argument/format string mismatch in &sect;[format.functions]</h3>
 <p><b>Section:</b> 22.14.5 <a href="https://wg21.link/format.functions">[format.functions]</a> <b>Status:</b> <a href="lwg-active.html#C++20">C++20</a>
  <b>Submitter:</b> Great Britain <b>Opened:</b> 2019-11-17 <b>Last modified:</b> 2021-02-25</p>
 <p><b>Priority: </b>Not Prioritized
@@ -59,7 +68,7 @@
 
 <p>
 Formatting functions don't allow throwing on incorrect arguments. 
-<tt>std::format</tt> is only allowed to throw if <tt>fmt</tt> is not a format string, but the 
+<code>std::format</code> is only allowed to throw if <code>fmt</code> is not a format string, but the 
 intention is it also throws for errors during formatting, e.g. there are fewer arguments than 
 required by the format string.
 </p>
@@ -95,20 +104,20 @@ by <b>Option A</b> and <b>Option B</b>, respectively.]
 
 <blockquote>
 <p>
--1- A <i>format string</i> <ins>for arguments <tt>args</tt></ins> is a (possibly empty) sequence of 
-<i>replacement fields</i>, <i>escape sequences</i>, and characters other than <tt>{</tt> and <tt>}</tt>. 
+-1- A <i>format string</i> <ins>for arguments <code>args</code></ins> is a (possibly empty) sequence of 
+<i>replacement fields</i>, <i>escape sequences</i>, and characters other than <code>{</code> and <code>}</code>. 
 [&hellip;]
 <p/>
--2- The <i>arg-id</i> field specifies the index of the argument in <tt>args</tt> whose value is to be 
+-2- The <i>arg-id</i> field specifies the index of the argument in <code>args</code> whose value is to be 
 formatted and inserted into the output instead of the replacement field. <ins>If there is no argument 
-with the index <i>arg-id</i> in <tt>args</tt>, the string is not a format string.</ins> The optional 
+with the index <i>arg-id</i> in <code>args</code>, the string is not a format string.</ins> The optional 
 <i>format-specifier</i> field explicitly specifies a format for the replacement value.
 <p/>
 [&hellip;]
 <p/>
 -5- The <i>format-spec</i> field contains <i>format specifications</i> that define how the value 
 should be presented. Each type can define its own interpretation of the <i>format-spec</i> field. 
-<ins>If <i>format-spec</i> doesn't conform to the format specifications for the argument in <tt>args</tt> 
+<ins>If <i>format-spec</i> doesn't conform to the format specifications for the argument in <code>args</code> 
 referred to by <i>arg-id</i>, the string is not a format string.</ins> [&hellip;]
 </p>
 </blockquote>
@@ -121,8 +130,8 @@ referred to by <i>arg-id</i>, the string is not a format string.</ins> [&hellip;
 <ins><b>20.20.? Error reporting [format.err.report]</b></ins>
 <p/>
 <ins>-?- Formatting functions throw exceptions to report formatting and other errors. They throw 
-<tt>format_error</tt> if an argument <tt>fmt</tt> is passed that is not a format string for arguments 
-<tt>args</tt> and propagate exceptions thrown by <tt>formatter</tt> specializations and iterator operations. 
+<code>format_error</code> if an argument <code>fmt</code> is passed that is not a format string for arguments 
+<code>args</code> and propagate exceptions thrown by <code>formatter</code> specializations and iterator operations. 
 Failure to allocate storage is reported by throwing an exception as described in 
 16.4.6.13 <a href="https://wg21.link/res.on.exception.handling">[res.on.exception.handling]</a>.</ins>
 </p>
@@ -142,7 +151,7 @@ wstring vformat(const locale&amp; loc, wstring_view fmt, wformat_args args);
 <p>
 -6- [&hellip;]
 <p/>
--7- <i>Throws:</i> <del><tt>format_error</tt> if <tt>fmt</tt> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
+-7- <i>Throws:</i> <del><code>format_error</code> if <code>fmt</code> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
 </p>
 </blockquote>
 [&hellip;]
@@ -162,7 +171,7 @@ template&lt;class Out&gt;
 <p>
 [&hellip;]
 <p/>
--15- <i>Throws:</i> <del><tt>format_error</tt> if <tt>fmt</tt> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
+-15- <i>Throws:</i> <del><code>format_error</code> if <code>fmt</code> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
 </p>
 </blockquote>
 [&hellip;]
@@ -186,7 +195,7 @@ template&lt;class Out, class... Args&gt;
 <p>
 [&hellip;]
 <p/>
--21- <i>Throws:</i> <del><tt>format_error</tt> if <tt>fmt</tt> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
+-21- <i>Throws:</i> <del><code>format_error</code> if <code>fmt</code> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
 </p>
 </blockquote>
 [&hellip;]
@@ -204,7 +213,7 @@ template&lt;class... Args&gt;
 <p>
 [&hellip;]
 <p/>
--25- <i>Throws:</i> <del><tt>format_error</tt> if <tt>fmt</tt> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
+-25- <i>Throws:</i> <del><code>format_error</code> if <code>fmt</code> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
 </p>
 </blockquote>
 </blockquote>
@@ -218,20 +227,20 @@ template&lt;class... Args&gt;
 
 <blockquote>
 <p>
--1- A <i>format string</i> <ins>for arguments <tt>args</tt></ins> is a (possibly empty) sequence of 
-<i>replacement fields</i>, <i>escape sequences</i>, and characters other than <tt>{</tt> and <tt>}</tt>. 
+-1- A <i>format string</i> <ins>for arguments <code>args</code></ins> is a (possibly empty) sequence of 
+<i>replacement fields</i>, <i>escape sequences</i>, and characters other than <code>{</code> and <code>}</code>. 
 [&hellip;]
 <p/>
--2- The <i>arg-id</i> field specifies the index of the argument in <tt>args</tt> whose value is to be 
+-2- The <i>arg-id</i> field specifies the index of the argument in <code>args</code> whose value is to be 
 formatted and inserted into the output instead of the replacement field. <ins>If there is no argument 
-with the index <i>arg-id</i> in <tt>args</tt>, the string is not a format string.</ins> The optional 
+with the index <i>arg-id</i> in <code>args</code>, the string is not a format string.</ins> The optional 
 <i>format-specifier</i> field explicitly specifies a format for the replacement value.
 <p/>
 [&hellip;]
 <p/>
 -5- The <i>format-spec</i> field contains <i>format specifications</i> that define how the value 
 should be presented. Each type can define its own interpretation of the <i>format-spec</i> field. 
-<ins>If <i>format-spec</i> doesn't conform to the format specifications for the argument in <tt>args</tt> 
+<ins>If <i>format-spec</i> doesn't conform to the format specifications for the argument in <code>args</code> 
 referred to by <i>arg-id</i>, the string is not a format string.</ins> [&hellip;]
 </p>
 </blockquote>
@@ -250,7 +259,7 @@ wstring vformat(const locale&amp; loc, wstring_view fmt, wformat_args args);
 <p>
 -6- [&hellip;]
 <p/>
--7- <i>Throws:</i> <tt>format_error</tt> if <tt>fmt</tt> is not a format string <ins>for <tt>args</tt></ins>.
+-7- <i>Throws:</i> <code>format_error</code> if <code>fmt</code> is not a format string <ins>for <code>args</code></ins>.
 </p>
 </blockquote>
 [&hellip;]
@@ -270,7 +279,7 @@ template&lt;class Out&gt;
 <p>
 [&hellip;]
 <p/>
--15- <i>Throws:</i> <tt>format_error</tt> if <tt>fmt</tt> is not a format string <ins>for <tt>args</tt></ins>.
+-15- <i>Throws:</i> <code>format_error</code> if <code>fmt</code> is not a format string <ins>for <code>args</code></ins>.
 </p>
 </blockquote>
 [&hellip;]
@@ -294,7 +303,7 @@ template&lt;class Out, class... Args&gt;
 <p>
 [&hellip;]
 <p/>
--21- <i>Throws:</i> <tt>format_error</tt> if <tt>fmt</tt> is not a format string <ins>for <tt>args</tt></ins>.
+-21- <i>Throws:</i> <code>format_error</code> if <code>fmt</code> is not a format string <ins>for <code>args</code></ins>.
 </p>
 </blockquote>
 [&hellip;]
@@ -312,7 +321,7 @@ template&lt;class... Args&gt;
 <p>
 [&hellip;]
 <p/>
--25- <i>Throws:</i> <tt>format_error</tt> if <tt>fmt</tt> is not a format string <ins>for <tt>args</tt></ins>.
+-25- <i>Throws:</i> <code>format_error</code> if <code>fmt</code> is not a format string <ins>for <code>args</code></ins>.
 </p>
 </blockquote>
 </blockquote>
@@ -336,13 +345,13 @@ wording refinements have been suggested that are integrated below.
 
 <blockquote>
 <p>
--1- A <i>format string</i> <ins>for arguments <tt>args</tt></ins> is a (possibly empty) sequence of 
-<i>replacement fields</i>, <i>escape sequences</i>, and characters other than <tt>{</tt> and <tt>}</tt>. 
+-1- A <i>format string</i> <ins>for arguments <code>args</code></ins> is a (possibly empty) sequence of 
+<i>replacement fields</i>, <i>escape sequences</i>, and characters other than <code>{</code> and <code>}</code>. 
 [&hellip;]
 <p/>
--2- The <i>arg-id</i> field specifies the index of the argument in <tt>args</tt> whose value is to be 
+-2- The <i>arg-id</i> field specifies the index of the argument in <code>args</code> whose value is to be 
 formatted and inserted into the output instead of the replacement field. <ins>If there is no argument 
-with the index <i>arg-id</i> in <tt>args</tt>, the string is not a format string for <tt>args</tt>.</ins> The optional 
+with the index <i>arg-id</i> in <code>args</code>, the string is not a format string for <code>args</code>.</ins> The optional 
 <i>format-specifier</i> field explicitly specifies a format for the replacement value.
 <p/>
 [&hellip;]
@@ -350,7 +359,7 @@ with the index <i>arg-id</i> in <tt>args</tt>, the string is not a format string
 -5- The <i>format-spec</i> field contains <i>format specifications</i> that define how the value 
 should be presented. Each type can define its own interpretation of the <i>format-spec</i> field. 
 <ins>If <i>format-spec</i> does not conform to the format specifications for the argument type referred to 
-by <i>arg-id</i>, the string is not a format string for <tt>args</tt>.</ins> [&hellip;]
+by <i>arg-id</i>, the string is not a format string for <code>args</code>.</ins> [&hellip;]
 </p>
 </blockquote>
 </li>
@@ -361,9 +370,9 @@ by <i>arg-id</i>, the string is not a format string for <tt>args</tt>.</ins> [&h
 <p>
 <ins><b>20.20.? Error reporting [format.err.report]</b></ins>
 <p/>
-<ins>-?- Formatting functions throw <tt>format_error</tt> if an argument <tt>fmt</tt> is passed 
-that is not a format string for <tt>args</tt>. They propagate exceptions thrown by operations of
-<tt>formatter</tt> specializations and iterators. Failure to allocate storage is 
+<ins>-?- Formatting functions throw <code>format_error</code> if an argument <code>fmt</code> is passed 
+that is not a format string for <code>args</code>. They propagate exceptions thrown by operations of
+<code>formatter</code> specializations and iterators. Failure to allocate storage is 
 reported by throwing an exception as described in 16.4.6.13 <a href="https://wg21.link/res.on.exception.handling">[res.on.exception.handling]</a>.</ins>
 </p>
 </blockquote>
@@ -382,7 +391,7 @@ wstring vformat(const locale&amp; loc, wstring_view fmt, wformat_args args);
 <p>
 -6- [&hellip;]
 <p/>
--7- <i>Throws:</i> <del><tt>format_error</tt> if <tt>fmt</tt> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
+-7- <i>Throws:</i> <del><code>format_error</code> if <code>fmt</code> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
 </p>
 </blockquote>
 [&hellip;]
@@ -402,7 +411,7 @@ template&lt;class Out&gt;
 <p>
 [&hellip;]
 <p/>
--15- <i>Throws:</i> <del><tt>format_error</tt> if <tt>fmt</tt> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
+-15- <i>Throws:</i> <del><code>format_error</code> if <code>fmt</code> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
 </p>
 </blockquote>
 [&hellip;]
@@ -426,7 +435,7 @@ template&lt;class Out, class... Args&gt;
 <p>
 [&hellip;]
 <p/>
--21- <i>Throws:</i> <del><tt>format_error</tt> if <tt>fmt</tt> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
+-21- <i>Throws:</i> <del><code>format_error</code> if <code>fmt</code> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
 </p>
 </blockquote>
 [&hellip;]
@@ -444,7 +453,7 @@ template&lt;class... Args&gt;
 <p>
 [&hellip;]
 <p/>
--25- <i>Throws:</i> <del><tt>format_error</tt> if <tt>fmt</tt> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
+-25- <i>Throws:</i> <del><code>format_error</code> if <code>fmt</code> is not a format string</del><ins>As specified in 22.14.3 <a href="https://wg21.link/format.err.report">[format.err.report]</a></ins>.
 </p>
 </blockquote>
 </blockquote>

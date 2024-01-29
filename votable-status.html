@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>LWG Index by Status and Section</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -53,71 +62,71 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
 
-<p>Revised 2024-01-28 at 13:28:43 UTC
-</p><h2><a name="Ready"</a>Ready (6 issues)</h2>
-<table border="1" cellpadding="4">
+<p>Revised 2024-01-29 at 11:35:50 UTC
+</p><h2 id="Ready">Ready (6 issues)</h2>
+<table class="issues-index">
 <tr>
-  <td align="center"><a href="lwg-toc.html"><b>Issue</b></a></td>
-  <td align="center"><a href="lwg-status.html"><b>Status</b></a></td>
-  <td align="center"><a href="lwg-index.html"><b>Section</b></a></td>
-  <td align="center"><b>Title</b></td>
-  <td align="center"><b>Proposed Resolution</b></td>
-  <td align="center"><a href="unresolved-prioritized.html"><b>Priority</b></a></td>
-  <td align="center"><b>Duplicates</b></td>
+  <th><a href="lwg-toc.html">Issue</a></th>
+  <th><a href="lwg-status.html">Status</a></th>
+  <th><a href="lwg-index.html">Section</a></th>
+  <th>Title</th>
+  <th>Proposed Resolution</th>
+  <th><a href="unresolved-prioritized.html">Priority</a></th>
+  <th>Duplicates</th>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3975">3975</a><sup><a href="https://cplusplus.github.io/LWG/issue3975">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#Ready">Ready</a><a name="3975"></a></td>
-<td align="left">22.14.6.6 [format.context]<a name="format.context"></a></td>
-<td align="left">Specializations of <tt>basic_format_context</tt> should not be permitted</td>
-<td align="center">Yes</td>
-<td align="center">3</td>
-<td align="left"></td>
+<td id="3975"><a href="lwg-active.html#3975">3975</a><sup><a href="https://cplusplus.github.io/LWG/issue3975">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>22.14.6.6 [format.context]</td>
+<td>Specializations of <code>basic_format_context</code> should not be permitted</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3950">3950</a><sup><a href="https://cplusplus.github.io/LWG/issue3950">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#Ready">Ready</a><a name="3950"></a></td>
-<td align="left">23.3.2 [string.view.synop]<a name="string.view.synop"></a></td>
-<td align="left"><tt>std::basic_string_view</tt> comparison operators are overspecified</td>
-<td align="center">Yes</td>
-<td align="center"></td>
-<td align="left"></td>
+<td id="3950"><a href="lwg-active.html#3950">3950</a><sup><a href="https://cplusplus.github.io/LWG/issue3950">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>23.3.2 [string.view.synop]</td>
+<td><code>std::basic_string_view</code> comparison operators are overspecified</td>
+<td>Yes</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3988">3988</a><sup><a href="https://cplusplus.github.io/LWG/issue3988">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#Ready">Ready</a><a name="3988"></a></td>
-<td align="left">25.5.3 [const.iterators]<a name="const.iterators"></a></td>
-<td align="left">Should <tt>as_const_view</tt> and <tt>basic_const_iterator</tt> provide <tt>base()</tt>?</td>
-<td align="center">Yes</td>
-<td align="center">3</td>
-<td align="left"></td>
+<td id="3988"><a href="lwg-active.html#3988">3988</a><sup><a href="https://cplusplus.github.io/LWG/issue3988">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>25.5.3 [const.iterators]</td>
+<td>Should <code>as_const_view</code> and <code>basic_const_iterator</code> provide <code>base()</code>?</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3984">3984</a><sup><a href="https://cplusplus.github.io/LWG/issue3984">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#Ready">Ready</a><a name="3984"></a></td>
-<td align="left">26.5.7.2 [range.utility.conv.to]<a name="range.utility.conv.to"></a></td>
-<td align="left"><tt>ranges::to</tt>'s recursion branch may be ill-formed</td>
-<td align="center">Yes</td>
-<td align="center">3</td>
-<td align="left"></td>
+<td id="3984"><a href="lwg-active.html#3984">3984</a><sup><a href="https://cplusplus.github.io/LWG/issue3984">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>26.5.7.2 [range.utility.conv.to]</td>
+<td><code>ranges::to</code>'s recursion branch may be ill-formed</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3919">3919</a><sup><a href="https://cplusplus.github.io/LWG/issue3919">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#Ready">Ready</a><a name="3919"></a></td>
-<td align="left">26.7.23 [range.enumerate]<a name="range.enumerate"></a></td>
-<td align="left"><tt>enumerate_view</tt> may invoke UB for sized common non-forward underlying ranges</td>
-<td align="center">Yes</td>
-<td align="center">3</td>
-<td align="left"></td>
+<td id="3919"><a href="lwg-active.html#3919">3919</a><sup><a href="https://cplusplus.github.io/LWG/issue3919">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>26.7.23 [range.enumerate]</td>
+<td><code>enumerate_view</code> may invoke UB for sized common non-forward underlying ranges</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
 </tr>
 <tr>
-<td align="right"><a href="lwg-active.html#3767">3767</a><sup><a href="https://cplusplus.github.io/LWG/issue3767">(i)</a></sup></td>
-<td align="left"><a href="lwg-active.html#Ready">Ready</a><a name="3767"></a></td>
-<td align="left">30.3.1.2.1 [locale.category]<a name="locale.category"></a></td>
-<td align="left"><tt>codecvt&lt;char<i>N</i>_t, char8_t, mbstate_t&gt;</tt> incorrectly added to locale</td>
-<td align="center">Yes</td>
-<td align="center">3</td>
-<td align="left"></td>
+<td id="3767"><a href="lwg-active.html#3767">3767</a><sup><a href="https://cplusplus.github.io/LWG/issue3767">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>30.3.1.2.1 [locale.category]</td>
+<td><code>codecvt&lt;char<i>N</i>_t, char8_t, mbstate_t&gt;</code> incorrectly added to locale</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
 </tr>
 </table>
 </body>

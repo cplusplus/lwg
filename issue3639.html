@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 3639: Handling of fill character width is underspecified in std::format</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Resolved">Resolved</a> status.</em></p>
-<h3><a name="3639" href="lwg-defects.html#3639">3639</a>. Handling of fill character width is underspecified in <tt>std::format</tt></h3>
+<h3 id="3639"><a href="lwg-defects.html#3639">3639</a>. Handling of fill character width is underspecified in <code>std::format</code></h3>
 <p><b>Section:</b> 22.14.2.2 <a href="https://wg21.link/format.string.std">[format.string.std]</a> <b>Status:</b> <a href="lwg-active.html#Resolved">Resolved</a>
  <b>Submitter:</b> Victor Zverovich <b>Opened:</b> 2021-11-13 <b>Last modified:</b> 2023-03-23</p>
 <p><b>Priority: </b>3
@@ -66,14 +75,14 @@ For example:
 auto s = std::format("{:&#x1F921;&gt;10}", 42);
 </pre></blockquote>
 <p>
-<tt>"&#x1F921;"</tt> (U+1F921) is a single code point but its estimated display width is two.
+<code>"&#x1F921;"</code> (U+1F921) is a single code point but its estimated display width is two.
 <p/>
 There are at least three possible resolutions:
 </p>
 <ol>
-<li><p><tt>s == "&#x1F921;&#x1F921;&#x1F921;&#x1F921;42"</tt>: use the estimated display width,
+<li><p><code>s == "&#x1F921;&#x1F921;&#x1F921;&#x1F921;42"</code>: use the estimated display width,
 correctly displayed on compatible terminals.</p></li>
-<li><p><tt>s == "&#x1F921;&#x1F921;&#x1F921;&#x1F921;&#x1F921;&#x1F921;&#x1F921;&#x1F921;42"</tt>:
+<li><p><code>s == "&#x1F921;&#x1F921;&#x1F921;&#x1F921;&#x1F921;&#x1F921;&#x1F921;&#x1F921;42"</code>:
 assume the display width of 1, incorrectly displayed.</p></li>
 <li><p>Require the fill character to have the estimated width of 1.</p></li>
 </ol>

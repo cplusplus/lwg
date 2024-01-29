@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 4035: single_view should provide empty</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="4035" href="lwg-active.html#4035">4035</a>. <tt>single_view</tt> should provide <tt>empty</tt></h3>
+<h3 id="4035"><a href="lwg-active.html#4035">4035</a>. <code>single_view</code> should provide <code>empty</code></h3>
 <p><b>Section:</b> 26.6.3.2 <a href="https://wg21.link/range.single.view">[range.single.view]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-12-31 <b>Last modified:</b> 2024-01-15</p>
 <p><b>Priority: </b>Not Prioritized
@@ -56,10 +65,10 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Although <tt>single_view::empty</tt> can be synthesized through <tt>view_interface</tt>,
-it seems more worthwhile to provide a static <tt>empty</tt> for it which eliminates the 
-need to pass in an object parameter, guarantees <tt>noexcept</tt>-ness, and is consistent 
-with the design of <tt>empty_view</tt> (<a href="https://godbolt.org/z/Yr6bhM11n">demo</a>):
+Although <code>single_view::empty</code> can be synthesized through <code>view_interface</code>,
+it seems more worthwhile to provide a static <code>empty</code> for it which eliminates the 
+need to pass in an object parameter, guarantees <code>noexcept</code>-ness, and is consistent 
+with the design of <code>empty_view</code> (<a href="https://godbolt.org/z/Yr6bhM11n">demo</a>):
 </p>
 <blockquote>
 <pre>
@@ -113,7 +122,7 @@ constexpr const T* end() const noexcept;
 </pre>
 <blockquote>
 <p>
--5- <i>Effects</i>: Equivalent to: <tt>return data() + 1;</tt>
+-5- <i>Effects</i>: Equivalent to: <code>return data() + 1;</code>
 </p>
 </blockquote>
 <pre>
@@ -121,7 +130,7 @@ constexpr const T* end() const noexcept;
 </pre>
 <blockquote>
 <p>
-<ins>-?- <i>Effects</i>: Equivalent to: <tt>return false;</tt></ins>
+<ins>-?- <i>Effects</i>: Equivalent to: <code>return false;</code></ins>
 </p>
 </blockquote>
 </blockquote>

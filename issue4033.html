@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 4033: &sect;[macro.names] defining macros after importing the standard library</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="4033" href="lwg-active.html#4033">4033</a>. &sect;[macro.names] defining macros after importing the standard library</h3>
+<h3 id="4033"><a href="lwg-active.html#4033">4033</a>. &sect;[macro.names] defining macros after importing the standard library</h3>
 <p><b>Section:</b> 16.4.5.3.3 <a href="https://wg21.link/macro.names">[macro.names]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2023-12-27 <b>Last modified:</b> 2024-01-13</p>
 <p><b>Priority: </b>Not Prioritized
@@ -93,13 +102,13 @@ This wording is relative to <a href="https://wg21.link/N4971">N4971</a>.
 <blockquote>
 <p>
 -1- <ins>If a translation unit includes a standard header, imports a standard header unit, or imports a
-standard library module, and provides a name specified in the standard library as an argument to <tt>#define</tt> 
-or <tt>#undef</tt>, the program is ill-formed, no diagnostic required</ins><del>A translation unit that includes 
-a standard library header shall not <tt>#define</tt> or <tt>#undef</tt> names declared in any standard library header</del>.
+standard library module, and provides a name specified in the standard library as an argument to <code>#define</code> 
+or <code>#undef</code>, the program is ill-formed, no diagnostic required</ins><del>A translation unit that includes 
+a standard library header shall not <code>#define</code> or <code>#undef</code> names declared in any standard library header</del>.
 <p/>
--2- A translation unit shall not <tt>#define</tt> or <tt>#undef</tt> names lexically identical to keywords, to the identifiers 
+-2- A translation unit shall not <code>#define</code> or <code>#undef</code> names lexically identical to keywords, to the identifiers 
 listed in Table [tab:lex.name.special], or to the <i>attribute-token</i>s described in 9.12 <a href="https://wg21.link/dcl.attr">[dcl.attr]</a>, except that 
-the names <tt>likely</tt> and <tt>unlikely</tt> may be defined as function-like macros (15.6 <a href="https://wg21.link/cpp.replace">[cpp.replace]</a>).
+the names <code>likely</code> and <code>unlikely</code> may be defined as function-like macros (15.6 <a href="https://wg21.link/cpp.replace">[cpp.replace]</a>).
 </p>
 </blockquote>
 

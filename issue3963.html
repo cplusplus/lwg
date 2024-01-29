@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 3963: Different std::flat_map/std::flat_multimap specializations should be able to share same nested classes</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="3963" href="lwg-active.html#3963">3963</a>. Different <tt>std::flat_map</tt>/<tt>std::flat_multimap</tt> specializations should be able to share same nested classes</h3>
+<h3 id="3963"><a href="lwg-active.html#3963">3963</a>. Different <code>std::flat_map</code>/<code>std::flat_multimap</code> specializations should be able to share same nested classes</h3>
 <p><b>Section:</b> 24.6.9.2 <a href="https://wg21.link/flat.map.defn">[flat.map.defn]</a>, 24.6.10.2 <a href="https://wg21.link/flat.multimap.defn">[flat.multimap.defn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-07-24 <b>Last modified:</b> 2023-11-03</p>
 <p><b>Priority: </b>3
@@ -56,13 +65,13 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Per current wording, <tt>std::flat_map&lt;K, V, C1, KCont, VCont&gt;::containers</tt> and 
-<tt>std::flat_multimap&lt;K, V, C2, KCont, VCont&gt;::containers</tt> need to be different types 
+Per current wording, <code>std::flat_map&lt;K, V, C1, KCont, VCont&gt;::containers</code> and 
+<code>std::flat_multimap&lt;K, V, C2, KCont, VCont&gt;::containers</code> need to be different types 
 since they are specified as nested classes. Likewise, 
-<tt>std::flat_map&lt;K, V, C, KCont1, VCont1&gt;::value_compare</tt> and 
-<tt>std::flat_multimap&lt;K, V, C, KCont2, VCont2&gt;::value_compare</tt> also need to be different types.
+<code>std::flat_map&lt;K, V, C, KCont1, VCont1&gt;::value_compare</code> and 
+<code>std::flat_multimap&lt;K, V, C, KCont2, VCont2&gt;::value_compare</code> also need to be different types.
 <p/>
-It may be better to allow implementations to make different <tt>std::flat_map</tt>/<tt>std::flat_multimap</tt> 
+It may be better to allow implementations to make different <code>std::flat_map</code>/<code>std::flat_multimap</code> 
 specializations share same nested classes.
 </p>
 
@@ -100,7 +109,7 @@ and the comparator type are not the associated types of these nested classes dur
 <blockquote>
 <p>
 <ins>
--?- Implementations may define member types <tt>containers</tt> and <tt>value_compare</tt> as nested 
+-?- Implementations may define member types <code>containers</code> and <code>value_compare</code> as nested 
 classes of another templated class and introduce them as <i>typedef-name</i>s. Implementations shall ensure that 
 these nested classes are not themselves class templates and have the specified names.
 </ins>

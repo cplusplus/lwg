@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 3919: enumerate_view may invoke UB for sized common non-forward underlying ranges</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Ready">Ready</a> status.</em></p>
-<h3><a name="3919" href="lwg-active.html#3919">3919</a>. <tt>enumerate_view</tt> may invoke UB for sized common non-forward underlying ranges</h3>
+<h3 id="3919"><a href="lwg-active.html#3919">3919</a>. <code>enumerate_view</code> may invoke UB for sized common non-forward underlying ranges</h3>
 <p><b>Section:</b> 26.7.23 <a href="https://wg21.link/range.enumerate">[range.enumerate]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
  <b>Submitter:</b> Patrick Palka <b>Opened:</b> 2023-04-07 <b>Last modified:</b> 2023-11-10</p>
 <p><b>Priority: </b>3
@@ -55,23 +64,23 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#Ready">Ready</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-For a sized common range, <tt>enumerate_view::end()</tt> is specified to call
-<tt>ranges::distance</tt>. But <tt>ranges::distance</tt> is not necessarily well-defined
-for a sized non-forward range after calling <tt>ranges::begin</tt> (according to
+For a sized common range, <code>enumerate_view::end()</code> is specified to call
+<code>ranges::distance</code>. But <code>ranges::distance</code> is not necessarily well-defined
+for a sized non-forward range after calling <code>ranges::begin</code> (according to
 26.4.3 <a href="https://wg21.link/range.sized">[range.sized]</a>).
 <p/>
 So for a sized common non-forward underlying range, it seems calling
-<tt>enumerate_view::begin()</tt> followed by <tt>enumerate_view::end()</tt> may invoke UB
-and thus make <tt>enumerate_view</tt> potentially unusable for such ranges.
+<code>enumerate_view::begin()</code> followed by <code>enumerate_view::end()</code> may invoke UB
+and thus make <code>enumerate_view</code> potentially unusable for such ranges.
 <p/>
 I suppose we might need to instead call and cache the result of
-<tt>ranges::distance</tt> from <tt>enumerate_view::begin()</tt> for such ranges.
+<code>ranges::distance</code> from <code>enumerate_view::begin()</code> for such ranges.
 </p>
 
 <p><i>[2022-04-12; Patrick Palka provides wording]</i></p>
 
 <p>
-The proposed wording follows the suggestion provided by Tim Song, to simply make <tt>enumerate</tt> non-common for this case.
+The proposed wording follows the suggestion provided by Tim Song, to simply make <code>enumerate</code> non-common for this case.
 </p>
 
 <p><i>[2023-05-24; Reflector poll]</i></p>
@@ -92,7 +101,7 @@ This wording is relative to <a href="https://wg21.link/N4944">N4944</a>.
 
 <ol>
 <li>
-<p>Modify 26.7.23.2 <a href="https://wg21.link/range.enumerate.view">[range.enumerate.view]</a>, class template class <tt>enumerate_view</tt> synopsis, as indicated:</p>
+<p>Modify 26.7.23.2 <a href="https://wg21.link/range.enumerate.view">[range.enumerate.view]</a>, class template class <code>enumerate_view</code> synopsis, as indicated:</p>
 
 <blockquote>
 <blockquote><pre>

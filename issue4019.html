@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 4019: Reversing an infinite range leads to an infinite loop</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="4019" href="lwg-active.html#4019">4019</a>. Reversing an infinite range leads to an infinite loop</h3>
+<h3 id="4019"><a href="lwg-active.html#4019">4019</a>. Reversing an infinite range leads to an infinite loop</h3>
 <p><b>Section:</b> 26.7.20 <a href="https://wg21.link/range.reverse">[range.reverse]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Barry Revzin <b>Opened:</b> 2023-11-25 <b>Last modified:</b> 2023-11-27</p>
 <p><b>Priority: </b>Not Prioritized
@@ -63,16 +72,16 @@ auto a = views::iota(0) | views::reverse;
 auto b = views::repeat(42) | views::reverse;
 </pre></blockquote>
 <p>
-Here, <tt>views::iota(0)</tt> and <tt>views::repeat(42)</tt> are both non-common bidirectional (even random-access) ranges. 
+Here, <code>views::iota(0)</code> and <code>views::repeat(42)</code> are both non-common bidirectional (even random-access) ranges. 
 They are also infinite ranges, even if the standard doesn't really recognize that. 
 <p/>
-<tt>views::reverse</tt> on a non-common range will actually compute the end iterator for you. So while both declarations 
-of <tt>a</tt> and <tt>b</tt> above compile, attempting to use either in any way will lead to an infinite loop when you 
-<tt>try a.begin()</tt> or <tt>b.begin()</tt>.
+<code>views::reverse</code> on a non-common range will actually compute the end iterator for you. So while both declarations 
+of <code>a</code> and <code>b</code> above compile, attempting to use either in any way will lead to an infinite loop when you 
+<code>try a.begin()</code> or <code>b.begin()</code>.
 <p/>
 A reddit post suggested disallowing reversing a non-common range but that likely breaks reasonable use-cases. We could at
-the very least recognize ranges whose sentinel is <tt>unreachable_t</tt> and reject those from consideration. For instance, 
-we could change 25.4.4.4 <a href="https://wg21.link/range.iter.op.next">[range.iter.op.next]</a>/3 to <i>Mandate</i> that <tt>S</tt> is not <tt>unreachable_t</tt>.
+the very least recognize ranges whose sentinel is <code>unreachable_t</code> and reject those from consideration. For instance, 
+we could change 25.4.4.4 <a href="https://wg21.link/range.iter.op.next">[range.iter.op.next]</a>/3 to <i>Mandate</i> that <code>S</code> is not <code>unreachable_t</code>.
 </p>
 
 

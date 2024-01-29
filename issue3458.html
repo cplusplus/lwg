@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 3458: Is shared_future intended to work with arrays or function types?</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Resolved">Resolved</a> status.</em></p>
-<h3><a name="3458" href="lwg-defects.html#3458">3458</a>. Is <tt>shared_future</tt> intended to work with arrays or function types?</h3>
+<h3 id="3458"><a href="lwg-defects.html#3458">3458</a>. Is <code>shared_future</code> intended to work with arrays or function types?</h3>
 <p><b>Section:</b> 33.10.7 <a href="https://wg21.link/futures.unique.future">[futures.unique.future]</a>, 33.10.8 <a href="https://wg21.link/futures.shared.future">[futures.shared.future]</a> <b>Status:</b> <a href="lwg-active.html#Resolved">Resolved</a>
  <b>Submitter:</b> Tomasz Kami&nacute;ski <b>Opened:</b> 2020-06-28 <b>Last modified:</b> 2020-11-09</p>
 <p><b>Priority: </b>0
@@ -60,7 +69,7 @@ Currently there is no prohibition of creating <code>shared_future&lt;T&gt;</code
 either an array type or a function type. However such objects cannot be constructed, as the corresponding 
 <code>future&lt;T&gt;</code>, is ill-formed due the signature <code>get()</code> method being ill-formed &mdash; 
 it will be declared as function returning an array or function type, respectively. [<i>Note:</i> For 
-<code>shared_future</code> <tt>get</tt> always returns an reference, so it is well-formed for array or function 
+<code>shared_future</code> <code>get</code> always returns an reference, so it is well-formed for array or function 
 types.]
 </p>
 
@@ -99,11 +108,11 @@ namespace std {
 </pre>
 </blockquote>
 <p>
-<ins>-?- If <tt>is_array_v&lt;R&gt;</tt> is <tt>true</tt> or <tt>is_function_v&lt;R&gt;</tt> is <tt>true</tt>, 
+<ins>-?- If <code>is_array_v&lt;R&gt;</code> is <code>true</code> or <code>is_function_v&lt;R&gt;</code> is <code>true</code>, 
 the program is ill-formed.</ins>
 <p/>
--4- The implementation provides the template <tt>future</tt> and two specializations, <tt>future&lt;R&amp;&gt;</tt> and 
-<tt>future&lt;void&gt;</tt>. These differ only in the return type and return value of the member function <tt>get</tt>, 
+-4- The implementation provides the template <code>future</code> and two specializations, <code>future&lt;R&amp;&gt;</code> and 
+<code>future&lt;void&gt;</code>. These differ only in the return type and return value of the member function <code>get</code>, 
 as set out in its description, below.
 </p>
 </blockquote>
@@ -123,12 +132,12 @@ namespace std {
 </pre>
 </blockquote>
 <p>
-<ins>-?- If <tt>is_array_v&lt;R&gt;</tt> is <tt>true</tt> or <tt>is_function_v&lt;R&gt;</tt> is <tt>true</tt>, 
+<ins>-?- If <code>is_array_v&lt;R&gt;</code> is <code>true</code> or <code>is_function_v&lt;R&gt;</code> is <code>true</code>, 
 the program is ill-formed.</ins>
 <p/>
--4- The implementation provides the template <tt>shared_future</tt> and two specializations, 
-<tt>shared_future&lt;R&amp;&gt;</tt> and <tt>shared_future&lt;void&gt;</tt>. These differ only in the return type 
-and return value of the member function <tt>get</tt>, as set out in its description, below.
+-4- The implementation provides the template <code>shared_future</code> and two specializations, 
+<code>shared_future&lt;R&amp;&gt;</code> and <code>shared_future&lt;void&gt;</code>. These differ only in the return type 
+and return value of the member function <code>get</code>, as set out in its description, below.
 </p>
 </blockquote>
 </li>

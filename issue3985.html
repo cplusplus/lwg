@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 3985: ranges::to should Mandates C not to be view</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="3985" href="lwg-active.html#3985">3985</a>. <tt>ranges::to</tt> should <i>Mandates</i> <tt>C</tt> not to be view</h3>
+<h3 id="3985"><a href="lwg-active.html#3985">3985</a>. <code>ranges::to</code> should <i>Mandates</i> <code>C</code> not to be view</h3>
 <p><b>Section:</b> 26.5.7.2 <a href="https://wg21.link/range.utility.conv.to">[range.utility.conv.to]</a>, 26.5.7.3 <a href="https://wg21.link/range.utility.conv.adaptors">[range.utility.conv.adaptors]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-25 <b>Last modified:</b> 2023-10-30</p>
 <p><b>Priority: </b>3
@@ -57,12 +66,12 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-In order to solve issues in LWG <a href="lwg-defects.html#3787">3787</a> and LWG <a href="lwg-defects.html#3847">3847</a> that the template parameter <tt>C</tt> 
-can be specified as an unreasonable type, <tt>ranges::to</tt> adds a <i>Mandates</i> that requires <tt>C</tt> to be a 
+In order to solve issues in LWG <a href="lwg-defects.html#3787">3787</a> and LWG <a href="lwg-defects.html#3847">3847</a> that the template parameter <code>C</code> 
+can be specified as an unreasonable type, <code>ranges::to</code> adds a <i>Mandates</i> that requires <code>C</code> to be a 
 <i>cv</i>-unqualified class type.
 </p>
 <p>
-However, the earliest requirement that <tt>C</tt> not be a view was still imposed by the constraints of function signatures,
+However, the earliest requirement that <code>C</code> not be a view was still imposed by the constraints of function signatures,
 although it is unclear why <i>Constraints</i> were used in the first place, such a way of kicking out the function candidate 
 does bring undesirable hard errors and poor diagnostics (<a href="https://godbolt.org/z/K1f15K71n">demo</a>):
 </p>
@@ -76,7 +85,7 @@ int main() {
 }
 </pre></blockquote>
 <p>
-I think consistent use of <i>Mandates</i> for template parameter <tt>C</tt> is more appropriate, as <tt>static_assert</tt> 
+I think consistent use of <i>Mandates</i> for template parameter <code>C</code> is more appropriate, as <code>static_assert</code> 
 provide clearer and more readable diagnostics.
 </p>
 
@@ -129,7 +138,7 @@ namespace std::ranges {
 </pre>
 <blockquote>
 <p>
--1- <i>Mandates</i>: <tt>C</tt> is a cv-unqualified class type <ins>and does not satisfy <tt>view</tt></ins>.
+-1- <i>Mandates</i>: <code>C</code> is a cv-unqualified class type <ins>and does not satisfy <code>view</code></ins>.
 </p>
 [&hellip;]
 </blockquote>
@@ -147,7 +156,7 @@ template&lt;template&lt;class...&gt; class C, class... Args&gt;
 </pre>
 <blockquote>
 <p>
--1- <i>Mandates</i>: For the first overload, <tt>C</tt> is a cv-unqualified class type <ins>and does not satisfy <tt>view</tt></ins>.
+-1- <i>Mandates</i>: For the first overload, <code>C</code> is a cv-unqualified class type <ins>and does not satisfy <code>view</code></ins>.
 </p>
 [&hellip;]
 </blockquote>

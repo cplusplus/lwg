@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 3953: iter_move for common_iterator and counted_iterator should return decltype(auto)</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#WP">WP</a> status.</em></p>
-<h3><a name="3953" href="lwg-defects.html#3953">3953</a>. <tt>iter_move</tt> for <tt>common_iterator</tt> and <tt>counted_iterator</tt> should return <tt>decltype(auto)</tt></h3>
+<h3 id="3953"><a href="lwg-defects.html#3953">3953</a>. <code>iter_move</code> for <code>common_iterator</code> and <code>counted_iterator</code> should return <code>decltype(auto)</code></h3>
 <p><b>Section:</b> 25.5.5.7 <a href="https://wg21.link/common.iter.cust">[common.iter.cust]</a>, 25.5.7.7 <a href="https://wg21.link/counted.iter.cust">[counted.iter.cust]</a> <b>Status:</b> <a href="lwg-active.html#WP">WP</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-06-30 <b>Last modified:</b> 2023-11-22</p>
 <p><b>Priority: </b>Not Prioritized
@@ -55,13 +64,13 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#WP">WP</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Although the customized <tt>iter_move</tt> of both requires the underlying iterator <tt>I</tt> to be <tt>input_iterator</tt>, 
-they still explicitly specify the return type as <tt>iter_rvalue_reference_t&lt;I&gt;</tt>,
+Although the customized <code>iter_move</code> of both requires the underlying iterator <code>I</code> to be <code>input_iterator</code>, 
+they still explicitly specify the return type as <code>iter_rvalue_reference_t&lt;I&gt;</code>,
 which makes it always instantiated.
 </p>
 <p>
-From the point of view that its validity is only specified in the <tt>input_iterator</tt> concept, it would be better to remove such 
-unnecessary type instantiation, which does not make much sense for an <tt>output_iterator</tt> even if it is still valid.
+From the point of view that its validity is only specified in the <code>input_iterator</code> concept, it would be better to remove such 
+unnecessary type instantiation, which does not make much sense for an <code>output_iterator</code> even if it is still valid.
 </p>
 
 <p><i>[2023-10-27; Reflector poll]</i></p>
@@ -80,7 +89,7 @@ This wording is relative to <a href="https://wg21.link/N4950">N4950</a>.
 </p>
 
 <ol>
-<li><p>Modify 25.5.5.1 <a href="https://wg21.link/common.iterator">[common.iterator]</a>, class template <tt>common_iterator</tt> synopsis, as indicated:</p>
+<li><p>Modify 25.5.5.1 <a href="https://wg21.link/common.iterator">[common.iterator]</a>, class template <code>common_iterator</code> synopsis, as indicated:</p>
 
 
 <blockquote>
@@ -115,14 +124,14 @@ friend constexpr <del>iter_rvalue_reference_t&lt;I&gt;</del><ins>decltype(auto)<
 <p>
 -1- <i>Preconditions</i>: [&hellip;]
 <p/>
--2- <i>Effects</i>: Equivalent to: <tt>return ranges::iter_move(get&lt;I&gt;(i.v_));</tt>
+-2- <i>Effects</i>: Equivalent to: <code>return ranges::iter_move(get&lt;I&gt;(i.v_));</code>
 </p>
 </blockquote>
 </blockquote>
 
 </li>
 
-<li><p>Modify 25.5.7.1 <a href="https://wg21.link/counted.iterator">[counted.iterator]</a>, class template <tt>counted_iterator</tt> synopsis, as indicated:</p>
+<li><p>Modify 25.5.7.1 <a href="https://wg21.link/counted.iterator">[counted.iterator]</a>, class template <code>counted_iterator</code> synopsis, as indicated:</p>
 
 
 <blockquote>
@@ -157,7 +166,7 @@ friend constexpr <del>iter_rvalue_reference_t&lt;I&gt;</del><ins>decltype(auto)<
 <p>
 -1- <i>Preconditions</i>: [&hellip;]
 <p/>
--2- <i>Effects</i>: Equivalent to: <tt>return ranges::iter_move(i.current);</tt>
+-2- <i>Effects</i>: Equivalent to: <code>return ranges::iter_move(i.current);</code>
 </p>
 </blockquote>
 </blockquote>

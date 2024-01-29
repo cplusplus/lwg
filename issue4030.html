@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 4030: Clarify whether arithmetic expressions in [numeric.sat.func] are mathematical or C++</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="4030" href="lwg-active.html#4030">4030</a>. Clarify whether arithmetic expressions in [numeric.sat.func] are mathematical or C++</h3>
+<h3 id="4030"><a href="lwg-active.html#4030">4030</a>. Clarify whether arithmetic expressions in [numeric.sat.func] are mathematical or C++</h3>
 <p><b>Section:</b> 27.10.17.1 <a href="https://wg21.link/numeric.sat.func">[numeric.sat.func]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Thomas K&ouml;ppe <b>Opened:</b> 2023-12-18 <b>Last modified:</b> 2023-12-22</p>
 <p><b>Priority: </b>Not Prioritized
@@ -56,12 +65,12 @@
 <p><b>Discussion:</b></p>
 <p>
 During the application of <a href="https://wg21.link/P0543R0">P0543R0</a>, "Saturation arithmetic", it was pointed out that it 
-might not be entirely clear what we want something like "<tt>x</tt> + <tt>y</tt>" to mean. The paper does not 
+might not be entirely clear what we want something like "<code>x</code> + <code>y</code>" to mean. The paper does not 
 suggest any formatting for those symbols, and a non-normative note explains that the intention is for 
 the expression to be considered mathematically.
 <p/>
 I wonder if this is clear enough. Notes are not normative, and the document "shall be usable without notes". 
-I have formatted this as <tt>$\tcode{x} + \tcode{y}$</tt> throughout, i.e. the variables are in code font, 
+I have formatted this as <code>$\tcode{x} + \tcode{y}$</code> throughout, i.e. the variables are in code font, 
 but the symbol is maths, not code. This is quite subtle. (See also 
 <a href="https://github.com/cplusplus/draft/pull/6686">GitHub discussion</a>.)
 <p/>

@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 276: Assignable requirement for container value type overly strict</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#CD1">CD1</a> status.</em></p>
-<h3><a name="276" href="lwg-defects.html#276">276</a>. Assignable requirement for container value type overly strict</h3>
+<h3 id="276"><a href="lwg-defects.html#276">276</a>. Assignable requirement for container value type overly strict</h3>
 <p><b>Section:</b> 24.2 <a href="https://wg21.link/container.requirements">[container.requirements]</a> <b>Status:</b> <a href="lwg-active.html#CD1">CD1</a>
  <b>Submitter:</b> Peter Dimov <b>Opened:</b> 2000-11-07 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
@@ -181,10 +190,10 @@ for operations where there is additional semantic information.
 
 <p><b>Rationale:</b></p>
 <p>list, set, multiset, map, multimap are able to store non-Assignables.
-However, there is some concern about <tt>list&lt;T&gt;</tt>:
+However, there is some concern about <code>list&lt;T&gt;</code>:
 although in general there's no reason for T to be Assignable, some
-implementations of the member functions <tt>operator=</tt> and
-<tt>assign</tt> do rely on that requirement.  The LWG does not want
+implementations of the member functions <code>operator=</code> and
+<code>assign</code> do rely on that requirement.  The LWG does not want
 to forbid such implementations.</p>
 
 <p>Note that the type stored in a standard container must still satisfy
@@ -194,11 +203,11 @@ for more details.
 </p>
 
 <p>In principle we could also relax the "Assignable" requirement for
-individual <tt>vector</tt> member functions, such as
-<tt>push_back</tt>.  However, the LWG did not see great value in such
+individual <code>vector</code> member functions, such as
+<code>push_back</code>.  However, the LWG did not see great value in such
 selective relaxation.  Doing so would remove implementors' freedom to
-implement <tt>vector::push_back</tt> in terms of
-<tt>vector::insert</tt>.</p>
+implement <code>vector::push_back</code> in terms of
+<code>vector::insert</code>.</p>
 
 
 

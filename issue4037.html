@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 4037: Static data members of ctype_base are not yet required to be usable in constant expressions</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="4037" href="lwg-active.html#4037">4037</a>. Static data members of <tt>ctype_base</tt> are not yet required to be usable in constant expressions</h3>
+<h3 id="4037"><a href="lwg-active.html#4037">4037</a>. Static data members of <code>ctype_base</code> are not yet required to be usable in constant expressions</h3>
 <p><b>Section:</b> 30.4.2.1 <a href="https://wg21.link/category.ctype.general">[category.ctype.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-12 <b>Last modified:</b> 2024-01-14</p>
 <p><b>Priority: </b>Not Prioritized
@@ -55,9 +64,9 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-It may be desired that static data members <tt>ctype_base</tt> are "real constants", i.e. usable in constant expressions. 
-However, this is not strictly required because <tt>mask</tt> is only required to be a bitmask type that can be a class type, 
-which makes the plain <tt>const</tt> potentially insufficient.
+It may be desired that static data members <code>ctype_base</code> are "real constants", i.e. usable in constant expressions. 
+However, this is not strictly required because <code>mask</code> is only required to be a bitmask type that can be a class type, 
+which makes the plain <code>const</code> potentially insufficient.
 </p>
 
 
@@ -96,7 +105,7 @@ namespace std {
 </pre>
 </blockquote>
 <p>
--1- The type <tt>mask</tt> is a bitmask type (16.3.3.3.3 <a href="https://wg21.link/bitmask.types">[bitmask.types]</a>).
+-1- The type <code>mask</code> is a bitmask type (16.3.3.3.3 <a href="https://wg21.link/bitmask.types">[bitmask.types]</a>).
 </p>
 </blockquote>
 

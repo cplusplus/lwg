@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 4007: Mystic prohibition of calling a volatile-qualified perfect forwarding call wrapper</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="4007" href="lwg-active.html#4007">4007</a>. Mystic prohibition of calling a <tt>volatile</tt>-qualified perfect forwarding call wrapper</h3>
+<h3 id="4007"><a href="lwg-active.html#4007">4007</a>. Mystic prohibition of calling a <code>volatile</code>-qualified perfect forwarding call wrapper</h3>
 <p><b>Section:</b> 22.10.4 <a href="https://wg21.link/func.require">[func.require]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-11-05 <b>Last modified:</b> 2023-11-05</p>
 <p><b>Priority: </b>Not Prioritized
@@ -59,19 +68,19 @@
 22.10.4 <a href="https://wg21.link/func.require">[func.require]</a>/4 says:
 </p>
 <blockquote><p>
-[&hellip;] This forwarding step delivers a state entity of type <tt>T</tt> as <i>cv</i> <tt>T&amp;</tt> 
-when the call is performed on an lvalue of the call wrapper type and as <i>cv</i> <tt>T&amp;&amp;</tt> 
+[&hellip;] This forwarding step delivers a state entity of type <code>T</code> as <i>cv</i> <code>T&amp;</code> 
+when the call is performed on an lvalue of the call wrapper type and as <i>cv</i> <code>T&amp;&amp;</code> 
 otherwise, where <i>cv</i> represents the cv-qualifiers of the call wrapper and where <i>cv</i> shall 
-be neither <tt>volatile</tt> nor <tt>const volatile</tt>.
+be neither <code>volatile</code> nor <code>const volatile</code>.
 </p></blockquote>
 <p>
 The "shall" seemingly indicates a requirement for user codes that calling a volatile perfect forwarding 
 call wrapper is undefined behavior. Such requirement seems to be combined with requirements for 
 implementations in an unusual way.
 <p/>
-Moreover, it is unclear whether UB is intended here. Perhaps we only want calling such a <tt>volatile</tt> 
-wrapper to be conditionally-supported. E.g. when the <tt>operator()</tt> happens to be implementable as a 
-static member function, calling a <tt>volatile</tt> wrapper can be naturally supported and have expected 
+Moreover, it is unclear whether UB is intended here. Perhaps we only want calling such a <code>volatile</code> 
+wrapper to be conditionally-supported. E.g. when the <code>operator()</code> happens to be implementable as a 
+static member function, calling a <code>volatile</code> wrapper can be naturally supported and have expected 
 behavior.
 </p>
 
@@ -88,11 +97,11 @@ This wording is relative to <a href="https://wg21.link/N4964">N4964</a>.
 <blockquote>
 <p>
 4 A <i>perfect forwarding call wrapper</i> is an argument forwarding call wrapper that forwards its state entities
-to the underlying call expression. This forwarding step delivers a state entity of type <tt>T</tt> as 
-<i>cv</i> <tt>T&amp;</tt> when the call is performed on an lvalue of the call wrapper type and as <i>cv</i> 
-<tt>T&amp;&amp;</tt> otherwise, where <i>cv</i> represents the cv-qualifiers of the call wrapper <del>and where 
-<i>cv</i> shall be neither <tt>volatile</tt> nor <tt>const volatile</tt></del><ins>, except that if <i>cv</i> 
-is either <tt>volatile</tt> or <tt>const volatile</tt>, it is unspecified whether the call is well-formed</ins>.
+to the underlying call expression. This forwarding step delivers a state entity of type <code>T</code> as 
+<i>cv</i> <code>T&amp;</code> when the call is performed on an lvalue of the call wrapper type and as <i>cv</i> 
+<code>T&amp;&amp;</code> otherwise, where <i>cv</i> represents the cv-qualifiers of the call wrapper <del>and where 
+<i>cv</i> shall be neither <code>volatile</code> nor <code>const volatile</code></del><ins>, except that if <i>cv</i> 
+is either <code>volatile</code> or <code>const volatile</code>, it is unspecified whether the call is well-formed</ins>.
 </p>
 </blockquote>
 

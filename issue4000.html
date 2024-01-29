@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 4000: flat_map::insert_range's Effects is not quite right</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="4000" href="lwg-active.html#4000">4000</a>. <tt>flat_map::insert_range</tt>'s <i>Effects</i> is not quite right</h3>
+<h3 id="4000"><a href="lwg-active.html#4000">4000</a>. <code>flat_map::insert_range</code>'s <i>Effects</i> is not quite right</h3>
 <p><b>Section:</b> 24.6.9.6 <a href="https://wg21.link/flat.map.modifiers">[flat.map.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-10-23 <b>Last modified:</b> 2023-10-28</p>
 <p><b>Priority: </b>Not Prioritized
@@ -55,7 +64,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-<tt>flat_map::insert_range</tt> adds elements to the <tt>containers</tt> member via:
+<code>flat_map::insert_range</code> adds elements to the <code>containers</code> member via:
 </p>
 <blockquote><pre>
 for (const auto&amp; e : rg) {
@@ -64,8 +73,8 @@ for (const auto&amp; e : rg) {
 }
 </pre></blockquote>
 <p>
-which is incorrect because <tt>rg</tt>'s value type may not be a <tt>pair</tt> (<tt>tuple</tt>, for instance), 
-which means that <tt>.first</tt> and <tt>.second</tt> are not valid in such cases.
+which is incorrect because <code>rg</code>'s value type may not be a <code>pair</code> (<code>tuple</code>, for instance), 
+which means that <code>.first</code> and <code>.second</code> are not valid in such cases.
 </p>
 
 
@@ -84,7 +93,7 @@ template&lt;<i>container-compatible-range</i>&lt;value_type&gt; R&gt;
 </pre>
 <blockquote>
 <p>
--12- <i>Effects</i>: Adds elements to <tt>c</tt> as if by:
+-12- <i>Effects</i>: Adds elements to <code>c</code> as if by:
 </p>
 <blockquote><pre>
 for (<ins>value_type</ins><del>const auto&amp;</del> e : rg) {

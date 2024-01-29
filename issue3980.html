@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 3980: The read exclusive ownership of an atomic read-modify-write operation and whether its read and write are two operations are unclear</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#NAD">Tentatively NAD</a> status.</em></p>
-<h3><a name="3980" href="lwg-active.html#3980">3980</a>. The read exclusive ownership of an atomic read-modify-write operation and whether its read and write are two operations are unclear</h3>
+<h3 id="3980"><a href="lwg-active.html#3980">3980</a>. The read exclusive ownership of an atomic read-modify-write operation and whether its read and write are two operations are unclear</h3>
 <p><b>Section:</b> 33.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
  <b>Submitter:</b> jim x <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2023-11-03</p>
 <p><b>Priority: </b>Not Prioritized
@@ -60,7 +69,7 @@
 Such two questions are sourced from StackOverflow:
 </p>
 <ol>
-<li><p><a href="https://stackoverflow.com/questions/77126045/can-the-read-operations-in-compare-exchange-strong-in-different-two-thread-rea/77126363?noredirect=1#comment135968355_77126363">Can the read operations in <tt>compare_exchange_strong</tt> in different two thread read the same value?</a></p></li>
+<li><p><a href="https://stackoverflow.com/questions/77126045/can-the-read-operations-in-compare-exchange-strong-in-different-two-thread-rea/77126363?noredirect=1#comment135968355_77126363">Can the read operations in <code>compare_exchange_strong</code> in different two thread read the same value?</a></p></li>
 <li><p><a href="https://stackoverflow.com/questions/65568185/for-purposes-of-ordering-is-atomic-read-modify-write-one-operation-or-two">For purposes of ordering, is atomic read-modify-write one operation or two?</a></p></li>
 </ol>
 <p>
@@ -114,7 +123,7 @@ However, the wording can have two meanings, each kind of read can result in diff
 <li><p>The check of the violation is done before the side effect of the RMW is in the modification order, i.e. the rule is 
 just checked at the read point.</p></li>
 <li><p>The check of the violation is done after the side effect of the RMW is in the modification order, i.e. the rule is 
-checked when <tt>RMW</tt> tries to add the side effect that is based on the read-value to the modification order, and that 
+checked when <code>RMW</code> tries to add the side effect that is based on the read-value to the modification order, and that 
 side effect wouldn't be added to the modification order if the rule was violated.</p></li>
 </ol>
 <p>
@@ -129,12 +138,12 @@ Such two interpretations arise from that the wording doesn't clearly specify whe
 So, my proposed wording is:
 </p>
 <blockquote style="border-left: 3px solid #ccc;padding-left: 15px;"><p>
-Atomic read-modify-write operations shall always read the value from a side effect <tt>X</tt>, where <tt>X</tt> 
+Atomic read-modify-write operations shall always read the value from a side effect <code>X</code>, where <code>X</code> 
 immediately precedes the side effect of the read-modify-write operation in the modification order.
 </p></blockquote>
 <p>
 This wording keeps a similar utterance to 6.9.2.2 <a href="https://wg21.link/intro.races">[intro.races]</a>, and it can clearly convey the meaning 
-that we say the value read by <tt>RWM</tt> is associated with the side effect of <tt>RMW</tt> in the modification order.
+that we say the value read by <code>RWM</code> is associated with the side effect of <code>RMW</code> in the modification order.
 <p/>
 Relevant discussion can be seen <a href="https://github.com/cplusplus/CWG/issues/423">CWG/issues/423</a> here.
 </p>

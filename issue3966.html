@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 3966: The value_type and reference members of std::flat_(multi)map::(const_)iterator are unclear</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="3966" href="lwg-active.html#3966">3966</a>. The <tt>value_type</tt> and <tt>reference</tt> members of <tt>std::flat_(multi)map::(const_)iterator</tt> are unclear</h3>
+<h3 id="3966"><a href="lwg-active.html#3966">3966</a>. The <code>value_type</code> and <code>reference</code> members of <code>std::flat_(multi)map::(const_)iterator</code> are unclear</h3>
 <p><b>Section:</b> 24.6.9.1 <a href="https://wg21.link/flat.map.overview">[flat.map.overview]</a>, 24.6.10.1 <a href="https://wg21.link/flat.multimap.overview">[flat.multimap.overview]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-04 <b>Last modified:</b> 2023-10-30</p>
 <p><b>Priority: </b>3
@@ -57,15 +66,15 @@
 <p><b>Discussion:</b></p>
 <p>
 24.6.9.1 <a href="https://wg21.link/flat.map.overview">[flat.map.overview]</a> and 24.6.10.1 <a href="https://wg21.link/flat.multimap.overview">[flat.multimap.overview]</a> currently only require that the iterator types 
-meet <i>Cpp17InputIterator</i> requirements and model the <tt>std::random_access_iterator</tt> concept.
+meet <i>Cpp17InputIterator</i> requirements and model the <code>std::random_access_iterator</code> concept.
 <p/>
 The intent seems to be that
 </p>
 <ul>
-<li><p>the <tt>operator*()</tt> returns proxy references of type <tt>std::pair&lt;const K&amp;, V&amp;&gt;</tt> or 
-<tt>std::pair&lt;const K&amp;, const V&amp;&gt;</tt> (same as the <tt>reference</tt> or <tt>const_reference</tt> 
+<li><p>the <code>operator*()</code> returns proxy references of type <code>std::pair&lt;const K&amp;, V&amp;&gt;</code> or 
+<code>std::pair&lt;const K&amp;, const V&amp;&gt;</code> (same as the <code>reference</code> or <code>const_reference</code> 
 types of the container adaptors), and</p></li>
-<li><p>the <tt>value_type</tt> of these iterators is <tt>std::pair&lt;K, V&gt;</tt> (same as the <tt>value_type</tt> 
+<li><p>the <code>value_type</code> of these iterators is <code>std::pair&lt;K, V&gt;</code> (same as the <code>value_type</code> 
 of the container adaptors).</p></li>
 </ul>
 <p>

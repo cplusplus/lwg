@@ -1,10 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Issue 4022: Ambiguity in the formatting of negative years with format specifier %C</title>
-<style type="text/css">
+<style>
   p {text-align:justify}
   li {text-align:justify}
   pre code.backtick::before { content: "`" }
@@ -19,7 +18,17 @@
   }
   ins {background-color:#A0FFA0}
   del {background-color:#FFA0A0}
-  table {border-collapse: collapse;}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
   @media (prefers-color-scheme: dark) {
      html {
         color: #ddd;
@@ -47,7 +56,7 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3><a name="4022" href="lwg-active.html#4022">4022</a>. Ambiguity in the formatting of negative years with format specifier <tt>%C</tt></h3>
+<h3 id="4022"><a href="lwg-active.html#4022">4022</a>. Ambiguity in the formatting of negative years with format specifier <code>%C</code></h3>
 <p><b>Section:</b> 29.12 <a href="https://wg21.link/time.format">[time.format]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-08 <b>Last modified:</b> 2023-12-09</p>
 <p><b>Priority: </b>Not Prioritized
@@ -67,24 +76,24 @@ Table 101, [tab:time.format.spec] reads:
 </tr>
 <tr>
 <td colspan="2" align="center">
-<tt>[&hellip;]</tt>
+<code>[&hellip;]</code>
 </td>
 </tr>
 <tr>
-<td><tt>%C</tt></td>
-<td>The year divided by <tt>100</tt> using floored division. If the result is a single decimal digit, it<br/>
-is prefixed with <tt>0</tt>. The modified command <tt>%EC</tt> produces the locale's alternative<br/>
+<td><code>%C</code></td>
+<td>The year divided by <code>100</code> using floored division. If the result is a single decimal digit, it<br/>
+is prefixed with <code>0</code>. The modified command <code>%EC</code> produces the locale's alternative<br/>
 representation of the century.</td>
 </tr>
 <tr>
 <td colspan="2" align="center">
-<tt>[&hellip;]</tt>
+<code>[&hellip;]</code>
 </td>
 </tr>
 </table>
 
 <p>
-When the year is in range <tt>[-99, -10]</tt>, it is unclear whether the result (in range <tt>[-9, -1]</tt>) 
+When the year is in range <code>[-99, -10]</code>, it is unclear whether the result (in range <code>[-9, -1]</code>) 
 is considered as a single decimal digit, and there is implementation divergence 
 (<a href="https://github.com/llvm/llvm-project/issues/74727">llvm/llvm-project#74727</a>).
 <p/>
@@ -123,18 +132,18 @@ This wording is relative to <a href="https://wg21.link/N4964">N4964</a>.
 </tr>
 <tr>
 <td colspan="2" align="center">
-<tt>[&hellip;]</tt>
+<code>[&hellip;]</code>
 </td>
 </tr>
 <tr>
-<td><tt>%C</tt></td>
-<td>The year divided by <tt>100</tt> using floored division. If the result is <del>a single decimal digit</del><ins>in range <tt>[0, 9]</tt></ins>, it<br/>
-is prefixed with <tt>0</tt>. The modified command <tt>%EC</tt> produces the locale's alternative<br/>
+<td><code>%C</code></td>
+<td>The year divided by <code>100</code> using floored division. If the result is <del>a single decimal digit</del><ins>in range <code>[0, 9]</code></ins>, it<br/>
+is prefixed with <code>0</code>. The modified command <code>%EC</code> produces the locale's alternative<br/>
 representation of the century.</td>
 </tr>
 <tr>
 <td colspan="2" align="center">
-<tt>[&hellip;]</tt>
+<code>[&hellip;]</code>
 </td>
 </tr>
 </table>
@@ -159,18 +168,18 @@ representation of the century.</td>
 </tr>
 <tr>
 <td colspan="2" align="center">
-<tt>[&hellip;]</tt>
+<code>[&hellip;]</code>
 </td>
 </tr>
 <tr>
-<td><tt>%C</tt></td>
-<td>The year divided by <tt>100</tt> using floored division. If the result is <del>a single decimal digit</del><ins>in range <tt>[-9, 9]</tt></ins>, it<br/>
-is prefixed with <tt>0</tt>. The modified command <tt>%EC</tt> produces the locale's alternative<br/>
+<td><code>%C</code></td>
+<td>The year divided by <code>100</code> using floored division. If the result is <del>a single decimal digit</del><ins>in range <code>[-9, 9]</code></ins>, it<br/>
+is prefixed with <code>0</code>. The modified command <code>%EC</code> produces the locale's alternative<br/>
 representation of the century.</td>
 </tr>
 <tr>
 <td colspan="2" align="center">
-<tt>[&hellip;]</tt>
+<code>[&hellip;]</code>
 </td>
 </tr>
 </table>

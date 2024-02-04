@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Issue 4051: Clarify that "constexpr iterator" is a requirement to be met</title>
+<title>Issue 4051: A less hacky and more useful way to compare comparison category types</title>
 <style>
   p {text-align:justify}
   li {text-align:justify}
@@ -56,40 +56,64 @@
 <body>
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3 id="4051"><a href="lwg-active.html#4051">4051</a>. Clarify that "constexpr iterator" is a requirement to be met</h3>
-<p><b>Section:</b> 25.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Daniel Krügler <b>Opened:</b> 2024-02-04 <b>Last modified:</b> 2024-02-04</p>
+<h3 id="4051"><a href="lwg-active.html#4051">4051</a>. A less hacky and more useful way to compare comparison category types</h3>
+<p><b>Section:</b> 17.11.2 <a href="https://wg21.link/cmp.categories">[cmp.categories]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Corentin Jabot <b>Opened:</b> 2024-01-31 <b>Last modified:</b> 2024-02-04</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
-<p><b>View all other</b> <a href="lwg-index.html#iterator.requirements.general">issues</a> in [iterator.requirements.general].</p>
+<p><b>View all other</b> <a href="lwg-index.html#cmp.categories">issues</a> in [cmp.categories].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-The term <i>constexpr iterator</i> is defined in 25.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a> as follows:
+Comparison categories can only be compared to the literal <code>0</code>.
+It does not make sense for them to be comparable to anything else, so conceptually, the design of 
+<a href="https://wg21.link/P0515" title=" Consistent comparison">P0515</a> makes sense, however in practice it's a pain point from users and implementations
+alike, as the desired semantics is barely implementable.
 </p>
-<blockquote><p>
--16- Iterators are called <i>constexpr iterators</i> if all operations provided to meet iterator category 
-requirements are constexpr functions.
-<p/>
-[<i>Note 3</i>: For example, the types "pointer to <i>int</i>" and <code>reverse_iterator&lt;int*&gt;</code> are 
-constexpr iterators. &mdash; <i>end note</i>]
-</p></blockquote>
+<ul>
+<li><p>One implementation strategy is to use <code>nullptr_t</code>. This produces warnings in implementations
+because using a <code>0</code> pointer constant is not recommended, and filtering out these warnings would be unreliable.</p></li>
+<li><p>Another implementation strategy is to require a <code>consteval</code> expression but</p>
+<ul>
+<li><p>This permits <code>1-1</code>, which ought to be totally fine and yet it exposes users to UB</p></li>
+<li><p>It is not SFINAE friendly (and attempts at SFINAE are presumably UB).</p></li>
+</ul>
+</li>
+</ul>
 <p>
-The particular form of this definition using the term "called" is untypical for a requirement and has let 
-to the interpretation in the proposed wording of LWG <a href="lwg-active.html#4038" title="std::text_encoding::aliases_view should have constexpr iterators">4038</a> that when we require a type to 
-meet the requirement of a constexpr iterator we should impose an "is a constexpr iterator" requirement. 
-This deviates from all existing places where we impose the form "meets the constexpr iterator requirements" 
-instead (23.3.3.4 <a href="https://wg21.link/string.view.iterators">[string.view.iterators]</a> p1, 23.4.3.1 <a href="https://wg21.link/basic.string.general">[basic.string.general]</a> p5, 
-24.2.2.4 <a href="https://wg21.link/container.opt.reqmts">[container.opt.reqmts]</a> p1, 24.3.7.1 <a href="https://wg21.link/array.overview">[array.overview]</a> p5, 24.3.11.1 <a href="https://wg21.link/vector.overview">[vector.overview]</a> p3).
+And there are use cases where SFINAE friendliness is important, notably testing frameworks.
 <p/>
-Note that the term <i>meets the XX requirements</i> is <em>not</em> restricted to the <i>Cpp17YY</i> requirements, 
-we use it elsewhere to, e.g. when we say that a type meets the character traits requirements (23.2 <a href="https://wg21.link/char.traits">[char.traits]</a>),
-the allocator-aware container requirements (24.2.2.5 <a href="https://wg21.link/container.alloc.reqmts">[container.alloc.reqmts]</a>), or the layout mappings 
-requirements (24.7.3.4.3 <a href="https://wg21.link/mdspan.layout.policy.reqmts">[mdspan.layout.policy.reqmts]</a>).
+The status quo has engendered multiple issues being reported to at least 3 vendors
 <p/>
-To make the status quo clearer this issue suggests to reword 25.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a> to
-be a requirement set. The alternative would be to change all currently referencing places to say "is a constexpr iterator"
-instead.
+Suggestion:
+</p>
+<ul>
+<li><p>Allow any <code>0</code> constant expression</p></li>
+<li><p>Require compile magic to SFINAE on non zero values</p></li>
+<li><p>Remove the gratuitous UB</p></li>
+</ul>
+<p>
+The proposed wording requires compiler magic and has been 
+<a href="https://godbolt.org/z/1xr9Wx38T">implemented in clang</a>.
+(Other possible way to implement that would for example be a magic type attribute, or a magic type)
+<p/>
+Related vendor issues:
+<p/>
+<a href="https://gcc.gnu.org/bugzilla/show_bug.cgi?id=96278">GCC Bugzilla issue 96278</a>
+<p/>
+<a href="https://gcc.gnu.org/bugzilla/show_bug.cgi?id=100903">GCC Bugzilla issue 100903</a>
+<p/>
+<a href="https://github.com/llvm/llvm-project/issues/43670">LLVM issue 43670</a>
+<p/>
+<a href="https://github.com/llvm/llvm-project/pull/79465">LLVM pulls request 79465</a>
+<p/>
+<a href="https://github.com/microsoft/STL/issues/4359">Microsoft STL issue 4359</a>
+<p/>
+<a href="https://github.com/microsoft/STL/pull/3581">Microsoft STL pull request 3581</a>
+<p/>
+<a href="https://developercommunity.visualstudio.com/t/Regression:-False-positive-C7595:-std::/10509214">Visual Studio issue 10509214</a>
+<p/>
+<a href="https://github.com/snitch-org/snitch/issues/140">snitch issue 140</a>
 </p>
 
 
@@ -99,15 +123,18 @@ This wording is relative to <a href="https://wg21.link/N4971" title=" Working Dr
 </p>
 
 <ol>
-<li><p>Modify 25.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a> as indicated:</p>
+<li><p>Modify 17.11.2.1 <a href="https://wg21.link/cmp.categories.pre">[cmp.categories.pre]</a> as indicated:</p>
 
 <blockquote>
 <p>
--16- Iterators <ins>meet the</ins><del>are called</del> <i>constexpr iterators</i> <ins>requirements</ins> if all operations 
-provided to meet iterator category requirements are constexpr functions.
+-3- The relational and equality operators for the comparison category types are specified with an anonymous
+parameter of unspecified type. This type shall be selected by the implementation such that these parameters
+can <ins>only</ins> accept <ins>an integral constant expression evaluating to</ins><del>literal</del> <code>0</code> 
+as a corresponding argument.
 <p/>
-[<i>Note 3</i>: For example, the types "pointer to <i>int</i>" and <code>reverse_iterator&lt;int*&gt;</code> are 
-constexpr iterators. &mdash; <i>end note</i>]
+<del>[<i>Example 1</i>: <code>nullptr_t</code> meets this requirement. &mdash; <i>end example</i>]</del>
+<p/>
+<del>In this context, the behavior of a program that supplies an argument other than a literal <code>0</code> is undefined.</del>
 </p>
 </blockquote>
 </li>

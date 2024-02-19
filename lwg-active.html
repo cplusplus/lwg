@@ -61,7 +61,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-02-17</td>
+  <td align="left">2024-02-19</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -73,7 +73,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-02-17 at 14:39:19 UTC
+<p>Revised 2024-02-19 at 12:29:56 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -58749,7 +58749,7 @@ are constant subexpressions.
 <hr>
 <h3 id="4042"><a href="#4042">4042</a><sup><a href="https://cplusplus.github.io/LWG/issue4042">(i)</a></sup>. <code>std::print</code> should permit an efficient implementation</h3>
 <p><b>Section:</b> 31.7.10 <a href="https://wg21.link/print.fun">[print.fun]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Victor Zverovich <b>Opened:</b> 2024-01-20 <b>Last modified:</b> 2024-01-21</p>
+ <b>Submitter:</b> Victor Zverovich <b>Opened:</b> 2024-01-20 <b>Last modified:</b> 2024-02-19</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#print.fun">active issues</a> in [print.fun].</p>
@@ -58789,6 +58789,10 @@ case of a write error. It might be a bit weird considering that the spec says th
 alternative resolution is to replace <code>vformat</code> with <code>vformat_to</code> info some unspecified buffer iterator 
 and state noninterleaving requirement separately. 
 </p>
+
+<p><i>[2024-02-19]</i></p>
+
+<p>This would be resolved by <a href="https://wg21.link/P3107" title=" Permit an efficient implementation of std::print">P3107</a>.</p>
 
 
 <p id="res-4042"><b>Proposed resolution:</b></p>

@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-02-22 at 12:03:48 UTC
+<p>Revised 2024-02-22 at 16:52:45 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -48205,8 +48205,8 @@ namespace std {
 <hr>
 <h3 id="3954"><a href="#3954">3954</a><sup><a href="https://cplusplus.github.io/LWG/issue3954">(i)</a></sup>. Feature-test macros in C headers (<code>&lt;stddef.h&gt;</code> etc.)</h3>
 <p><b>Section:</b> 17.14.1 <a href="https://wg21.link/support.c.headers.general">[support.c.headers.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-07-06 <b>Last modified:</b> 2023-07-08</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-07-06 <b>Last modified:</b> 2024-02-22</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -48221,6 +48221,82 @@ Presumably, <code><i>name</i>.h</code> should provide macros shown in the synops
 generally require implementations of the C standard library to change. I think we should make clarification in 
 17.14.1 <a href="https://wg21.link/support.c.headers.general">[support.c.headers.general]</a>.
 </p>
+
+<p><i>[2024-02-22; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll in July 2023.
+</p>
+<p><i>[Jonathan commented]</i></p>
+
+<p>
+The issue says that "such requirement would generally require implementations
+of the C standard library to change" but this is not true.
+A conforming C++ library already needs a C++-aware <code>&lt;stdlib.h&gt;</code> and <code>&lt;math.h&gt;</code>, and has done so since C++98! We should be cautious about expanding the set of C headers that need to be C++-aware, but if we require <code>&lt;stdlib.h&gt;</code> to define these functions:
+<pre><code>
+constexpr long abs(long);
+constexpr long long abs(long long);
+</code></pre>
+then it can also define <code>__cpp_lib_constexpr_math</code>.
+</p>
+<p>
+We have these <code>&lt;cxxx&gt;</code> headers providing feature test macros:
+</p>
+<pre>
+&lt;cmath&gt;:
+__cpp_lib_constexpr_cmath
+ __cpp_lib_hypot
+__cpp_lib_interpolate
+__cpp_lib_math_special_functions
+
+&lt;cstddef&gt;:
+__cpp_lib_byte
+
+&lt;cstdlib&gt;:
+__cpp_lib_constexpr_cmath
+</pre>
+<p>
+For <code>&lt;stdlib.h&gt;</code> and <code>&lt;math.h&gt;</code>
+the implementation already needs a C++-specific version of the header,
+because <code>::abs</code> is required to be overloaded (and constexpr) in
+<code>&lt;stdlib.h&gt;</code> and <code>&lt;math.h&gt;</code>
+(and all the math functions have to be constexpr even if you include
+<code>&lt;math.h&gt;</code>).
+So I see no issue here: the <code>&lt;xxx.h&gt;</code> headers should obviously
+define the same macros as the <code>&lt;cxxx&gt;</code> headers.
+</p>
+<p>
+We do not require <code>::byte</code> to be in <code>&lt;stddef.h&gt;</code>,
+so maybe we should not require the macro there either.
+Except that <code>std::byte</code> is permitted to be in
+<code>&lt;stddef.h&gt;</code>,
+just not in the global namespace (see LWG <a href="lwg-active.html#3883" title="&sect;[support.c.headers.other] Ambiguity in the requirements for includes">3883</a>).
+So maybe SD-6 should simply clarify that the macro indicates the presence
+of <code>std::byte</code>, not <code>::byte</code>,
+and whether <code>std::byte</code> and its macro are defined
+by <code>&lt;stddef.h&gt;</code> is unspecified.
+Also related to LWG <a href="lwg-active.html#3484" title="Should &lt;stddef.h&gt; declare ::nullptr_t?">3484</a>.
+</p>
+
+<p><i>[Jens commented]</i></p>
+
+
+<p>
+It seems 17.14 <a href="https://wg21.link/support.c.headers">[support.c.headers]</a> is silent on which macros
+from the <code>&lt;cxxx&gt;</code> headers are made available via the <code>&lt;xxx.h&gt;</code> headers,
+given that 17.14.7 <a href="https://wg21.link/support.c.headers.other">[support.c.headers.other]</a> talks about names placed in
+the standard library namespace (macros don't fit that description).
+</p>
+
+<p><i>[Ben noted some additional macros]</i></p>
+
+<pre><code>
+#define __cpp_lib_freestanding_cstdlib      <em>new-val // freestanding, also in &lt;cstdlib&gt;, &lt;cmath&gt;</em>
+#define __cpp_lib_freestanding_cstring      <em>new-val // freestanding, also in &lt;cstring&gt;</em>
+#define __cpp_lib_freestanding_cwchar       <em>new-val // freestanding, also in &lt;cwchar&gt;</em>
+#define __cpp_lib_freestanding_errc         <em>new-val // freestanding, also in &lt;cerrno&gt;, &lt;system_error&gt;</em>
+</code></pre>
+
 
 
 <p id="res-3954"><b>Proposed resolution:</b></p>
@@ -48994,8 +49070,8 @@ traits to give results consistent with exception specifications.
 <hr>
 <h3 id="3968"><a href="#3968">3968</a><sup><a href="https://cplusplus.github.io/LWG/issue3968">(i)</a></sup>. <code>std::endian::native</code> value should be more specific about object representations</h3>
 <p><b>Section:</b> 22.15.8 <a href="https://wg21.link/bit.endian">[bit.endian]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Brian Bi <b>Opened:</b> 2023-08-06 <b>Last modified:</b> 2023-08-13</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Brian Bi <b>Opened:</b> 2023-08-06 <b>Last modified:</b> 2024-02-22</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -49017,6 +49093,35 @@ types, the program cannot actually rely on this. It is conceivable (though unlik
 object is actually the least significant 8 bits flipped, or the least significant 8 bits permuted, or something 
 like that.
 </p>
+
+<p><i>[2024-02-22; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll in August 2023.
+</p>
+<p><i>[Jonathan expressed shock that <a href="https://wg21.link/P1236R1" title=" Alternative Wording for P0907R4 Signed Integers are Two's Complement">P1236R1</a> remove portability guarantees that were previously present.]</i></p>
+
+<p><i>[Jens explained that no observable guarantees were ever present anyway, which is why Core removed the wording.]</i></p>
+
+<p>
+I agree with the thrust of the issue (i.e. the special values for
+<code>std::endian</code> should permit reliance on a particular object
+representation), but I disagree with the wording chosen.  The
+"pure binary" phrasing that is sort-of defined in a footnote
+is bad.  I think we want to say that all scalar types have no
+padding bits and that the base-2 representation of
+an unsigned integer type is formed by the bit concatenation
+of the base-2 representations of the "unsigned char" values that
+comprise the object representation of that unsigned integer type.
+"bit concatenation" should best be phrased in math, e.g.
+given a value <em>x</em> of some unsigned integer type and the
+sequence of unsigned char values c<sup>j</sup> (each having width M)
+comprising the object representation of x,
+the coefficients of the base-2 representation of x are
+ x<sub>i</sub> = c<sup>&lfloor;i/M&rfloor;</sup><sub>i mod M</sub>
+or somesuch.  See 7.6.11 <a href="https://wg21.link/expr.bit.and">[expr.bit.and]</a> for some phrasing in this area.
+</p>
+
 
 
 <p id="res-3968"><b>Proposed resolution:</b></p>
@@ -49286,8 +49391,8 @@ is already guaranteed to exist by the <i>container</i> requirements, 24.2.2.2 <a
 <hr>
 <h3 id="3977"><a href="#3977">3977</a><sup><a href="https://cplusplus.github.io/LWG/issue3977">(i)</a></sup>. <code>constexpr</code> and <code>noexcept</code> for operators for bitmask types</h3>
 <p><b>Section:</b> 16.3.3.3.3 <a href="https://wg21.link/bitmask.types">[bitmask.types]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-19 <b>Last modified:</b> 2023-09-24</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-19 <b>Last modified:</b> 2024-02-22</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#bitmask.types">active issues</a> in [bitmask.types].</p>
 <p><b>View all other</b> <a href="lwg-index.html#bitmask.types">issues</a> in [bitmask.types].</p>
@@ -49308,6 +49413,30 @@ operators for <code>launch</code></a> are <code>noexcept</code> but not <code>co
 I think it's better to ensure more consistency be integer types and non-integer bitmask types, i.e., require the 
 compound assignment operators to be <code>constexpr</code> (only available in C++14 and later) and all operators to be <code>noexcept</code>.
 </p>
+
+<p><i>[2024-02-22; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll in September 2023.
+</p>
+<p><i>[Jonathan commented]</i></p>
+
+<p>
+"The proposed change only affects an example showing a possible way to implement
+a made-up example type. It doesn't change any requirements on bitmask types,
+or change anything for any of the bitmask types defined in the standard library.
+It doesn't say that implementing them without noexcept and constexpr would be
+invalid.
+This change has no normative effect and certainly doesn't achieve the stated
+aim of requiring these assignments to be constexpr and non-throwing."
+</p>
+<p><i>[Casey agreed]</i></p>
+
+<p>
+"We should strike paragraph two completely and write up the actual requirements
+that a bitmask type is required to meet, but that's a lot of work for someone."
+</p>
+
 
 
 <p id="res-3977"><b>Proposed resolution:</b></p>
@@ -49420,8 +49549,8 @@ Set priority to 4 after reflector poll.
 <hr>
 <h3 id="3979"><a href="#3979">3979</a><sup><a href="https://cplusplus.github.io/LWG/issue3979">(i)</a></sup>. Should we reject <code>std::bind_front&lt;42&gt;()</code> and its friends?</h3>
 <p><b>Section:</b> 22.10.13 <a href="https://wg21.link/func.not.fn">[func.not.fn]</a>, 22.10.14 <a href="https://wg21.link/func.bind.partial">[func.bind.partial]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2023-09-24</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-22 <b>Last modified:</b> 2024-02-22</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#func.not.fn">issues</a> in [func.not.fn].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -49435,6 +49564,24 @@ Note that we might need to separately handle NTTP of scalar and class types for 
 <a href="https://wg21.link/CWG2459">CWG2459</a> is not resolved, because it might be necessary to avoid copying a 
 template parameter object.
 </p>
+
+<p><i>[2024-02-22; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll in September 2023.
+</p>
+<p>
+"Not convinced it's worth adding a small amount of future maintenance burden
+to catch a tiny amount of nonsense-but-not-dangerous code slightly earlier
+(at the point of call instead of point of use)."
+</p>
+<p>
+"NAD. We reject <code>bind_front&lt;null_f&gt;()</code> because
+<code>bind_front(null_f)()</code> compiles but gives UB.
+Neither <code>bind_front(42)()</code> nor <code>bind_front&lt;42&gt;()</code>
+compiles."
+</p>
+
 
 
 <p id="res-3979"><b>Proposed resolution:</b></p>
@@ -50316,8 +50463,8 @@ Set priority to 4 after reflector poll.
 <hr>
 <h3 id="3998"><a href="#3998">3998</a><sup><a href="https://cplusplus.github.io/LWG/issue3998">(i)</a></sup>. Constants in <code>std::regex_constants</code> should be allowed to be enumerators</h3>
 <p><b>Section:</b> 32.4 <a href="https://wg21.link/re.const">[re.const]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-10-18 <b>Last modified:</b> 2023-10-21</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-10-18 <b>Last modified:</b> 2024-02-22</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#re.const">issues</a> in [re.const].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -50337,6 +50484,21 @@ Notes: since C++20, we can even make the enumeration types scoped and expose the
 namespace by using-declaration or using-enum-declaration. <a href="https://wg21.link/P0439R0" title=" Make memory_order a scoped enumeration">P0439R0</a> might be related, 
 since it changed former enumerators to <code>constexpr</code> variables.
 </p>
+
+<p><i>[2024-02-22; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll in October 2023.
+</p>
+<p><i>[Jonathan commented]</i></p>
+
+<p>
+"Why only change the <code class='backtick'>regex_constants</code> bitmask constants,
+and not those for <code>ctype_base::mask</code>,
+<code>ios_base::fmtflags</code>, <code>ios_base::iostate</code>,
+and <code>ios_base::openmode</code>?"
+</p>
+
 
 
 <p id="res-3998"><b>Proposed resolution:</b></p>
@@ -50421,8 +50583,8 @@ namespace std {
 <hr>
 <h3 id="4000"><a href="#4000">4000</a><sup><a href="https://cplusplus.github.io/LWG/issue4000">(i)</a></sup>. <code>flat_map::insert_range</code>'s <i>Effects</i> is not quite right</h3>
 <p><b>Section:</b> 24.6.9.6 <a href="https://wg21.link/flat.map.modifiers">[flat.map.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-10-23 <b>Last modified:</b> 2023-10-28</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-10-23 <b>Last modified:</b> 2024-02-22</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -50439,6 +50601,19 @@ for (const auto&amp; e : rg) {
 which is incorrect because <code>rg</code>'s value type may not be a <code>pair</code> (<code>tuple</code>, for instance), 
 which means that <code>.first</code> and <code>.second</code> are not valid in such cases.
 </p>
+
+<p><i>[2024-02-22; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll in October 2023.
+</p>
+
+<p>
+"This is <a href="https://wg21.link/P2767" title=" flat_map/flat_set omnibus">P2767</a> section 6 which LWG looked at in Varna,
+and was turned into https://github.com/cplusplus/draft/pull/6274 as an
+editorial change."
+</p>
+
 
 
 <p id="res-4000"><b>Proposed resolution:</b></p>

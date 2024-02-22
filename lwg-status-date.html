@@ -67,7 +67,7 @@
 This document is the Index by Status and Date for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
-<p>Revised 2024-02-22 at 12:03:48 UTC
+<p>Revised 2024-02-22 at 16:52:45 UTC
 </p><h2 id="Ready">Ready (6 issues)</h2>
 <table class="issues-index">
 <tr>
@@ -282,6 +282,60 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
   <th>Proposed Resolution</th>
   <th><a href="unresolved-prioritized.html">Priority</a></th>
   <th>Duplicates</th>
+</tr>
+<tr>
+<td id="3977"><a href="lwg-active.html#3977" title="constexpr and noexcept for operators for bitmask types">3977</a><sup><a href="https://cplusplus.github.io/LWG/issue3977">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>16.3.3.3.3 [bitmask.types]</td>
+<td><code>constexpr</code> and <code>noexcept</code> for operators for bitmask types</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="3954"><a href="lwg-active.html#3954" title="Feature-test macros in C headers (&lt;stddef.h&gt; etc.)">3954</a><sup><a href="https://cplusplus.github.io/LWG/issue3954">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>17.14.1 [support.c.headers.general]</td>
+<td>Feature-test macros in C headers (<code>&lt;stddef.h&gt;</code> etc.)</td>
+<td><span class="no-pr">No</span></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="3979"><a href="lwg-active.html#3979" title="Should we reject std::bind_front&lt;42&gt;() and its friends?">3979</a><sup><a href="https://cplusplus.github.io/LWG/issue3979">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>22.10.13 [func.not.fn]</td>
+<td>Should we reject <code>std::bind_front&lt;42&gt;()</code> and its friends?</td>
+<td>Yes</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td id="3968"><a href="lwg-active.html#3968" title="std::endian::native value should be more specific about object representations">3968</a><sup><a href="https://cplusplus.github.io/LWG/issue3968">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>22.15.8 [bit.endian]</td>
+<td><code>std::endian::native</code> value should be more specific about object representations</td>
+<td>Yes</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td id="4000"><a href="lwg-active.html#4000" title="flat_map::insert_range's Effects is not quite right">4000</a><sup><a href="https://cplusplus.github.io/LWG/issue4000">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>24.6.9.6 [flat.map.modifiers]</td>
+<td><code>flat_map::insert_range</code>'s <i>Effects</i> is not quite right</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="3998"><a href="lwg-active.html#3998" title="Constants in std::regex_constants should be allowed to be enumerators">3998</a><sup><a href="https://cplusplus.github.io/LWG/issue3998">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>32.4 [re.const]</td>
+<td>Constants in <code>std::regex_constants</code> should be allowed to be enumerators</td>
+<td><span class="no-pr">No</span></td>
+<td>3</td>
+<td></td>
 </tr>
 <tr>
 <td id="4054"><a href="lwg-active.html#4054" title="Repeating a repeat_view should repeat the view">4054</a><sup><a href="https://cplusplus.github.io/LWG/issue4054">(i)</a></sup></td>
@@ -1037,46 +1091,10 @@ should require the arguments to have the same length</td>
 <td></td>
 </tr>
 <tr>
-<td id="4000"><a href="lwg-active.html#4000" title="flat_map::insert_range's Effects is not quite right">4000</a><sup><a href="https://cplusplus.github.io/LWG/issue4000">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>24.6.9.6 [flat.map.modifiers]</td>
-<td><code>flat_map::insert_range</code>'s <i>Effects</i> is not quite right</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="3998"><a href="lwg-active.html#3998" title="Constants in std::regex_constants should be allowed to be enumerators">3998</a><sup><a href="https://cplusplus.github.io/LWG/issue3998">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>32.4 [re.const]</td>
-<td>Constants in <code>std::regex_constants</code> should be allowed to be enumerators</td>
-<td><span class="no-pr">No</span></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="3992"><a href="lwg-active.html#3992" title="basic_stringbuf::str()&amp;&amp; should enforce &#x1d4aa;(1)">3992</a><sup><a href="https://cplusplus.github.io/LWG/issue3992">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>31.8.2.4 [stringbuf.members]</td>
 <td><code>basic_stringbuf::str()&amp;&amp;</code> should enforce &#x1d4aa;(1)</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="3977"><a href="lwg-active.html#3977" title="constexpr and noexcept for operators for bitmask types">3977</a><sup><a href="https://cplusplus.github.io/LWG/issue3977">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>16.3.3.3.3 [bitmask.types]</td>
-<td><code>constexpr</code> and <code>noexcept</code> for operators for bitmask types</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="3979"><a href="lwg-active.html#3979" title="Should we reject std::bind_front&lt;42&gt;() and its friends?">3979</a><sup><a href="https://cplusplus.github.io/LWG/issue3979">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>22.10.13 [func.not.fn]</td>
-<td>Should we reject <code>std::bind_front&lt;42&gt;()</code> and its friends?</td>
 <td>Yes</td>
 <td></td>
 <td></td>
@@ -1087,15 +1105,6 @@ should require the arguments to have the same length</td>
 <td>24.2.2.5 [container.alloc.reqmts]</td>
 <td>What does it mean for a type to be "allocator aware"?</td>
 <td><span class="no-pr">No</span></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="3968"><a href="lwg-active.html#3968" title="std::endian::native value should be more specific about object representations">3968</a><sup><a href="https://cplusplus.github.io/LWG/issue3968">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>22.15.8 [bit.endian]</td>
-<td><code>std::endian::native</code> value should be more specific about object representations</td>
-<td>Yes</td>
 <td></td>
 <td></td>
 </tr>
@@ -1122,15 +1131,6 @@ should require the arguments to have the same length</td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>24.6.9 [flat.map]</td>
 <td>Should the comparator of <code>std::flat_map</code>/<code>std::flat_multimap</code> be copied twice in some operations?</td>
-<td><span class="no-pr">No</span></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="3954"><a href="lwg-active.html#3954" title="Feature-test macros in C headers (&lt;stddef.h&gt; etc.)">3954</a><sup><a href="https://cplusplus.github.io/LWG/issue3954">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>17.14.1 [support.c.headers.general]</td>
-<td>Feature-test macros in C headers (<code>&lt;stddef.h&gt;</code> etc.)</td>
 <td><span class="no-pr">No</span></td>
 <td></td>
 <td></td>

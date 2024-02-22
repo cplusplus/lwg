@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4000"><a href="lwg-active.html#4000">4000</a>. <code>flat_map::insert_range</code>'s <i>Effects</i> is not quite right</h3>
 <p><b>Section:</b> 24.6.9.6 <a href="https://wg21.link/flat.map.modifiers">[flat.map.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-10-23 <b>Last modified:</b> 2023-10-28</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-10-23 <b>Last modified:</b> 2024-02-22</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -82,6 +82,19 @@ for (const auto&amp; e : rg) {
 which is incorrect because <code>rg</code>'s value type may not be a <code>pair</code> (<code>tuple</code>, for instance), 
 which means that <code>.first</code> and <code>.second</code> are not valid in such cases.
 </p>
+
+<p><i>[2024-02-22; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll in October 2023.
+</p>
+
+<p>
+"This is <a href="https://wg21.link/P2767" title=" flat_map/flat_set omnibus">P2767</a> section 6 which LWG looked at in Varna,
+and was turned into https://github.com/cplusplus/draft/pull/6274 as an
+editorial change."
+</p>
+
 
 
 <p id="res-4000"><b>Proposed resolution:</b></p>

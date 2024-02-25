@@ -121,17 +121,11 @@ such that <code>a + n == b</code>.<br/>
 For example, pointer subtraction is undefined if the result isn't representable 
 as <code>std::ptrdiff_t</code>, and user-defined types with random access iterators 
 aren't required to have a difference which is always representable by 
-<code>difference_type</code> in general.
+<code>difference_type</code>.
 <p/>
 <code>std::distance(&amp;a, &amp;b)</code> can't be well-defined when 
-<code>&amp;b - &amp;a</code> is not, so <code>std::distance</code> is missing a precondition:
+<code>&amp;b - &amp;a</code> is not, so <code>std::distance</code> is missing a precondition.
 </p>
-<blockquote>
-<p>
-[&hellip;] <ins>and <code>typename iterator_traits&lt;InputIterator&gt;::difference_type</code> 
-can represent the result of this function call</ins>.
-</p>
-</blockquote>
 
 
 <p id="res-4055"><b>Proposed resolution:</b></p>

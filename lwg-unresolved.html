@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-02-22 at 16:52:45 UTC
+<p>Revised 2024-02-25 at 15:58:38 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -56129,6 +56129,114 @@ Given subexpressions <code>E</code> and <code>F</code>, the expressions <code>vi
 are expression-equivalent to <code>repeat_view<ins>&lt;decay_t&lt;decltype((E))&gt;&gt;</ins>(E)</code> and 
 <code>repeat_view(E, F)</code>, respectively.
 </p>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4055"><a href="#4055">4055</a><sup><a href="https://cplusplus.github.io/LWG/issue4055">(i)</a></sup>. &sect;[iterator.operations] <code>std::distance</code> is missing a precondition</h3>
+<p><b>Section:</b> 25.4.3 <a href="https://wg21.link/iterator.operations">[iterator.operations]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2024-02-25 <b>Last modified:</b> 2024-02-25</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#iterator.operations">active issues</a> in [iterator.operations].</p>
+<p><b>View all other</b> <a href="lwg-index.html#iterator.operations">issues</a> in [iterator.operations].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>std::distance</code> for random access iterators is defined in terms of 
+<code>(last - first)</code> (25.4.3 <a href="https://wg21.link/iterator.operations">[iterator.operations]</a> p5) for 
+<i>Cpp17RandomAccessIterators</i>.
+<p/>
+However, this subtraction is not guaranteed to be well-defined
+(25.3.5.7 <a href="https://wg21.link/random.access.iterators">[random.access.iterators]</a>, Table [tab:randomaccessiterator]):
+</p>
+<blockquote>
+<table border="1">
+<caption>Table 91: <i>Cpp17RandomAccessIterator</i> requirements (in addition to 
+<i>Cpp17BidirectionalIterator</i>) [tab:randomaccessiterator]</caption>
+<tr align="center">
+<th>Expression</th>
+<th>Return type</th>
+<th>Operational semantics</th>
+<th>Assertion&#47;note<br/>pre-&#47;post-condition</th>
+</tr> 
+
+<tr>
+<td colspan="4" align="center">
+<code>[&hellip;]</code>
+</td>
+</tr>
+
+<tr>
+<td>
+<code>b - a</code>
+</td>
+<td>
+<code>difference_type</code>
+</td>
+<td>
+<code>return n;</code>
+</td>
+<td>
+<i>Preconditions</i>: there exists a<br/>
+value <code>n</code> of type <code>difference_type</code><br/> 
+such that <code>a + n == b</code>.<br/>
+<code>b == a + (b - a)</code>.
+</td>
+</tr>
+
+</table>
+
+</blockquote>
+<p>
+For example, pointer subtraction is undefined if the result isn't representable 
+as <code>std::ptrdiff_t</code>, and user-defined types with random access iterators 
+aren't required to have a difference which is always representable by 
+<code>difference_type</code> in general.
+<p/>
+<code>std::distance(&amp;a, &amp;b)</code> can't be well-defined when 
+<code>&amp;b - &amp;a</code> is not, so <code>std::distance</code> is missing a precondition:
+</p>
+<blockquote>
+<p>
+[&hellip;] <ins>and <code>typename iterator_traits&lt;InputIterator&gt;::difference_type</code> 
+can represent the result of this function call</ins>.
+</p>
+</blockquote>
+
+
+<p id="res-4055"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
+</p>
+
+<ol>
+<li><p>Modify 25.4.3 <a href="https://wg21.link/iterator.operations">[iterator.operations]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class InputIterator&gt;
+  constexpr typename iterator_traits&lt;InputIterator&gt;::difference_type
+    distance(InputIterator first, InputIterator last);
+</pre>
+<blockquote>
+<p>
+-4-<i>Preconditions</i>: <code>last</code> is reachable from <code>first</code>, or <code>InputIterator</code> 
+meets the <i>Cpp17RandomAccessIterator</i> requirements<ins>,</ins> <del>and</del> <code>first</code> 
+is reachable from <code>last</code> <ins>, and 
+<code>typename iterator_traits&lt;InputIterator&gt;::difference_type</code> can represent the result of 
+this function call</ins>.
+<p/>
+-5- <i>Effects</i>: If <code>InputIterator</code> meets the <i>Cpp17RandomAccessIterator</i> 
+requirements, returns <code>(last - first)</code>; otherwise, increments <code>first</code> until <code>last</code> 
+is reached and returns the number of increments.
+</p>
+</blockquote>
 </blockquote>
 </li>
 </ol>

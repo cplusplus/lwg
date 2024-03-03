@@ -71,23 +71,23 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-<code>generator::iterator</code>'s <code>operator*</code> is specified to have the following noexcept-specifier:
+<code>generator::<i>iterator</i></code>'s <code>operator*</code> is specified to have the following noexcept-specifier:
 </p>
 <blockquote><pre>
-noexcept(is_nothrow_copy_constructible_v&lt;reference&gt;)
+noexcept(is_nothrow_copy_constructible_v&lt;<i>reference</i>&gt;)
 </pre></blockquote>
 <p>
-When <code>reference</code> is an rvalue reference type, <code>is_nothrow_copy_constructible_v&lt;reference&gt;</code> 
-is <code>false</code> (because <code>reference</code> is not copy constructible), which means <code>operator*</code> 
+When <code><i>reference</i></code> is an rvalue reference type, <code>is_nothrow_copy_constructible_v&lt;<i>reference</i>&gt;</code> 
+is <code>false</code> (because <code><i>reference</i></code> is not copy constructible), which means <code>operator*</code> 
 is not <code>noexcept</code>.
 <p/>
 However, <code>operator*</code> doesn't perform any potentially-throwing operation in this case. It's effect is 
-equivalent to <code>return static_cast&lt;reference&gt;(*p.value_);</code> (where the type of <code>p.value_</code> 
-is effectively <code>add_pointer_t&lt;reference&gt;</code>). Neither the dereference nor the cast to rvalue 
+equivalent to <code>return static_cast&lt;<i>reference</i>&gt;(*p.value_);</code> (where the type of <code>p.<i>value_</i></code> 
+is effectively <code>add_pointer_t&lt;<i>reference</i>&gt;</code>). Neither the dereference nor the cast to rvalue 
 reference can throw an exception.
 <p/>
 I think the expression inside the noexcept-specifier should be changed to 
-<code>noexcept(static_cast&lt;reference&gt;(*p.<i>value_</i>))</code>.
+<code>noexcept(static_cast&lt;<i>reference</i>&gt;(*p.<i>value_</i>))</code>.
 </p>
 
 

@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-03-03 at 17:41:02 UTC
+<p>Revised 2024-03-03 at 17:41:34 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -60408,7 +60408,7 @@ is <code>false</code> (because <code><i>reference</i></code> is not copy constru
 is not <code>noexcept</code>.
 <p/>
 However, <code>operator*</code> doesn't perform any potentially-throwing operation in this case. It's effect is 
-equivalent to <code>return static_cast&lt;<i>reference</i>&gt;(*p.value_);</code> (where the type of <code>p.<i>value_</i></code> 
+equivalent to <code>return static_cast&lt;<i>reference</i>&gt;(*p.<i>value_</i>);</code> (where the type of <code>p.<i>value_</i></code> 
 is effectively <code>add_pointer_t&lt;<i>reference</i>&gt;</code>). Neither the dereference nor the cast to rvalue 
 reference can throw an exception.
 <p/>

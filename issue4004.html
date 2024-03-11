@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Issue 4004: The load and store operation in &sect;[atomics.order] p1 is ambiguous</title>
 <meta property="og:title" content="Issue 4004: The load and store operation in &sect;[atomics.order] p1 is ambiguous">
-<meta property="og:description" content="C++ library issue. Status: New">
+<meta property="og:description" content="C++ library issue. Status: SG1">
 <meta property="og:url" content="https://cplusplus.github.io/LWG/issue4004.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://isocpp.org/assets/images/cpp_logo.png">
@@ -61,15 +61,15 @@
 </head>
 <body>
 <hr>
-<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#SG1">SG1</a> status.</em></p>
 <h3 id="4004"><a href="lwg-active.html#4004">4004</a>. The load and store operation in &sect;[atomics.order] p1 is ambiguous</h3>
-<p><b>Section:</b> 33.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> jim x <b>Opened:</b> 2023-10-30 <b>Last modified:</b> 2023-11-04</p>
-<p><b>Priority: </b>Not Prioritized
+<p><b>Section:</b> 33.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> <b>Status:</b> <a href="lwg-active.html#SG1">SG1</a>
+ <b>Submitter:</b> jim x <b>Opened:</b> 2023-10-30 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#atomics.order">active issues</a> in [atomics.order].</p>
 <p><b>View all other</b> <a href="lwg-index.html#atomics.order">issues</a> in [atomics.order].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#SG1">SG1</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 33.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> p1 says:
@@ -119,6 +119,21 @@ synchronization relationship, however, they both are RMW operations.
 <p/>
 It should be clearly defined which are store operations and which are load operations. 
 </p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll in November 2023. Ask SG1 to look.
+</p>
+<p>
+Jonathan:
+"Interpreting this to only mean the <code>store</code> and <code>load</code>
+member functions wouldn't even be self-consistent. Could be clearer though,
+6.9.2 <a href="https://wg21.link/intro.multithread">[intro.multithread]</a> talks about reads and writes (and RMW ops)
+and only uses "store" and "load" informally. Maybe just add something saying
+"reads are also called loads and writes are also called stores".
+</p>
+
 
 
 <p id="res-4004"><b>Proposed resolution:</b></p>

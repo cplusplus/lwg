@@ -67,7 +67,7 @@
 This document is the Index by Status and Date for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
-<p>Revised 2024-03-11 at 21:46:40 UTC
+<p>Revised 2024-03-11 at 21:56:47 UTC
 </p><h2 id="Ready">Ready (6 issues)</h2>
 <table class="issues-index">
 <tr>
@@ -134,7 +134,7 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
 <td></td>
 </tr>
 </table>
-<h2 id="Tentatively_Ready">Tentatively Ready (4 issues)</h2>
+<h2 id="Tentatively_Ready">Tentatively Ready (6 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -144,6 +144,15 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
   <th>Proposed Resolution</th>
   <th><a href="unresolved-prioritized.html">Priority</a></th>
   <th>Duplicates</th>
+</tr>
+<tr>
+<td id="4025"><a href="lwg-active.html#4025" title="Move assignment operator of std::expected&lt;cv void, E&gt; should not be conditionally deleted">4025</a><sup><a href="https://cplusplus.github.io/LWG/issue4025">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>22.8.7.4 [expected.void.assign]</td>
+<td>Move assignment operator of <code>std::expected&lt;<i>cv</i> void, E&gt;</code> should not be conditionally deleted</td>
+<td>Yes</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td id="4011"><a href="lwg-active.html#4011" title="&quot;Effects: Equivalent to return&quot; in [span.elem]">4011</a><sup><a href="https://cplusplus.github.io/LWG/issue4011">(i)</a></sup></td>
@@ -177,6 +186,15 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
 <td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
 <td>26.7.19.2 [range.common.view]</td>
 <td><code>common_view::begin/end</code> are missing the <code><i>simple-view</i></code> check</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4023"><a href="lwg-active.html#4023" title="Preconditions of std::basic_streambuf::setg/setp">4023</a><sup><a href="https://cplusplus.github.io/LWG/issue4023">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>31.6.3.4 [streambuf.protected]</td>
+<td>Preconditions of <code>std::basic_streambuf::setg/setp</code></td>
 <td>Yes</td>
 <td></td>
 <td></td>
@@ -329,7 +347,7 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
 <td></td>
 </tr>
 </table>
-<h2 id="New">New (399 issues)</h2>
+<h2 id="New">New (396 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -339,6 +357,71 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
   <th>Proposed Resolution</th>
   <th><a href="unresolved-prioritized.html">Priority</a></th>
   <th>Duplicates</th>
+</tr>
+<tr>
+<td id="4005"><a href="lwg-active.html#4005" title="&quot;Required behavior&quot; too narrowly defined">4005</a><sup><a href="https://cplusplus.github.io/LWG/issue4005">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>3.46 [defns.required.behavior]</td>
+<td>"Required behavior" too narrowly defined</td>
+<td><span class="no-pr">No</span></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td id="4015"><a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations">4015</a><sup><a href="https://cplusplus.github.io/LWG/issue4015">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>22.5.3.7 [optional.monadic]</td>
+<td>LWG 3973 broke <code>const</code> overloads of <code>std::optional</code> monadic operations</td>
+<td>Yes</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td id="4026"><a href="lwg-active.html#4026" title="Assignment operators of std::expected should propagate triviality">4026</a><sup><a href="https://cplusplus.github.io/LWG/issue4026">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>22.8.6.4 [expected.object.assign]</td>
+<td>Assignment operators of <code>std::expected</code> should propagate triviality</td>
+<td>Yes</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td id="4007"><a href="lwg-active.html#4007" title="Mystic prohibition of calling a volatile-qualified perfect forwarding call wrapper">4007</a><sup><a href="https://cplusplus.github.io/LWG/issue4007">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>22.10.4 [func.require]</td>
+<td>Mystic prohibition of calling a <code>volatile</code>-qualified perfect forwarding call wrapper</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4010"><a href="lwg-active.html#4010" title="subrange::advance should be improved">4010</a><sup><a href="https://cplusplus.github.io/LWG/issue4010">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>26.5.4.3 [range.subrange.access]</td>
+<td><code>subrange::advance</code> should be improved</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4008"><a href="lwg-active.html#4008" title="&sect;[range.utility.conv.to] ranges::to may cause infinite recursion if range_value_t&lt;C&gt; 
+is a non-move-constructible range">4008</a><sup><a href="https://cplusplus.github.io/LWG/issue4008">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>26.5.7.2 [range.utility.conv.to]</td>
+<td>&sect;[range.utility.conv.to] <code>ranges::to</code> may cause infinite recursion if <code>range_value_t&lt;C&gt;</code> 
+is a non-move-constructible range</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4018"><a href="lwg-active.html#4018" title="ranges::to's copy branch is underconstrained">4018</a><sup><a href="https://cplusplus.github.io/LWG/issue4018">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>26.5.7.2 [range.utility.conv.to]</td>
+<td><code>ranges::to</code>'s copy branch is underconstrained</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
 </tr>
 <tr>
 <td id="4056"><a href="lwg-active.html#4056" title="The effects of std::swap are under-specified">4056</a><sup><a href="https://cplusplus.github.io/LWG/issue4056">(i)</a></sup></td>
@@ -748,24 +831,6 @@ vprint_unicode/vprint_nonunicode">4039</a><sup><a href="https://cplusplus.github
 <td></td>
 </tr>
 <tr>
-<td id="4026"><a href="lwg-active.html#4026" title="Assignment operators of std::expected should propagate triviality">4026</a><sup><a href="https://cplusplus.github.io/LWG/issue4026">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>22.8.6.4 [expected.object.assign]</td>
-<td>Assignment operators of <code>std::expected</code> should propagate triviality</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4025"><a href="lwg-active.html#4025" title="Move assignment operator of std::expected&lt;cv void, E&gt; should not be conditionally deleted">4025</a><sup><a href="https://cplusplus.github.io/LWG/issue4025">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>22.8.7.4 [expected.void.assign]</td>
-<td>Move assignment operator of <code>std::expected&lt;<i>cv</i> void, E&gt;</code> should not be conditionally deleted</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="4029"><a href="lwg-active.html#4029" title="basic_string accidentally fails to meet the reversible container requirements">4029</a><sup><a href="https://cplusplus.github.io/LWG/issue4029">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>23.4.3.1 [basic.string.general]</td>
@@ -820,15 +885,6 @@ vprint_unicode/vprint_nonunicode">4039</a><sup><a href="https://cplusplus.github
 <td></td>
 </tr>
 <tr>
-<td id="4023"><a href="lwg-active.html#4023" title="Preconditions of std::basic_streambuf::setg/setp">4023</a><sup><a href="https://cplusplus.github.io/LWG/issue4023">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>31.6.3.4 [streambuf.protected]</td>
-<td>Preconditions of <code>std::basic_streambuf::setg/setp</code></td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="4020"><a href="lwg-active.html#4020" title="extents::index-cast weirdness">4020</a><sup><a href="https://cplusplus.github.io/LWG/issue4020">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>24.7.3.3.2 [mdspan.extents.expo]</td>
@@ -838,57 +894,10 @@ vprint_unicode/vprint_nonunicode">4039</a><sup><a href="https://cplusplus.github
 <td></td>
 </tr>
 <tr>
-<td id="4015"><a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations">4015</a><sup><a href="https://cplusplus.github.io/LWG/issue4015">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>22.5.3.7 [optional.monadic]</td>
-<td>LWG 3973 broke <code>const</code> overloads of <code>std::optional</code> monadic operations</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="4017"><a href="lwg-active.html#4017" title="Behavior of std::views::split on an empty range">4017</a><sup><a href="https://cplusplus.github.io/LWG/issue4017">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>26.7.17.3 [range.split.iterator]</td>
 <td>Behavior of <code>std::views::split</code> on an empty range</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4019"><a href="lwg-active.html#4019" title="Reversing an infinite range leads to an infinite loop">4019</a><sup><a href="https://cplusplus.github.io/LWG/issue4019">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>26.7.20 [range.reverse]</td>
-<td>Reversing an infinite range leads to an infinite loop</td>
-<td><span class="no-pr">No</span></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4018"><a href="lwg-active.html#4018" title="ranges::to's copy branch is underconstrained">4018</a><sup><a href="https://cplusplus.github.io/LWG/issue4018">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>26.5.7.2 [range.utility.conv.to]</td>
-<td><code>ranges::to</code>'s copy branch is underconstrained</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4010"><a href="lwg-active.html#4010" title="subrange::advance should be improved">4010</a><sup><a href="https://cplusplus.github.io/LWG/issue4010">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>26.5.4.3 [range.subrange.access]</td>
-<td><code>subrange::advance</code> should be improved</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4008"><a href="lwg-active.html#4008" title="&sect;[range.utility.conv.to] ranges::to may cause infinite recursion if range_value_t&lt;C&gt; 
-is a non-move-constructible range">4008</a><sup><a href="https://cplusplus.github.io/LWG/issue4008">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>26.5.7.2 [range.utility.conv.to]</td>
-<td>&sect;[range.utility.conv.to] <code>ranges::to</code> may cause infinite recursion if <code>range_value_t&lt;C&gt;</code> 
-is a non-move-constructible range</td>
 <td>Yes</td>
 <td></td>
 <td></td>
@@ -909,24 +918,6 @@ is a non-move-constructible range</td>
 <td>The definition of <code>iota_view::<i>iterator</i>::iterator_concept</code> should be improved</td>
 <td>Yes</td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4007"><a href="lwg-active.html#4007" title="Mystic prohibition of calling a volatile-qualified perfect forwarding call wrapper">4007</a><sup><a href="https://cplusplus.github.io/LWG/issue4007">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>22.10.4 [func.require]</td>
-<td>Mystic prohibition of calling a <code>volatile</code>-qualified perfect forwarding call wrapper</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4005"><a href="lwg-active.html#4005" title="&quot;Required behavior&quot; too narrowly defined">4005</a><sup><a href="https://cplusplus.github.io/LWG/issue4005">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>3.46 [defns.required.behavior]</td>
-<td>"Required behavior" too narrowly defined</td>
-<td><span class="no-pr">No</span></td>
-<td></td>
 <td></td>
 </tr>
 <tr>
@@ -5013,7 +5004,7 @@ types &mdash; this is inconsistent with other types in the library</td>
 <td></td>
 </tr>
 </table>
-<h2 id="SG9">SG9 (1 issues)</h2>
+<h2 id="SG9">SG9 (2 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -5023,6 +5014,15 @@ types &mdash; this is inconsistent with other types in the library</td>
   <th>Proposed Resolution</th>
   <th><a href="unresolved-prioritized.html">Priority</a></th>
   <th>Duplicates</th>
+</tr>
+<tr>
+<td id="4019"><a href="lwg-active.html#4019" title="Reversing an infinite range leads to an infinite loop">4019</a><sup><a href="https://cplusplus.github.io/LWG/issue4019">(i)</a></sup></td>
+<td><a href="lwg-active.html#SG9">SG9</a></td>
+<td>26.7.20 [range.reverse]</td>
+<td>Reversing an infinite range leads to an infinite loop</td>
+<td><span class="no-pr">No</span></td>
+<td>3</td>
+<td></td>
 </tr>
 <tr>
 <td id="3971"><a href="lwg-active.html#3971" title="Join ranges of rvalue references with ranges of prvalues">3971</a><sup><a href="https://cplusplus.github.io/LWG/issue3971">(i)</a></sup></td>

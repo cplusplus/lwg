@@ -67,8 +67,8 @@ is a non-move-constructible range">
 <h3 id="4008"><a href="lwg-active.html#4008">4008</a>. &sect;[range.utility.conv.to] <code>ranges::to</code> may cause infinite recursion if <code>range_value_t&lt;C&gt;</code> 
 is a non-move-constructible range</h3>
 <p><b>Section:</b> 26.5.7.2 <a href="https://wg21.link/range.utility.conv.to">[range.utility.conv.to]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> S. B. Tam <b>Opened:</b> 2023-11-08 <b>Last modified:</b> 2023-11-18</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> S. B. Tam <b>Opened:</b> 2023-11-08 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.utility.conv.to">active issues</a> in [range.utility.conv.to].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.utility.conv.to">issues</a> in [range.utility.conv.to].</p>
@@ -157,6 +157,16 @@ yet again, leading to an infinite recursion.
 I believe this can be fixed by stop calling <code>to&lt;C&gt;</code> recursively when <code>range_reference_t&lt;R&gt;</code> 
 is the same as <code>range_value_t&lt;C&gt;</code>.
 </p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+"Do we want <code>same_as</code> or <code>!<em>different-from</em></code>?"
+</p>
+
 
 
 <p id="res-4008"><b>Proposed resolution:</b></p>

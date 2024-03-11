@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-03-11 at 21:46:40 UTC
+<p>Revised 2024-03-11 at 21:56:47 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -49269,6 +49269,7 @@ return {std::move(first), std::move(init)};
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.join.with.view">active issues</a> in [range.join.with.view].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.join.with.view">issues</a> in [range.join.with.view].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#SG9">SG9</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 The issue that <code>concat_view</code> implicitly breaks equality-preserving by concatenating range of references with range 
@@ -50822,8 +50823,8 @@ and only uses "store" and "load" informally. Maybe just add something saying
 <hr>
 <h3 id="4005"><a href="#4005">4005</a><sup><a href="https://cplusplus.github.io/LWG/issue4005">(i)</a></sup>. "Required behavior" too narrowly defined</h3>
 <p><b>Section:</b> 3.46 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a>, 16.3.2.4 <a href="https://wg21.link/structure.specifications">[structure.specifications]</a>, 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.functions]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2023-11-03 <b>Last modified:</b> 2023-11-04</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2023-11-03 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -50846,6 +50847,13 @@ Bullet (2.4) of 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.fu
 3.46 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a> by suddenly extending it to "destructor operations".
 </p>
 
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+</p>
+
+
 
 <p id="res-4005"><b>Proposed resolution:</b></p>
 
@@ -50856,8 +50864,8 @@ Bullet (2.4) of 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.fu
 <hr>
 <h3 id="4007"><a href="#4007">4007</a><sup><a href="https://cplusplus.github.io/LWG/issue4007">(i)</a></sup>. Mystic prohibition of calling a <code>volatile</code>-qualified perfect forwarding call wrapper</h3>
 <p><b>Section:</b> 22.10.4 <a href="https://wg21.link/func.require">[func.require]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-11-05 <b>Last modified:</b> 2023-11-05</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-11-05 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#func.require">issues</a> in [func.require].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -50881,6 +50889,26 @@ wrapper to be conditionally-supported. E.g. when the <code>operator()</code> hap
 static member function, calling a <code>volatile</code> wrapper can be naturally supported and have expected 
 behavior.
 </p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+LWG <a href="lwg-defects.html#2487" title="bind() should be const-overloaded, not cv-overloaded">2487</a> doesn't seem to intend to forbid <code>volatile</code>
+support as a conforming extension.
+</p>
+<p>
+<a href="https://wg21.link/P1065R2" title=" constexpr INVOKE">P1065R2</a> made it ill-formed for <code>std::bind</code> but didn't
+make the same change to the definition of perfect forwarding call wrapper.
+So given an <code class='backtick'>as_volatile</code> function that works like <code class='backtick'>std::as_const</code>,
+<code class='backtick'>as_volatile(std::bind(&amp;T::fn))(t)</code> is ill-formed but
+<code class='backtick'>as_volatile(std::mem_fn(&amp;T::fn))(t)</code> is undefined.
+Supporting it as a conforming extension is fine, but making it UB is not.
+Maybe "conditionally supported" instead?
+</p>
+
 
 
 <p id="res-4007"><b>Proposed resolution:</b></p>
@@ -50915,8 +50943,8 @@ is either <code>volatile</code> or <code>const volatile</code>, it is unspecifie
 <h3 id="4008"><a href="#4008">4008</a><sup><a href="https://cplusplus.github.io/LWG/issue4008">(i)</a></sup>. &sect;[range.utility.conv.to] <code>ranges::to</code> may cause infinite recursion if <code>range_value_t&lt;C&gt;</code> 
 is a non-move-constructible range</h3>
 <p><b>Section:</b> 26.5.7.2 <a href="https://wg21.link/range.utility.conv.to">[range.utility.conv.to]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> S. B. Tam <b>Opened:</b> 2023-11-08 <b>Last modified:</b> 2023-11-18</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> S. B. Tam <b>Opened:</b> 2023-11-08 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.utility.conv.to">active issues</a> in [range.utility.conv.to].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.utility.conv.to">issues</a> in [range.utility.conv.to].</p>
@@ -51005,6 +51033,16 @@ yet again, leading to an infinite recursion.
 I believe this can be fixed by stop calling <code>to&lt;C&gt;</code> recursively when <code>range_reference_t&lt;R&gt;</code> 
 is the same as <code>range_value_t&lt;C&gt;</code>.
 </p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+"Do we want <code>same_as</code> or <code>!<em>different-from</em></code>?"
+</p>
+
 
 
 <p id="res-4008"><b>Proposed resolution:</b></p>
@@ -51146,8 +51184,8 @@ range_difference_t&lt;const V&gt;(size()))</code>.</ins></p>
 <hr>
 <h3 id="4010"><a href="#4010">4010</a><sup><a href="https://cplusplus.github.io/LWG/issue4010">(i)</a></sup>. <code>subrange::advance</code> should be improved</h3>
 <p><b>Section:</b> 26.5.4.3 <a href="https://wg21.link/range.subrange.access">[range.subrange.access]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-11-09 <b>Last modified:</b> 2023-11-18</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-11-09 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#range.subrange.access">issues</a> in [range.subrange.access].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -51157,6 +51195,21 @@ range_difference_t&lt;const V&gt;(size()))</code>.</ins></p>
 n, <i>end_</i>)</code>, which has &#x1d4aa;(<code>n</code>) complexity for non-common random-access ranges,
 which can be improved to &#x1d4aa;(1) with the help of the <code><i>size_</i></code> member (if provided).
 </p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+Jonathan: The "Effects: Equivalent to" wording strongly suggests doing exactly
+what it suggests there, and  the difference would be observable in the number
+of times the iterator is compared to the sentinel. I'm not sure if we care
+about that, or if an implementation would be free to make this change as QoI.
+Regarding the proposed resolution, we know the type of <code>n</code>
+so we don't need to use <code>decltype(n)</code> in the cast.
+</p>
+
 
 
 <p id="res-4010"><b>Proposed resolution:</b></p>
@@ -51430,8 +51483,8 @@ to
 <hr>
 <h3 id="4015"><a href="#4015">4015</a><sup><a href="https://cplusplus.github.io/LWG/issue4015">(i)</a></sup>. LWG 3973 broke <code>const</code> overloads of <code>std::optional</code> monadic operations</h3>
 <p><b>Section:</b> 22.5.3.7 <a href="https://wg21.link/optional.monadic">[optional.monadic]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-11-24 <b>Last modified:</b> 2023-11-29</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-11-24 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>1
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -51499,6 +51552,15 @@ did not already say that indirectly. I also added extra mentioning of <code><i>h
 where different cells had very different effects on that member (unless these cells specify postconditions), 
 to prevent misunderstanding.
 </p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 1 after reflector poll in November 2023.
+Six votes for 'Tentatively Ready' but enough uncertainty to deserve
+discussion at a meeting.
+</p>
+
 
 
 <p id="res-4015"><b>Proposed resolution:</b></p>
@@ -52332,8 +52394,8 @@ constexpr <i>outer-iterator</i>(<i>Parent</i>&amp; parent, iterator_t&lt;<i>Base
 <hr>
 <h3 id="4018"><a href="#4018">4018</a><sup><a href="https://cplusplus.github.io/LWG/issue4018">(i)</a></sup>. <code>ranges::to</code>'s copy branch is underconstrained</h3>
 <p><b>Section:</b> 26.5.7.2 <a href="https://wg21.link/range.utility.conv.to">[range.utility.conv.to]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-11-25 <b>Last modified:</b> 2023-11-25</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-11-25 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.utility.conv.to">active issues</a> in [range.utility.conv.to].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.utility.conv.to">issues</a> in [range.utility.conv.to].</p>
@@ -52361,6 +52423,13 @@ int main() {
   auto v = std::ranges::to&lt;nonmovable_vector&lt;int&gt;&gt;(arr); // <span style="color:red;font-weight:bolder">hard error</span>
 }
 </pre></blockquote>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
 
 
 <p id="res-4018"><b>Proposed resolution:</b></p>
@@ -52422,12 +52491,12 @@ ranges::copy(r, <i>container-inserter</i>&lt;range_reference_t&lt;R&gt;&gt;(c));
 
 <hr>
 <h3 id="4019"><a href="#4019">4019</a><sup><a href="https://cplusplus.github.io/LWG/issue4019">(i)</a></sup>. Reversing an infinite range leads to an infinite loop</h3>
-<p><b>Section:</b> 26.7.20 <a href="https://wg21.link/range.reverse">[range.reverse]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Barry Revzin <b>Opened:</b> 2023-11-25 <b>Last modified:</b> 2023-11-27</p>
-<p><b>Priority: </b>Not Prioritized
+<p><b>Section:</b> 26.7.20 <a href="https://wg21.link/range.reverse">[range.reverse]</a> <b>Status:</b> <a href="lwg-active.html#SG9">SG9</a>
+ <b>Submitter:</b> Barry Revzin <b>Opened:</b> 2023-11-25 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#range.reverse">issues</a> in [range.reverse].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#SG9">SG9</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 Consider the following:
@@ -52448,6 +52517,18 @@ A reddit post suggested disallowing reversing a non-common range but that likely
 the very least recognize ranges whose sentinel is <code>unreachable_t</code> and reject those from consideration. For instance, 
 we could change 25.4.4.4 <a href="https://wg21.link/range.iter.op.next">[range.iter.op.next]</a>/3 to <i>Mandate</i> that <code>S</code> is not <code>unreachable_t</code>.
 </p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll. Ask SG9 to look. Probably needs a paper.
+</p>
+<p>
+Infinite ranges are invalid and giving an invalid range to the library is
+undefined. But this is not a particularly satisfactory answer given that
+we provide such ranges ourselves...
+</p>
+
 
 
 <p id="res-4019"><b>Proposed resolution:</b></p>
@@ -52772,71 +52853,6 @@ representation of the century.</td>
 
 
 <hr>
-<h3 id="4023"><a href="#4023">4023</a><sup><a href="https://cplusplus.github.io/LWG/issue4023">(i)</a></sup>. Preconditions of <code>std::basic_streambuf::setg/setp</code></h3>
-<p><b>Section:</b> 31.6.3.4 <a href="https://wg21.link/streambuf.protected">[streambuf.protected]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-08 <b>Last modified:</b> 2023-12-09</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-It seems that operations of <code>std::basic_streambuf</code> expect that
-</p>
-<ul>
-<li><p><code>[eback(), egptr())</code> is a valid range and <code>gptr()</code> points into that range, and</p></li>
-<li><p><code>[pbase(), pptr())</code> is a valid range and <code>epptr()</code> points into that range.</p></li>
-</ul>
-<p>
-However, it is currently not specified for <code>setg/setp</code> that such invariants need to be established.
-</p>
-
-
-<p id="res-4023"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4964" title=" Working Draft, Programming Languages — C++">N4964</a>.
-</p>
-
-<ol>
-
-<li><p>Modify 31.6.3.4.2 <a href="https://wg21.link/streambuf.get.area">[streambuf.get.area]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-void setg(char_type* gbeg, char_type* gnext, char_type* gend);
-</pre>
-<blockquote>
-<p>
-<ins>-?- <i>Preconditions</i>: <code>[gbeg,  gnext)</code>, <code>[gbeg, gend)</code>, and <code>[gnext, gend)</code> are all valid ranges.</ins>
-<p/>
--5- <i>Postconditions</i>: <code>gbeg == eback()</code>, <code>gnext == gptr()</code>, and <code>gend == egptr()</code> are all <code>true</code>.
-</p>
-</blockquote>
-</blockquote>
-</li>
-
-<li><p>Modify 31.6.3.4.3 <a href="https://wg21.link/streambuf.put.area">[streambuf.put.area]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-void setp(char_type* pbeg, char_type* pend);
-</pre>
-<blockquote>
-<p>
-<ins>-?- <i>Preconditions</i>: <code>[pbeg, pend)</code> is a valid range.</ins>
-<p/>
--5- <i>Postconditions</i>: <code>pbeg == pbase()</code>, <code>pbeg == pptr()</code>, and <code>pend == epptr()</code> are all <code>true</code>.
-</p>
-</blockquote>
-</blockquote>
-</li>
-</ol>
-
-
-
-
-
-
-<hr>
 <h3 id="4024"><a href="#4024">4024</a><sup><a href="https://cplusplus.github.io/LWG/issue4024">(i)</a></sup>. Underspecified destruction of objects created in <code>std::make_shared_for_overwrite/std::allocate_shared_for_overwrite</code></h3>
 <p><b>Section:</b> 20.3.2.2.7 <a href="https://wg21.link/util.smartptr.shared.create">[util.smartptr.shared.create]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-16 <b>Last modified:</b> 2023-12-16</p>
@@ -52901,64 +52917,10 @@ object of type <code>U</code>.</p></li>
 
 
 <hr>
-<h3 id="4025"><a href="#4025">4025</a><sup><a href="https://cplusplus.github.io/LWG/issue4025">(i)</a></sup>. Move assignment operator of <code>std::expected&lt;<i>cv</i> void, E&gt;</code> should not be conditionally deleted</h3>
-<p><b>Section:</b> 22.8.7.4 <a href="https://wg21.link/expected.void.assign">[expected.void.assign]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-16 <b>Last modified:</b> 2023-12-22</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View all other</b> <a href="lwg-index.html#expected.void.assign">issues</a> in [expected.void.assign].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-It seems intended that copy functions of <code>std::optional</code>, <code>std::variant</code>, and <code>std::expected</code> 
-are conditionally deleted, while move functions are constrained. However, the move assignment operator of 
-<code>std::expected&lt;<i>cv</i> void, E&gt;</code> is currently conditionally deleted, which is inconsistent.
-</p>
-
-
-<p id="res-4025"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
-</p>
-
-<ol>
-
-<li><p>Modify 22.8.7.4 <a href="https://wg21.link/expected.void.assign">[expected.void.assign]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-constexpr expected&amp; operator=(expected&amp;&amp; rhs) noexcept(<i>see below</i>);
-</pre>
-<blockquote>
-<p>
-<ins>-?- <i>Constraints</i>: <code>is_move_constructible_v&lt;E&gt;</code> is <code>true</code> and 
-<code>is_move_assignable_v&lt;E&gt;</code> is <code>true</code>.</ins>
-<p/>
-[&hellip;]
-<p/>
--6- <i>Remarks</i>: The exception specification is equivalent to <code>is_nothrow_move_constructible_v&lt;E&gt; &amp;&amp;
-is_nothrow_move_assignable_v&lt;E&gt;</code>.
-<p/>
-<del>-7- This operator is defined as deleted unless <code>is_move_constructible_v&lt;E&gt;</code> is <code>true</code> 
-and <code>is_move_assignable_v&lt;E&gt;</code> is <code>true</code>.</del>
-</p>
-</blockquote>
-</blockquote>
-</li>
-
-</ol>
-
-
-
-
-
-
-
-<hr>
 <h3 id="4026"><a href="#4026">4026</a><sup><a href="https://cplusplus.github.io/LWG/issue4026">(i)</a></sup>. Assignment operators of <code>std::expected</code> should propagate triviality</h3>
 <p><b>Section:</b> 22.8.6.4 <a href="https://wg21.link/expected.object.assign">[expected.object.assign]</a>, 22.8.7.4 <a href="https://wg21.link/expected.void.assign">[expected.void.assign]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-16 <b>Last modified:</b> 2023-12-22</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-16 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -52971,6 +52933,14 @@ apply such requirements for <code>std::expected</code>.
 Such changes are being made in libc++ (<a href="https://github.com/llvm/llvm-project/pull/74768">llvm/llvm-project#74768</a>). 
 And it may be desired to make the triviality improvement portable.
 </p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll in January 2024.
+A few votes for Tentatively Ready, others thought it needed more consideration.
+</p>
+
 
 
 <p id="res-4026"><b>Proposed resolution:</b></p>

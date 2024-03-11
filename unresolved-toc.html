@@ -59,7 +59,7 @@
 <p>Reference ISO/IEC IS 14882:2020(E)</p>
 <p>This document is the Table of Contents for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.</p>
-<p>Revised 2024-03-11 at 21:46:40 UTC
+<p>Revised 2024-03-11 at 21:56:47 UTC
 </p><table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -4291,7 +4291,7 @@ should require the arguments to have the same length</td>
 <td>3.46 [defns.required.behavior]</td>
 <td>"Required behavior" too narrowly defined</td>
 <td><span class="no-pr">No</span></td>
-<td></td>
+<td>2</td>
 <td></td>
 </tr>
 <tr>
@@ -4300,7 +4300,7 @@ should require the arguments to have the same length</td>
 <td>22.10.4 [func.require]</td>
 <td>Mystic prohibition of calling a <code>volatile</code>-qualified perfect forwarding call wrapper</td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -4311,7 +4311,7 @@ is a non-move-constructible range">4008</a><sup><a href="https://cplusplus.githu
 <td>&sect;[range.utility.conv.to] <code>ranges::to</code> may cause infinite recursion if <code>range_value_t&lt;C&gt;</code> 
 is a non-move-constructible range</td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -4329,7 +4329,7 @@ is a non-move-constructible range</td>
 <td>26.5.4.3 [range.subrange.access]</td>
 <td><code>subrange::advance</code> should be improved</td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -4347,7 +4347,7 @@ is a non-move-constructible range</td>
 <td>22.5.3.7 [optional.monadic]</td>
 <td>LWG 3973 broke <code>const</code> overloads of <code>std::optional</code> monadic operations</td>
 <td>Yes</td>
-<td></td>
+<td>1</td>
 <td></td>
 </tr>
 <tr>
@@ -4365,16 +4365,16 @@ is a non-move-constructible range</td>
 <td>26.5.7.2 [range.utility.conv.to]</td>
 <td><code>ranges::to</code>'s copy branch is underconstrained</td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
 <td id="4019"><a href="lwg-active.html#4019" title="Reversing an infinite range leads to an infinite loop">4019</a><sup><a href="https://cplusplus.github.io/LWG/issue4019">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
+<td><a href="lwg-active.html#SG9">SG9</a></td>
 <td>26.7.20 [range.reverse]</td>
 <td>Reversing an infinite range leads to an infinite loop</td>
 <td><span class="no-pr">No</span></td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -4405,28 +4405,10 @@ is a non-move-constructible range</td>
 <td></td>
 </tr>
 <tr>
-<td id="4023"><a href="lwg-active.html#4023" title="Preconditions of std::basic_streambuf::setg/setp">4023</a><sup><a href="https://cplusplus.github.io/LWG/issue4023">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>31.6.3.4 [streambuf.protected]</td>
-<td>Preconditions of <code>std::basic_streambuf::setg/setp</code></td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="4024"><a href="lwg-active.html#4024" title="Underspecified destruction of objects created in std::make_shared_for_overwrite/std::allocate_shared_for_overwrite">4024</a><sup><a href="https://cplusplus.github.io/LWG/issue4024">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>20.3.2.2.7 [util.smartptr.shared.create]</td>
 <td>Underspecified destruction of objects created in <code>std::make_shared_for_overwrite/std::allocate_shared_for_overwrite</code></td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4025"><a href="lwg-active.html#4025" title="Move assignment operator of std::expected&lt;cv void, E&gt; should not be conditionally deleted">4025</a><sup><a href="https://cplusplus.github.io/LWG/issue4025">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>22.8.7.4 [expected.void.assign]</td>
-<td>Move assignment operator of <code>std::expected&lt;<i>cv</i> void, E&gt;</code> should not be conditionally deleted</td>
 <td>Yes</td>
 <td></td>
 <td></td>
@@ -4437,7 +4419,7 @@ is a non-move-constructible range</td>
 <td>22.8.6.4 [expected.object.assign]</td>
 <td>Assignment operators of <code>std::expected</code> should propagate triviality</td>
 <td>Yes</td>
-<td></td>
+<td>2</td>
 <td></td>
 </tr>
 <tr>

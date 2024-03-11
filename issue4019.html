@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Issue 4019: Reversing an infinite range leads to an infinite loop</title>
 <meta property="og:title" content="Issue 4019: Reversing an infinite range leads to an infinite loop">
-<meta property="og:description" content="C++ library issue. Status: New">
+<meta property="og:description" content="C++ library issue. Status: SG9">
 <meta property="og:url" content="https://cplusplus.github.io/LWG/issue4019.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://isocpp.org/assets/images/cpp_logo.png">
@@ -61,14 +61,14 @@
 </head>
 <body>
 <hr>
-<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#SG9">SG9</a> status.</em></p>
 <h3 id="4019"><a href="lwg-active.html#4019">4019</a>. Reversing an infinite range leads to an infinite loop</h3>
-<p><b>Section:</b> 26.7.20 <a href="https://wg21.link/range.reverse">[range.reverse]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Barry Revzin <b>Opened:</b> 2023-11-25 <b>Last modified:</b> 2023-11-27</p>
-<p><b>Priority: </b>Not Prioritized
+<p><b>Section:</b> 26.7.20 <a href="https://wg21.link/range.reverse">[range.reverse]</a> <b>Status:</b> <a href="lwg-active.html#SG9">SG9</a>
+ <b>Submitter:</b> Barry Revzin <b>Opened:</b> 2023-11-25 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#range.reverse">issues</a> in [range.reverse].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#SG9">SG9</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 Consider the following:
@@ -89,6 +89,18 @@ A reddit post suggested disallowing reversing a non-common range but that likely
 the very least recognize ranges whose sentinel is <code>unreachable_t</code> and reject those from consideration. For instance, 
 we could change 25.4.4.4 <a href="https://wg21.link/range.iter.op.next">[range.iter.op.next]</a>/3 to <i>Mandate</i> that <code>S</code> is not <code>unreachable_t</code>.
 </p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll. Ask SG9 to look. Probably needs a paper.
+</p>
+<p>
+Infinite ranges are invalid and giving an invalid range to the library is
+undefined. But this is not a particularly satisfactory answer given that
+we provide such ranges ourselves...
+</p>
+
 
 
 <p id="res-4019"><b>Proposed resolution:</b></p>

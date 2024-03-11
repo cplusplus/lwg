@@ -62,7 +62,7 @@
 </tr>
 <tr>
 <td align="left">Date:</td>
-<td align="left">Revised 2024-03-11 at 21:46:40 UTC
+<td align="left">Revised 2024-03-11 at 21:56:47 UTC
 </td>
 </tr>
 <tr>
@@ -1477,6 +1477,139 @@ ranges::<del>copy</del><ins>for_each</ins>(r, <i>container-<del>inserter</del><i
 </blockquote>
 </li>
 </ol>
+
+
+
+
+
+<hr>
+<h3 id="4023"><a href="#4023">4023</a><sup><a href="https://cplusplus.github.io/LWG/issue4023">(i)</a></sup>. Preconditions of <code>std::basic_streambuf::setg/setp</code></h3>
+<p><b>Section:</b> 31.6.3.4 <a href="https://wg21.link/streambuf.protected">[streambuf.protected]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-08 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+It seems that operations of <code>std::basic_streambuf</code> expect that
+</p>
+<ul>
+<li><p><code>[eback(), egptr())</code> is a valid range and <code>gptr()</code> points into that range, and</p></li>
+<li><p><code>[pbase(), pptr())</code> is a valid range and <code>epptr()</code> points into that range.</p></li>
+</ul>
+<p>
+However, it is currently not specified for <code>setg/setp</code> that such invariants need to be established.
+</p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after six votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4023"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4964" title=" Working Draft, Programming Languages — C++">N4964</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 31.6.3.4.2 <a href="https://wg21.link/streambuf.get.area">[streambuf.get.area]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+void setg(char_type* gbeg, char_type* gnext, char_type* gend);
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Preconditions</i>: <code>[gbeg,  gnext)</code>, <code>[gbeg, gend)</code>, and <code>[gnext, gend)</code> are all valid ranges.</ins>
+<p/>
+-5- <i>Postconditions</i>: <code>gbeg == eback()</code>, <code>gnext == gptr()</code>, and <code>gend == egptr()</code> are all <code>true</code>.
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+<li><p>Modify 31.6.3.4.3 <a href="https://wg21.link/streambuf.put.area">[streambuf.put.area]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+void setp(char_type* pbeg, char_type* pend);
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Preconditions</i>: <code>[pbeg, pend)</code> is a valid range.</ins>
+<p/>
+-5- <i>Postconditions</i>: <code>pbeg == pbase()</code>, <code>pbeg == pptr()</code>, and <code>pend == epptr()</code> are all <code>true</code>.
+</p>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4025"><a href="#4025">4025</a><sup><a href="https://cplusplus.github.io/LWG/issue4025">(i)</a></sup>. Move assignment operator of <code>std::expected&lt;<i>cv</i> void, E&gt;</code> should not be conditionally deleted</h3>
+<p><b>Section:</b> 22.8.7.4 <a href="https://wg21.link/expected.void.assign">[expected.void.assign]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-16 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#expected.void.assign">issues</a> in [expected.void.assign].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+It seems intended that copy functions of <code>std::optional</code>, <code>std::variant</code>, and <code>std::expected</code> 
+are conditionally deleted, while move functions are constrained. However, the move assignment operator of 
+<code>std::expected&lt;<i>cv</i> void, E&gt;</code> is currently conditionally deleted, which is inconsistent.
+</p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after six votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4025"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 22.8.7.4 <a href="https://wg21.link/expected.void.assign">[expected.void.assign]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+constexpr expected&amp; operator=(expected&amp;&amp; rhs) noexcept(<i>see below</i>);
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Constraints</i>: <code>is_move_constructible_v&lt;E&gt;</code> is <code>true</code> and 
+<code>is_move_assignable_v&lt;E&gt;</code> is <code>true</code>.</ins>
+<p/>
+[&hellip;]
+<p/>
+-6- <i>Remarks</i>: The exception specification is equivalent to <code>is_nothrow_move_constructible_v&lt;E&gt; &amp;&amp;
+is_nothrow_move_assignable_v&lt;E&gt;</code>.
+<p/>
+<del>-7- This operator is defined as deleted unless <code>is_move_constructible_v&lt;E&gt;</code> is <code>true</code> 
+and <code>is_move_assignable_v&lt;E&gt;</code> is <code>true</code>.</del>
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+</ol>
+
+
 
 
 

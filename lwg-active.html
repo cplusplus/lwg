@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-03-11 at 22:02:25 UTC
+<p>Revised 2024-03-11 at 22:05:06 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -55068,8 +55068,8 @@ support as a conforming extension.
 <a href="https://wg21.link/P1065R2" title=" constexpr INVOKE">P1065R2</a> made it ill-formed for <code>std::bind</code> but didn't
 make the same change to the definition of perfect forwarding call wrapper.
 So given an <code class='backtick'>as_volatile</code> function that works like <code class='backtick'>std::as_const</code>,
-<code class='backtick'>as_volatile(std::bind(&amp;T::fn))(t)</code> is ill-formed but
-<code class='backtick'>as_volatile(std::mem_fn(&amp;T::fn))(t)</code> is undefined.
+<code>as_volatile(std::bind(&amp;T::fn))(t)</code> is ill-formed but
+<code>as_volatile(std::mem_fn(&amp;T::fn))(t)</code> is undefined.
 Supporting it as a conforming extension is fine, but making it UB is not.
 Maybe "conditionally supported" instead?
 </p>

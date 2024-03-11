@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-03-11 at 22:05:06 UTC
+<p>Revised 2024-03-11 at 22:17:50 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -52292,8 +52292,8 @@ to destroy the contained value <ins>and sets <code><i>has_val</i></code> to <cod
 <hr>
 <h3 id="4017"><a href="#4017">4017</a><sup><a href="https://cplusplus.github.io/LWG/issue4017">(i)</a></sup>. Behavior of <code>std::views::split</code> on an empty range</h3>
 <p><b>Section:</b> 26.7.17.3 <a href="https://wg21.link/range.split.iterator">[range.split.iterator]</a>, 26.7.16.3 <a href="https://wg21.link/range.lazy.split.outer">[range.lazy.split.outer]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> David Stone <b>Opened:</b> 2023-11-19 <b>Last modified:</b> 2023-11-27</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> David Stone <b>Opened:</b> 2023-11-19 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -52343,6 +52343,13 @@ have to have a trailing empty range).
 The following demo shows Barry Revzin's implementation from <a href="https://wg21.link/P2210" title=" Superior String Splitting">P2210</a>, adjusted to fix this: 
 <a href="https://godbolt.org/z/axWb64j9f">godbolt.org/z/axWb64j9f</a>
 </p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
 
 
 <p id="res-4017"><b>Proposed resolution:</b></p>
@@ -52855,8 +52862,8 @@ representation of the century.</td>
 <hr>
 <h3 id="4024"><a href="#4024">4024</a><sup><a href="https://cplusplus.github.io/LWG/issue4024">(i)</a></sup>. Underspecified destruction of objects created in <code>std::make_shared_for_overwrite/std::allocate_shared_for_overwrite</code></h3>
 <p><b>Section:</b> 20.3.2.2.7 <a href="https://wg21.link/util.smartptr.shared.create">[util.smartptr.shared.create]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-16 <b>Last modified:</b> 2023-12-16</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-16 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#util.smartptr.shared.create">active issues</a> in [util.smartptr.shared.create].</p>
 <p><b>View all other</b> <a href="lwg-index.html#util.smartptr.shared.create">issues</a> in [util.smartptr.shared.create].</p>
@@ -52868,6 +52875,17 @@ are specified in 20.3.2.2.7 <a href="https://wg21.link/util.smartptr.shared.crea
 <code>std::make_shared_for_overwrite</code> and <code>std::allocate_shared_for_overwrite</code> should be destroyed by plain 
 destructor calls.
 </p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll in December 2023.
+</p>
+<p>
+This was the <a href="https://wg21.link/P1020R1" title=" Smart pointer creation with default initialization">P1020R1</a> author's intent (see LWG reflector mail
+in November 2018) but it was never clarified in the wording. This fixes that.
+</p>
+
 
 
 <p id="res-4024"><b>Proposed resolution:</b></p>
@@ -53412,56 +53430,6 @@ constexpr const_reverse_iterator crend() const noexcept;</del>
 <del>-4- <i>Returns</i>: An iterator which is semantically equivalent to <code>reverse_iterator(begin())</code>.</del>
 </p>
 </blockquote>
-</blockquote>
-
-</li>
-
-</ol>
-
-
-
-
-
-
-
-<hr>
-<h3 id="4030"><a href="#4030">4030</a><sup><a href="https://cplusplus.github.io/LWG/issue4030">(i)</a></sup>. Clarify whether arithmetic expressions in [numeric.sat.func] are mathematical or C++</h3>
-<p><b>Section:</b> 27.10.17.1 <a href="https://wg21.link/numeric.sat.func">[numeric.sat.func]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Thomas K&ouml;ppe <b>Opened:</b> 2023-12-18 <b>Last modified:</b> 2023-12-22</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-During the application of <a href="https://wg21.link/P0543R0" title=" Saturation arithmetic">P0543R0</a>, "Saturation arithmetic", it was pointed out that it 
-might not be entirely clear what we want something like "<code>x</code> + <code>y</code>" to mean. The paper does not 
-suggest any formatting for those symbols, and a non-normative note explains that the intention is for 
-the expression to be considered mathematically.
-<p/>
-I wonder if this is clear enough. Notes are not normative, and the document "shall be usable without notes". 
-I have formatted this as <code>$\tcode{x} + \tcode{y}$</code> throughout, i.e. the variables are in code font, 
-but the symbol is maths, not code. This is quite subtle. (See also 
-<a href="https://github.com/cplusplus/draft/pull/6686">GitHub discussion</a>.)
-<p/>
-I think it would be an improvement if we simply made the note not be a note. It seems to contain entirely reasonable, mandatory content.
-</p>
-
-
-<p id="res-4030"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
-</p>
-
-<ol>
-
-<li><p>Modify 27.10.17.1 <a href="https://wg21.link/numeric.sat.func">[numeric.sat.func]</a> as indicated:</p>
-
-<blockquote>
-<p>
--1- <del>[<i>Note 1</i>:</del> In the following descriptions, an arithmetic operation is performed as a mathematical 
-operation with infinite range and then it is determined whether the mathematical result fits into the result type. 
-<del>&mdash; <i>end note</i>]</del>
-</p>
 </blockquote>
 
 </li>
@@ -54305,8 +54273,8 @@ in the error state of <code>os</code>.</p></li>
 <hr>
 <h3 id="4040"><a href="#4040">4040</a><sup><a href="https://cplusplus.github.io/LWG/issue4040">(i)</a></sup>. Contradictory specification of <code>std::tuple_size</code></h3>
 <p><b>Section:</b> 22.4.7 <a href="https://wg21.link/tuple.helper">[tuple.helper]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-20 <b>Last modified:</b> 2024-01-21</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-20 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#tuple.helper">issues</a> in [tuple.helper].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -54343,6 +54311,15 @@ while others (e.g. <a href="https://github.com/microsoft/STL/blob/442029c6fa37f1
 always consider <code>std::tuple_size&lt;<i>cv</i> T&gt;</code> needs to be defined. The latter 
 reading seems to be justified by 16.4.2.2 <a href="https://wg21.link/contents">[contents]</a>/1 and 22.4.2 <a href="https://wg21.link/tuple.syn">[tuple.syn]</a>.
 </p>
+
+<p><i>[2024-03-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+The first part of the issue was
+<a href="https://github.com/cplusplus/draft/pull/6777">fixed editorially</a>.
+</p>
+
 
 
 <p id="res-4040"><b>Proposed resolution:</b></p>

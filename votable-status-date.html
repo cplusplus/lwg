@@ -67,7 +67,7 @@
 This document is the Index by Status and Date for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
-<p>Revised 2024-03-11 at 22:17:50 UTC
+<p>Revised 2024-03-12 at 01:11:16 UTC
 </p><h2 id="Ready">Ready (6 issues)</h2>
 <table class="issues-index">
 <tr>
@@ -134,7 +134,7 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
 <td></td>
 </tr>
 </table>
-<h2 id="Tentatively_Ready">Tentatively Ready (7 issues)</h2>
+<h2 id="Tentatively_Ready">Tentatively Ready (14 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -144,6 +144,78 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
   <th>Proposed Resolution</th>
   <th><a href="unresolved-prioritized.html">Priority</a></th>
   <th>Duplicates</th>
+</tr>
+<tr>
+<td id="4045"><a href="lwg-active.html#4045" title="tuple can create dangling references from tuple-like">4045</a><sup><a href="https://cplusplus.github.io/LWG/issue4045">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>22.4.4.2 [tuple.cnstr]</td>
+<td><code>tuple</code> can create dangling references from <code><i>tuple-like</i></code></td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4031"><a href="lwg-active.html#4031" title="bad_expected_access&lt;void&gt; member functions should be noexcept">4031</a><sup><a href="https://cplusplus.github.io/LWG/issue4031">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>22.8.5 [expected.bad.void]</td>
+<td><code>bad_expected_access&lt;void&gt;</code> member functions should be <code>noexcept</code></td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4035"><a href="lwg-active.html#4035" title="single_view should provide empty">4035</a><sup><a href="https://cplusplus.github.io/LWG/issue4035">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>26.6.3.2 [range.single.view]</td>
+<td><code>single_view</code> should provide <code>empty</code></td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4054"><a href="lwg-active.html#4054" title="Repeating a repeat_view should repeat the view">4054</a><sup><a href="https://cplusplus.github.io/LWG/issue4054">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>26.6.5.1 [range.repeat.overview]</td>
+<td>Repeating a <code>repeat_view</code> should repeat the view</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4053"><a href="lwg-active.html#4053" title="Unary call to std::views::repeat does not decay the argument">4053</a><sup><a href="https://cplusplus.github.io/LWG/issue4053">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>26.6.5.2 [range.repeat.view]</td>
+<td>Unary call to <code>std::views::repeat</code> does not decay the argument</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4013"><a href="lwg-active.html#4013" title="lazy_split_view::outer-iterator::value_type should not provide default constructor">4013</a><sup><a href="https://cplusplus.github.io/LWG/issue4013">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>26.7.16.4 [range.lazy.split.outer.value]</td>
+<td><code>lazy_split_view::<i>outer-iterator</i>::value_type</code> should not provide default constructor</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4043"><a href="lwg-active.html#4043" title="&quot;ASCII&quot; is not a registered character encoding">4043</a><sup><a href="https://cplusplus.github.io/LWG/issue4043">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>30.6.2.2 [text.encoding.general]</td>
+<td><code>"ASCII"</code> is not a registered character encoding</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4036"><a href="lwg-active.html#4036" title="__alignof_is_defined is only implicitly specified in C++ and not yet deprecated">4036</a><sup><a href="https://cplusplus.github.io/LWG/issue4036">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>D.11 [depr.c.macros]</td>
+<td><code>__alignof_is_defined</code> is only implicitly specified in C++ and not yet deprecated</td>
+<td>Yes</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td id="4025"><a href="lwg-active.html#4025" title="Move assignment operator of std::expected&lt;cv void, E&gt; should not be conditionally deleted">4025</a><sup><a href="https://cplusplus.github.io/LWG/issue4025">(i)</a></sup></td>
@@ -168,15 +240,6 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
 <td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
 <td>26.5.7 [range.utility.conv]</td>
 <td><code><i>container-insertable</i></code> checks do not match what <code><i>container-inserter</i></code> does</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4013"><a href="lwg-active.html#4013" title="lazy_split_view::outer-iterator::value_type should not provide default constructor">4013</a><sup><a href="https://cplusplus.github.io/LWG/issue4013">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
-<td>26.7.16.4 [range.lazy.split.outer.value]</td>
-<td><code>lazy_split_view::<i>outer-iterator</i>::value_type</code> should not provide default constructor</td>
 <td>Yes</td>
 <td></td>
 <td></td>

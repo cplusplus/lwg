@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-03-12 at 01:11:16 UTC
+<p>Revised 2024-03-12 at 01:19:01 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -53917,65 +53917,6 @@ namespace std {
 
 
 <hr>
-<h3 id="4038"><a href="#4038">4038</a><sup><a href="https://cplusplus.github.io/LWG/issue4038">(i)</a></sup>. <code>std::text_encoding::aliases_view</code> should have constexpr iterators</h3>
-<p><b>Section:</b> 30.6.2.5 <a href="https://wg21.link/text.encoding.aliases">[text.encoding.aliases]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-01-16 <b>Last modified:</b> 2024-01-16</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-<code>aliases_view::begin()</code> and <code>aliases_view::end()</code>
-are constexpr functions, but there is no requirement that you can use
-the returned iterator and sentinel in constant expressions.
-</p>
-
-
-<p id="res-4038"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
-</p>
-
-<ol>
-<li><p>Modify 30.6.2.5 <a href="https://wg21.link/text.encoding.aliases">[text.encoding.aliases]</a> as indicated:</p>
-
-<blockquote>
-<blockquote>
-<pre>
-struct text_encoding::aliases_view : ranges::view_interface&lt;text_encoding::aliases_view&gt; {
-  constexpr <i>implementation-defined</i> begin() const;
-  constexpr <i>implementation-defined</i> end() const;
-};
-</pre>
-</blockquote>
-<p>
--1-
-<code>text_encoding::aliases_view</code> models <code>copyable</code>,
-<code>ranges::view</code>, <code>ranges::random_access_range</code>,
-and <code>ranges::borrowed_range</code>.
-</p>
-<p>
--2-
-Both <code>ranges::range_value_t&lt;text_encoding::aliases_view&gt;</code>
-and <code>ranges::range_reference_t&lt;text_encoding::aliases_view&gt;</code>
-denote <code>const char*</code>.
-</p>
-<p>
-<ins>
--?-
-<code>ranges::iterator_t&lt;text_encoding::aliases_view&gt;</code>
-is a constexpr iterator (25.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a>).
-</ins>
-</p>
-</blockquote>
-</li>
-</ol>
-
-
-
-
-
-<hr>
 <h3 id="4039"><a href="#4039">4039</a><sup><a href="https://cplusplus.github.io/LWG/issue4039">(i)</a></sup>. &sect;[ostream.formatted.print]: Inappropriate usage of <code>badbit</code> in definition of 
 <code>vprint_unicode</code>/<code>vprint_nonunicode</code></h3>
 <p><b>Section:</b> 31.7.6.3.5 <a href="https://wg21.link/ostream.formatted.print">[ostream.formatted.print]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
@@ -54199,13 +54140,13 @@ are constant subexpressions.
 
 <hr>
 <h3 id="4042"><a href="#4042">4042</a><sup><a href="https://cplusplus.github.io/LWG/issue4042">(i)</a></sup>. <code>std::print</code> should permit an efficient implementation</h3>
-<p><b>Section:</b> 31.7.10 <a href="https://wg21.link/print.fun">[print.fun]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Victor Zverovich <b>Opened:</b> 2024-01-20 <b>Last modified:</b> 2024-02-19</p>
-<p><b>Priority: </b>Not Prioritized
+<p><b>Section:</b> 31.7.10 <a href="https://wg21.link/print.fun">[print.fun]</a> <b>Status:</b> <a href="lwg-active.html#LEWG">LEWG</a>
+ <b>Submitter:</b> Victor Zverovich <b>Opened:</b> 2024-01-20 <b>Last modified:</b> 2024-03-12</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#print.fun">active issues</a> in [print.fun].</p>
 <p><b>View all other</b> <a href="lwg-index.html#print.fun">issues</a> in [print.fun].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#LEWG">LEWG</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 <code>std::print</code>/<code>std::vprint*</code> is currently defined in terms of formatting into a temporary string, e.g. 
@@ -54244,6 +54185,16 @@ and state noninterleaving requirement separately.
 <p><i>[2024-02-19; Feb 2024 mailing]</i></p>
 
 <p>This would be resolved by <a href="https://wg21.link/P3107" title=" Permit an efficient implementation of std::print">P3107</a>.</p>
+
+<p><i>[2024-03-12; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 and status to LEWG after reflector poll in January 2024.
+</p>
+<p>
+"This loses the guarantee that if the formatting throws then there's no output."
+</p>
+
 
 
 <p id="res-4042"><b>Proposed resolution:</b></p>
@@ -55048,8 +54999,8 @@ as a corresponding argument.
 <hr>
 <h3 id="4052"><a href="#4052">4052</a><sup><a href="https://cplusplus.github.io/LWG/issue4052">(i)</a></sup>. Bogus requirements for <code>piecewise_linear_distribution</code></h3>
 <p><b>Section:</b> 28.5.9.6.2 <a href="https://wg21.link/rand.dist.samp.pconst">[rand.dist.samp.pconst]</a>, 28.5.9.6.3 <a href="https://wg21.link/rand.dist.samp.plinear">[rand.dist.samp.plinear]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-02-05 <b>Last modified:</b> 2024-02-05</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-02-05 <b>Last modified:</b> 2024-03-12</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#rand.dist.samp.pconst">issues</a> in [rand.dist.samp.pconst].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -55145,6 +55096,15 @@ for <em>k</em> = 0, &hellip;, <em>n</em>.
 The equivalent constructor for <code>piecewise_constant_distribution</code>
 has similar problems with its preconditions in terms of <em>n</em> + 1.
 </p>
+
+<p><i>[2024-03-12; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll.
+The copy &amp; paste error was
+<a href="https://github.com/cplusplus/draft/pull/6794">fixed editorially</a>.
+</p>
+
 
 
 <p id="res-4052"><b>Proposed resolution:</b></p>

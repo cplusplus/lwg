@@ -62,7 +62,7 @@
 </tr>
 <tr>
 <td align="left">Date:</td>
-<td align="left">Revised 2024-03-13 at 10:43:53 UTC
+<td align="left">Revised 2024-03-13 at 17:42:59 UTC
 </td>
 </tr>
 <tr>
@@ -1903,6 +1903,78 @@ This wording is relative to <a href="https://wg21.link/N4971" title=" Working Dr
 </pre>
 </blockquote>
 </blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+
+
+<hr>
+<h3 id="4037"><a href="#4037">4037</a><sup><a href="https://cplusplus.github.io/LWG/issue4037">(i)</a></sup>. Static data members of <code>ctype_base</code> are not yet required to be usable in constant expressions</h3>
+<p><b>Section:</b> 30.4.2.1 <a href="https://wg21.link/category.ctype.general">[category.ctype.general]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-12 <b>Last modified:</b> 2024-03-13</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+It may be desired that static data members <code>ctype_base</code> are "real constants", i.e. usable in constant expressions. 
+However, this is not strictly required because <code>mask</code> is only required to be a bitmask type that can be a class type, 
+which makes the plain <code>const</code> potentially insufficient.
+</p>
+
+<p><i>[2024-03-12; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after five votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4037"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 30.4.2.1 <a href="https://wg21.link/category.ctype.general">[category.ctype.general]</a> as indicated:</p>
+
+<blockquote>
+<blockquote>
+<pre>
+namespace std {
+  class ctype_base {
+  public:
+    using mask = <i>see below</i>;
+
+    // <i>numeric values are for exposition only.</i>
+    static const<ins>expr</ins> mask space  = 1 &lt;&lt; 0;
+    static const<ins>expr</ins> mask print  = 1 &lt;&lt; 1;
+    static const<ins>expr</ins> mask cntrl  = 1 &lt;&lt; 2;
+    static const<ins>expr</ins> mask upper  = 1 &lt;&lt; 3;
+    static const<ins>expr</ins> mask lower  = 1 &lt;&lt; 4;
+    static const<ins>expr</ins> mask alpha  = 1 &lt;&lt; 5;
+    static const<ins>expr</ins> mask digit  = 1 &lt;&lt; 6;
+    static const<ins>expr</ins> mask punct  = 1 &lt;&lt; 7;
+    static const<ins>expr</ins> mask xdigit = 1 &lt;&lt; 8;
+    static const<ins>expr</ins> mask blank  = 1 &lt;&lt; 9;
+    static const<ins>expr</ins> mask alnum  = alpha | digit;
+    static const<ins>expr</ins> mask graph  = alnum | punct;
+  };
+}
+</pre>
+</blockquote>
+<p>
+-1- The type <code>mask</code> is a bitmask type (16.3.3.3.3 <a href="https://wg21.link/bitmask.types">[bitmask.types]</a>).
+</p>
+</blockquote>
+
 
 </li>
 

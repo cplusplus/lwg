@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-03-12 at 01:19:01 UTC
+<p>Revised 2024-03-13 at 10:42:05 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -55118,8 +55118,8 @@ The copy &amp; paste error was
 <hr>
 <h3 id="4055"><a href="#4055">4055</a><sup><a href="https://cplusplus.github.io/LWG/issue4055">(i)</a></sup>. &sect;[iterator.operations] <code>std::distance</code> is missing a precondition</h3>
 <p><b>Section:</b> 25.4.3 <a href="https://wg21.link/iterator.operations">[iterator.operations]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2024-02-25 <b>Last modified:</b> 2024-02-25</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2024-02-25 <b>Last modified:</b> 2024-03-12</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#iterator.operations">active issues</a> in [iterator.operations].</p>
 <p><b>View all other</b> <a href="lwg-index.html#iterator.operations">issues</a> in [iterator.operations].</p>
@@ -55181,8 +55181,20 @@ aren't required to have a difference which is always representable by
 <code>&amp;b - &amp;a</code> is not, so <code>std::distance</code> is missing a precondition.
 </p>
 
+<p><i>[2024-03-12; Reflector poll]</i></p>
 
-<p id="res-4055"><b>Proposed resolution:</b></p>
+<p>
+Set priority to 4 after reflector poll.
+</p>
+<p>
+The proposed change is wrong, the new wording only associates with the second
+condition, but should also apply when "<code>last</code> is reachable from
+<code>first</code>".
+</p>
+
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
+
 <p>
 This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
 </p>
@@ -55212,6 +55224,44 @@ is reached and returns the number of increments.
 </blockquote>
 </li>
 </ol>
+</blockquote>
+
+<p><i>[2024-03-12; Jonathan provides improved wording]</i></p>
+
+
+
+
+<p id="res-4055"><b>Proposed resolution:</b></p>
+
+<p>
+This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
+</p>
+
+<ol>
+<li><p>Modify 25.4.3 <a href="https://wg21.link/iterator.operations">[iterator.operations]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class InputIterator&gt;
+  constexpr typename iterator_traits&lt;InputIterator&gt;::difference_type
+    distance(InputIterator first, InputIterator last);
+</pre>
+<blockquote>
+<p>
+-4-<i>Preconditions</i>: <code>last</code> is reachable from <code>first</code>, or <code>InputIterator</code> 
+meets the <i>Cpp17RandomAccessIterator</i> requirements and <code>first</code> 
+is reachable from <code>last</code>.
+<ins>The return type can represent the result.</ins>
+<p/>
+-5- <i>Effects</i>: If <code>InputIterator</code> meets the <i>Cpp17RandomAccessIterator</i> 
+requirements, returns <code>(last - first)</code>; otherwise, increments <code>first</code> until <code>last</code> 
+is reached and returns the number of increments.
+</p>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+
 
 
 
@@ -55342,6 +55392,96 @@ I think the expression inside the noexcept-specifier should be changed to
 
 
 <p id="res-4057"><b>Proposed resolution:</b></p>
+
+
+
+
+
+<hr>
+<h3 id="4058"><a href="#4058">4058</a><sup><a href="https://cplusplus.github.io/LWG/issue4058">(i)</a></sup>. <code>std::to_address()</code> should be SFINAE-friendly</h3>
+<p><b>Section:</b> 99 [section.ref.here] <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Peter Kasting <b>Opened:</b> 2024-03-13 <b>Last modified:</b> 2024-03-13</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+LWG <a href="lwg-defects.html#3545" title="std::pointer_traits should be SFINAE-friendly">3545</a> made <code>std::pointer_traits</code> SFINAE-friendly.
+However, <code>std::to_address</code> is still not required to be SFINAE-friendly.
+</p>
+<p>
+This requires callers who wish to accept both pointer-like and non-pointer-like
+types to guard calls with a constraint that reimplements the core logic of
+<code>to_address</code>, such as the following:
+</p>
+<pre><code>
+template&lt;typename T&gt;
+concept IsPointerLike = requires { typename std::pointer_traits&lt;T&gt;::pointer; }
+                         || requires (const T&amp; t) { t.operator-&gt;(); };
+</code></pre>
+<p>
+Making <code class='backtick'>to_address</code> not be SFINAE-friendly
+<a href="https://gcc.gnu.org/bugzilla/show_bug.cgi?id=113074#c7">was seen as desirable</a>,
+so <code class='backtick'>std::contiguous_iterator</code> would produce a hard error for types marked with
+<code class='backtick'>contiguous_iterator_tag</code> that do not properly support <code class='backtick'>to_address</code>.
+Thus any fix should not regress that unless LWG explicitly decides to do so.
+Also note that libc++'s current implementation of <code class='backtick'>to_address</code>,
+which is SFINAE-friendly,
+<a href="https://godbolt.org/z/e681Ynhf1">does not produce such a hard error</a>.
+</p>
+
+
+<p id="res-4058"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
+</p>
+
+<ol>
+<li>
+<p>Modify 20.2.4 <a href="https://wg21.link/pointer.conversion">[pointer.conversion]</a> as indicated:</p>
+<blockquote>
+<p><code>
+template&lt;class Ptr&gt; constexpr auto to_address(const Ptr&amp; p) noexcept;
+</code></p>
+<p><ins>
+-?- <em>Constraints</em>:
+Either the expression
+<code>pointer_traits&lt;Ptr&gt;::to_address(p)</code> is well-formed
+(see 20.2.3.4 <a href="https://wg21.link/pointer.traits.optmem">[pointer.traits.optmem]</a>),
+or the expression <code>p.operator-&gt;()</code> is well-formed.
+</ins></p>
+<p>
+-3- <em>Returns</em>:
+<code>pointer_traits&lt;Ptr&gt;::to_address(p)</code>
+if that expression is well-formed
+<del>(see 20.2.3.4 <a href="https://wg21.link/pointer.traits.optmem">[pointer.traits.optmem]</a>)</del>,
+otherwise <code>to_address(p.operator-&gt;())</code>.
+</p>
+</blockquote>
+</li>
+<li>
+<p>Modify 25.3.4.14 <a href="https://wg21.link/iterator.concept.contiguous">[iterator.concept.contiguous]</a> as indicated:</p>
+<blockquote>
+<p>
+-1- The <code>contiguous_iterator</code> concept provides a guarantee that
+the denoted elements are stored contiguously in memory.
+</p>
+<pre><code>
+template&lt;class I&gt;
+  concept contiguous_iterator =
+    random_access_iterator&lt;I&gt; &amp;&amp;
+    derived_from&lt;ITER_CONCEPT(I), contiguous_iterator_tag&gt; &amp;&amp;
+    is_lvalue_reference_v&lt;iter_reference_t&lt;I&gt;&gt; &amp;&amp;
+    same_as&lt;iter_value_t&lt;I&gt;, remove_cvref_t&lt;iter_reference_t&lt;I&gt;&gt;&gt; &amp;&amp;
+    <del>requires(const I&amp; i) {
+      { to_address(i) } -&gt; same_as&lt;add_pointer_t&lt;iter_reference_t&lt;I&gt;&gt;&gt;;
+    }</del>
+    <ins>std::same_as&lt;decltype([] { return std::to_address(std::declval&lt;I&gt;()); }()),
+                 std::add_pointer_t&lt;std::iter_reference_t&lt;I&gt;&gt;&gt;</ins>;
+</code></pre>
+</blockquote>
+</li>
+</ol>
 
 
 

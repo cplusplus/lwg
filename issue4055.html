@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4055"><a href="lwg-active.html#4055">4055</a>. &sect;[iterator.operations] <code>std::distance</code> is missing a precondition</h3>
 <p><b>Section:</b> 25.4.3 <a href="https://wg21.link/iterator.operations">[iterator.operations]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2024-02-25 <b>Last modified:</b> 2024-02-25</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2024-02-25 <b>Last modified:</b> 2024-03-12</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#iterator.operations">active issues</a> in [iterator.operations].</p>
 <p><b>View all other</b> <a href="lwg-index.html#iterator.operations">issues</a> in [iterator.operations].</p>
@@ -127,8 +127,20 @@ aren't required to have a difference which is always representable by
 <code>&amp;b - &amp;a</code> is not, so <code>std::distance</code> is missing a precondition.
 </p>
 
+<p><i>[2024-03-12; Reflector poll]</i></p>
 
-<p id="res-4055"><b>Proposed resolution:</b></p>
+<p>
+Set priority to 4 after reflector poll.
+</p>
+<p>
+The proposed change is wrong, the new wording only associates with the second
+condition, but should also apply when "<code>last</code> is reachable from
+<code>first</code>".
+</p>
+
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
+
 <p>
 This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
 </p>
@@ -158,6 +170,44 @@ is reached and returns the number of increments.
 </blockquote>
 </li>
 </ol>
+</blockquote>
+
+<p><i>[2024-03-12; Jonathan provides improved wording]</i></p>
+
+
+
+
+<p id="res-4055"><b>Proposed resolution:</b></p>
+
+<p>
+This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
+</p>
+
+<ol>
+<li><p>Modify 25.4.3 <a href="https://wg21.link/iterator.operations">[iterator.operations]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class InputIterator&gt;
+  constexpr typename iterator_traits&lt;InputIterator&gt;::difference_type
+    distance(InputIterator first, InputIterator last);
+</pre>
+<blockquote>
+<p>
+-4-<i>Preconditions</i>: <code>last</code> is reachable from <code>first</code>, or <code>InputIterator</code> 
+meets the <i>Cpp17RandomAccessIterator</i> requirements and <code>first</code> 
+is reachable from <code>last</code>.
+<ins>The return type can represent the result.</ins>
+<p/>
+-5- <i>Effects</i>: If <code>InputIterator</code> meets the <i>Cpp17RandomAccessIterator</i> 
+requirements, returns <code>(last - first)</code>; otherwise, increments <code>first</code> until <code>last</code> 
+is reached and returns the number of increments.
+</p>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+
 
 
 

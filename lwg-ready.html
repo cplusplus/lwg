@@ -62,7 +62,7 @@
 </tr>
 <tr>
 <td align="left">Date:</td>
-<td align="left">Revised 2024-03-15 at 13:49:32 UTC
+<td align="left">Revised 2024-03-15 at 13:57:42 UTC
 </td>
 </tr>
 <tr>
@@ -988,132 +988,6 @@ to&lt;C&gt;(<ins>ref_view(</ins>r<ins>)</ins> | views::transform([](auto&amp;&am
 <li><p>(2.3) &mdash; Otherwise, the program is ill-formed.</p></li>
 </ol>
 </blockquote>
-</blockquote>
-
-</li>
-
-</ol>
-
-
-
-
-
-<hr>
-<h3 id="3988"><a href="#3988">3988</a><sup><a href="https://cplusplus.github.io/LWG/issue3988">(i)</a></sup>. Should <code>as_const_view</code> and <code>basic_const_iterator</code> provide <code>base()</code>?</h3>
-<p><b>Section:</b> 25.5.3 <a href="https://wg21.link/const.iterators">[const.iterators]</a>, 26.7.21.2 <a href="https://wg21.link/range.as.const.view">[range.as.const.view]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-28 <b>Last modified:</b> 2023-11-07</p>
-<p><b>Priority: </b>3
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#const.iterators">active issues</a> in [const.iterators].</p>
-<p><b>View all other</b> <a href="lwg-index.html#const.iterators">issues</a> in [const.iterators].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#Ready">Ready</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-Currently, both <code>as_const_view</code> and <code>basic_const_iterator</code> provide <code>base()</code> members to 
-return the underlying range and iterator, which seems to expose vulnerabilities in modifying them:
-</p>
-<blockquote><pre>
-#include &lt;vector&gt;
-#include &lt;ranges&gt;
-
-int main() {
-  std::vector v{1, 2, 3};
-  
-  auto f = [](std::span&lt;int&gt;::const_iterator i) {
-    *i.base() = 4;
-  };
-  f(std::span{v}.cbegin());
-
-  auto g = [](const std::ranges::constant_range auto&amp; r) {
-    r.begin().base()[1] = 5;
-    r.base()[2] = 6;
-  };
-  g(std::ranges::as_const_view(v));
-
-  // v now becomes [4, 5, 6]
-}
-</pre></blockquote>
-<p>
-I don't think such a shortcut should be provided as it doesn't seem to be the intention and could be harmful.
-</p>
-
-<p><i>[2023-10-30; Reflector poll]</i></p>
-
-<p>
-Set priority to 3 after reflector poll.
-Send to SG9.
-</p>
-
-<p><i>[Kona 2023-11-07; move to Ready]</i></p>
-
-
-
-
-<p id="res-3988"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4958" title=" Working Draft, Programming Languages — C++">N4958</a>.
-</p>
-
-<ol>
-
-<li><p>Modify 25.5.3.3 <a href="https://wg21.link/const.iterators.iterator">[const.iterators.iterator]</a>, class template <code>basic_const_iterator</code> synopsis, as indicated:</p>
-
-<blockquote>
-<pre>
-namespace std {
-  [&hellip;]
-
-  template&lt;input_iterator Iterator&gt;
-  class basic_const_iterator {
-    [&hellip;]
-    <del>constexpr const Iterator&amp; base() const &amp; noexcept;</del>
-    <del>constexpr Iterator base() &amp;&amp;;</del>
-    [&hellip;]
-  };
-}
-</pre>
-</blockquote>
-
-</li>
-
-<li><p>Modify 25.5.3.5 <a href="https://wg21.link/const.iterators.ops">[const.iterators.ops]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-<del>constexpr const Iterator&amp; base() const &amp; noexcept;</del>
-</pre>
-<blockquote>
-<p>
-<del>-4- <i>Effects</i>: Equivalent to: <code>return <i>current_</i>;</code></del>
-</p>
-</blockquote>
-<pre>
-<del>constexpr Iterator base() &amp;&amp;;</del>
-</pre>
-<blockquote>
-<p>
-<del>-5- <i>Effects</i>: Equivalent to: <code>return std::move(<i>current_</i>);</code></del>
-</p>
-</blockquote>
-</blockquote>
-
-</li>
-
-<li><p>Modify 26.7.21.2 <a href="https://wg21.link/range.as.const.view">[range.as.const.view]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-namespace std::ranges {
-  template&lt;view V&gt;
-    requires input_range&lt;V&gt;
-  class as_const_view : public view_interface&lt;as_const_view&lt;V&gt;&gt; {
-    [&hellip;]
-    <del>constexpr V base() const &amp; requires copy_constructible&lt;V&gt; { return <i>base_</i>; }</del>
-    <del>constexpr V base() &amp;&amp; { return std::move(<i>base_</i>); }</del>
-    [&hellip;]
-  };
-}
-</pre>
 </blockquote>
 
 </li>

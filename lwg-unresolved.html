@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-03-13 at 17:42:59 UTC
+<p>Revised 2024-03-15 at 13:47:28 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -53325,8 +53325,8 @@ immediate context of the expression of the <del>return statement (8.7.4 <a href=
 <hr>
 <h3 id="4029"><a href="#4029">4029</a><sup><a href="https://cplusplus.github.io/LWG/issue4029">(i)</a></sup>. <code>basic_string</code> accidentally fails to meet the reversible container requirements</h3>
 <p><b>Section:</b> 23.4.3.1 <a href="https://wg21.link/basic.string.general">[basic.string.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2023-12-18 <b>Last modified:</b> 2023-12-22</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2023-12-18 <b>Last modified:</b> 2024-03-15</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#basic.string.general">issues</a> in [basic.string.general].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -53337,6 +53337,26 @@ function must have constant complexity. The corresponding member functions in 23
 have no complexity requirements, and <code>basic_string</code> unintentionally is not a reversible container 
 (unless the implementation coincidentally provides constant complexity member functions).
 </p>
+
+<p><i>[2024-03-15; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>Could harmonize with <code>vector</code> by saying:
+"A basic_string meets all of the requirements of a contiguous container
+(24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a>) and of a reversible container
+(24.2.2.3 <a href="https://wg21.link/container.rev.reqmts">[container.rev.reqmts]</a>)."
+It's not a sequence container (see LWG <a href="lwg-closed.html#718" title="basic_string is not a sequence">718</a>)
+but as per 24.2.2.5 <a href="https://wg21.link/container.alloc.reqmts">[container.alloc.reqmts]</a> p1 it is allocator-aware
+(although it doesn't use <code>construct</code> and <code>destroy</code>).
+</p>
+<p>
+Not comfortable removing the detailed descriptions for those members.
+We don't have the "Descriptions are only provided here for operations on [...]
+that are not described in one of these tables" wording that the containers have.
+</p>
+
 
 
 <p id="res-4029"><b>Proposed resolution:</b></p>
@@ -53366,7 +53386,7 @@ explicitly say <code>basic_string</code> meets the reversible container requirem
 
 <blockquote>
 <p>
--2- A specialization of <code>basic_string</code> is a contiguous container (24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a>) <ins>and 
+-2- A specialization of <code>basic_string</code> is a contiguous container (24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a>) <ins>and a
 reversible container (24.2.2.3 <a href="https://wg21.link/container.rev.reqmts">[container.rev.reqmts]</a>)</ins>.
 <p/>
 -3- In all cases, <code>[data(), data() + size()]</code> is a valid range, <code>data() + size()</code> points at 
@@ -53446,8 +53466,8 @@ constexpr const_reverse_iterator crend() const noexcept;</del>
 <hr>
 <h3 id="4032"><a href="#4032">4032</a><sup><a href="https://cplusplus.github.io/LWG/issue4032">(i)</a></sup>. Possibly invalid types in the constraints of constructors of <code>std::shared_ptr</code></h3>
 <p><b>Section:</b> 20.3.2.2.2 <a href="https://wg21.link/util.smartptr.shared.const">[util.smartptr.shared.const]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-25 <b>Last modified:</b> 2024-01-13</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-25 <b>Last modified:</b> 2024-03-15</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#util.smartptr.shared.const">active issues</a> in [util.smartptr.shared.const].</p>
 <p><b>View all other</b> <a href="lwg-index.html#util.smartptr.shared.const">issues</a> in [util.smartptr.shared.const].</p>
@@ -53459,8 +53479,19 @@ however, they may be invalid types when <code>Y</code> is an array type of unkno
 Presumably, the constraints should be satisfied only when the mentioned <code>Y(*)[N]</code> or <code>Y(*)[]</code> is valid.
 </p>
 
+<p><i>[2024-03-15; Reflector poll]</i></p>
 
-<p id="res-4032"><b>Proposed resolution:</b></p>
+<p>
+Set priority to 4 after reflector poll.
+</p>
+<p>
+Jens pointed out that "convertible", as a core language concept,
+goes from "expression" to "type", not from "type" to "type".
+</p>
+
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
+
 <p>
 This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
 </p>
@@ -53500,6 +53531,116 @@ is a well-formed expression. For the first two overloads:
 <code>Y(*)[N]</code> is <ins>a valid type and</ins> convertible to <code>T*</code>, or <code>T</code> is <code>U[]</code> and
 <code>Y(*)[]</code> is <ins>a valid type and</ins> convertible to <code>T*</code>.</p></li>
 <li><p>(9.2) &mdash; If <code>T</code> is not an array type, then <code>Y*</code> is convertible to <code>T*</code>.</p></li>
+</ol>
+<p>
+[&hellip;]
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+</blockquote>
+
+<p><i>[2024-03-15; Jonathan provides alternative wording]</i></p>
+
+<p>
+Can we just use <code>is_convertible_v&lt;Y(*)[N], T*&gt;</code>?
+With <code class='backtick'>enable_if</code>-style SFINAE an invalid type will cause substitution failure
+and with a <em>requires-clause</em> the constraints won't be satisfied.
+Either way we get the desired outcome.
+Also, the delete expression is already required to be well-formed, which
+rules out function types, so that part of the issue is NAD.
+</p>
+
+
+
+<p id="res-4032"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 20.3.2.2.2 <a href="https://wg21.link/util.smartptr.shared.const">[util.smartptr.shared.const]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class Y&gt; explicit shared_ptr(Y* p);
+</pre>
+<blockquote>
+<p>
+-3- <i>Constraints</i>: When <code>T</code> is an array type, the expression <code>delete[] p</code> is well-formed 
+and either<ins>:</ins>
+<del><code>T</code> is <code>U[N]</code> and <code>Y(*)[N]</code> is convertible to 
+<code>T*</code>, or <code>T</code> is <code>U[]</code> and <code>Y(*)[]</code> is convertible to 
+<code>T*</code>.</del>
+</p>
+<ol style="list-style-type: none">
+<li>&mdash;
+<ins>
+<code>is_bounded_array_v&lt;T&gt; &amp;&amp;
+is_convertible_v&lt;Y(*)[rank_v&lt;T&gt;], T*&gt;</code> is <code>true</code>,
+or
+</ins>
+</li>
+<li>&mdash;
+<ins>
+<code>is_unbounded_array_v&lt;T&gt; &amp;&amp; is_convertible_v&lt;Y(*)[], T*&gt;</code> is <code>true</code>.
+</ins>
+</li>
+</ol>
+<p>
+When <code>T</code> is not an array type, the expression <code>delete p</code> is well-formed and
+<del><code>Y*</code> is convertible to <code>T*</code></del>
+<ins><code>is_convertible_v&lt;Y*, T*&gt;</code> is <code>true</code></ins>.
+</p>
+<p>
+[&hellip;]
+</p>
+</blockquote>
+<pre>
+template&lt;class Y, class D&gt; shared_ptr(Y* p, D d);
+template&lt;class Y, class D, class A&gt; shared_ptr(Y* p, D d, A a);
+template&lt;class D&gt; shared_ptr(nullptr_t p, D d);
+template&lt;class D, class A&gt; shared_ptr(nullptr_t p, D d, A a);
+</pre>
+<blockquote>
+<p>
+-9- <i>Constraints</i>: <code>is_move_constructible_v&lt;D&gt;</code> is <code>true</code>, and <code>d(p)</code>
+is a well-formed expression. For the first two overloads:
+</p>
+<ol style="list-style-type: none">
+<li><p>(9.1) &mdash; If <code>T</code> is an array type, then either<ins>:</ins>
+<del>
+<code>T</code> is <code>U[N]</code> and
+<code>Y(*)[N]</code> is convertible to <code>T*</code>, or <code>T</code> is <code>U[]</code> and
+<code>Y(*)[]</code> is convertible to <code>T*</code>.
+</del>
+</p>
+<ol style="list-style-type: none">
+<li>&mdash;
+<ins>
+<code>is_bounded_array_v&lt;T&gt; &amp;&amp;
+is_convertible_v&lt;Y(*)[rank_v&lt;T&gt;], T*&gt;</code> is <code>true</code>,
+or
+</ins>
+</li>
+<li>&mdash;
+<ins>
+<code>is_unbounded_array_v&lt;T&gt; &amp;&amp;
+is_convertible_v&lt;Y(*)[], T*&gt;</code> is <code>true</code>.
+</ins>
+</li>
+</ol>
+</li>
+<li><p>(9.2) &mdash; If <code>T</code> is not an array type, then
+<del><code>Y*</code> is convertible to <code>T*</code></del>
+<ins><code>is_convertible_v&lt;Y*, T*&gt;</code> is <code>true</code></ins>.
+</p></li>
 </ol>
 <p>
 [&hellip;]
@@ -53987,8 +54128,8 @@ The first part of the issue was
 <hr>
 <h3 id="4041"><a href="#4041">4041</a><sup><a href="https://cplusplus.github.io/LWG/issue4041">(i)</a></sup>. The requirements on literal type in [concept.swappable] should be removed</h3>
 <p><b>Section:</b> 18.4.9 <a href="https://wg21.link/concept.swappable">[concept.swappable]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-20 <b>Last modified:</b> 2024-01-27</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-20 <b>Last modified:</b> 2024-03-15</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#concept.swappable">issues</a> in [concept.swappable].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -54022,6 +54163,29 @@ int main()
 <p>
 IMO there's no good reason to additionally require literal types since C++23, which would complicate implementations.
 </p>
+
+<p><i>[2024-03-15; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll.
+</p>
+<p>
+Concerned about 7.7 <a href="https://wg21.link/expr.const">[expr.const]</a>/5.16 (can only modify non-volatile
+lvalues of literal type in constant expressions).
+Unable see a non-contrived case where this issue matters.
+</p>
+<p>
+N.B. <code>ranges::swap</code> needs the "reified object" treatment;
+the repetitions of <code class='backtick'>E1</code> and <code class='backtick'>E2</code> are not pure textual repetitions of the
+argument expressions.
+</p>
+<p>
+Can we just eliminate all uses of "literal type"?
+</p>
+<p>
+Wouldn't we still require a constexpr destructor?
+</p>
+
 
 
 <p id="res-4041"><b>Proposed resolution:</b></p>
@@ -54610,8 +54774,8 @@ per the Unicode Standard, Chapter 3.9
 <hr>
 <h3 id="4046"><a href="#4046">4046</a><sup><a href="https://cplusplus.github.io/LWG/issue4046">(i)</a></sup>. Effects of inserting into or erasing from flat container adaptors when an exception is thrown need to be more permissive</h3>
 <p><b>Section:</b> 24.2.7.2 <a href="https://wg21.link/associative.reqmts.except">[associative.reqmts.except]</a>, 24.6.9.1 <a href="https://wg21.link/flat.map.overview">[flat.map.overview]</a>, 24.6.10.1 <a href="https://wg21.link/flat.multimap.overview">[flat.multimap.overview]</a>, 24.6.11.1 <a href="https://wg21.link/flat.set.overview">[flat.set.overview]</a>, 24.6.12.1 <a href="https://wg21.link/flat.multiset.overview">[flat.multiset.overview]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-23 <b>Last modified:</b> 2024-01-27</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-23 <b>Last modified:</b> 2024-03-15</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -54631,6 +54795,14 @@ a guarantee.
 Perhaps we should conditionally relax the requirements when the underlying containers can't provide them.
 </p>
 
+<p><i>[2024-03-15; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+</p>
+<p> <a href="https://wg21.link/P2767" title=" flat_map/flat_set omnibus">P2767</a> §3.5 is related/conflicting.  </p>
+
+
 
 <p id="res-4046"><b>Proposed resolution:</b></p>
 
@@ -54641,8 +54813,8 @@ Perhaps we should conditionally relax the requirements when the underlying conta
 <hr>
 <h3 id="4047"><a href="#4047">4047</a><sup><a href="https://cplusplus.github.io/LWG/issue4047">(i)</a></sup>. Explicitly specifying template arguments for <code>std::swap</code> should not be supported</h3>
 <p><b>Section:</b> 16.4.5.2.1 <a href="https://wg21.link/namespace.std">[namespace.std]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-25 <b>Last modified:</b> 2024-01-27</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-25 <b>Last modified:</b> 2024-03-15</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#namespace.std">active issues</a> in [namespace.std].</p>
 <p><b>View all other</b> <a href="lwg-index.html#namespace.std">issues</a> in [namespace.std].</p>
@@ -54664,6 +54836,20 @@ Perhaps we should explicitly state that explicitly specifying templates for <cod
 from signatures of overloads, for doing so.
 </p>
 
+<p><i>[2024-03-15; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll.
+</p>
+<p> NAD - if a user does this and it breaks, so be it.</p>
+<p>NAD as an issue creating a new kind of library policy for the first time.
+Needs a paper.</p>
+<p>
+Not unique to <code>std::swap</code>. We should forbid this throughout
+the standard library.
+</p>
+
+
 
 <p id="res-4047"><b>Proposed resolution:</b></p>
 
@@ -54674,8 +54860,8 @@ from signatures of overloads, for doing so.
 <hr>
 <h3 id="4048"><a href="#4048">4048</a><sup><a href="https://cplusplus.github.io/LWG/issue4048">(i)</a></sup>. Inconsistent preconditions for transparent insertion of <code>std::flat_map/std::flat_set</code></h3>
 <p><b>Section:</b> 24.6.11 <a href="https://wg21.link/flat.set">[flat.set]</a>, 24.6.9.1 <a href="https://wg21.link/flat.map.overview">[flat.map.overview]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-26 <b>Last modified:</b> 2024-01-27</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-26 <b>Last modified:</b> 2024-03-15</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -54691,6 +54877,27 @@ for <code>std::flat_set::insert</code> can lead to inconsistent results. Tim Son
 were copied from old revisions of <a href="https://wg21.link/P2363" title=" Extending associative containers with the remaining heterogeneous overloads">P2363</a>. So, presumably we should change these preconditions for 
 flat container adaptors to consistently use <code>equal_range</code>.
 </p>
+
+<p><i>[2024-03-15; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+</p>
+<p>
+We didn't want <code>equal_range(k) == equal_range(u)</code> because the two sides of the
+<code>==</code> need to be evaluated at different times.
+</p>
+<p>
+It seems to me that <code>equal_range(k) == equal_range(u)</code> ought to be
+true before the insertion, and still true after the insertion.
+The wording in 24.4.6.4 <a href="https://wg21.link/set.modifiers">[set.modifiers]</a>/3 and
+24.4.4.4 <a href="https://wg21.link/map.modifiers">[map.modifiers]</a>/13 requires only that the condition be true
+before the insertion.
+We either want to change the wording here to be consistent with those places;
+or else change 24.4.6.4 <a href="https://wg21.link/set.modifiers">[set.modifiers]</a> and 24.4.4.4 <a href="https://wg21.link/map.modifiers">[map.modifiers]</a>
+to be consistent with the saner wording here. I'd vote for the latter.
+</p>
+
 
 
 <p id="res-4048"><b>Proposed resolution:</b></p>
@@ -55367,100 +55574,6 @@ is reached and returns the number of increments.
 </li>
 </ol>
 
-
-
-
-
-
-<hr>
-<h3 id="4056"><a href="#4056">4056</a><sup><a href="https://cplusplus.github.io/LWG/issue4056">(i)</a></sup>. The effects of <code>std::swap</code> are under-specified</h3>
-<p><b>Section:</b> 22.2.2 <a href="https://wg21.link/utility.swap">[utility.swap]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2024-02-28 <b>Last modified:</b> 2024-03-03</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#utility.swap">active issues</a> in [utility.swap].</p>
-<p><b>View all other</b> <a href="lwg-index.html#utility.swap">issues</a> in [utility.swap].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-Subclause 22.2.2 <a href="https://wg21.link/utility.swap">[utility.swap]</a> describes the effect of <code>std::swap</code> as follows:
-</p>
-<blockquote>
-<p>
-<i>Effects</i>: Exchanges values stored in two locations.
-</p>
-</blockquote>
-<p>
-This description is extremely vague. A possible implementation which complies with this wording is:
-</p>
-<blockquote>
-<pre>
-template&lt;class T&gt;
-constexpr void swap(T&amp;, T&amp;) noexcept(/* ... */)
-{
-    int __x = 0, __y = 0;
-    int __z = __x;
-    __x = __y;
-    __y = __z;
-}
-</pre>
-</blockquote>
-<p>
-This exchanges values stored in two locations; namely in the locations of two objects with automatic 
-storage duration within <code>swap</code>. Since this has no observable effect and complies, it is also 
-valid to implement <code>swap</code> as follows:
-</p>
-<blockquote>
-<pre>
-template&lt;class T&gt;
-constexpr void swap(T&amp;, T&amp;) noexcept(/* ... */) { }
-</pre>
-</blockquote>
-<p>
-Furthermore, there is implementation divergence. 
-<a href="https://github.com/llvm/llvm-project/blob/26402777ebf4eb3d8f3d5a45943b451c740b2d76/libcxx/include/__utility/swap.h#L42">
-libc++ uses direct-initialization</a> to construct a temporary <code>T</code>, but 
-<a href="https://github.com/gcc-mirror/gcc/blob/80c386cb20d38ebc55f30a79418fabfbed904b87/libstdc%2B%2B-v3/include/bits/move.h#L221">
-libstdc++ uses copy-initialization</a>. For most types, this hopefully calls the same constructor, however, 
-this is not universally true. The standard should specify in more detail what is meant to happen.
-</p>
-
-
-<p id="res-4056"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
-</p>
-
-<ol>
-<li><p>Modify 22.2.2 <a href="https://wg21.link/utility.swap">[utility.swap]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-template&lt;class T&gt;
-  constexpr void swap(T&amp; a, T&amp; b) noexcept(<i>see below</i>);
-</pre>
-<blockquote>
-<p>
--1- <i>Constraints</i>: <code>is_move_constructible_v&lt;T&gt;</code> is <code>true</code> and 
-<code>is_move_assignable_v&lt;T&gt;</code> is <code>true</code>.
-<p/>
--2-<i>Preconditions</i>: Type <code>T</code> meets the <i>Cpp17MoveConstructible</i> (Table 31) and 
-<i>Cpp17MoveAssignable</i> (Table 33) requirements.
-<p/>
--3- <i>Effects</i>: <del>Exchanges values stored in two locations.</del><ins>Equivalent to:</ins>
-</p>
-<blockquote><pre>
-<ins>auto t(std::move(a));
-a = std::move(b);
-b = std::move(t);</ins>
-</pre></blockquote>
-<p>
--4- <i>Remarks</i>: The exception specification is equivalent to: [&hellip;]
-</p>
-</blockquote>
-</blockquote>
-</li>
-</ol>
 
 
 

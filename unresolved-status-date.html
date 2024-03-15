@@ -67,8 +67,8 @@
 This document is the Index by Status and Date for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
-<p>Revised 2024-03-13 at 17:42:59 UTC
-</p><h2 id="New">New (384 issues)</h2>
+<p>Revised 2024-03-15 at 13:47:28 UTC
+</p><h2 id="New">New (383 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -78,6 +78,60 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
   <th>Proposed Resolution</th>
   <th><a href="unresolved-prioritized.html">Priority</a></th>
   <th>Duplicates</th>
+</tr>
+<tr>
+<td id="4047"><a href="lwg-active.html#4047" title="Explicitly specifying template arguments for std::swap should not be supported">4047</a><sup><a href="https://cplusplus.github.io/LWG/issue4047">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>16.4.5.2.1 [namespace.std]</td>
+<td>Explicitly specifying template arguments for <code>std::swap</code> should not be supported</td>
+<td><span class="no-pr">No</span></td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td id="4041"><a href="lwg-active.html#4041" title="The requirements on literal type in [concept.swappable] should be removed">4041</a><sup><a href="https://cplusplus.github.io/LWG/issue4041">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>18.4.9 [concept.swappable]</td>
+<td>The requirements on literal type in [concept.swappable] should be removed</td>
+<td>Yes</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td id="4032"><a href="lwg-active.html#4032" title="Possibly invalid types in the constraints of constructors of std::shared_ptr">4032</a><sup><a href="https://cplusplus.github.io/LWG/issue4032">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>20.3.2.2.2 [util.smartptr.shared.const]</td>
+<td>Possibly invalid types in the constraints of constructors of <code>std::shared_ptr</code></td>
+<td>Yes</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td id="4029"><a href="lwg-active.html#4029" title="basic_string accidentally fails to meet the reversible container requirements">4029</a><sup><a href="https://cplusplus.github.io/LWG/issue4029">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>23.4.3.1 [basic.string.general]</td>
+<td><code>basic_string</code> accidentally fails to meet the reversible container requirements</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4046"><a href="lwg-active.html#4046" title="Effects of inserting into or erasing from flat container adaptors when an exception is thrown need to be more permissive">4046</a><sup><a href="https://cplusplus.github.io/LWG/issue4046">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>24.2.7.2 [associative.reqmts.except]</td>
+<td>Effects of inserting into or erasing from flat container adaptors when an exception is thrown need to be more permissive</td>
+<td><span class="no-pr">No</span></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td id="4048"><a href="lwg-active.html#4048" title="Inconsistent preconditions for transparent insertion of std::flat_map/std::flat_set">4048</a><sup><a href="https://cplusplus.github.io/LWG/issue4048">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>24.6.11 [flat.set]</td>
+<td>Inconsistent preconditions for transparent insertion of <code>std::flat_map/std::flat_set</code></td>
+<td>Yes</td>
+<td>2</td>
+<td></td>
 </tr>
 <tr>
 <td id="4058"><a href="lwg-active.html#4058" title="std::to_address() should be SFINAE-friendly">4058</a><sup><a href="https://cplusplus.github.io/LWG/issue4058">(i)</a></sup></td>
@@ -196,15 +250,6 @@ is a non-move-constructible range</td>
 <td>Behavior of <code>std::views::split</code> on an empty range</td>
 <td>Yes</td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4056"><a href="lwg-active.html#4056" title="The effects of std::swap are under-specified">4056</a><sup><a href="https://cplusplus.github.io/LWG/issue4056">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>22.2.2 [utility.swap]</td>
-<td>The effects of <code>std::swap</code> are under-specified</td>
-<td>Yes</td>
-<td></td>
 <td></td>
 </tr>
 <tr>
@@ -379,42 +424,6 @@ is a non-move-constructible range</td>
 <td></td>
 </tr>
 <tr>
-<td id="4047"><a href="lwg-active.html#4047" title="Explicitly specifying template arguments for std::swap should not be supported">4047</a><sup><a href="https://cplusplus.github.io/LWG/issue4047">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>16.4.5.2.1 [namespace.std]</td>
-<td>Explicitly specifying template arguments for <code>std::swap</code> should not be supported</td>
-<td><span class="no-pr">No</span></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4041"><a href="lwg-active.html#4041" title="The requirements on literal type in [concept.swappable] should be removed">4041</a><sup><a href="https://cplusplus.github.io/LWG/issue4041">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>18.4.9 [concept.swappable]</td>
-<td>The requirements on literal type in [concept.swappable] should be removed</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4046"><a href="lwg-active.html#4046" title="Effects of inserting into or erasing from flat container adaptors when an exception is thrown need to be more permissive">4046</a><sup><a href="https://cplusplus.github.io/LWG/issue4046">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>24.2.7.2 [associative.reqmts.except]</td>
-<td>Effects of inserting into or erasing from flat container adaptors when an exception is thrown need to be more permissive</td>
-<td><span class="no-pr">No</span></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4048"><a href="lwg-active.html#4048" title="Inconsistent preconditions for transparent insertion of std::flat_map/std::flat_set">4048</a><sup><a href="https://cplusplus.github.io/LWG/issue4048">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>24.6.11 [flat.set]</td>
-<td>Inconsistent preconditions for transparent insertion of <code>std::flat_map/std::flat_set</code></td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="4039"><a href="lwg-active.html#4039" title="&sect;[ostream.formatted.print]: Inappropriate usage of badbit in definition of 
 vprint_unicode/vprint_nonunicode">4039</a><sup><a href="https://cplusplus.github.io/LWG/issue4039">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
@@ -444,15 +453,6 @@ vprint_unicode/vprint_nonunicode">4039</a><sup><a href="https://cplusplus.github
 <td></td>
 </tr>
 <tr>
-<td id="4032"><a href="lwg-active.html#4032" title="Possibly invalid types in the constraints of constructors of std::shared_ptr">4032</a><sup><a href="https://cplusplus.github.io/LWG/issue4032">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>20.3.2.2.2 [util.smartptr.shared.const]</td>
-<td>Possibly invalid types in the constraints of constructors of <code>std::shared_ptr</code></td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="4014"><a href="lwg-active.html#4014" title="LWG 3809 changes behavior of some existing std::subtract_with_carry_engine code">4014</a><sup><a href="https://cplusplus.github.io/LWG/issue4014">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>28.5.4.4 [rand.eng.sub]</td>
@@ -475,15 +475,6 @@ vprint_unicode/vprint_nonunicode">4039</a><sup><a href="https://cplusplus.github
 <td><a href="lwg-active.html#New">New</a></td>
 <td>21.3.7 [meta.rel]</td>
 <td><code>std::is_(nothrow_)convertible</code> should be reworded to avoid dependence on the <code>return</code> statement</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4029"><a href="lwg-active.html#4029" title="basic_string accidentally fails to meet the reversible container requirements">4029</a><sup><a href="https://cplusplus.github.io/LWG/issue4029">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>23.4.3.1 [basic.string.general]</td>
-<td><code>basic_string</code> accidentally fails to meet the reversible container requirements</td>
 <td>Yes</td>
 <td></td>
 <td></td>

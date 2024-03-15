@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-03-13 at 17:42:59 UTC
+<p>Revised 2024-03-15 at 13:47:28 UTC
 </p><h2>Tentative Issues</h2>
 <hr>
 <h3 id="2457"><a href="#2457">2457</a><sup><a href="https://cplusplus.github.io/LWG/issue2457">(i)</a></sup>. <code>std::begin()</code> and <code>std::end()</code> do not support multi-dimensional arrays correctly</h3>
@@ -2895,6 +2895,116 @@ Given subexpressions <code>E</code> and <code>F</code>, the expressions <code>vi
 are expression-equivalent to <code>repeat_view<ins>&lt;decay_t&lt;decltype((E))&gt;&gt;</ins>(E)</code> and 
 <code>repeat_view(E, F)</code>, respectively.
 </p>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4056"><a href="#4056">4056</a><sup><a href="https://cplusplus.github.io/LWG/issue4056">(i)</a></sup>. The effects of <code>std::swap</code> are under-specified</h3>
+<p><b>Section:</b> 22.2.2 <a href="https://wg21.link/utility.swap">[utility.swap]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+ <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2024-02-28 <b>Last modified:</b> 2024-03-15</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#utility.swap">active issues</a> in [utility.swap].</p>
+<p><b>View all other</b> <a href="lwg-index.html#utility.swap">issues</a> in [utility.swap].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively NAD">Tentatively NAD</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Subclause 22.2.2 <a href="https://wg21.link/utility.swap">[utility.swap]</a> describes the effect of <code>std::swap</code> as follows:
+</p>
+<blockquote>
+<p>
+<i>Effects</i>: Exchanges values stored in two locations.
+</p>
+</blockquote>
+<p>
+This description is extremely vague. A possible implementation which complies with this wording is:
+</p>
+<blockquote>
+<pre>
+template&lt;class T&gt;
+constexpr void swap(T&amp;, T&amp;) noexcept(/* ... */)
+{
+    int __x = 0, __y = 0;
+    int __z = __x;
+    __x = __y;
+    __y = __z;
+}
+</pre>
+</blockquote>
+<p>
+This exchanges values stored in two locations; namely in the locations of two objects with automatic 
+storage duration within <code>swap</code>. Since this has no observable effect and complies, it is also 
+valid to implement <code>swap</code> as follows:
+</p>
+<blockquote>
+<pre>
+template&lt;class T&gt;
+constexpr void swap(T&amp;, T&amp;) noexcept(/* ... */) { }
+</pre>
+</blockquote>
+<p>
+Furthermore, there is implementation divergence. 
+<a href="https://github.com/llvm/llvm-project/blob/26402777ebf4eb3d8f3d5a45943b451c740b2d76/libcxx/include/__utility/swap.h#L42">
+libc++ uses direct-initialization</a> to construct a temporary <code>T</code>, but 
+<a href="https://github.com/gcc-mirror/gcc/blob/80c386cb20d38ebc55f30a79418fabfbed904b87/libstdc%2B%2B-v3/include/bits/move.h#L221">
+libstdc++ uses copy-initialization</a>. For most types, this hopefully calls the same constructor, however, 
+this is not universally true. The standard should specify in more detail what is meant to happen.
+</p>
+
+<p><i>[2024-03-15; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively NAD Editorial after reflector poll.
+</p>
+<p>
+<em>Cpp17MoveConstructible</em> require direct-init and copy-init to be
+semantically equivalent, so the different implementation techniques can
+only be observed by types which fail to meet the function's preconditions.
+</p>
+<p>
+Replace the unusual "stored in two locations" wording
+<a href="https://github.com/cplusplus/draft/pull/6857">editorially</a>.
+</p>
+
+
+
+<p id="res-4056"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
+</p>
+
+<ol>
+<li><p>Modify 22.2.2 <a href="https://wg21.link/utility.swap">[utility.swap]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class T&gt;
+  constexpr void swap(T&amp; a, T&amp; b) noexcept(<i>see below</i>);
+</pre>
+<blockquote>
+<p>
+-1- <i>Constraints</i>: <code>is_move_constructible_v&lt;T&gt;</code> is <code>true</code> and 
+<code>is_move_assignable_v&lt;T&gt;</code> is <code>true</code>.
+<p/>
+-2-<i>Preconditions</i>: Type <code>T</code> meets the <i>Cpp17MoveConstructible</i> (Table 31) and 
+<i>Cpp17MoveAssignable</i> (Table 33) requirements.
+<p/>
+-3- <i>Effects</i>: <del>Exchanges values stored in two locations.</del><ins>Equivalent to:</ins>
+</p>
+<blockquote><pre>
+<ins>auto t(std::move(a));
+a = std::move(b);
+b = std::move(t);</ins>
+</pre></blockquote>
+<p>
+-4- <i>Remarks</i>: The exception specification is equivalent to: [&hellip;]
+</p>
+</blockquote>
 </blockquote>
 </li>
 </ol>

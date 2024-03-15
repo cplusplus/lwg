@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4029"><a href="lwg-active.html#4029">4029</a>. <code>basic_string</code> accidentally fails to meet the reversible container requirements</h3>
 <p><b>Section:</b> 23.4.3.1 <a href="https://wg21.link/basic.string.general">[basic.string.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2023-12-18 <b>Last modified:</b> 2023-12-22</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2023-12-18 <b>Last modified:</b> 2024-03-15</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#basic.string.general">issues</a> in [basic.string.general].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -76,6 +76,26 @@ function must have constant complexity. The corresponding member functions in 23
 have no complexity requirements, and <code>basic_string</code> unintentionally is not a reversible container 
 (unless the implementation coincidentally provides constant complexity member functions).
 </p>
+
+<p><i>[2024-03-15; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>Could harmonize with <code>vector</code> by saying:
+"A basic_string meets all of the requirements of a contiguous container
+(24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a>) and of a reversible container
+(24.2.2.3 <a href="https://wg21.link/container.rev.reqmts">[container.rev.reqmts]</a>)."
+It's not a sequence container (see LWG <a href="lwg-closed.html#718" title="basic_string is not a sequence">718</a>)
+but as per 24.2.2.5 <a href="https://wg21.link/container.alloc.reqmts">[container.alloc.reqmts]</a> p1 it is allocator-aware
+(although it doesn't use <code>construct</code> and <code>destroy</code>).
+</p>
+<p>
+Not comfortable removing the detailed descriptions for those members.
+We don't have the "Descriptions are only provided here for operations on [...]
+that are not described in one of these tables" wording that the containers have.
+</p>
+
 
 
 <p id="res-4029"><b>Proposed resolution:</b></p>
@@ -105,7 +125,7 @@ explicitly say <code>basic_string</code> meets the reversible container requirem
 
 <blockquote>
 <p>
--2- A specialization of <code>basic_string</code> is a contiguous container (24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a>) <ins>and 
+-2- A specialization of <code>basic_string</code> is a contiguous container (24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a>) <ins>and a
 reversible container (24.2.2.3 <a href="https://wg21.link/container.rev.reqmts">[container.rev.reqmts]</a>)</ins>.
 <p/>
 -3- In all cases, <code>[data(), data() + size()]</code> is a valid range, <code>data() + size()</code> points at 

@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-03-15 at 13:57:42 UTC
+<p>Revised 2024-03-15 at 14:33:42 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -4417,7 +4417,7 @@ the flags specified in <code>f</code>. If an exception is thrown, <code>*this</c
 <hr>
 <h3 id="2146"><a href="#2146">2146</a><sup><a href="https://cplusplus.github.io/LWG/issue2146">(i)</a></sup>. Are reference types <code>Copy</code>&#47;<code>Move-Constructible</code>&#47;<code>Assignable</code> or <code>Destructible</code>?</h3>
 <p><b>Section:</b> 16.4.4.2 <a href="https://wg21.link/utility.arg.requirements">[utility.arg.requirements]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
- <b>Submitter:</b> Nikolay Ivchenkov <b>Opened:</b> 2012-03-23 <b>Last modified:</b> 2020-10-02</p>
+ <b>Submitter:</b> Nikolay Ivchenkov <b>Opened:</b> 2012-03-23 <b>Last modified:</b> 2024-03-15</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#utility.arg.requirements">issues</a> in [utility.arg.requirements].</p>
@@ -4553,6 +4553,9 @@ or <code>decay</code> as needed, but there are still places where we incorrectly
 state requirements in terms of types that might be references.
 The <code>swap</code> case still needs solving. Still need a survey.
 </p>
+
+<p><i>[2024-03-15; LWG <a href="lwg-active.html#4047" title="Explicitly specifying template arguments for std::swap should not be supported">4047</a> addresses the <code>swap</code> part]</i></p>
+
 
 
 
@@ -54982,6 +54985,7 @@ Needs a paper.</p>
 Not unique to <code>std::swap</code>. We should forbid this throughout
 the standard library.
 </p>
+<p>Closely related to LWG <a href="lwg-active.html#2146" title="Are reference types Copy&#47;Move-Constructible&#47;Assignable or Destructible?">2146</a>.</p>
 
 
 

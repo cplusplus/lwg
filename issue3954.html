@@ -129,12 +129,12 @@ We do not require <code>::byte</code> to be in <code>&lt;stddef.h&gt;</code>,
 so maybe we should not require the macro there either.
 Except that <code>std::byte</code> is permitted to be in
 <code>&lt;stddef.h&gt;</code>,
-just not in the global namespace (see LWG <a href="lwg-active.html#3883" title="&sect;[support.c.headers.other] Ambiguity in the requirements for includes">3883</a>).
+just not in the global namespace (see LWG <a href="lwg-active.html#3883" title="&sect;[support.c.headers.other] Ambiguity in the requirements for includes (Status: New)">3883</a>).
 So maybe SD-6 should simply clarify that the macro indicates the presence
 of <code>std::byte</code>, not <code>::byte</code>,
 and whether <code>std::byte</code> and its macro are defined
 by <code>&lt;stddef.h&gt;</code> is unspecified.
-Also related to LWG <a href="lwg-active.html#3484" title="Should &lt;stddef.h&gt; declare ::nullptr_t?">3484</a>.
+Also related to LWG <a href="lwg-active.html#3484" title="Should &lt;stddef.h&gt; declare ::nullptr_t? (Status: New)">3484</a>.
 </p>
 
 <p><i>[Jens commented]</i></p>

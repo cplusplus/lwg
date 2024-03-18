@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-03-18 at 09:33:06 UTC
+<p>Revised 2024-03-18 at 10:25:20 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -218,8 +218,8 @@ vprint_unicode/vprint_nonunicode">4039</a>, <a href="lwg-active.html#4040" title
 <li>Added the following 14 WP issues: <a href="lwg-defects.html#3946" title="The definition of const_iterator_t should be reworked">3946</a>, <a href="lwg-defects.html#3947" title="Unexpected constraints on adjacent_transform_view::base()">3947</a>, <a href="lwg-defects.html#3948" title="possibly-const-range and as-const-pointer should be noexcept">3948</a>, <a href="lwg-defects.html#3949" title="std::atomic&lt;bool&gt;'s trivial destructor dropped in C++17 spec wording">3949</a>, <a href="lwg-defects.html#3951" title="&sect;[expected.object.swap]: Using value() instead of has_value()">3951</a>, <a href="lwg-defects.html#3953" title="iter_move for common_iterator and counted_iterator should return decltype(auto)">3953</a>, <a href="lwg-defects.html#3957" title="&sect;[container.alloc.reqmts] The value category of v should be claimed">3957</a>, <a href="lwg-defects.html#3965" title="Incorrect example in [format.string.escaped] p3 for formatting of combining characters">3965</a>, <a href="lwg-defects.html#3970" title="&sect;[mdspan.syn] Missing definition of full_extent_t and full_extent">3970</a>, <a href="lwg-defects.html#3973" title="Monadic operations should be ADL-proof">3973</a>, <a href="lwg-defects.html#3974" title="mdspan::operator[] should not copy OtherIndexTypes">3974</a>, <a href="lwg-defects.html#3987" title="Including &lt;flat_foo&gt; doesn't provide std::begin/end">3987</a>, <a href="lwg-defects.html#3990" title="Program-defined specializations of std::tuple and std::variant can't be properly supported">3990</a>, <a href="lwg-defects.html#4001" title="iota_view should provide empty">4001</a>.</li>
 <li>Changed the following issue to Voting (from New): <a href="lwg-active.html#3919" title="enumerate_view may invoke UB for sized common non-forward underlying ranges">3919</a>.</li>
 <li>Changed the following issue to Voting (from Open): <a href="lwg-active.html#3767" title="codecvt&lt;charN_t, char8_t, mbstate_t&gt; incorrectly added to locale">3767</a>.</li>
+<li>Changed the following issue to Ready (from SG16): <a href="lwg-active.html#3944" title="Formatters converting sequences of char to sequences of wchar_t">3944</a>.</li>
 <li>Changed the following issue to Open (from New): <a href="lwg-active.html#3343" title="Ordering of calls to unlock() and notify_all() in Effects element of notify_all_at_thread_exit() should be reversed">3343</a>.</li>
-<li>Changed the following issue to Open (from SG16): <a href="lwg-active.html#3944" title="Formatters converting sequences of char to sequences of wchar_t">3944</a>.</li>
 <li>Changed the following 17 issues to WP (from Tentatively Ready): <a href="lwg-defects.html#2994" title="Needless UB for basic_string and basic_string_view">2994</a>, <a href="lwg-defects.html#3884" title="flat_foo is missing allocator-extended copy/move constructors">3884</a>, <a href="lwg-defects.html#3885" title="'op' should be in [zombie.names]">3885</a>, <a href="lwg-defects.html#3887" title="Version macro for allocate_at_least">3887</a>, <a href="lwg-defects.html#3893" title="LWG 3661 broke atomic&lt;shared_ptr&lt;T&gt;&gt; a; a = nullptr;">3893</a>, <a href="lwg-defects.html#3894" title="generator::promise_type::yield_value(ranges::elements_of&lt;Rng, Alloc&gt;) should not be noexcept">3894</a>, <a href="lwg-defects.html#3903" title="span destructor is redundantly noexcept">3903</a>, <a href="lwg-defects.html#3904" title="lazy_split_view::outer-iterator's const-converting constructor isn't setting trailing_empty_">3904</a>, <a href="lwg-defects.html#3905" title="Type of std::fexcept_t">3905</a>, <a href="lwg-defects.html#3912" title="enumerate_view::iterator::operator- should be noexcept">3912</a>, <a href="lwg-defects.html#3914" title="Inconsistent template-head of ranges::enumerate_view">3914</a>, <a href="lwg-defects.html#3915" title="Redundant paragraph about expression variations">3915</a>, <a href="lwg-defects.html#3925" title="Concept formattable's definition is incorrect">3925</a>, <a href="lwg-defects.html#3927" title="Unclear preconditions for operator[] for sequence containers">3927</a>, <a href="lwg-defects.html#3935" title="template&lt;class X&gt; constexpr complex&amp; operator=(const complex&lt;X&gt;&amp;) has no specification">3935</a>, <a href="lwg-defects.html#3938" title="Cannot use std::expected monadic ops with move-only error_type">3938</a>, <a href="lwg-defects.html#3940" title="std::expected&lt;void, E&gt;::value() also needs E to be copy constructible">3940</a>.</li>
 <li>Changed the following 7 issues to WP (from New): <a href="lwg-defects.html#2392" title="&quot;character type&quot; is used but not defined">2392</a>, <a href="lwg-defects.html#3203" title="span element access invalidation">3203</a>, <a href="lwg-defects.html#3431" title="&lt;=&gt; for containers should require three_way_comparable&lt;T&gt; instead of &lt;=&gt;">3431</a>, <a href="lwg-defects.html#3749" title="common_iterator should handle integer-class difference types">3749</a>, <a href="lwg-defects.html#3809" title="Is std::subtract_with_carry_engine&lt;uint16_t&gt; supposed to work?">3809</a>, <a href="lwg-defects.html#3892" title="Incorrect formatting of nested ranges and tuples">3892</a>, <a href="lwg-defects.html#3897" title="inout_ptr will not update raw pointer to 0">3897</a>.</li>
 <li>Changed the following issue to WP (from Open): <a href="lwg-defects.html#3305" title="any_cast&lt;void&gt;">3305</a>.</li>
@@ -50628,13 +50628,12 @@ iterators to elements in the parsed range. For example,<br/>
 
 <hr>
 <h3 id="3944"><a href="#3944">3944</a><sup><a href="https://cplusplus.github.io/LWG/issue3944">(i)</a></sup>. Formatters converting sequences of <code>char</code> to sequences of <code>wchar_t</code></h3>
-<p><b>Section:</b> 22.14.6.3 <a href="https://wg21.link/format.formatter.spec">[format.formatter.spec]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
- <b>Submitter:</b> Mark de Wever <b>Opened:</b> 2023-06-01 <b>Last modified:</b> 2024-03-13</p>
+<p><b>Section:</b> 22.14.6.3 <a href="https://wg21.link/format.formatter.spec">[format.formatter.spec]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
+ <b>Submitter:</b> Mark de Wever <b>Opened:</b> 2023-06-01 <b>Last modified:</b> 2024-03-18</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#format.formatter.spec">active issues</a> in [format.formatter.spec].</p>
 <p><b>View all other</b> <a href="lwg-index.html#format.formatter.spec">issues</a> in [format.formatter.spec].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 I noticed some interesting features introduced by the range based
@@ -50758,6 +50757,9 @@ Set status to SG16 and priority to 3 after reflector poll.
 </p>
 
 <p><i>[2023-07-26; Mark de Wever provides wording confirmed by SG16]</i></p>
+
+<p><i>[2024-03-18; Tokyo: move to Ready]</i></p>
+
 
 
 

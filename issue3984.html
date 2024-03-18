@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Issue 3984: ranges::to's recursion branch may be ill-formed</title>
 <meta property="og:title" content="Issue 3984: ranges::to's recursion branch may be ill-formed">
-<meta property="og:description" content="C++ library issue. Status: Ready">
+<meta property="og:description" content="C++ library issue. Status: Voting">
 <meta property="og:url" content="https://cplusplus.github.io/LWG/issue3984.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://isocpp.org/assets/images/cpp_logo.png">
@@ -61,15 +61,15 @@
 </head>
 <body>
 <hr>
-<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Ready">Ready</a> status.</em></p>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Voting">Voting</a> status.</em></p>
 <h3 id="3984"><a href="lwg-active.html#3984">3984</a>. <code>ranges::to</code>'s recursion branch may be ill-formed</h3>
-<p><b>Section:</b> 26.5.7.2 <a href="https://wg21.link/range.utility.conv.to">[range.utility.conv.to]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-23 <b>Last modified:</b> 2023-11-07</p>
+<p><b>Section:</b> 26.5.7.2 <a href="https://wg21.link/range.utility.conv.to">[range.utility.conv.to]</a> <b>Status:</b> <a href="lwg-active.html#Voting">Voting</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-08-23 <b>Last modified:</b> 2024-03-18</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.utility.conv.to">active issues</a> in [range.utility.conv.to].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.utility.conv.to">issues</a> in [range.utility.conv.to].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#Ready">Ready</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Voting">Voting</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 When <code>r</code> is a nested range, <code>ranges::to</code> constructs the object recursively through <code>r | views::transform(...)</code>.

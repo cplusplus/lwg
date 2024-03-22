@@ -67,7 +67,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-03-19</td>
+  <td align="left">2024-03-22</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-03-19 at 09:55:55 UTC
+<p>Revised 2024-03-22 at 01:33:02 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -199,9 +199,9 @@ ownership of it.
 <ul>
 <li>D125: 2023-06-09 Post-Varna<ul>
 <li><b>Summary:</b><ul>
-<li>500 open issues, up by 70.</li>
+<li>501 open issues, up by 71.</li>
 <li>3043 closed issues, up by 43.</li>
-<li>37 reassigned issues, up by 1.</li>
+<li>36 reassigned issues, up by 0.</li>
 <li>3580 issues total, up by 114.</li>
 </ul></li>
 <li><b>Details:</b><ul>
@@ -220,6 +220,7 @@ vprint_unicode/vprint_nonunicode (Status: New)">4039</a>, <a href="lwg-active.ht
 <li>Changed the following issue to Voting (from Open): <a href="lwg-active.html#3767" title="codecvt&lt;charN_t, char8_t, mbstate_t&gt; incorrectly added to locale (Status: Voting)">3767</a>.</li>
 <li>Changed the following issue to Ready (from SG16): <a href="lwg-active.html#3944" title="Formatters converting sequences of char to sequences of wchar_t (Status: Ready)">3944</a>.</li>
 <li>Changed the following issue to Open (from New): <a href="lwg-active.html#3343" title="Ordering of calls to unlock() and notify_all() in Effects element of notify_all_at_thread_exit() should be reversed (Status: Open)">3343</a>.</li>
+<li>Changed the following issue to Open (from LEWG): <a href="lwg-active.html#3918" title="std::uninitialized_move/_n and guaranteed copy elision (Status: Open)">3918</a>.</li>
 <li>Changed the following 17 issues to WP (from Tentatively Ready): <a href="lwg-defects.html#2994" title="Needless UB for basic_string and basic_string_view (Status: WP)">2994</a>, <a href="lwg-defects.html#3884" title="flat_foo is missing allocator-extended copy/move constructors (Status: WP)">3884</a>, <a href="lwg-defects.html#3885" title="'op' should be in [zombie.names] (Status: WP)">3885</a>, <a href="lwg-defects.html#3887" title="Version macro for allocate_at_least (Status: WP)">3887</a>, <a href="lwg-defects.html#3893" title="LWG 3661 broke atomic&lt;shared_ptr&lt;T&gt;&gt; a; a = nullptr; (Status: WP)">3893</a>, <a href="lwg-defects.html#3894" title="generator::promise_type::yield_value(ranges::elements_of&lt;Rng, Alloc&gt;) should not be noexcept (Status: WP)">3894</a>, <a href="lwg-defects.html#3903" title="span destructor is redundantly noexcept (Status: WP)">3903</a>, <a href="lwg-defects.html#3904" title="lazy_split_view::outer-iterator's const-converting constructor isn't setting trailing_empty_ (Status: WP)">3904</a>, <a href="lwg-defects.html#3905" title="Type of std::fexcept_t (Status: WP)">3905</a>, <a href="lwg-defects.html#3912" title="enumerate_view::iterator::operator- should be noexcept (Status: WP)">3912</a>, <a href="lwg-defects.html#3914" title="Inconsistent template-head of ranges::enumerate_view (Status: WP)">3914</a>, <a href="lwg-defects.html#3915" title="Redundant paragraph about expression variations (Status: WP)">3915</a>, <a href="lwg-defects.html#3925" title="Concept formattable's definition is incorrect (Status: WP)">3925</a>, <a href="lwg-defects.html#3927" title="Unclear preconditions for operator[] for sequence containers (Status: WP)">3927</a>, <a href="lwg-defects.html#3935" title="template&lt;class X&gt; constexpr complex&amp; operator=(const complex&lt;X&gt;&amp;) has no specification (Status: WP)">3935</a>, <a href="lwg-defects.html#3938" title="Cannot use std::expected monadic ops with move-only error_type (Status: WP)">3938</a>, <a href="lwg-defects.html#3940" title="std::expected&lt;void, E&gt;::value() also needs E to be copy constructible (Status: WP)">3940</a>.</li>
 <li>Changed the following 7 issues to WP (from New): <a href="lwg-defects.html#2392" title="&quot;character type&quot; is used but not defined (Status: WP)">2392</a>, <a href="lwg-defects.html#3203" title="span element access invalidation (Status: WP)">3203</a>, <a href="lwg-defects.html#3431" title="&lt;=&gt; for containers should require three_way_comparable&lt;T&gt; instead of &lt;=&gt; (Status: WP)">3431</a>, <a href="lwg-defects.html#3749" title="common_iterator should handle integer-class difference types (Status: WP)">3749</a>, <a href="lwg-defects.html#3809" title="Is std::subtract_with_carry_engine&lt;uint16_t&gt; supposed to work? (Status: WP)">3809</a>, <a href="lwg-defects.html#3892" title="Incorrect formatting of nested ranges and tuples (Status: WP)">3892</a>, <a href="lwg-defects.html#3897" title="inout_ptr will not update raw pointer to 0 (Status: WP)">3897</a>.</li>
 <li>Changed the following issue to WP (from Open): <a href="lwg-defects.html#3305" title="any_cast&lt;void&gt; (Status: WP)">3305</a>.</li>
@@ -261,7 +262,7 @@ should not be constrained (Status: New)">3900</a>, <a href="lwg-active.html#3902
 required to be correctly formatted? (Status: New)">3921</a>, <a href="lwg-active.html#3922" title="It's unclear whether numeric_limits can be specialized by users (Status: New)">3922</a>, <a href="lwg-active.html#3923" title="The specification of numeric_limits doesn't clearly distinguish between implementation requirements
 and user requirements (Status: New)">3923</a>, <a href="lwg-active.html#3924" title="Stop token data race avoidance requirements unclear (Status: New)">3924</a>, <a href="lwg-active.html#3926" title="Which namespace std is the mentioned one? (Status: New)">3926</a>, <a href="lwg-active.html#3928" title="Non-top-level namespace posix shouldn't be reserved (Status: New)">3928</a>, <a href="lwg-active.html#3929" title="Preconditions for type traits should be Mandates (Status: New)">3929</a>, <a href="lwg-active.html#3931" title="Too many paper bump __cpp_lib_ranges (Status: New)">3931</a>, <a href="lwg-active.html#3932" title="Expression-equivalence is sometimes unimplementable when passing prvalue expressions to comparison CPOs (Status: New)">3932</a>, <a href="lwg-active.html#3933" title="P1467R9 accidentally changed the signatures of certain constructors of std::complex (Status: New)">3933</a>, <a href="lwg-active.html#3934" title="std::complex&lt;T&gt;::operator=(const T&amp;) has no specification (Status: New)">3934</a>, <a href="lwg-active.html#3937" title="I/O manipulators should be specified in terms of base classes (Status: New)">3937</a>, <a href="lwg-active.html#3939" title="&sect;[format.string.std] char is not formatted as a character when charT is wchar_t (Status: New)">3939</a>, <a href="lwg-active.html#3942" title="Inconsistent use of const char_type&amp; in standard specializations of std::char_traits (Status: New)">3942</a>, <a href="lwg-active.html#3943" title="Clarify lifetime requirements of BasicFormatter and Formatter (Status: New)">3943</a>.</li>
 <li>Added the following 2 Open issues: <a href="lwg-active.html#3840" title="filesystem::u8path should be undeprecated (Status: Open)">3840</a>, <a href="lwg-active.html#3844" title="Non-numeric formats for negative durations (Status: Open)">3844</a>.</li>
-<li>Added the following 2 LEWG issues: <a href="lwg-active.html#3868" title="Constrained algorithms should not require output_iterator (Status: LEWG)">3868</a>, <a href="lwg-active.html#3918" title="std::uninitialized_move/_n and guaranteed copy elision (Status: LEWG)">3918</a>.</li>
+<li>Added the following 2 LEWG issues: <a href="lwg-active.html#3868" title="Constrained algorithms should not require output_iterator (Status: LEWG)">3868</a>, <a href="lwg-active.html#3918" title="std::uninitialized_move/_n and guaranteed copy elision (Status: Open)">3918</a>.</li>
 <li>Added the following SG1 issue: <a href="lwg-active.html#3941" title="&sect;[atomics.order] inadvertently prohibits widespread implementation techniques (Status: SG1)">3941</a>.</li>
 <li>Added the following SG9 issue: <a href="lwg-closed.html#3913" title="ranges::const_iterator_t&lt;range R&gt; fails to accept arrays of unknown bound (Status: NAD)">3913</a>.</li>
 <li>Added the following SG16 issue: <a href="lwg-active.html#3944" title="Formatters converting sequences of char to sequences of wchar_t (Status: Ready)">3944</a>.</li>
@@ -48719,11 +48720,11 @@ this is indirectly implied by the existing precondition. ]
 
 <hr>
 <h3 id="3918"><a href="#3918">3918</a><sup><a href="https://cplusplus.github.io/LWG/issue3918">(i)</a></sup>. <code>std::uninitialized_move/_n</code> and guaranteed copy elision</h3>
-<p><b>Section:</b> 27.11.6 <a href="https://wg21.link/uninitialized.move">[uninitialized.move]</a> <b>Status:</b> <a href="lwg-active.html#LEWG">LEWG</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-04-04 <b>Last modified:</b> 2023-06-01</p>
+<p><b>Section:</b> 27.11.6 <a href="https://wg21.link/uninitialized.move">[uninitialized.move]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-04-04 <b>Last modified:</b> 2024-03-22</p>
 <p><b>Priority: </b>3
 </p>
-<p><b>View all issues with</b> <a href="lwg-status.html#LEWG">LEWG</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 Currently <code>std::move</code> is unconditionally used in <code>std::uninitialized_move</code> and <code>std::uninitialized_move_n</code>, 
@@ -48744,9 +48745,9 @@ Set priority to 3 after reflector poll. Send to LEWG.
 "Consider using <code>iter_move</code> in the move algos."
 </p>
 
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
 
-
-<p id="res-3918"><b>Proposed resolution:</b></p>
 <p>
 This wording is relative to <a href="https://wg21.link/N4944" title=" Working Draft, Standard for Programming Language C++">N4944</a>.
 </p>
@@ -48768,6 +48769,98 @@ template&lt;class T&gt;
   
 <ins>template&lt;class I&gt;
   decltype(auto) <i>deref-move</i>(const I&amp; it) {
+    if constexpr (is_lvalue_reference_v&lt;decltype(*it)&gt;)
+      return std::move(*it);
+    else
+      return *it;
+  }</ins>
+</pre></blockquote>
+</blockquote>
+</li>
+
+<li>
+<p>Modify 27.11.6 <a href="https://wg21.link/uninitialized.move">[uninitialized.move]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class InputIterator, class NoThrowForwardIterator&gt;
+  NoThrowForwardIterator uninitialized_move(InputIterator first, InputIterator last,
+                                            NoThrowForwardIterator result);
+</pre>
+<blockquote>
+<p>
+-1- <i>Preconditions</i>: <code>result + [0, (last - first))</code> does not overlap with <code>[first, last)</code>.
+<p/>
+-2- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+for (; first != last; (void)++result, ++first)
+  ::new (<i>voidify</i>(*result))
+    typename iterator_traits&lt;NoThrowForwardIterator&gt;::value_type(<del>std::move(*</del><ins><i>deref-move</i>(</ins>first));
+return result;
+</pre></blockquote>
+</blockquote>
+[&hellip;]
+<pre>
+template&lt;class InputIterator, class Size, class NoThrowForwardIterator&gt;
+  pair&lt;InputIterator, NoThrowForwardIterator&gt;
+    uninitialized_move_n(InputIterator first, Size n, NoThrowForwardIterator result);
+</pre>
+<blockquote>
+<p>
+-6- <i>Preconditions</i>: <code>result + [0, n)</code> does not overlap with <code>first + [0, n)</code>.
+<p/>
+-7- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+for (; n &gt; 0; ++result,(void) ++first, --n)
+  ::new (<i>voidify</i>(*result))
+    typename iterator_traits&lt;NoThrowForwardIterator&gt;::value_type(<del>std::move(*</del><ins><i>deref-move</i>(</ins>first));
+return {first, result};
+</pre></blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+
+<p><i>[2024-03-22; Tokyo: Jonathan updates wording after LEWG review]</i></p>
+
+<p>
+LWG agrees it would be good to do this.
+Using <code class='backtick'>iter_move</code> was discussed, but it was noted that the versions of these
+algos in the <code class='backtick'>ranges</code> namespace already use it and introducing
+<code class='backtick'>ranges::iter_move</code> into the non-ranges versions wasn't desirable.
+It was observed that the proposed <em>deref-move</em> has a
+<code>const I&amp;</code> parameter which would be ill-formed for any iterator
+with a non-const <code class='backtick'>operator*</code> member. Suggested removing the const and
+recommended LWG to accept the proposed resolution.
+</p>
+
+
+
+<p id="res-3918"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
+</p>
+
+<ol>
+<li>
+<p>Modify 27.11.1 <a href="https://wg21.link/specialized.algorithms.general">[specialized.algorithms.general]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-3- Some algorithms specified in 27.11 <a href="https://wg21.link/specialized.algorithms">[specialized.algorithms]</a> make use of the <ins>following</ins> exposition-only 
+function<ins>s</ins> <del><code><i>voidify</i></code></del>:
+</p>
+<blockquote><pre>
+template&lt;class T&gt;
+  constexpr void* <i>voidify</i>(T&amp; obj) noexcept {
+    return addressof(obj);
+  }
+  
+<ins>template&lt;class I&gt;
+  decltype(auto) <i>deref-move</i>(I&amp; it) {
     if constexpr (is_lvalue_reference_v&lt;decltype(*it)&gt;)
       return std::move(*it);
     else

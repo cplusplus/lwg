@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-03-22 at 01:33:02 UTC
+<p>Revised 2024-03-25 at 10:09:22 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -55946,6 +55946,42 @@ template&lt;class I&gt;
 
 </li>
 </ol>
+
+
+
+
+
+<hr>
+<h3 id="4059"><a href="#4059">4059</a><sup><a href="https://cplusplus.github.io/LWG/issue4059">(i)</a></sup>. Leaky abstraction in <code>join_with_view</code>'s iterator</h3>
+<p><b>Section:</b> 26.7.15.3 <a href="https://wg21.link/range.join.with.iterator">[range.join.with.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> S. B. Tam <b>Opened:</b> 2024-03-23 <b>Last modified:</b> 2024-03-25</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.join.with.iterator">active issues</a> in [range.join.with.iterator].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.join.with.iterator">issues</a> in [range.join.with.iterator].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>join_with_view</code>'s iterator is defined in terms of <code>variant</code>, <code>visit</code> and <code>get</code>, 
+which implies that the iterator operations throw <code>bad_variant_access</code> if the underlying variant is 
+valueless-by-exception (which can happen if an underlying iterator has a throwing copy constructor).
+<p/>
+IMO, the <code>variant</code> is an implementation detail and shouldn't be exposed. It's confusing for users to 
+get <code>bad_variant_access</code> when user code does not deal with <code>variant</code>.
+<p/>
+The spec of <code>join_with_view</code> is also inconsistent with <code>concat_view</code> as recently added to the
+working draft by <a href="https://wg21.link/P2542R8">P2542R8</a>. The latter has "<code><i>it_</i>.valueless_by_exception()</code> is 
+<code>false</code>" as a precondition.
+<p/>
+I believe that <code>join_with_view</code> should similarly require that <code><i>inner_it_</i>.valueless_by_exception()</code> 
+is <code>false</code> for each iterator operation.
+<p/>
+(FWIW, MSVC STL implements <code>join_with_view</code> with a trimmed-down version of <code>variant</code>, and having 
+to throw <code>bad_variant_access</code> causes a small maintenance burden.)
+</p>
+
+
+<p id="res-4059"><b>Proposed resolution:</b></p>
 
 
 

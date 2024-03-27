@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-03-27 at 15:02:15 UTC
+<p>Revised 2024-03-27 at 15:55:27 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -56110,7 +56110,7 @@ This wording is relative to <a href="https://wg21.link/N4971" title=" Working Dr
 
 <blockquote>
 <p>
--8- <ins>If <code><i>first_</i>&lt;index_type, k&gt;(slices...)</code> equals <code>extents.extent(<i>k</i>)</code> 
+-8- <ins>If <code><i>first_</i>&lt;index_type, <i>k</i>&gt;(slices...)</code> equals <code>extents().extent(<i>k</i>)</code> 
 for any rank index <code><i>k</i></code> of <code>extents()</code>, then l</ins><del>L</del>et <code>offset</code> be 
 a value of type <code>size_t</code> equal to <ins><code>(*this).required_span_size()</code>. Otherwise, let 
 <code>offset</code> be a value of type <code>size_t</code> equal to</ins> 

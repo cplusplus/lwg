@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-03-27 at 15:02:15 UTC
+<p>Revised 2024-03-27 at 15:55:27 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -61726,7 +61726,7 @@ This wording is relative to <a href="https://wg21.link/N4971" title=" Working Dr
 
 <blockquote>
 <p>
--8- <ins>If <code><i>first_</i>&lt;index_type, k&gt;(slices...)</code> equals <code>extents.extent(<i>k</i>)</code> 
+-8- <ins>If <code><i>first_</i>&lt;index_type, <i>k</i>&gt;(slices...)</code> equals <code>extents().extent(<i>k</i>)</code> 
 for any rank index <code><i>k</i></code> of <code>extents()</code>, then l</ins><del>L</del>et <code>offset</code> be 
 a value of type <code>size_t</code> equal to <ins><code>(*this).required_span_size()</code>. Otherwise, let 
 <code>offset</code> be a value of type <code>size_t</code> equal to</ins> 

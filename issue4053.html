@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Issue 4053: Unary call to std::views::repeat does not decay the argument</title>
 <meta property="og:title" content="Issue 4053: Unary call to std::views::repeat does not decay the argument">
-<meta property="og:description" content="C++ library issue. Status: Voting">
+<meta property="og:description" content="C++ library issue. Status: WP">
 <meta property="og:url" content="https://cplusplus.github.io/LWG/issue4053.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://isocpp.org/assets/images/cpp_logo.png">
@@ -61,15 +61,14 @@
 </head>
 <body>
 <hr>
-<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Voting">Voting</a> status.</em></p>
-<h3 id="4053"><a href="lwg-active.html#4053">4053</a>. Unary call to <code>std::views::repeat</code> does not decay the argument</h3>
-<p><b>Section:</b> 26.6.5.2 <a href="https://wg21.link/range.repeat.view">[range.repeat.view]</a> <b>Status:</b> <a href="lwg-active.html#Voting">Voting</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-02-05 <b>Last modified:</b> 2024-03-18</p>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#WP">WP</a> status.</em></p>
+<h3 id="4053"><a href="lwg-defects.html#4053">4053</a>. Unary call to <code>std::views::repeat</code> does not decay the argument</h3>
+<p><b>Section:</b> 26.6.5.2 <a href="https://wg21.link/range.repeat.view">[range.repeat.view]</a> <b>Status:</b> <a href="lwg-active.html#WP">WP</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-02-05 <b>Last modified:</b> 2024-04-02</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#range.repeat.view">active issues</a> in [range.repeat.view].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.repeat.view">issues</a> in [range.repeat.view].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#Voting">Voting</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#WP">WP</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 Currently, a binary call to <code>std::views::repeat</code> decay the arguments due to the deduction guide, 
@@ -97,6 +96,8 @@ Presumably we should extend the deduction guide of <code>std::ranges::repeat_vie
 <p>
 Set status to Tentatively Ready after six votes in favour during reflector poll.
 </p>
+
+<p><i>[Tokyo 2024-03-23; Status changed: Voting &rarr; WP.]</i></p>
 
 
 

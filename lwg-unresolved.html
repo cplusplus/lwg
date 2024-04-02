@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-03-30 at 09:43:18 UTC
+<p>Revised 2024-04-02 at 10:30:43 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -11968,131 +11968,6 @@ least <code>DefaultConstructible</code> and <code>MoveAssignable</code>.
 
 
 <p id="res-2513"><b>Proposed resolution:</b></p>
-
-
-
-
-
-<hr>
-<h3 id="2524"><a href="#2524">2524</a><sup><a href="https://cplusplus.github.io/LWG/issue2524">(i)</a></sup>. <code>generate_canonical</code> can occasionally return 1.0</h3>
-<p><b>Section:</b> 28.5.9.4.2 <a href="https://wg21.link/rand.dist.pois.exp">[rand.dist.pois.exp]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
- <b>Submitter:</b> Michael Pr&auml;hofer <b>Opened:</b> 2015-08-20 <b>Last modified:</b> 2018-08-22</p>
-<p><b>Priority: </b>2
-</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>Original title was: <code>exponential_distribution&lt;float&gt;</code> sometimes returns inf.</p>
-
-<p>
-The random number distribution class template <code>exponential_distribution&lt;float&gt;</code> may return "inf" as can be seen from the following example program:
-</p>
-<blockquote>
-<pre>
-// compiled with
-// g++ -std=c++11 Error_exp_distr.cpp
-
-#include &lt;iostream&gt;
-#include &lt;random&gt;
-#include &lt;bitset&gt;
-
-int main(){
-  unsigned long long h;
-  std::mt19937_64 mt1(1);
-  std::mt19937_64 mt2(1);
-  mt1.discard(517517);
-  mt2.discard(517517);
-  std::exponential_distribution&lt;float&gt; dis(1.0);
-  h = mt2();
-  std::cout &lt;&lt; std::bitset&lt;64&gt;(h) &lt;&lt; " " &lt;&lt; (float) -log(1 - h/pow(2, 64)) &lt;&lt; " " 
-            &lt;&lt; -log(1 - (float) h/pow(2, 64)) &lt;&lt; " " &lt;&lt; dis(mt1) &lt;&lt; std::endl;
-  h = mt2();
-  std::cout &lt;&lt; std::bitset&lt;64&gt;(h) &lt;&lt; " " &lt;&lt; (float) -log(1 - h/pow(2, 64)) &lt;&lt; " " 
-            &lt;&lt; -log(1 - (float) h/pow(2, 64)) &lt;&lt; " " &lt;&lt; dis(mt1) &lt;&lt; std::endl;
-}
-</pre>
-</blockquote>
-<p>
-output:
-</p>
-<blockquote>
-<pre>
-0110010110001001010011000111000101001100111110100001110011100001 0.505218 0.505218 0.505218
-1111111111111111111111111101010011000110011110011000110101100110 18.4143 inf inf
-</pre>
-</blockquote>
-<p>
-The reason seems to be that converting a <code>double x</code> in the range <code>[0, 1)</code> to <code>float</code> may result in <code>1.0f</code> 
-if <code>x</code> is close enough to <code>1</code>. I see two possibilities to fix that:
-</p>
-<ol>
-<li><p>use internally <code>double</code> (or <code>long double</code>?) and then convert the result at the very end to <code>float</code>.</p></li>
-<li><p>take only 24 random bits and convert them to a <code>float x</code> in the range <code>[0, 1)</code> and then return <code>-log(1 - x)</code>.</p></li>
-</ol>
-
-<p>
-I have not checked if <code>std::exponential_distribution&lt;double&gt;</code> has the same problem:
-For <code>float</code> on the average 1 out of 2<sup>24</sup> (~10<sup>7</sup>) draws returns "inf", which is easily confirmed.
-For <code>double</code> on the average 1 out of 2<sup>53</sup> (~10<sup>16</sup>) draws might return "inf", which I have not tested.
-</p>
-
-<p><b>Marshall:</b><br/>
-I don't think the problem is in <code>std::exponential_distribution</code>; but rather in <code>generate_canonical</code>.
-</p>
-
-<p>Consider:
-<blockquote><pre>
-std::mt19937_64 mt2(1);
-mt2.discard(517517);
-std::cout &lt;&lt; std::hexfloat &lt;&lt; std::generate_canonical&lt;float, std::numeric_limits&lt;float&gt;::digits&gt;(mt2) &lt;&lt; std::endl;
-std::cout &lt;&lt; std::hexfloat &lt;&lt; std::generate_canonical&lt;float, std::numeric_limits&lt;float&gt;::digits&gt;(mt2) &lt;&lt; std::endl;
-std::cout &lt;&lt; std::hexfloat &lt;&lt; std::generate_canonical&lt;float, std::numeric_limits&lt;float&gt;::digits&gt;(mt2) &lt;&lt; std::endl;
-</pre></blockquote>
-<p/>
-which outputs:
-<p/>
-<blockquote><pre>
-0x1.962532p-2
-0x1p+0
-0x1.20d0cap-3
-</pre></blockquote>
-
-but <code>generate_canonical</code> is defined to return a result in the range [0, 1).
-</p>
-
-<p><i>[2015-10, Kona Saturday afternoon]</i></p>
-
-<p>Options: </p>
-<ul>
-<li>1) NAD, make it work. E.g. nudge slightly, making the hightest result return the highest allowable value (next_after). This might change the distribution slightly.</li>
-<li>2) Re-run the algorithm when you get a 1. This changes the specification in that it makes extra calls to the random engine.</li>
-<li>3) Something else</li>
-</ul>
-
-<p>WEB: The one thing we cannot tolerate is any output range other than [0, 1).</p>
-<p>WEB: I believe there may be a documented algorithm for the generator, and perhaps it's possible to discover en-route that the algorithm produces the wrong result and fix it.</p>
-<p>MC: No. I analyzed this once, and here it is: the algorithm is in [rand.util.canonical], and it's all fine until p5. The expression <code>S/R^k</code> is mathematically less than one, but it may round to one.</p>
-<p>GR: Could we change the rounding mode for the computation? </p>
-<p>HH: No, because the rounding mode is global, not thread-local.</p>
-<p>AM: SG1 wants to get rid of the floating point environment. </p>
-<p>STL: The problem is that the standard specifies the implementation, and the implementation doesn't work.</p>
-<p>MC: I'm not sure if nudging it down will introduce a subtle bias.</p>
-<p>EF: I worry about how the user's choice of floating point environment affects the behaviour.</p>
-<p>MS offers to run the topic past colleagues.</p>
-<p>MC: Will set the status to open. STL wants to rename the issue. WEB wants to be able to find the issue by its original name still.</p>
-
-<p>Mike Spertus to run the options past his mathematical colleagues, and report back.</p>
-
-<p><i>[2017-11 Albuquerque Wednesday issue processing]</i></p>
-
-<p>Choice: Rerun the algorithm if it gets 1.0.</p>
-<p>Thomas K to provide wording; Marshall and STL to review.</p>
-
-<p><i>[2018-08 Batavia Monday issue discussion]</i></p>
-
-<p>Davis has a paper <a href="https://wg21.link/P0952">P0952</a> which resolves this.</p>
-
-
-<p id="res-2524"><b>Proposed resolution:</b></p>
 
 
 
@@ -48256,7 +48131,6 @@ the standard library namespace (macros don't fit that description).
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-07-06 <b>Last modified:</b> 2023-10-30</p>
 <p><b>Priority: </b>3
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#range.repeat.view">active issues</a> in [range.repeat.view].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.repeat.view">issues</a> in [range.repeat.view].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -56173,7 +56047,6 @@ return mdspan(src.accessor().offset(src.data(), sub_map_<ins>result</ins><del>of
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-03-24 <b>Last modified:</b> 2024-03-26</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#format.context">active issues</a> in [format.context].</p>
 <p><b>View all other</b> <a href="lwg-index.html#format.context">issues</a> in [format.context].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>

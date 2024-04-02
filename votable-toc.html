@@ -59,7 +59,7 @@
 <p>Reference ISO/IEC IS 14882:2020(E)</p>
 <p>This document is the Table of Contents for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.</p>
-<p>Revised 2024-03-30 at 09:43:18 UTC
+<p>Revised 2024-04-02 at 10:30:43 UTC
 </p><table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -71,192 +71,12 @@
   <th>Duplicates</th>
 </tr>
 <tr>
-<td id="3767"><a href="lwg-active.html#3767" title="codecvt&lt;charN_t, char8_t, mbstate_t&gt; incorrectly added to locale (Status: Voting)">3767</a><sup><a href="https://cplusplus.github.io/LWG/issue3767">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>30.3.1.2.1 [locale.category]</td>
-<td><code>codecvt&lt;char<i>N</i>_t, char8_t, mbstate_t&gt;</code> incorrectly added to locale</td>
+<td id="3944"><a href="lwg-active.html#3944" title="Formatters converting sequences of char to sequences of wchar_t (Status: Ready)">3944</a><sup><a href="https://cplusplus.github.io/LWG/issue3944">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>22.14.6.3 [format.formatter.spec]</td>
+<td>Formatters converting sequences of <code>char</code> to sequences of <code>wchar_t</code></td>
 <td>Yes</td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="3919"><a href="lwg-active.html#3919" title="enumerate_view may invoke UB for sized common non-forward underlying ranges (Status: Voting)">3919</a><sup><a href="https://cplusplus.github.io/LWG/issue3919">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.7.23 [range.enumerate]</td>
-<td><code>enumerate_view</code> may invoke UB for sized common non-forward underlying ranges</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="3950"><a href="lwg-active.html#3950" title="std::basic_string_view comparison operators are overspecified (Status: Voting)">3950</a><sup><a href="https://cplusplus.github.io/LWG/issue3950">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>23.3.2 [string.view.synop]</td>
-<td><code>std::basic_string_view</code> comparison operators are overspecified</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="3975"><a href="lwg-active.html#3975" title="Specializations of basic_format_context should not be permitted (Status: Voting)">3975</a><sup><a href="https://cplusplus.github.io/LWG/issue3975">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>22.14.6.6 [format.context]</td>
-<td>Specializations of <code>basic_format_context</code> should not be permitted</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="3984"><a href="lwg-active.html#3984" title="ranges::to's recursion branch may be ill-formed (Status: Voting)">3984</a><sup><a href="https://cplusplus.github.io/LWG/issue3984">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.5.7.2 [range.utility.conv.to]</td>
-<td><code>ranges::to</code>'s recursion branch may be ill-formed</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4011"><a href="lwg-active.html#4011" title="&quot;Effects: Equivalent to return&quot; in [span.elem] (Status: Voting)">4011</a><sup><a href="https://cplusplus.github.io/LWG/issue4011">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>24.7.2.2.6 [span.elem]</td>
-<td>"<i>Effects</i>: Equivalent to return" in [span.elem]</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4012"><a href="lwg-active.html#4012" title="common_view::begin/end are missing the simple-view check (Status: Voting)">4012</a><sup><a href="https://cplusplus.github.io/LWG/issue4012">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.7.19.2 [range.common.view]</td>
-<td><code>common_view::begin/end</code> are missing the <code><i>simple-view</i></code> check</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4013"><a href="lwg-active.html#4013" title="lazy_split_view::outer-iterator::value_type should not provide default constructor (Status: Voting)">4013</a><sup><a href="https://cplusplus.github.io/LWG/issue4013">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.7.16.4 [range.lazy.split.outer.value]</td>
-<td><code>lazy_split_view::<i>outer-iterator</i>::value_type</code> should not provide default constructor</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4016"><a href="lwg-active.html#4016" title="container-insertable checks do not match what container-inserter does (Status: Voting)">4016</a><sup><a href="https://cplusplus.github.io/LWG/issue4016">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.5.7 [range.utility.conv]</td>
-<td><code><i>container-insertable</i></code> checks do not match what <code><i>container-inserter</i></code> does</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4023"><a href="lwg-active.html#4023" title="Preconditions of std::basic_streambuf::setg/setp (Status: Voting)">4023</a><sup><a href="https://cplusplus.github.io/LWG/issue4023">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>31.6.3.4 [streambuf.protected]</td>
-<td>Preconditions of <code>std::basic_streambuf::setg/setp</code></td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4025"><a href="lwg-active.html#4025" title="Move assignment operator of std::expected&lt;cv void, E&gt; should not be conditionally deleted (Status: Voting)">4025</a><sup><a href="https://cplusplus.github.io/LWG/issue4025">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>22.8.7.4 [expected.void.assign]</td>
-<td>Move assignment operator of <code>std::expected&lt;<i>cv</i> void, E&gt;</code> should not be conditionally deleted</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4030"><a href="lwg-active.html#4030" title="Clarify whether arithmetic expressions in [numeric.sat.func] are mathematical or C++ (Status: Voting)">4030</a><sup><a href="https://cplusplus.github.io/LWG/issue4030">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>27.10.17.1 [numeric.sat.func]</td>
-<td>Clarify whether arithmetic expressions in [numeric.sat.func] are mathematical or C++</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4031"><a href="lwg-active.html#4031" title="bad_expected_access&lt;void&gt; member functions should be noexcept (Status: Voting)">4031</a><sup><a href="https://cplusplus.github.io/LWG/issue4031">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>22.8.5 [expected.bad.void]</td>
-<td><code>bad_expected_access&lt;void&gt;</code> member functions should be <code>noexcept</code></td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4035"><a href="lwg-active.html#4035" title="single_view should provide empty (Status: Voting)">4035</a><sup><a href="https://cplusplus.github.io/LWG/issue4035">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.6.3.2 [range.single.view]</td>
-<td><code>single_view</code> should provide <code>empty</code></td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4036"><a href="lwg-active.html#4036" title="__alignof_is_defined is only implicitly specified in C++ and not yet deprecated (Status: Voting)">4036</a><sup><a href="https://cplusplus.github.io/LWG/issue4036">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>D.11 [depr.c.macros]</td>
-<td><code>__alignof_is_defined</code> is only implicitly specified in C++ and not yet deprecated</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4037"><a href="lwg-active.html#4037" title="Static data members of ctype_base are not yet required to be usable in constant expressions (Status: Voting)">4037</a><sup><a href="https://cplusplus.github.io/LWG/issue4037">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>30.4.2.1 [category.ctype.general]</td>
-<td>Static data members of <code>ctype_base</code> are not yet required to be usable in constant expressions</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4038"><a href="lwg-active.html#4038" title="std::text_encoding::aliases_view should have constexpr iterators (Status: Voting)">4038</a><sup><a href="https://cplusplus.github.io/LWG/issue4038">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>30.6.2.5 [text.encoding.aliases]</td>
-<td><code>std::text_encoding::aliases_view</code> should have constexpr iterators</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4043"><a href="lwg-active.html#4043" title="&quot;ASCII&quot; is not a registered character encoding (Status: Voting)">4043</a><sup><a href="https://cplusplus.github.io/LWG/issue4043">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>30.6.2.2 [text.encoding.general]</td>
-<td><code>"ASCII"</code> is not a registered character encoding</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4045"><a href="lwg-active.html#4045" title="tuple can create dangling references from tuple-like (Status: Voting)">4045</a><sup><a href="https://cplusplus.github.io/LWG/issue4045">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>22.4.4.2 [tuple.cnstr]</td>
-<td><code>tuple</code> can create dangling references from <code><i>tuple-like</i></code></td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4053"><a href="lwg-active.html#4053" title="Unary call to std::views::repeat does not decay the argument (Status: Voting)">4053</a><sup><a href="https://cplusplus.github.io/LWG/issue4053">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.6.5.2 [range.repeat.view]</td>
-<td>Unary call to <code>std::views::repeat</code> does not decay the argument</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4054"><a href="lwg-active.html#4054" title="Repeating a repeat_view should repeat the view (Status: Voting)">4054</a><sup><a href="https://cplusplus.github.io/LWG/issue4054">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.6.5.1 [range.repeat.overview]</td>
-<td>Repeating a <code>repeat_view</code> should repeat the view</td>
-<td>Yes</td>
-<td></td>
 <td></td>
 </tr>
 </table>

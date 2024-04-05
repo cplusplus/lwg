@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-04-02 at 10:30:43 UTC
+<p>Revised 2024-04-05 at 12:01:28 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -56138,6 +56138,33 @@ applied to <code>forward_range</code>s.
 
 
 <p id="res-4062"><b>Proposed resolution:</b></p>
+
+
+
+
+
+<hr>
+<h3 id="4063"><a href="#4063">4063</a><sup><a href="https://cplusplus.github.io/LWG/issue4063">(i)</a></sup>. Freestanding <code>std::char_traits&lt;char&gt;::eof</code> depends on non-freestanding <code>EOF</code></h3>
+<p><b>Section:</b> 23.2.4.2 <a href="https://wg21.link/char.traits.specializations.char">[char.traits.specializations.char]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-04-03 <b>Last modified:</b> 2024-04-05</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#char.traits.specializations.char">issues</a> in [char.traits.specializations.char].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Currently <code>EOF</code> is not yet freestanding, because it's only specified to be provided in 
+<code>&lt;stdio.h&gt;</code> in C, or together with <code>&lt;cstdio&gt;</code> in C++.
+<p/>
+However, <code>std::char_traits&lt;char&gt;::eof</code> (required to be freestanding since C++26 by 
+<a href="https://wg21.link/P2338R4" title=" Freestanding Library: Character primitives and the C library">P2338R4</a>) is required to return the value of <code>EOF</code>. It's unclear what is 
+expected to be done in a freestanding implementation.
+<p/>
+Related to <a href="https://github.com/llvm/llvm-project/issues/85158">LLVM issue #85158</a>.
+</p>
+
+
+<p id="res-4063"><b>Proposed resolution:</b></p>
 
 
 

@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-04-05 at 12:17:15 UTC
+<p>Revised 2024-04-07 at 17:53:25 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -56173,7 +56173,7 @@ Related to <a href="https://github.com/llvm/llvm-project/issues/85158">LLVM issu
 <hr>
 <h3 id="4064"><a href="#4064">4064</a><sup><a href="https://cplusplus.github.io/LWG/issue4064">(i)</a></sup>. Clarify that <code>std::launder</code> is not needed when using the result of <code>std::memcpy</code></h3>
 <p><b>Section:</b> 23.5.3 <a href="https://wg21.link/cstring.syn">[cstring.syn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2024-04-05 <b>Last modified:</b> 2024-04-05</p>
+ <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2024-04-05 <b>Last modified:</b> 2024-04-07</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -56216,7 +56216,7 @@ This wording is relative to <a href="https://wg21.link/N4971" title=" Working Dr
 -3- The functions <code>memcpy</code> and <code>memmove</code> are signal-safe (17.13.5 <a href="https://wg21.link/support.signal">[support.signal]</a>). 
 Both functions implicitly create objects (6.7.2 <a href="https://wg21.link/intro.object">[intro.object]</a>) in the destination region of 
 storage immediately prior to copying the sequence of characters to the destination. <ins>Both functions 
-return a pointer to the first implicitly created object.</ins>
+return a pointer to a suitable created object.</ins>
 </p>
 </blockquote>
 </li>

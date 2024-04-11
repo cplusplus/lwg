@@ -67,7 +67,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-04-07</td>
+  <td align="left">2024-04-11</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-04-07 at 17:53:25 UTC
+<p>Revised 2024-04-11 at 17:56:48 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -59601,7 +59601,7 @@ Related to <a href="https://github.com/llvm/llvm-project/issues/85158">LLVM issu
 <hr>
 <h3 id="4064"><a href="#4064">4064</a><sup><a href="https://cplusplus.github.io/LWG/issue4064">(i)</a></sup>. Clarify that <code>std::launder</code> is not needed when using the result of <code>std::memcpy</code></h3>
 <p><b>Section:</b> 23.5.3 <a href="https://wg21.link/cstring.syn">[cstring.syn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2024-04-05 <b>Last modified:</b> 2024-04-07</p>
+ <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2024-04-05 <b>Last modified:</b> 2024-04-11</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -59609,7 +59609,7 @@ Related to <a href="https://github.com/llvm/llvm-project/issues/85158">LLVM issu
 <blockquote><pre>
 int x = 0;
 alignas(int) std::byte y[sizeof(int)];
-int z = *reinterpret_cast&lt;int*&gt;(std::memcpy(y, &amp;x, sizeof(int)));
+int z = *static_cast&lt;int*&gt;(std::memcpy(y, &amp;x, sizeof(int)));
 </pre></blockquote>
 <p>
 This example should be well-defined, even without the use of <code>std::launder</code>.

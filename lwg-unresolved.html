@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-04-11 at 17:56:48 UTC
+<p>Revised 2024-04-13 at 13:03:53 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -38040,6 +38040,7 @@ Set priority to 4 after reflector poll.
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2022-03-18 <b>Last modified:</b> 2022-05-17</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#allocator.requirements.general">active issues</a> in [allocator.requirements.general].</p>
 <p><b>View all other</b> <a href="lwg-index.html#allocator.requirements.general">issues</a> in [allocator.requirements.general].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -56218,6 +56219,72 @@ Both functions implicitly create objects (6.7.2 <a href="https://wg21.link/intro
 storage immediately prior to copying the sequence of characters to the destination. <ins>Both functions 
 return a pointer to a suitable created object.</ins>
 </p>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4065"><a href="#4065">4065</a><sup><a href="https://cplusplus.github.io/LWG/issue4065">(i)</a></sup>. Requirements for fancy pointers might be insufficient for self-referential implementation of containers</h3>
+<p><b>Section:</b> 16.4.4.6.1 <a href="https://wg21.link/allocator.requirements.general">[allocator.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-04-07 <b>Last modified:</b> 2024-04-13</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#allocator.requirements.general">active issues</a> in [allocator.requirements.general].</p>
+<p><b>View all other</b> <a href="lwg-index.html#allocator.requirements.general">issues</a> in [allocator.requirements.general].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Currently, 16.4.4.6.1 <a href="https://wg21.link/allocator.requirements.general">[allocator.requirements.general]</a>/2.12 imposes a precondition for 
+<code>pointer_traits::pointer_to</code> that <code>r</code> denotes an object whose storage is allocated 
+by the allocator.
+<p/>
+However, as mentioned in <a href="https://wg21.link/P0773R0" title=" Towards meaningful fancy pointers">P0773R0</a>, some containers are self-referential in current 
+implementations, and thus a fancy pointer stored in the last node (as required by LWG <a href="lwg-defects.html#2261" title="Are containers required to use their 'pointer' type internally? (Status: C++17)">2261</a>) 
+needs to be able to point to a sentinel node in the container object. Given the container object can 
+be constructed at any location, perhaps we should specify that <code>pointer_traits::pointer_to</code> 
+works on any lvalue.
+</p>
+
+
+<p id="res-4065"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
+</p>
+
+<ol>
+<li><p>Modify 16.4.4.6.1 <a href="https://wg21.link/allocator.requirements.general">[allocator.requirements.general]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- In subclause 16.4.4.6 <a href="https://wg21.link/allocator.requirements">[allocator.requirements]</a>,
+</p>
+<ol style="list-style-type: none">
+<li><p>[&hellip;]</p></li>
+<li><p>(2.10) &mdash; <code>p</code> denotes a value of type <code>XX::pointer</code> obtained by calling 
+<code>a1.allocate</code>, where <code>a1 == a</code>,</p></li>
+<li><p>(2.11) &mdash; [&hellip;],</p></li>
+<li><p>(2.12) &mdash; <code>r</code> denotes a<ins>n l</ins>value of type <code>T<del>&amp;</del></code> 
+<del>obtained by the expression <code>*p</code></del>,</p></li>
+<li><p>[&hellip;]</p></li>
+</ol>
+<p>
+[&hellip;]
+</p>
+<pre>
+pointer_traits&lt;XX::pointer&gt;::pointer_to(r)
+</pre>
+<blockquote>
+<p>
+-33- <i>Result:</i> <code>XX::pointer</code>
+<p/>
+-34- <i>Postconditions:</i> <del>Same as <code>p</code></del><ins>Let <code>p1</code> denote the return value. 
+<code>*p1</code> refers to the same object as <code>r</code></ins>.
+</p>
+</blockquote>
 </blockquote>
 </li>
 </ol>

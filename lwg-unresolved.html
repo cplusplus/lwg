@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-04-19 at 14:07:09 UTC
+<p>Revised 2024-04-19 at 15:21:35 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -56680,6 +56680,120 @@ make the specializations match them.
 <p id="res-4069"><b>Proposed resolution:</b></p>
 <p>
 </p>
+
+
+
+
+
+<hr>
+<h3 id="4070"><a href="#4070">4070</a><sup><a href="https://cplusplus.github.io/LWG/issue4070">(i)</a></sup>. Transcoding by <code>std::formatter&lt;std::filesystem::path&gt;</code></h3>
+<p><b>Section:</b> 99 [fs.path.fmtr.funcs] <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-04-19 <b>Last modified:</b> 2024-04-19</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+99 [fs.path.fmtr.funcs] says:
+
+<blockquote>
+If <code class='backtick'>charT</code> is <code class='backtick'>char</code>, <code class='backtick'>path::value_type</code> is <code class='backtick'>wchar_t</code>,
+and the literal encoding is UTF-8, then the escaped path is
+transcoded from the native encoding for wide character strings to UTF-8
+with maximal subparts of ill-formed subsequences substituted with
+<span style="font-variant:small-caps">u+fffd</span>
+replacement character per the Unicode Standard [...].
+Otherwise, transcoding is implementation-defined.
+</blockquote>
+</p>
+
+<p>
+This seems to mean that the Unicode substitutions are only done
+for an escaped path, i.e. when the <code class='backtick'>?</code> option is used. Otherwise, the form
+of transcoding is completely implementation-defined.
+However, this makes no sense.
+An escaped string will have no ill-formed subsequences, because they will
+already have been replaced as per 22.14.6.4 <a href="https://wg21.link/format.string.escaped">[format.string.escaped]</a>:
+<blockquote>
+Otherwise (<em>X</em> is a sequence of ill-formed code units),
+each code unit <em>U</em> is appended to <em>E</em> in order as
+the sequence <code>\x{<em>hex-digit-sequence</em>}</code>,
+where <code><em>hex-digit-sequence</em></code> is the shortest hexadecimal
+representation of <em>U</em> using lower-case hexadecimal digits.
+</blockquote>
+</p>
+<p>
+So only unescaped strings can have ill-formed sequences by the time
+we do transcoding to <code class='backtick'>char</code>, but whether or not any
+<span style="font-variant:small-caps">u+fffd</span> substitution
+occurs is just implementation-defined.
+</p>
+
+<p>
+I believe we want to specify the substitutions are done when transcoding
+an <em>unescaped</em> path (and it doesn't matter whether we specify it
+for escaped paths, because it's a no-op if escaping happens first,
+as is apparently intended).
+</p>
+
+<p>
+It does matter whether we escape first or perform substitutions first.
+If we escape first then every code unit in an ill-formed sequence is
+individually escaped as <code class='backtick'>\x{hex-digit-sequence}</code>.
+So an ill-formed sequence of two <code class='backtick'>wchar_t</code> values will be escaped as
+two <code class='backtick'>\x{...}</code> strings, which are then transcoded to UTF-8.
+If we transcode (with substitutions first) then the entire
+ill-formed sequence is replaced with a single replacement character,
+which will then be escaped as <code class='backtick'>\x{fffd}</code>.
+SG16 should be asked to confirm that escaping first is intended,
+so that an escaped string shows the original invalid code units.
+For a non-escaped string, we want the ill-formed sequence to be
+formatted as &#xfffd;, which the proposed resolution tries to ensure.
+</p>
+
+
+
+<p id="res-4070"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981">N4981</a>.
+</p>
+<ol>
+<li><p>Modify 99 [fs.path.fmtr.funcs] as indicated:</p>
+
+<blockquote>
+<pre><code>
+template&lt;class FormatContext&gt;
+  typename FormatContext::iterator
+    format(const filesystem::path&amp; p, FormatContext&amp; ctx) const;
+</code></pre>
+<blockquote>-5-
+<em>Effects</em>:
+Let <code class='backtick'>s</code> be <code>p.generic_string&lt;filesystem::path::value_type&gt;()</code>
+if the <code class='backtick'>g</code> option is used, otherwise <code class='backtick'>p.native()</code>.
+Writes <code class='backtick'>s into </code>ctx.out()`, adjusted according to the path-format-spec.
+If <code class='backtick'>charT</code> is <code class='backtick'>char</code>, <code class='backtick'>path::value_type</code> is <code class='backtick'>wchar_t</code>,
+and the literal encoding is UTF-8, then the
+<del>escaped path</del>
+<ins>(possible escaped) string</ins>
+is transcoded from the native encoding for wide character strings to UTF-8
+with maximal subparts of ill-formed subsequences substituted with
+<span style="font-variant:small-caps">u+fffd</span> replacement character per
+the Unicode Standard, Chapter 3.9 <span style="font-variant:small-caps">u+fffd</span>
+Substitution in Conversion.
+If <code class='backtick'>charT</code> and <code class='backtick'>path::value_type</code> are the same then no transcoding is performed.
+Otherwise, transcoding is implementation-defined
+</blockquote>
+</blockquote>
+</li>
+<li>
+Modify the entry in the index of implementation-defined behavior as indicated:
+<blockquote>
+transcoding of a formatted <code class='backtick'>path</code> when <code class='backtick'>charT</code> and <code class='backtick'>path::value_type</code> differ
+<ins>and not converting from <code class='backtick'>wchar_t</code> to UTF-8</ins>
+</blockquote>
+</li>
+
+</ol>
 
 
 

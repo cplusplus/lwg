@@ -76,7 +76,7 @@ requirements for <code>CharT</code>. Clearly there have to be more requirements 
 </p>
 <ol>
 <li><p>Comparison operators such as "<code>==</code>" or "<code>&lt;=</code>" must be defined between <code>CharT</code> 
-objects, because these operators are used at various places of 32 <a href="https://wg21.link/re">[re]</a>, including 
+objects, because these operators are used at various places of 99 [re], including 
 32.2 <a href="https://wg21.link/re.req">[re.req]</a> paragraph 14 and 16, 32.6 <a href="https://wg21.link/re.traits">[re.traits]</a> paragraph 12, and 
 32.12 <a href="https://wg21.link/re.grammar">[re.grammar]</a> paragraph 14. Similarly, "<code>==</code>" between a <code>CharT</code> object 
 and integer 0 must also be defined, as it is used at 32.2 <a href="https://wg21.link/re.req">[re.req]</a> paragraph 11.
@@ -84,8 +84,8 @@ and integer 0 must also be defined, as it is used at 32.2 <a href="https://wg21.
 <p/>
 Alternatively, we can also interpret these operators in the text, as code implemented using 
 "<code>std::char_traits&lt;CharT&gt;</code>" comparison functions. This interpretation has the advantage 
-of keeping 32 <a href="https://wg21.link/re">[re]</a> consistent with the strings library and string comparisons, which are 
-also used in 32 <a href="https://wg21.link/re">[re]</a>, including 32.2 <a href="https://wg21.link/re.req">[re.req]</a> paragraph 7, 18, 20, and 
+of keeping 99 [re] consistent with the strings library and string comparisons, which are 
+also used in 99 [re], including 32.2 <a href="https://wg21.link/re.req">[re.req]</a> paragraph 7, 18, 20, and 
 32.12 <a href="https://wg21.link/re.grammar">[re.grammar]</a> paragraph 14.2. Also, only with this interpretation, can
 32.6 <a href="https://wg21.link/re.traits">[re.traits]</a> paragraph 3 be consistent with 32.2 <a href="https://wg21.link/re.req">[re.req]</a> paragraph 11.</p></li>
 <li><p>There must be a way to convert between <code>CharT</code> and <code>char</code>, otherwise there is no 

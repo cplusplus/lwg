@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-04-19 at 15:21:35 UTC
+<p>Revised 2024-04-19 at 16:35:52 UTC
 </p><h2>Tentative Issues</h2>
 <hr>
 <h3 id="2457"><a href="#2457">2457</a><sup><a href="https://cplusplus.github.io/LWG/issue2457">(i)</a></sup>. <code>std::begin()</code> and <code>std::end()</code> do not support multi-dimensional arrays correctly</h3>
@@ -245,7 +245,7 @@ This wording is relative to <a href="https://wg21.link/N4901" title=" Working Dr
 
 <hr>
 <h3 id="3714"><a href="#3714">3714</a><sup><a href="https://cplusplus.github.io/LWG/issue3714">(i)</a></sup>. Non-single-argument constructors for range adaptors should not be <code>explicit</code></h3>
-<p><b>Section:</b> 26.7.25.2 <a href="https://wg21.link/range.zip.transform.view">[range.zip.transform.view]</a>, 26.7.27.2 <a href="https://wg21.link/range.adjacent.transform.view">[range.adjacent.transform.view]</a>, 26.7.28.2 <a href="https://wg21.link/range.chunk.view.input">[range.chunk.view.input]</a>, 26.7.28.6 <a href="https://wg21.link/range.chunk.view.fwd">[range.chunk.view.fwd]</a>, 26.7.29.2 <a href="https://wg21.link/range.slide.view">[range.slide.view]</a>, 26.7.30.2 <a href="https://wg21.link/range.chunk.by.view">[range.chunk.by.view]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+<p><b>Section:</b> 26.7.26.2 <a href="https://wg21.link/range.zip.transform.view">[range.zip.transform.view]</a>, 26.7.28.2 <a href="https://wg21.link/range.adjacent.transform.view">[range.adjacent.transform.view]</a>, 26.7.29.2 <a href="https://wg21.link/range.chunk.view.input">[range.chunk.view.input]</a>, 26.7.29.6 <a href="https://wg21.link/range.chunk.view.fwd">[range.chunk.view.fwd]</a>, 26.7.30.2 <a href="https://wg21.link/range.slide.view">[range.slide.view]</a>, 26.7.31.2 <a href="https://wg21.link/range.chunk.by.view">[range.chunk.by.view]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2022-06-10 <b>Last modified:</b> 2024-01-29</p>
 <p><b>Priority: </b>4
 </p>
@@ -301,7 +301,7 @@ This wording is relative to <a href="https://wg21.link/N4910" title=" Working Dr
 </p>
 
 <ol>
-<li><p>Modify 26.7.25.2 <a href="https://wg21.link/range.zip.transform.view">[range.zip.transform.view]</a> as indicated:</p>
+<li><p>Modify 26.7.26.2 <a href="https://wg21.link/range.zip.transform.view">[range.zip.transform.view]</a> as indicated:</p>
 
 <blockquote>
 <blockquote>
@@ -337,7 +337,7 @@ with <code>std::move(views)...</code>.
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.27.2 <a href="https://wg21.link/range.adjacent.transform.view">[range.adjacent.transform.view]</a> as indicated:</p>
+<li><p>Modify 26.7.28.2 <a href="https://wg21.link/range.adjacent.transform.view">[range.adjacent.transform.view]</a> as indicated:</p>
 
 <blockquote>
 <blockquote>
@@ -372,7 +372,7 @@ constexpr <del>explicit</del> adjacent_transform_view(V base, F fun);
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.28.2 <a href="https://wg21.link/range.chunk.view.input">[range.chunk.view.input]</a> as indicated:</p>
+<li><p>Modify 26.7.29.2 <a href="https://wg21.link/range.chunk.view.input">[range.chunk.view.input]</a> as indicated:</p>
 
 <blockquote>
 <blockquote>
@@ -408,7 +408,7 @@ constexpr <del>explicit</del> chunk_view(V base, range_difference_t&lt;V&gt; n);
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.28.6 <a href="https://wg21.link/range.chunk.view.fwd">[range.chunk.view.fwd]</a> as indicated:</p>
+<li><p>Modify 26.7.29.6 <a href="https://wg21.link/range.chunk.view.fwd">[range.chunk.view.fwd]</a> as indicated:</p>
 
 <blockquote>
 <blockquote>
@@ -442,7 +442,7 @@ constexpr <del>explicit</del> chunk_view(V base, range_difference_t&lt;V&gt; n);
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.29.2 <a href="https://wg21.link/range.slide.view">[range.slide.view]</a> as indicated:</p>
+<li><p>Modify 26.7.30.2 <a href="https://wg21.link/range.slide.view">[range.slide.view]</a> as indicated:</p>
 
 <blockquote>
 <blockquote>
@@ -476,7 +476,7 @@ constexpr <del>explicit</del> slide_view(V base, range_difference_t&lt;V&gt; n);
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.30.2 <a href="https://wg21.link/range.chunk.by.view">[range.chunk.by.view]</a> as indicated:</p>
+<li><p>Modify 26.7.31.2 <a href="https://wg21.link/range.chunk.by.view">[range.chunk.by.view]</a> as indicated:</p>
 
 <blockquote>
 <blockquote>
@@ -551,7 +551,7 @@ uses-allocator construction of a const type, so we can't make it ill-formed.
 
 <hr>
 <h3 id="3908"><a href="#3908">3908</a><sup><a href="https://cplusplus.github.io/LWG/issue3908">(i)</a></sup>. <code>enumerate_view::<i>iterator</i></code> constructor is explicit</h3>
-<p><b>Section:</b> 26.7.23.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+<p><b>Section:</b> 26.7.24.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-03-23 <b>Last modified:</b> 2023-06-01</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -590,7 +590,7 @@ This wording is relative to <a href="https://wg21.link/N4944" title=" Working Dr
 <ol>
 <li>
 <p>
-Modify the class synopsis in 26.7.23.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a>
+Modify the class synopsis in 26.7.24.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a>
 as shown:
 </p>
 <blockquote><pre><code>
@@ -601,7 +601,7 @@ as shown:
 
 <li>
 <p>
-Modify the detailed description in 26.7.23.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a>
+Modify the detailed description in 26.7.24.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a>
 as shown:
 </p>
 <blockquote>
@@ -734,7 +734,7 @@ with the following properties: [...]
 
 <hr>
 <h3 id="3930"><a href="#3930">3930</a><sup><a href="https://cplusplus.github.io/LWG/issue3930">(i)</a></sup>. Simplify type trait wording</h3>
-<p><b>Section:</b> 21 <a href="https://wg21.link/meta">[meta]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+<p><b>Section:</b> 99 [meta] <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
  <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2023-05-01 <b>Last modified:</b> 2023-06-01</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -795,7 +795,7 @@ This wording is relative to <a href="https://wg21.link/N4944" title=" Working Dr
 <ol>
 <li>
 <p>
-Throughout 21 <a href="https://wg21.link/meta">[meta]</a> replace all occurrences of
+Throughout 99 [meta] replace all occurrences of
 </p>
 <blockquote><p>
 <code>T</code> shall be a complete type, <i>cv</i> <code>void</code>, or an array of unknown bound.
@@ -817,7 +817,7 @@ by
 
 <hr>
 <h3 id="3936"><a href="#3936">3936</a><sup><a href="https://cplusplus.github.io/LWG/issue3936">(i)</a></sup>. Are implementations allowed to deprecate components not in [depr]?</h3>
-<p><b>Section:</b> D <a href="https://wg21.link/depr">[depr]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+<p><b>Section:</b> 99 [depr] <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-05-22 <b>Last modified:</b> 2023-06-01</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -857,7 +857,7 @@ This wording is relative to <a href="https://wg21.link/N4950" title=" Working Dr
 [<i>Drafting Note:</i>
 There are two mutually exclusive proposed resolutions,
 depending on whether it is allowed to deprecate components not in
-D <a href="https://wg21.link/depr">[depr]</a>.
+99 [depr].
 </p>
 </blockquote>
 
@@ -873,9 +873,9 @@ D <a href="https://wg21.link/depr">[depr]</a>.
 -?- <i>Recommended practice</i>:
 Implementations should not apply the <code>deprecated</code> attribute
 (9.12.5 <a href="https://wg21.link/dcl.attr.deprecated">[dcl.attr.deprecated]</a>) to library entities that are not
-specified in D <a href="https://wg21.link/depr">[depr]</a>.
+specified in 99 [depr].
 Implementations should apply the <code>deprecated</code> attribute to
-library entities specified in D <a href="https://wg21.link/depr">[depr]</a> whenever possible.
+library entities specified in 99 [depr] whenever possible.
 </ins>
 </p>
 </blockquote>
@@ -893,13 +893,13 @@ library entities specified in D <a href="https://wg21.link/depr">[depr]</a> when
 <ins>
 -?- Implementations shall not apply the <code>deprecated</code> attribute
 (9.12.5 <a href="https://wg21.link/dcl.attr.deprecated">[dcl.attr.deprecated]</a>) to library entities that are not
-specified in D <a href="https://wg21.link/depr">[depr]</a>.
+specified in 99 [depr].
 </ins>
 </p>
 <p>
 <ins>-?- <i>Recommended practice</i>:
 Implementations should apply the <code>deprecated</code> attribute to
-library entities specified in D <a href="https://wg21.link/depr">[depr]</a> whenever possible.
+library entities specified in 99 [depr] whenever possible.
 </ins>
 </p>
 </blockquote>
@@ -1396,7 +1396,7 @@ This wording is relative to <a href="https://wg21.link/N4958" title=" Working Dr
 <blockquote>
 <p>
 -1- Class template <code>projected</code> is used to constrain algorithms that accept callable objects and projections 
-(3.42 <a href="https://wg21.link/defns.projection">[defns.projection]</a>). It combines an <code>indirectly_readable</code> type <code>I</code> and a callable 
+(3.43 <a href="https://wg21.link/defns.projection">[defns.projection]</a>). It combines an <code>indirectly_readable</code> type <code>I</code> and a callable 
 object type <code>Proj</code> into a new <code>indirectly_readable</code> type whose <code>reference</code> type is the 
 result of applying <code>Proj</code> to the <code>iter_reference_t</code> of <code>I</code>.
 </p>
@@ -1533,7 +1533,7 @@ return *ranges::prev(<ins><i>common-arg-end</i></ins><del>ranges::end</del>(<i>d
 
 <hr>
 <h3 id="4006"><a href="#4006">4006</a><sup><a href="https://cplusplus.github.io/LWG/issue4006">(i)</a></sup>. <code>chunk_view::<i>outer-iterator</i>::value_type</code> should provide <code>empty</code></h3>
-<p><b>Section:</b> 26.7.28.4 <a href="https://wg21.link/range.chunk.outer.value">[range.chunk.outer.value]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+<p><b>Section:</b> 26.7.29.4 <a href="https://wg21.link/range.chunk.outer.value">[range.chunk.outer.value]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-11-05 <b>Last modified:</b> 2024-03-11</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -1589,7 +1589,7 @@ This wording is relative to <a href="https://wg21.link/N4964" title=" Working Dr
 
 <ol>
 
-<li><p>Modify 26.7.28.4 <a href="https://wg21.link/range.chunk.outer.value">[range.chunk.outer.value]</a> as indicated:</p>
+<li><p>Modify 26.7.29.4 <a href="https://wg21.link/range.chunk.outer.value">[range.chunk.outer.value]</a> as indicated:</p>
 
 <blockquote>
 <blockquote>

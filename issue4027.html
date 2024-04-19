@@ -148,7 +148,7 @@ This wording is relative to <a href="https://wg21.link/N4971" title=" Working Dr
 namespace std::ranges {
   [&hellip;]
 
-  // <i>26.7.21 <a href="https://wg21.link/range.as.const">[range.as.const]</a>, as const view</i>
+  // <i>26.7.22 <a href="https://wg21.link/range.as.const">[range.as.const]</a>, as const view</i>
   template&lt;input_range R&gt;
     constexpr auto&amp; <i>possibly-const-range</i>(R&amp; r) noexcept { // <i>exposition only</i>
       if constexpr (<ins>input</ins><del>constant</del>_range&lt;const R&gt;<del> &amp;&amp; !constant_range&lt;R&gt;</del>) {

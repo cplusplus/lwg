@@ -63,7 +63,7 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#NAD">Tentatively NAD</a> status.</em></p>
 <h3 id="3714"><a href="lwg-active.html#3714">3714</a>. Non-single-argument constructors for range adaptors should not be <code>explicit</code></h3>
-<p><b>Section:</b> 26.7.25.2 <a href="https://wg21.link/range.zip.transform.view">[range.zip.transform.view]</a>, 26.7.27.2 <a href="https://wg21.link/range.adjacent.transform.view">[range.adjacent.transform.view]</a>, 26.7.28.2 <a href="https://wg21.link/range.chunk.view.input">[range.chunk.view.input]</a>, 26.7.28.6 <a href="https://wg21.link/range.chunk.view.fwd">[range.chunk.view.fwd]</a>, 26.7.29.2 <a href="https://wg21.link/range.slide.view">[range.slide.view]</a>, 26.7.30.2 <a href="https://wg21.link/range.chunk.by.view">[range.chunk.by.view]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+<p><b>Section:</b> 26.7.26.2 <a href="https://wg21.link/range.zip.transform.view">[range.zip.transform.view]</a>, 26.7.28.2 <a href="https://wg21.link/range.adjacent.transform.view">[range.adjacent.transform.view]</a>, 26.7.29.2 <a href="https://wg21.link/range.chunk.view.input">[range.chunk.view.input]</a>, 26.7.29.6 <a href="https://wg21.link/range.chunk.view.fwd">[range.chunk.view.fwd]</a>, 26.7.30.2 <a href="https://wg21.link/range.slide.view">[range.slide.view]</a>, 26.7.31.2 <a href="https://wg21.link/range.chunk.by.view">[range.chunk.by.view]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2022-06-10 <b>Last modified:</b> 2024-01-29</p>
 <p><b>Priority: </b>4
 </p>
@@ -119,7 +119,7 @@ This wording is relative to <a href="https://wg21.link/N4910" title=" Working Dr
 </p>
 
 <ol>
-<li><p>Modify 26.7.25.2 <a href="https://wg21.link/range.zip.transform.view">[range.zip.transform.view]</a> as indicated:</p>
+<li><p>Modify 26.7.26.2 <a href="https://wg21.link/range.zip.transform.view">[range.zip.transform.view]</a> as indicated:</p>
 
 <blockquote>
 <blockquote>
@@ -155,7 +155,7 @@ with <code>std::move(views)...</code>.
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.27.2 <a href="https://wg21.link/range.adjacent.transform.view">[range.adjacent.transform.view]</a> as indicated:</p>
+<li><p>Modify 26.7.28.2 <a href="https://wg21.link/range.adjacent.transform.view">[range.adjacent.transform.view]</a> as indicated:</p>
 
 <blockquote>
 <blockquote>
@@ -190,7 +190,7 @@ constexpr <del>explicit</del> adjacent_transform_view(V base, F fun);
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.28.2 <a href="https://wg21.link/range.chunk.view.input">[range.chunk.view.input]</a> as indicated:</p>
+<li><p>Modify 26.7.29.2 <a href="https://wg21.link/range.chunk.view.input">[range.chunk.view.input]</a> as indicated:</p>
 
 <blockquote>
 <blockquote>
@@ -226,7 +226,7 @@ constexpr <del>explicit</del> chunk_view(V base, range_difference_t&lt;V&gt; n);
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.28.6 <a href="https://wg21.link/range.chunk.view.fwd">[range.chunk.view.fwd]</a> as indicated:</p>
+<li><p>Modify 26.7.29.6 <a href="https://wg21.link/range.chunk.view.fwd">[range.chunk.view.fwd]</a> as indicated:</p>
 
 <blockquote>
 <blockquote>
@@ -260,7 +260,7 @@ constexpr <del>explicit</del> chunk_view(V base, range_difference_t&lt;V&gt; n);
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.29.2 <a href="https://wg21.link/range.slide.view">[range.slide.view]</a> as indicated:</p>
+<li><p>Modify 26.7.30.2 <a href="https://wg21.link/range.slide.view">[range.slide.view]</a> as indicated:</p>
 
 <blockquote>
 <blockquote>
@@ -294,7 +294,7 @@ constexpr <del>explicit</del> slide_view(V base, range_difference_t&lt;V&gt; n);
 </blockquote>
 </li>
 
-<li><p>Modify 26.7.30.2 <a href="https://wg21.link/range.chunk.by.view">[range.chunk.by.view]</a> as indicated:</p>
+<li><p>Modify 26.7.31.2 <a href="https://wg21.link/range.chunk.by.view">[range.chunk.by.view]</a> as indicated:</p>
 
 <blockquote>
 <blockquote>

@@ -63,14 +63,14 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4070"><a href="lwg-active.html#4070">4070</a>. Transcoding by <code>std::formatter&lt;std::filesystem::path&gt;</code></h3>
-<p><b>Section:</b> 99 [fs.path.fmtr.funcs] <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 31.12.6.9.2 <a href="https://wg21.link/fs.path.fmtr.funcs">[fs.path.fmtr.funcs]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-04-19 <b>Last modified:</b> 2024-04-19</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-99 [fs.path.fmtr.funcs] says:
+31.12.6.9.2 <a href="https://wg21.link/fs.path.fmtr.funcs">[fs.path.fmtr.funcs]</a> says:
 
 <blockquote>
 If <code class='backtick'>charT</code> is <code class='backtick'>char</code>, <code class='backtick'>path::value_type</code> is <code class='backtick'>wchar_t</code>,
@@ -89,7 +89,7 @@ for an escaped path, i.e. when the <code class='backtick'>?</code> option is use
 of transcoding is completely implementation-defined.
 However, this makes no sense.
 An escaped string will have no ill-formed subsequences, because they will
-already have been replaced as per 22.14.6.4 <a href="https://wg21.link/format.string.escaped">[format.string.escaped]</a>:
+already have been replaced as per 22.14.6.5 <a href="https://wg21.link/format.string.escaped">[format.string.escaped]</a>:
 <blockquote>
 Otherwise (<em>X</em> is a sequence of ill-formed code units),
 each code unit <em>U</em> is appended to <em>E</em> in order as
@@ -131,10 +131,10 @@ formatted as &#xfffd;, which the proposed resolution tries to ensure.
 
 <p id="res-4070"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4981">N4981</a>.
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
 </p>
 <ol>
-<li><p>Modify 99 [fs.path.fmtr.funcs] as indicated:</p>
+<li><p>Modify 31.12.6.9.2 <a href="https://wg21.link/fs.path.fmtr.funcs">[fs.path.fmtr.funcs]</a> as indicated:</p>
 
 <blockquote>
 <pre><code>

@@ -77,7 +77,7 @@ to <code>forward_range</code>s, because even if it does not have <code>.empty()<
 check whether it is empty by comparing its <code>begin()</code> and <code>end()</code>, which is reflected in the 
 standard preference to use it to check whether a certain <code>forward_range</code> is empty,
 such as in the <i>Effects</i> of <code>split_view::<i>find-next</i>()</code> (26.7.17.2 <a href="https://wg21.link/range.split.view">[range.split.view]</a>) 
-and <code>cartesian_product_view::end()</code> (26.7.32.2 <a href="https://wg21.link/range.cartesian.view">[range.cartesian.view]</a>).
+and <code>cartesian_product_view::end()</code> (26.7.33.2 <a href="https://wg21.link/range.cartesian.view">[range.cartesian.view]</a>).
 <p/>
 In addition, MSVC-STL also uses <code>ranges::empty</code> in the <a
 href="https://github.com/microsoft/STL/blob/8e2d724cc1072b4052b14d8c5f81a830b8f1d8cb/stl/inc/algorithm#L1455">implementation</a>

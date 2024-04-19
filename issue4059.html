@@ -80,7 +80,7 @@ IMO, the <code>variant</code> is an implementation detail and shouldn't be expos
 get <code>bad_variant_access</code> when user code does not deal with <code>variant</code>.
 <p/>
 The spec of <code>join_with_view</code> is also inconsistent with <code>concat_view</code> as recently added to the
-working draft by <a href="https://wg21.link/P2542R8">P2542R8</a>. The latter has "<code><i>it_</i>.valueless_by_exception()</code> is 
+working draft by <a href="https://wg21.link/P2542R8" title=" views::concat">P2542R8</a>. The latter has "<code><i>it_</i>.valueless_by_exception()</code> is 
 <code>false</code>" as a precondition.
 <p/>
 I believe that <code>join_with_view</code> should similarly require that <code><i>inner_it_</i>.valueless_by_exception()</code> 

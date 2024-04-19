@@ -250,7 +250,7 @@ For reference types, <code>is_destructible&lt;T&gt;::value</code> is <code>true<
 For incomplete types and function types, <code>is_destructible&lt;T&gt;::value</code> is <code>false</code>.<br/>
 For object types and given <code>U</code> equal to <code>remove_all_extents&lt;T&gt;::type</code>,<br/> 
 if the expression <code>std::declval&lt;U&amp;&gt;().~U()</code> is well-formed when treated as an<br/>
-unevaluated operand (Clause 7 <a href="https://wg21.link/expr">[expr]</a>), then <code>is_destructible&lt;T&gt;::value</code> is <code>true</code>,<br/>
+unevaluated operand (Clause  [expr]), then <code>is_destructible&lt;T&gt;::value</code> is <code>true</code>,<br/>
 otherwise it is <code>false</code>.<br/>
 </ins>
 </td>

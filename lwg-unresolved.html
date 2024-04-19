@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-04-16 at 14:56:50 UTC
+<p>Revised 2024-04-19 at 14:07:09 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -30237,6 +30237,8 @@ is_convertible_v&lt;U, <del>T</del><ins>R</ins>&gt;
  <b>Submitter:</b> Tim Song <b>Opened:</b> 2020-04-07 <b>Last modified:</b> 2020-09-06</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#res.on.requirements">active issues</a> in [res.on.requirements].</p>
+<p><b>View all other</b> <a href="lwg-index.html#res.on.requirements">issues</a> in [res.on.requirements].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
@@ -56598,6 +56600,86 @@ template&lt;class Duration2, class TimeZonePtr2&gt;
 </blockquote>
 </li>
 </ol>
+
+
+
+
+
+<hr>
+<h3 id="4068"><a href="#4068">4068</a><sup><a href="https://cplusplus.github.io/LWG/issue4068">(i)</a></sup>. Terminology for objects whose types model a concept</h3>
+<p><b>Section:</b> 16.4.5.11 <a href="https://wg21.link/res.on.requirements">[res.on.requirements]</a>, 16.3.2.3 <a href="https://wg21.link/structure.requirements">[structure.requirements]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-04-19 <b>Last modified:</b> 2024-04-19</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#res.on.requirements">active issues</a> in [res.on.requirements].</p>
+<p><b>View all other</b> <a href="lwg-index.html#res.on.requirements">issues</a> in [res.on.requirements].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+During <a href="https://wg21.link/P2300" title=" `std::execution`">P2300</a> review the suggestion was raised that it might
+be helpful to be able to talk about "an object that models <code class='backtick'>Concept</code>"
+instead of "an object whose type models <code class='backtick'>Concept</code>" or other more verbose forms.
+</p>
+
+
+<p id="res-4068"><b>Proposed resolution:</b></p>
+<p>
+</p>
+
+
+
+
+
+<hr>
+<h3 id="4069"><a href="#4069">4069</a><sup><a href="https://cplusplus.github.io/LWG/issue4069">(i)</a></sup>. <code>std::atomic&lt;volatile T&gt;</code> should be ill-formed</h3>
+<p><b>Section:</b> 33.5.8 <a href="https://wg21.link/atomics.types.generic">[atomics.types.generic]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-04-19 <b>Last modified:</b> 2024-04-19</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#atomics.types.generic">issues</a> in [atomics.types.generic].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+As a result of <a href="https://wg21.link/cwg2094" title="2094. Trivial copy/move constructor for class with volatile member. Status: C++17">Core DR 2094</a>
+(concerning triviality of volatile-qualified subobjects),
+<code>is_trivially_copyable_v&lt;volatile int&gt;</code> is now true,
+which means that <code class='backtick'>volatile int</code> is a valid type for <code class='backtick'>std::atomic</code>.
+</p>
+<p>
+Libsdc++ and libc++ can't actually compile that type though,
+and that seems very sensible to me.
+</p>
+
+<p>
+Even worse is that <code>std::atomic&lt;volatile int&gt;</code> will not
+select the specialization for <code class='backtick'>int</code>, because that is clearly specified by
+33.5.8.3 <a href="https://wg21.link/atomics.types.int">[atomics.types.int]</a> to only be for cv-unqualified types.
+33.5.8.4 <a href="https://wg21.link/atomics.types.float">[atomics.types.float]</a> also says it's only for cv-unqualified
+floating-point types. And 33.5.8.5 <a href="https://wg21.link/atomics.types.pointer">[atomics.types.pointer]</a> will only
+match cv-unqualified pointer types.
+This means that even when <code>std::atomic&lt;volatile int&gt;</code>
+compiles (as with MSVC) you can't use members like <code class='backtick'>fetch_add</code> because that
+only exists on the specialization, not the primary template.
+</p>
+
+<p>
+Should we add something to <code class='backtick'>std::atomic</code> to make it not valid again,
+as was the case (and presumably the original intent) before CWG DR 2094?
+</p>
+
+<p>
+A similar question exists for <code>std::atomic_ref&lt;volatile int&gt;</code>
+although there are apparently valid uses for that type. However, the
+<code class='backtick'>atomic_ref</code> specializations for integers, floats, and pointers are only
+for cv-unqualified types, so it doesn't work usefully.
+For <code class='backtick'>atomic_ref</code> we might want to allow <code class='backtick'>volatile</code>-qualified types <em>and</em>
+make the specializations match them.
+</p>
+
+
+<p id="res-4069"><b>Proposed resolution:</b></p>
+<p>
+</p>
 
 
 

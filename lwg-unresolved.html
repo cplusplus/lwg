@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-04-21 at 15:12:09 UTC
+<p>Revised 2024-04-21 at 15:18:38 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -57282,13 +57282,13 @@ This wording is relative to <a href="https://wg21.link/N4981" title=" Working Dr
 
 <blockquote>
 <pre>
-#include &lt;compare&gt;              // <i>see <a href="https://wg21.link/compare.syn">[compare.syn]</a></i>
-#include &lt;initializer_list&gt;     // <i>see <a href="https://wg21.link/initializer.list.syn">[initializer.list.syn]</a></i>
-#include &lt;iterator&gt;             // <i>see <a href="https://wg21.link/iterator.synopsis">[iterator.synopsis]</a></i>
+#include &lt;compare&gt;              // <i>see 17.11.1 <a href="https://wg21.link/compare.syn">[compare.syn]</a></i>
+#include &lt;initializer_list&gt;     // <i>see 17.10.2 <a href="https://wg21.link/initializer.list.syn">[initializer.list.syn]</a></i>
+#include &lt;iterator&gt;             // <i>see 25.2 <a href="https://wg21.link/iterator.synopsis">[iterator.synopsis]</a></i>
 
 namespace std::ranges {
   [&hellip;]
-  // <i>26.7.18, concat view</i>
+  // <i>26.7.18 <a href="https://wg21.link/range.concat">[range.concat]</a>, concat view</i>
   template&lt;input_range... Views&gt;
     requires <i>see below</i>
   class concat_view;                                                                <ins>// <i>freestanding</i></ins>

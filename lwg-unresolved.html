@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-04-21 at 14:13:58 UTC
+<p>Revised 2024-04-21 at 15:12:09 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -57234,6 +57234,73 @@ issue and not specific to concurrent queues.
 
 
 <p id="res-4075"><b>Proposed resolution:</b></p>
+
+
+
+
+
+<hr>
+<h3 id="4076"><a href="#4076">4076</a><sup><a href="https://cplusplus.github.io/LWG/issue4076">(i)</a></sup>. <code>concat_view</code> should be freestanding</h3>
+<p><b>Section:</b> 17.3.2 <a href="https://wg21.link/version.syn">[version.syn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-21 <b>Last modified:</b> 2024-04-21</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#version.syn">active issues</a> in [version.syn].</p>
+<p><b>View all other</b> <a href="lwg-index.html#version.syn">issues</a> in [version.syn].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>concat_view</code> can be freestanding, but this never seems to come up in the discussion, 
+which seems to be an oversight.
+</p>
+
+<p><i>[2024-04-21; Daniel comments]</i></p>
+
+<p>
+The specification of some member functions of <code>concat_view</code> seem to depend on freestanding-deleted
+<code>get</code> overloads for <code>variant</code>, but so does <code>join_with_view</code>, which is marked as freestanding,
+so that does not seem like a reason to accept <code>join_with_view</code> but not <code>concat_view</code> as freestanding.
+</p>
+
+
+<p id="res-4076"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 17.3.2 <a href="https://wg21.link/version.syn">[version.syn]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+#define __cpp_lib_ranges_concat 202403L // <ins><i>freestanding</i>,</ins> <i>also in</i> &lt;ranges&gt;
+</pre>
+</blockquote>
+</li>
+
+<li><p>Modify 26.2 <a href="https://wg21.link/ranges.syn">[ranges.syn]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+#include &lt;compare&gt;              // <i>see <a href="https://wg21.link/compare.syn">[compare.syn]</a></i>
+#include &lt;initializer_list&gt;     // <i>see <a href="https://wg21.link/initializer.list.syn">[initializer.list.syn]</a></i>
+#include &lt;iterator&gt;             // <i>see <a href="https://wg21.link/iterator.synopsis">[iterator.synopsis]</a></i>
+
+namespace std::ranges {
+  [&hellip;]
+  // <i>26.7.18, concat view</i>
+  template&lt;input_range... Views&gt;
+    requires <i>see below</i>
+  class concat_view;                                                                <ins>// <i>freestanding</i></ins>
+  
+  namespace views { inline constexpr <i>unspecified</i> concat = <i>unspecified</i>; }            <ins>// <i>freestanding</i></ins>
+  [&hellip;]
+}
+</pre>
+</blockquote>
+</li>
+
+</ol>
 
 
 

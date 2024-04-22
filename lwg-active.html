@@ -67,7 +67,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-04-21</td>
+  <td align="left">2024-04-22</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-04-21 at 17:42:51 UTC
+<p>Revised 2024-04-22 at 09:08:37 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -60063,7 +60063,7 @@ instead of "an object whose type models <code class='backtick'>Concept</code>" o
 <hr>
 <h3 id="4069"><a href="#4069">4069</a><sup><a href="https://cplusplus.github.io/LWG/issue4069">(i)</a></sup>. <code>std::atomic&lt;volatile T&gt;</code> should be ill-formed</h3>
 <p><b>Section:</b> 33.5.8 <a href="https://wg21.link/atomics.types.generic">[atomics.types.generic]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-04-19 <b>Last modified:</b> 2024-04-19</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-04-19 <b>Last modified:</b> 2024-04-22</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#atomics.types.generic">issues</a> in [atomics.types.generic].</p>
@@ -60076,7 +60076,7 @@ As a result of <a href="https://wg21.link/cwg2094" title="2094. Trivial copy/mov
 which means that <code class='backtick'>volatile int</code> is a valid type for <code class='backtick'>std::atomic</code>.
 </p>
 <p>
-Libsdc++ and libc++ can't actually compile that type though,
+Libstdc++ and libc++ can't actually compile that type though,
 and that seems very sensible to me.
 </p>
 

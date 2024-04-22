@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-04-22 at 09:12:31 UTC
+<p>Revised 2024-04-22 at 09:15:02 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -56828,7 +56828,7 @@ for any type that does have any comparison operators, e.g.
 </p>
 <p>
 Instantiating <code>reference_wrapper&lt;A&gt;</code> will instantiate
-the declarations of the hidden friends, will attempt to determine the
+the declarations of the hidden friends, which will attempt to determine the
 return types of the <code>operator&lt;=&gt;</code> functions.
 That fails because <em><code class='backtick'>synth-three-way</code></em> is constrained
 and can't be called with arguments of type <code class='backtick'>A</code>.

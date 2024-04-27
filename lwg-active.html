@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-04-27 at 15:58:09 UTC
+<p>Revised 2024-04-27 at 16:28:17 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -60987,7 +60987,7 @@ constexpr <i>iterator</i>(<i>iterator</i>&lt;!Const&gt; it)
 Given an iterator type <code>I</code>, currently both <code>std::iter_value_t&lt;I&gt;</code> and 
 <code>std::iterator_traits&lt;I&gt;::value_type</code> can be called the value type of <code>I</code>. 
 These two types can be different if one specializes <code>std::indirect_readable_traits</code> for 
-<code>I</code> such that <code>std::indierct_readable_traits&lt;I&gt;::value_type</code> is different 
+<code>I</code> such that <code>std::indirect_readable_traits&lt;I&gt;::value_type</code> is different 
 from <code>I::value_type</code>.
 <p/>
 It seems intended that ranges algorithms use <code>std::iter_value_t&lt;I&gt;</code> and non-ranges algorithms, 

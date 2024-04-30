@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-04-29 at 20:25:49 UTC
+<p>Revised 2024-04-30 at 22:01:01 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -57827,6 +57827,106 @@ Let <code>E</code> be an expression and let <code>T</code> be <code>decltype((E)
 </li>
 
 </ol>
+
+
+
+
+
+<hr>
+<h3 id="4084"><a href="#4084">4084</a><sup><a href="https://cplusplus.github.io/LWG/issue4084">(i)</a></sup>. <code>std::fixed</code> ignores <code>std::uppercase</code></h3>
+<p><b>Section:</b> 30.4.3.3.3 <a href="https://wg21.link/facet.num.put.virtuals">[facet.num.put.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-04-30 <b>Last modified:</b> 2024-04-30</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#facet.num.put.virtuals">active issues</a> in [facet.num.put.virtuals].</p>
+<p><b>View all other</b> <a href="lwg-index.html#facet.num.put.virtuals">issues</a> in [facet.num.put.virtuals].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+In Table 114 &ndash; Floating-point conversions [tab:facet.num.put.fp]
+we specify that a floating-point value should be printed as if by <code class='backtick'>%f</code>
+when <code>(flags &amp; floatfield) == fixed</code>.
+This ignores whether <code class='backtick'>uppercase</code> is also set in <code class='backtick'>flags</code>,
+meaning there is no way to use <code class='backtick'>%F</code> as the conversion specifier.
+</p>
+<p>
+That's fine for finite values, because 1.23 in fixed format has
+no exponent character and no hex digits.
+But <code class='backtick'>%f</code> and <code class='backtick'>%F</code> are not equivalent, because the latter prints <code class='backtick'>"NAN"</code>
+and <code class='backtick'>"INF"</code> (or <code class='backtick'>"INFINITY"</code>).
+It seems there is no way to print <code class='backtick'>"NAN"</code> using <code class='backtick'>std::num_put</code>, is that right?
+</p>
+<p>
+Libstdc++ and MSVC prints <code class='backtick'>"inf"</code> for the following code,
+but libc++ prints <code class='backtick'>"INF"</code> which I think is non-conforming:
+<pre><code>
+    std::cout &lt;&lt; std::uppercase &lt;&lt; std::fixed &lt;&lt; std::numeric_limits&lt;double&gt;::infinity();
+</code></pre>
+</p>
+<p>
+The libc++ behaviour seems more useful and less surprising.
+</p>
+
+
+<p id="res-4084"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+<ol>
+<li><p>Modify 30.4.3.3.3 <a href="https://wg21.link/facet.num.put.virtuals">[facet.num.put.virtuals]</a> as indicated:</p>
+
+<blockquote>
+<table style="border: 1px solid">
+<caption style="caption-side: top">
+Table 114 &ndash; Floating-point conversions [tab:facet.num.put.fp]
+</caption>
+<tr style="text-align: center">
+<th style="border-bottom: 1px solid">State</th>
+<th style="border-bottom: 1px solid"><code class='backtick'>stdio</code> equivalent</th>
+</tr>
+<tr>
+<td>
+<code class='backtick'>floatfield == ios_base::fixed</code> <ins><code>&amp;&amp; !uppercase</code></ins>
+</td>
+<td style="text-align: center"><code class='backtick'>%f</code></td>
+</tr>
+<tr>
+<td><ins><code class='backtick'>floatfield == ios_base::fixed</code></ins></td>
+<td style="text-align: center"><ins><code class='backtick'>%F</code></ins></td>
+</tr>
+<tr>
+<td><code>floatfield == ios_base::fixed &amp;&amp; !uppercase</code></td>
+<td style="text-align: center"><code class='backtick'>%e</code></td>
+</tr>
+<tr>
+<td><code>floatfield == ios_base::fixed</code></td>
+<td style="text-align: center"><code class='backtick'>%E</code></td>
+</tr>
+<tr>
+<td>
+<code>
+floatfield == (ios_base::fixed | ios_base::scientific)` &amp;&amp; !uppercase
+</code>
+</td>
+<td style="text-align: center"><code class='backtick'>%a</code></td>
+</tr>
+<tr>
+<td><code>floatfield == (ios_base::fixed | ios_base::scientific)</code></td>
+<td style="text-align: center"><code class='backtick'>%A</code></td>
+</tr>
+<tr>
+<td><code class='backtick'>!uppercase</code></td>
+<td style="text-align: center"><code class='backtick'>%g</code></td>
+</tr>
+<tr>
+<td><em>otherwise</em></td>
+<td style="text-align: center"><code class='backtick'>%G</code></td>
+</tr>
+</table>
+</blockquote>
+</li>
+</ol>
+
 
 
 

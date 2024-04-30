@@ -80,18 +80,17 @@ meaning there is no way to use <code class='backtick'>%F</code> as the conversio
 </p>
 <p>
 That's fine for finite values, because 1.23 in fixed format has
-no exponent character and no hex digits.
-But <code class='backtick'>%f</code> and <code class='backtick'>%F</code> are not equivalent, because the latter prints <code class='backtick'>"NAN"</code>
-and <code class='backtick'>"INF"</code> (or <code class='backtick'>"INFINITY"</code>).
-It seems there is no way to print <code class='backtick'>"NAN"</code> using <code class='backtick'>std::num_put</code>, is that right?
+no exponent character and no hex digits that would need to use uppercase.
+But <code class='backtick'>%f</code> and <code class='backtick'>%F</code> are not equivalent for non-finite values,
+because <code class='backtick'>%F</code> prints <code class='backtick'>"NAN"</code> and <code class='backtick'>"INF"</code> (or <code class='backtick'>"INFINITY"</code>).
+It seems there is no way to print <code class='backtick'>"NAN"</code> or <code class='backtick'>"INF"</code> using <code class='backtick'>std::num_put</code>.
 </p>
 <p>
-Libstdc++ and MSVC prints <code class='backtick'>"inf"</code> for the following code,
+Libstdc++ and MSVC print <code class='backtick'>"inf"</code> for the following code,
 but libc++ prints <code class='backtick'>"INF"</code> which I think is non-conforming:
-<pre><code>
-    std::cout &lt;&lt; std::uppercase &lt;&lt; std::fixed &lt;&lt; std::numeric_limits&lt;double&gt;::infinity();
-</code></pre>
 </p>
+<pre><code>    std::cout &lt;&lt; std::uppercase &lt;&lt; std::fixed &lt;&lt; std::numeric_limits&lt;double&gt;::infinity();
+</code></pre>
 <p>
 The libc++ behaviour seems more useful and less surprising.
 </p>

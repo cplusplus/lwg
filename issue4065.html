@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4065"><a href="lwg-active.html#4065">4065</a>. Requirements for fancy pointers might be insufficient for self-referential implementation of containers</h3>
 <p><b>Section:</b> 16.4.4.6.1 <a href="https://wg21.link/allocator.requirements.general">[allocator.requirements.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-04-07 <b>Last modified:</b> 2024-04-13</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-04-07 <b>Last modified:</b> 2024-05-01</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#allocator.requirements.general">active issues</a> in [allocator.requirements.general].</p>
 <p><b>View all other</b> <a href="lwg-index.html#allocator.requirements.general">issues</a> in [allocator.requirements.general].</p>
@@ -82,6 +82,17 @@ needs to be able to point to a sentinel node in the container object. Given the 
 be constructed at any location, perhaps we should specify that <code>pointer_traits::pointer_to</code> 
 works on any lvalue.
 </p>
+
+<p><i>[2024-05-01; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>"This applies to small-object optimizations too."</p>
+<p>"An alternative way to support P0773's "near pointers" would be to require
+that a sentinel-node container using a "near allocator" must itself be
+constructed in the near segment. (This is P0773 (B) (2).)"</p>
+
 
 
 <p id="res-4065"><b>Proposed resolution:</b></p>

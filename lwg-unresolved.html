@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-05-01 at 09:12:32 UTC
+<p>Revised 2024-05-04 at 13:09:23 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -57458,6 +57458,8 @@ namespace std::ranges {
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-04-21 <b>Last modified:</b> 2024-04-21</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#alg.rand.generate">active issues</a> in [alg.rand.generate].</p>
+<p><b>View all other</b> <a href="lwg-index.html#alg.rand.generate">issues</a> in [alg.rand.generate].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
@@ -57934,6 +57936,65 @@ floatfield == (ios_base::fixed | ios_base::scientific)` &amp;&amp; !uppercase
 </tr>
 </table>
 </blockquote>
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4085"><a href="#4085">4085</a><sup><a href="https://cplusplus.github.io/LWG/issue4085">(i)</a></sup>. <code>ranges::generate_random</code>'s helper lambda should specify the return type</h3>
+<p><b>Section:</b> 27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-28 <b>Last modified:</b> 2024-05-04</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#alg.rand.generate">active issues</a> in [alg.rand.generate].</p>
+<p><b>View all other</b> <a href="lwg-index.html#alg.rand.generate">issues</a> in [alg.rand.generate].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The non-specialized case of <code>generate_random(r, g, d)</code> would call
+<code>ranges::generate(r, [&amp;d, &amp;g] { return invoke(d, g); })</code>.
+However, the lambda does not explicitly specify the return type, which leads 
+to a hard error when <code>invoke</code> returns a reference to the object that is not copyable or
+<code>R</code> is not the <code>output_range</code> for <code>decay_t&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt;</code>.
+</p>
+
+
+<p id="res-4085"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class R, class G, class D&gt;
+  requires output_range&lt;R, invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; &amp;&amp; invocable&lt;D&amp;, G&amp;&gt; &amp;&amp;
+           uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt;
+constexpr borrowed_iterator_t&lt;R&gt; ranges::generate_random(R&amp;&amp; r, G&amp;&amp; g, D&amp;&amp; d);
+</pre>
+<p>-5- <i>Effects</i>:</p>
+<ol style="list-style-type: none">
+<li><p>(5.1) &mdash; [&hellip;]</p></li>
+<li><p>(5.2) &mdash; [&hellip;]</p></li>
+<li><p>(5.3) &mdash; Otherwise, calls:</p>
+<blockquote><pre>
+ranges::generate(std::forward&lt;R&gt;(r), [&amp;d, &amp;g] <ins>-&gt; decltype(auto)</ins> { return invoke(d, g); });
+</pre></blockquote>
+</li>
+</ol>
+<p>-6- <i>Returns</i>: <code>ranges::end(r)</code></p>
+<p>-7- <i>Remarks</i>: The effects of <code>generate_random(r, g, d)</code> shall be equivalent to</p>
+<blockquote><pre>
+ranges::generate(std::forward&lt;R&gt;(r), [&amp;d, &amp;g] <ins>-&gt; decltype(auto)</ins> { return invoke(d, g); })
+</pre></blockquote>
+</blockquote>
+
 </li>
 </ol>
 

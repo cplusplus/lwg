@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-05-04 at 14:40:44 UTC
+<p>Revised 2024-05-04 at 15:22:28 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -58129,6 +58129,137 @@ constexpr O ranges::generate_random_n(O first, iter_difference_t&lt;O&gt; n, G&a
 <ins>return generate_random(counted_iterator(std::move(first), n),
           default_sentinel, g, d).base();</ins>
 </pre></blockquote>
+</blockquote>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4087"><a href="#4087">4087</a><sup><a href="https://cplusplus.github.io/LWG/issue4087">(i)</a></sup>. Standard exception messages have unspecified encoding</h3>
+<p><b>Section:</b> 17.9.3 <a href="https://wg21.link/exception">[exception]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Victor Zverovich <b>Opened:</b> 2024-04-28 <b>Last modified:</b> 2024-05-04</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#exception">issues</a> in [exception].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The null-terminated multibyte string returned by the <code>what</code> method of <code>std::exception</code> 
+and its subclasses in the standard has an unspecified encoding. The closest thing in the specification 
+is the "suitable for conversion and display as a <code>wstring</code>" part in <i>Remarks</i> 
+(17.9.3 <a href="https://wg21.link/exception">[exception]</a> p6) but it is too vague to be useful because anything can be converted to 
+<code>wstring</code> in one way or another:
+</p>
+<blockquote>
+<pre>
+virtual const char* what() const noexcept;
+</pre>
+<blockquote>
+<p>
+<i>Returns</i>: An implementation-defined <span style="font-variant:small-caps">ntbs</span>.
+<p/>
+<i>Remarks</i>: The message may be a null-terminated multibyte string (16.3.3.3.4.3 <a href="https://wg21.link/multibyte.strings">[multibyte.strings]</a>), 
+suitable for conversion and display as a <code>wstring</code> (23.4 <a href="https://wg21.link/string.classes">[string.classes]</a>, 
+30.4.2.5 <a href="https://wg21.link/locale.codecvt">[locale.codecvt]</a>). The return value remains valid until the exception object from which it 
+is obtained is destroyed or a non-<code>const</code> member function of the exception object is called.
+</p>
+</blockquote>
+</blockquote>
+<p>
+As a result, it is impossible to portably use the exception message, e.g. print it. Since exception 
+messages are commonly combined with string literals and are often constructed from string literals, 
+at the very least the standard should say that the message is compatible with them, i.e. that it is 
+in the ordinary literal encoding or its subset.
+<p/>
+To give a specific example of this problem, consider the following code compiled on Windows with 
+Microsoft Visual C++, the ordinary literal encoding of UTF-8 and the system locale set to Belarusian 
+(the language of the text in this example):
+</p>
+<blockquote>
+<pre>
+std::uintmax_t size = 0;
+try {
+  size = std::filesystem::file_size(L"Шчучыншчына");
+} catch (const std::exception&amp; e) {
+  std::print("Памылка: {}", e.what());
+}
+</pre>
+</blockquote>
+<p>
+Since both <code>std::filesystem::path</code> and <code>std::print</code> support Unicode one would expect this 
+to work and, when run, print a readable error message if the file "Шчучыншчына" doesn't exist. However, 
+the output will be corrupted instead. The reason for the corruption is that <code>filesystem_error</code> 
+requires including the path in the message but doesn't say that it should be transcoded 
+(31.12.7.2 <a href="https://wg21.link/fs.filesystem.error.members">[fs.filesystem.error.members]</a> p7):
+</p>
+<blockquote>
+<pre>
+virtual const char* what() const noexcept;
+</pre>
+<blockquote>
+<p>
+<i>Returns</i>: An <span style="font-variant:small-caps">ntbs</span> that incorporates the <code>what_arg</code> 
+argument supplied to the constructor. The exact format is unspecified. Implementations should include the 
+<code>system_error::what()</code> string and the pathnames of <code>path1</code> and <code>path2</code> in the native 
+format in the returned string.
+</p>
+</blockquote>
+</blockquote>
+<p>
+Therefore, the message will contain literal text in the ordinary literal encoding (UTF-8) combined with a 
+path, most likely in the operating system dependent current encoding for pathnames which in this case is CP1251. 
+So different parts of the output will be in two incompatible encodings and therefore unusable with 
+<code>std::print</code> or any other facility.
+<p/>
+The actual observable behavior for the above example is no output in the Windows console which 
+is extremely broken but appears to be conformant with the current specification. It was reproduced with 
+{fmt}'s implementation of <code>print</code> since Microsoft STL doesn't implement <code>std::print</code> yet. 
+Replacing <code>std::print</code> with another output facility produces a different but equally unusable form 
+of mojibake.
+</p>
+
+<p><i>[2024-05-04; Daniel comments]</i></p>
+
+<p>
+The proposed wording is incomplete. There are about 12 other <code>what</code> specifications in the Standard
+Library with exactly the same specification as <code>exception::what</code> that would either need to get the 
+same treatment or we would need general wording somewhere that says that the specification "contract" of 
+<code>exception::what</code> extends to all of its derived classes. A third choice could be that we introduce 
+a new definition such as an <span style="font-variant:small-caps">lntbs</span> (or maybe "literal 
+<span style="font-variant:small-caps">ntbs</span>") that is essentially an 
+<span style="font-variant:small-caps">ntbs</span> in the ordinary literal encoding.
+</p>
+
+
+<p id="res-4087"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 17.9.3 <a href="https://wg21.link/exception">[exception]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+virtual const char* what() const noexcept;
+</pre>
+<blockquote>
+<p>
+<i>Returns</i>: An implementation-defined <span style="font-variant:small-caps">ntbs</span> 
+<ins>in the ordinary literal encoding</ins>.
+<p/>
+<i>Remarks</i>: The message may be a null-terminated multibyte string (16.3.3.3.4.3 <a href="https://wg21.link/multibyte.strings">[multibyte.strings]</a>), 
+suitable for conversion and display as a <code>wstring</code> (23.4 <a href="https://wg21.link/string.classes">[string.classes]</a>, 
+30.4.2.5 <a href="https://wg21.link/locale.codecvt">[locale.codecvt]</a>). The return value remains valid until the exception object from which it 
+is obtained is destroyed or a non-<code>const</code> member function of the exception object is called.
+</p>
 </blockquote>
 </blockquote>
 

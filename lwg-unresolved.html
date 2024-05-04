@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-05-04 at 16:16:46 UTC
+<p>Revised 2024-05-04 at 16:27:27 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -58516,6 +58516,50 @@ respectively.
 </li>
 </ol>
 
+
+
+
+
+
+<hr>
+<h3 id="4090"><a href="#4090">4090</a><sup><a href="https://cplusplus.github.io/LWG/issue4090">(i)</a></sup>. Underspecified use of locale facets for locale-dependent <code>std::format</code></h3>
+<p><b>Section:</b> 22.14.2.2 <a href="https://wg21.link/format.string.std">[format.string.std]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jens Maurer <b>Opened:</b> 2024-04-30 <b>Last modified:</b> 2024-05-04</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#format.string.std">active issues</a> in [format.string.std].</p>
+<p><b>View all other</b> <a href="lwg-index.html#format.string.std">issues</a> in [format.string.std].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+There are <code>std::format</code> variants that take an explicit <code>std::locale</code> parameter.
+There is the <code>"L"</code> format specifier that uses that locale (or some environment
+locale) for formatting, according to 22.14.2.2 <a href="https://wg21.link/format.string.std">[format.string.std]</a> p17:
+</p>
+<blockquote>
+<p>
+"For integral types, the locale-specific form causes the context's locale to
+be used to insert the appropriate digit group separator characters."
+</p>
+</blockquote>
+<p>
+It is unclear which specific facets are used to make this happen.
+This is important, because users can install their own facets into
+a given locale. Specific questions include:
+</p>
+<ul>
+<li><p>Is <code>num_put&lt;&gt;</code> being used? Or just <code>numpunct&lt;&gt;</code>?</p></li>
+<li><p> Are any of the <code>_byname</code> facets being used?</p></li>
+</ul>
+<p>
+Assuming the encoding for <code>char</code> is UTF-8, the use of a user-provided
+<code>num_put&lt;&gt;</code> facet (as opposed to <code>std::format</code> creating the output based on
+<code>numpunct&lt;&gt;</code>) would allow digit separators that are not expressibly as a
+single UTF-8 code unit.
+</p>
+
+
+<p id="res-4090"><b>Proposed resolution:</b></p>
 
 
 

@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-05-05 at 08:58:58 UTC
+<p>Revised 2024-05-05 at 09:11:41 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -49078,6 +49078,7 @@ Dictionary for Information Processing Systems.)</ins>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-08-10 <b>Last modified:</b> 2023-11-03</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#alg.fold">active issues</a> in [alg.fold].</p>
 <p><b>View all other</b> <a href="lwg-index.html#alg.fold">issues</a> in [alg.fold].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -58744,6 +58745,95 @@ friend constexpr bool operator==(
 are each <code>false</code>.
 <p/>
 [&hellip;]
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4093"><a href="#4093">4093</a><sup><a href="https://cplusplus.github.io/LWG/issue4093">(i)</a></sup>. <code>ranges::fold_left_first_with_iter</code> incorrectly constructs <code>optional&lt;U&gt;</code></h3>
+<p><b>Section:</b> 27.6.18 <a href="https://wg21.link/alg.fold">[alg.fold]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-03 <b>Last modified:</b> 2024-05-05</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#alg.fold">active issues</a> in [alg.fold].</p>
+<p><b>View all other</b> <a href="lwg-index.html#alg.fold">issues</a> in [alg.fold].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>ranges::fold_left_first_with_iter</code> constructs the initial value through 
+<code>optional&lt;U&gt;(in_place, *first)</code> which is not quite right, because the exposure 
+constraint only ensures that <code>U</code> can be constructed from the value type of the iterator 
+rather than its reference (<a href="https://godbolt.org/z/xbEqdxoK8">demo</a>):
+</p>
+<blockquote><pre>
+#include &lt;ranges&gt;
+#include &lt;algorithm&gt;
+
+struct Op {
+  Op() = default;
+  Op(std::tuple&lt;int&gt;);
+  Op(std::tuple&lt;int&amp;&gt;) = delete;
+  Op operator()(Op, std::tuple&lt;int&amp;&gt;) const;
+};
+
+int main() {
+  std::ranges::fold_left_first_with_iter(
+    std::views::zip(std::views::single(0)), 
+    Op{}
+  ); // <span style="color:red;font-weight:bolder">hard error in libstdc++ and MSVC-STL</span>
+}
+</pre></blockquote>
+
+
+<p id="res-4093"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 27.6.18 <a href="https://wg21.link/alg.fold">[alg.fold]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;input_iterator I, sentinel_for&lt;I&gt; S
+         <i>indirectly-binary-left-foldable</i>&lt;iter_value_t&lt;I&gt;, I&gt; F&gt;
+  requires constructible_from&lt;iter_value_t&lt;I&gt;, iter_reference_t&lt;I&gt;&gt;
+  constexpr <i>see below</i> ranges::fold_left_first_with_iter(I first, S last, F f);
+template&lt;input_range R, <i>indirectly-binary-left-foldable</i>&lt;range_value_t&lt;R&gt;, iterator_t&lt;R&gt;&gt; F&gt;
+  requires constructible_from&lt;range_value_t&lt;R&gt;, range_reference_t&lt;R&gt;&gt;
+  constexpr <i>see below</i> ranges::fold_left_first_with_iter(R&amp;&amp; r, F f);
+</pre>
+<blockquote>
+<p>
+-9- Let <code>U</code> be
+</p>
+<blockquote><pre>
+decltype(ranges::fold_left(std::move(first), last, iter_value_t&lt;I&gt;(*first), f))
+</pre></blockquote>
+<p>
+-10- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+if (first == last)
+  return {std::move(first), optional&lt;U&gt;()};
+optional&lt;U&gt; init(in_place, <ins>iter_value_t&lt;I&gt;(</ins>*first<ins>)</ins>);
+for (++first; first != last; ++first)
+  *init = invoke(f, std::move(*init), *first);
+return {std::move(first), std::move(init)};
+</pre></blockquote>
+<p>
+-11- <i>Remarks</i>: The return type is <code>fold_left_first_with_iter_result&lt;I, optional&lt;U&gt;&gt;</code>
+for the first overload and <code>fold_left_first_with_iter_result&lt;borrowed_iterator_t&lt;R&gt;, optional&lt;U&gt;&gt;</code> 
+for the second overload.
 </p>
 </blockquote>
 </blockquote>

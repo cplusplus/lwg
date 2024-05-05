@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-05-04 at 17:01:25 UTC
+<p>Revised 2024-05-05 at 08:58:58 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -40820,6 +40820,7 @@ for any integer <code>0 &le; <i>i</i> &le; sizeof...(Vs)</code><ins>,</ins><del>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2022-09-18 <b>Last modified:</b> 2022-10-12</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#common.iterator">active issues</a> in [common.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#common.iterator">issues</a> in [common.iterator].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -58649,6 +58650,101 @@ template&lt;class... Rs&gt;
                                      <i>concat-rvalue-reference-t</i>&lt;Rs...&gt;,
                                      iterator_t&lt;Rs&gt;&gt; &amp;&amp; ...);
 </pre>
+</blockquote>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4092"><a href="#4092">4092</a><sup><a href="https://cplusplus.github.io/LWG/issue4092">(i)</a></sup>. The monotonic version of <code>common_iterator::operator==</code> is underconstrained</h3>
+<p><b>Section:</b> 25.5.5.1 <a href="https://wg21.link/common.iterator">[common.iterator]</a>, 25.5.5.6 <a href="https://wg21.link/common.iter.cmp">[common.iter.cmp]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-01 <b>Last modified:</b> 2024-05-05</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#common.iterator">active issues</a> in [common.iterator].</p>
+<p><b>View all other</b> <a href="lwg-index.html#common.iterator">issues</a> in [common.iterator].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>common_iterator</code> has the following equality operator:
+</p>
+<blockquote><pre>
+template&lt;class I2, sentinel_for&lt;I&gt; S2&gt;
+    requires sentinel_for&lt;S, I2&gt;
+  friend constexpr bool operator==(
+    const common_iterator&amp; x, const common_iterator&lt;I2, S2&gt;&amp; y);
+</pre></blockquote>
+<p>
+which is quite useful when wrapping a C++20 <code>input_iterator</code> that does not model <code>equality_comparable</code> 
+so that the quality operator required by the <i>Cpp17InputIterator</i> can still be synthesized.
+<p/>
+However, the function signature does not check the correlation between <code>I2</code> and <code>I</code>, 
+which allows a <code>common_iterator</code> wrapping two completely unrelated iterators to validly compare 
+(<a href="https://godbolt.org/z/Erce8dETT">demo</a>):
+</p>
+<blockquote><pre>
+common_iterator&lt;string::iterator, unreachable_sentinel_t&gt; i1;
+common_iterator&lt;list&lt;int&gt;::iterator, unreachable_sentinel_t&gt; i2;
+i1 == i2; // <span style="color:red;font-weight:bolder">unfortunately compile</span>
+</pre></blockquote>
+<p>
+The proposed resolution requires <code>common_with&lt;I, I2&gt;</code> to be satisfied to enhance semantics, 
+which is also consistent with the signature of <code>counted_iterator::operator==</code>.
+</p>
+
+
+<p id="res-4092"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 25.5.5.1 <a href="https://wg21.link/common.iterator">[common.iterator]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+namespace std {
+  template&lt;input_or_output_iterator I, sentinel_for&lt;I&gt; S&gt;
+    requires (!same_as&lt;I, S&gt; &amp;&amp; copyable&lt;I&gt;)
+  class common_iterator {
+  public:
+    [&hellip;]
+    template&lt;<del>class</del><ins>common_with&lt;I&gt;</ins> I2, sentinel_for&lt;I&gt; S2&gt;
+      requires sentinel_for&lt;S, I2&gt;
+    friend constexpr bool operator==(
+      const common_iterator&amp; x, const common_iterator&lt;I2, S2&gt;&amp; y);
+    [&hellip;]
+  };
+  [&hellip;]
+}
+</pre>
+</blockquote>
+
+</li>
+
+<li><p>Modify 25.5.5.6 <a href="https://wg21.link/common.iter.cmp">[common.iter.cmp]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;<del>class</del><ins>common_with&lt;I&gt;</ins> I2, sentinel_for&lt;I&gt; S2&gt;
+  requires sentinel_for&lt;S, I2&gt;
+friend constexpr bool operator==(
+  const common_iterator&amp; x, const common_iterator&lt;I2, S2&gt;&amp; y);
+</pre>
+<blockquote>
+<p>
+-1- <i>Preconditions</i>: <code>x.v_.valueless_by_exception()</code> and <code>y.v_.valueless_by_exception()</code> 
+are each <code>false</code>.
+<p/>
+[&hellip;]
+</p>
 </blockquote>
 </blockquote>
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Issue 4090: Underspecified use of locale facets for locale-dependent std::format</title>
 <meta property="og:title" content="Issue 4090: Underspecified use of locale facets for locale-dependent std::format">
-<meta property="og:description" content="C++ library issue. Status: New">
+<meta property="og:description" content="C++ library issue. Status: SG16">
 <meta property="og:url" content="https://cplusplus.github.io/LWG/issue4090.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://isocpp.org/assets/images/cpp_logo.png">
@@ -61,15 +61,15 @@
 </head>
 <body>
 <hr>
-<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#SG16">SG16</a> status.</em></p>
 <h3 id="4090"><a href="lwg-active.html#4090">4090</a>. Underspecified use of locale facets for locale-dependent <code>std::format</code></h3>
-<p><b>Section:</b> 22.14.2.2 <a href="https://wg21.link/format.string.std">[format.string.std]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jens Maurer <b>Opened:</b> 2024-04-30 <b>Last modified:</b> 2024-05-04</p>
-<p><b>Priority: </b>Not Prioritized
+<p><b>Section:</b> 22.14.2.2 <a href="https://wg21.link/format.string.std">[format.string.std]</a> <b>Status:</b> <a href="lwg-active.html#SG16">SG16</a>
+ <b>Submitter:</b> Jens Maurer <b>Opened:</b> 2024-04-30 <b>Last modified:</b> 2024-05-08</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#format.string.std">active issues</a> in [format.string.std].</p>
 <p><b>View all other</b> <a href="lwg-index.html#format.string.std">issues</a> in [format.string.std].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#SG16">SG16</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 There are <code>std::format</code> variants that take an explicit <code>std::locale</code> parameter.
@@ -97,6 +97,13 @@ Assuming the encoding for <code>char</code> is UTF-8, the use of a user-provided
 <code>numpunct&lt;&gt;</code>) would allow digit separators that are not expressibly as a
 single UTF-8 code unit.
 </p>
+
+<p><i>[2024-05-08; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
 
 
 <p id="res-4090"><b>Proposed resolution:</b></p>

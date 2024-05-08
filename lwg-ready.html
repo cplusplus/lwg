@@ -62,7 +62,7 @@
 </tr>
 <tr>
 <td align="left">Date:</td>
-<td align="left">Revised 2024-05-08 at 09:51:28 UTC
+<td align="left">Revised 2024-05-08 at 10:37:31 UTC
 </td>
 </tr>
 <tr>
@@ -272,6 +272,846 @@ an explicit or partial specialization of the class template <code>formatter</cod
 </li>
 
 </ol>
+
+
+
+
+<hr>
+<h3 id="4060"><a href="#4060">4060</a><sup><a href="https://cplusplus.github.io/LWG/issue4060">(i)</a></sup>. <code>submdspan</code> preconditions do not forbid creating invalid pointer</h3>
+<p><b>Section:</b> 99 [mdspan.submdspan.submdspan] <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Mark Hoemmen <b>Opened:</b> 2024-03-26 <b>Last modified:</b> 2024-05-08</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Oliver Lee and Ryan Wooster pointed out to us that creating a <code>submdspan</code> with zero-length 
+<code><i>tuple-like</i></code> or <code>strided_slice</code> slice specifiers at the upper extent can cause 
+the Standard <code>submdspan_mapping</code> overloads to access the input <code>mdspan</code>'s mapping 
+out of bounds.
+This happens in the following line of specification ( [mdspan.submdspan.mapping] p8 in
+<a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a> moved to [mdspan.submdspan.mapping.common] p8 <b>after</b> the merge of 
+<a href="https://wg21.link/P2642R6">P2642R6</a>).
+</p>
+<blockquote style="border-left: 3px solid #ccc;padding-left: 15px;">
+<p>
+Let <code>offset</code> be a value of type <code>size_t</code> equal to <code>(*this)(<i>first_</i>&lt;index_type, P&gt;(slices...)...)</code>.
+</p>
+</blockquote>
+<p>
+If <code>data_handle_type</code> is a pointer to an array, then the resulting offset can be larger than 
+<code>required_span_size()</code>, thus making the pointer invalid (not just one past the end). In a 
+constexpr context, the result is ill-formed. With the <a href="https://github.com/kokkos/mdspan">reference 
+<code>mdspan</code> implementation</a>, Clang can actually report a build error (e.g., for out-of-bounds access 
+to a <code>std::array</code>). The contributed example illustrates this.
+<p/>
+Oliver and Ryan offer the following example and analysis:
+</p>
+<blockquote style="border-left: 3px solid #ccc;padding-left: 15px;">
+<p>
+Example 1:
+</p>
+<blockquote><pre>
+auto x = std::array&lt;int, 3&gt;{};
+auto A = mdspan{x.data(), extents{3}}; 
+auto B = submdspan(A, pair{3, 3});
+</pre></blockquote>
+<p>
+B is an <code>mdspan</code> with zero elements.
+<p/>
+Example 2:
+</p>
+<blockquote><pre>
+auto y = std::array&lt;int, 9&gt;{};
+auto C = mdspan{y.data(), extents{3, 3}}; 
+auto D = submdspan(C, pair{3, 3}, pair{3, 3});
+</pre></blockquote>
+<p>
+A precondition for each slice specifier is ( [mdspan.submdspan.extents]):
+</p>
+<blockquote><pre>
+0 &le; <i>first_</i>&lt;index_type, <i>k</i>&gt;(slices...) &le; <i>last_</i>&lt;<i>k</i>&gt;(src.extents(), slices...) &le; src.extent(<i>k</i>).
+</pre></blockquote>
+<p>
+Our understanding is that precondition is satisfied. In the second example, <code><i>first_</i>&lt;0&gt;</code> 
+is 3 and <code><i>first_</i>&lt;1&gt;</code> is also 3.
+<p/>
+However, the submapping offset is defined as <code>(*this)(<i>first_</i>&lt;index_type, P&gt;(slices...)...)</code>, 
+which then can result in an invalid data handle of the <code>submdspan</code>, even if the data handle is never 
+accessed/dereferenced.
+<p/>
+<a href="https://godbolt.org/z/zaMTbMEK7">godbolt demo</a>
+</p>
+</blockquote>
+<p>
+We expect this situation to come up in practice.
+<p/>
+Suppose we have an <code>N x N</code> mdspan representing a matrix <code>A</code>, and we want to partition it 
+into a <code>2 x 2</code> "matrix of matrices" (also called a "block matrix"). This partitioning is a 
+common operation in linear algebra algorithms such as matrix factorizations.  
+Examples of this <code>2 x 2</code> partitioning appear in <a href="https://wg21.link/P2642" title=" Padded mdspan layouts">P2642</a> and <a href="https://wg21.link/P1673" title=" A free function linear algebra interface based on the BLAS">P1673</a>.
+</p>
+<blockquote><pre>
+mdspan A{A_ptr, N, N};
+
+size_t p = partition_point(N); // <i>integer in 0, 1, &hellip;, N (inclusive)</i>
+auto A_00 = submdspan(A, tuple{0, p}, tuple{0, p});
+auto A_10 = submdspan(A, tuple{p, N}, tuple{0, 0});
+auto A_01 = submdspan(A, tuple{0, p}, tuple{p, N});
+auto A_11 = submdspan(A, tuple{p, N}, tuple{p, N});
+</pre></blockquote>
+<p>
+Table illustrating the resulting <code>2 x 2</code> block matrix follows:
+</p>
+<table border="1">
+<tr>
+  <td><code>A_00</code></td>
+  <td><code>A_01</code></td>
+</tr>
+<tr>
+  <td><code>A_10</code></td>
+  <td><code>A_11</code></td>
+</tr>
+</table> 
+<p>
+It's valid for <code>p</code> to be <code>0</code>. That makes every block but <code>A_11</code> have zero size.
+Thus, it should also be valid for <code>p</code> to be <code>N</code>. That makes every block but 
+<code>A_00</code> have zero size. However, that leads to the aforementioned UB.
+<p/>
+It doesn't make sense to change <code><i>first_</i></code> or <code><i>last_</i></code>. The definitions of 
+<code><i>first_</i></code> and <code><i>last_</i></code> are meant to turn the slice specifier into a pair of bounds.
+Since <code>submdspan(A, tuple{p, N}, tuple{p, N})</code> is valid even if <code>p</code> equals <code>N</code>,
+then that strongly suggests that <code><i>first_</i>&lt;0&gt;</code> and <code><i>first_</i>&lt;1&gt;</code> 
+should always be <code>p</code>, even if <code>p</code> equals <code>N</code>.
+<p/>
+As a result, we find ourselves needing to change <code>submdspan_mapping</code>. This will affect both 
+the Standard <code>submdspan_mapping</code> overloads, and any custom (user-defined) overloads.
+</p>
+
+<p><i>[2024-05-08; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after five votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4060"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a> <b>after</b> the merge of <a href="https://wg21.link/P2642R6">P2642R6</a>.
+</p>
+
+<ol>
+<li><p>Modify the new  [mdspan.submdspan.mapping.common] as indicated:</p>
+
+<blockquote>
+<p>
+-8- <ins>If <code><i>first_</i>&lt;index_type, <i>k</i>&gt;(slices...)</code> equals <code>extents().extent(<i>k</i>)</code> 
+for any rank index <code><i>k</i></code> of <code>extents()</code>, then l</ins><del>L</del>et <code>offset</code> be 
+a value of type <code>size_t</code> equal to <ins><code>(*this).required_span_size()</code>. Otherwise, let 
+<code>offset</code> be a value of type <code>size_t</code> equal to</ins> 
+<code>(*this)(<i>first_</i>&lt;index_type, P&gt;(slices...)...)</code>.
+</p>
+</blockquote>
+</li>
+
+<li><p>Modify 99 [mdspan.submdspan.submdspan] as indicated:</p>
+
+<blockquote class="note">
+<p>
+As a drive-by readability fix, we also propose changing a variable name in paragraph 6
+as indicated below.
+</p>
+</blockquote>
+
+<blockquote>
+<pre>
+template&lt;class ElementType, class Extents, class LayoutPolicy,
+         class AccessorPolicy, class... SliceSpecifiers&gt;
+  constexpr auto submdspan(
+    const mdspan&lt;ElementType, Extents, LayoutPolicy, AccessorPolicy&gt;&amp; src,
+    SliceSpecifiers... slices) -&gt; <i>see below</i>;
+</pre>
+<blockquote>
+<p>
+-1- Let <code>index_type</code> be <code>typename Extents::index_type</code>.
+<p/>
+-2- Let <code>sub_map_offset</code> be the result of <code>submdspan_mapping(src.mapping(), slices...)</code>.
+<p/>
+[&hellip;]
+<p/>
+-3- <i>Constraints</i>: [&hellip;]
+<p/>
+-4- <i>Mandates</i>: [&hellip;]
+<p/>
+-5-<i>Preconditions</i>: [&hellip;]
+<p/>
+-6- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+auto sub_map_<ins>result</ins><del>offset</del> = submdspan_mapping(src.mapping(), slices...);
+return mdspan(src.accessor().offset(src.data(), sub_map_<ins>result</ins><del>offset</del>.offset),
+              sub_map_<ins>result</ins><del>offset</del>.mapping,
+              AccessorPolicy::offset_policy(src.accessor()));
+</pre></blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4061"><a href="#4061">4061</a><sup><a href="https://cplusplus.github.io/LWG/issue4061">(i)</a></sup>. Should <code>std::basic_format_context</code> be default-constructible/copyable/movable?</h3>
+<p><b>Section:</b> 22.14.6.7 <a href="https://wg21.link/format.context">[format.context]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-03-24 <b>Last modified:</b> 2024-05-08</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#format.context">issues</a> in [format.context].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Per 22.14.6.7 <a href="https://wg21.link/format.context">[format.context]</a>, it seems that <code>std::basic_format_context</code> has a default 
+constructor that is effectively defaulted, which means that it is default constructible if and only 
+if <code>OutIt</code> is default constructible. Currently only libstdc++ makes it conditionally default 
+constructible, while libc++ and MSVC STL (together with fmtlib) make it never default constructible.
+<p/>
+It seems that <code>basic_format_context</code> objects are supposed to be created by the implementation 
+in some internal way, and user codes are only supposed to modify existing <code>basic_format_context</code> 
+objects during formatting.
+</p>
+
+<p><i>[2024-05-08; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after six votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4061"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
+</p>
+
+<ol>
+<li><p>Modify 22.14.6.7 <a href="https://wg21.link/format.context">[format.context]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+namespace std {
+  template&lt;class Out, class charT&gt;
+  class basic_format_context {
+    basic_format_args&lt;basic_format_context&gt; args_; // <i>exposition only</i>
+    Out out_;                                      // <i>exposition only</i>
+
+    <ins>basic_format_context(const basic_format_context&amp;) = delete;
+    basic_format_context&amp; operator=(const basic_format_context&amp;) = delete;</ins>
+  public:
+    using iterator = Out;
+    using char_type = charT;
+    template&lt;class T&gt; using formatter_type = formatter&lt;T, charT&gt;;
+    
+    basic_format_arg&lt;basic_format_context&gt; arg(size_t id) const noexcept;
+    std::locale locale();
+    
+    iterator out();
+    void advance_to(iterator it);
+  };
+}
+</pre>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4071"><a href="#4071">4071</a><sup><a href="https://cplusplus.github.io/LWG/issue4071">(i)</a></sup>. <code>reference_wrapper</code> comparisons are not SFINAE-friendly</h3>
+<p><b>Section:</b> 22.10.6.6 <a href="https://wg21.link/refwrap.comparisons">[refwrap.comparisons]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-04-19 <b>Last modified:</b> 2024-05-08</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<a href="https://wg21.link/P2944R3" title=" Comparisons for reference_wrapper">P2944R3</a> added these hidden friends to <code class='backtick'>reference_wrapper</code>:
+</p>
+<pre><code>
+   friend constexpr <em>synth-three-way-result</em>&lt;T&gt; operator&lt;=&gt;(reference_wrapper, reference_wrapper);
+   friend constexpr <em>synth-three-way-result</em>&lt;T&gt; operator&lt;=&gt;(reference_wrapper, const T&amp;);
+   friend constexpr <em>synth-three-way-result</em>&lt;T&gt; operator&lt;=&gt;(reference_wrapper, reference_wrapper&lt;const T&gt;);
+</code></pre>
+
+<p>
+These functions are not templates, and so their declarations are ill-formed
+for any type that does have any comparison operators, e.g.
+<pre><code>
+    struct A { } a;
+    std::reference_wrapper&lt;A&gt; r(a);
+</code></pre>
+</p>
+<p>
+Instantiating <code>reference_wrapper&lt;A&gt;</code> will instantiate
+the declarations of the hidden friends, which will attempt to determine the
+return types of the <code>operator&lt;=&gt;</code> functions.
+That fails because <em><code class='backtick'>synth-three-way</code></em> is constrained
+and can't be called with arguments of type <code class='backtick'>A</code>.
+</p>
+
+<p>
+This can be solved by changing those functions into templates, so they
+aren't instantiated eagerly, e.g.,
+<pre><code>
+    <ins>template&lt;class U = T&gt;</ins>
+    friend constexpr <em>synth-three-way-result</em>&lt;<del>T</del><ins>U</ins>&gt; operator&lt;=&gt;(reference_wrapper, reference_wrapper);
+</code></pre>
+or by giving them a deduced return type (so that it isn't instantiated eagerly)
+and constraining them to only be callable when valid:
+<pre><code>
+    friend constexpr <del><em>synth-three-way-result</em>&lt;T&gt;</del><ins>auto</ins> operator&lt;=&gt;(reference_wrapper x, reference_wrapper y)
+    <ins>requires requires (const T t) { <em>synth-three-way</em>(t, t); }</ins>
+</code></pre>
+The second alternative is used in the proposed resolution.
+</p>
+<p>
+In practice the <em>requires-clause</em> can be implemented more simply
+(and efficiently) by checking the constraints of <em>synth-three-way</em>
+directly:
+<pre><code>    requires (const T t) { { t &lt; t } -> <em>boolean-testable</em>; }
+</code></pre>
+but when specified in prose in a <em>Constraints</em>: element it seems
+clearer to just use <code><em>synth-three-way</em>(x.get(), y.get())</code>.
+</p>
+
+<p>The proposed resolution has been committed to libstdc++'s master branch.</p>
+
+<p><i>[2024-05-08; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after eight votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4071"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+<ol>
+<li><p>Modify 22.10.6.1 <a href="https://wg21.link/refwrap.general">[refwrap.general]</a> as indicated:</p>
+
+<blockquote>
+<pre><code>
+   // [refwrap.comparisons], comparisons
+   friend constexpr bool operator==(reference_wrapper, reference_wrapper);
+   friend constexpr bool operator==(reference_wrapper, const T&amp;);
+   friend constexpr bool operator==(reference_wrapper, reference_wrapper&lt;const T&gt;);
+
+   friend constexpr <del><em>synth-three-way-result</em>&lt;T&gt;</del><ins>auto</ins> operator&lt;=&gt;(reference_wrapper, reference_wrapper);
+   friend constexpr <del><em>synth-three-way-result</em>&lt;T&gt;</del><ins>auto</ins> operator&lt;=&gt;(reference_wrapper, const T&amp;);
+   friend constexpr <del><em>synth-three-way-result</em>&lt;T&gt;</del><ins>auto</ins> operator&lt;=&gt;(reference_wrapper, reference_wrapper&lt;const T&gt;);
+</code></pre>
+</blockquote>
+
+</li>
+<li><p>Modify 22.10.6.6 <a href="https://wg21.link/refwrap.comparisons">[refwrap.comparisons]</a> as indicated:</p>
+<blockquote>
+<pre><code>
+friend constexpr <del><em>synth-three-way-result</em>&lt;T&gt;</del><ins>auto</ins> operator&lt;=&gt;(reference_wrapper x, reference_wrapper y);
+</code></pre>
+
+<p>
+<ins>-?-
+<em>Constraints</em>:
+The expression
+<code><em>synth-three-way</em>(x.get(), y.get())</code>
+is well-formed.
+</ins>
+</p>
+
+<p>-7-
+<em>Returns</em>: <code><em>synth-three-way</em>(x.get(), y.get())</code>.
+</p>
+
+<pre><code>
+friend constexpr <del><em>synth-three-way-result</em>&lt;T&gt;</del><ins>auto</ins> operator&lt;=&gt;(reference_wrapper x, const T&amp; y);
+</code></pre>
+
+<p>
+<ins>-?-
+<em>Constraints</em>:
+The expression
+<code><em>synth-three-way</em>(x.get(), y)</code>
+is well-formed.
+</ins>
+</p>
+
+<p>-8-
+<em>Returns</em>: <code><em>synth-three-way</em>(x.get(), y)</code>.
+</p>
+
+<pre><code>
+friend constexpr <del><em>synth-three-way-result</em>&lt;T&gt;</del><ins>auto</ins> operator&lt;=&gt;(reference_wrapper x, reference_wrapper&lt;const T&gt; y);
+</code></pre>
+
+<p>-9-
+<em>Constraints</em>: <code>is_const_v&lt;T&gt;</code> is <code class='backtick'>false</code>.
+<ins>
+The expression
+<code><em>synth-three-way</em>(x.get(), y.get())</code>
+is well-formed.
+</ins>
+</p>
+
+<p>-10-
+<em>Returns</em>: <code><em>synth-three-way</em>(x.get(), y.get())</code>.
+</p>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4074"><a href="#4074">4074</a><sup><a href="https://cplusplus.github.io/LWG/issue4074">(i)</a></sup>. <code><i>compatible-joinable-ranges</i></code> is underconstrained</h3>
+<p><b>Section:</b> 26.7.15.2 <a href="https://wg21.link/range.join.with.view">[range.join.with.view]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-21 <b>Last modified:</b> 2024-05-08</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.join.with.view">active issues</a> in [range.join.with.view].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.join.with.view">issues</a> in [range.join.with.view].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>join_with_view</code> requires the value type, reference and rvalue reference of the inner range 
+and pattern range to share common (reference) types through <code><i>compatible-joinable-ranges</i></code>.
+<p/>
+However, unlike what <code>concat_view</code> and <code>generator</code> do, this concept only requires that 
+these three types be valid and does not further check the relationship between them to be compatible 
+with the <code>indirectly_readable</code> requirement for <code>input_iterator</code>.
+This results in a validly-constructed <code>join_with_view</code> that may not model <code>input_range</code>, 
+which seems unintended.
+<p/>
+The proposed resolution aliases <code><i>compatible-joinable-ranges</i></code> to <code><i>concatable</i></code> 
+i.e. specialization for two ranges to fully constrain, and I believe this could also be a better fit for 
+LWG <a href="lwg-active.html#3971" title="Join ranges of rvalue references with ranges of prvalues (Status: Open)">3971</a>.
+</p>
+
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
+
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 26.7.15.2 <a href="https://wg21.link/range.join.with.view">[range.join.with.view]</a> as indicated:</p>
+  
+<blockquote>
+<pre>
+namespace std::ranges {
+  template&lt;class R, class P&gt;
+    concept <i>compatible-joinable-ranges</i> = <ins><i>concatable</i>&lt;R, P&gt;;</ins>  // <i>exposition only</i>
+        <del>common_with&lt;range_value_t&lt;R&gt;, range_value_t&lt;P&gt;&gt; &amp;&amp;
+        common_reference_with&lt;range_reference_t&lt;R&gt;, range_reference_t&lt;P&gt;&gt; &amp;&amp;
+        common_reference_with&lt;range_rvalue_reference_t&lt;R&gt;, range_rvalue_reference_t&lt;P&gt;&gt;;</del>
+  
+  [&hellip;]
+}
+</pre>
+</blockquote>
+</li>
+
+</ol>
+</blockquote>
+
+<p><i>[2024-04-24; Hewill Kang provides improved wording]</i></p>
+
+
+<p><i>[2024-05-08; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after five votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4074"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 26.2 <a href="https://wg21.link/ranges.syn">[ranges.syn]</a> as indicated:</p>
+  
+<blockquote>
+<pre>
+#include &lt;compare&gt;              // <i>see 17.11.1 <a href="https://wg21.link/compare.syn">[compare.syn]</a></i>
+#include &lt;initializer_list&gt;     // <i>see 17.10.2 <a href="https://wg21.link/initializer.list.syn">[initializer.list.syn]</a></i>
+#include &lt;iterator&gt;             // <i>see 25.2 <a href="https://wg21.link/iterator.synopsis">[iterator.synopsis]</a></i>
+
+namespace std::ranges {
+  [&hellip;]
+  // <i>26.7.15 <a href="https://wg21.link/range.join.with">[range.join.with]</a></i>, <i>join with view</i>
+  <del>template&lt;class R, class P&gt;
+    concept <i>compatible-joinable-ranges</i> = <i>see below</i>; // <i>exposition only</i></del>
+
+  template&lt;input_range V, forward_range Pattern&gt;
+    requires <del>view&lt;V&gt; &amp;&amp; input_range&lt;range_reference_t&lt;V&gt;&gt;
+          &amp;&amp; view&lt;Pattern&gt;
+          &amp;&amp; <i>compatible-joinable-ranges</i>&lt;range_reference_t&lt;V&gt;, Pattern&gt;</del>
+          <ins><i>see below</i></ins>
+  class join_with_view;                                                             // <i>freestanding</i>
+  [&hellip;]
+}
+</pre>
+</blockquote>
+</li>
+
+<li><p>Modify 26.7.15.2 <a href="https://wg21.link/range.join.with.view">[range.join.with.view]</a> as indicated:</p>
+  
+<blockquote>
+<pre>
+namespace std::ranges {
+  <del>template&lt;class R, class P&gt;
+    concept <i>compatible-joinable-ranges</i> =            // <i>exposition only</i>
+        common_with&lt;range_value_t&lt;R&gt;, range_value_t&lt;P&gt;&gt; &amp;&amp;
+        common_reference_with&lt;range_reference_t&lt;R&gt;, range_reference_t&lt;P&gt;&gt; &amp;&amp;
+        common_reference_with&lt;range_rvalue_reference_t&lt;R&gt;, range_rvalue_reference_t&lt;P&gt;&gt;;</del>
+  
+  [&hellip;]
+
+  template&lt;input_range V, forward_range Pattern&gt;
+    requires view&lt;V&gt; &amp;&amp; input_range&lt;range_reference_t&lt;V&gt;&gt;
+          &amp;&amp; view&lt;Pattern&gt;
+          &amp;&amp; <i><del>compatible-joinable-ranges</del><ins>concatable</ins></i>&lt;range_reference_t&lt;V&gt;, Pattern&gt;
+  class join_with_view : public view_interface&lt;join_with_view&lt;V, Pattern&gt;&gt; {
+    [&hellip;]
+    constexpr auto begin() const
+      requires forward_range&lt;const V&gt; &amp;&amp;
+               forward_range&lt;const Pattern&gt; &amp;&amp;
+               is_reference_v&lt;range_reference_t&lt;const V&gt;&gt; &amp;&amp;
+               input_range&lt;range_reference_t&lt;const V&gt;&gt; <ins>&amp;&amp;
+               <i>concatable</i>&lt;range_reference_t&lt;const V&gt;, const Pattern&gt;</ins> {
+      return <i>iterator</i>&lt;true&gt;{*this, ranges::begin(<i>base_</i>)};
+    }
+    [&hellip;]
+    constexpr auto end() const
+      requires forward_range&lt;const V&gt; &amp;&amp; forward_range&lt;const Pattern&gt; &amp;&amp;
+               is_reference_v&lt;range_reference_t&lt;const V&gt;&gt; &amp;&amp;
+               input_range&lt;range_reference_t&lt;const V&gt;&gt; <ins>&amp;&amp;
+               <i>concatable</i>&lt;range_reference_t&lt;const V&gt;, const Pattern&gt;</ins> {
+      [&hellip;]
+    }
+  };
+}
+</pre>
+</blockquote>
+</li>
+
+<li><p>Modify 26.7.15.3 <a href="https://wg21.link/range.join.with.iterator">[range.join.with.iterator]</a> as indicated:</p>
+  
+<blockquote>
+<pre>
+namespace std::ranges {
+  template&lt;input_range V, forward_range Pattern&gt;
+    requires view&lt;V&gt; &amp;&amp; input_range&lt;range_reference_t&lt;V&gt;&gt;
+          &amp;&amp; view&lt;Pattern&gt; &amp;&amp; <i><del>compatible-joinable-ranges</del><ins>concatable</ins></i>&lt;range_reference_t&lt;V&gt;, Pattern&gt;
+  template&lt;bool Const&gt;
+  class join_with_view&lt;V, Pattern&gt;::<i>iterator</i> {
+    [&hellip;]
+  };
+}
+</pre>
+</blockquote>
+</li>
+
+<li><p>Modify 26.7.15.4 <a href="https://wg21.link/range.join.with.sentinel">[range.join.with.sentinel]</a> as indicated:</p>
+  
+<blockquote>
+<pre>
+namespace std::ranges {
+  template&lt;input_range V, forward_range Pattern&gt;
+    requires view&lt;V&gt; &amp;&amp; input_range&lt;range_reference_t&lt;V&gt;&gt;
+          &amp;&amp; view&lt;Pattern&gt; &amp;&amp; <i><del>compatible-joinable-ranges</del><ins>concatable</ins></i>&lt;range_reference_t&lt;V&gt;, Pattern&gt;
+  template&lt;bool Const&gt;
+  class join_with_view&lt;V, Pattern&gt;::<i>sentinel</i> {
+    [&hellip;]
+  };
+}
+</pre>
+</blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4076"><a href="#4076">4076</a><sup><a href="https://cplusplus.github.io/LWG/issue4076">(i)</a></sup>. <code>concat_view</code> should be freestanding</h3>
+<p><b>Section:</b> 17.3.2 <a href="https://wg21.link/version.syn">[version.syn]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-21 <b>Last modified:</b> 2024-05-08</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#version.syn">active issues</a> in [version.syn].</p>
+<p><b>View all other</b> <a href="lwg-index.html#version.syn">issues</a> in [version.syn].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>concat_view</code> can be freestanding, but this never seems to come up in the discussion, 
+which seems to be an oversight.
+</p>
+
+<p><i>[2024-04-21; Daniel comments]</i></p>
+
+<p>
+The specification of some member functions of <code>concat_view</code> seem to depend on freestanding-deleted
+<code>get</code> overloads for <code>variant</code>, but so does <code>join_with_view</code>, which is marked as freestanding,
+so it does not seem to be a good reason to accept <code>join_with_view</code> but not <code>concat_view</code> as freestanding.
+</p>
+
+<p><i>[2024-05-08; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after seven votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4076"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 17.3.2 <a href="https://wg21.link/version.syn">[version.syn]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+#define __cpp_lib_ranges_concat 202403L // <ins><i>freestanding</i>,</ins> <i>also in</i> &lt;ranges&gt;
+</pre>
+</blockquote>
+</li>
+
+<li><p>Modify 26.2 <a href="https://wg21.link/ranges.syn">[ranges.syn]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+#include &lt;compare&gt;              // <i>see 17.11.1 <a href="https://wg21.link/compare.syn">[compare.syn]</a></i>
+#include &lt;initializer_list&gt;     // <i>see 17.10.2 <a href="https://wg21.link/initializer.list.syn">[initializer.list.syn]</a></i>
+#include &lt;iterator&gt;             // <i>see 25.2 <a href="https://wg21.link/iterator.synopsis">[iterator.synopsis]</a></i>
+
+namespace std::ranges {
+  [&hellip;]
+  // <i>26.7.18 <a href="https://wg21.link/range.concat">[range.concat]</a>, concat view</i>
+  template&lt;input_range... Views&gt;
+    requires <i>see below</i>
+  class concat_view;                                                                <ins>// <i>freestanding</i></ins>
+  
+  namespace views { inline constexpr <i>unspecified</i> concat = <i>unspecified</i>; }            <ins>// <i>freestanding</i></ins>
+  [&hellip;]
+}
+</pre>
+</blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4079"><a href="#4079">4079</a><sup><a href="https://cplusplus.github.io/LWG/issue4079">(i)</a></sup>. Missing <i>Preconditions</i> in <code>concat_view::<i>iterator</i></code>'s conversion constructor</h3>
+<p><b>Section:</b> 26.7.18.3 <a href="https://wg21.link/range.concat.iterator">[range.concat.iterator]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-26 <b>Last modified:</b> 2024-05-08</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.concat.iterator">active issues</a> in [range.concat.iterator].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.concat.iterator">issues</a> in [range.concat.iterator].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+This conversion constructor obtains the alternative iterator of the argument
+through <code>std::get</code>, which will throw when the <code>variant</code> is valueless.
+We seem to be missing a <i>Preconditions</i> element here.
+</p>
+
+<p><i>[2024-05-08; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after seven votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4079"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 26.7.18.3 <a href="https://wg21.link/range.concat.iterator">[range.concat.iterator]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+constexpr <i>iterator</i>(<i>iterator</i>&lt;!Const&gt; it)
+  requires Const &amp;&amp;
+           (convertible_to&lt;iterator_t&lt;Views&gt;, iterator_t&lt;const Views&gt;&gt; &amp;&amp; ...);
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Preconditions</i>: <code>it.<i>it_</i>.valueless_by_exception()</code> is <code>false</code>.</ins>
+<p/>
+-8- <i>Effects</i>: Initializes <code><i>parent_</i></code> with <code>it.<i>parent_</i></code>, and let <code><i>i</i></code> be
+<code>it.<i>it_</i>.index()</code>, initializes <code><i>it_</i></code> with 
+<code><i>base-iter</i>(in_place_index&lt;<i>i</i>&gt;, std::get&lt;<i>i</i>&gt;(std::move(it.<i>it_</i>)))</code>.
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4082"><a href="#4082">4082</a><sup><a href="https://cplusplus.github.io/LWG/issue4082">(i)</a></sup>. <code>views::concat(r)</code> is well-formed when <code>r</code> is an <code>output_range</code></h3>
+<p><b>Section:</b> 26.7.18.1 <a href="https://wg21.link/range.concat.overview">[range.concat.overview]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-27 <b>Last modified:</b> 2024-05-08</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Currently, <code>views::concat</code> will return <code>views::all(r)</code> when it takes only one argument, 
+which only requires that the type of <code>r</code> models <code>viewable_range</code> which includes <code>output_range</code>:
+</p>
+<blockquote><pre>
+std::vector&lt;int&gt; v;
+auto r = std::views::counted(std::back_inserter(v), 3);
+auto c = std::views::concat(r); // <span style="color:red;font-weight:bolder">well-formed</span>
+</pre></blockquote>
+<p>
+Since <code>concat_view</code> requires all ranges to be <code>input_range</code>, this seems inconsistent. 
+We should reject the above just like <code>views::zip_transform</code> still requires <code>F</code> to be 
+<code>move_constructible</code> in the case of an empty pack.
+</p>
+
+<p><i>[2024-05-08; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after seven votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4082"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 26.7.18.1 <a href="https://wg21.link/range.concat.overview">[range.concat.overview]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- The name <code>views::concat</code> denotes a customization point object (16.3.3.3.5 <a href="https://wg21.link/customization.point.object">[customization.point.object]</a>).
+Given a pack of subexpressions <code>Es...</code>, the expression <code>views::concat(Es...)</code> is expression-equivalent to
+</p>
+<ol style="list-style-type: none">
+<li><p>(2.1) &mdash; <code>views::all(Es...)</code> if <code>Es</code> is a pack with only one element <ins>whose type models 
+<code>input_range</code></ins>,</p></li>
+<li><p>(2.2) &mdash; otherwise, <code>concat_view(Es...)</code>.</p></li>
+</ol>
+
+</blockquote>
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4083"><a href="#4083">4083</a><sup><a href="https://cplusplus.github.io/LWG/issue4083">(i)</a></sup>. <code>views::as_rvalue</code> should reject non-input ranges</h3>
+<p><b>Section:</b> 26.7.7.1 <a href="https://wg21.link/range.as.rvalue.overview">[range.as.rvalue.overview]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-27 <b>Last modified:</b> 2024-05-08</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>views::as_rvalue(r)</code> equivalent to <code>views::all(r)</code> when <code>r</code>'s reference and rvalue reference are
+of the same type, which means that in this case we only need to check whether the type of <code>r</code> models <code>viewable_range</code>.
+<p/>
+However, libstdc++'s implementation always requires <code>as_rvalue_view{r}</code> to be valid, which leads to
+divergence when <code>r</code> is not an <code>input_range</code> (<a href="https://godbolt.org/z/EbzEsK88Y">demo</a>):
+</p>
+<blockquote><pre>
+#include &lt;ranges&gt;
+
+struct I {
+  int operator*();
+  using difference_type = int;
+  I&amp; operator++();
+  void operator++(int);
+};
+
+std::ranges::range auto r = std::ranges::subrange{I{}, std::unreachable_sentinel}
+                          | std::views::as_rvalue; // <span style="color:red;font-weight:bolder">// well-formed in libc++/MSVC-STL, ill-formed in libstdc++</span>
+</pre></blockquote>
+<p>
+Although this is precisely a bug in libstdc++ that does not conform to the current wording, it is reasonable to
+require <code>r</code> to be an <code>input_range</code> to be consistent with the constraints of <code>as_rvalue_view</code>.
+</p>
+
+<p><i>[2024-05-08; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after seven votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4083"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 26.7.7.1 <a href="https://wg21.link/range.as.rvalue.overview">[range.as.rvalue.overview]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- The name <code>views::as_rvalue</code> denotes a range adaptor object (26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a>).
+Let <code>E</code> be an expression and let <code>T</code> be <code>decltype((E))</code>. The expression 
+<code>views::as_rvalue(E)</code> is expression-equivalent to:
+</p>
+<ol style="list-style-type: none">
+<li><p>(2.1) &mdash; <code>views::all(E)</code> if <ins><code>T</code> models <code>input_range</code> and</ins> 
+<code>same_as&lt;range_rvalue_reference_t&lt;T&gt;, range_reference_t&lt;T&gt;&gt;</code> is <code>true</code>.</p></li>
+<li><p>(2.2) &mdash; Otherwise, <code>as_rvalue_view(E)</code>.</p></li>
+</ol>
+
+</blockquote>
+</li>
+
+</ol>
+
 
 
 

@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4063"><a href="lwg-active.html#4063">4063</a>. Freestanding <code>std::char_traits&lt;char&gt;::eof</code> depends on non-freestanding <code>EOF</code></h3>
 <p><b>Section:</b> 23.2.4.2 <a href="https://wg21.link/char.traits.specializations.char">[char.traits.specializations.char]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-04-03 <b>Last modified:</b> 2024-04-05</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-04-03 <b>Last modified:</b> 2024-05-08</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#char.traits.specializations.char">issues</a> in [char.traits.specializations.char].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -80,6 +80,34 @@ expected to be done in a freestanding implementation.
 <p/>
 Related to <a href="https://github.com/llvm/llvm-project/issues/85158">LLVM issue #85158</a>.
 </p>
+
+<p><i>[2024-05-08; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+</p>
+<p>
+"The <code class='backtick'>eof</code>, <code class='backtick'>not_eof</code>, <code class='backtick'>to_int_type</code> and <code class='backtick'>to_char_type</code> members of <code class='backtick'>char_traits</code>
+are only needed by iostreams, so I see no reason for them to be freestanding.
+In libstdc++ <code class='backtick'>eof</code> and <code class='backtick'>not_eof</code> depend on hosted, so are not freestanding.
+Now that we can have partially freestanding classes in the library,
+that seems like the right solution here."
+</p>
+<p>
+"<code class='backtick'>int_type</code>/<code class='backtick'>char_type</code>/<code class='backtick'>eof</code> is kind of poor-man (or C)'s
+<code>optional&lt;char_type&gt;</code>. Inclined to support it in freestanding
+on that basis, even if the only standard component that uses it is iostreams."
+</p>
+<p>
+"No implementer is confused about the value of <code class='backtick'>eof()</code>/<code class='backtick'>EOF</code>.
+Having the value specified in the non-freestanding part of the standard
+should be good enough."
+</p>
+<p>
+"Prefer to make EOF freestanding, but don't feel strongly about it.
+The important thing is keeping <code class='backtick'>string_view</code> working."
+</p>
+
 
 
 <p id="res-4063"><b>Proposed resolution:</b></p>

@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-05-08 at 09:29:33 UTC
+<p>Revised 2024-05-08 at 09:51:28 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -58156,12 +58156,11 @@ constexpr O ranges::generate_random_n(O first, iter_difference_t&lt;O&gt; n, G&a
 
 <hr>
 <h3 id="4087"><a href="#4087">4087</a><sup><a href="https://cplusplus.github.io/LWG/issue4087">(i)</a></sup>. Standard exception messages have unspecified encoding</h3>
-<p><b>Section:</b> 17.9.3 <a href="https://wg21.link/exception">[exception]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Victor Zverovich <b>Opened:</b> 2024-04-28 <b>Last modified:</b> 2024-05-04</p>
-<p><b>Priority: </b>Not Prioritized
+<p><b>Section:</b> 17.9.3 <a href="https://wg21.link/exception">[exception]</a> <b>Status:</b> <a href="lwg-active.html#SG16">SG16</a>
+ <b>Submitter:</b> Victor Zverovich <b>Opened:</b> 2024-04-28 <b>Last modified:</b> 2024-05-08</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#exception">issues</a> in [exception].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 The null-terminated multibyte string returned by the <code>what</code> method of <code>std::exception</code> 
@@ -58249,6 +58248,13 @@ a new definition such as an <span style="font-variant:small-caps">lntbs</span> (
 <span style="font-variant:small-caps">ntbs</span>") that is essentially an 
 <span style="font-variant:small-caps">ntbs</span> in the ordinary literal encoding.
 </p>
+
+<p><i>[2024-05-08; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll. Send to SG16.
+</p>
+
 
 
 <p id="res-4087"><b>Proposed resolution:</b></p>

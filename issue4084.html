@@ -64,7 +64,7 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#LEWG">LEWG</a> status.</em></p>
 <h3 id="4084"><a href="lwg-active.html#4084">4084</a>. <code>std::fixed</code> ignores <code>std::uppercase</code></h3>
 <p><b>Section:</b> 30.4.3.3.3 <a href="https://wg21.link/facet.num.put.virtuals">[facet.num.put.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#LEWG">LEWG</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-04-30 <b>Last modified:</b> 2024-05-08</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-04-30 <b>Last modified:</b> 2024-05-09</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#facet.num.put.virtuals">active issues</a> in [facet.num.put.virtuals].</p>
@@ -76,7 +76,7 @@ In Table 114 &ndash; Floating-point conversions [tab:facet.num.put.fp]
 we specify that a floating-point value should be printed as if by <code class='backtick'>%f</code>
 when <code>(flags &amp; floatfield) == fixed</code>.
 This ignores whether <code class='backtick'>uppercase</code> is also set in <code class='backtick'>flags</code>,
-meaning there is no way to use <code class='backtick'>%F</code> as the conversion specifier
+meaning there is no way to use the conversion specifier <code class='backtick'>%F</code>
 that was added to <code class='backtick'>printf</code> in C99.
 </p>
 <p>

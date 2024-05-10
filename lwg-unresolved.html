@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-05-10 at 13:24:06 UTC
+<p>Revised 2024-05-10 at 14:50:44 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -58884,6 +58884,84 @@ type <code>I</code> and value <code>K</code> of type <code>subrange_kind</code>,
 </li>
 <li>
 <p>(2.3) &mdash; Otherwise, equivalent to <code>reverse_view{E}</code>.</p>
+</li>
+</ol>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4098"><a href="#4098">4098</a><sup><a href="https://cplusplus.github.io/LWG/issue4098">(i)</a></sup>. <code>views::adjacent&lt;0&gt;</code> should reject non-forward ranges</h3>
+<p><b>Section:</b> 26.7.27.1 <a href="https://wg21.link/range.adjacent.overview">[range.adjacent.overview]</a>, 26.7.28.1 <a href="https://wg21.link/range.adjacent.transform.overview">[range.adjacent.transform.overview]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-10 <b>Last modified:</b> 2024-05-10</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.adjacent.overview">issues</a> in [range.adjacent.overview].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Following-up LWG <a href="lwg-active.html#4082" title="views::concat(r) is well-formed when r is an output_range (Status: Tentatively Ready)">4082</a> and LWG <a href="lwg-active.html#4083" title="views::as_rvalue should reject non-input ranges (Status: Tentatively Ready)">4083</a>, the current wording makes
+<code>views::adjacent&lt;0&gt;(r)</code> and <code>views::adjacent_transform&lt;0&gt;(r, [] { return 0; })</code>
+well-formed even when <code>r</code> is just an input range or an output range, which seems to be an oversight.
+</p>
+
+
+<p id="res-4098"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 26.7.27.1 <a href="https://wg21.link/range.adjacent.overview">[range.adjacent.overview]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- The name <code>views::adjacent&lt;N&gt;</code> denotes a range adaptor object
+(26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a>). Given a subexpression <code>E</code> and a constant expression
+<code>N</code>, the expression <code>views::adjacent&lt;N&gt;(E)</code> is expression-equivalent to
+</p>
+<ol style="list-style-type:none">
+<li>
+<p>(2.1) &mdash; <code>((void)E, auto(views::empty&lt;tuple&lt;&gt;&gt;))</code> if
+  <code>N</code> is equal to <code>0</code> <ins>and <code>decltype((E))</code> models <code>forward_range</code></ins>,
+</p>
+</li>
+<li>
+<p>(2.2) &mdash; otherwise, <code>adjacent_view&lt;views::all_t&lt;decltype((E))&gt;, N&gt;(E)</code>.</p>
+</li>
+</ol>
+</blockquote>
+
+</li>
+
+<li><p>Modify 26.7.28.1 <a href="https://wg21.link/range.adjacent.transform.overview">[range.adjacent.transform.overview]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- The name <code>views::adjacent_transform&lt;N&gt;</code> denotes a range adaptor object
+(26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a>). Given subexpressions <code>E</code> and <code>F</code> 
+and a constant expression <code>N</code>:
+</p>
+<ol style="list-style-type:none">
+<li>
+<p>(2.1) &mdash; If <code>N</code> is equal to <code>0</code> <ins>and <code>decltype((E))</code> 
+models <code>forward_range</code></ins>, <code>views::adjacent_transform&lt;N&gt;(E, F)</code>
+is expression-equivalent to <code>((void)E, views::zip_transform(F))</code>, except that
+the evaluations of <code>E</code> and <code>F</code> are indeterminately sequenced.
+</p>
+</li>
+<li>
+<p>(2.2) &mdash; Otherwise, the expression <code>views::adjacent_transform&lt;N&gt;(E, F)</code> is
+expression-equivalent to <code>adjacent_transform_view&lt;views::all_t&lt;decltype((E))&gt;, 
+decay_t&lt;decltype((F))&gt;, N&gt;(E, F)</code>.
+</p>
 </li>
 </ol>
 </blockquote>

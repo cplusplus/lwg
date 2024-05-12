@@ -64,7 +64,7 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4085"><a href="lwg-active.html#4085">4085</a>. <code>ranges::generate_random</code>'s helper lambda should specify the return type</h3>
 <p><b>Section:</b> 27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-28 <b>Last modified:</b> 2024-05-04</p>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-28 <b>Last modified:</b> 2024-05-12</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#alg.rand.generate">active issues</a> in [alg.rand.generate].</p>
@@ -79,8 +79,9 @@ to a hard error when <code>invoke</code> returns a reference to the object that 
 <code>R</code> is not the <code>output_range</code> for <code>decay_t&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt;</code>.
 </p>
 
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
 
-<p id="res-4085"><b>Proposed resolution:</b></p>
 <p>
 This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
 </p>
@@ -110,6 +111,78 @@ ranges::generate(std::forward&lt;R&gt;(r), [&amp;d, &amp;g] <ins>-&gt; decltype(
 <blockquote><pre>
 ranges::generate(std::forward&lt;R&gt;(r), [&amp;d, &amp;g] <ins>-&gt; decltype(auto)</ins> { return invoke(d, g); })
 </pre></blockquote>
+</blockquote>
+
+</li>
+</ol>
+</blockquote>
+
+<p><i>[2024-05-12, Hewill Kang provides improved wording]</i></p>
+
+
+
+<p id="res-4085"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 28.5.2 <a href="https://wg21.link/rand.synopsis">[rand.synopsis]</a>, header <code>&lt;random&gt;</code> synopsis, as indicated:</p>
+
+<blockquote>
+<pre>
+#include &lt;initializer_list&gt;     // <i>see 17.10.2 <a href="https://wg21.link/initializer.list.syn">[initializer.list.syn]</a></i>
+
+namespace std {
+  [&hellip;]
+  namespace ranges {
+    [&hellip;]
+    template&lt;class R, class G, class D&gt;
+      requires output_range&lt;R, invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; &amp;&amp; invocable&lt;D&amp;, G&amp;&gt; &amp;&amp;
+               uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt; <ins>&amp;&amp;
+               is_arithmetic_v&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt;</ins>
+    constexpr borrowed_iterator_t&lt;R&gt; generate_random(R&amp;&amp; r, G&amp;&amp; g, D&amp;&amp; d);
+
+    template&lt;class G, class D, output_iterator&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; O, sentinel_for&lt;O&gt; S&gt;
+      requires invocable&lt;D&amp;, G&amp;&gt; &amp;&amp; uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt; <ins>&amp;&amp;
+               is_arithmetic_v&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt;</ins>
+    constexpr O generate_random(O first, S last, G&amp;&amp; g, D&amp;&amp; d);
+  }
+  [&hellip;]
+}
+</pre>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class R, class G, class D&gt;
+  requires output_range&lt;R, invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; &amp;&amp; invocable&lt;D&amp;, G&amp;&gt; &amp;&amp;
+           uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt; <ins>&amp;&amp;
+           is_arithmetic_v&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt;</ins>
+constexpr borrowed_iterator_t&lt;R&gt; ranges::generate_random(R&amp;&amp; r, G&amp;&amp; g, D&amp;&amp; d);
+</pre>
+<blockquote>
+<p>
+-5- <i>Effects</i>:
+</p>
+[&hellip;]
+</blockquote>
+<pre>
+template&lt;class G, class D, output_iterator&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; O, sentinel_for&lt;O&gt; S&gt;
+  requires invocable&lt;D&amp;, G&amp;&gt; &amp;&amp; uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt; <ins>&amp;&amp;
+           is_arithmetic_v&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt;</ins>
+constexpr O ranges::generate_random(O first, S last, G&amp;&amp; g, D&amp;&amp; d);
+</pre>
+<blockquote>
+<p>
+-8- <i>Effects</i>: Equivalent to:
+</p>
+[&hellip;]
+</blockquote>
 </blockquote>
 
 </li>

@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-05-13 at 11:19:20 UTC
+<p>Revised 2024-05-13 at 13:34:50 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -58971,85 +58971,6 @@ type <code>I</code> and value <code>K</code> of type <code>subrange_kind</code>,
 
 
 <hr>
-<h3 id="4098"><a href="#4098">4098</a><sup><a href="https://cplusplus.github.io/LWG/issue4098">(i)</a></sup>. LWG 117 loses the sign for negative NaN on some architectures</h3>
-<p><b>Section:</b> 31.7.6.3.2 <a href="https://wg21.link/ostream.inserters.arithmetic">[ostream.inserters.arithmetic]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-05-10 <b>Last modified:</b> 2024-05-13</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View all other</b> <a href="lwg-index.html#ostream.inserters.arithmetic">issues</a> in [ostream.inserters.arithmetic].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-LWG <a href="lwg-defects.html#117" title="basic_ostream uses nonexistent num_put member functions (Status: CD1)">117</a> fixed insertion of a <code class='backtick'>float</code> into an ostream by
-requiring a cast to <code class='backtick'>double</code>. This gives a surprising result on RISC-V when
-inserting a negative NaN, because RISC-V floating-point instructions do
-not preserve the sign or payload of NaN values. This means that
-<code>std::cout &lt;&lt; -std::numeric_limits&lt;float&gt;::quiet_NaN()</code>
-prints <code class='backtick'>"nan"</code> rather than <code class='backtick'>"-nan"</code> as most users probably expect.
-</p>
-<p>
-11.3 section of the RISC-V ISA manual (20191213): 
-</p>
-<blockquote>
-Except when otherwise stated, if the result of a floating-point operation
-is NaN, it is the canonical NaN. The canonical NaN has a positive sign
-and all significand bits clear except the MSB, a.k.a. the quiet bit.
-For single-precision floating-point, this corresponds to the pattern
-0x7fc00000.
-</blockquote>
-<p>
-This is allowed by IEEE 754 (2019), as per section 6.3:
-</p>
-<blockquote>
-When either an input or result is a NaN, this standard does not interpret
-the sign of a NaN.
-</blockquote>
-
-<p>
-So it is standard-conforming for <code>static_cast&lt;double&gt;(val)</code>
-to lose the sign (and payload) of a NaN.
-This might also affect Apple M1 chips, if they use the ARMv8 default-NaN mode.
-</p>
-<p>
-The current wording does not permit an implementation to use something like
-<code>std::copysign(static_cast&lt;double&gt;(val), std::signbit(val) ? -1.0 : +1.0)</code>
-to restore the sign bit. Should this be allowed? Maybe we should say that it's
-unspecified whether the cast to <code class='backtick'>double</code> preserves the sign of a NaN?
-If not, should we add a note about the surprising behaviour?
-</p>
-
-
-
-<p id="res-4098"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
-</p>
-<ol>
-<li>
-<p>Modify 31.7.6.3.2 <a href="https://wg21.link/ostream.inserters.arithmetic">[ostream.inserters.arithmetic]</a> as indicated:</p>
-<blockquote>
--3-
-When <code class='backtick'>val</code> is of type <code class='backtick'>float</code> the formatting conversion occurs as if
-it performed the following code fragment:
-<pre><code>
-  bool failed = use_facet&lt;
-    num_put&lt;charT, ostreambuf_iterator&lt;charT, traits&gt;&gt;
-      >(getloc()).put(*this, *this, fill(),
-        static_cast&lt;double&gt;(val)).failed();
-</code></pre>
-<ins>
-[<i>Note ?</i>: When <code class='backtick'>val</code> is a NaN value, the conversion to <code class='backtick'>double</code>
-can alter the sign and payload. &mdash; <i>end note</i>]
-</ins>
-</blockquote>
-</li>
-</ol>
-
-
-
-
-
-<hr>
 <h3 id="4098"><a href="#4098">4098</a><sup><a href="https://cplusplus.github.io/LWG/issue4098">(i)</a></sup>. <code>views::adjacent&lt;0&gt;</code> should reject non-forward ranges</h3>
 <p><b>Section:</b> 26.7.27.1 <a href="https://wg21.link/range.adjacent.overview">[range.adjacent.overview]</a>, 26.7.28.1 <a href="https://wg21.link/range.adjacent.transform.overview">[range.adjacent.transform.overview]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-10 <b>Last modified:</b> 2024-05-10</p>
@@ -59276,6 +59197,85 @@ int main() {
 </li>
 </ol>
 
+
+
+
+
+
+<hr>
+<h3 id="4101"><a href="#4101">4101</a><sup><a href="https://cplusplus.github.io/LWG/issue4101">(i)</a></sup>. LWG 117 loses the sign for negative NaN on some architectures</h3>
+<p><b>Section:</b> 31.7.6.3.2 <a href="https://wg21.link/ostream.inserters.arithmetic">[ostream.inserters.arithmetic]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-05-10 <b>Last modified:</b> 2024-05-13</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#ostream.inserters.arithmetic">issues</a> in [ostream.inserters.arithmetic].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+LWG <a href="lwg-defects.html#117" title="basic_ostream uses nonexistent num_put member functions (Status: CD1)">117</a> fixed insertion of a <code class='backtick'>float</code> into an ostream by
+requiring a cast to <code class='backtick'>double</code>. This gives a surprising result on RISC-V when
+inserting a negative NaN, because RISC-V floating-point instructions do
+not preserve the sign or payload of NaN values. This means that
+<code>std::cout &lt;&lt; -std::numeric_limits&lt;float&gt;::quiet_NaN()</code>
+prints <code class='backtick'>"nan"</code> rather than <code class='backtick'>"-nan"</code> as most users probably expect.
+</p>
+<p>
+11.3 section of the RISC-V ISA manual (20191213): 
+</p>
+<blockquote>
+Except when otherwise stated, if the result of a floating-point operation
+is NaN, it is the canonical NaN. The canonical NaN has a positive sign
+and all significand bits clear except the MSB, a.k.a. the quiet bit.
+For single-precision floating-point, this corresponds to the pattern
+0x7fc00000.
+</blockquote>
+<p>
+This is allowed by IEEE 754 (2019), as per section 6.3:
+</p>
+<blockquote>
+When either an input or result is a NaN, this standard does not interpret
+the sign of a NaN.
+</blockquote>
+
+<p>
+So it is standard-conforming for <code>static_cast&lt;double&gt;(val)</code>
+to lose the sign (and payload) of a NaN.
+This might also affect Apple M1 chips, if they use the ARMv8 default-NaN mode.
+</p>
+<p>
+The current wording does not permit an implementation to use something like
+<code>std::copysign(static_cast&lt;double&gt;(val), std::signbit(val) ? -1.0 : +1.0)</code>
+to restore the sign bit. Should this be allowed? Maybe we should say that it's
+unspecified whether the cast to <code class='backtick'>double</code> preserves the sign of a NaN?
+If not, should we add a note about the surprising behaviour?
+</p>
+
+
+
+<p id="res-4101"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+<ol>
+<li>
+<p>Modify 31.7.6.3.2 <a href="https://wg21.link/ostream.inserters.arithmetic">[ostream.inserters.arithmetic]</a> as indicated:</p>
+<blockquote>
+-3-
+When <code class='backtick'>val</code> is of type <code class='backtick'>float</code> the formatting conversion occurs as if
+it performed the following code fragment:
+<pre><code>
+  bool failed = use_facet&lt;
+    num_put&lt;charT, ostreambuf_iterator&lt;charT, traits&gt;&gt;
+      >(getloc()).put(*this, *this, fill(),
+        static_cast&lt;double&gt;(val)).failed();
+</code></pre>
+<ins>
+[<i>Note ?</i>: When <code class='backtick'>val</code> is a NaN value, the conversion to <code class='backtick'>double</code>
+can alter the sign and payload. &mdash; <i>end note</i>]
+</ins>
+</blockquote>
+</li>
+</ol>
 
 
 

@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-05-14 at 11:10:47 UTC
+<p>Revised 2024-05-14 at 11:17:03 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -63600,8 +63600,15 @@ If you're lucky it crashes at runtime when trying to reach <code class='backtick
 but it could also form a <code class='backtick'>string_view</code> that reads arbitrary secrets from the
 memory between the two pointers.
 </p>
+<p><i>[Jonathan comments]</i></p>
+
 <p>
 At the very least, we should have an Annex C entry documenting the change.
+Making the new <code class='backtick'>string_view(Iter, Iter)</code> constructor <code class='backtick'>explicit</code> would prevent
+the runtime behaviour change for the second example,
+but GCC thinks the first example would still be ambiguous
+(it seems to depend on how list-initialization handles explicit constructors,
+which has implementation divergence).
 </p>
 
 

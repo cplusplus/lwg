@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-05-14 at 11:10:47 UTC
+<p>Revised 2024-05-14 at 11:17:03 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -59328,8 +59328,15 @@ If you're lucky it crashes at runtime when trying to reach <code class='backtick
 but it could also form a <code class='backtick'>string_view</code> that reads arbitrary secrets from the
 memory between the two pointers.
 </p>
+<p><i>[Jonathan comments]</i></p>
+
 <p>
 At the very least, we should have an Annex C entry documenting the change.
+Making the new <code class='backtick'>string_view(Iter, Iter)</code> constructor <code class='backtick'>explicit</code> would prevent
+the runtime behaviour change for the second example,
+but GCC thinks the first example would still be ambiguous
+(it seems to depend on how list-initialization handles explicit constructors,
+which has implementation divergence).
 </p>
 
 

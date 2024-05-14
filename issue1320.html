@@ -116,14 +116,14 @@ about moving to <code>&lt;iterator&gt;</code>.
 <p>
 Add the declaration of <code>iter_swap</code> to the <code>&lt;iterator&gt;</code>
 header synopsis (25.2 <a href="https://wg21.link/iterator.synopsis">[iterator.synopsis]</a>), with a note that it is
-documented in clause 99 [algorithms].
+documented in clause 27 <a href="https://wg21.link/algorithms">[algorithms]</a>.
 </p>
 
 <blockquote><pre>
 ...
 template &lt;class T, size_t N&gt; T* end(T (&amp;array)[N]);
 
-<ins><i>// documented in 99 [algorithms]</i>
+<ins><i>// documented in 27 <a href="https://wg21.link/algorithms">[algorithms]</a></i>
 template&lt;class ForwardIterator1, class ForwardIterator2&gt;
   void iter_swap(ForwardIterator1 a, ForwardIterator2 b);</ins>
 </pre></blockquote>

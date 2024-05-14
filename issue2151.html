@@ -74,7 +74,7 @@
 In C++11, <code>basic_string</code> is not described as a "container", and is not governed by the allocator-aware 
 container semantics described in sub-clause 24.2 <a href="https://wg21.link/container.requirements">[container.requirements]</a>; as a result, and 
 requirements or contracts for the <code>basic_string</code> interface must be documented in Clause 
-99 [strings].
+23 <a href="https://wg21.link/strings">[strings]</a>.
 <p/>
 Sub-clause 23.4.3.7.8 <a href="https://wg21.link/string.swap">[string.swap]</a> defines the <code>swap</code> member function with no requirements, and
 with guarantees to execute in constant time without throwing. Fulfilling such a contract is not reasonable 
@@ -85,9 +85,9 @@ for containers with unequal non-propagating allocators to be undefined.
 <p/>
 Resolution proposal:
 <p/>
-Additional language from Clause 99 [containers] should probably be copied to Clause 
-99 [strings]. I will refrain from an exactly recommendation, however, as I am raising further
-issues related to the language in Clause 99 [containers].
+Additional language from Clause 24 <a href="https://wg21.link/containers">[containers]</a> should probably be copied to Clause 
+23 <a href="https://wg21.link/strings">[strings]</a>. I will refrain from an exactly recommendation, however, as I am raising further
+issues related to the language in Clause 24 <a href="https://wg21.link/containers">[containers]</a>.
 </p>
 
 <p><i>[2013-03-15 Issues Teleconference]</i></p>

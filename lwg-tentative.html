@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-05-13 at 13:34:50 UTC
+<p>Revised 2024-05-14 at 04:51:08 UTC
 </p><h2>Tentative Issues</h2>
 <hr>
 <h3 id="2457"><a href="#2457">2457</a><sup><a href="https://cplusplus.github.io/LWG/issue2457">(i)</a></sup>. <code>std::begin()</code> and <code>std::end()</code> do not support multi-dimensional arrays correctly</h3>
@@ -734,7 +734,7 @@ with the following properties: [...]
 
 <hr>
 <h3 id="3930"><a href="#3930">3930</a><sup><a href="https://cplusplus.github.io/LWG/issue3930">(i)</a></sup>. Simplify type trait wording</h3>
-<p><b>Section:</b> 99 [meta] <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+<p><b>Section:</b> 21 <a href="https://wg21.link/meta">[meta]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
  <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2023-05-01 <b>Last modified:</b> 2023-06-01</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -795,7 +795,7 @@ This wording is relative to <a href="https://wg21.link/N4944" title=" Working Dr
 <ol>
 <li>
 <p>
-Throughout 99 [meta] replace all occurrences of
+Throughout 21 <a href="https://wg21.link/meta">[meta]</a> replace all occurrences of
 </p>
 <blockquote><p>
 <code>T</code> shall be a complete type, <i>cv</i> <code>void</code>, or an array of unknown bound.
@@ -817,7 +817,7 @@ by
 
 <hr>
 <h3 id="3936"><a href="#3936">3936</a><sup><a href="https://cplusplus.github.io/LWG/issue3936">(i)</a></sup>. Are implementations allowed to deprecate components not in [depr]?</h3>
-<p><b>Section:</b> 99 [depr] <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+<p><b>Section:</b> D <a href="https://wg21.link/depr">[depr]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-05-22 <b>Last modified:</b> 2023-06-01</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -857,7 +857,7 @@ This wording is relative to <a href="https://wg21.link/N4950" title=" Working Dr
 [<i>Drafting Note:</i>
 There are two mutually exclusive proposed resolutions,
 depending on whether it is allowed to deprecate components not in
-99 [depr].
+D <a href="https://wg21.link/depr">[depr]</a>.
 </p>
 </blockquote>
 
@@ -873,9 +873,9 @@ depending on whether it is allowed to deprecate components not in
 -?- <i>Recommended practice</i>:
 Implementations should not apply the <code>deprecated</code> attribute
 (9.12.5 <a href="https://wg21.link/dcl.attr.deprecated">[dcl.attr.deprecated]</a>) to library entities that are not
-specified in 99 [depr].
+specified in D <a href="https://wg21.link/depr">[depr]</a>.
 Implementations should apply the <code>deprecated</code> attribute to
-library entities specified in 99 [depr] whenever possible.
+library entities specified in D <a href="https://wg21.link/depr">[depr]</a> whenever possible.
 </ins>
 </p>
 </blockquote>
@@ -893,13 +893,13 @@ library entities specified in 99 [depr] whenever possible.
 <ins>
 -?- Implementations shall not apply the <code>deprecated</code> attribute
 (9.12.5 <a href="https://wg21.link/dcl.attr.deprecated">[dcl.attr.deprecated]</a>) to library entities that are not
-specified in 99 [depr].
+specified in D <a href="https://wg21.link/depr">[depr]</a>.
 </ins>
 </p>
 <p>
 <ins>-?- <i>Recommended practice</i>:
 Implementations should apply the <code>deprecated</code> attribute to
-library entities specified in 99 [depr] whenever possible.
+library entities specified in D <a href="https://wg21.link/depr">[depr]</a> whenever possible.
 </ins>
 </p>
 </blockquote>

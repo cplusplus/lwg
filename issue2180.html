@@ -121,7 +121,7 @@ copy(v.begin(), v.end(), dest);
 could also throw exceptions. In this particular example we can just think of a <code>std::back_insert_iterator</code>
 applied to a container that needs to allocate its elements used as the type for <code>OutputIterator</code>.
 <p/>
-Even though Clause 99 [numerics] has mostly stronger exception constraints than other parts of the
+Even though Clause 28 <a href="https://wg21.link/numerics">[numerics]</a> has mostly stronger exception constraints than other parts of the
 library the here discussed are overrestrictive, especially since no operation of <code>std::seed_seq</code> 
 except the template <code>generate</code> is actually needed within the library implementation, as mentioned in the 
 discussion of LWG <a href="lwg-closed.html#2124" title="Seed sequence over-specified (Status: NAD)">2124</a>.

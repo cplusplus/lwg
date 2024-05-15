@@ -67,7 +67,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-05-14</td>
+  <td align="left">2024-05-15</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-05-14 at 11:17:03 UTC
+<p>Revised 2024-05-15 at 10:13:28 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -63477,8 +63477,8 @@ int main() {
 <hr>
 <h3 id="4101"><a href="#4101">4101</a><sup><a href="https://cplusplus.github.io/LWG/issue4101">(i)</a></sup>. LWG 117 loses the sign for negative NaN on some architectures</h3>
 <p><b>Section:</b> 31.7.6.3.2 <a href="https://wg21.link/ostream.inserters.arithmetic">[ostream.inserters.arithmetic]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-05-10 <b>Last modified:</b> 2024-05-13</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-05-10 <b>Last modified:</b> 2024-05-15</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#ostream.inserters.arithmetic">issues</a> in [ostream.inserters.arithmetic].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -63522,9 +63522,9 @@ unspecified whether the cast to <code class='backtick'>double</code> preserves t
 If not, should we add a note about the surprising behaviour?
 </p>
 
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
 
-
-<p id="res-4101"><b>Proposed resolution:</b></p>
 <p>
 This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
 </p>
@@ -63544,6 +63544,48 @@ it performed the following code fragment:
 <ins>
 [<i>Note ?</i>: When <code class='backtick'>val</code> is a NaN value, the conversion to <code class='backtick'>double</code>
 can alter the sign and payload. &mdash; <i>end note</i>]
+</ins>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+
+<p><i>[2024-05-15; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
+<p><i>[2024-05-15; Peter Dimov provides improved wording]</i></p>
+
+<p>Jonathan observes that the same problem exists for
+<code>operator&lt;&lt;(<em>extended-floating-point-type</em>)</code>.
+</p>
+
+
+
+<p id="res-4101"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+<ol>
+<li>
+<p>Modify 31.7.6.3.2 <a href="https://wg21.link/ostream.inserters.arithmetic">[ostream.inserters.arithmetic]</a> as indicated:</p>
+<blockquote>
+-3-
+When <code class='backtick'>val</code> is of type <code class='backtick'>float</code> the formatting conversion occurs as if
+it performed the following code fragment:
+<pre><code>
+  bool failed = use_facet&lt;
+    num_put&lt;charT, ostreambuf_iterator&lt;charT, traits&gt;&gt;
+      >(getloc()).put(*this, *this, fill(),
+        <del>static_cast&lt;double&gt;(val)</del><ins><em>dval</em></ins>).failed();
+</code></pre>
+<ins>
+where <code><em>dval</em></code> is <code class='backtick'>val</code> converted to type <code class='backtick'>double</code>
+as if by <code>static_cast&lt;double&gt;(val)</code>,
+except that the sign and payload of NaN values may be preserved
+rather than discarded.
 </ins>
 </blockquote>
 </li>

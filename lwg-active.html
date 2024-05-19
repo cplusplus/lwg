@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-05-19 at 10:37:03 UTC
+<p>Revised 2024-05-19 at 12:26:27 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -63932,7 +63932,7 @@ specifier.
 <p/>
 Additionally, the current wording only initializes the <code>size_</code> member in the default constructor, which
 may lead to undefined behavior when copying <code>basic_format_args</code> as uninitialized <code>data_</code> member 
-is copied. There is also an implementation divergence (<a   href="https://godbolt.org/z/nYEje7zzj">demo</a>):
+is copied. There is also an implementation divergence (<a href="https://godbolt.org/z/nYEje7zzj">demo</a>):
 </p>
 <blockquote><pre>
 #include &lt;format&gt;

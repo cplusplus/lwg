@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-05-19 at 08:46:20 UTC
+<p>Revised 2024-05-19 at 09:31:10 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -59505,6 +59505,53 @@ template&lt;input_range R, weakly_incrementable O, class Proj = identity,
 </li>
 </ol>
 
+
+
+
+
+
+<hr>
+<h3 id="4104"><a href="#4104">4104</a><sup><a href="https://cplusplus.github.io/LWG/issue4104">(i)</a></sup>. <code>basic_const_iterator&lt;volatile int*&gt;</code> is not a <code>contiguous_iterator</code></h3>
+<p><b>Section:</b> 25.5.3 <a href="https://wg21.link/const.iterators">[const.iterators]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-14 <b>Last modified:</b> 2024-05-19</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#const.iterators">active issues</a> in [const.iterators].</p>
+<p><b>View all other</b> <a href="lwg-index.html#const.iterators">issues</a> in [const.iterators].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Although <code>volatile int*</code> satisfies <code>contiguous_iterator</code>, due to the formula design of
+<code>iter_const_reference_t</code>, its result for the former will be <code>int</code>, which makes 
+<code>basic_const_iterator&lt;volatile int*&gt;</code> no longer a <code>contiguous_iterator</code> even though its
+<code>iterator_concept</code> is defined as <code>contiguous_iterator_tag</code> and it has a valid 
+<code>operator-&gt;()</code> that returns <code>const volatile int*</code>.
+<p/>
+This seems to defeat the purpose of <code>basic_const_iterator</code> to preserve the behavior of the underlying 
+iterator (except for indirection operators). The same goes for 
+<code>basic_const_iterator&lt;const volatile int*&gt;</code>:
+</p>
+<blockquote><pre>
+#include &lt;iterator&gt;
+#include &lt;span&gt;
+
+int main() {
+  int i = 42;
+
+  const volatile int* p = &amp;i;
+  static_assert(std::contiguous_iterator&lt;decltype(p)&gt;);
+  std::span sp1{p, 1}; // ok
+  
+  std::basic_const_iterator it{p};
+  static_assert(std::same_as&lt;decltype(it.operator-&gt;()), const volatile int*&gt;);
+  static_assert(std::same_as&lt;decltype(it)::iterator_concept, std::contiguous_iterator_tag&gt;);
+  static_assert(std::contiguous_iterator&lt;decltype(it)&gt;); // <span style="color:red;font-weight:bolder">failed</span>
+  std::span sp2{it, 1}; // <span style="color:red;font-weight:bolder">failed</span>
+}
+</pre></blockquote>
+
+
+<p id="res-4104"><b>Proposed resolution:</b></p>
 
 
 

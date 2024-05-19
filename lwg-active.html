@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-05-19 at 10:03:45 UTC
+<p>Revised 2024-05-19 at 10:20:49 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -63922,6 +63922,15 @@ the internal members are initialized when default-constructed <code>basic_format
 providing one is reasonable.
 <p/>
 The proposed solution is to prefer the more aggressive one.
+</p>
+
+<p><i>[2024-05-19; Daniel comments]</i></p>
+
+<p>
+The here suggested proposal to remove the default constructor implicitly depends on the decision of
+LWG <a href="lwg-active.html#4061" title="Should std::basic_format_context be default-constructible/copyable/movable? (Status: Tentatively Ready)">4061</a> to remove <code>basic_format_context</code>'s default constructor, since its usage
+would require that the exposition-only member <code>args_</code> of type <code>basic_format_args&lt;basic_format_context&gt;</code> 
+can be default-constructed as well.
 </p>
 
 

@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-06-11 at 08:38:33 UTC
+<p>Revised 2024-06-11 at 08:44:43 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -64443,7 +64443,8 @@ This wording is relative to <a href="https://wg21.link/N4981" title=" Working Dr
 <ol>
 <li>
 In 20.3.2.2.2 <a href="https://wg21.link/util.smartptr.shared.const">[util.smartptr.shared.const]</a>/9, specify that
-<code class='backtick'>shared_ptr(nullptr_t p, D d);</code> checks whether <code class='backtick'>d(static_cast&lt;T*&gt;(nullptr))</code>
+<code class='backtick'>shared_ptr(nullptr_t p, D d);</code> checks whether
+<code>d(static_cast&lt;T*&gt;(nullptr))</code>
 is well-formed. This requires expressing the the constraints for
 the <code class='backtick'>Y*</code> constructors and the <code class='backtick'>nullptr_t</code> constructors separately,
 which is mostly editorial:

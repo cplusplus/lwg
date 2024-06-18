@@ -67,7 +67,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-06-11</td>
+  <td align="left">2024-06-18</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-06-11 at 08:44:43 UTC
+<p>Revised 2024-06-18 at 11:43:15 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -27415,7 +27415,7 @@ throwing an exception when <del>the</del><ins>a function's</ins> precondition is
 <hr>
 <h3 id="3197"><a href="#3197">3197</a><sup><a href="https://cplusplus.github.io/LWG/issue3197">(i)</a></sup>. <code>std::prev</code> should not require <code>BidirectionalIterator</code></h3>
 <p><b>Section:</b> 25.4.3 <a href="https://wg21.link/iterator.operations">[iterator.operations]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Billy O'Neal III <b>Opened:</b> 2019-04-03 <b>Last modified:</b> 2022-04-22</p>
+ <b>Submitter:</b> Billy O'Neal III <b>Opened:</b> 2019-04-03 <b>Last modified:</b> 2024-06-18</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#iterator.operations">active issues</a> in [iterator.operations].</p>
@@ -27454,6 +27454,18 @@ An algorithm that was changed by P2408 to accept types that model
 We should consider whether <code>distance</code>, <code>advance</code> and <code>next</code>
 need the same treatment.
 </p>
+
+<p><i>[2024-06-18; Jonathan adds a comment]</i></p>
+
+<p>
+Related to LWG <a href="lwg-defects.html#2353" title="std::next is over-constrained (Status: C++17)">2353</a> which made a similar change to <code class='backtick'>std::next</code>.
+Also, if we require a <i>Cpp17BidirectionalIterator</i> here, then that means
+you can't use <code class='backtick'>std::prev</code> on a <code class='backtick'>std::bidirectional_iterator</code> unless it also
+meets the <i>Cpp17BidirectionalIterator</i> requirements. That seems like an
+unnecessary restriction, since <code class='backtick'>std::prev</code> doesn't do anything that wouldn't
+work fine with any type that models <code class='backtick'>std::bidirectional_iterator</code>.
+</p>
+
 
 
 <p id="res-3197"><b>Proposed resolution:</b></p>
@@ -34305,7 +34317,7 @@ Set priority to 3 during reflector discussions.
 <hr>
 <h3 id="3504"><a href="#3504">3504</a><sup><a href="https://cplusplus.github.io/LWG/issue3504">(i)</a></sup>. <code>condition_variable::wait_for</code> is overspecified</h3>
 <p><b>Section:</b> 33.7.4 <a href="https://wg21.link/thread.condition.condvar">[thread.condition.condvar]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2020-11-18 <b>Last modified:</b> 2020-11-29</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2020-11-18 <b>Last modified:</b> 2024-06-18</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#thread.condition.condvar">issues</a> in [thread.condition.condvar].</p>
@@ -34349,8 +34361,99 @@ This also affects the other overload of <code>condition_variable::wait_for</code
 Set priority to 3 during reflector discussions.
 </p>
 
+<p><i>[2024-06-18; Jonathan adds wording]</i></p>
+
+
 
 <p id="res-3504"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+<ol>
+<li>
+<p>Modify 33.7.1 <a href="https://wg21.link/thread.condition.general">[thread.condition.general]</a> as indicated,
+adding a new paragraph to the end:</p>
+<blockquote>
+<ins>-6-
+The definitions in 33.7 <a href="https://wg21.link/thread.condition">[thread.condition]</a> make use of the
+following exposition-only function:
+</ins>
+<blockquote>
+<pre><code><ins>template&lt;class Dur&gt;
+  chrono::steady_clock::time_point <em>rel-to-abs</em>(const Dur&amp; rel_time)
+  { return chrono::steady_clock::now() + chrono::ceil&lt;chrono::steady_clock::duration&gt;(rel_time); }
+</ins>
+</code></pre>
+</blockquote>
+</blockquote>
+</li>
+
+<li>
+<p>Modify 33.7.4 <a href="https://wg21.link/thread.condition.condvar">[thread.condition.condvar]</a> as indicated:</p>
+<blockquote>
+<pre><code>
+template&lt;class Rep, class Period&gt;
+  cv_status wait_for(unique_lock&lt;mutex&gt;&amp; lock,
+                     const chrono::duration&lt;Rep, Period&gt;&amp; rel_time);
+</code></pre>
+<p>-23- <i>Preconditions</i>:
+<code class='backtick'>lock.owns_lock()</code> is <code class='backtick'>true</code> and <code class='backtick'>lock.mutex()</code> is locked by the calling thread,
+and either [...]
+</p>
+<p>-24- <i>Effects</i>: Equivalent to:
+<blockquote><code>
+return wait_until(lock, <del>chrono::steady_clock::now() + rel_time</del> <ins><em>rel-to-abs</em>(rel_time)</ins>);
+</code></blockquote>
+</p>
+<p>[...]</p>
+<pre><code>
+template&lt;class Rep, class Period, class Predicate&gt;
+  cv_status wait_for(unique_lock&lt;mutex&gt;&amp; lock,
+                     const chrono::duration&lt;Rep, Period&gt;&amp; rel_time,
+                     Predicate pred);
+</code></pre>
+<p>-35- <i>Preconditions</i>:
+<code class='backtick'>lock.owns_lock()</code> is <code class='backtick'>true</code> and <code class='backtick'>lock.mutex()</code> is locked by the calling thread,
+and either [...]
+</p>
+<p>-36- <i>Effects</i>: Equivalent to:
+<blockquote><code>
+return wait_until(lock, <del>chrono::steady_clock::now() + rel_time</del> <ins><em>rel-to-abs</em>(rel_time)</ins>, std::move(pred));
+</code></blockquote>
+</p>
+<p>
+[<i>Note 8</i>:
+There is no blocking if <code class='backtick'>pred()</code> is initially <code class='backtick'>true</code>, even if the timeout has already expired.
+&mdash; <i>end note</i>]
+</p>
+</blockquote>
+</li>
+
+<li>
+<p>Modify 33.7.5.2 <a href="https://wg21.link/thread.condvarany.wait">[thread.condvarany.wait]</a> as indicated:</p>
+<blockquote>
+<pre><code>
+template&lt;class Lock, class Rep, class Period&gt;
+  cv_status wait_for(Lock&amp; lock, const chrono::duration&lt;Rep, Period&gt;&amp; rel_time);
+</code></pre>
+<p>-11- <i>Effects</i>: Equivalent to:
+<blockquote><code>
+return wait_until(lock, <del>chrono::steady_clock::now() + rel_time</del> <ins><em>rel-to-abs</em>(rel_time)</ins>);
+</code></blockquote>
+</p>
+<p>[...]</p>
+<pre><code>
+template&lt;class Lock, class Rep, class Period, class Predicate&gt;
+  cv_status wait_for(Lock&amp; lock, const chrono::duration&lt;Rep, Period&gt;&amp; rel_time, Predicate pred);
+</code></pre>
+<p>-19- <i>Effects</i>: Equivalent to:
+<blockquote><code>
+return wait_until(lock, <del>chrono::steady_clock::now() + rel_time</del> <ins><em>rel-to-abs</em>(rel_time)</ins>, std::move(pred));
+</code></blockquote>
+</p>
+</blockquote>
+</li>
+</ol>
 
 
 

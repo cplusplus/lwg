@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-06-22 at 11:55:43 UTC
+<p>Revised 2024-06-22 at 12:19:31 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -64639,6 +64639,9 @@ The helper concept <code><i>has-arrow</i></code> in 26.5.2 <a href="https://wg21
 require that <code>I::operator-&gt;()</code> be <code>const</code>-qualified, which is inconsistent with 
 the constraints on <code>reverse_iterator</code> and <code>common_iterator</code>'s <code>operator-&gt;()</code> 
 as the latter two both require the underlying iterator has <code>const operator-&gt;()</code> member.
+<p/>
+We should enhance the semantics of <code><i>has-arrow</i></code> so that <i>implicit expression variations</i> 
+prohibit silly games.
 </p>
 
 

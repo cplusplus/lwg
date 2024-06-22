@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-06-22 at 11:55:43 UTC
+<p>Revised 2024-06-22 at 12:19:31 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -60366,6 +60366,9 @@ The helper concept <code><i>has-arrow</i></code> in 26.5.2 <a href="https://wg21
 require that <code>I::operator-&gt;()</code> be <code>const</code>-qualified, which is inconsistent with 
 the constraints on <code>reverse_iterator</code> and <code>common_iterator</code>'s <code>operator-&gt;()</code> 
 as the latter two both require the underlying iterator has <code>const operator-&gt;()</code> member.
+<p/>
+We should enhance the semantics of <code><i>has-arrow</i></code> so that <i>implicit expression variations</i> 
+prohibit silly games.
 </p>
 
 

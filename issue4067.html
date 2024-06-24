@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4067"><a href="lwg-active.html#4067">4067</a>. Inconsistency and potential infinity meta-recursion in <code>std::chrono::zoned_time</code>'s constructors</h3>
 <p><b>Section:</b> 29.11.7.2 <a href="https://wg21.link/time.zone.zonedtime.ctor">[time.zone.zonedtime.ctor]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-04-14 <b>Last modified:</b> 2024-04-15</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-04-14 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#time.zone.zonedtime.ctor">issues</a> in [time.zone.zonedtime.ctor].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -84,6 +84,21 @@ And given the <code>locate_name</code> function may be an overload set that dist
 <code>string_view</code>, the use of <code>locate_time(string_view{})</code> in the constraints doesn't always reflect 
 <code>locate_time(name)</code> in the effects as the return types can be different.
 </p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+"Such a <code class='backtick'>UserDefinedTzPtr</code> would be ridiculous and not useful,
+but it wouldn't hurt to tighten the spec a bit."
+"Would prefer a much simpler resolution saying 'dont do that'.
+I don't like that <code><i>locatable-as-tzptr</i></code> doesn't look like
+a dependent expression, but it is really.
+Saying '<code class='backtick'>TimeZonePtr</code> is implicit convertible from its return type'
+should be phrased in terms of converting <i>to</i>, and should talk about
+conversion from an expression to a type (see LWG <a href="lwg-active.html#3105" title="T1 is convertible to T2 (Status: New)">3105</a>)."
+</p>
+
 
 
 <p id="res-4067"><b>Proposed resolution:</b></p>

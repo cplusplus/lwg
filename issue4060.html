@@ -63,8 +63,8 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Ready">Tentatively Ready</a> status.</em></p>
 <h3 id="4060"><a href="lwg-active.html#4060">4060</a>. <code>submdspan</code> preconditions do not forbid creating invalid pointer</h3>
-<p><b>Section:</b> 99 [mdspan.submdspan.submdspan] <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
- <b>Submitter:</b> Mark Hoemmen <b>Opened:</b> 2024-03-26 <b>Last modified:</b> 2024-05-08</p>
+<p><b>Section:</b> 24.7.3.7.7 <a href="https://wg21.link/mdspan.sub.sub">[mdspan.sub.sub]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Mark Hoemmen <b>Opened:</b> 2024-03-26 <b>Last modified:</b> 2024-06-24</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
@@ -74,8 +74,8 @@ Oliver Lee and Ryan Wooster pointed out to us that creating a <code>submdspan</c
 <code><i>tuple-like</i></code> or <code>strided_slice</code> slice specifiers at the upper extent can cause 
 the Standard <code>submdspan_mapping</code> overloads to access the input <code>mdspan</code>'s mapping 
 out of bounds.
-This happens in the following line of specification ( [mdspan.submdspan.mapping] p8 in
-<a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a> moved to [mdspan.submdspan.mapping.common] p8 <b>after</b> the merge of 
+This happens in the following line of specification (24.7.3.7.6 <a href="https://wg21.link/mdspan.sub.map">[mdspan.sub.map]</a> p8 in
+<a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a> moved to [mdspan.sub.map.common] p8 <b>after</b> the merge of
 <a href="https://wg21.link/P2642R6">P2642R6</a>).
 </p>
 <blockquote style="border-left: 3px solid #ccc;padding-left: 15px;">
@@ -187,7 +187,7 @@ This wording is relative to <a href="https://wg21.link/N4971" title=" Working Dr
 </p>
 
 <ol>
-<li><p>Modify the new  [mdspan.submdspan.mapping.common] as indicated:</p>
+<li><p>Modify the new 24.7.3.7.6.1 <a href="https://wg21.link/mdspan.sub.map.common">[mdspan.sub.map.common]</a> as indicated:</p>
 
 <blockquote>
 <p>
@@ -200,7 +200,7 @@ a value of type <code>size_t</code> equal to <ins><code>(*this).required_span_si
 </blockquote>
 </li>
 
-<li><p>Modify 99 [mdspan.submdspan.submdspan] as indicated:</p>
+<li><p>Modify 24.7.3.7.7 <a href="https://wg21.link/mdspan.sub.sub">[mdspan.sub.sub]</a> as indicated:</p>
 
 <blockquote class="note">
 <p>

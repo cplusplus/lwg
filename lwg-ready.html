@@ -62,7 +62,7 @@
 </tr>
 <tr>
 <td align="left">Date:</td>
-<td align="left">Revised 2024-06-24 at 16:07:21 UTC
+<td align="left">Revised 2024-06-24 at 16:43:21 UTC
 </td>
 </tr>
 <tr>
@@ -75,5 +75,55 @@
 </tr>
 </table>
 <h2>Ready Issues</h2>
+<hr>
+<h3 id="4112"><a href="#4112">4112</a><sup><a href="https://cplusplus.github.io/LWG/issue4112">(i)</a></sup>. <code><i>has-arrow</i></code> should required <code>operator-&gt;()</code> to be <code>const</code>-qualified</h3>
+<p><b>Section:</b> 26.5.2 <a href="https://wg21.link/range.utility.helpers">[range.utility.helpers]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-06-22 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>Discussion:</b></p>
+<p>
+The helper concept <code><i>has-arrow</i></code> in 26.5.2 <a href="https://wg21.link/range.utility.helpers">[range.utility.helpers]</a> does not 
+require that <code>I::operator-&gt;()</code> be <code>const</code>-qualified, which is inconsistent with 
+the constraints on <code>reverse_iterator</code> and <code>common_iterator</code>'s <code>operator-&gt;()</code> 
+as the latter two both require the underlying iterator has <code>const operator-&gt;()</code> member.
+<p/>
+We should enhance the semantics of <code><i>has-arrow</i></code> so that
+<i>implicit expression variations</i> (18.2 <a href="https://wg21.link/concepts.equality">[concepts.equality]</a>)
+prohibit silly games.
+</p>
+
+<p><i>[St. Louis 2024-06-24; move to Ready]</i></p>
+
+
+
+
+<p id="res-4112"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 26.5.2 <a href="https://wg21.link/range.utility.helpers">[range.utility.helpers]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+[&hellip;]
+
+template&lt;class I&gt;
+  concept <i>has-arrow</i> =                                       // <i>exposition only</i>
+    input_iterator&lt;I&gt; &amp;&amp; (is_pointer_v&lt;I&gt; || requires(<ins>const</ins> I i) { i.operator-&gt;(); });
+
+[&hellip;]
+</pre>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
 </body>
 </html>

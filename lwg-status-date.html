@@ -67,7 +67,7 @@
 This document is the Index by Status and Date for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
-<p>Revised 2024-06-24 at 19:31:28 UTC
+<p>Revised 2024-06-24 at 22:50:05 UTC
 </p><h2 id="Voting">Voting (13 issues)</h2>
 <table class="issues-index">
 <tr>
@@ -197,7 +197,7 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
 <td></td>
 </tr>
 </table>
-<h2 id="Ready">Ready (1 issues)</h2>
+<h2 id="Ready">Ready (3 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -215,6 +215,24 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
 <td><code><i>has-arrow</i></code> should required <code>operator-&gt;()</code> to be <code>const</code>-qualified</td>
 <td>Yes</td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td id="3436"><a href="lwg-active.html#3436" title="std::construct_at should support arrays (Status: Ready)">3436</a><sup><a href="https://cplusplus.github.io/LWG/issue3436">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>27.11.8 [specialized.construct]</td>
+<td><code>std::construct_at</code> should support arrays</td>
+<td>Yes</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td id="4044"><a href="lwg-active.html#4044" title="Confusing requirements for std::print on POSIX platforms (Status: Ready)">4044</a><sup><a href="https://cplusplus.github.io/LWG/issue4044">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>31.7.10 [print.fun]</td>
+<td>Confusing requirements for <code>std::print</code> on POSIX platforms</td>
+<td>Yes</td>
+<td>3</td>
 <td></td>
 </tr>
 </table>
@@ -311,7 +329,7 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
 <td></td>
 </tr>
 </table>
-<h2 id="New">New (415 issues)</h2>
+<h2 id="New">New (413 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -475,15 +493,6 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
 <td>LWG 270 and ranges version of binary search algorithms</td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="3436"><a href="lwg-active.html#3436" title="std::construct_at should support arrays (Status: New)">3436</a><sup><a href="https://cplusplus.github.io/LWG/issue3436">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>27.11.8 [specialized.construct]</td>
-<td><code>std::construct_at</code> should support arrays</td>
-<td>Yes</td>
-<td>2</td>
 <td></td>
 </tr>
 <tr>
@@ -801,15 +810,6 @@ passed to allocator <code>construct</code> and <code>destroy</code></td>
 <td>Contradictory specification of <code>std::tuple_size</code></td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4015"><a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations (Status: New)">4015</a><sup><a href="https://cplusplus.github.io/LWG/issue4015">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>22.5.3.7 [optional.monadic]</td>
-<td>LWG 3973 broke <code>const</code> overloads of <code>std::optional</code> monadic operations</td>
-<td>Yes</td>
-<td>1</td>
 <td></td>
 </tr>
 <tr>
@@ -4120,6 +4120,15 @@ the evaluation of type traits</td>
   <th>Duplicates</th>
 </tr>
 <tr>
+<td id="4015"><a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations (Status: Open)">4015</a><sup><a href="https://cplusplus.github.io/LWG/issue4015">(i)</a></sup></td>
+<td><a href="lwg-active.html#Open">Open</a></td>
+<td>22.5.3.7 [optional.monadic]</td>
+<td>LWG 3973 broke <code>const</code> overloads of <code>std::optional</code> monadic operations</td>
+<td>Yes</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
 <td id="2833"><a href="lwg-active.html#2833" title="Library needs to specify what it means when it declares a function constexpr (Status: Open)">2833</a><sup><a href="https://cplusplus.github.io/LWG/issue2833">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
 <td>22.6.3.2 [variant.ctor]</td>
@@ -4133,15 +4142,6 @@ the evaluation of type traits</td>
 <td><a href="lwg-active.html#Open">Open</a></td>
 <td>27.11.6 [uninitialized.move]</td>
 <td><code>std::uninitialized_move/_n</code> and guaranteed copy elision</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4044"><a href="lwg-active.html#4044" title="Confusing requirements for std::print on POSIX platforms (Status: Open)">4044</a><sup><a href="https://cplusplus.github.io/LWG/issue4044">(i)</a></sup></td>
-<td><a href="lwg-active.html#Open">Open</a></td>
-<td>31.7.10 [print.fun]</td>
-<td>Confusing requirements for <code>std::print</code> on POSIX platforms</td>
 <td>Yes</td>
 <td>3</td>
 <td></td>

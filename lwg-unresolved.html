@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-06-24 at 19:31:28 UTC
+<p>Revised 2024-06-24 at 22:50:05 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -30463,252 +30463,6 @@ determination above is also modeled</ins>.</p></li>
 
 
 <hr>
-<h3 id="3436"><a href="#3436">3436</a><sup><a href="https://cplusplus.github.io/LWG/issue3436">(i)</a></sup>. <code>std::construct_at</code> should support arrays</h3>
-<p><b>Section:</b> 27.11.8 <a href="https://wg21.link/specialized.construct">[specialized.construct]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2020-04-29 <b>Last modified:</b> 2024-06-24</p>
-<p><b>Priority: </b>2
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#specialized.construct">active issues</a> in [specialized.construct].</p>
-<p><b>View all other</b> <a href="lwg-index.html#specialized.construct">issues</a> in [specialized.construct].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-<code>std::construct_at</code> is ill-formed for array types, because the type of the <code>new</code>-expression is <code>T</code> 
-not <code>T*</code> so it cannot be converted to the return type.
-<p/>
-In C++17 <code>allocator_traits::construct</code> did work for arrays, because it returns <code>void</code> so there is no 
-ill-formed conversion. On the other hand, in C++17 <code>allocator_traits::destroy</code> didn't work for arrays, 
-because <code>p-&gt;~T()</code> isn't valid.
-<p/>
-In C++20 <code>allocator_traits::destroy</code> does work, because <code>std::destroy_at</code> treats arrays specially, 
-but <code>allocator_traits::construct</code> no longer works because it uses <code>std::construct_at</code>.
-<p/>
-It seems unnecessary and/or confusing to remove support for arrays in <code>construct</code> when we're adding it in <code>destroy</code>.
-<p/>
-I suggest that <code>std::construct_at</code> should also handle arrays. It might be reasonable to restrict that 
-support to the case where <code>sizeof...(Args) == 0</code>, if supporting parenthesized aggregate-initialization 
-is not desirable in <code>std::construct_at</code>.
-</p>
-
-<p><i>[2020-05-09; Reflector prioritization]</i></p>
-
-<p>
-Set priority to 2 after reflector discussions.
-</p>
-
-<p><i>[2021-01-16; Zhihao Yuan provides wording]</i></p>
-
-
-<p>
-<strong>Previous resolution [SUPERSEDED]:</strong>
-</p>
-<blockquote class="note">
-<p>
-This wording is relative to <a href="https://wg21.link/N4878" title=" Working Draft, Standard for Programming Language C++">N4878</a>. 
-</p>
-
-<ol>
-<li><p>Modify 27.11.8 <a href="https://wg21.link/specialized.construct">[specialized.construct]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-template&lt;class T, class... Args&gt;
-  constexpr T* construct_at(T* location, Args&amp;&amp;... args);
-
-namespace ranges {
-  template&lt;class T, class... Args&gt;
-    constexpr T* construct_at(T* location, Args&amp;&amp;... args);
-}
-</pre>
-<blockquote>
-<p>
--1- <i>Constraints:</i> The expression <code>::new (declval&lt;void*&gt;()) T(declval&lt;Args&gt;()...)</code> is well-formed
-when treated as an unevaluated operand.
-<p/>
--2- <i>Effects:</i> Equivalent to:
-</p>
-<blockquote><pre>
-<del>return</del><ins>auto ptr =</ins> ::new (<i>voidify</i>(*location)) T(std::forward&lt;Args&gt;(args)...);
-<ins>if constexpr (is_array_v&lt;T&gt;)
-  return launder(location);
-else
-  return ptr;</ins>
-</pre></blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-
-<p><i>[2021-12-07; Zhihao Yuan comments and provides improved wording]</i></p>
-
-<p>
-The previous PR allows constructing arbitrary number of elements when
-<code>T</code> is an array of unknown bound:</p>
-<blockquote><pre>
-extern int a[];
-std::construct_at(&amp;a, 0, 1, 2);
-</pre></blockquote>
-<p>
-and leads to a UB.
-</p>
-<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
-<blockquote class="note">
-
-<p>
-This wording is relative to <a href="https://wg21.link/N4901" title=" Working Draft, Standard for Programming Language C++">N4901</a>. 
-</p>
-
-<ol>
-<li><p>Modify 27.11.8 <a href="https://wg21.link/specialized.construct">[specialized.construct]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-template&lt;class T, class... Args&gt;
-  constexpr T* construct_at(T* location, Args&amp;&amp;... args);
-
-namespace ranges {
-  template&lt;class T, class... Args&gt;
-    constexpr T* construct_at(T* location, Args&amp;&amp;... args);
-}
-</pre>
-<blockquote>
-<p>
--1- <i>Constraints:</i> The expression <code>::new (declval&lt;void*&gt;()) T(declval&lt;Args&gt;()...)</code> is well-formed
-when treated as an unevaluated operand (7.2.3 <a href="https://wg21.link/expr.context">[expr.context]</a>) <ins>and <code>is_unbounded_array_v&lt;T&gt;</code> is 
-<code>false</code></ins>.
-<p/>
--2- <i>Effects:</i> Equivalent to:
-</p>
-<blockquote><pre>
-<del>return</del><ins>auto ptr =</ins> ::new (<i>voidify</i>(*location)) T(std::forward&lt;Args&gt;(args)...);
-<ins>if constexpr (is_array_v&lt;T&gt;)
-  return launder(location);
-else
-  return ptr;</ins>
-</pre></blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-
-<p><i>[2024-03-18; Jonathan provides new wording]</i></p>
-
-<p>
-During Core review in Varna, Hubert suggested creating <code class='backtick'>T[1]</code> for the array case.
-</p>
-
-<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
-<blockquote class="note">
-
-<p>
-This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
-</p>
-
-<ol>
-<li><p>Modify 27.11.8 <a href="https://wg21.link/specialized.construct">[specialized.construct]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-template&lt;class T, class... Args&gt;
-  constexpr T* construct_at(T* location, Args&amp;&amp;... args);
-
-namespace ranges {
-  template&lt;class T, class... Args&gt;
-    constexpr T* construct_at(T* location, Args&amp;&amp;... args);
-}
-</pre>
-<blockquote>
-<p>
--1- <i>Constraints:</i>
-<ins><code>is_unbounded_array_v&lt;T&gt;</code> is <code>false</code>.</ins>
-The expression <code>::new (declval&lt;void*&gt;()) T(declval&lt;Args&gt;()...)</code> is well-formed
-when treated as an unevaluated operand (7.2.3 <a href="https://wg21.link/expr.context">[expr.context]</a>).
-<p/>
--2- <i>Effects:</i> Equivalent to:
-</p>
-<blockquote><pre>
-<ins>if constexpr (is_array_v&lt;T&gt;)
-  return ::new (<i>voidify</i>(*location)) T[1]{{std::forward&lt;Args&gt;(args)...}};
-else</ins>
-  return ::new (<i>voidify</i>(*location)) T(std::forward&lt;Args&gt;(args)...);
-</pre></blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-
-<p><i>[St. Louis 2024-06-24; Jonathan provides improved wording]</i></p>
-
-<p>
-Why not support unbounded arrays, deducing the bound from <code class='backtick'>sizeof...(Args)</code>?
-<br/>
-JW: There's no motivation to support that here in <code class='backtick'>construct_at</code>.
-It isn't possible to create unbounded arrays via allocators,
-nor via any of the <code class='backtick'>uninitialized_xxx</code> algorithms. Extending <code class='backtick'>construct_at</code>
-that way seems like a design change, not restoring support for something
-that used to work with allocators and then got broken in C++20.
-</p>
-<p>
-Tim observed that the proposed resolution is ill-formed if <code class='backtick'>T</code> has an
-explicit default constructor. Value-initialization would work for that case,
-and there seems to be little motivation for supplying arguments to
-initialize the array. In C++17 the <code class='backtick'>allocator_traits::construct</code> case only
-supported value-initialization.
-</p>
-
-
-
-<p id="res-3436"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
-</p>
-
-<ol>
-<li><p>Modify 27.11.8 <a href="https://wg21.link/specialized.construct">[specialized.construct]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-template&lt;class T, class... Args&gt;
-  constexpr T* construct_at(T* location, Args&amp;&amp;... args);
-
-namespace ranges {
-  template&lt;class T, class... Args&gt;
-    constexpr T* construct_at(T* location, Args&amp;&amp;... args);
-}
-</pre>
-<blockquote>
-<p>
--1- <i>Constraints:</i>
-<ins><code>is_unbounded_array_v&lt;T&gt;</code> is <code>false</code>.</ins>
-The expression <code>::new (declval&lt;void*&gt;()) T(declval&lt;Args&gt;()...)</code> is well-formed
-when treated as an unevaluated operand (7.2.3 <a href="https://wg21.link/expr.context">[expr.context]</a>).
-</p>
-<p>
-<ins>-?- <i>Mandates</i>:
-If <code>is_array_v&lt;T&gt;</code> is <code class='backtick'>true</code>, <code class='backtick'>sizeof...(Args)</code> is zero.
-</ins>
-</p>
-<p>
--2- <i>Effects:</i> Equivalent to:
-</p>
-<blockquote><pre>
-<ins>if constexpr (is_array_v&lt;T&gt;)
-  return ::new (<i>voidify</i>(*location)) T[1]();
-else</ins>
-  return ::new (<i>voidify</i>(*location)) T(std::forward&lt;Args&gt;(args)...);
-</pre></blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ol>
-
-
-
-
-<hr>
 <h3 id="3438"><a href="#3438">3438</a><sup><a href="https://cplusplus.github.io/LWG/issue3438">(i)</a></sup>. &sect;[container.node.overview] missing <code>multiset</code>/<code>map</code> cases</h3>
 <p><b>Section:</b> 24.2.5.1 <a href="https://wg21.link/container.node.overview">[container.node.overview]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jens Maurer <b>Opened:</b> 2020-04-30 <b>Last modified:</b> 2020-05-09</p>
@@ -31982,7 +31736,7 @@ and <code>is_constructible&lt;T[1], T&gt;</code> are false?
 </p>
 
 <p>
-There may be some interaction with LWG <a href="lwg-active.html#3436" title="std::construct_at should support arrays (Status: New)">3436</a>.
+There may be some interaction with LWG <a href="lwg-active.html#3436" title="std::construct_at should support arrays (Status: Ready)">3436</a>.
 </p>
 
 
@@ -51936,11 +51690,11 @@ to
 
 <hr>
 <h3 id="4015"><a href="#4015">4015</a><sup><a href="https://cplusplus.github.io/LWG/issue4015">(i)</a></sup>. LWG 3973 broke <code>const</code> overloads of <code>std::optional</code> monadic operations</h3>
-<p><b>Section:</b> 22.5.3.7 <a href="https://wg21.link/optional.monadic">[optional.monadic]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-11-24 <b>Last modified:</b> 2024-03-11</p>
+<p><b>Section:</b> 22.5.3.7 <a href="https://wg21.link/optional.monadic">[optional.monadic]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-11-24 <b>Last modified:</b> 2024-06-24</p>
 <p><b>Priority: </b>1
 </p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 The resolution of LWG <a href="lwg-defects.html#3973" title="Monadic operations should be ADL-proof (Status: WP)">3973</a> (adopted in Kona) changed all
@@ -52015,9 +51769,9 @@ Six votes for 'Tentatively Ready' but enough uncertainty to deserve
 discussion at a meeting.
 </p>
 
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
 
-
-<p id="res-4015"><b>Proposed resolution:</b></p>
 <p>
 This wording is relative to <a href="https://wg21.link/N4964" title=" Working Draft, Programming Languages — C++">N4964</a> <em>after</em> application of the wording of LWG <a href="lwg-defects.html#3973" title="Monadic operations should be ADL-proof (Status: WP)">3973</a>.
 </p>
@@ -52730,6 +52484,732 @@ constexpr void reset() noexcept;
 <p>
 -1- <i>Effects</i>: If <code>*this</code> contains a value, calls <code><del>val-&gt;</del><ins><i>val</i>.</ins>T::~T()</code>
 to destroy the contained value <ins>and sets <code><i>has_val</i></code> to <code>false</code></ins>; otherwise no effect.
+<p/>
+-2- <i>Postconditions</i>: <code>*this</code> does not contain a value.
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+</ol>
+</blockquote>
+
+<p><i>[St. Louis 2024-06-24; Jonathan provides improved wording]</i></p>
+
+
+
+
+<p id="res-4015"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 22.5.3.1 <a href="https://wg21.link/optional.optional.general">[optional.optional.general]</a>, class template <code>optional</code> synopsis, as indicated:</p>
+
+<blockquote>
+<pre>
+namespace std {
+  template&lt;class T&gt;
+  class optional {
+  public:
+    using value_type = T;
+    [&hellip;]
+  private:
+    <ins>union {</ins>
+      T <ins><i>val</i></ins><del>*val</del>; // <i>exposition only</i>
+    <ins>};</ins>
+  };
+  
+  [&hellip;]
+}
+</pre>
+</blockquote>
+</li>
+
+<li><p>Modify 22.5.3.1 <a href="https://wg21.link/optional.optional.general">[optional.optional.general]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- When an <code>optional&lt;T&gt;</code> object contains a value,
+<ins>the</ins>
+member <code>val</code>
+<ins>is active (11.5.1 <a href="https://wg21.link/class.union.general">[class.union.general]</a>)</ins>
+<del>points to the contained value</del>.
+</p>
+</blockquote>
+</li>
+
+<li><p>Modify 22.5.3.2 <a href="https://wg21.link/optional.ctor">[optional.ctor]</a> as indicated:</p>
+
+<blockquote class="note">
+<p>
+[<i>Drafting note</i>: Normatively, this subclause doesn't require any changes, but Daniel suggested to replace
+phrases of the form "[&hellip;]initializes the contained value with"] by "[&hellip;]initializes <code><i>val</i></code> with"
+as we do in 22.8.6.2 <a href="https://wg21.link/expected.object.cons">[expected.object.cons]</a>.]
+</p>
+</blockquote>
+
+<blockquote>
+<pre>
+constexpr optional(const optional&amp; rhs);
+</pre>
+<blockquote>
+<p>
+-4- <i>Effects</i>: If <code>rhs</code> contains a value, direct-non-list-initializes 
+<ins><code><i>val</i></code></ins><del>the contained value</del> with <code><del>*</del>rhs<ins>.<i>val</i></ins></code>.
+<p/>
+-5- <i>Postconditions</i>: <code>rhs.has_value() == this-&gt;has_value()</code>.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+<pre>
+constexpr optional(optional&amp;&amp; rhs) noexcept(<i>see below</i>);
+</pre>
+<blockquote>
+<p>
+-8- <i>Constraints</i>: [&hellip;]
+<p/>
+-9- <i>Effects</i>: If <code>rhs</code> contains a value, direct-non-list-initializes 
+<ins><code><i>val</i></code></ins><del>the contained value</del> with <code>std::move(<del>*</del>rhs<ins>.<i>val</i></ins>)</code>.
+<code>rhs.has_value()</code> is unchanged.
+<p/>
+-10- <i>Postconditions</i>: <code>rhs.has_value() == this-&gt;has_value()</code>.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+<pre>
+template&lt;class... Args&gt; constexpr explicit optional(in_place_t, Args&amp;&amp;... args);
+</pre>
+<blockquote>
+<p>
+-13- <i>Constraints</i>: [&hellip;]
+<p/>
+-14- <i>Effects</i>: Direct-non-list-initializes <ins><code><i>val</i></code></ins><del>the contained value</del> 
+with <code>std::forward&lt;Args&gt;(args)...</code>.
+<p/>
+-15- <i>Postconditions</i>: <code>*this</code> contains a value.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+<pre>
+template&lt;class U, class... Args&gt;
+  constexpr explicit optional(in_place_t, initializer_list&lt;U&gt; il, Args&amp;&amp;... args);
+</pre>
+<blockquote>
+<p>
+-18- <i>Constraints</i>: [&hellip;]
+<p/>
+-19- <i>Effects</i>: Direct-non-list-initializes <ins><code><i>val</i></code></ins><del>the contained value</del> 
+with <code>il, std::forward&lt;Args&gt;(args)...</code>.
+<p/>
+-20- <i>Postconditions</i>: <code>*this</code> contains a value.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+<pre>
+template&lt;class U = T&gt; constexpr explicit(<i>see below</i>) optional(U&amp;&amp; v);
+</pre>
+<blockquote>
+<p>
+-23- <i>Constraints</i>: [&hellip;]
+<p/>
+-24- <i>Effects</i>: Direct-non-list-initializes <ins><code><i>val</i></code></ins><del>the contained value</del> 
+with <code>std::forward&lt;U&gt;(v)</code>.
+<p/>
+-25- <i>Postconditions</i>: <code>*this</code> contains a value.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+<pre>
+template&lt;class U&gt; constexpr explicit(<i>see below</i>) optional(const optional&lt;U&gt;&amp; rhs);
+</pre>
+<blockquote>
+<p>
+-28- <i>Constraints</i>: [&hellip;]
+<p/>
+-29- <i>Effects</i>: If <code>rhs</code> contains a value, direct-non-list-initializes 
+<ins><code><i>val</i></code></ins><del>the contained value</del> with <code><del>*</del>rhs<ins>.<i>val</i></ins></code>.
+<p/>
+-30- <i>Postconditions</i>: <code>rhs.has_value() == this-&gt;has_value()</code>.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+<pre>
+template&lt;class U&gt; constexpr explicit(<i>see below</i>) optional(optional&lt;U&gt;&amp;&amp; rhs);
+</pre>
+<blockquote>
+<p>
+-33- <i>Constraints</i>: [&hellip;]
+<p/>
+-34- <i>Effects</i>: If <code>rhs</code> contains a value, direct-non-list-initializes 
+<ins><code><i>val</i></code></ins><del>the contained value</del> with 
+<code>std::move(<del>*</del>rhs<ins>.<i>val</i></ins>)</code>. <code>rhs.has_value()</code> is unchanged.
+<p/>
+-35- <i>Postconditions</i>: <code>rhs.has_value() == this-&gt;has_value()</code>.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+<li><p>Modify 22.5.3.3 <a href="https://wg21.link/optional.dtor">[optional.dtor]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+constexpr ~optional();
+</pre>
+<blockquote>
+<p>
+-1- <i>Effects</i>: If <code>is_trivially_destructible_v&lt;T&gt; != true</code> and <code>*this</code> contains a value, 
+calls <code><del>val-&gt;</del><ins><i>val</i>.</ins>T::~T()</code><ins>.</ins>
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+<li><p>Modify 22.5.3.4 <a href="https://wg21.link/optional.assign">[optional.assign]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+constexpr optional&lt;T&gt;&amp; operator=(nullopt_t) noexcept;
+</pre>
+<blockquote>
+<p>
+-1- <i>Effects</i>: If <code>*this</code> contains a value, calls 
+<code><del>val-&gt;</del><ins><i>val</i>.</ins>T::~T()</code> to destroy the contained 
+value; otherwise no effect.
+<p/>
+-2- <i>Postconditions</i>: <code>*this</code> does not contain a value.
+</p>
+</blockquote>
+<pre>
+constexpr optional&lt;T&gt;&amp; operator=(const optional&amp; rhs);
+</pre>
+<blockquote>
+<p>
+-4- <i>Effects</i>: See Table 58.
+</p>
+<table border="1">
+<caption>Table 58 &mdash; <code>optional::operator=(const optional&amp;)</code> effects [tab:optional.assign.copy]</caption>
+
+<tr>
+<th></th>
+<th><b><code>*this</code> contains a value</b></th>
+<th><b><code>*this</code> does not contain a value</b></th>
+</tr>
+
+<tr>
+<td><b><code>rhs</code> contains a value</b></td>
+<td>assigns <code><del>*</del>rhs<ins>.<i>val</i></ins></code> to <ins><code><i>val</i></code></ins><del>the contained value</del></td>
+<td>direct-non-list-initializes <ins><code><i>val</i></code></ins><del>the contained value</del> 
+with <code><del>*</del>rhs<ins>.<i>val</i></ins></code><br/>
+</td>
+</tr>
+
+<tr>
+<td><b><code>rhs</code> does not contain a value</b></td>
+<td>destroys the contained value by calling <code><del>val-&gt;</del><ins><i>val</i>.</ins>T::~T()</code><br/>
+</td>
+<td>no effect</td>
+</tr>
+</table> 
+<p>
+-5- <i>Postconditions</i>: <code>rhs.has_value() == this-&gt;has_value()</code>.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+<pre>
+constexpr optional&lt;T&gt;&amp; operator=(optional&amp;&amp; rhs) noexcept(<i>see below</i>);
+</pre>
+<blockquote>
+<p>
+-8- <i>Constraints</i>: [&hellip;]
+<p/>
+-9- <i>Effects</i>: See Table 59. The result of the expression <code>rhs.has_value()</code> remains unchanged.
+<p/>
+-10- <i>Postconditions</i>: <code>rhs.has_value() == this-&gt;has_value()</code>.
+<p/>
+-11- <i>Returns</i>: <code>*this</code>.
+</p>
+<table border="1">
+<caption>Table 59 &mdash; <code>optional::operator=(optional&amp;&amp;)</code> effects [tab:optional.assign.move]</caption>
+
+<tr>
+<th></th>
+<th><b><code>*this</code> contains a value</b></th>
+<th><b><code>*this</code> does not contain a value</b></th>
+</tr>
+
+<tr>
+<td><b><code>rhs</code> contains a value</b></td>
+<td>assigns <code>std::move(<del>*</del>rhs<ins>.<i>val</i></ins>)</code> to <ins><code><i>val</i></code></ins><del>the contained value</del></td>
+<td>direct-non-list-initializes <ins><code><i>val</i></code></ins><del>the contained value</del> with 
+<code>std::move(<del>*</del>rhs<ins>.<i>val</i></ins>)</code></td>
+</tr>
+
+<tr>
+<td><b><code>rhs</code> does not contain a value</b></td>
+<td>destroys the contained value by calling<br/>
+<code><del>val-&gt;</del><ins><i>val</i>.</ins>T::~T()</code></td>
+<td>no effect</td>
+</tr>
+</table> 
+<p>
+-12- <i>Remarks</i>: [&hellip;]
+<p/>
+-13- If any exception is thrown, the result of the expression <code>this-&gt;has_value()</code> remains 
+unchanged. If an exception is thrown during the call to <code>T</code>'s move constructor, the state 
+of <code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception 
+safety guarantee of <code>T</code>'s move constructor. If an exception is thrown during the call to 
+<code>T</code>'s move assignment, the state of <code><del>*</del><ins><i>val</i></ins><del>val</del></code> 
+and <code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception 
+safety guarantee of <code>T</code>'s move assignment.
+</p>
+</blockquote>
+<pre>
+template&lt;class U = T&gt; constexpr optional&lt;T&gt;&amp; operator=(U&amp;&amp; v);
+</pre>
+<blockquote>
+<p>
+-14- <i>Constraints</i>: [&hellip;]
+<p/>
+-15- <i>Effects</i>: If <code>*this</code> contains a value, assigns <code>std::forward&lt;U&gt;(v)</code> 
+to <ins><code><i>val</i></code></ins><del>the contained value</del>; otherwise direct-non-list-initializes 
+<ins><code><i>val</i></code></ins><del>the contained value</del> with <code>std::forward&lt;U&gt;(v)</code>.
+<p/>
+-16- <i>Postconditions</i>: <code>*this</code> contains a value.
+<p/>
+-17- <i>Returns</i>: <code>*this</code>.
+<p/>
+-18- <i>Remarks</i>: If any exception is thrown, the result of the expression <code>this-&gt;has_value()</code> 
+remains unchanged. If an exception is thrown during the call to <code>T</code>'s constructor, the state of 
+<code>v</code> is determined by the exception safety guarantee of <code>T</code>'s constructor. If an exception 
+is thrown during the call to <code>T</code>'s assignment, the state of <code><ins><i>val</i></ins><del>*val</del></code> 
+and <code>v</code> is determined by the exception safety guarantee of <code>T</code>'s assignment.   
+</p>
+</blockquote>
+<pre>
+template&lt;class U&gt; constexpr optional&lt;T&gt;&amp; operator=(const optional&lt;U&gt;&amp; rhs);
+</pre>
+<blockquote>
+<p>
+-19- <i>Constraints</i>: [&hellip;]
+<p/>
+-20- <i>Effects</i>: See Table 60.
+</p>
+<table border="1">
+<caption>Table 60 &mdash; <code>optional::operator=(const optional&lt;U&gt;&amp;)</code> effects [tab:optional.assign.copy.templ]</caption>
+
+<tr>
+<th></th>
+<th><b><code>*this</code> contains a value</b></th>
+<th><b><code>*this</code> does not contain a value</b></th>
+</tr>
+
+<tr>
+<td><b><code>rhs</code> contains a value</b></td>
+<td>assigns <code><del>*</del>rhs<ins>.<i>val</i></ins></code> to <ins><code><i>val</i></code></ins><del>the contained value</del></td>
+<td>direct-non-list-initializes <ins><code><i>val</i></code></ins><del>the contained value</del> 
+with <code><del>*</del>rhs<ins>.<i>val</i></ins></code> </td>
+</tr>
+
+<tr>
+<td><b><code>rhs</code> does not contain a value</b></td>
+<td>destroys the contained value by calling<br/> 
+<code><del>val-&gt;</del><ins><i>val</i>.</ins>T::~T()</code> </td>
+<td>no effect</td>
+</tr>
+</table> 
+<p>
+-21- <i>Postconditions</i>: <code>rhs.has_value() == this-&gt;has_value()</code>.
+<p/>
+-22- <i>Returns</i>: <code>*this</code>.
+<p/>
+-23- If any exception is thrown, the result of the expression <code>this-&gt;has_value()</code> remains 
+unchanged. If an exception is thrown during the call to <code>T</code>'s constructor, the state of 
+<code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception safety 
+guarantee of <code>T</code>'s constructor. If an exception is thrown during the call to <code>T</code>'s
+assignment, the state of <code><ins><i>val</i></ins><del>*val</del></code> and 
+<code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception safety 
+guarantee of <code>T</code>'s assignment.
+</p>
+</blockquote>
+<pre>
+template&lt;class U&gt; constexpr optional&lt;T&gt;&amp; operator=(optional&lt;U&gt;&amp;&amp; rhs);
+</pre>
+<blockquote>
+<p>
+-24- <i>Constraints</i>: [&hellip;]
+<p/>
+-25- <i>Effects</i>: See Table 61. The result of the expression <code>rhs.has_value()</code> remains unchanged.
+</p>
+<table border="1">
+<caption>Table 61 &mdash; <code>optional::operator=(optional&lt;U&gt;&amp;&amp;)</code> effects [tab:optional.assign.move.templ]</caption>
+
+<tr>
+<th></th>
+<th><b><code>*this</code> contains a value</b></th>
+<th><b><code>*this</code> does not contain a value</b></th>
+</tr>
+
+<tr>
+<td><b><code>rhs</code> contains a value</b></td>
+<td>assigns <code>std::move(<del>*</del>rhs<ins>.<i>val</i></ins>)</code> to <ins><code><i>val</i></code></ins><del>the contained value</del></td>
+<td>direct-non-list-initializes <ins><code><i>val</i></code></ins><del>the contained value</del> with<br/>
+<code>std::move(<del>*</del>rhs<ins>.<i>val</i></ins>)</code> </td>
+</tr>
+
+<tr>
+<td><b><code>rhs</code> does not contain a value</b></td>
+<td>destroys the contained value by calling<br/>
+<code><del>val-&gt;</del><ins><i>val</i>.</ins>T::~T()</code> </td>
+<td>no effect</td>
+</tr>
+</table> 
+<p>
+-26- <i>Postconditions</i>: <code>rhs.has_value() == this-&gt;has_value()</code>.
+<p/>
+-27- <i>Returns</i>: <code>*this</code>.
+<p/>
+-28- If any exception is thrown, the result of the expression <code>this-&gt;has_value()</code> remains 
+unchanged. If an exception is thrown during the call to <code>T</code>'s constructor, the state of 
+<code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception safety 
+guarantee of <code>T</code>'s constructor. If an exception is thrown during the call to <code>T</code>'s
+assignment, the state of <code><ins><i>val</i></ins><del>*val</del></code> and 
+<code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception safety 
+guarantee of <code>T</code>'s assignment.
+</p>
+</blockquote>
+<pre>
+template&lt;class... Args&gt; constexpr T&amp; emplace(Args&amp;&amp;... args);
+</pre>
+<blockquote>
+<p>
+-29- <i>Mandates</i>: [&hellip;]
+<p/>
+-30- <i>Effects</i>: Calls <code>*this = nullopt</code>. Then direct-non-list-initializes 
+<ins><code><i>val</i></code></ins><del>the contained value</del> with <code>std::forward&lt;Args&gt;(args)...</code>.
+<p/>
+-31- <i>Postconditions</i>: <code>*this</code> contains a value.
+<p/>
+-32- <i>Returns</i>: <ins><code><i>val</i></code></ins><del>A reference to the new contained value</del>.
+<p/>
+[&hellip;]
+<p/>
+-34- <i>Remarks</i>: If an exception is thrown during the call to <code>T</code>'s constructor, <code>*this</code> 
+does not contain a value, and the previous <code><ins><i>val</i></ins><del>*val</del></code> (if any) 
+has been destroyed.
+</p>
+</blockquote>
+<pre>
+template&lt;class U, class... Args&gt; constexpr T&amp; emplace(initializer_list&lt;U&gt; il, Args&amp;&amp;... args);
+</pre>
+<blockquote>
+<p>
+-35- <i>Constraints</i>: [&hellip;]
+<p/>
+-36- <i>Effects</i>: Calls <code>*this = nullopt</code>. Then direct-non-list-initializes 
+<ins><code><i>val</i></code></ins><del>the contained value</del> with <code>il, std::forward&lt;Args&gt;(args)...</code>.
+<p/>
+-37- <i>Postconditions</i>: <code>*this</code> contains a value.
+<p/>
+-38- <i>Returns</i>: <ins><code><i>val</i></code></ins><del>A reference to the new contained value</del>.
+<p/>
+[&hellip;]
+<p/>
+-40- <i>Remarks</i>: If an exception is thrown during the call to <code>T</code>'s constructor, <code>*this</code> 
+does not contain a value, and the previous <code><ins><i>val</i></ins><del>*val</del></code> (if any) 
+has been destroyed.
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+<li><p>Modify 22.5.3.5 <a href="https://wg21.link/optional.swap">[optional.swap]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+constexpr void swap(optional&amp; rhs) noexcept(<i>see below</i>);
+</pre>
+<blockquote>
+<p>
+-1- <i>Mandates</i>: [&hellip;]
+<p/>
+-2- <i>Preconditions</i>: [&hellip;]
+<p/>
+-3- <i>Effects</i>: See Table 62.
+</p>
+<table border="1">
+<caption>Table 62 &mdash; <code>optional::swap(optional&amp;)</code> effects [tab:optional.swap]</caption>
+
+<tr>
+<th></th>
+<th><b><code>*this</code> contains a value</b></th>
+<th><b><code>*this</code> does not contain a value</b></th>
+</tr>
+
+<tr>
+<td><b><code>rhs</code> contains a value</b></td>
+<td>calls <code>swap(<ins><i>val</i></ins><del>*(*this)</del>, <del>*</del>rhs<ins>.<i>val</i></ins>)</code></td>
+<td>direct-non-list-initializes <ins><code><i>val</i></code></ins><del>the contained value of <code>*this</code></del><br/>
+with <code>std::move(<del>*</del>rhs<ins>.<i>val</i></ins>)</code>, followed by <code>rhs.<ins><i>val</i>.</ins><del>val-&gt;</del>T::~T()</code>;<br/>
+postcondition is that <code>*this</code> contains a value and <code>rhs</code> does<br/>
+not contain a value</td>
+</tr>
+
+<tr>
+<td><b><code>rhs</code> does not contain a value</b></td>
+<td>direct-non-list-initializes <del>the contained value of</del> <code>rhs<ins>.<i>val</i></ins></code><br/>
+with <code>std::move(<ins><i>val</i></ins><del>*(*this)</del>)</code>, followed by <code><ins><i>val</i>.</ins><del>val-&gt;</del>T::~T()</code>;<br/>
+postcondition is that <code>*this</code> does not contain a value and <code>rhs</code><br/>
+contains a value</td>
+<td>no effect</td>
+</tr>
+</table> 
+<p>
+-4- <i>Throws</i>: [&hellip;]
+<p/>
+-5- <i>Remarks</i>: [&hellip;]
+<p/>
+-6- If any exception is thrown, the results of the expressions <code>this-&gt;has_value()</code> and 
+<code>rhs.has_value()</code> remain unchanged. If an exception is thrown during the call to function <code>swap</code>, 
+the state of <code><ins><i>val</i></ins><del>*val</del></code> and 
+<code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception safety 
+guarantee of <code>swap</code> for lvalues of <code>T</code>. If an exception is thrown during the call to 
+<code>T</code>'s move constructor, the state of <code><ins><i>val</i></ins><del>*val</del></code> and 
+<code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception safety 
+guarantee of <code>T</code>'s move constructor.
+<p/>
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+<li><p>Modify 22.5.3.6 <a href="https://wg21.link/optional.observe">[optional.observe]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+constexpr const T* operator-&gt;() const noexcept;
+constexpr T* operator-&gt;() noexcept;
+</pre>
+<blockquote>
+<p>
+-1- <i>Preconditions</i>: <code>*this</code> contains a value.
+<p/>
+-2- <i>Returns</i>: <code><ins>addressof(<i>val</i>)</ins><del>val</del></code>.
+<p/>
+-3- [&hellip;]
+</p>
+</blockquote>
+<pre>
+constexpr const T&amp; operator*() const &amp; noexcept;
+constexpr T&amp; operator*() &amp; noexcept;
+</pre>
+<blockquote>
+<p>
+-4- <i>Preconditions</i>: <code>*this</code> contains a value.
+<p/>
+-5- <i>Returns</i>: <code><ins><i>val</i></ins><del>*val</del></code>.
+<p/>
+-6- [&hellip;]
+</p>
+</blockquote>
+<pre>
+constexpr T&amp;&amp; operator*() &amp;&amp; noexcept;
+constexpr const T&amp;&amp; operator*() const &amp;&amp; noexcept;
+</pre>
+<blockquote>
+<p>
+-7- <i>Preconditions</i>: <code>*this</code> contains a value.
+<p/>
+-8- <i>Effects</i>: Equivalent to: <code>return std::move(<ins><i>val</i></ins><del>*val</del>);</code>
+</p>
+</blockquote>
+<pre>
+constexpr explicit operator bool() const noexcept;
+</pre>
+<blockquote>
+<p>
+-9- <i>Returns</i>: <code>true</code> if and only if <code>*this</code> contains a value.
+<p/>
+-10- <i>Remarks</i>: This function is a constexpr function.
+</p>
+</blockquote>
+<pre>
+constexpr bool has_value() const noexcept;
+</pre>
+<blockquote>
+<p>
+-11- <i>Returns</i>: <code>true</code> if and only if <code>*this</code> contains a value.
+<p/>
+-12- <i>Remarks</i>: This function is a constexpr function.
+</p>
+</blockquote>
+<pre>
+constexpr const T&amp; value() const &amp;;
+constexpr T&amp; value() &amp;;
+</pre>
+<blockquote>
+<p>
+-13- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+return has_value() ? <ins><i>val</i></ins><del>*val</del> : throw bad_optional_access();
+</pre></blockquote>
+</blockquote>
+<pre>
+constexpr T&amp;&amp; value() &amp;&amp;;
+constexpr const T&amp;&amp; value() const &amp;&amp;;
+</pre>
+<blockquote>
+<p>
+-14- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+return has_value() ? std::move(<ins><i>val</i></ins><del>*val</del>) : throw bad_optional_access();
+</pre></blockquote>
+</blockquote>
+<pre>
+template&lt;class U&gt; constexpr T value_or(U&amp;&amp; v) const &amp;;
+</pre>
+<blockquote>
+<p>
+-15- <i>Mandates</i>: [&hellip;]
+<p/>
+-16- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+return has_value() ? <ins><i>val</i></ins><del>**this</del> : static_cast&lt;T&gt;(std::forward&lt;U&gt;(v));
+</pre></blockquote>
+</blockquote>
+<pre>
+template&lt;class U&gt; constexpr T value_or(U&amp;&amp; v) &amp;&amp;;
+</pre>
+<blockquote>
+<p>
+-17- <i>Mandates</i>: [&hellip;]
+<p/>
+-18- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+return has_value() ? std::move(<ins><i>val</i></ins><del>**this</del>) : static_cast&lt;T&gt;(std::forward&lt;U&gt;(v));
+</pre></blockquote>
+</blockquote>
+</blockquote>
+</li>
+
+<li><p>Modify 22.5.3.7 <a href="https://wg21.link/optional.monadic">[optional.monadic]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) &amp;;
+template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) const &amp;;
+</pre>
+<blockquote>
+<p>
+-1- Let <code>U</code> be <code>invoke_result_t&lt;F, decltype(<ins>(<i>val</i>)</ins><del>*val</del>)&gt;</code>.
+<p/>
+-2- <i>Mandates</i>: [&hellip;]
+<p/>
+-3- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+if (*this) {
+  return invoke(std::forward&lt;F&gt;(f), <ins><i>val</i></ins><del>*val</del>);
+} else {
+  return remove_cvref_t&lt;U&gt;();
+}
+</pre></blockquote>
+</blockquote>
+<pre>
+template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) &amp;&amp;;
+template&lt;class F&gt; constexpr auto and_then(F&amp;&amp; f) const &amp;&amp;;
+</pre>
+<blockquote>
+<p>
+-4- Let <code>U</code> be <code>invoke_result_t&lt;F, decltype(std::move(<ins><i>val</i></ins><del>*val</del>))&gt;</code>.
+<p/>
+-5- <i>Mandates</i>: [&hellip;]
+<p/>
+-6- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+if (*this) {
+  return invoke(std::forward&lt;F&gt;(f), std::move(<ins><i>val</i></ins><del>*val</del>));
+} else {
+  return remove_cvref_t&lt;U&gt;();
+}
+</pre></blockquote>
+</blockquote>
+<pre>
+template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) &amp;;
+template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) const &amp;;
+</pre>
+<blockquote>
+<p>
+-7- Let <code>U</code> be <code>remove_cv_t&lt;invoke_result_t&lt;F, decltype(<ins>(<i>val</i>)</ins><del>*val</del>)&gt;&gt;</code>.
+<p/>
+-8- <i>Mandates</i>: <code>U</code> is a non-array object type other than <code>in_place_t</code> or <code>nullopt_t</code>. The declaration
+</p>
+<blockquote><pre>
+U u(invoke(std::forward&lt;F&gt;(f), <ins><i>val</i></ins><del>*val</del>));
+</pre></blockquote>
+<p>
+is well-formed for some invented variable <code>u</code>.
+<p/>
+[&hellip;]
+<p/>
+-9- <i>Returns</i>: If <code>*this</code> contains a value, an <code>optional&lt;U&gt;</code> object whose contained value is 
+direct-non-list-initialized with <code>invoke(std::forward&lt;F&gt;(f), <ins><i>val</i></ins><del>*val</del>)</code>; otherwise, 
+<code>optional&lt;U&gt;()</code>.
+</p>
+</blockquote>
+<pre>
+template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) &amp;&amp;;
+template&lt;class F&gt; constexpr auto transform(F&amp;&amp; f) const &amp;&amp;;
+</pre>
+<blockquote>
+<p>
+-10- Let <code>U</code> be <code>remove_cv_t&lt;invoke_result_t&lt;F, decltype(std::move(<ins><i>val</i></ins><del>*val</del>))&gt;&gt;</code>.
+<p/>
+-11- <i>Mandates</i>: <code>U</code> is a non-array object type other than <code>in_place_t</code> or <code>nullopt_t</code>. The declaration
+</p>
+<blockquote><pre>
+U u(invoke(std::forward&lt;F&gt;(f), std::move(<ins><i>val</i></ins><del>*val</del>)));
+</pre></blockquote>
+<p>
+is well-formed for some invented variable <code>u</code>.
+<p/>
+[&hellip;]
+<p/>
+-12- <i>Returns</i>: If <code>*this</code> contains a value, an <code>optional&lt;U&gt;</code> object whose contained value is 
+direct-non-list-initialized with <code>invoke(std::forward&lt;F&gt;(f), std::move(<ins><i>val</i></ins><del>*val</del>))</code>; otherwise, 
+<code>optional&lt;U&gt;()</code>.
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+<li><p>Modify 22.5.3.8 <a href="https://wg21.link/optional.mod">[optional.mod]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+constexpr void reset() noexcept;
+</pre>
+<blockquote>
+<p>
+-1- <i>Effects</i>: If <code>*this</code> contains a value, calls <code><del>val-&gt;</del><ins><i>val</i>.</ins>T::~T()</code>
+to destroy the contained value; otherwise no effect.
 <p/>
 -2- <i>Postconditions</i>: <code>*this</code> does not contain a value.
 </p>
@@ -54823,583 +55303,6 @@ void vprint_nonunicode(FILE* stream, string_view fmt, format_args args);
 </blockquote>
 </li>
 </ol>
-
-
-
-
-
-<hr>
-<h3 id="4044"><a href="#4044">4044</a><sup><a href="https://cplusplus.github.io/LWG/issue4044">(i)</a></sup>. Confusing requirements for <code>std::print</code> on POSIX platforms</h3>
-<p><b>Section:</b> 31.7.10 <a href="https://wg21.link/print.fun">[print.fun]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-01-24 <b>Last modified:</b> 2024-03-19</p>
-<p><b>Priority: </b>3
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#print.fun">active issues</a> in [print.fun].</p>
-<p><b>View all other</b> <a href="lwg-index.html#print.fun">issues</a> in [print.fun].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-The effects for <code>vprintf_unicode</code> say:
-</p>
-
-<blockquote>
-<p>
-If <code>stream</code> refers to a terminal capable of displaying Unicode,
-writes <code>out</code> to the terminal using the native Unicode API;
-if <code>out</code> contains invalid code units, the behavior is undefined
-and implementations are encouraged to diagnose it.
-Otherwise writes <code>out</code> to <code>stream</code> unchanged.
-If the native Unicode API is used, the function flushes <code>stream</code>
-before writing <code>out</code>.
-</p>
-<p>
-[<i>Note 1</i>:
-On POSIX and Windows, <code>stream</code> referring to a terminal means that,
-respectively, <code>isatty(fileno(stream))</code> and
-<code>GetConsoleMode(_get_osfhandle(_fileno(stream)), ...)</code>
-return nonzero.
-&mdash; <i>end note</i>]
-</p>
-<p>
-[<i>Note 2</i>:
-On Windows, the native Unicode API is <code>WriteConsoleW</code>.
-&mdash; <i>end note</i>]
-</p>
-<p>-8-
-<i>Throws</i>:  [...]
-</p>
-<p>-9-
-<i>Recommended practice</i>:
-If invoking the native Unicode API requires transcoding, implementations
-should substitute invalid code units with
-<span style="font-variant: small-caps">u+fffd replacement character</span>
-per the Unicode Standard, Chapter 3.9
-<span style="font-variant: small-caps">u+fffd</span> Substitution in Conversion.
-</p>
-</blockquote>
-
-<p>
-The very explicit mention of <code>isatty</code> for POSIX platforms has
-confused at least two implementers into thinking that we're supposed to
-use <code>isatty</code>, and supposed to do something differently based
-on what it returns. That seems consistent with the nearly identical wording
-in 22.14.2.2 <a href="https://wg21.link/format.string.std">[format.string.std]</a> paragraph 12, which says
-"Implementations should use either UTF-8, UTF-16, or UTF-32,
-on platforms <u>capable of displaying Unicode text in a terminal</u>"
-and then has a note explicitly saying this is the case for Windows-based and
-many POSIX-based operating systems. So it seems clear that POSIX platforms
-are supposed to be considered to have "a terminal capable of displaying
-Unicode text", and so <code>std::print</code> should use <code>isatty</code>
-and then use a native Unicode API, and diagnose invalid code units.
-</p>
-<p>
-This is a problem however, because <code>isatty</code> needs
-to make a system call on Linux, adding 500ns to every <code>std::print</code>
-call. This results in a 10x slowdown on Linux, where <code>std::print</code>
-can take just 60ns without the <code>isatty</code> check.
-</p>
-<p>
-From discussions with Tom Honermann I learned that the "native Unicode API"
-wording is only relevant on Windows. This makes sense, because for POSIX
-platforms, writing to a terminal is done using the usual stdio functions,
-so there's no need to treat a terminal differently to any other file stream.
-And substitution of invalid code units with
-<span style="font-variant: small-caps">u+fffd</span>
-is recommended for Windows because that's what typical modern terminals do on
-POSIX platforms, so requiring the implementation to do that on Windows gives
-consistent behaviour. But the implementation doesn't need to do anything to
-make that happen with a POSIX terminal, it happens anyway.
-So the <code>isatty</code> check is unnecessary for POSIX platforms,
-and the note mentioning it just causes confusion and has no benefit.
-</p>
-
-<p>
-Secondly, there initially seems to be a contradiction between the 
-"implementations are encouraged to diagnose it" wording and the later
-<i>Recommended practice</i>. In fact, there's no contradiction because
-the native Unicode API might accept UTF-8 and therefore require no
-transcoding, and so the <i>Recommended practice</i> wouldn't apply.
-The intention is that diagnosing invalid UTF-8 is still desirable in this case,
-but how should it be diagnosed? By writing an error to the terminal alongside
-the formatted string?
-Or by substituting <span style="font-variant: small-caps">u+fffd</span> maybe?
-If the latter is the intention, why is one suggestion in the middle of the
-<i>Effects</i>, and one given as <i>Recommended practice</i>?
-</p>
-
-<p>
-The proposed resolution attempts to clarify that a "native Unicode API"
-is only needed if that's how you display Unicode on the terminal.
-It also moves the flushing requirement to be adjacent to the other
-requirements for systems using a native Unicode API instead of on its own
-later in the paragraph.
-And the suggestion to diagnose invalid code units is moved into the
-<i>Recommended practice</i> and clarified that it's only relevant if
-using a native Unicode API. I'm still not entirely happy with encouragement
-to diagnose invalid code units without giving any clue as to how that should
-be done. What does it mean to diagnose something at runtime? That's novel
-for the C++ standard. The way it's currently phrased seems to imply something
-other than <span style="font-variant: small-caps">u+fffd</span> substitution
-should be done, although that seems the most obvious implementation to me.
-</p>
-
-
-<p><i>[2024-03-12; Reflector poll]</i></p>
-
-<p>
-Set priority to 3 after reflector poll and send to SG16.
-</p>
-
-<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
-<blockquote class="note">
-
-<p>
-This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
-</p>
-
-<ol>
-<li><p>Modify 31.7.6.3.5 <a href="https://wg21.link/ostream.formatted.print">[ostream.formatted.print]</a> as indicated:</p>
-<blockquote>
-<pre>
-void vprint_unicode(ostream&amp; os, string_view fmt, format_args args);
-void vprint_nonunicode(ostream&amp; os, string_view fmt, format_args args);
-</pre>
-<p>-3-
-<i>Effects</i>:
-Behaves as a formatted output function
-(31.7.6.3.1 <a href="https://wg21.link/ostream.formatted.reqmts">[ostream.formatted.reqmts]</a>)
-of <code>os</code>, except that:
-<ol style="list-style-type: none">
-<li>(3.1) &ndash;
-failure to generate output is reported as specified below, and
-</li>
-<li>(3.2) &ndash;
-any exception thrown by the call to <code>vformat</code> is propagated without
-regard to the value of <code>os.exceptions()</code> and without turning on
-<code>ios_base::badbit</code> in the error state of <code>os</code>.
-</li>
-</ol>
-</p>
-<p>
-After constructing a <code>sentry</code> object,
-the function initializes an automatic variable via
-<pre><code>  string out = vformat(os.getloc(), fmt, args); </code></pre>
-If the function is <code>vprint_unicode</code>
-and <code>os</code> is a stream that
-refers to a terminal capable of displaying Unicode
-<ins>via a native Unicode API,</ins>
-which is determined in an implementation-defined manner,
-<ins>flushes <code>os</code> and then</ins>
-writes <code>out</code> to the terminal using the native Unicode API;
-if <code>out</code> contains invalid code units, the behavior is undefined
-<del>and implementations are encouraged to diagnose it</del>.
-<del>
-If the native Unicode API is used, the function flushes <code>os</code>
-before writing <code>out</code>.
-</del>
-Otherwise, (if <code>os</code> is not such a stream or the function is
-<code>vprint_nonunicode</code>), inserts the character sequence
-[<code>out.begin()</code>,<code>out.end()</code>) into <code>os</code>.
-If writing to the terminal or inserting into <code>os</code> fails, calls
-<code>os.setstate(ios_base::badbit)</code>
-(which may throw <code>ios_base::failure</code>).
-</p>
-<p>-4-
-<i>Recommended practice</i>:
-For <code>vprint_unicode</code>,
-if invoking the native Unicode API requires transcoding, implementations
-should substitute invalid code units with
-<span style="font-variant: small-caps">u+fffd replacement character</span>
-per the Unicode Standard, Chapter 3.9
-<span style="font-variant: small-caps">u+fffd</span> Substitution in Conversion.
-<ins>
-If invoking the native Unicode API  does not require transcoding,
-implementations are encouraged to diagnose invalid code units.
-</ins>
-</p>
-</blockquote>
-</li>
-
-<li><p>Modify 31.7.10 <a href="https://wg21.link/print.fun">[print.fun]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-void vprint_unicode(FILE* stream, string_view fmt, format_args args);
-</pre>
-<p>-6-
-<i>Preconditions</i>:
-<code>stream</code> is a valid pointer to an output C stream.
-</p>
-<p>-7-
-<i>Effects</i>:
-The function initializes an automatic variable via
-<pre><code>  string out = vformat(fmt, args); </code></pre>
-If <code>stream</code> refers to a terminal capable of displaying Unicode
-<ins>via a native Unicode API</ins>,
-<ins>flushes <code>stream</code> and then</ins>
-writes <code>out</code> to the terminal using the native Unicode API;
-if <code>out</code> contains invalid code units, the behavior is undefined
-<del>and implementations are encouraged to diagnose it</del>.
-Otherwise writes <code>out</code> to <code>stream</code> unchanged.
-<del>
-If the native Unicode API is used, the function flushes <code>stream</code>
-before writing <code>out</code>.
-</del>
-</p>
-<p>
-[<i>Note 1</i>:
-On <del>POSIX and</del> Windows<del>,</del>
-<ins>the native Unicode API is <code>WriteConsoleW</code> and</ins>
-<code>stream</code> referring to a terminal means that<del>,
-respectively, <code>isatty(fileno(stream))</code> and</del>
-<code>GetConsoleMode(_get_osfhandle(_fileno(stream)), ...)</code>
-return nonzero.
-&mdash; <i>end note</i>]
-</p>
-<p>
-<del>
-[<i>Note 2</i>:
-On Windows, the native Unicode API is <code>WriteConsoleW</code>.
-&mdash; <i>end note</i>]
-</del>
-</p>
-<p>-8-
-<i>Throws</i>:  [...]
-</p>
-<p>-9-
-<i>Recommended practice</i>:
-If invoking the native Unicode API requires transcoding, implementations
-should substitute invalid code units with
-<span style="font-variant: small-caps">u+fffd replacement character</span>
-per the Unicode Standard, Chapter 3.9
-<span style="font-variant: small-caps">u+fffd</span> Substitution in Conversion.
-<ins>
-If invoking the native Unicode API  does not require transcoding,
-implementations are encouraged to diagnose invalid code units.
-</ins>
-</p>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-
-<p><i>[2024-03-12; Jonathan updates wording based on SG16 feedback]</i></p>
-
-<p>
-SG16 reviewed the issue and approved the proposed resolution with
-the wording about diagnosing invalid code units removed.
-</p>
-<p>
-SG16 favors removing the following text (both occurrences) from the proposed
-wording. This is motivated by a lack of understanding regarding what it means
-to diagnose such invalid code unit sequences given that the input is likely
-provided at run-time.
-
-<blockquote>
-If invoking the native Unicode API does not require transcoding, implementations are encouraged to diagnose invalid code units.
-</blockquote>
-</p>
-
-<p>
-Some concern was expressed regarding how the current wording is structured.
-At present, the wording leads with a Windows centric perspective;
-if the stream refers to a terminal ... use the native Unicode API ...
-otherwise write code units to the stream.
-It might be an improvement to structure the wording such that use of the native
-Unicode API is presented as a fallback for implementations that require its use
-when writing directly to the stream is not sufficient to produce desired
-results. In other words, the wording should permit direct writing to the stream
-even when the stream is directed to a terminal and a native Unicode API is
-available when the implementation has reason to believe that doing so will
-produce the correct results. For example, Microsoft's HoloLens has a Windows
-based operating system, but it only supports use of UTF-8 as the system code
-page and therefore would not require the native Unicode API bypass;
-implementations for it could avoid the overhead of checking to see if the
-stream is directed to a console.
-</p>
-
-<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
-<blockquote class="note">
-
-
-<p>
-This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
-</p>
-
-<ol>
-<li><p>Modify 31.7.6.3.5 <a href="https://wg21.link/ostream.formatted.print">[ostream.formatted.print]</a> as indicated:</p>
-<blockquote>
-<pre>
-void vprint_unicode(ostream&amp; os, string_view fmt, format_args args);
-void vprint_nonunicode(ostream&amp; os, string_view fmt, format_args args);
-</pre>
-<p>-3-
-<i>Effects</i>:
-Behaves as a formatted output function
-(31.7.6.3.1 <a href="https://wg21.link/ostream.formatted.reqmts">[ostream.formatted.reqmts]</a>)
-of <code>os</code>, except that:
-<ol style="list-style-type: none">
-<li>(3.1) &ndash;
-failure to generate output is reported as specified below, and
-</li>
-<li>(3.2) &ndash;
-any exception thrown by the call to <code>vformat</code> is propagated without
-regard to the value of <code>os.exceptions()</code> and without turning on
-<code>ios_base::badbit</code> in the error state of <code>os</code>.
-</li>
-</ol>
-</p>
-<p>
-After constructing a <code>sentry</code> object,
-the function initializes an automatic variable via
-<pre><code>  string out = vformat(os.getloc(), fmt, args); </code></pre>
-If the function is <code>vprint_unicode</code>
-and <code>os</code> is a stream that
-refers to a terminal <ins>that is only</ins> capable of displaying Unicode
-<ins>via a native Unicode API,</ins>
-which is determined in an implementation-defined manner,
-<ins>flushes <code>os</code> and then</ins>
-writes <code>out</code> to the terminal using the native Unicode API;
-if <code>out</code> contains invalid code units, the behavior is undefined
-<del>and implementations are encouraged to diagnose it</del>.
-<del>
-If the native Unicode API is used, the function flushes <code>os</code>
-before writing <code>out</code>.
-</del>
-Otherwise, (if <code>os</code> is not such a stream or the function is
-<code>vprint_nonunicode</code>), inserts the character sequence
-[<code>out.begin()</code>,<code>out.end()</code>) into <code>os</code>.
-If writing to the terminal or inserting into <code>os</code> fails, calls
-<code>os.setstate(ios_base::badbit)</code>
-(which may throw <code>ios_base::failure</code>).
-</p>
-<p>-4-
-<i>Recommended practice</i>:
-For <code>vprint_unicode</code>,
-if invoking the native Unicode API requires transcoding, implementations
-should substitute invalid code units with
-<span style="font-variant: small-caps">u+fffd replacement character</span>
-per the Unicode Standard, Chapter 3.9
-<span style="font-variant: small-caps">u+fffd</span> Substitution in Conversion.
-</p>
-</blockquote>
-</li>
-
-<li><p>Modify 31.7.10 <a href="https://wg21.link/print.fun">[print.fun]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-void vprint_unicode(FILE* stream, string_view fmt, format_args args);
-</pre>
-<p>-6-
-<i>Preconditions</i>:
-<code>stream</code> is a valid pointer to an output C stream.
-</p>
-<p>-7-
-<i>Effects</i>:
-The function initializes an automatic variable via
-<pre><code>  string out = vformat(fmt, args); </code></pre>
-If <code>stream</code> refers to a terminal <ins>that is only</ins>
-capable of displaying Unicode
-<ins>via a native Unicode API</ins>,
-<ins>flushes <code>stream</code> and then</ins>
-writes <code>out</code> to the terminal using the native Unicode API;
-if <code>out</code> contains invalid code units, the behavior is undefined
-<del>and implementations are encouraged to diagnose it</del>.
-Otherwise writes <code>out</code> to <code>stream</code> unchanged.
-<del>
-If the native Unicode API is used, the function flushes <code>stream</code>
-before writing <code>out</code>.
-</del>
-</p>
-<p>
-[<i>Note 1</i>:
-On <del>POSIX and</del> Windows<del>,</del>
-<ins>the native Unicode API is <code>WriteConsoleW</code> and</ins>
-<code>stream</code> referring to a terminal means that<del>,
-respectively, <code>isatty(fileno(stream))</code> and</del>
-<code>GetConsoleMode(_get_osfhandle(_fileno(stream)), ...)</code>
-return nonzero.
-&mdash; <i>end note</i>]
-</p>
-<p>
-<del>
-[<i>Note 2</i>:
-On Windows, the native Unicode API is <code>WriteConsoleW</code>.
-&mdash; <i>end note</i>]
-</del>
-</p>
-<p>-8-
-<i>Throws</i>:  [...]
-</p>
-<p>-9-
-<i>Recommended practice</i>:
-If invoking the native Unicode API requires transcoding, implementations
-should substitute invalid code units with
-<span style="font-variant: small-caps">u+fffd replacement character</span>
-per the Unicode Standard, Chapter 3.9
-<span style="font-variant: small-caps">u+fffd</span> Substitution in Conversion.
-</p>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-
-<p><i>[2024-03-19; Tokyo: Jonathan updates wording after LWG review]</i></p>
-
-<p>
-Split the <em>Effects</em>: into separate bullets for the "native Unicode API"
-and "otherwise" cases. Remove the now-redundant "if <code class='backtick'>os</code> is not such a stream"
-parenthesis.
-</p>
-
-
-
-<p id="res-4044"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4971" title=" Working Draft, Programming Languages — C++">N4971</a>.
-</p>
-
-<ol>
-<li><p>Modify 31.7.6.3.5 <a href="https://wg21.link/ostream.formatted.print">[ostream.formatted.print]</a> as indicated:</p>
-<blockquote>
-<pre>
-void vprint_unicode(ostream&amp; os, string_view fmt, format_args args);
-void vprint_nonunicode(ostream&amp; os, string_view fmt, format_args args);
-</pre>
-<p>-3-
-<i>Effects</i>:
-Behaves as a formatted output function
-(31.7.6.3.1 <a href="https://wg21.link/ostream.formatted.reqmts">[ostream.formatted.reqmts]</a>)
-of <code>os</code>, except that:
-<ol style="list-style-type: none">
-<li>(3.1) &ndash;
-failure to generate output is reported as specified below, and
-</li>
-<li>(3.2) &ndash;
-any exception thrown by the call to <code>vformat</code> is propagated without
-regard to the value of <code>os.exceptions()</code> and without turning on
-<code>ios_base::badbit</code> in the error state of <code>os</code>.
-</li>
-</ol>
-</p>
-
-<p>
-<ins>-?-</ins>
-After constructing a <code>sentry</code> object,
-the function initializes an automatic variable via
-<pre><code>  string out = vformat(os.getloc(), fmt, args); </code></pre>
-<ol style="list-style-type: none">
-<li><ins>(?.1) &ndash; </ins>
-If the function is <code>vprint_unicode</code>
-and <code>os</code> is a stream that
-refers to a terminal <ins>that is only</ins> capable of displaying Unicode
-<ins>via a native Unicode API,</ins>
-which is determined in an implementation-defined manner,
-<ins>flushes <code>os</code> and then</ins>
-writes <code>out</code> to the terminal using the native Unicode API;
-if <code>out</code> contains invalid code units, the behavior is undefined
-<del>and implementations are encouraged to diagnose it.</del>
-<del>
-If the native Unicode API is used, the function flushes <code>os</code>
-before writing <code>out</code></del>.
-</li>
-<li><ins>(?.2) &ndash; </ins>
-Otherwise,
-<del>
-(if <code>os</code> is not such a stream or the function is
-<code>vprint_nonunicode</code>),
-</del>
-inserts the character sequence
-[<code>out.begin()</code>,<code>out.end()</code>) into <code>os</code>.
-</li>
-</ol>
-</p>
-<p>
-<ins>-?-</ins>
-If writing to the terminal or inserting into <code>os</code> fails, calls
-<code>os.setstate(ios_base::badbit)</code>
-(which may throw <code>ios_base::failure</code>).
-</p>
-<p>-4-
-<i>Recommended practice</i>:
-For <code>vprint_unicode</code>,
-if invoking the native Unicode API requires transcoding, implementations
-should substitute invalid code units with
-<span style="font-variant: small-caps">u+fffd replacement character</span>
-per the Unicode Standard, Chapter 3.9
-<span style="font-variant: small-caps">u+fffd</span> Substitution in Conversion.
-</p>
-</blockquote>
-</li>
-
-<li><p>Modify 31.7.10 <a href="https://wg21.link/print.fun">[print.fun]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-void vprint_unicode(FILE* stream, string_view fmt, format_args args);
-</pre>
-<p>-6-
-<i>Preconditions</i>:
-<code>stream</code> is a valid pointer to an output C stream.
-</p>
-<p>-7-
-<i>Effects</i>:
-The function initializes an automatic variable via
-<pre><code>  string out = vformat(fmt, args); </code></pre>
-<ol style="list-style-type: none">
-<li><ins>(7.1) &ndash; </ins>
-If <code>stream</code> refers to a terminal <ins>that is only</ins>
-capable of displaying Unicode
-<ins>via a native Unicode API</ins>,
-<ins>flushes <code>stream</code> and then</ins>
-writes <code>out</code> to the terminal using the native Unicode API;
-if <code>out</code> contains invalid code units, the behavior is undefined
-<del>and implementations are encouraged to diagnose it</del>.
-</li>
-<li><ins>(7.2) &ndash; </ins>
-Otherwise writes <code>out</code> to <code>stream</code> unchanged.
-</li>
-</ol>
-</p>
-<p>
-<del>
-If the native Unicode API is used, the function flushes <code>stream</code>
-before writing <code>out</code>.
-</del>
-</p>
-<p>
-[<i>Note 1</i>:
-On <del>POSIX and</del> Windows<del>,</del>
-<ins>the native Unicode API is <code>WriteConsoleW</code> and</ins>
-<code>stream</code> referring to a terminal means that<del>,
-respectively, <code>isatty(fileno(stream))</code> and</del>
-<code>GetConsoleMode(_get_osfhandle(_fileno(stream)), ...)</code>
-return<ins>s</ins> nonzero.
-&mdash; <i>end note</i>]
-</p>
-<p>
-<del>
-[<i>Note 2</i>:
-On Windows, the native Unicode API is <code>WriteConsoleW</code>.
-&mdash; <i>end note</i>]
-</del>
-</p>
-<p>-8-
-<i>Throws</i>:  [...]
-</p>
-<p>-9-
-<i>Recommended practice</i>:
-If invoking the native Unicode API requires transcoding, implementations
-should substitute invalid code units with
-<span style="font-variant: small-caps">u+fffd replacement character</span>
-per the Unicode Standard, Chapter 3.9
-<span style="font-variant: small-caps">u+fffd</span> Substitution in Conversion.
-</p>
-</blockquote>
-</li>
-</ol>
-
 
 
 

@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-06-24 at 12:51:15 UTC
+<p>Revised 2024-06-24 at 13:02:10 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -37564,7 +37564,7 @@ Set priority to 3 after reflector poll.
 <hr>
 <h3 id="3635"><a href="#3635">3635</a><sup><a href="https://cplusplus.github.io/LWG/issue3635">(i)</a></sup>. Add <code>__cpp_lib_deduction_guides</code> to feature test macros</h3>
 <p><b>Section:</b> 17.3.2 <a href="https://wg21.link/version.syn">[version.syn]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
- <b>Submitter:</b> Konstantin Varlamov <b>Opened:</b> 2021-11-09 <b>Last modified:</b> 2023-05-24</p>
+ <b>Submitter:</b> Konstantin Varlamov <b>Opened:</b> 2021-11-09 <b>Last modified:</b> 2024-06-24</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#version.syn">active issues</a> in [version.syn].</p>
@@ -37624,12 +37624,11 @@ to be portable to pre-CTAD compilers can just not use CTAD.
 
 <p><i>[2023-04-21; Reflector poll for 'Tentatively NAD']</i></p>
 
-<p><i>[
+<p>
 "We keep changing the deduction guides, and different libraries might be
 conformant in some headers and not others. The status cannot be represented
 by a single number."
-]</i></p>
-
+</p>
 
 
 
@@ -54169,7 +54168,7 @@ is <code>forward_iterator_tag</code>;</ins></p></li>
 <hr>
 <h3 id="4003"><a href="#4003">4003</a><sup><a href="https://cplusplus.github.io/LWG/issue4003">(i)</a></sup>. <code>view_interface::back</code> is overconstrained</h3>
 <p><b>Section:</b> 26.5.3 <a href="https://wg21.link/view.interface">[view.interface]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-10-28 <b>Last modified:</b> 2023-11-07</p>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2023-10-28 <b>Last modified:</b> 2024-06-24</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#view.interface">issues</a> in [view.interface].</p>
@@ -54196,7 +54195,7 @@ static_assert(std::get&lt;0&gt;(z.back()) == 4); // ok
 
 <p><i>[2023-11-07; Reflector poll]</i></p>
 
-+<p>NAD. "During the <code>concat</code> discussion LEWG decided not to
+<p>NAD. "During the <code>concat</code> discussion LEWG decided not to
 support the corner case of random-access sized but not-common ranges."
 "If we did want to address such ranges, would be better to enforce commonness
 for random-access sized ranges by having <code>ranges::end</code> return

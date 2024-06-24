@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-06-24 at 22:50:05 UTC
+<p>Revised 2024-06-24 at 22:55:43 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -55344,7 +55344,11 @@ member <code>val</code>
 <p>
 [<i>Drafting note</i>: Normatively, this subclause doesn't require any changes, but Daniel suggested to replace
 phrases of the form "[&hellip;]initializes the contained value with"] by "[&hellip;]initializes <code><i>val</i></code> with"
-as we do in 22.8.6.2 <a href="https://wg21.link/expected.object.cons">[expected.object.cons]</a>.]
+as we do in 22.8.6.2 <a href="https://wg21.link/expected.object.cons">[expected.object.cons]</a>.
+I think this is an improvement, since the edit to [optional.ctor] above does
+not actually say that <code class='backtick'>val</code> <i>is</i> the contained value, so the changes
+below make it clear that we begin/end the lifetime of <code class='backtick'>val</code>, not something else.
+]
 </p>
 </blockquote>
 

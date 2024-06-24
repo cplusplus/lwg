@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Issue 4106: basic_format_args should not be default-constructible</title>
 <meta property="og:title" content="Issue 4106: basic_format_args should not be default-constructible">
-<meta property="og:description" content="C++ library issue. Status: New">
+<meta property="og:description" content="C++ library issue. Status: Tentatively Ready">
 <meta property="og:url" content="https://cplusplus.github.io/LWG/issue4106.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://isocpp.org/assets/images/cpp_logo.png">
@@ -61,14 +61,14 @@
 </head>
 <body>
 <hr>
-<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Ready">Tentatively Ready</a> status.</em></p>
 <h3 id="4106"><a href="lwg-active.html#4106">4106</a>. <code>basic_format_args</code> should not be default-constructible</h3>
-<p><b>Section:</b> 22.14.8.3 <a href="https://wg21.link/format.args">[format.args]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-17 <b>Last modified:</b> 2024-05-19</p>
+<p><b>Section:</b> 22.14.8.3 <a href="https://wg21.link/format.args">[format.args]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-17 <b>Last modified:</b> 2024-06-24</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#format.args">issues</a> in [format.args].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 It's unclear why <code>basic_format_args</code> originally provided a default constructor and its actual use cases,
@@ -106,6 +106,13 @@ LWG <a href="lwg-active.html#4061" title="Should std::basic_format_context be de
 would require that the exposition-only member <code>args_</code> of type <code>basic_format_args&lt;basic_format_context&gt;</code> 
 can be default-constructed as well.
 </p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after eight votes in favour during reflector poll.
+</p>
+
 
 
 <p id="res-4106"><b>Proposed resolution:</b></p>

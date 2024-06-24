@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4091"><a href="lwg-active.html#4091">4091</a>. <code>concat_view</code> rejects non-movable references</h3>
 <p><b>Section:</b> 26.7.18.2 <a href="https://wg21.link/range.concat.view">[range.concat.view]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-01 <b>Last modified:</b> 2024-05-04</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-01 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.concat.view">active issues</a> in [range.concat.view].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.concat.view">issues</a> in [range.concat.view].</p>
@@ -104,6 +104,16 @@ requires that the <code>value_type</code> of the inner range and pattern range m
 which always fails for non-movable types. However, this can be automatically resolved by LWG 
 <a href="lwg-active.html#4074" title="compatible-joinable-ranges is underconstrained (Status: Tentatively Ready)">4074</a>'s resolution.
 </p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll.
+"Proposed resolution loses the existing requirement that the conversion
+is equality-preserving."
+"Don't care about rejecting non-movable reference types."
+</p>
+
 
 
 <p id="res-4091"><b>Proposed resolution:</b></p>

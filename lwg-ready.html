@@ -62,7 +62,7 @@
 </tr>
 <tr>
 <td align="left">Date:</td>
-<td align="left">Revised 2024-06-22 at 12:19:31 UTC
+<td align="left">Revised 2024-06-24 at 12:10:50 UTC
 </td>
 </tr>
 <tr>
@@ -1112,6 +1112,308 @@ Let <code>E</code> be an expression and let <code>T</code> be <code>decltype((E)
 </blockquote>
 </li>
 
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4096"><a href="#4096">4096</a><sup><a href="https://cplusplus.github.io/LWG/issue4096">(i)</a></sup>. <code>views::iota(views::iota(0))</code> should be rejected</h3>
+<p><b>Section:</b> 26.6.4.1 <a href="https://wg21.link/range.iota.overview">[range.iota.overview]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-08 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>views::iota(E)</code> literally means incrementing element E endlessly, but 
+<code>views::iota(views::iota(0))</code> is currently well-formed due to CTAD,
+rejecting such unreasonable spelling seems therefore reasonable.
+</p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after seven votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4096"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 26.6.4.1 <a href="https://wg21.link/range.iota.overview">[range.iota.overview]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- <code>iota_view</code> generates a sequence of elements by repeatedly incrementing an initial value.
+<p/>
+-2- The name <code>views::iota</code> denotes a customization point object (16.3.3.3.5 <a href="https://wg21.link/customization.point.object">[customization.point.object]</a>).
+Given subexpressions <code>E</code> and <code>F</code>, the expressions <code>views::iota(E)</code> and
+<code>views::iota(E, F)</code> are expression-equivalent to 
+<code>iota_view<ins>&lt;decay_t&lt;decltype((E))&gt;&gt;</ins>(E)</code> and <code>iota_view(E, F)</code>, 
+respectively.
+</p>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4098"><a href="#4098">4098</a><sup><a href="https://cplusplus.github.io/LWG/issue4098">(i)</a></sup>. <code>views::adjacent&lt;0&gt;</code> should reject non-forward ranges</h3>
+<p><b>Section:</b> 26.7.27.1 <a href="https://wg21.link/range.adjacent.overview">[range.adjacent.overview]</a>, 26.7.28.1 <a href="https://wg21.link/range.adjacent.transform.overview">[range.adjacent.transform.overview]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-10 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.adjacent.overview">issues</a> in [range.adjacent.overview].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Following-up LWG <a href="lwg-active.html#4082" title="views::concat(r) is well-formed when r is an output_range (Status: Tentatively Ready)">4082</a> and LWG <a href="lwg-active.html#4083" title="views::as_rvalue should reject non-input ranges (Status: Tentatively Ready)">4083</a>, the current wording makes
+<code>views::adjacent&lt;0&gt;(r)</code> and <code>views::adjacent_transform&lt;0&gt;(r, [] { return 0; })</code>
+well-formed even when <code>r</code> is just an input range or an output range, which seems to be an oversight.
+</p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after six votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4098"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 26.7.27.1 <a href="https://wg21.link/range.adjacent.overview">[range.adjacent.overview]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- The name <code>views::adjacent&lt;N&gt;</code> denotes a range adaptor object
+(26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a>). Given a subexpression <code>E</code> and a constant expression
+<code>N</code>, the expression <code>views::adjacent&lt;N&gt;(E)</code> is expression-equivalent to
+</p>
+<ol style="list-style-type:none">
+<li>
+<p>(2.1) &mdash; <code>((void)E, auto(views::empty&lt;tuple&lt;&gt;&gt;))</code> if
+  <code>N</code> is equal to <code>0</code> <ins>and <code>decltype((E))</code> models <code>forward_range</code></ins>,
+</p>
+</li>
+<li>
+<p>(2.2) &mdash; otherwise, <code>adjacent_view&lt;views::all_t&lt;decltype((E))&gt;, N&gt;(E)</code>.</p>
+</li>
+</ol>
+</blockquote>
+
+</li>
+
+<li><p>Modify 26.7.28.1 <a href="https://wg21.link/range.adjacent.transform.overview">[range.adjacent.transform.overview]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- The name <code>views::adjacent_transform&lt;N&gt;</code> denotes a range adaptor object
+(26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a>). Given subexpressions <code>E</code> and <code>F</code> 
+and a constant expression <code>N</code>:
+</p>
+<ol style="list-style-type:none">
+<li>
+<p>(2.1) &mdash; If <code>N</code> is equal to <code>0</code> <ins>and <code>decltype((E))</code> 
+models <code>forward_range</code></ins>, <code>views::adjacent_transform&lt;N&gt;(E, F)</code>
+is expression-equivalent to <code>((void)E, views::zip_transform(F))</code>, except that
+the evaluations of <code>E</code> and <code>F</code> are indeterminately sequenced.
+</p>
+</li>
+<li>
+<p>(2.2) &mdash; Otherwise, the expression <code>views::adjacent_transform&lt;N&gt;(E, F)</code> is
+expression-equivalent to <code>adjacent_transform_view&lt;views::all_t&lt;decltype((E))&gt;, 
+decay_t&lt;decltype((F))&gt;, N&gt;(E, F)</code>.
+</p>
+</li>
+</ol>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4105"><a href="#4105">4105</a><sup><a href="https://cplusplus.github.io/LWG/issue4105">(i)</a></sup>. <code>ranges::ends_with</code>'s <i>Returns</i> misses difference casting</h3>
+<p><b>Section:</b> 27.6.17 <a href="https://wg21.link/alg.ends.with">[alg.ends.with]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-17 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The <i>Returns</i> of the ranges version of <code>ranges::ends_with</code> are specified as
+<code>ranges::equal(ranges::drop_view(ranges::ref_view(r1), N1 - N2), r2, ...)</code> which is not quite right
+when <code>N2</code> is an integer-class type and <code>N1</code> is an integer type, because in this case
+<code>N1 - N2</code> will be an integer-class type which cannot be implicitly converted to the 
+<code>difference_type</code> of <code>r1</code> leading to the construction of <code>drop_view</code> 
+being ill-formed.
+</p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after five votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4105"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 27.6.17 <a href="https://wg21.link/alg.ends.with">[alg.ends.with]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;input_range R1, input_range R2, class Pred = ranges::equal_to, class Proj1 = identity,
+         class Proj2 = identity&gt;
+  requires (forward_range&lt;R1&gt; || sized_range&lt;R1&gt;) &amp;&amp;
+           (forward_range&lt;R2&gt; || sized_range&lt;R2&gt;) &amp;&amp;
+           indirectly_comparable&lt;iterator_t&lt;R1&gt;, iterator_t&lt;R2&gt;, Pred, Proj1, Proj2&gt;
+  constexpr bool ranges::ends_with(R1&amp;&amp; r1, R2&amp;&amp; r2, Pred pred = {},
+                                   Proj1 proj1 = {}, Proj2 proj2 = {});
+</pre>
+<blockquote>
+<p>
+-3- Let <code>N1</code> be <code>ranges::distance(r1)</code> and <code>N2</code> be
+<code>ranges::distance(r2)</code>.
+<p/>
+-4- <i>Returns</i>: <code>false</code> if <code>N1 &lt; N2</code>, otherwise
+</p>
+<blockquote><pre>
+ranges::equal(ranges::drop_view(ranges::ref_view(r1), N1 - <ins>static_cast&lt;decltype(N1)&gt;(</ins>N2<ins>)</ins>), r2, pred, proj1, proj2)
+</pre></blockquote>
+</blockquote>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4106"><a href="#4106">4106</a><sup><a href="https://cplusplus.github.io/LWG/issue4106">(i)</a></sup>. <code>basic_format_args</code> should not be default-constructible</h3>
+<p><b>Section:</b> 22.14.8.3 <a href="https://wg21.link/format.args">[format.args]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-17 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#format.args">issues</a> in [format.args].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+It's unclear why <code>basic_format_args</code> originally provided a default constructor and its actual use cases,
+all three major libraries declare them as <code>default</code>, which allows value initialization of 
+<code>basic_format_args</code> at compile time.
+<p/>
+This does not fully conform to the current wording as its signature does not have the <code>constexpr</code>
+specifier.
+<p/>
+Additionally, the current wording only initializes the <code>size_</code> member in the default constructor, which
+may lead to undefined behavior when copying <code>basic_format_args</code> as uninitialized <code>data_</code> member 
+is copied. There is also an implementation divergence (<a href="https://godbolt.org/z/nYEje7zzj">demo</a>):
+</p>
+<blockquote><pre>
+#include &lt;format&gt;
+constexpr std::format_args fmt_args; // <span style="color:red;font-weight:bolder">only well-formed in MSVC-STL</span>
+</pre></blockquote>
+<p>
+One option is to add default member initializers for all members and <code>default</code> the default constructor 
+to best match the status quo, which guarantees that <code>basic_format_args</code> is <code>constexpr</code>-able.
+<p/>
+However, given that <code>basic_format_args</code> has different implementation details in the three libraries, 
+its actual members may not be <code>size_</code> and <code>data_</code>. It is unnecessary to ensure that all
+the internal members are initialized when default-constructed <code>basic_format_args</code>, indicating that not
+providing one is reasonable.
+<p/>
+The proposed solution is to prefer the more aggressive one.
+</p>
+
+<p><i>[2024-05-19; Daniel comments]</i></p>
+
+<p>
+The here suggested proposal to remove the default constructor implicitly depends on the decision of
+LWG <a href="lwg-active.html#4061" title="Should std::basic_format_context be default-constructible/copyable/movable? (Status: Tentatively Ready)">4061</a> to remove <code>basic_format_context</code>'s default constructor, since its usage
+would require that the exposition-only member <code>args_</code> of type <code>basic_format_args&lt;basic_format_context&gt;</code> 
+can be default-constructed as well.
+</p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after eight votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4106"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 22.14.8.3 <a href="https://wg21.link/format.args">[format.args]</a> as indicated:</p>
+
+<blockquote>
+<blockquote>
+<pre>
+namespace std {
+  template&lt;class Context&gt;
+  class basic_format_args {
+    size_t size_;                               // <i>exposition only</i>
+    const basic_format_arg&lt;Context&gt;* data_;     // <i>exposition only</i>
+
+  public:
+    <del>basic_format_args() noexcept;</del>
+
+    template&lt;class... Args&gt;
+      basic_format_args(const <i>format-arg-store</i>&lt;Context, Args...&gt;&amp; store) noexcept;
+
+    basic_format_arg&lt;Context&gt; get(size_t i) const noexcept;
+  };
+  [&hellip;]
+}
+</pre>
+</blockquote>
+[&hellip;]
+<pre>
+<del>basic_format_args() noexcept;</del>
+</pre>
+<blockquote>
+<p>
+<del>-2- <i>Effects</i> Initializes <code>size_</code> with <code>0</code>.</del>
+</p>
+</blockquote>
+</blockquote>
+
+</li>
 </ol>
 
 

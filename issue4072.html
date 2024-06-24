@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4072"><a href="lwg-active.html#4072">4072</a>. <code class='backtick'>std::optional</code> comparisons: constrain harder</h3>
 <p><b>Section:</b> 22.5.8 <a href="https://wg21.link/optional.comp.with.t">[optional.comp.with.t]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-04-19 <b>Last modified:</b> 2024-04-22</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-04-19 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>1
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#optional.comp.with.t">issues</a> in [optional.comp.with.t].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -120,6 +120,16 @@ I haven't analyzed whether we need the modification here too.
 The proposed resolution (without <em><code class='backtick'>is-derived-from-optional</code></em>)
 has been implemented and tested in libstdc++.
 </p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set priority to 1 after reflector poll.
+LWG <a href="lwg-defects.html#3746" title="optional's spaceship with U with a type derived from optional 
+causes infinite constraint meta-recursion (Status: C++23)">3746</a> changes might be needed here too,
+i.e, consider types derived from <code class='backtick'>optional</code>, not only <code class='backtick'>optional</code> itself.
+</p>
+
 
 
 <p id="res-4072"><b>Proposed resolution:</b></p>

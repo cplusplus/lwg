@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4104"><a href="lwg-active.html#4104">4104</a>. <code>basic_const_iterator&lt;volatile int*&gt;</code> is not a <code>contiguous_iterator</code></h3>
 <p><b>Section:</b> 25.5.3 <a href="https://wg21.link/const.iterators">[const.iterators]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-14 <b>Last modified:</b> 2024-05-19</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-14 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#const.iterators">active issues</a> in [const.iterators].</p>
 <p><b>View all other</b> <a href="lwg-index.html#const.iterators">issues</a> in [const.iterators].</p>
@@ -100,6 +100,14 @@ int main() {
   std::span sp2{it, 1}; // <span style="color:red;font-weight:bolder">failed</span>
 }
 </pre></blockquote>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll.
+See also LWG <a href="lwg-active.html#3813" title="std::span&lt;volatile T, E&gt; is made ill-formed by P2278R4 when T is a normal class type (Status: New)">3813</a>.
+</p>
+
 
 
 <p id="res-4104"><b>Proposed resolution:</b></p>

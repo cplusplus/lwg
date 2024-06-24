@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Issue 4086: ranges::generate_random_n is missing</title>
 <meta property="og:title" content="Issue 4086: ranges::generate_random_n is missing">
-<meta property="og:description" content="C++ library issue. Status: New">
+<meta property="og:description" content="C++ library issue. Status: Tentatively NAD">
 <meta property="og:url" content="https://cplusplus.github.io/LWG/issue4086.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://isocpp.org/assets/images/cpp_logo.png">
@@ -61,15 +61,15 @@
 </head>
 <body>
 <hr>
-<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#NAD">Tentatively NAD</a> status.</em></p>
 <h3 id="4086"><a href="lwg-active.html#4086">4086</a>. <code>ranges::generate_random_n</code> is missing</h3>
-<p><b>Section:</b> 27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-29 <b>Last modified:</b> 2024-05-04</p>
+<p><b>Section:</b> 27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-29 <b>Last modified:</b> 2024-06-24</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#alg.rand.generate">active issues</a> in [alg.rand.generate].</p>
 <p><b>View all other</b> <a href="lwg-index.html#alg.rand.generate">issues</a> in [alg.rand.generate].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively NAD">Tentatively NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 <a href="https://wg21.link/P1068" title=" Vector API for random number generation">P1068</a> introduced <code>ranges::generate_random</code> which has both range and 
@@ -79,6 +79,13 @@ In view of the fact that <code>generate</code> and <code>fill</code> have their 
 namely <code>generate_n</code> and <code>fill_n</code>, adding <code>generate_random_n</code> does improve consistency 
 and provide a more intuitive and simple way to generate a specified number of random numbers.
 </p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+NAD, this is a feature request not a defect. Needs a paper.
+</p>
+
 
 
 <p id="res-4086"><b>Proposed resolution:</b></p>

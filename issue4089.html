@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4089"><a href="lwg-active.html#4089">4089</a>. <code>concat_view::<i>iterator</i></code>'s <code>iter_swap</code> is overconstrained</h3>
 <p><b>Section:</b> 26.7.18.3 <a href="https://wg21.link/range.concat.iterator">[range.concat.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-30 <b>Last modified:</b> 2024-05-04</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-30 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.concat.iterator">active issues</a> in [range.concat.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.concat.iterator">issues</a> in [range.concat.iterator].</p>
@@ -111,6 +111,14 @@ does not have a valid <code>iter_swap</code>, leading to the constraints of <cod
 This doesn't seem like it should be, and I think providing a simplified homogeneous <code>iter_swap</code> specialization
 for <code>concat_view::<i>iterator</i></code> is reasonable.
 </p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+An extreme corner case, probably not worth caring about.
+</p>
+
 
 
 <p id="res-4089"><b>Proposed resolution:</b></p>

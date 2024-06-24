@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-06-22 at 12:19:31 UTC
+<p>Revised 2024-06-24 at 12:10:50 UTC
 </p><h2>Tentative Issues</h2>
 <hr>
 <h3 id="2457"><a href="#2457">2457</a><sup><a href="https://cplusplus.github.io/LWG/issue2457">(i)</a></sup>. <code>std::begin()</code> and <code>std::end()</code> do not support multi-dimensional arrays correctly</h3>
@@ -2587,6 +2587,761 @@ Let <code>E</code> be an expression and let <code>T</code> be <code>decltype((E)
 </blockquote>
 </li>
 
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4086"><a href="#4086">4086</a><sup><a href="https://cplusplus.github.io/LWG/issue4086">(i)</a></sup>. <code>ranges::generate_random_n</code> is missing</h3>
+<p><b>Section:</b> 27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-29 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#alg.rand.generate">active issues</a> in [alg.rand.generate].</p>
+<p><b>View all other</b> <a href="lwg-index.html#alg.rand.generate">issues</a> in [alg.rand.generate].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively NAD">Tentatively NAD</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<a href="https://wg21.link/P1068" title=" Vector API for random number generation">P1068</a> introduced <code>ranges::generate_random</code> which has both range and 
+iterator-sentinel pair overloads. However, the <code><i>_n</i></code> version never seems to be discussed.
+<p/>
+In view of the fact that <code>generate</code> and <code>fill</code> have their corresponding <code><i>_n</i></code> siblings, 
+namely <code>generate_n</code> and <code>fill_n</code>, adding <code>generate_random_n</code> does improve consistency 
+and provide a more intuitive and simple way to generate a specified number of random numbers.
+</p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+NAD, this is a feature request not a defect. Needs a paper.
+</p>
+
+
+
+<p id="res-4086"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 28.5.2 <a href="https://wg21.link/rand.synopsis">[rand.synopsis]</a>, header <code>&lt;random&gt;</code> synopsis, as indicated:</p>
+
+<blockquote>
+<pre>
+#include &lt;initializer_list&gt;     // <i>see 17.10.2 <a href="https://wg21.link/initializer.list.syn">[initializer.list.syn]</a></i>
+
+namespace std {
+  [&hellip;]
+  namespace ranges {
+    // <i>27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a></i>, generate_random
+    template&lt;class R, class G&gt;
+      requires output_range&lt;R, invoke_result_t&lt;G&amp;&gt;&gt; &amp;&amp;
+               uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt;
+      constexpr borrowed_iterator_t&lt;R&gt; generate_random(R&amp;&amp; r, G&amp;&amp; g);
+
+    template&lt;class G, output_iterator&lt;invoke_result_t&lt;G&amp;&gt;&gt; O, sentinel_for&lt;O&gt; S&gt;
+      requires uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt;
+      constexpr O generate_random(O first, S last, G&amp;&amp; g);
+
+    <ins>template&lt;class G, output_iterator&lt;invoke_result_t&lt;G&amp;&gt;&gt; O&gt;
+      requires uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt;
+      constexpr O generate_random_n(O first, iter_difference_t&lt;O&gt; n, G&amp;&amp; g);</ins>
+
+    template&lt;class R, class G, class D&gt;
+      requires output_range&lt;R, invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; &amp;&amp; invocable&lt;D&amp;, G&amp;&gt; &amp;&amp;
+               uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt;
+    constexpr borrowed_iterator_t&lt;R&gt; generate_random(R&amp;&amp; r, G&amp;&amp; g, D&amp;&amp; d);
+
+    template&lt;class G, class D, output_iterator&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; O, sentinel_for&lt;O&gt; S&gt;
+      requires invocable&lt;D&amp;, G&amp;&gt; &amp;&amp; uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt;
+    constexpr O generate_random(O first, S last, G&amp;&amp; g, D&amp;&amp; d);
+
+    <ins>template&lt;class G, class D, output_iterator&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; O&gt;
+      requires invocable&lt;D&amp;, G&amp;&gt; &amp;&amp; uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt;
+    constexpr O generate_random_n(O first, iter_difference_t&lt;O&gt; n, G&amp;&amp; g, D&amp;&amp; d);</ins>
+  }
+  [&hellip;]
+}
+</pre>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class G, output_iterator&lt;invoke_result_t&lt;G&amp;&gt;&gt; O, sentinel_for&lt;O&gt; S&gt;
+  requires uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt;
+constexpr O ranges::generate_random(O first, S last, G&amp;&amp; g);
+</pre>
+<blockquote>
+<p>
+-4- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+return generate_random(subrange&lt;O, S&gt;(std::move(first), last), g);
+</pre></blockquote>
+</blockquote>
+<pre><ins>
+template&lt;class G, output_iterator&lt;invoke_result_t&lt;G&amp;&gt;&gt; O&gt;
+  requires uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt;
+constexpr O ranges::generate_random_n(O first, iter_difference_t&lt;O&gt; n, G&amp;&amp; g);</ins>
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Effects</i>: Equivalent to:</ins>
+</p>
+<blockquote><pre>
+<ins>return generate_random(counted_iterator(std::move(first), n),
+            default_sentinel, g).base();</ins>
+</pre></blockquote>
+</blockquote>
+[&hellip;]
+<pre>
+template&lt;class G, class D, output_iterator&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; O, sentinel_for&lt;O&gt; S&gt;
+  requires invocable&lt;D&amp;, G&amp;&gt; &amp;&amp; uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt;
+constexpr O ranges::generate_random(O first, S last, G&amp;&amp; g, D&amp;&amp; d);
+</pre>
+<blockquote>
+<p>
+-8- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+return generate_random(subrange&lt;O, S&gt;(std::move(first), last), g, d);
+</pre></blockquote>
+</blockquote>
+<pre><ins>
+template&lt;class G, class D, output_iterator&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; O&gt;
+  requires invocable&lt;D&amp;, G&amp;&gt; &amp;&amp; uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt;
+constexpr O ranges::generate_random_n(O first, iter_difference_t&lt;O&gt; n, G&amp;&amp; g, D&amp;&amp; d);</ins>
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Effects</i>: Equivalent to:</ins>
+</p>
+<blockquote><pre>
+<ins>return generate_random(counted_iterator(std::move(first), n),
+          default_sentinel, g, d).base();</ins>
+</pre></blockquote>
+</blockquote>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4095"><a href="#4095">4095</a><sup><a href="https://cplusplus.github.io/LWG/issue4095">(i)</a></sup>. <code>ranges::fold_<i>meow</i></code> should explicitly spell out the return type</h3>
+<p><b>Section:</b> 27.4 <a href="https://wg21.link/algorithm.syn">[algorithm.syn]</a>, 27.6.18 <a href="https://wg21.link/alg.fold">[alg.fold]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-03 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#algorithm.syn">issues</a> in [algorithm.syn].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively NAD">Tentatively NAD</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Unlike other algorithms, the return types of <code>ranges::fold_<i>meow</i></code> are specified in terms of
+<code>auto</code> and <code><i>see below</i></code>, and its implementation details depend on the return types of 
+other overloads through <code>decltype(fold_<i>meow</i>(...))</code>.
+<p/>
+This makes determining the return type of a certain overload (such as <code>fold_right_last</code>) 
+extremely difficult even for experts, requiring several trips back and forth to different overloads 
+to finally understand what the actual return type is. The situation is even worse for newbies because 
+such a form of specifying the return type makes it impossible for the IDE to deduce the real return type, 
+which is extremely user-unfriendly.
+<p/>
+I think that explicitly specifying the return type for these overloads not only greatly improves 
+readability but also offloads the compiler from deducing the return type, which can definitely be 
+considered an improvement.
+<p/>
+The proposed resolution does not touch the <i>Effects</i> clause and only changes the function signature 
+to seek minimal changes.
+</p>
+
+<p><i>[2024-06-24; Reflector poll: NAD]</i></p>
+
+<p>Implementations are free to spell this out if desired.</p>
+
+
+
+<p id="res-4095"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 27.4 <a href="https://wg21.link/algorithm.syn">[algorithm.syn]</a>, header <code>&lt;algorithm&gt;</code> synopsis, as indicated:</p>
+
+<blockquote>
+<pre>
+#include &lt;initializer_list&gt;     // <i>see 17.10.2 <a href="https://wg21.link/initializer.list.syn">[initializer.list.syn]</a></i>
+
+namespace std {
+  [&hellip;]
+  namespace ranges {
+    [&hellip;]
+    template&lt;input_iterator I, sentinel_for&lt;I&gt; S, class T = iter_value_t&lt;I&gt;,
+             <i>indirectly-binary-left-foldable</i>&lt;T, I&gt; F&gt;
+      constexpr auto fold_left(I first, S last, T init, F f) <ins>-&gt;
+        decay_t&lt;invoke_result_t&lt;F&amp;, T, iter_reference_t&lt;I&gt;&gt;&gt;</ins>;
+
+    template&lt;input_range R, class T = range_value_t&lt;R&gt;,
+             <i>indirectly-binary-left-foldable</i>&lt;T, iterator_t&lt;R&gt;&gt; F&gt;
+      constexpr auto fold_left(R&amp;&amp; r, T init, F f) <ins>-&gt;
+        decay_t&lt;invoke_result_t&lt;F&amp;, T, range_reference_t&lt;R&gt;&gt;&gt;</ins>;
+
+    template&lt;input_iterator I, sentinel_for&lt;I&gt; S,
+             <i>indirectly-binary-left-foldable</i>&lt;iter_value_t&lt;I&gt;, I&gt; F&gt;
+      requires constructible_from&lt;iter_value_t&lt;I&gt;, iter_reference_t&lt;I&gt;&gt;
+      constexpr auto fold_left_first(I first, S last, F f) <ins>-&gt;
+        optional&lt;decay_t&lt;invoke_result_t&lt;F&amp;, iter_value_t&lt;I&gt;, iter_reference_t&lt;I&gt;&gt;&gt;&gt;</ins>;
+
+    template&lt;input_range R, <i>indirectly-binary-left-foldable</i>&lt;range_value_t&lt;R&gt;, iterator_t&lt;R&gt;&gt; F&gt;
+      requires constructible_from&lt;range_value_t&lt;R&gt;, range_reference_t&lt;R&gt;&gt;
+      constexpr auto fold_left_first(R&amp;&amp; r, F f) <ins>-&gt;
+        optional&lt;decay_t&lt;invoke_result_t&lt;F&amp;, range_value_t&lt;R&gt;, range_reference_t&lt;R&gt;&gt;&gt;&gt;</ins>;
+
+    template&lt;bidirectional_iterator I, sentinel_for&lt;I&gt; S, class T = iter_value_t&lt;I&gt;,
+             <i>indirectly-binary-right-foldable</i>&lt;T, I&gt; F&gt;
+      constexpr auto fold_right(I first, S last, T init, F f) <ins>-&gt;
+        decay_t&lt;invoke_result_t&lt;F&amp;, iter_reference_t&lt;I&gt;, T&gt;&gt;</ins>;
+
+    template&lt;bidirectional_range R, class T = range_value_t&lt;R&gt;,
+             <i>indirectly-binary-right-foldable</i>&lt;T, iterator_t&lt;R&gt;&gt; F&gt;
+      constexpr auto fold_right(R&amp;&amp; r, T init, F f) <ins>-&gt;
+        decay_t&lt;invoke_result_t&lt;F&amp;, range_reference_t&lt;R&gt;, T&gt;&gt;</ins>;
+
+    template&lt;bidirectional_iterator I, sentinel_for&lt;I&gt; S,
+             <i>indirectly-binary-right-foldable</i>&lt;iter_value_t&lt;I&gt;, I&gt; F&gt;
+      requires constructible_from&lt;iter_value_t&lt;I&gt;, iter_reference_t&lt;I&gt;&gt;
+    constexpr auto fold_right_last(I first, S last, F f) <ins>-&gt;
+      optional&lt;decay_t&lt;invoke_result_t&lt;F&amp;, iter_reference_t&lt;I&gt;, iter_value_t&lt;I&gt;&gt;&gt;&gt;</ins>;
+
+    template&lt;bidirectional_range R,
+             <i>indirectly-binary-right-foldable</i>&lt;range_value_t&lt;R&gt;, iterator_t&lt;R&gt;&gt; F&gt;
+      requires constructible_from&lt;range_value_t&lt;R&gt;, range_reference_t&lt;R&gt;&gt;
+    constexpr auto fold_right_last(R&amp;&amp; r, F f) <ins>-&gt;
+      optional&lt;decay_t&lt;invoke_result_t&lt;F&amp;, range_reference_t&lt;R&gt;, range_value_t&lt;R&gt;&gt;&gt;&gt;</ins>;
+
+    template&lt;class I, class T&gt;
+      using fold_left_with_iter_result = in_value_result&lt;I, T&gt;;
+    template&lt;class I, class T&gt;
+      using fold_left_first_with_iter_result = in_value_result&lt;I, T&gt;;
+
+    template&lt;input_iterator I, sentinel_for&lt;I&gt; S, class T = iter_value_t&lt;I&gt;,
+             <i>indirectly-binary-left-foldable</i>&lt;T, I&gt; F&gt;
+      constexpr <del><i>see below</i></del><ins>auto</ins> fold_left_with_iter(I first, S last, T init, F f) <ins>-&gt;
+        fold_left_with_iter_result&lt;I, decay_t&lt;invoke_result_t&lt;F&amp;, T, iter_reference_t&lt;I&gt;&gt;&gt;&gt;</ins>;
+
+    template&lt;input_range R, class T = range_value_t&lt;R&gt;,
+             <i>indirectly-binary-left-foldable</i>&lt;T, iterator_t&lt;R&gt;&gt; F&gt;
+      constexpr <del><i>see below</i></del><ins>auto</ins> fold_left_with_iter(R&amp;&amp; r, T init, F f) <ins>-&gt;
+        fold_left_with_iter_result&lt;borrowed_iterator_t&lt;R&gt;,
+                                   decay_t&lt;invoke_result_t&lt;F&amp;, T, range_reference_t&lt;R&gt;&gt;&gt;&gt;</ins>;
+
+    template&lt;input_iterator I, sentinel_for&lt;I&gt; S,
+             <i>indirectly-binary-left-foldable</i>&lt;iter_value_t&lt;I&gt;, I&gt; F&gt;
+      requires constructible_from&lt;iter_value_t&lt;I&gt;, iter_reference_t&lt;I&gt;&gt;
+      constexpr <del><i>see below</i></del><ins>auto</ins> fold_left_first_with_iter(I first, S last, F f) <ins>-&gt;
+        fold_left_first_with_iter_result&lt;
+          I, optional&lt;decay_t&lt;invoke_result_t&lt;F&amp;, iter_value_t&lt;I&gt;, iter_reference_t&lt;I&gt;&gt;&gt;&gt;&gt;</ins>;
+
+    template&lt;input_range R,
+             <i>indirectly-binary-left-foldable</i>&lt;range_value_t&lt;R&gt;, iterator_t&lt;R&gt;&gt; F&gt;
+      requires constructible_from&lt;range_value_t&lt;R&gt;, range_reference_t&lt;R&gt;&gt;
+      constexpr <del><i>see below</i></del><ins>auto</ins> fold_left_first_with_iter(R&amp;&amp; r, F f) <ins>-&gt;
+        fold_left_first_with_iter_result&lt;
+          borrowed_iterator_t&lt;R&gt;,
+          optional&lt;decay_t&lt;invoke_result_t&lt;F&amp;, range_value_t&lt;R&gt;, range_reference_t&lt;R&gt;&gt;&gt;&gt;&gt;</ins>;
+  }
+  [&hellip;]
+}
+</pre>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.6.18 <a href="https://wg21.link/alg.fold">[alg.fold]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;input_iterator I, sentinel_for&lt;I&gt; S, class T = iter_value_t&lt;I&gt;,
+         <i>indirectly-binary-left-foldable</i>&lt;T, I&gt; F&gt;
+constexpr auto ranges::fold_left(I first, S last, T init, F f) <ins>-&gt;
+  decay_t&lt;invoke_result_t&lt;F&amp;, T, iter_reference_t&lt;I&gt;&gt;&gt;</ins>;
+
+template&lt;input_range R, class T = range_value_t&lt;R&gt;,
+         <i>indirectly-binary-left-foldable</i>&lt;T, iterator_t&lt;R&gt;&gt; F&gt;
+constexpr auto ranges::fold_left(R&amp;&amp; r, T init, F f) <ins>-&gt;
+  decay_t&lt;invoke_result_t&lt;F&amp;, T, range_reference_t&lt;R&gt;&gt;&gt;</ins>;
+</pre>
+<blockquote>
+<p>
+-1- <i>Returns</i>:
+</p>
+<blockquote><pre>
+ranges::fold_left_with_iter(std::move(first), last, std::move(init), f).value
+</pre></blockquote>
+</blockquote>
+<pre>
+template&lt;input_iterator I, sentinel_for&lt;I&gt; S,
+         <i>indirectly-binary-left-foldable</i>&lt;iter_value_t&lt;I&gt;, I&gt; F&gt;
+  requires constructible_from&lt;iter_value_t&lt;I&gt;, iter_reference_t&lt;I&gt;&gt;
+  constexpr auto ranges::fold_left_first(I first, S last, F f) <ins>-&gt;
+    optional&lt;decay_t&lt;invoke_result_t&lt;F&amp;, iter_value_t&lt;I&gt;, iter_reference_t&lt;I&gt;&gt;&gt;&gt;</ins>;
+
+template&lt;input_range R, <i>indirectly-binary-left-foldable</i>&lt;range_value_t&lt;R&gt;, iterator_t&lt;R&gt;&gt; F&gt;
+  requires constructible_from&lt;range_value_t&lt;R&gt;, range_reference_t&lt;R&gt;&gt;
+  constexpr auto ranges::fold_left_first(R&amp;&amp; r, F f) <ins>-&gt;
+    optional&lt;decay_t&lt;invoke_result_t&lt;F&amp;, range_value_t&lt;R&gt;, range_reference_t&lt;R&gt;&gt;&gt;&gt;</ins>;
+</pre>
+<blockquote>
+<p>
+-2- <i>Returns</i>:
+</p>
+<blockquote><pre>
+ranges::fold_left_first_with_iter(std::move(first), last, f).value
+</pre></blockquote>
+</blockquote>
+<pre>
+template&lt;bidirectional_iterator I, sentinel_for&lt;I&gt; S, class T = iter_value_t&lt;I&gt;,
+         <i>indirectly-binary-right-foldable</i>&lt;T, I&gt; F&gt;
+  constexpr auto ranges::fold_right(I first, S last, T init, F f) <ins>-&gt;
+    decay_t&lt;invoke_result_t&lt;F&amp;, iter_reference_t&lt;I&gt;, T&gt;&gt;</ins>;
+
+template&lt;bidirectional_range R, class T = range_value_t&lt;R&gt;,
+        <i>indirectly-binary-right-foldable</i>&lt;T, iterator_t&lt;R&gt;&gt; F&gt;
+  constexpr auto ranges::fold_right(R&amp;&amp; r, T init, F f) <ins>-&gt;
+    decay_t&lt;invoke_result_t&lt;F&amp;, range_reference_t&lt;R&gt;, T&gt;&gt;</ins>;  
+</pre>
+<blockquote>
+<p>
+-3- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+using U = decay_t&lt;invoke_result_t&lt;F&amp;, iter_reference_t&lt;I&gt;, T&gt;&gt;;
+if (first == last)
+  return U(std::move(init));
+I tail = ranges::next(first, last);
+U accum = invoke(f, *--tail, std::move(init));
+while (first != tail)
+  accum = invoke(f, *--tail, std::move(accum));
+return accum;
+</pre></blockquote>
+</blockquote>
+<pre>
+template&lt;bidirectional_iterator I, sentinel_for&lt;I&gt; S,
+        <i>indirectly-binary-right-foldable</i>&lt;iter_value_t&lt;I&gt;, I&gt; F&gt;
+  requires constructible_from&lt;iter_value_t&lt;I&gt;, iter_reference_t&lt;I&gt;&gt;
+constexpr auto ranges::fold_right_last(I first, S last, F f) <ins>-&gt;
+  optional&lt;decay_t&lt;invoke_result_t&lt;F&amp;, iter_reference_t&lt;I&gt;, iter_value_t&lt;I&gt;&gt;&gt;&gt;</ins>;
+
+template&lt;bidirectional_range R,
+         <i>indirectly-binary-right-foldable</i>&lt;range_value_t&lt;R&gt;, iterator_t&lt;R&gt;&gt; F&gt;
+ requires constructible_from&lt;range_value_t&lt;R&gt;, range_reference_t&lt;R&gt;&gt;
+constexpr auto ranges::fold_right_last(R&amp;&amp; r, F f) <ins>-&gt;
+  optional&lt;decay_t&lt;invoke_result_t&lt;F&amp;, range_reference_t&lt;R&gt;, range_value_t&lt;R&gt;&gt;&gt;&gt;</ins>;
+</pre>
+<blockquote>
+<p>
+-4- Let <code>U</code> be <code>decltype(ranges::fold_right(first, last, iter_value_t&lt;I&gt;(*first), f))</code>.
+<p/>
+-5- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+if (first == last)
+  return optional&lt;U&gt;();
+I tail = ranges::prev(ranges::next(first, std::move(last)));
+return optional&lt;U&gt;(in_place,
+  ranges::fold_right(std::move(first), tail, iter_value_t&lt;I&gt;(*tail), std::move(f)));
+</pre></blockquote>
+</blockquote>
+<pre>
+template&lt;input_iterator I, sentinel_for&lt;I&gt; S, class T = iter_value_t&lt;I&gt;,
+         <i>indirectly-binary-left-foldable</i>&lt;T, I&gt; F&gt;
+  constexpr <del><i>see below</i></del><ins>auto</ins> ranges::fold_left_with_iter(I first, S last, T init, F f) <ins>-&gt;
+    fold_left_with_iter_result&lt;I, decay_t&lt;invoke_result_t&lt;F&amp;, T, iter_reference_t&lt;I&gt;&gt;&gt;&gt;</ins>;
+
+template&lt;input_range R, class T = range_value_t&lt;R&gt;,
+         <i>indirectly-binary-left-foldable</i>&lt;T, iterator_t&lt;R&gt;&gt; F&gt;
+  constexpr <del><i>see below</i></del><ins>auto</ins> ranges::fold_left_with_iter(R&amp;&amp; r, T init, F f) <ins>-&gt;
+    fold_left_with_iter_result&lt;borrowed_iterator_t&lt;R&gt;,
+                               decay_t&lt;invoke_result_t&lt;F&amp;, T, range_reference_t&lt;R&gt;&gt;&gt;&gt;</ins>;
+</pre>
+<blockquote>
+<p>
+-6- Let <code>U</code> be <code>decay_t&lt;invoke_result_t&lt;F&amp;, T, iter_reference_t&lt;I&gt;&gt;&gt;</code>.
+<p/>
+-7- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+if (first == last)
+  return {std::move(first), U(std::move(init))};
+U accum = invoke(f, std::move(init), *first);
+for (++first; first != last; ++first)
+  accum = invoke(f, std::move(accum), *first);
+return {std::move(first), std::move(accum)};
+</pre></blockquote>
+<p>
+<del>-8- <i>Remarks</i>: The return type is <code>fold_left_with_iter_result&lt;I, U&gt;</code>
+for the first overload and <code>fold_left_with_iter_result&lt;borrowed_iterator_t&lt;R&gt;, U&gt;</code> 
+for the second overload.</del>
+</p>
+</blockquote>
+<pre>
+template&lt;input_iterator I, sentinel_for&lt;I&gt; S,
+         <i>indirectly-binary-left-foldable</i>&lt;iter_value_t&lt;I&gt;, I&gt; F&gt;
+  requires constructible_from&lt;iter_value_t&lt;I&gt;, iter_reference_t&lt;I&gt;&gt;
+  constexpr <del><i>see below</i></del><ins>auto</ins> ranges::fold_left_first_with_iter(I first, S last, F f) <ins>-&gt;
+    fold_left_first_with_iter_result&lt;
+      I, optional&lt;decay_t&lt;invoke_result_t&lt;F&amp;, iter_value_t&lt;I&gt;, iter_reference_t&lt;I&gt;&gt;&gt;&gt;&gt;</ins>;
+
+template&lt;input_range R,
+         <i>indirectly-binary-left-foldable</i>&lt;range_value_t&lt;R&gt;, iterator_t&lt;R&gt;&gt; F&gt;
+  requires constructible_from&lt;range_value_t&lt;R&gt;, range_reference_t&lt;R&gt;&gt;
+  constexpr <del><i>see below</i></del><ins>auto</ins> ranges::fold_left_first_with_iter(R&amp;&amp; r, F f) <ins>-&gt;
+    fold_left_first_with_iter_result&lt;
+      borrowed_iterator_t&lt;R&gt;,
+      optional&lt;decay_t&lt;invoke_result_t&lt;F&amp;, range_value_t&lt;R&gt;, range_reference_t&lt;R&gt;&gt;&gt;&gt;&gt;</ins>;
+</pre>
+<blockquote>
+<p>
+-9- Let <code>U</code> be
+</p>
+<blockquote><pre>
+decltype(ranges::fold_left(std::move(first), last, iter_value_t&lt;I&gt;(*first), f))
+</pre></blockquote>
+<p>
+-10- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+if (first == last)
+  return {std::move(first), optional&lt;U&gt;()};
+optional&lt;U&gt; init(in_place, *first);
+for (++first; first != last; ++first)
+  *init = invoke(f, std::move(*init), *first);
+return {std::move(first), std::move(init)};
+</pre></blockquote>
+<p>
+<del>-11- <i>Remarks</i>: The return type is <code>fold_left_first_with_iter_result&lt;I, optional&lt;U&gt;&gt;</code>
+for the first overload and <code>fold_left_first_with_iter_result&lt;borrowed_iterator_t&lt;R&gt;,
+  optional&lt;U&gt;&gt;</code> for the second overload.</del>
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4096"><a href="#4096">4096</a><sup><a href="https://cplusplus.github.io/LWG/issue4096">(i)</a></sup>. <code>views::iota(views::iota(0))</code> should be rejected</h3>
+<p><b>Section:</b> 26.6.4.1 <a href="https://wg21.link/range.iota.overview">[range.iota.overview]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-08 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>views::iota(E)</code> literally means incrementing element E endlessly, but 
+<code>views::iota(views::iota(0))</code> is currently well-formed due to CTAD,
+rejecting such unreasonable spelling seems therefore reasonable.
+</p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after seven votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4096"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 26.6.4.1 <a href="https://wg21.link/range.iota.overview">[range.iota.overview]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- <code>iota_view</code> generates a sequence of elements by repeatedly incrementing an initial value.
+<p/>
+-2- The name <code>views::iota</code> denotes a customization point object (16.3.3.3.5 <a href="https://wg21.link/customization.point.object">[customization.point.object]</a>).
+Given subexpressions <code>E</code> and <code>F</code>, the expressions <code>views::iota(E)</code> and
+<code>views::iota(E, F)</code> are expression-equivalent to 
+<code>iota_view<ins>&lt;decay_t&lt;decltype((E))&gt;&gt;</ins>(E)</code> and <code>iota_view(E, F)</code>, 
+respectively.
+</p>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4098"><a href="#4098">4098</a><sup><a href="https://cplusplus.github.io/LWG/issue4098">(i)</a></sup>. <code>views::adjacent&lt;0&gt;</code> should reject non-forward ranges</h3>
+<p><b>Section:</b> 26.7.27.1 <a href="https://wg21.link/range.adjacent.overview">[range.adjacent.overview]</a>, 26.7.28.1 <a href="https://wg21.link/range.adjacent.transform.overview">[range.adjacent.transform.overview]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-10 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.adjacent.overview">issues</a> in [range.adjacent.overview].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Following-up LWG <a href="lwg-active.html#4082" title="views::concat(r) is well-formed when r is an output_range (Status: Tentatively Ready)">4082</a> and LWG <a href="lwg-active.html#4083" title="views::as_rvalue should reject non-input ranges (Status: Tentatively Ready)">4083</a>, the current wording makes
+<code>views::adjacent&lt;0&gt;(r)</code> and <code>views::adjacent_transform&lt;0&gt;(r, [] { return 0; })</code>
+well-formed even when <code>r</code> is just an input range or an output range, which seems to be an oversight.
+</p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after six votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4098"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 26.7.27.1 <a href="https://wg21.link/range.adjacent.overview">[range.adjacent.overview]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- The name <code>views::adjacent&lt;N&gt;</code> denotes a range adaptor object
+(26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a>). Given a subexpression <code>E</code> and a constant expression
+<code>N</code>, the expression <code>views::adjacent&lt;N&gt;(E)</code> is expression-equivalent to
+</p>
+<ol style="list-style-type:none">
+<li>
+<p>(2.1) &mdash; <code>((void)E, auto(views::empty&lt;tuple&lt;&gt;&gt;))</code> if
+  <code>N</code> is equal to <code>0</code> <ins>and <code>decltype((E))</code> models <code>forward_range</code></ins>,
+</p>
+</li>
+<li>
+<p>(2.2) &mdash; otherwise, <code>adjacent_view&lt;views::all_t&lt;decltype((E))&gt;, N&gt;(E)</code>.</p>
+</li>
+</ol>
+</blockquote>
+
+</li>
+
+<li><p>Modify 26.7.28.1 <a href="https://wg21.link/range.adjacent.transform.overview">[range.adjacent.transform.overview]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- The name <code>views::adjacent_transform&lt;N&gt;</code> denotes a range adaptor object
+(26.7.2 <a href="https://wg21.link/range.adaptor.object">[range.adaptor.object]</a>). Given subexpressions <code>E</code> and <code>F</code> 
+and a constant expression <code>N</code>:
+</p>
+<ol style="list-style-type:none">
+<li>
+<p>(2.1) &mdash; If <code>N</code> is equal to <code>0</code> <ins>and <code>decltype((E))</code> 
+models <code>forward_range</code></ins>, <code>views::adjacent_transform&lt;N&gt;(E, F)</code>
+is expression-equivalent to <code>((void)E, views::zip_transform(F))</code>, except that
+the evaluations of <code>E</code> and <code>F</code> are indeterminately sequenced.
+</p>
+</li>
+<li>
+<p>(2.2) &mdash; Otherwise, the expression <code>views::adjacent_transform&lt;N&gt;(E, F)</code> is
+expression-equivalent to <code>adjacent_transform_view&lt;views::all_t&lt;decltype((E))&gt;, 
+decay_t&lt;decltype((F))&gt;, N&gt;(E, F)</code>.
+</p>
+</li>
+</ol>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4105"><a href="#4105">4105</a><sup><a href="https://cplusplus.github.io/LWG/issue4105">(i)</a></sup>. <code>ranges::ends_with</code>'s <i>Returns</i> misses difference casting</h3>
+<p><b>Section:</b> 27.6.17 <a href="https://wg21.link/alg.ends.with">[alg.ends.with]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-17 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The <i>Returns</i> of the ranges version of <code>ranges::ends_with</code> are specified as
+<code>ranges::equal(ranges::drop_view(ranges::ref_view(r1), N1 - N2), r2, ...)</code> which is not quite right
+when <code>N2</code> is an integer-class type and <code>N1</code> is an integer type, because in this case
+<code>N1 - N2</code> will be an integer-class type which cannot be implicitly converted to the 
+<code>difference_type</code> of <code>r1</code> leading to the construction of <code>drop_view</code> 
+being ill-formed.
+</p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after five votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4105"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 27.6.17 <a href="https://wg21.link/alg.ends.with">[alg.ends.with]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;input_range R1, input_range R2, class Pred = ranges::equal_to, class Proj1 = identity,
+         class Proj2 = identity&gt;
+  requires (forward_range&lt;R1&gt; || sized_range&lt;R1&gt;) &amp;&amp;
+           (forward_range&lt;R2&gt; || sized_range&lt;R2&gt;) &amp;&amp;
+           indirectly_comparable&lt;iterator_t&lt;R1&gt;, iterator_t&lt;R2&gt;, Pred, Proj1, Proj2&gt;
+  constexpr bool ranges::ends_with(R1&amp;&amp; r1, R2&amp;&amp; r2, Pred pred = {},
+                                   Proj1 proj1 = {}, Proj2 proj2 = {});
+</pre>
+<blockquote>
+<p>
+-3- Let <code>N1</code> be <code>ranges::distance(r1)</code> and <code>N2</code> be
+<code>ranges::distance(r2)</code>.
+<p/>
+-4- <i>Returns</i>: <code>false</code> if <code>N1 &lt; N2</code>, otherwise
+</p>
+<blockquote><pre>
+ranges::equal(ranges::drop_view(ranges::ref_view(r1), N1 - <ins>static_cast&lt;decltype(N1)&gt;(</ins>N2<ins>)</ins>), r2, pred, proj1, proj2)
+</pre></blockquote>
+</blockquote>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4106"><a href="#4106">4106</a><sup><a href="https://cplusplus.github.io/LWG/issue4106">(i)</a></sup>. <code>basic_format_args</code> should not be default-constructible</h3>
+<p><b>Section:</b> 22.14.8.3 <a href="https://wg21.link/format.args">[format.args]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-17 <b>Last modified:</b> 2024-06-24</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#format.args">issues</a> in [format.args].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+It's unclear why <code>basic_format_args</code> originally provided a default constructor and its actual use cases,
+all three major libraries declare them as <code>default</code>, which allows value initialization of 
+<code>basic_format_args</code> at compile time.
+<p/>
+This does not fully conform to the current wording as its signature does not have the <code>constexpr</code>
+specifier.
+<p/>
+Additionally, the current wording only initializes the <code>size_</code> member in the default constructor, which
+may lead to undefined behavior when copying <code>basic_format_args</code> as uninitialized <code>data_</code> member 
+is copied. There is also an implementation divergence (<a href="https://godbolt.org/z/nYEje7zzj">demo</a>):
+</p>
+<blockquote><pre>
+#include &lt;format&gt;
+constexpr std::format_args fmt_args; // <span style="color:red;font-weight:bolder">only well-formed in MSVC-STL</span>
+</pre></blockquote>
+<p>
+One option is to add default member initializers for all members and <code>default</code> the default constructor 
+to best match the status quo, which guarantees that <code>basic_format_args</code> is <code>constexpr</code>-able.
+<p/>
+However, given that <code>basic_format_args</code> has different implementation details in the three libraries, 
+its actual members may not be <code>size_</code> and <code>data_</code>. It is unnecessary to ensure that all
+the internal members are initialized when default-constructed <code>basic_format_args</code>, indicating that not
+providing one is reasonable.
+<p/>
+The proposed solution is to prefer the more aggressive one.
+</p>
+
+<p><i>[2024-05-19; Daniel comments]</i></p>
+
+<p>
+The here suggested proposal to remove the default constructor implicitly depends on the decision of
+LWG <a href="lwg-active.html#4061" title="Should std::basic_format_context be default-constructible/copyable/movable? (Status: Tentatively Ready)">4061</a> to remove <code>basic_format_context</code>'s default constructor, since its usage
+would require that the exposition-only member <code>args_</code> of type <code>basic_format_args&lt;basic_format_context&gt;</code> 
+can be default-constructed as well.
+</p>
+
+<p><i>[2024-06-24; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after eight votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4106"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 22.14.8.3 <a href="https://wg21.link/format.args">[format.args]</a> as indicated:</p>
+
+<blockquote>
+<blockquote>
+<pre>
+namespace std {
+  template&lt;class Context&gt;
+  class basic_format_args {
+    size_t size_;                               // <i>exposition only</i>
+    const basic_format_arg&lt;Context&gt;* data_;     // <i>exposition only</i>
+
+  public:
+    <del>basic_format_args() noexcept;</del>
+
+    template&lt;class... Args&gt;
+      basic_format_args(const <i>format-arg-store</i>&lt;Context, Args...&gt;&amp; store) noexcept;
+
+    basic_format_arg&lt;Context&gt; get(size_t i) const noexcept;
+  };
+  [&hellip;]
+}
+</pre>
+</blockquote>
+[&hellip;]
+<pre>
+<del>basic_format_args() noexcept;</del>
+</pre>
+<blockquote>
+<p>
+<del>-2- <i>Effects</i> Initializes <code>size_</code> with <code>0</code>.</del>
+</p>
+</blockquote>
+</blockquote>
+
+</li>
 </ol>
 
 

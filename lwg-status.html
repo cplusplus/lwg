@@ -62,7 +62,7 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
 
-<p>Revised 2024-06-22 at 12:19:31 UTC
+<p>Revised 2024-06-24 at 12:10:50 UTC
 </p><h2 id="Ready">Ready (1 issues)</h2>
 <table class="issues-index">
 <tr>
@@ -84,7 +84,7 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <td></td>
 </tr>
 </table>
-<h2 id="Tentatively_Ready">Tentatively Ready (8 issues)</h2>
+<h2 id="Tentatively_Ready">Tentatively Ready (12 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -118,6 +118,24 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
 <td>22.14.6.7 [format.context]</td>
 <td>Should <code>std::basic_format_context</code> be default-constructible/copyable/movable?</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4106"><a href="lwg-active.html#4106" title="basic_format_args should not be default-constructible (Status: Tentatively Ready)">4106</a><sup><a href="https://cplusplus.github.io/LWG/issue4106">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>22.14.8.3 [format.args]</td>
+<td><code>basic_format_args</code> should not be default-constructible</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4096"><a href="lwg-active.html#4096" title="views::iota(views::iota(0)) should be rejected (Status: Tentatively Ready)">4096</a><sup><a href="https://cplusplus.github.io/LWG/issue4096">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>26.6.4.1 [range.iota.overview]</td>
+<td><code>views::iota(views::iota(0))</code> should be rejected</td>
 <td>Yes</td>
 <td></td>
 <td></td>
@@ -159,6 +177,24 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <td></td>
 </tr>
 <tr>
+<td id="4098"><a href="lwg-active.html#4098" title="views::adjacent&lt;0&gt; should reject non-forward ranges (Status: Tentatively Ready)">4098</a><sup><a href="https://cplusplus.github.io/LWG/issue4098">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>26.7.27.1 [range.adjacent.overview]</td>
+<td><code>views::adjacent&lt;0&gt;</code> should reject non-forward ranges</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4105"><a href="lwg-active.html#4105" title="ranges::ends_with's Returns misses difference casting (Status: Tentatively Ready)">4105</a><sup><a href="https://cplusplus.github.io/LWG/issue4105">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>27.6.17 [alg.ends.with]</td>
+<td><code>ranges::ends_with</code>'s <i>Returns</i> misses difference casting</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td id="4060"><a href="lwg-active.html#4060" title="submdspan preconditions do not forbid creating invalid pointer (Status: Tentatively Ready)">4060</a><sup><a href="https://cplusplus.github.io/LWG/issue4060">(i)</a></sup></td>
 <td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
 <td>99 [mdspan.submdspan.submdspan]</td>
@@ -168,7 +204,7 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <td></td>
 </tr>
 </table>
-<h2 id="Tentatively_NAD">Tentatively NAD (16 issues)</h2>
+<h2 id="Tentatively_NAD">Tentatively NAD (18 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -297,6 +333,24 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <td></td>
 </tr>
 <tr>
+<td id="4095"><a href="lwg-active.html#4095" title="ranges::fold_meow should explicitly spell out the return type (Status: Tentatively NAD)">4095</a><sup><a href="https://cplusplus.github.io/LWG/issue4095">(i)</a></sup></td>
+<td><a href="lwg-active.html#NAD">Tentatively NAD</a></td>
+<td>27.4 [algorithm.syn]</td>
+<td><code>ranges::fold_<i>meow</i></code> should explicitly spell out the return type</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4086"><a href="lwg-active.html#4086" title="ranges::generate_random_n is missing (Status: Tentatively NAD)">4086</a><sup><a href="https://cplusplus.github.io/LWG/issue4086">(i)</a></sup></td>
+<td><a href="lwg-active.html#NAD">Tentatively NAD</a></td>
+<td>27.12.2 [alg.rand.generate]</td>
+<td><code>ranges::generate_random_n</code> is missing</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td id="3980"><a href="lwg-active.html#3980" title="The read exclusive ownership of an atomic read-modify-write operation and whether its read and write are two operations are unclear (Status: Tentatively NAD)">3980</a><sup><a href="https://cplusplus.github.io/LWG/issue3980">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">Tentatively NAD</a></td>
 <td>33.5.4 [atomics.order]</td>
@@ -324,7 +378,7 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <td></td>
 </tr>
 </table>
-<h2 id="New">New (424 issues)</h2>
+<h2 id="New">New (416 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -461,15 +515,6 @@ is unclear</td>
 <td>Headers declare more than entities</td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4075"><a href="lwg-active.html#4075" title="Thread stability requirement on constructors and destructors (Status: New)">4075</a><sup><a href="https://cplusplus.github.io/LWG/issue4075">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>16.4.4 [utility.requirements]</td>
-<td>Thread stability requirement on constructors and destructors</td>
-<td><span class="no-pr">No</span></td>
-<td></td>
 <td></td>
 </tr>
 <tr>
@@ -1471,7 +1516,7 @@ the evaluation of type traits</td>
 <td>22.5.8 [optional.comp.with.t]</td>
 <td><code class='backtick'>std::optional</code> comparisons: constrain harder</td>
 <td>Yes</td>
-<td></td>
+<td>1</td>
 <td></td>
 </tr>
 <tr>
@@ -1758,15 +1803,6 @@ the evaluation of type traits</td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>22.14.7.4 [format.range.fmtmap]</td>
 <td>Map formatter may conflict with user-defined specializations of <code>pair</code>/<code>tuple</code> formatters</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4106"><a href="lwg-active.html#4106" title="basic_format_args should not be default-constructible (Status: New)">4106</a><sup><a href="https://cplusplus.github.io/LWG/issue4106">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>22.14.8.3 [format.args]</td>
-<td><code>basic_format_args</code> should not be default-constructible</td>
 <td>Yes</td>
 <td></td>
 <td></td>
@@ -2215,7 +2251,7 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td>25.3.2 [iterator.assoc.types]</td>
 <td>Presumed value and difference types of an iterator type in ranges and non-ranges algorithms</td>
 <td><span class="no-pr">No</span></td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -2350,7 +2386,7 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td>25.5.3 [const.iterators]</td>
 <td><code>basic_const_iterator&lt;volatile int*&gt;</code> is not a <code>contiguous_iterator</code></td>
 <td><span class="no-pr">No</span></td>
-<td></td>
+<td>4</td>
 <td></td>
 </tr>
 <tr>
@@ -2377,7 +2413,7 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td>25.5.5.1 [common.iterator]</td>
 <td>The monotonic version of <code>common_iterator::operator==</code> is underconstrained</td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -2565,15 +2601,6 @@ is a non-move-constructible range</td>
 <td></td>
 </tr>
 <tr>
-<td id="4096"><a href="lwg-active.html#4096" title="views::iota(views::iota(0)) should be rejected (Status: New)">4096</a><sup><a href="https://cplusplus.github.io/LWG/issue4096">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>26.6.4.1 [range.iota.overview]</td>
-<td><code>views::iota(views::iota(0))</code> should be rejected</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="3614"><a href="lwg-active.html#3614" title="iota_view::size and the most negative signed integer values (Status: New)">3614</a><sup><a href="https://cplusplus.github.io/LWG/issue3614">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>26.6.4.2 [range.iota.view]</td>
@@ -2655,7 +2682,7 @@ difference_type is not an integer-class type? (Status: New)">3763</a><sup><a hre
 <td>26.7.7.1 [range.as.rvalue.overview]</td>
 <td>The simple case of <code>views::as_rvalue</code> and <code>views::common</code> are not strictly correct</td>
 <td>Yes</td>
-<td></td>
+<td>4</td>
 <td></td>
 </tr>
 <tr>
@@ -2718,7 +2745,7 @@ difference_type is not an integer-class type? (Status: New)">3763</a><sup><a hre
 <td>26.7.15.3 [range.join.with.iterator]</td>
 <td>Leaky abstraction in <code>join_with_view</code>'s iterator</td>
 <td><span class="no-pr">No</span></td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -2796,21 +2823,21 @@ inner-iterator with std::default_sentinel results in null pointer dereference (S
 <td></td>
 </tr>
 <tr>
-<td id="4091"><a href="lwg-active.html#4091" title="concat_view rejects non-movable references (Status: New)">4091</a><sup><a href="https://cplusplus.github.io/LWG/issue4091">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>26.7.18.2 [range.concat.view]</td>
-<td><code>concat_view</code> rejects non-movable references</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="4073"><a href="lwg-active.html#4073" title="concat_view::size may overflow (Status: New)">4073</a><sup><a href="https://cplusplus.github.io/LWG/issue4073">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>26.7.18.2 [range.concat.view]</td>
 <td><code class='backtick'>concat_view::size</code> may overflow</td>
 <td><span class="no-pr">No</span></td>
+<td>4</td>
 <td></td>
+</tr>
+<tr>
+<td id="4091"><a href="lwg-active.html#4091" title="concat_view rejects non-movable references (Status: New)">4091</a><sup><a href="https://cplusplus.github.io/LWG/issue4091">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>26.7.18.2 [range.concat.view]</td>
+<td><code>concat_view</code> rejects non-movable references</td>
+<td>Yes</td>
+<td>4</td>
 <td></td>
 </tr>
 <tr>
@@ -2819,7 +2846,7 @@ inner-iterator with std::default_sentinel results in null pointer dereference (S
 <td>26.7.18.3 [range.concat.iterator]</td>
 <td><code>concat_view::<i>iterator</i></code>'s <code>iter_swap</code> is overconstrained</td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -2827,15 +2854,6 @@ inner-iterator with std::default_sentinel results in null pointer dereference (S
 <td><a href="lwg-active.html#New">New</a></td>
 <td>26.7.18.3 [range.concat.iterator]</td>
 <td><code>concat_view::<i>iterator</i>::operator-</code> is overconstrained</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4097"><a href="lwg-active.html#4097" title="views::reverse should be specialized for some view types (Status: New)">4097</a><sup><a href="https://cplusplus.github.io/LWG/issue4097">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>26.7.21.1 [range.reverse.overview]</td>
-<td><code>views::reverse</code> should be specialized for some view types</td>
 <td>Yes</td>
 <td></td>
 <td></td>
@@ -2886,15 +2904,6 @@ inner-iterator with std::default_sentinel results in null pointer dereference (S
 <td></td>
 </tr>
 <tr>
-<td id="4098"><a href="lwg-active.html#4098" title="views::adjacent&lt;0&gt; should reject non-forward ranges (Status: New)">4098</a><sup><a href="https://cplusplus.github.io/LWG/issue4098">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>26.7.27.1 [range.adjacent.overview]</td>
-<td><code>views::adjacent&lt;0&gt;</code> should reject non-forward ranges</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="3899"><a href="lwg-active.html#3899" title="co_yielding elements of an lvalue generator is unnecessarily inefficient (Status: New)">3899</a><sup><a href="https://cplusplus.github.io/LWG/issue3899">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>26.8.5 [coro.generator.promise]</td>
@@ -2933,15 +2942,6 @@ should not be constrained</td>
 <td></td>
 </tr>
 <tr>
-<td id="4095"><a href="lwg-active.html#4095" title="ranges::fold_meow should explicitly spell out the return type (Status: New)">4095</a><sup><a href="https://cplusplus.github.io/LWG/issue4095">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>27.4 [algorithm.syn]</td>
-<td><code>ranges::fold_<i>meow</i></code> should explicitly spell out the return type</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="3793"><a href="lwg-active.html#3793" title="Requirements for some algorithms' Size template parameters are unclear (Status: New)">3793</a><sup><a href="https://cplusplus.github.io/LWG/issue3793">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>27.6.5 [alg.foreach]</td>
@@ -2951,21 +2951,12 @@ should not be constrained</td>
 <td></td>
 </tr>
 <tr>
-<td id="4105"><a href="lwg-active.html#4105" title="ranges::ends_with's Returns misses difference casting (Status: New)">4105</a><sup><a href="https://cplusplus.github.io/LWG/issue4105">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>27.6.17 [alg.ends.with]</td>
-<td><code>ranges::ends_with</code>'s <i>Returns</i> misses difference casting</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="4093"><a href="lwg-active.html#4093" title="ranges::fold_left_first_with_iter incorrectly constructs optional&lt;U&gt; (Status: New)">4093</a><sup><a href="https://cplusplus.github.io/LWG/issue4093">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>27.6.18 [alg.fold]</td>
 <td><code>ranges::fold_left_first_with_iter</code> incorrectly constructs <code>optional&lt;U&gt;</code></td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -2974,7 +2965,7 @@ should not be constrained</td>
 <td>27.6.18 [alg.fold]</td>
 <td><code>ranges::fold_<i>meow</i></code> is overconstrained</td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -3003,7 +2994,7 @@ should not be constrained</td>
 <td><code>ranges::unique_copy</code>'s constraints for the case where <code>result</code> is an
     <code>input_iterator</code> are not quite right</td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -3130,15 +3121,6 @@ specified to make <code><i>N</i></code> copies of <code>T</code> into the destin
 <td><a href="lwg-active.html#New">New</a></td>
 <td>27.12.2 [alg.rand.generate]</td>
 <td><code>ranges::generate_random</code>'s helper lambda should specify the return type</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4086"><a href="lwg-active.html#4086" title="ranges::generate_random_n is missing (Status: New)">4086</a><sup><a href="https://cplusplus.github.io/LWG/issue4086">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>27.12.2 [alg.rand.generate]</td>
-<td><code>ranges::generate_random_n</code> is missing</td>
 <td>Yes</td>
 <td></td>
 <td></td>
@@ -4916,7 +4898,7 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <td></td>
 </tr>
 </table>
-<h2 id="LEWG">LEWG (27 issues)</h2>
+<h2 id="LEWG">LEWG (28 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -5036,6 +5018,15 @@ types &mdash; this is inconsistent with other types in the library</td>
 <td>26.6.6 [range.istream]</td>
 <td>Is <code>&lt;ranges&gt;</code> sufficient for <code>istream_view</code>?</td>
 <td><span class="no-pr">No</span></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4097"><a href="lwg-active.html#4097" title="views::reverse should be specialized for some view types (Status: LEWG)">4097</a><sup><a href="https://cplusplus.github.io/LWG/issue4097">(i)</a></sup></td>
+<td><a href="lwg-active.html#LEWG">LEWG</a></td>
+<td>26.7.21.1 [range.reverse.overview]</td>
+<td><code>views::reverse</code> should be specialized for some view types</td>
+<td>Yes</td>
 <td>3</td>
 <td></td>
 </tr>
@@ -5196,7 +5187,7 @@ types &mdash; this is inconsistent with other types in the library</td>
 <td></td>
 </tr>
 </table>
-<h2 id="SG1">SG1 (8 issues)</h2>
+<h2 id="SG1">SG1 (9 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -5212,6 +5203,15 @@ types &mdash; this is inconsistent with other types in the library</td>
 <td><a href="lwg-active.html#SG1">SG1</a></td>
 <td>6.9.2 [intro.multithread]</td>
 <td>Underspecification of atomics</td>
+<td><span class="no-pr">No</span></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4075"><a href="lwg-active.html#4075" title="Thread stability requirement on constructors and destructors (Status: SG1)">4075</a><sup><a href="https://cplusplus.github.io/LWG/issue4075">(i)</a></sup></td>
+<td><a href="lwg-active.html#SG1">SG1</a></td>
+<td>16.4.4 [utility.requirements]</td>
+<td>Thread stability requirement on constructors and destructors</td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
 <td></td>

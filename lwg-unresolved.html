@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-06-24 at 19:00:34 UTC
+<p>Revised 2024-06-24 at 19:31:28 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -52746,7 +52746,7 @@ to destroy the contained value <ins>and sets <code><i>has_val</i></code> to <cod
 <hr>
 <h3 id="4017"><a href="#4017">4017</a><sup><a href="https://cplusplus.github.io/LWG/issue4017">(i)</a></sup>. Behavior of <code>std::views::split</code> on an empty range</h3>
 <p><b>Section:</b> 26.7.17.3 <a href="https://wg21.link/range.split.iterator">[range.split.iterator]</a>, 26.7.16.3 <a href="https://wg21.link/range.lazy.split.outer">[range.lazy.split.outer]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> David Stone <b>Opened:</b> 2023-11-19 <b>Last modified:</b> 2024-03-11</p>
+ <b>Submitter:</b> David Stone <b>Opened:</b> 2023-11-19 <b>Last modified:</b> 2024-06-24</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -52802,6 +52802,28 @@ The following demo shows Barry Revzin's implementation from <a href="https://wg2
 
 <p>
 Set priority to 3 after reflector poll.
+</p>
+
+<p><i>[2024-03; Reflector comments]</i></p>
+
+<p>
+"For <code class='backtick'>split</code>, we need to adjust the definition of <code class='backtick'>end()</code> for the
+<code class='backtick'>common_range</code> case
+(which may require introducing a new constructor to the iterator);
+right now it would compare <code class='backtick'>ranges::end(base_)</code> against a value-initialized
+iterator, which is not in the domain of <code class='backtick'>==</code>.
+For <code class='backtick'>lazy_split</code>, we need to also change the non-forward overload."
+</p>
+<p>
+"What should splitting an empty range on an empty pattern produce?
+Right now the behavior is that splitting a range of N &gt; 0 elements
+with an empty pattern produces a range of N single-element ranges.
+I suppose you can argue that an empty pattern matches between adjacent elements
+but not at the start or end, so that an empty range, like a single-element range,
+contains 0 delimiters so should produce a range of one empty range.
+But it's also at least arguable that this should produce an empty range instead,
+so that we maintain the N element &lt;-&gt; N subrange
+and 1 element per subrange invariant.
 </p>
 
 

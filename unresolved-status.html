@@ -62,8 +62,8 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
 
-<p>Revised 2024-06-28 at 20:58:14 UTC
-</p><h2 id="Ready">Ready (5 issues)</h2>
+<p>Revised 2024-06-28 at 22:51:16 UTC
+</p><h2 id="Ready">Ready (8 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -73,6 +73,15 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
   <th>Proposed Resolution</th>
   <th><a href="unresolved-prioritized.html">Priority</a></th>
   <th>Duplicates</th>
+</tr>
+<tr>
+<td id="4064"><a href="lwg-active.html#4064" title="Clarify that std::launder is not needed when using the result of std::memcpy (Status: Ready)">4064</a><sup><a href="https://cplusplus.github.io/LWG/issue4064">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>23.5.3 [cstring.syn]</td>
+<td>Clarify that <code>std::launder</code> is not needed when using the result of <code>std::memcpy</code></td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
 </tr>
 <tr>
 <td id="4027"><a href="lwg-active.html#4027" title="possibly-const-range should prefer returning const R&amp; (Status: Ready)">4027</a><sup><a href="https://cplusplus.github.io/LWG/issue4027">(i)</a></sup></td>
@@ -90,6 +99,26 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <td><code><i>has-arrow</i></code> should required <code>operator-&gt;()</code> to be <code>const</code>-qualified</td>
 <td>Yes</td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td id="3899"><a href="lwg-active.html#3899" title="co_yielding elements of an lvalue generator is unnecessarily inefficient (Status: Ready)">3899</a><sup><a href="https://cplusplus.github.io/LWG/issue3899">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>26.8.5 [coro.generator.promise]</td>
+<td><code>co_yield</code>ing elements of an lvalue <code>generator</code> is unnecessarily inefficient</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="3900"><a href="lwg-active.html#3900" title="The allocator_arg_t overloads of generator::promise_type::operator new
+should not be constrained (Status: Ready)">3900</a><sup><a href="https://cplusplus.github.io/LWG/issue3900">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>26.8.5 [coro.generator.promise]</td>
+<td>The <code>allocator_arg_t</code> overloads of <code>generator::promise_type::operator new</code>
+should not be constrained</td>
+<td>Yes</td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -120,7 +149,7 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <td></td>
 </tr>
 </table>
-<h2 id="New">New (412 issues)</h2>
+<h2 id="New">New (410 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -2628,26 +2657,6 @@ inner-iterator with std::default_sentinel results in null pointer dereference (S
 <td></td>
 </tr>
 <tr>
-<td id="3899"><a href="lwg-active.html#3899" title="co_yielding elements of an lvalue generator is unnecessarily inefficient (Status: New)">3899</a><sup><a href="https://cplusplus.github.io/LWG/issue3899">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>26.8.5 [coro.generator.promise]</td>
-<td><code>co_yield</code>ing elements of an lvalue <code>generator</code> is unnecessarily inefficient</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="3900"><a href="lwg-active.html#3900" title="The allocator_arg_t overloads of generator::promise_type::operator new
-should not be constrained (Status: New)">3900</a><sup><a href="https://cplusplus.github.io/LWG/issue3900">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>26.8.5 [coro.generator.promise]</td>
-<td>The <code>allocator_arg_t</code> overloads of <code>generator::promise_type::operator new</code>
-should not be constrained</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
 <td id="4057"><a href="lwg-active.html#4057" title="generator::iterator's operator* is not noexcept when it can be (Status: New)">4057</a><sup><a href="https://cplusplus.github.io/LWG/issue4057">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>26.8.6 [coro.generator.iterator]</td>
@@ -3890,7 +3899,7 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <td></td>
 </tr>
 </table>
-<h2 id="Open">Open (80 issues)</h2>
+<h2 id="Open">Open (78 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -4105,15 +4114,6 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <td>23.5 [c.strings]</td>
 <td>Problematic iterator-pair constructor of containers</td>
 <td><span class="no-pr">No</span></td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4064"><a href="lwg-active.html#4064" title="Clarify that std::launder is not needed when using the result of std::memcpy (Status: Open)">4064</a><sup><a href="https://cplusplus.github.io/LWG/issue4064">(i)</a></sup></td>
-<td><a href="lwg-active.html#Open">Open</a></td>
-<td>23.5.3 [cstring.syn]</td>
-<td>Clarify that <code>std::launder</code> is not needed when using the result of <code>std::memcpy</code></td>
-<td>Yes</td>
 <td>3</td>
 <td></td>
 </tr>
@@ -4529,15 +4529,6 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <td>29.3p9 appears to rule out some acceptable executions</td>
 <td><span class="no-pr">No</span></td>
 <td>4</td>
-<td></td>
-</tr>
-<tr>
-<td id="3485"><a href="lwg-active.html#3485" title="atomic_ref safety should be based on operations that &quot;potentially conflict&quot; rather than lifetime (Status: Open)">3485</a><sup><a href="https://cplusplus.github.io/LWG/issue3485">(i)</a></sup></td>
-<td><a href="lwg-active.html#Open">Open</a></td>
-<td>33.5.7 [atomics.ref.generic]</td>
-<td><code>atomic_ref</code> safety should be based on operations that "potentially conflict" rather than lifetime</td>
-<td><span class="no-pr">No</span></td>
-<td>3</td>
 <td></td>
 </tr>
 <tr>

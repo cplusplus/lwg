@@ -62,7 +62,7 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
 
-<p>Revised 2024-06-28 at 20:03:20 UTC
+<p>Revised 2024-06-28 at 20:05:41 UTC
 </p><h2 id="Voting">Voting (13 issues)</h2>
 <table class="issues-index">
 <tr>
@@ -333,7 +333,7 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <td></td>
 </tr>
 </table>
-<h2 id="New">New (413 issues)</h2>
+<h2 id="New">New (412 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -3910,15 +3910,6 @@ regards to <code>ClassAtomCollatingElement</code></td>
 <td></td>
 </tr>
 <tr>
-<td id="3508"><a href="lwg-active.html#3508" title="atomic_ref&lt;cv T&gt; is not well-specified (Status: New)">3508</a><sup><a href="https://cplusplus.github.io/LWG/issue3508">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>33.5.7.1 [atomics.ref.generic.general]</td>
-<td><code>atomic_ref&lt;<i>cv</i> T&gt;</code> is not well-specified</td>
-<td><span class="no-pr">No</span></td>
-<td>2</td>
-<td></td>
-</tr>
-<tr>
 <td id="3409"><a href="lwg-active.html#3409" title="Too lax description of atomic_ref&lt;T&gt;::required_alignment (Status: New)">3409</a><sup><a href="https://cplusplus.github.io/LWG/issue3409">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>33.5.7.2 [atomics.ref.ops]</td>
@@ -4112,7 +4103,7 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <td></td>
 </tr>
 </table>
-<h2 id="Open">Open (77 issues)</h2>
+<h2 id="Open">Open (80 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -4754,6 +4745,33 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <td></td>
 </tr>
 <tr>
+<td id="3485"><a href="lwg-active.html#3485" title="atomic_ref safety should be based on operations that &quot;potentially conflict&quot; rather than lifetime (Status: Open)">3485</a><sup><a href="https://cplusplus.github.io/LWG/issue3485">(i)</a></sup></td>
+<td><a href="lwg-active.html#Open">Open</a></td>
+<td>33.5.7 [atomics.ref.generic]</td>
+<td><code>atomic_ref</code> safety should be based on operations that "potentially conflict" rather than lifetime</td>
+<td><span class="no-pr">No</span></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="3508"><a href="lwg-active.html#3508" title="atomic_ref&lt;cv T&gt; is not well-specified (Status: Open)">3508</a><sup><a href="https://cplusplus.github.io/LWG/issue3508">(i)</a></sup></td>
+<td><a href="lwg-active.html#Open">Open</a></td>
+<td>33.5.7.1 [atomics.ref.generic.general]</td>
+<td><code>atomic_ref&lt;<i>cv</i> T&gt;</code> is not well-specified</td>
+<td><span class="no-pr">No</span></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td id="4069"><a href="lwg-active.html#4069" title="std::atomic&lt;volatile T&gt; should be ill-formed (Status: Open)">4069</a><sup><a href="https://cplusplus.github.io/LWG/issue4069">(i)</a></sup></td>
+<td><a href="lwg-active.html#Open">Open</a></td>
+<td>33.5.8 [atomics.types.generic]</td>
+<td><code>std::atomic&lt;volatile T&gt;</code> should be ill-formed</td>
+<td><span class="no-pr">No</span></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
 <td id="3343"><a href="lwg-active.html#3343" title="Ordering of calls to unlock() and notify_all() in Effects element of notify_all_at_thread_exit() should be reversed (Status: Open)">3343</a><sup><a href="https://cplusplus.github.io/LWG/issue3343">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
 <td>33.7.3 [thread.condition.nonmember]</td>
@@ -5106,7 +5124,7 @@ types &mdash; this is inconsistent with other types in the library</td>
 <td></td>
 </tr>
 </table>
-<h2 id="SG1">SG1 (9 issues)</h2>
+<h2 id="SG1">SG1 (7 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -5160,24 +5178,6 @@ types &mdash; this is inconsistent with other types in the library</td>
 <td>&sect;[atomics.order] inadvertently prohibits widespread implementation techniques</td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="3485"><a href="lwg-active.html#3485" title="atomic_ref safety should be based on operations that &quot;potentially conflict&quot; rather than lifetime (Status: SG1)">3485</a><sup><a href="https://cplusplus.github.io/LWG/issue3485">(i)</a></sup></td>
-<td><a href="lwg-active.html#SG1">SG1</a></td>
-<td>33.5.7 [atomics.ref.generic]</td>
-<td><code>atomic_ref</code> safety should be based on operations that "potentially conflict" rather than lifetime</td>
-<td><span class="no-pr">No</span></td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4069"><a href="lwg-active.html#4069" title="std::atomic&lt;volatile T&gt; should be ill-formed (Status: SG1)">4069</a><sup><a href="https://cplusplus.github.io/LWG/issue4069">(i)</a></sup></td>
-<td><a href="lwg-active.html#SG1">SG1</a></td>
-<td>33.5.8 [atomics.types.generic]</td>
-<td><code>std::atomic&lt;volatile T&gt;</code> should be ill-formed</td>
-<td><span class="no-pr">No</span></td>
-<td>2</td>
 <td></td>
 </tr>
 <tr>

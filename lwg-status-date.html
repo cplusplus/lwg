@@ -67,7 +67,7 @@
 This document is the Index by Status and Date for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
-<p>Revised 2024-06-26 at 20:45:31 UTC
+<p>Revised 2024-06-28 at 20:03:20 UTC
 </p><h2 id="Voting">Voting (13 issues)</h2>
 <table class="issues-index">
 <tr>
@@ -350,6 +350,15 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
   <th>Duplicates</th>
 </tr>
 <tr>
+<td id="3508"><a href="lwg-active.html#3508" title="atomic_ref&lt;cv T&gt; is not well-specified (Status: New)">3508</a><sup><a href="https://cplusplus.github.io/LWG/issue3508">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>33.5.7.1 [atomics.ref.generic.general]</td>
+<td><code>atomic_ref&lt;<i>cv</i> T&gt;</code> is not well-specified</td>
+<td><span class="no-pr">No</span></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
 <td id="4113"><a href="lwg-active.html#4113" title="Disallow has_unique_object_representations&lt;Incomplete[]&gt; (Status: New)">4113</a><sup><a href="https://cplusplus.github.io/LWG/issue4113">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>21.3.5.4 [meta.unary.prop]</td>
@@ -547,15 +556,6 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
 <td><code class='backtick'>shared_ptr(nullptr_t, Deleter)</code> is overconstrained, breaking some sensible deleters</td>
 <td>Yes</td>
 <td></td>
-<td></td>
-</tr>
-<tr>
-<td id="3508"><a href="lwg-active.html#3508" title="atomic_ref&lt;cv T&gt; is not well-specified (Status: New)">3508</a><sup><a href="https://cplusplus.github.io/LWG/issue3508">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>33.5.7.1 [atomics.ref.generic.general]</td>
-<td><code>atomic_ref&lt;<i>cv</i> T&gt;</code> is not well-specified</td>
-<td><span class="no-pr">No</span></td>
-<td>2</td>
 <td></td>
 </tr>
 <tr>
@@ -5123,10 +5123,10 @@ types &mdash; this is inconsistent with other types in the library</td>
   <th>Duplicates</th>
 </tr>
 <tr>
-<td id="4075"><a href="lwg-active.html#4075" title="Thread stability requirement on constructors and destructors (Status: SG1)">4075</a><sup><a href="https://cplusplus.github.io/LWG/issue4075">(i)</a></sup></td>
+<td id="3485"><a href="lwg-active.html#3485" title="atomic_ref safety should be based on operations that &quot;potentially conflict&quot; rather than lifetime (Status: SG1)">3485</a><sup><a href="https://cplusplus.github.io/LWG/issue3485">(i)</a></sup></td>
 <td><a href="lwg-active.html#SG1">SG1</a></td>
-<td>16.4.4 [utility.requirements]</td>
-<td>Thread stability requirement on constructors and destructors</td>
+<td>33.5.7 [atomics.ref.generic]</td>
+<td><code>atomic_ref</code> safety should be based on operations that "potentially conflict" rather than lifetime</td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
 <td></td>
@@ -5138,6 +5138,15 @@ types &mdash; this is inconsistent with other types in the library</td>
 <td><code>std::atomic&lt;volatile T&gt;</code> should be ill-formed</td>
 <td><span class="no-pr">No</span></td>
 <td>2</td>
+<td></td>
+</tr>
+<tr>
+<td id="4075"><a href="lwg-active.html#4075" title="Thread stability requirement on constructors and destructors (Status: SG1)">4075</a><sup><a href="https://cplusplus.github.io/LWG/issue4075">(i)</a></sup></td>
+<td><a href="lwg-active.html#SG1">SG1</a></td>
+<td>16.4.4 [utility.requirements]</td>
+<td>Thread stability requirement on constructors and destructors</td>
+<td><span class="no-pr">No</span></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -5165,15 +5174,6 @@ types &mdash; this is inconsistent with other types in the library</td>
 <td>[concurr.ts] Constrain threads where <code>future::then</code> can run a continuation</td>
 <td><span class="no-pr">No</span></td>
 <td></td>
-<td></td>
-</tr>
-<tr>
-<td id="3485"><a href="lwg-active.html#3485" title="atomic_ref safety should be based on operations that &quot;potentially conflict&quot; rather than lifetime (Status: SG1)">3485</a><sup><a href="https://cplusplus.github.io/LWG/issue3485">(i)</a></sup></td>
-<td><a href="lwg-active.html#SG1">SG1</a></td>
-<td>33.5.7 [atomics.ref.generic]</td>
-<td><code>atomic_ref</code> safety should be based on operations that "potentially conflict" rather than lifetime</td>
-<td><span class="no-pr">No</span></td>
-<td>3</td>
 <td></td>
 </tr>
 <tr>

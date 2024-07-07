@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-06-28 at 22:51:16 UTC
+<p>Revised 2024-07-07 at 13:03:58 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -42085,6 +42085,7 @@ modified commands <code>%Ey</code> and <code>%Oy</code> interpret the locale's a
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2022-11-23 <b>Last modified:</b> 2023-01-28</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.elements.iterator">active issues</a> in [range.elements.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.elements.iterator">issues</a> in [range.elements.iterator].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -59141,6 +59142,111 @@ The proposed resolution uses <code>remove_all_extents_t&lt;T&gt;</code>
 for consistency with the <b>Condition</b> column.]
 </p>
 </blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4114"><a href="#4114">4114</a><sup><a href="https://cplusplus.github.io/LWG/issue4114">(i)</a></sup>. <code>elements_view::<i>iterator</i>::operator*</code> missing conditional <code>noexcept</code> specification</h3>
+<p><b>Section:</b> 26.7.23.3 <a href="https://wg21.link/range.elements.iterator">[range.elements.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-02 <b>Last modified:</b> 2024-07-07</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.elements.iterator">active issues</a> in [range.elements.iterator].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.elements.iterator">issues</a> in [range.elements.iterator].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>views::elements</code>, which can be seen as a specialization of <code>views::transform</code>, 
+is used to <i>transform</i> the original tuple into its elements.
+<p/>
+Since neither has a specialization for <code>iter_move</code>, the customization point is dispatched 
+to the default implementation. However, unlike the latter, <code>elements_view::<i>iterator</i>::operator*</code> 
+does not have a <code>noexcept</code> specification, which makes calls to <code>iter_move</code> never 
+<code>noexcept</code>, which seems to be an oversight (<a href="https://godbolt.org/z/aGe8EP6Wd">demo</a>):
+</p>
+<blockquote><pre>
+#include &lt;ranges&gt;
+#include &lt;vector&gt;
+
+std::vector v{std::pair{1, "a"}, {2, "b"}};
+
+auto r1 = v | std::views::keys;
+auto i1 = r1.begin();
+static_assert(noexcept(*i1));                        // <span  style="color:#C80000;font-weight:bold">failed</span>
+static_assert(noexcept(std::ranges::iter_move(i1))); // <span  style="color:#C80000;font-weight:bold">failed</span>
+
+auto get_key = [](auto&amp; t) noexcept -&gt; auto&amp; { return std::get&lt;0&gt;(t); };
+auto r2 = v | std::views::transform(get_key);
+auto i2 = r2.begin();
+static_assert(noexcept(*i2));
+static_assert(noexcept(std::ranges::iter_move(i2)));
+</pre></blockquote>
+<p>
+The proposed resolution is aligned with the <i>strengthened</i> implementation of MSVC-STL.
+</p>
+
+
+<p id="res-4114"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 26.7.23.3 <a href="https://wg21.link/range.elements.iterator">[range.elements.iterator]</a> as indicated:</p>
+
+<blockquote><pre>
+namespace std::ranges {
+  template&lt;input_range V, size_t N&gt;
+    requires view&lt;V&gt; &amp;&amp; <i>has-tuple-element</i>&lt;range_value_t&lt;V&gt;, N&gt; &amp;&amp;
+             <i>has-tuple-element</i>&lt;remove_reference_t&lt;range_reference_t&lt;V&gt;&gt;, N&gt; &amp;&amp;
+             <i>returnable-element</i>&lt;range_reference_t&lt;V&gt;, N&gt;
+  template&lt;bool Const&gt;
+  class elements_view&lt;V, N&gt;::<i>iterator</i> {
+    [&hellip;]
+
+    static constexpr decltype(auto) <i>get-element</i>(const iterator_t&lt;<i>Base</i>&gt;&amp; i)<del>;</del>     // <i>exposition only</i>
+      <ins>noexcept(noexcept(std::get&lt;N&gt;(*i))) requires is_reference_v&lt;range_reference_t&lt;<i>Base</i>&gt;&gt; {
+      return std::get&lt;N&gt;(*i);
+    }</ins>
+    <ins>
+    static constexpr decltype(auto) <i>get-element</i>(const iterator_t&lt;<i>Base</i>&gt;&amp; i)      // <i>exposition only</i>
+      noexcept(noexcept(std::get&lt;N&gt;(*i)) &amp;&amp;
+               is_nothrow_move_constructible_v&lt;tuple_element_t&lt;N, range_reference_t&lt;<i>Base</i>&gt;&gt;&gt;) {
+      using E = remove_cv_t&lt;tuple_element_t&lt;N, range_reference_t&lt;<i>Base</i>&gt;&gt;&gt;;
+      return static_cast&lt;E&gt;(std::get&lt;N&gt;(*i));
+    }</ins>
+
+  public:
+    [&hellip;]
+
+    constexpr decltype(auto) operator*() const
+      <ins>noexcept(noexcept(<i>get-element</i>(<i>current_</i>)))</ins>
+    { return <i>get-element</i>(<i>current_</i>); }
+
+    [&hellip;]
+  };
+}
+</pre></blockquote>
+<p>
+[&hellip;]
+</p>
+<pre><del>static constexpr decltype(auto) <i>get-element</i>(const iterator_t&lt;<i>Base</i>&gt;&amp; i);</del></pre>
+<p>
+<del>-3- <i>Effects</i>: Equivalent to:</del>
+</p>
+<blockquote><pre>
+<del>if constexpr (is_reference_v&lt;range_reference_t&lt;<i>Base</i>&gt;&gt;) {
+  return std::get&lt;N&gt;(*i);
+} else {
+  using E = remove_cv_t&lt;tuple_element_t&lt;N, range_reference_t&lt;<i>Base</i>&gt;&gt;&gt;;
+  return static_cast&lt;E&gt;(std::get&lt;N&gt;(*i));
+}</del>
+</pre></blockquote>
 
 </li>
 </ol>

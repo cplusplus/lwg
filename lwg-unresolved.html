@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-07-07 at 17:23:10 UTC
+<p>Revised 2024-07-07 at 17:47:06 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -55413,6 +55413,7 @@ is reached and returns the number of increments.
  <b>Submitter:</b> S. B. Tam <b>Opened:</b> 2024-03-01 <b>Last modified:</b> 2024-06-24</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#coro.generator.iterator">active issues</a> in [coro.generator.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#coro.generator.iterator">issues</a> in [coro.generator.iterator].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -59380,6 +59381,52 @@ namespace std::ranges {
 </blockquote>
 
 </li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4117"><a href="#4117">4117</a><sup><a href="https://cplusplus.github.io/LWG/issue4117">(i)</a></sup>. <code>generator::<i>iterator</i></code> should provide <code>iterator_concept</code></h3>
+<p><b>Section:</b> 26.8.6 <a href="https://wg21.link/coro.generator.iterator">[coro.generator.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-07 <b>Last modified:</b> 2024-07-07</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#coro.generator.iterator">active issues</a> in [coro.generator.iterator].</p>
+<p><b>View all other</b> <a href="lwg-index.html#coro.generator.iterator">issues</a> in [coro.generator.iterator].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>generator::<i>iterator</i></code> currently does not provide an <code>iterator_concept</code>.
+While this does not affect it being an <code>input_iterator</code>, providing <code>iterator_concept</code> 
+does improve consistency given that other C++20 iterators have such a member type alias.
+</p>
+
+
+<p id="res-4117"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 26.8.6 <a href="https://wg21.link/coro.generator.iterator">[coro.generator.iterator]</a> as indicated:</p>
+
+<blockquote><pre>
+namespace std {
+  template&lt;class Ref, class V, class Allocator&gt;
+  class generator&lt;Ref, V, Allocator&gt;::<i>iterator</i> {
+  public:
+    <ins>using iterator_concept = input_iterator_tag;</ins>
+    using value_type = value;
+    using difference_type = ptrdiff_t;
+    [&hellip;]
+  };
+}
+</pre></blockquote>
+
+</li>
+
 </ol>
 
 

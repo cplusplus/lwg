@@ -66,9 +66,8 @@
 <p>This document is the Index by Section for the <a href="lwg-active.html">Library Active Issues List</a>, <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.</p>
 <h2>Index by Section</h2>
 <p><a href="lwg-index-open.html">(view only non-Ready open issues)</a></p>
-<p>Revised 2024-07-07 at 17:47:06 UTC
-</p><h2 id="Section_17">Section 17 (1 issues)</h2>
-<p><a href="lwg-index-open.html#Section_17">(view only non-Ready open issues)</a></p>
+<p>Revised 2024-07-08 at 09:00:51 UTC
+</p><h2 id="Section_23">Section 23 (1 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -80,17 +79,16 @@
   <th>Duplicates</th>
 </tr>
 <tr>
-<td id="4076"><a href="lwg-active.html#4076" title="concat_view should be freestanding (Status: Voting)">4076</a><sup><a href="https://cplusplus.github.io/LWG/issue4076">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>17.3.2 [version.syn]<a id="version.syn"></a></td>
-<td><code>concat_view</code> should be freestanding</td>
+<td id="4064"><a href="lwg-active.html#4064" title="Clarify that std::launder is not needed when using the result of std::memcpy (Status: Ready)">4064</a><sup><a href="https://cplusplus.github.io/LWG/issue4064">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>23.5.3 [cstring.syn]<a id="cstring.syn"></a></td>
+<td>Clarify that <code>std::launder</code> is not needed when using the result of <code>std::memcpy</code></td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 </table>
-<h2 id="Section_22">Section 22 (4 issues)</h2>
-<p><a href="lwg-index-open.html#Section_22">(view only non-Ready open issues)</a></p>
+<h2 id="Section_26">Section 26 (4 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -102,44 +100,45 @@
   <th>Duplicates</th>
 </tr>
 <tr>
-<td id="4071"><a href="lwg-active.html#4071" title="reference_wrapper comparisons are not SFINAE-friendly (Status: Voting)">4071</a><sup><a href="https://cplusplus.github.io/LWG/issue4071">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>22.10.6.6 [refwrap.comparisons]<a id="refwrap.comparisons"></a></td>
-<td><code>reference_wrapper</code> comparisons are not SFINAE-friendly</td>
+<td id="4027"><a href="lwg-active.html#4027" title="possibly-const-range should prefer returning const R&amp; (Status: Ready)">4027</a><sup><a href="https://cplusplus.github.io/LWG/issue4027">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>26.2 [ranges.syn]<a id="ranges.syn"></a></td>
+<td><code><i>possibly-const-range</i></code> should prefer returning <code>const R&amp;</code></td>
+<td>Yes</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td id="4112"><a href="lwg-active.html#4112" title="has-arrow should required operator-&gt;() to be const-qualified (Status: Ready)">4112</a><sup><a href="https://cplusplus.github.io/LWG/issue4112">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>26.5.2 [range.utility.helpers]<a id="range.utility.helpers"></a></td>
+<td><code><i>has-arrow</i></code> should required <code>operator-&gt;()</code> to be <code>const</code>-qualified</td>
 <td>Yes</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td id="3944"><a href="lwg-active.html#3944" title="Formatters converting sequences of char to sequences of wchar_t (Status: Voting)">3944</a><sup><a href="https://cplusplus.github.io/LWG/issue3944">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>22.14.6.4 [format.formatter.spec]<a id="format.formatter.spec"></a></td>
-<td>Formatters converting sequences of <code>char</code> to sequences of <code>wchar_t</code></td>
+<td id="3899"><a href="lwg-active.html#3899" title="co_yielding elements of an lvalue generator is unnecessarily inefficient (Status: Ready)">3899</a><sup><a href="https://cplusplus.github.io/LWG/issue3899">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>26.8.5 [coro.generator.promise]<a id="coro.generator.promise"></a></td>
+<td><code>co_yield</code>ing elements of an lvalue <code>generator</code> is unnecessarily inefficient</td>
 <td>Yes</td>
 <td>3</td>
 <td></td>
 </tr>
 <tr>
-<td id="4061"><a href="lwg-active.html#4061" title="Should std::basic_format_context be default-constructible/copyable/movable? (Status: Voting)">4061</a><sup><a href="https://cplusplus.github.io/LWG/issue4061">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>22.14.6.7 [format.context]<a id="format.context"></a></td>
-<td>Should <code>std::basic_format_context</code> be default-constructible/copyable/movable?</td>
+<td id="3900"><a href="lwg-active.html#3900" title="The allocator_arg_t overloads of generator::promise_type::operator new
+should not be constrained (Status: Ready)">3900</a><sup><a href="https://cplusplus.github.io/LWG/issue3900">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>26.8.5 [coro.generator.promise]</td>
+<td>The <code>allocator_arg_t</code> overloads of <code>generator::promise_type::operator new</code>
+should not be constrained</td>
 <td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4106"><a href="lwg-active.html#4106" title="basic_format_args should not be default-constructible (Status: Voting)">4106</a><sup><a href="https://cplusplus.github.io/LWG/issue4106">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>22.14.8.3 [format.args]<a id="format.args"></a></td>
-<td><code>basic_format_args</code> should not be default-constructible</td>
-<td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 </table>
-<h2 id="Section_24">Section 24 (1 issues)</h2>
-<p><a href="lwg-index-open.html#Section_24">(view only non-Ready open issues)</a></p>
+<h2 id="Section_27">Section 27 (2 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -151,17 +150,25 @@
   <th>Duplicates</th>
 </tr>
 <tr>
-<td id="4060"><a href="lwg-active.html#4060" title="submdspan preconditions do not forbid creating invalid pointer (Status: Voting)">4060</a><sup><a href="https://cplusplus.github.io/LWG/issue4060">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>24.7.3.7.7 [mdspan.sub.sub]<a id="mdspan.sub.sub"></a></td>
-<td><code>submdspan</code> preconditions do not forbid creating invalid pointer</td>
+<td id="3918"><a href="lwg-active.html#3918" title="std::uninitialized_move/_n and guaranteed copy elision (Status: Ready)">3918</a><sup><a href="https://cplusplus.github.io/LWG/issue3918">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>27.11.6 [uninitialized.move]<a id="uninitialized.move"></a></td>
+<td><code>std::uninitialized_move/_n</code> and guaranteed copy elision</td>
 <td>Yes</td>
+<td>3</td>
 <td></td>
+</tr>
+<tr>
+<td id="3436"><a href="lwg-active.html#3436" title="std::construct_at should support arrays (Status: Ready)">3436</a><sup><a href="https://cplusplus.github.io/LWG/issue3436">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>27.11.8 [specialized.construct]<a id="specialized.construct"></a></td>
+<td><code>std::construct_at</code> should support arrays</td>
+<td>Yes</td>
+<td>2</td>
 <td></td>
 </tr>
 </table>
-<h2 id="Section_26">Section 26 (6 issues)</h2>
-<p><a href="lwg-index-open.html#Section_26">(view only non-Ready open issues)</a></p>
+<h2 id="Section_31">Section 31 (1 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -173,79 +180,12 @@
   <th>Duplicates</th>
 </tr>
 <tr>
-<td id="4096"><a href="lwg-active.html#4096" title="views::iota(views::iota(0)) should be rejected (Status: Voting)">4096</a><sup><a href="https://cplusplus.github.io/LWG/issue4096">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.6.4.1 [range.iota.overview]<a id="range.iota.overview"></a></td>
-<td><code>views::iota(views::iota(0))</code> should be rejected</td>
+<td id="4044"><a href="lwg-active.html#4044" title="Confusing requirements for std::print on POSIX platforms (Status: Ready)">4044</a><sup><a href="https://cplusplus.github.io/LWG/issue4044">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>31.7.10 [print.fun]<a id="print.fun"></a></td>
+<td>Confusing requirements for <code>std::print</code> on POSIX platforms</td>
 <td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4083"><a href="lwg-active.html#4083" title="views::as_rvalue should reject non-input ranges (Status: Voting)">4083</a><sup><a href="https://cplusplus.github.io/LWG/issue4083">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.7.7.1 [range.as.rvalue.overview]<a id="range.as.rvalue.overview"></a></td>
-<td><code>views::as_rvalue</code> should reject non-input ranges</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4074"><a href="lwg-active.html#4074" title="compatible-joinable-ranges is underconstrained (Status: Voting)">4074</a><sup><a href="https://cplusplus.github.io/LWG/issue4074">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.7.15.2 [range.join.with.view]<a id="range.join.with.view"></a></td>
-<td><code><i>compatible-joinable-ranges</i></code> is underconstrained</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4082"><a href="lwg-active.html#4082" title="views::concat(r) is well-formed when r is an output_range (Status: Voting)">4082</a><sup><a href="https://cplusplus.github.io/LWG/issue4082">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.7.18.1 [range.concat.overview]<a id="range.concat.overview"></a></td>
-<td><code>views::concat(r)</code> is well-formed when <code>r</code> is an <code>output_range</code></td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4079"><a href="lwg-active.html#4079" title="Missing Preconditions in concat_view::iterator's conversion constructor (Status: Voting)">4079</a><sup><a href="https://cplusplus.github.io/LWG/issue4079">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.7.18.3 [range.concat.iterator]<a id="range.concat.iterator"></a></td>
-<td>Missing <i>Preconditions</i> in <code>concat_view::<i>iterator</i></code>'s conversion constructor</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4098"><a href="lwg-active.html#4098" title="views::adjacent&lt;0&gt; should reject non-forward ranges (Status: Voting)">4098</a><sup><a href="https://cplusplus.github.io/LWG/issue4098">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>26.7.27.1 [range.adjacent.overview]<a id="range.adjacent.overview"></a></td>
-<td><code>views::adjacent&lt;0&gt;</code> should reject non-forward ranges</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-</table>
-<h2 id="Section_27">Section 27 (1 issues)</h2>
-<p><a href="lwg-index-open.html#Section_27">(view only non-Ready open issues)</a></p>
-<table class="issues-index">
-<tr>
-  <th><a href="lwg-toc.html">Issue</a></th>
-  <th><a href="lwg-status.html">Status</a></th>
-  <th><a href="lwg-index.html">Section</a></th>
-  <th>Title</th>
-  <th>Proposed Resolution</th>
-  <th><a href="unresolved-prioritized.html">Priority</a></th>
-  <th>Duplicates</th>
-</tr>
-<tr>
-<td id="4105"><a href="lwg-active.html#4105" title="ranges::ends_with's Returns misses difference casting (Status: Voting)">4105</a><sup><a href="https://cplusplus.github.io/LWG/issue4105">(i)</a></sup></td>
-<td><a href="lwg-active.html#Voting">Voting</a></td>
-<td>27.6.17 [alg.ends.with]<a id="alg.ends.with"></a></td>
-<td><code>ranges::ends_with</code>'s <i>Returns</i> misses difference casting</td>
-<td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 </table>

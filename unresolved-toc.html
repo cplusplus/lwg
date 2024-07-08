@@ -59,7 +59,7 @@
 <p>Reference ISO/IEC IS 14882:2020(E)</p>
 <p>This document is the Table of Contents for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.</p>
-<p>Revised 2024-07-07 at 17:47:06 UTC
+<p>Revised 2024-07-08 at 09:00:51 UTC
 </p><table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -2300,15 +2300,6 @@ BidirectionalIterator (Status: New)">3261</a><sup><a href="https://cplusplus.git
 <td></td>
 </tr>
 <tr>
-<td id="3436"><a href="lwg-active.html#3436" title="std::construct_at should support arrays (Status: Ready)">3436</a><sup><a href="https://cplusplus.github.io/LWG/issue3436">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>27.11.8 [specialized.construct]</td>
-<td><code>std::construct_at</code> should support arrays</td>
-<td>Yes</td>
-<td>2</td>
-<td></td>
-</tr>
-<tr>
 <td id="3438"><a href="lwg-active.html#3438" title="&sect;[container.node.overview] missing multiset/map cases (Status: New)">3438</a><sup><a href="https://cplusplus.github.io/LWG/issue3438">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>24.2.5.1 [container.node.overview]</td>
@@ -3684,26 +3675,6 @@ not copy) their predicate object</td>
 <td></td>
 </tr>
 <tr>
-<td id="3899"><a href="lwg-active.html#3899" title="co_yielding elements of an lvalue generator is unnecessarily inefficient (Status: Ready)">3899</a><sup><a href="https://cplusplus.github.io/LWG/issue3899">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>26.8.5 [coro.generator.promise]</td>
-<td><code>co_yield</code>ing elements of an lvalue <code>generator</code> is unnecessarily inefficient</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="3900"><a href="lwg-active.html#3900" title="The allocator_arg_t overloads of generator::promise_type::operator new
-should not be constrained (Status: Ready)">3900</a><sup><a href="https://cplusplus.github.io/LWG/issue3900">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>26.8.5 [coro.generator.promise]</td>
-<td>The <code>allocator_arg_t</code> overloads of <code>generator::promise_type::operator new</code>
-should not be constrained</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
 <td id="3902"><a href="lwg-active.html#3902" title="Return type of std::declval&lt;cv void&gt; should be (cv-unqualified) void (Status: New)">3902</a><sup><a href="https://cplusplus.github.io/LWG/issue3902">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>22.2.6 [declval]</td>
@@ -3762,15 +3733,6 @@ should not be constrained</td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>20.2.10 [default.allocator]</td>
 <td>Validity of <code>allocator&lt;void&gt;</code> and possibly <code>polymorphic_allocator&lt;void&gt;</code> should be clarified</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="3918"><a href="lwg-active.html#3918" title="std::uninitialized_move/_n and guaranteed copy elision (Status: Ready)">3918</a><sup><a href="https://cplusplus.github.io/LWG/issue3918">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>27.11.6 [uninitialized.move]</td>
-<td><code>std::uninitialized_move/_n</code> and guaranteed copy elision</td>
 <td>Yes</td>
 <td>3</td>
 <td></td>
@@ -4396,15 +4358,6 @@ is a non-move-constructible range</td>
 <td></td>
 </tr>
 <tr>
-<td id="4027"><a href="lwg-active.html#4027" title="possibly-const-range should prefer returning const R&amp; (Status: Ready)">4027</a><sup><a href="https://cplusplus.github.io/LWG/issue4027">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>26.2 [ranges.syn]</td>
-<td><code><i>possibly-const-range</i></code> should prefer returning <code>const R&amp;</code></td>
-<td>Yes</td>
-<td>2</td>
-<td></td>
-</tr>
-<tr>
 <td id="4028"><a href="lwg-active.html#4028" title="std::is_(nothrow_)convertible should be reworded to avoid dependence on the return statement (Status: New)">4028</a><sup><a href="https://cplusplus.github.io/LWG/issue4028">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>21.3.7 [meta.rel]</td>
@@ -4483,15 +4436,6 @@ vprint_unicode/vprint_nonunicode (Status: New)">4039</a><sup><a href="https://cp
 <td><a href="lwg-active.html#LEWG">LEWG</a></td>
 <td>31.7.10 [print.fun]</td>
 <td><code>std::print</code> should permit an efficient implementation</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4044"><a href="lwg-active.html#4044" title="Confusing requirements for std::print on POSIX platforms (Status: Ready)">4044</a><sup><a href="https://cplusplus.github.io/LWG/issue4044">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>31.7.10 [print.fun]</td>
-<td>Confusing requirements for <code>std::print</code> on POSIX platforms</td>
 <td>Yes</td>
 <td>3</td>
 <td></td>
@@ -4611,15 +4555,6 @@ vprint_unicode/vprint_nonunicode (Status: New)">4039</a><sup><a href="https://cp
 <td>Freestanding <code>std::char_traits&lt;char&gt;::eof</code> depends on non-freestanding <code>EOF</code></td>
 <td><span class="no-pr">No</span></td>
 <td>2</td>
-<td></td>
-</tr>
-<tr>
-<td id="4064"><a href="lwg-active.html#4064" title="Clarify that std::launder is not needed when using the result of std::memcpy (Status: Ready)">4064</a><sup><a href="https://cplusplus.github.io/LWG/issue4064">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>23.5.3 [cstring.syn]</td>
-<td>Clarify that <code>std::launder</code> is not needed when using the result of <code>std::memcpy</code></td>
-<td>Yes</td>
-<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -4937,15 +4872,6 @@ vprint_unicode/vprint_nonunicode (Status: New)">4039</a><sup><a href="https://cp
 <td>LWG 270 and ranges version of binary search algorithms</td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4112"><a href="lwg-active.html#4112" title="has-arrow should required operator-&gt;() to be const-qualified (Status: Ready)">4112</a><sup><a href="https://cplusplus.github.io/LWG/issue4112">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>26.5.2 [range.utility.helpers]</td>
-<td><code><i>has-arrow</i></code> should required <code>operator-&gt;()</code> to be <code>const</code>-qualified</td>
-<td>Yes</td>
-<td></td>
 <td></td>
 </tr>
 <tr>

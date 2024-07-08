@@ -66,7 +66,7 @@
 <p>This document is the Index by Section for the <a href="lwg-active.html">Library Active Issues List</a>, <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.</p>
 <h2>Index by Section</h2>
 <p><a href="lwg-index-open.html">(view only non-Ready open issues)</a></p>
-<p>Revised 2024-07-07 at 17:47:06 UTC
+<p>Revised 2024-07-08 at 09:00:51 UTC
 </p><h2 id="Section_3">Section 3 (2 issues)</h2>
 <p><a href="lwg-index-open.html#Section_3">(view only non-Ready open issues)</a></p>
 <table class="issues-index">
@@ -1930,7 +1930,7 @@ the evaluation of type traits</td>
 <td></td>
 </tr>
 </table>
-<h2 id="Section_23">Section 23 (18 issues)</h2>
+<h2 id="Section_23">Section 23 (17 issues)</h2>
 <p><a href="lwg-index-open.html#Section_23">(view only non-Ready open issues)</a></p>
 <table class="issues-index">
 <tr>
@@ -2096,15 +2096,6 @@ not copy) their predicate object</td>
 <td>23.5 [c.strings]</td>
 <td>Problematic iterator-pair constructor of containers</td>
 <td><span class="no-pr">No</span></td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4064"><a href="lwg-active.html#4064" title="Clarify that std::launder is not needed when using the result of std::memcpy (Status: Ready)">4064</a><sup><a href="https://cplusplus.github.io/LWG/issue4064">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>23.5.3 [cstring.syn]<a id="cstring.syn"></a></td>
-<td>Clarify that <code>std::launder</code> is not needed when using the result of <code>std::memcpy</code></td>
-<td>Yes</td>
 <td>3</td>
 <td></td>
 </tr>
@@ -2908,7 +2899,7 @@ initializer_list (Status: New)">3537</a><sup><a href="https://cplusplus.github.i
 <td></td>
 </tr>
 </table>
-<h2 id="Section_26">Section 26 (57 issues)</h2>
+<h2 id="Section_26">Section 26 (53 issues)</h2>
 <p><a href="lwg-index-open.html#Section_26">(view only non-Ready open issues)</a></p>
 <table class="issues-index">
 <tr>
@@ -2921,18 +2912,9 @@ initializer_list (Status: New)">3537</a><sup><a href="https://cplusplus.github.i
   <th>Duplicates</th>
 </tr>
 <tr>
-<td id="4027"><a href="lwg-active.html#4027" title="possibly-const-range should prefer returning const R&amp; (Status: Ready)">4027</a><sup><a href="https://cplusplus.github.io/LWG/issue4027">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>26.2 [ranges.syn]<a id="ranges.syn"></a></td>
-<td><code><i>possibly-const-range</i></code> should prefer returning <code>const R&amp;</code></td>
-<td>Yes</td>
-<td>2</td>
-<td></td>
-</tr>
-<tr>
 <td id="3729"><a href="lwg-active.html#3729" title="std::tuple_element_t&lt;std::ranges::subrange&lt;I, S, K&gt;&gt; should remove top-level cv-qualifiers (Status: New)">3729</a><sup><a href="https://cplusplus.github.io/LWG/issue3729">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>26.2 [ranges.syn]</td>
+<td>26.2 [ranges.syn]<a id="ranges.syn"></a></td>
 <td><code>std::tuple_element_t&lt;std::ranges::subrange&lt;I, S, K&gt;&gt;</code> should remove top-level <i>cv</i>-qualifiers</td>
 <td>Yes</td>
 <td>4</td>
@@ -2954,15 +2936,6 @@ initializer_list (Status: New)">3537</a><sup><a href="https://cplusplus.github.i
 <td>The definition of <code>viewable_range</code> is not quite right</td>
 <td>Yes</td>
 <td>4</td>
-<td></td>
-</tr>
-<tr>
-<td id="4112"><a href="lwg-active.html#4112" title="has-arrow should required operator-&gt;() to be const-qualified (Status: Ready)">4112</a><sup><a href="https://cplusplus.github.io/LWG/issue4112">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>26.5.2 [range.utility.helpers]<a id="range.utility.helpers"></a></td>
-<td><code><i>has-arrow</i></code> should required <code>operator-&gt;()</code> to be <code>const</code>-qualified</td>
-<td>Yes</td>
-<td></td>
 <td></td>
 </tr>
 <tr>
@@ -3408,26 +3381,6 @@ inner-iterator with std::default_sentinel results in null pointer dereference (S
 <td></td>
 </tr>
 <tr>
-<td id="3899"><a href="lwg-active.html#3899" title="co_yielding elements of an lvalue generator is unnecessarily inefficient (Status: Ready)">3899</a><sup><a href="https://cplusplus.github.io/LWG/issue3899">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>26.8.5 [coro.generator.promise]<a id="coro.generator.promise"></a></td>
-<td><code>co_yield</code>ing elements of an lvalue <code>generator</code> is unnecessarily inefficient</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="3900"><a href="lwg-active.html#3900" title="The allocator_arg_t overloads of generator::promise_type::operator new
-should not be constrained (Status: Ready)">3900</a><sup><a href="https://cplusplus.github.io/LWG/issue3900">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>26.8.5 [coro.generator.promise]</td>
-<td>The <code>allocator_arg_t</code> overloads of <code>generator::promise_type::operator new</code>
-should not be constrained</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
 <td id="4117"><a href="lwg-active.html#4117" title="generator::iterator should provide iterator_concept (Status: New)">4117</a><sup><a href="https://cplusplus.github.io/LWG/issue4117">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>26.8.6 [coro.generator.iterator]<a id="coro.generator.iterator"></a></td>
@@ -3446,7 +3399,7 @@ should not be constrained</td>
 <td></td>
 </tr>
 </table>
-<h2 id="Section_27">Section 27 (32 issues)</h2>
+<h2 id="Section_27">Section 27 (30 issues)</h2>
 <p><a href="lwg-index-open.html#Section_27">(view only non-Ready open issues)</a></p>
 <table class="issues-index">
 <tr>
@@ -3697,27 +3650,9 @@ specified to make <code><i>N</i></code> copies of <code>T</code> into the destin
 <td></td>
 </tr>
 <tr>
-<td id="3918"><a href="lwg-active.html#3918" title="std::uninitialized_move/_n and guaranteed copy elision (Status: Ready)">3918</a><sup><a href="https://cplusplus.github.io/LWG/issue3918">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>27.11.6 [uninitialized.move]<a id="uninitialized.move"></a></td>
-<td><code>std::uninitialized_move/_n</code> and guaranteed copy elision</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="3436"><a href="lwg-active.html#3436" title="std::construct_at should support arrays (Status: Ready)">3436</a><sup><a href="https://cplusplus.github.io/LWG/issue3436">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>27.11.8 [specialized.construct]<a id="specialized.construct"></a></td>
-<td><code>std::construct_at</code> should support arrays</td>
-<td>Yes</td>
-<td>2</td>
-<td></td>
-</tr>
-<tr>
 <td id="3888"><a href="lwg-active.html#3888" title="Most ranges uninitialized memory algorithms are underconstrained (Status: New)">3888</a><sup><a href="https://cplusplus.github.io/LWG/issue3888">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>27.11.8 [specialized.construct]</td>
+<td>27.11.8 [specialized.construct]<a id="specialized.construct"></a></td>
 <td>Most ranges uninitialized memory algorithms are underconstrained</td>
 <td>Yes</td>
 <td>3</td>
@@ -4199,7 +4134,7 @@ required to be correctly formatted?</td>
 <td></td>
 </tr>
 </table>
-<h2 id="Section_31">Section 31 (35 issues)</h2>
+<h2 id="Section_31">Section 31 (34 issues)</h2>
 <p><a href="lwg-index-open.html#Section_31">(view only non-Ready open issues)</a></p>
 <table class="issues-index">
 <tr>
@@ -4358,18 +4293,9 @@ vprint_unicode/vprint_nonunicode (Status: New)">4039</a><sup><a href="https://cp
 <td></td>
 </tr>
 <tr>
-<td id="4044"><a href="lwg-active.html#4044" title="Confusing requirements for std::print on POSIX platforms (Status: Ready)">4044</a><sup><a href="https://cplusplus.github.io/LWG/issue4044">(i)</a></sup></td>
-<td><a href="lwg-active.html#Ready">Ready</a></td>
-<td>31.7.10 [print.fun]<a id="print.fun"></a></td>
-<td>Confusing requirements for <code>std::print</code> on POSIX platforms</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
 <td id="4042"><a href="lwg-active.html#4042" title="std::print should permit an efficient implementation (Status: LEWG)">4042</a><sup><a href="https://cplusplus.github.io/LWG/issue4042">(i)</a></sup></td>
 <td><a href="lwg-active.html#LEWG">LEWG</a></td>
-<td>31.7.10 [print.fun]</td>
+<td>31.7.10 [print.fun]<a id="print.fun"></a></td>
 <td><code>std::print</code> should permit an efficient implementation</td>
 <td>Yes</td>
 <td>3</td>

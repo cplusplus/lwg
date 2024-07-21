@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-07-21 at 09:28:55 UTC
+<p>Revised 2024-07-21 at 09:47:56 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -59766,6 +59766,8 @@ The member <i>typedef-name</i> <code>iterator_category</code> is defined if and 
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-16 <b>Last modified:</b> 2024-07-21</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.utility.conv.general">active issues</a> in [range.utility.conv.general].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.utility.conv.general">issues</a> in [range.utility.conv.general].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
@@ -59836,6 +59838,64 @@ constexpr auto <i>container-append</i>(Container&amp; c) {     <i>// exposition 
   };
 };
 </pre></blockquote>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4122"><a href="#4122">4122</a><sup><a href="https://cplusplus.github.io/LWG/issue4122">(i)</a></sup>. Ill-formed <code>operator&lt;=&gt;</code> can cause hard error when instantiating <code>std::inplace_vector</code></h3>
+<p><b>Section:</b> 26.5.7.1 <a href="https://wg21.link/range.utility.conv.general">[range.utility.conv.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-07-20 <b>Last modified:</b> 2024-07-21</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#range.utility.conv.general">active issues</a> in [range.utility.conv.general].</p>
+<p><b>View all other</b> <a href="lwg-index.html#range.utility.conv.general">issues</a> in [range.utility.conv.general].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+This is almost the same problem as LWG <a href="lwg-defects.html#4071" title="reference_wrapper comparisons are not SFINAE-friendly (Status: WP)">4071</a> except that it happens to <code>std::inplace_vector</code>. 
+As the <code>operator&lt;=&gt;</code> overload for <code>std::inplace_vector</code> is a non-template function whose return 
+type (<code><i>synth-three-way-result</i>&lt;T&gt;</code>) is not deduced, when the return type is ill-formed, hard 
+error occurs in the instantiation of the enclosing <code>std::inplace_vector&lt;T, N&gt;</code>.
+</p>
+
+
+<p id="res-4122"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4986">N4986</a>.
+</p>
+
+<ol>
+<li><p>Modify  [inplace.vector.overview], class template <code>std::inplace_vector</code> synopsis, as indicated:</p>
+
+<blockquote>
+<pre>
+namespace std {
+  template&lt;class T, size_t N&gt;
+  class inplace_vector {
+  public:
+    [&hellip;]
+    constexpr friend bool operator==(const inplace_vector&amp; x,
+                                     const inplace_vector&amp; y);
+    constexpr friend <del><i>synth-three-way-result</i>&lt;T&gt;</del><ins>auto</ins>
+      operator&lt;=&gt;(const inplace_vector&amp; x, const inplace_vector&amp; y)<del>;</del><ins>
+        requires requires (const T t) { <i>synth-three-way</i>(t, t); } 
+      {
+        return lexicographical_compare_three_way(x.begin(), x.end(), y.begin(), y.end(),
+                                                 <i>synth-three-way</i>);
+      }</ins>
+    constexpr friend void swap(inplace_vector&amp; x, inplace_vector&amp; y)
+      noexcept(N == 0 || (is_nothrow_swappable_v&lt;T&gt; &amp;&amp;
+                          is_nothrow_move_constructible_v&lt;T&gt;))
+    { x.swap(y); }
+  };
+};
+</pre>
 </blockquote>
 
 </li>

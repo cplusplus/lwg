@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-07-21 at 08:48:47 UTC
+<p>Revised 2024-07-21 at 08:53:01 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -57564,7 +57564,7 @@ template&lt;class... Rs&gt;
 <hr>
 <h3 id="4092"><a href="#4092">4092</a><sup><a href="https://cplusplus.github.io/LWG/issue4092">(i)</a></sup>. The monotonic version of <code>common_iterator::operator==</code> is underconstrained</h3>
 <p><b>Section:</b> 25.5.5.1 <a href="https://wg21.link/common.iterator">[common.iterator]</a>, 25.5.5.6 <a href="https://wg21.link/common.iter.cmp">[common.iter.cmp]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-01 <b>Last modified:</b> 2024-06-24</p>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-01 <b>Last modified:</b> 2024-07-21</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#common.iterator">active issues</a> in [common.iterator].</p>
@@ -57606,9 +57606,9 @@ Seems unlikely to be a problem in practice.
 Proposed resolution would make the two <code class='backtick'>operator==</code> overloads ambiguous.
 </p>
 
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
 
-
-<p id="res-4092"><b>Proposed resolution:</b></p>
 <p>
 This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
 </p>
@@ -57650,6 +57650,81 @@ friend constexpr bool operator==(
 <blockquote>
 <p>
 -1- <i>Preconditions</i>: <code>x.v_.valueless_by_exception()</code> and <code>y.v_.valueless_by_exception()</code> 
+are each <code>false</code>.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+</ol>
+</blockquote>
+
+<p><i>[2024-07-09; Hewill provides improved wording]</i></p>
+
+
+
+<p id="res-4092"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4986">N4986</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 25.5.5.1 <a href="https://wg21.link/common.iterator">[common.iterator]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+namespace std {
+  template&lt;input_or_output_iterator I, sentinel_for&lt;I&gt; S&gt;
+    requires (!same_as&lt;I, S&gt; &amp;&amp; copyable&lt;I&gt;)
+  class common_iterator {
+  public:
+    [&hellip;]
+    template&lt;<del>class</del><ins>common_with&lt;I&gt;</ins> I2, sentinel_for&lt;I&gt; S2&gt;
+      requires sentinel_for&lt;S, I2&gt;
+    friend constexpr bool operator==(
+      const common_iterator&amp; x, const common_iterator&lt;I2, S2&gt;&amp; y);
+    template&lt;<del>class</del><ins>common_with&lt;I&gt;</ins> I2, sentinel_for&lt;I&gt; S2&gt;
+      requires sentinel_for&lt;S, I2&gt; &amp;&amp; equality_comparable_with&lt;I, I2&gt;
+    friend constexpr bool operator==(
+      const common_iterator&amp; x, const common_iterator&lt;I2, S2&gt;&amp; y);
+    [&hellip;]
+  };
+  [&hellip;]
+}
+</pre>
+</blockquote>
+
+</li>
+
+<li><p>Modify 25.5.5.6 <a href="https://wg21.link/common.iter.cmp">[common.iter.cmp]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;<del>class</del><ins>common_with&lt;I&gt;</ins> I2, sentinel_for&lt;I&gt; S2&gt;
+  requires sentinel_for&lt;S, I2&gt;
+friend constexpr bool operator==(
+  const common_iterator&amp; x, const common_iterator&lt;I2, S2&gt;&amp; y);
+</pre>
+<blockquote>
+<p>
+-1- <i>Preconditions</i>: <code>x.v_.valueless_by_exception()</code> and <code>y.v_.valueless_by_exception()</code> 
+are each <code>false</code>.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+<pre>
+template&lt;<del>class</del><ins>common_with&lt;I&gt;</ins> I2, sentinel_for&lt;I&gt; S2&gt;
+  requires sentinel_for&lt;S, I2&gt; &amp;&amp; equality_comparable_with&lt;I, I2&gt;
+friend constexpr bool operator==(
+  const common_iterator&amp; x, const common_iterator&lt;I2, S2&gt;&amp; y);
+</pre>
+<blockquote>
+<p>
+-3- <i>Preconditions</i>: <code>x.v_.valueless_by_exception()</code> and <code>y.v_.valueless_by_exception()</code> 
 are each <code>false</code>.
 <p/>
 [&hellip;]
@@ -59545,6 +59620,78 @@ The duration’s numeric value (as if extracted via <code class='backtick'>.coun
 </tr>
 </tbody>
 </table>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4119"><a href="#4119">4119</a><sup><a href="https://cplusplus.github.io/LWG/issue4119">(i)</a></sup>. <code>generator::promise_type::yield_value(ranges::elements_of&lt;R, Alloc&gt;)</code>'s nested <code>generator</code> may be ill-formed</h3>
+<p><b>Section:</b> 26.8.5 <a href="https://wg21.link/coro.generator.promise">[coro.generator.promise]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-11 <b>Last modified:</b> 2024-07-21</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#coro.generator.promise">active issues</a> in [coro.generator.promise].</p>
+<p><b>View all other</b> <a href="lwg-index.html#coro.generator.promise">issues</a> in [coro.generator.promise].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The nested coroutine is specified to return <code>generator&lt;yielded, ranges::range_value_t&lt;R&gt;, Alloc&gt;</code> 
+which can be problematic as the value type of <code>R</code> is really irrelevant to <code>yielded</code>, 
+unnecessarily violating the <code>generator</code>'s <i>Mandates</i> (<a href="https://godbolt.org/z/PzGP3G7rr">demo</a>):
+</p>
+<blockquote><pre>
+#include &lt;generator&gt;
+#include &lt;vector&gt;
+
+std::generator&lt;std::span&lt;int&gt;&gt; f() {
+  std::vector&lt;int&gt; v;
+  co_yield v; // ok
+}
+
+std::generator&lt;std::span&lt;int&gt;&gt; g() {
+  std::vector&lt;std::vector&lt;int&gt;&gt; v;
+  co_yield std::ranges::elements_of(v); // <span style="color:red;font-weight:bolder">hard error</span>
+}
+</pre></blockquote>
+<p>
+This proposed resolution is to change the second template parameter from <code>range_value_t&lt;R&gt;</code> 
+to <code>void</code> since that type doesn't matter to us.
+</p>
+
+
+<p id="res-4119"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4986">N4986</a>.
+</p>
+<ol>
+<li><p>Modify 26.8.5 <a href="https://wg21.link/coro.generator.promise">[coro.generator.promise]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;ranges::input_range R, class Alloc&gt;
+  requires convertible_to&lt;ranges::range_reference_t&lt;R&gt;, yielded&gt;
+  auto yield_value(ranges::elements_of&lt;R, Alloc&gt; r);
+</pre>
+<blockquote>
+<p>
+-13- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote><pre>
+auto nested = [](allocator_arg_t, Alloc, ranges::iterator_t&lt;R&gt; i, ranges::sentinel_t&lt;R&gt; s)
+  -&gt; generator&lt;yielded, <del>ranges::range_value_t&lt;R&gt;</del><ins>void</ins>, Alloc&gt; {
+    for (; i != s; ++i) {
+      co_yield static_cast&lt;yielded&gt;(*i);
+    }
+  };
+return yield_value(ranges::elements_of(nested(
+  allocator_arg, r.allocator, ranges::begin(r.range), ranges::end(r.range))));
+</pre></blockquote>
+[&hellip;]
+</blockquote>
 </blockquote>
 </li>
 </ol>

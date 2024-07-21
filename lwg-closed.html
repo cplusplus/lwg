@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Closed Issues List (Revision D125)</h1>
-<p>Revised 2024-07-21 at 09:56:27 UTC
+<p>Revised 2024-07-21 at 12:18:13 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -2015,7 +2015,7 @@ illegal.&nbsp; See 16.4.6.5 <a href="https://wg21.link/member.functions">[member
 
 <hr>
 <h3 id="96"><a href="#96">96</a><sup><a href="https://cplusplus.github.io/LWG/issue96">(i)</a></sup>. Vector&lt;bool&gt; is not a container</h3>
-<p><b>Section:</b> 24.3.11 <a href="https://wg21.link/vector">[vector]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.12 <a href="https://wg21.link/vector">[vector]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> AFNOR <b>Opened:</b> 1998-10-07 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -2278,7 +2278,7 @@ incorrect code to work, rather than the other way around.</p>
 
 <hr>
 <h3 id="101"><a href="#101">101</a><sup><a href="https://cplusplus.github.io/LWG/issue101">(i)</a></sup>. No way to free storage for vector and deque</h3>
-<p><b>Section:</b> 24.3.11 <a href="https://wg21.link/vector">[vector]</a>, 24.3.7 <a href="https://wg21.link/array">[array]</a> <b>Status:</b> <a href="lwg-active.html#NAD_Editorial">NAD Editorial</a>
+<p><b>Section:</b> 24.3.12 <a href="https://wg21.link/vector">[vector]</a>, 24.3.8 <a href="https://wg21.link/array">[array]</a> <b>Status:</b> <a href="lwg-active.html#NAD_Editorial">NAD Editorial</a>
  <b>Submitter:</b> AFNOR <b>Opened:</b> 1998-10-07 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -2750,7 +2750,7 @@ retained for future reference.</p>
 
 <hr>
 <h3 id="131"><a href="#131">131</a><sup><a href="https://cplusplus.github.io/LWG/issue131">(i)</a></sup>. list::splice throws nothing</h3>
-<p><b>Section:</b> 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Howard Hinnant <b>Opened:</b> 1999-03-06 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -8536,7 +8536,7 @@ List 1 -- Examples of (presumably) normative Notes:
 20.2.10.2 <a href="https://wg21.link/allocator.members">[allocator.members]</a>, p10,<br/>
 23.4.3.3 <a href="https://wg21.link/string.cons">[string.cons]</a>, p11,<br/>
 30.3.1.3 <a href="https://wg21.link/locale.cons">[locale.cons]</a>, p11,<br/>
-24.3.8.4 <a href="https://wg21.link/deque.modifiers">[deque.modifiers]</a>, p2,<br/>
+24.3.9.4 <a href="https://wg21.link/deque.modifiers">[deque.modifiers]</a>, p2,<br/>
 27.8.9 <a href="https://wg21.link/alg.min.max">[alg.min.max]</a>, p3,<br/>
 28.4.6 <a href="https://wg21.link/complex.ops">[complex.ops]</a>, p15,<br/>
 31.6.3.5.3 <a href="https://wg21.link/streambuf.virt.get">[streambuf.virt.get]</a>, p7.<br/>
@@ -11203,14 +11203,14 @@ change, so there is no real-world harm here.</p>
 
 <hr>
 <h3 id="491"><a href="#491">491</a><sup><a href="https://cplusplus.github.io/LWG/issue491">(i)</a></sup>. std::list&lt;>::unique incorrectly specified</h3>
-<p><b>Section:</b> 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Thomas Mang <b>Opened:</b> 2004-12-12 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#list.ops">issues</a> in [list.ops].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
-<p>In Section 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraphs 19 to 21 describe the
+<p>In Section 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraphs 19 to 21 describe the
 behavior of the std::list&lt;T, Allocator>::unique operation. However, the
 current wording is defective for various reasons.</p>
 
@@ -11220,7 +11220,7 @@ current wording is defective for various reasons.</p>
 1) Analysis of current wording:
 </p>
 
-<p>24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 19:</p>
+<p>24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 19:</p>
 
 <p>
 Current wording says:
@@ -11234,7 +11234,7 @@ predicate argument) holds."</p>
 This sentences makes use of the undefined term "Eliminates". Although it
 is, to a certain degree, reasonable to consider the term "eliminate"
 synonymous with "erase", using "Erase" in the first place, as the
-wording of 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 15 does, would be clearer.</p>
+wording of 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 15 does, would be clearer.</p>
 
 <p>
 The range of the elements referred to by iterator i is "[first + 1,
@@ -11251,7 +11251,7 @@ The same problems as pointed out in DR 202 (equivalence relation / order
 of arguments for pred()) apply to this paragraph.</p>
 
 <p>
-24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 20:
+24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 20:
 </p>
 
 <p>
@@ -11268,7 +11268,7 @@ expressions ( "*i == *(i - 1)", "pred(*i, *(i -1))" ).
 </p>
 
 <p>
-24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 21:</p>
+24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 21:</p>
 
 <p>
 Current wording says:
@@ -11307,7 +11307,7 @@ of DR 202, no impact on current code is expected.</p>
 3) Proposed fixes:</p>
 
 <p>
-Change 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 19 to:</p>
+Change 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 19 to:</p>
 
 <p>
 "Effect: Erases all but the first element from every consecutive group
@@ -11326,7 +11326,7 @@ wording need also additional review.
 b) "Erases" refers in the author's opinion unambiguously to the member
 function "erase". In case there is doubt this might not be unamgibuous,
 a direct reference to the member function "erase" is suggested [Note:
-This would also imply a change of 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph
+This would also imply a change of 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph
 15.].
 c) The expression "(i - 1)" was left, but is expected that DR submitted
 by Thomas Mang regarding invalid iterator arithmetic expressions will
@@ -11346,7 +11346,7 @@ elements consists of only a single element, this element is also
 considered the first element."</p>
 
 <p>
-Change 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 20 to:</p>
+Change 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 20 to:</p>
 
 <p>
 "Throws: Nothing unless an exception is thrown by *(i-1) == *i or
@@ -11357,7 +11357,7 @@ Comments to the new wording:</p>
 
 <p>
 a) The wording regarding the conditions is identical to proposed
-24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 19. If 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a>,
+24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 19. If 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>,
 paragraph 19 is resolved in another way, the proposed wording need also
 additional review.
 b) The expression "(i - 1)" was left, but is expected that DR submitted
@@ -11366,7 +11366,7 @@ take this into account.
 c) Typos fixed.</p>
 
 <p>
-Change 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 21 to:</p>
+Change 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, paragraph 21 to:</p>
 
 <p>
 "Complexity: If empty() == false, exactly size() - 1 applications of the
@@ -14916,7 +14916,7 @@ post Oxford: Noted that it is already fixed in
 
 <hr>
 <h3 id="588"><a href="#588">588</a><sup><a href="https://cplusplus.github.io/LWG/issue588">(i)</a></sup>. requirements on zero sized <code>tr1::arrays</code> and other details</h3>
-<p><b>Section:</b> 24.3.7 <a href="https://wg21.link/array">[array]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.8 <a href="https://wg21.link/array">[array]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Gennaro Prota <b>Opened:</b> 2006-07-18 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -15080,7 +15080,7 @@ star bullet 3 ("it would be desiderable to have a static const data
 member..."):
 </p>
 <blockquote><p>
-It seems that <code>tuple_size&lt;array&lt;T, N&gt; &gt;::value</code> as of 24.3.7.7 <a href="https://wg21.link/array.tuple">[array.tuple]</a> does
+It seems that <code>tuple_size&lt;array&lt;T, N&gt; &gt;::value</code> as of 24.3.8.7 <a href="https://wg21.link/array.tuple">[array.tuple]</a> does
 provide this functionality now.
 </p></blockquote>
 </li>
@@ -17171,7 +17171,7 @@ identified, and big-O notation always involves constant factors.
 
 <hr>
 <h3 id="667"><a href="#667">667</a><sup><a href="https://cplusplus.github.io/LWG/issue667">(i)</a></sup>. <code>money_get</code>'s widened minus sign</h3>
-<p><b>Section:</b> 30.4.7.2.2 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 30.4.7.2.3 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Thomas Plum <b>Opened:</b> 2007-04-16 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -17179,7 +17179,7 @@ identified, and big-O notation always involves constant factors.
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-30.4.7.2.2 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a>, para 1 says:
+30.4.7.2.3 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a>, para 1 says:
 </p>
 
 <blockquote><p>
@@ -17251,7 +17251,7 @@ Move to NAD.
 
 <hr>
 <h3 id="668"><a href="#668">668</a><sup><a href="https://cplusplus.github.io/LWG/issue668">(i)</a></sup>. <code>money_get</code>'s empty minus sign</h3>
-<p><b>Section:</b> 30.4.7.2.2 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 30.4.7.2.3 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Thomas Plum <b>Opened:</b> 2007-04-16 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -17259,7 +17259,7 @@ Move to NAD.
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-30.4.7.2.2 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a>, para 3 says:
+30.4.7.2.3 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a>, para 3 says:
 </p>
 
 <blockquote><p>
@@ -17299,7 +17299,7 @@ Related to <a href="lwg-closed.html#669" title="Equivalent postive and negative 
 <blockquote>
 <p>
 I disagree that a <code>negative_sign</code> of "" means "there is no way to
-write a negative sign".  The meaning requires the sentences of 30.4.7.2.2 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a> p3 following that quoted above to be
+write a negative sign".  The meaning requires the sentences of 30.4.7.2.3 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a> p3 following that quoted above to be
 taken into account:
 </p>
 
@@ -17417,7 +17417,7 @@ NAD.  Agreed that the original assessment as NAD was correct.
 
 <p id="res-668"><b>Proposed resolution:</b></p>
 <p>
-Change 30.4.7.2.2 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a> p3:
+Change 30.4.7.2.3 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a> p3:
 </p>
 
 <blockquote><p>
@@ -17463,7 +17463,7 @@ example</i>] </ins>
 
 <hr>
 <h3 id="669"><a href="#669">669</a><sup><a href="https://cplusplus.github.io/LWG/issue669">(i)</a></sup>. Equivalent postive and negative signs in <code>money_get</code></h3>
-<p><b>Section:</b> 30.4.7.2.2 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 30.4.7.2.3 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Thomas Plum <b>Opened:</b> 2007-04-16 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -17471,7 +17471,7 @@ example</i>] </ins>
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-30.4.7.2.2 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a>, para 3 sentence 4 says:
+30.4.7.2.3 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a>, para 3 sentence 4 says:
 </p>
 
 <blockquote><p>
@@ -17559,7 +17559,7 @@ The following objection has been raised:
 </p>
 
 <blockquote><p>
-Whitespace is optional when matching space. (See 30.4.7.2.2 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a>, para 2.)
+Whitespace is optional when matching space. (See 30.4.7.2.3 <a href="https://wg21.link/locale.money.get.virtuals">[locale.money.get.virtuals]</a>, para 2.)
 </p></blockquote>
 
 <p>
@@ -19556,7 +19556,7 @@ Addressed in <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2009/n2
 
 <hr>
 <h3 id="751"><a href="#751">751</a><sup><a href="https://cplusplus.github.io/LWG/issue751">(i)</a></sup>. change pass-by-reference members of <code>vector&lt;bool&gt;</code> to pass-by-value?</h3>
-<p><b>Section:</b> 24.3.12 <a href="https://wg21.link/vector.bool">[vector.bool]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.13 <a href="https://wg21.link/vector.bool">[vector.bool]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2007-10-10 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -19749,7 +19749,7 @@ occur.
 
 <hr>
 <h3 id="757"><a href="#757">757</a><sup><a href="https://cplusplus.github.io/LWG/issue757">(i)</a></sup>. Typo in the synopsis of vector</h3>
-<p><b>Section:</b> 24.3.11 <a href="https://wg21.link/vector">[vector]</a> <b>Status:</b> <a href="lwg-active.html#NAD_Editorial">NAD Editorial</a>
+<p><b>Section:</b> 24.3.12 <a href="https://wg21.link/vector">[vector]</a> <b>Status:</b> <a href="lwg-active.html#NAD_Editorial">NAD Editorial</a>
  <b>Submitter:</b> Paolo Carlini <b>Opened:</b> 2007-11-04 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -19757,7 +19757,7 @@ occur.
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD Editorial">NAD Editorial</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-In the synopsis 24.3.11 <a href="https://wg21.link/vector">[vector]</a>, there is the signature:
+In the synopsis 24.3.12 <a href="https://wg21.link/vector">[vector]</a>, there is the signature:
 </p>
 
 <blockquote><pre>
@@ -19773,14 +19773,14 @@ iterator insert(const_iterator position, T&amp;&amp; x);
 </pre></blockquote>
 
 <p>
-24.3.11.5 <a href="https://wg21.link/vector.modifiers">[vector.modifiers]</a> is fine.
+24.3.12.5 <a href="https://wg21.link/vector.modifiers">[vector.modifiers]</a> is fine.
 </p>
 
 
 
 <p id="res-757"><b>Proposed resolution:</b></p>
 <p>
-Change the synopsis in 24.3.11 <a href="https://wg21.link/vector">[vector]</a>:
+Change the synopsis in 24.3.12 <a href="https://wg21.link/vector">[vector]</a>:
 </p>
 
 <blockquote><pre>
@@ -22007,7 +22007,7 @@ as an accessible unambiguous direct base class. If no such type exists, the memb
 
 <hr>
 <h3 id="851"><a href="#851">851</a><sup><a href="https://cplusplus.github.io/LWG/issue851">(i)</a></sup>. simplified array construction</h3>
-<p><b>Section:</b> 24.3.7 <a href="https://wg21.link/array">[array]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.8 <a href="https://wg21.link/array">[array]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Benjamin Kosnik <b>Opened:</b> 2008-06-05 <b>Last modified:</b> 2017-06-06</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -22216,7 +22216,7 @@ make_array(Args&amp;&amp;... args);
 
 <li>
 <p>
-Append after 24.3.7.7 <a href="https://wg21.link/array.tuple">[array.tuple]</a> Tuple interface to class template array
+Append after 24.3.8.7 <a href="https://wg21.link/array.tuple">[array.tuple]</a> Tuple interface to class template array
 the following new section:
 </p>
 <blockquote>
@@ -22318,7 +22318,7 @@ Add to the array synopsis in 24.3 <a href="https://wg21.link/sequences">[sequenc
 
 <li>
 <p>
-Append after 24.3.7.7 <a href="https://wg21.link/array.tuple">[array.tuple]</a> "Tuple interface to class template array" the
+Append after 24.3.8.7 <a href="https://wg21.link/array.tuple">[array.tuple]</a> "Tuple interface to class template array" the
 following new section:
 </p>
 
@@ -22374,7 +22374,7 @@ array&lt;double, 4&gt;
 
 <hr>
 <h3 id="855"><a href="#855">855</a><sup><a href="https://cplusplus.github.io/LWG/issue855">(i)</a></sup>. capacity() and reserve() for deque?</h3>
-<p><b>Section:</b> 24.3.8.3 <a href="https://wg21.link/deque.capacity">[deque.capacity]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.9.3 <a href="https://wg21.link/deque.capacity">[deque.capacity]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Herv&eacute; Br&ouml;nnimann <b>Opened:</b> 2008-06-11 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -22455,7 +22455,7 @@ implementation details.
 <p id="res-855"><b>Proposed resolution:</b></p>
 
 <p>
-Add new signatures to synopsis in 24.3.8 <a href="https://wg21.link/deque">[deque]</a>:
+Add new signatures to synopsis in 24.3.9 <a href="https://wg21.link/deque">[deque]</a>:
 </p>
 
 <blockquote><pre>
@@ -22464,7 +22464,7 @@ bool reserve(size_type n);
 </pre></blockquote>
 
 <p>
-Add new signatures to 24.3.8.3 <a href="https://wg21.link/deque.capacity">[deque.capacity]</a>:
+Add new signatures to 24.3.9.3 <a href="https://wg21.link/deque.capacity">[deque.capacity]</a>:
 </p>
 
 <blockquote>
@@ -22530,7 +22530,7 @@ during such a sequence other than by the element constructors.
 </blockquote>
 
 <p>
-And 24.3.8.4 <a href="https://wg21.link/deque.modifiers">[deque.modifiers]</a> para 1, can be enhanced:
+And 24.3.9.4 <a href="https://wg21.link/deque.modifiers">[deque.modifiers]</a> para 1, can be enhanced:
 </p>
 
 <blockquote><p>
@@ -24131,7 +24131,7 @@ note</i>]
 
 <hr>
 <h3 id="892"><a href="#892">892</a><sup><a href="https://cplusplus.github.io/LWG/issue892">(i)</a></sup>. Forward_list issues...</h3>
-<p><b>Section:</b> 24.3.9.6 <a href="https://wg21.link/forward.list.ops">[forward.list.ops]</a> <b>Status:</b> <a href="lwg-active.html#NAD_Editorial">NAD Editorial</a>
+<p><b>Section:</b> 24.3.10.6 <a href="https://wg21.link/forward.list.ops">[forward.list.ops]</a> <b>Status:</b> <a href="lwg-active.html#NAD_Editorial">NAD Editorial</a>
  <b>Submitter:</b> Ed Smith-Rowland <b>Opened:</b> 2008-09-15 <b>Last modified:</b> 2023-02-07</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -25580,7 +25580,7 @@ In 22.4.4.4 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a> remove the c
 
 <hr>
 <h3 id="919"><a href="#919">919</a><sup><a href="https://cplusplus.github.io/LWG/issue919">(i)</a></sup>. (<code>forward_</code>)<code>list</code> specialized remove algorithms are over constrained</h3>
-<p><b>Section:</b> 24.3.9.6 <a href="https://wg21.link/forward.list.ops">[forward.list.ops]</a>, 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.10.6 <a href="https://wg21.link/forward.list.ops">[forward.list.ops]</a>, 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Daniel Kr&uuml;gler <b>Opened:</b> 2008-10-06 <b>Last modified:</b> 2023-02-07</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -25589,7 +25589,7 @@ In 22.4.4.4 <a href="https://wg21.link/tuple.swap">[tuple.swap]</a> remove the c
 <p><b>Discussion:</b></p>
 <p>
 The signatures of <code>forwardlist::remove</code> and <code>list::remove</code>
-defined in  [forwardlist.ops] before 11 + 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a> before 15:
+defined in  [forwardlist.ops] before 11 + 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a> before 15:
 </p>
 
 <blockquote><pre>
@@ -25663,7 +25663,7 @@ NAD, solved by the removal of concepts.
 <ol style="list-style-type:upper-alpha">
 <li>
 <p>
-Replace in  [forwardlist.ops] before 11 and in 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a> before 15
+Replace in  [forwardlist.ops] before 11 and in 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a> before 15
 </p>
 
 <blockquote><pre>
@@ -26030,7 +26030,7 @@ template&lt;class... TTypes, class... UTypes&gt;
 
 <hr>
 <h3 id="930"><a href="#930">930</a><sup><a href="https://cplusplus.github.io/LWG/issue930">(i)</a></sup>. Access to std::array data as built-in array type</h3>
-<p><b>Section:</b> 24.3.7 <a href="https://wg21.link/array">[array]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.8 <a href="https://wg21.link/array">[array]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Niels Dekker <b>Opened:</b> 2008-11-17 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -26292,10 +26292,10 @@ The idea to resolve the issue by adding explicit conversion operators
 was abandoned, because it would be inconvenient to use, especially when
 passing the array to a template function, as mentioned by Daniel. So we
 reconsidered the original proposed resolution, which appeared
-acceptable, except for its proposed changes to 24.3.7.5 <a href="https://wg21.link/array.zero">[array.zero]</a>, which
+acceptable, except for its proposed changes to 24.3.8.5 <a href="https://wg21.link/array.zero">[array.zero]</a>, which
 allowed <code>c_array_type</code> and <code>c_array()</code> to be absent for a zero-sized array.
 Alisdair argued that such wording would disallow certain generic use
-cases. New wording for 24.3.7.5 <a href="https://wg21.link/array.zero">[array.zero]</a> was agreed upon (Howard: and
+cases. New wording for 24.3.8.5 <a href="https://wg21.link/array.zero">[array.zero]</a> was agreed upon (Howard: and
 is reflected in the proposed resolution).
 </p>
 <p>
@@ -26344,7 +26344,7 @@ conversion functions.
 
 <p id="res-930"><b>Proposed resolution:</b></p>
 <p>
-Add to the template definition of array, 24.3.7 <a href="https://wg21.link/array">[array]</a>/3:
+Add to the template definition of array, 24.3.8 <a href="https://wg21.link/array">[array]</a>/3:
 </p>
 
 <blockquote>
@@ -26358,7 +26358,7 @@ const c_array_type &amp; c_array() const &amp;;
 </blockquote>
 
 <p>
-Add the following subsection to 24.3.7 <a href="https://wg21.link/array">[array]</a>, after  [array.data]:
+Add the following subsection to 24.3.8 <a href="https://wg21.link/array">[array]</a>, after  [array.data]:
 </p>
 
 <blockquote>
@@ -26379,7 +26379,7 @@ const c_array_type &amp; c_array() const &amp;;
 
 
 <p>
-Change Zero sized arrays 24.3.7.5 <a href="https://wg21.link/array.zero">[array.zero]</a>:
+Change Zero sized arrays 24.3.8.5 <a href="https://wg21.link/array.zero">[array.zero]</a>:
 </p>
 
 <blockquote>
@@ -30734,7 +30734,7 @@ Mark as NAD.  No consensus for change.
 
 <p id="res-1035"><b>Proposed resolution:</b></p>
 <p>
-Add a paragraph to 24.3.7.4 <a href="https://wg21.link/array.special">[array.special]</a>:
+Add a paragraph to 24.3.8.4 <a href="https://wg21.link/array.special">[array.special]</a>:
 </p>
 
 <blockquote><pre>
@@ -30925,7 +30925,7 @@ Result is unspecified for an empty container.
 </blockquote>
 
 <p>
-Change 24.3.7 <a href="https://wg21.link/array">[array]</a> p1:
+Change 24.3.8 <a href="https://wg21.link/array">[array]</a> p1:
 </p>
 
 <blockquote><p>
@@ -30942,7 +30942,7 @@ N&gt;&gt;</code></ins>.
 </p></blockquote>
 
 <p>
-Add to the synopsis in 24.3.7 <a href="https://wg21.link/array">[array]</a>:
+Add to the synopsis in 24.3.8 <a href="https://wg21.link/array">[array]</a>:
 </p>
 
 <blockquote><pre>
@@ -30957,7 +30957,7 @@ Add to the synopsis in 24.3.7 <a href="https://wg21.link/array">[array]</a>:
 </pre></blockquote>
 
 <p>
-Change 24.3.11 <a href="https://wg21.link/vector">[vector]</a> p1:
+Change 24.3.12 <a href="https://wg21.link/vector">[vector]</a> p1:
 </p>
 
 <blockquote><p>
@@ -30975,7 +30975,7 @@ vector&lt; T, Alloc&gt;&gt;</code></ins>.
 </p></blockquote>
 
 <p>
-Add at the end of the synopsis in 24.3.11 <a href="https://wg21.link/vector">[vector]</a> p2:
+Add at the end of the synopsis in 24.3.12 <a href="https://wg21.link/vector">[vector]</a> p2:
 </p>
 
 <blockquote><pre>
@@ -36221,7 +36221,7 @@ other things that we say. We believe that this is editorial.
 
 <hr>
 <h3 id="1184"><a href="#1184">1184</a><sup><a href="https://cplusplus.github.io/LWG/issue1184">(i)</a></sup>. Feature request: dynamic bitset</h3>
-<p><b>Section:</b> 24.3.11 <a href="https://wg21.link/vector">[vector]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.12 <a href="https://wg21.link/vector">[vector]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2009-07-29 <b>Last modified:</b> 2020-09-06</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -37643,7 +37643,7 @@ void swap(vector&lt;T,Allocator&gt;&amp; x, vector&lt;T,Allocator&gt;&amp;&amp; 
 
 <li>
 <p>
-Change 24.3.8 <a href="https://wg21.link/deque">[deque]</a>/2 as indicated:
+Change 24.3.9 <a href="https://wg21.link/deque">[deque]</a>/2 as indicated:
 </p>
 
 <blockquote><pre>
@@ -37722,7 +37722,7 @@ void swap(forward_list&lt;T,Allocator&gt;&amp; x, forward_list&lt;T,Allocator&gt
 
 <li>
 <p>
-Change 24.3.10 <a href="https://wg21.link/list">[list]</a>/2 as indicated:
+Change 24.3.11 <a href="https://wg21.link/list">[list]</a>/2 as indicated:
 </p>
 
 <blockquote><pre>
@@ -37870,7 +37870,7 @@ void swap(stack&lt;T, Container&gt;&amp; x, stack&lt;T, Container&gt;&amp;&amp; 
 
 <li>
 <p>
-Change 24.3.11 <a href="https://wg21.link/vector">[vector]</a>/2 as indicated:
+Change 24.3.12 <a href="https://wg21.link/vector">[vector]</a>/2 as indicated:
 </p>
 
 <blockquote><pre>
@@ -37892,7 +37892,7 @@ void swap(vector&lt;T,Allocator&gt;&amp; x, vector&lt;T,Allocator&gt;&amp;&amp; 
 
 <li>
 <p>
-Change 24.3.11.3 <a href="https://wg21.link/vector.capacity">[vector.capacity]</a> before p. 8 as indicated:
+Change 24.3.12.3 <a href="https://wg21.link/vector.capacity">[vector.capacity]</a> before p. 8 as indicated:
 </p>
 
 <blockquote><pre>
@@ -37919,7 +37919,7 @@ void swap(vector&lt;T,Allocator&gt;&amp; x, vector&lt;T,Allocator&gt;&amp;&amp; 
 
 <li>
 <p>
-Change 24.3.12 <a href="https://wg21.link/vector.bool">[vector.bool]</a>/1 as indicated:
+Change 24.3.13 <a href="https://wg21.link/vector.bool">[vector.bool]</a>/1 as indicated:
 </p>
 
 <blockquote><pre>
@@ -38563,7 +38563,7 @@ valarray&lt;T&gt;&amp; operator+= (initializer_list&lt;T&gt;);
 
 <hr>
 <h3 id="1246"><a href="#1246">1246</a><sup><a href="https://cplusplus.github.io/LWG/issue1246">(i)</a></sup>. <code>vector::resize()</code> missing efficiency guarantee</h3>
-<p><b>Section:</b> 24.3.11.3 <a href="https://wg21.link/vector.capacity">[vector.capacity]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.12.3 <a href="https://wg21.link/vector.capacity">[vector.capacity]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> David Abrahams <b>Opened:</b> 2009-10-24 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -38606,7 +38606,7 @@ below.
 
 <p id="res-1246"><b>Proposed resolution:</b></p>
 <p>
-In 24.3.11.3 <a href="https://wg21.link/vector.capacity">[vector.capacity]</a>/10, change
+In 24.3.12.3 <a href="https://wg21.link/vector.capacity">[vector.capacity]</a>/10, change
 </p>
 
 <blockquote><pre>
@@ -38627,7 +38627,7 @@ sequence</del>
 The description in terms of <code>push_back</code> led some to believe that
 one could expect the exact same growth pattern from both <code>resize</code> and
 <code>push_back</code> (e.g.) which could lead to sub-optimal implementations.
-Additionally, 24.3.11 <a href="https://wg21.link/vector">[vector]</a>, p1 includes a statement that this container
+Additionally, 24.3.12 <a href="https://wg21.link/vector">[vector]</a>, p1 includes a statement that this container
 "supports (amortized) constant time insert and erase operations at the end;",
 therefore addressing the concern of this issue.
 </p>
@@ -39657,7 +39657,7 @@ sense if we have to move an element, but why should that be required from
 <p>
 First, I read the newly proposed spec for <code>clear()</code> that it does in
 general <em>not</em> invalidate a previous past-the-end iterator value, but
-<code>deque</code> says in 24.3.8.4 <a href="https://wg21.link/deque.modifiers">[deque.modifiers]</a> for the semantics of
+<code>deque</code> says in 24.3.9.4 <a href="https://wg21.link/deque.modifiers">[deque.modifiers]</a> for the semantics of
 <code>erase</code> that erasures at the end will invalidate the past-the-end
 iterator. With removal of a direct binding between <code>clear()</code> and
 <code>erase()</code> there seem to be some fixes necessary. One way to fix that
@@ -42474,7 +42474,7 @@ refer to the same string or the other string.
 
 <hr>
 <h3 id="1419"><a href="#1419">1419</a><sup><a href="https://cplusplus.github.io/LWG/issue1419">(i)</a></sup>. <code>forward_list::erase_after</code> should return an iterator</h3>
-<p><b>Section:</b> 24.3.9 <a href="https://wg21.link/forward.list">[forward.list]</a> <b>Status:</b> <a href="lwg-active.html#NAD_Editorial">NAD Editorial</a>
+<p><b>Section:</b> 24.3.10 <a href="https://wg21.link/forward.list">[forward.list]</a> <b>Status:</b> <a href="lwg-active.html#NAD_Editorial">NAD Editorial</a>
  <b>Submitter:</b> INCITS <b>Opened:</b> 2010-08-25 <b>Last modified:</b> 2023-02-07</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -42740,7 +42740,7 @@ determine if changes are needed
 
 <hr>
 <h3 id="1444"><a href="#1444">1444</a><sup><a href="https://cplusplus.github.io/LWG/issue1444">(i)</a></sup>. <code>OFF_T</code> is not defined</h3>
-<p><b>Section:</b> 31.5.3.2 <a href="https://wg21.link/fpos.operations">[fpos.operations]</a> <b>Status:</b> <a href="lwg-active.html#Dup">Dup</a>
+<p><b>Section:</b> 31.5.3.3 <a href="https://wg21.link/fpos.operations">[fpos.operations]</a> <b>Status:</b> <a href="lwg-active.html#Dup">Dup</a>
  <b>Submitter:</b> BSI <b>Opened:</b> 2010-08-25 <b>Last modified:</b> 2016-01-28</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -46859,7 +46859,7 @@ Ammend 17.2 <a href="https://wg21.link/support.types">[support.types]</a>, Table
 Some differences from 99 [arrays.ts::container.requirements] are not explicitly specified, including at
 least the lack of a default constructor, copy assignment and <code>swap</code> member.
 <p/>
-The wording could be similar to 24.3.7.1 <a href="https://wg21.link/array.overview">[array.overview]</a> which says "An array satisfies all of the requirements 
+The wording could be similar to 24.3.8.1 <a href="https://wg21.link/array.overview">[array.overview]</a> which says "An array satisfies all of the requirements 
 of a container and of a reversible container (99 [arrays.ts::container.requirements]), except that a default constructed 
 array object is not empty and that <code>swap</code> does not have constant complexity."
 </p>
@@ -47116,7 +47116,7 @@ template &lt;class Alloc&gt;
 
 <hr>
 <h3 id="2256"><a href="#2256">2256</a><sup><a href="https://cplusplus.github.io/LWG/issue2256">(i)</a></sup>. On <code>vector</code> iterator invalidation</h3>
-<p><b>Section:</b> 24.3.11.5 <a href="https://wg21.link/vector.modifiers">[vector.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.12.5 <a href="https://wg21.link/vector.modifiers">[vector.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Howard Hinnant <b>Opened:</b> 2013-04-29 <b>Last modified:</b> 2020-05-08</p>
 <p><b>Priority: </b>3
 </p>
@@ -47125,7 +47125,7 @@ template &lt;class Alloc&gt;
 <p><b>Discussion:</b></p>
 
 <p>
-24.3.11.5 <a href="https://wg21.link/vector.modifiers">[vector.modifiers]</a>/p3 says:
+24.3.12.5 <a href="https://wg21.link/vector.modifiers">[vector.modifiers]</a>/p3 says:
 </p>
 <blockquote><pre>
 iterator erase(const_iterator position);
@@ -47494,7 +47494,7 @@ and <code>&lt;vector&gt;</code>.
 
 <hr>
 <h3 id="2279"><a href="#2279">2279</a><sup><a href="https://cplusplus.github.io/LWG/issue2279">(i)</a></sup>. Carefully state effects of <code>list::splice</code> function</h3>
-<p><b>Section:</b> 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, 24.3.9.6 <a href="https://wg21.link/forward.list.ops">[forward.list.ops]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, 24.3.10.6 <a href="https://wg21.link/forward.list.ops">[forward.list.ops]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Arseny Klimovsky <b>Opened:</b> 2013-08-15 <b>Last modified:</b> 2023-02-07</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -47504,7 +47504,7 @@ and <code>&lt;vector&gt;</code>.
 <p>
 I think that the effects of <code>list::splice</code> function should be stated more carefully.
 <p/>
-Function transferring a single element is described now in the following way (24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a> p7):
+Function transferring a single element is described now in the following way (24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a> p7):
 </p>
 
 <blockquote>
@@ -47572,7 +47572,7 @@ continue to refer to the same element, but now behave as iterators into <code>*t
 </blockquote>
 </li>
 
-<li><p>Modify 24.3.10.5 <a href="https://wg21.link/list.ops">[list.ops]</a> p7 as indicated:</p>
+<li><p>Modify 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a> p7 as indicated:</p>
 
 <blockquote>
 <pre>
@@ -48494,7 +48494,7 @@ STL withdraws the issue, non-power-of-2 URNGs are used in the field, it is too l
 
 <hr>
 <h3 id="2335"><a href="#2335">2335</a><sup><a href="https://cplusplus.github.io/LWG/issue2335">(i)</a></sup>. <code>array&lt;array&lt;int, 3&gt;, 4&gt;</code> should be layout-compatible with <code>int[4][3]</code></h3>
-<p><b>Section:</b> 24.3.7 <a href="https://wg21.link/array">[array]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.8 <a href="https://wg21.link/array">[array]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Jeffrey Yasskin <b>Opened:</b> 2013-10-04 <b>Last modified:</b> 2020-11-09</p>
 <p><b>Priority: </b>3
 </p>
@@ -48519,7 +48519,7 @@ to view memory as the other type: C++14 CD [class.mem]p18.
 </p>
 I believe it's sufficient to add "<code>array&lt;T, N&gt;</code> shall be
 layout-compatible (6.8 <a href="https://wg21.link/basic.types">[basic.types]</a>) with <code>T[N]</code>." to 
-24.3.7.1 <a href="https://wg21.link/array.overview">[array.overview]</a>, but we might also need some extension to 
+24.3.8.1 <a href="https://wg21.link/array.overview">[array.overview]</a>, but we might also need some extension to 
 11.4 <a href="https://wg21.link/class.mem">[class.mem]</a> to address the possibility of layout-compatibility 
 between struct and array types.
 <p>
@@ -50251,7 +50251,7 @@ template &lt;class T&gt; struct tuple_size <ins>{ }</ins>;
 
 <hr>
 <h3 id="2449"><a href="#2449">2449</a><sup><a href="https://cplusplus.github.io/LWG/issue2449">(i)</a></sup>. <code>vector::insert</code> invalidates <code>end()</code>?</h3>
-<p><b>Section:</b> 24.3.11.5 <a href="https://wg21.link/vector.modifiers">[vector.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 24.3.12.5 <a href="https://wg21.link/vector.modifiers">[vector.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Marc Glisse <b>Opened:</b> 2014-10-21 <b>Last modified:</b> 2017-03-14</p>
 <p><b>Priority: </b>3
 </p>
@@ -50261,7 +50261,7 @@ template &lt;class T&gt; struct tuple_size <ins>{ }</ins>;
 <p>
 this issue is based on the discussion <a href="https://groups.google.com/a/isocpp.org/d/topic/std-discussion/oYvKscnl280/discussion">here</a>.
 <p/>
-24.3.11.5 <a href="https://wg21.link/vector.modifiers">[vector.modifiers]</a> says about <code>vector::insert</code>: "If no reallocation happens, all the iterators and references 
+24.3.12.5 <a href="https://wg21.link/vector.modifiers">[vector.modifiers]</a> says about <code>vector::insert</code>: "If no reallocation happens, all the iterators and references 
 before the insertion point remain valid." This doesn't seem to guarantee anything about the iterator <em>at</em> the point of insertion.
 <p/>
 The question comes from people asking if the following is valid, assuming a sufficient call to <code>reserve()</code> was done first:
@@ -56483,7 +56483,7 @@ and shall not be an aggregate.</del>
 
 <hr>
 <h3 id="3579"><a href="#3579">3579</a><sup><a href="https://cplusplus.github.io/LWG/issue3579">(i)</a></sup>. Complexity guarantees for <code>resize()</code> and <code>append()</code> functions across the library</h3>
-<p><b>Section:</b> 23.4.3.5 <a href="https://wg21.link/string.capacity">[string.capacity]</a>, 24.3.8.3 <a href="https://wg21.link/deque.capacity">[deque.capacity]</a>, 24.3.10.3 <a href="https://wg21.link/list.capacity">[list.capacity]</a>, 24.3.11.3 <a href="https://wg21.link/vector.capacity">[vector.capacity]</a>, 24.3.9.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a>, 28.6.2.8 <a href="https://wg21.link/valarray.members">[valarray.members]</a>, 23.4.3.7.2 <a href="https://wg21.link/string.append">[string.append]</a>, 31.12.6.5.3 <a href="https://wg21.link/fs.path.append">[fs.path.append]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 23.4.3.5 <a href="https://wg21.link/string.capacity">[string.capacity]</a>, 24.3.9.3 <a href="https://wg21.link/deque.capacity">[deque.capacity]</a>, 24.3.11.3 <a href="https://wg21.link/list.capacity">[list.capacity]</a>, 24.3.12.3 <a href="https://wg21.link/vector.capacity">[vector.capacity]</a>, 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a>, 28.6.2.8 <a href="https://wg21.link/valarray.members">[valarray.members]</a>, 23.4.3.7.2 <a href="https://wg21.link/string.append">[string.append]</a>, 31.12.6.5.3 <a href="https://wg21.link/fs.path.append">[fs.path.append]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Louis Dionne <b>Opened:</b> 2021-08-11 <b>Last modified:</b> 2022-08-23</p>
 <p><b>Priority: </b>3
 </p>
@@ -56508,15 +56508,15 @@ The following classes have a <code>resize()</code> member function and also a <c
 </p>
 <ul>
 <li><p>23.4.3.5 <a href="https://wg21.link/string.capacity">[string.capacity]</a></p></li>
-<li><p>24.3.8.3 <a href="https://wg21.link/deque.capacity">[deque.capacity]</a></p></li>
-<li><p>24.3.10.3 <a href="https://wg21.link/list.capacity">[list.capacity]</a></p></li>
-<li><p>24.3.11.3 <a href="https://wg21.link/vector.capacity">[vector.capacity]</a></p></li>
+<li><p>24.3.9.3 <a href="https://wg21.link/deque.capacity">[deque.capacity]</a></p></li>
+<li><p>24.3.11.3 <a href="https://wg21.link/list.capacity">[list.capacity]</a></p></li>
+<li><p>24.3.12.3 <a href="https://wg21.link/vector.capacity">[vector.capacity]</a></p></li>
 </ul>
 <p>
 The following classes have a <code>resize()</code> member function but do not support <code>push_back()</code>:
 </p>
 <ul>
-<li><p>24.3.9.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a></p></li>
+<li><p>24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a></p></li>
 <li><p>28.6.2.8 <a href="https://wg21.link/valarray.members">[valarray.members]</a></p></li>
 </ul>
 <p>

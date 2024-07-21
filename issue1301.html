@@ -134,7 +134,7 @@ sense if we have to move an element, but why should that be required from
 <p>
 First, I read the newly proposed spec for <code>clear()</code> that it does in
 general <em>not</em> invalidate a previous past-the-end iterator value, but
-<code>deque</code> says in 24.3.8.4 <a href="https://wg21.link/deque.modifiers">[deque.modifiers]</a> for the semantics of
+<code>deque</code> says in 24.3.9.4 <a href="https://wg21.link/deque.modifiers">[deque.modifiers]</a> for the semantics of
 <code>erase</code> that erasures at the end will invalidate the past-the-end
 iterator. With removal of a direct binding between <code>clear()</code> and
 <code>erase()</code> there seem to be some fixes necessary. One way to fix that

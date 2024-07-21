@@ -67,7 +67,7 @@
 This document is the Index by Status and Date for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
-<p>Revised 2024-07-21 at 09:56:27 UTC
+<p>Revised 2024-07-21 at 12:18:13 UTC
 </p><h2 id="New">New (419 issues)</h2>
 <table class="issues-index">
 <tr>
@@ -78,6 +78,15 @@ This document is the Index by Status and Date for the <a href="lwg-active.html">
   <th>Proposed Resolution</th>
   <th><a href="unresolved-prioritized.html">Priority</a></th>
   <th>Duplicates</th>
+</tr>
+<tr>
+<td id="4122"><a href="lwg-active.html#4122" title="Ill-formed operator&lt;=&gt; can cause hard error when instantiating std::inplace_vector (Status: New)">4122</a><sup><a href="https://cplusplus.github.io/LWG/issue4122">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>24.3.14.1 [inplace.vector.overview]</td>
+<td>Ill-formed <code>operator&lt;=&gt;</code> can cause hard error when instantiating <code>std::inplace_vector</code></td>
+<td>Yes</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td id="4120"><a href="lwg-active.html#4120" title="move_iterator should provide iterator_category only when it models
@@ -122,15 +131,6 @@ forward_iterator (Status: New)">4120</a><sup><a href="https://cplusplus.github.i
 <td><a href="lwg-active.html#New">New</a></td>
 <td>26.8.5 [coro.generator.promise]</td>
 <td><code>generator::promise_type::yield_value(ranges::elements_of&lt;R, Alloc&gt;)</code>'s nested <code>generator</code> may be ill-formed</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4122"><a href="lwg-active.html#4122" title="Ill-formed operator&lt;=&gt; can cause hard error when instantiating std::inplace_vector (Status: New)">4122</a><sup><a href="https://cplusplus.github.io/LWG/issue4122">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>99 [inplace.vector.overview]</td>
-<td>Ill-formed <code>operator&lt;=&gt;</code> can cause hard error when instantiating <code>std::inplace_vector</code></td>
 <td>Yes</td>
 <td></td>
 <td></td>
@@ -722,7 +722,7 @@ is a non-move-constructible range</td>
 <tr>
 <td id="4000"><a href="lwg-active.html#4000" title="flat_map::insert_range's Effects is not quite right (Status: New)">4000</a><sup><a href="https://cplusplus.github.io/LWG/issue4000">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>24.6.9.6 [flat.map.modifiers]</td>
+<td>24.6.9.7 [flat.map.modifiers]</td>
 <td><code>flat_map::insert_range</code>'s <i>Effects</i> is not quite right</td>
 <td>Yes</td>
 <td>3</td>
@@ -1558,7 +1558,7 @@ required to be correctly formatted?</td>
 <tr>
 <td id="3424"><a href="lwg-active.html#3424" title="optional::value_or should never return a cv-qualified type (Status: New)">3424</a><sup><a href="https://cplusplus.github.io/LWG/issue3424">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>22.5.3.6 [optional.observe]</td>
+<td>22.5.3.7 [optional.observe]</td>
 <td><code>optional::value_or</code> should never return a <i>cv</i>-qualified type</td>
 <td>Yes</td>
 <td>3</td>
@@ -1734,7 +1734,7 @@ not copy) their predicate object</td>
 <td id="3758"><a href="lwg-active.html#3758" title="Element-relocating operations of std::vector and std::deque 
 should conditionally require Cpp17CopyInsertable in their preconditions (Status: New)">3758</a><sup><a href="https://cplusplus.github.io/LWG/issue3758">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td>Element-relocating operations of <code>std::vector</code> and <code>std::deque</code> 
 should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</td>
 <td><span class="no-pr">No</span></td>
@@ -2070,7 +2070,7 @@ inner-iterator with std::default_sentinel results in null pointer dereference (S
 <tr>
 <td id="3219"><a href="lwg-active.html#3219" title="std::array overview container requirements are incorrect (Status: New)">3219</a><sup><a href="https://cplusplus.github.io/LWG/issue3219">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>24.3.7.1 [array.overview]</td>
+<td>24.3.8.1 [array.overview]</td>
 <td><code>std::array</code> overview container requirements are incorrect</td>
 <td>Yes</td>
 <td>3</td>
@@ -2223,7 +2223,7 @@ inner-iterator with std::default_sentinel results in null pointer dereference (S
 <tr>
 <td id="3638"><a href="lwg-active.html#3638" title="vector&lt;bool&gt;::swap(reference, reference) is useless (Status: New)">3638</a><sup><a href="https://cplusplus.github.io/LWG/issue3638">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>24.3.12 [vector.bool]</td>
+<td>24.3.13 [vector.bool]</td>
 <td><code>vector&lt;bool&gt;::swap(reference, reference)</code> is useless</td>
 <td>Yes</td>
 <td>3</td>
@@ -3297,7 +3297,7 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <tr>
 <td id="3308"><a href="lwg-active.html#3308" title="vector and deque iterator erase invalidates elements even when no change occurs (Status: New)">3308</a><sup><a href="https://cplusplus.github.io/LWG/issue3308">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>24.3.8.4 [deque.modifiers]</td>
+<td>24.3.9.4 [deque.modifiers]</td>
 <td><code>vector</code> and <code>deque</code> iterator <code>erase</code> invalidates elements even when no change occurs</td>
 <td>Yes</td>
 <td>3</td>
@@ -3593,7 +3593,7 @@ regards to <code>ClassAtomCollatingElement</code></td>
 <tr>
 <td id="2983"><a href="lwg-active.html#2983" title="money_put::do_put underspecified (Status: New)">2983</a><sup><a href="https://cplusplus.github.io/LWG/issue2983">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>30.4.7.3.2 [locale.money.put.virtuals]</td>
+<td>30.4.7.3.3 [locale.money.put.virtuals]</td>
 <td><code>money_put::do_put</code> underspecified</td>
 <td>Yes</td>
 <td>3</td>
@@ -3935,7 +3935,7 @@ the evaluation of type traits</td>
 <tr>
 <td id="4015"><a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations (Status: Open)">4015</a><sup><a href="https://cplusplus.github.io/LWG/issue4015">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>22.5.3.7 [optional.monadic]</td>
+<td>22.5.3.8 [optional.monadic]</td>
 <td>LWG 3973 broke <code>const</code> overloads of <code>std::optional</code> monadic operations</td>
 <td>Yes</td>
 <td>1</td>
@@ -4088,7 +4088,7 @@ the evaluation of type traits</td>
 <tr>
 <td id="617"><a href="lwg-active.html#617" title="std::array is a sequence that doesn't satisfy the sequence requirements? (Status: Open)">617</a><sup><a href="https://cplusplus.github.io/LWG/issue617">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.7 [array]</td>
+<td>24.3.8 [array]</td>
 <td><code>std::array</code> is a sequence that doesn't satisfy the sequence requirements?</td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
@@ -4097,7 +4097,7 @@ the evaluation of type traits</td>
 <tr>
 <td id="2158"><a href="lwg-active.html#2158" title="Conditional copy&#47;move in std::vector (Status: Open)">2158</a><sup><a href="https://cplusplus.github.io/LWG/issue2158">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td>Conditional copy&#47;move in <code>std::vector</code></td>
 <td>Yes</td>
 <td>3</td>
@@ -4169,7 +4169,7 @@ the evaluation of type traits</td>
 <tr>
 <td id="2157"><a href="lwg-active.html#2157" title="How does std::array&lt;T,0&gt; initialization work when T is not default-constructible? (Status: Open)">2157</a><sup><a href="https://cplusplus.github.io/LWG/issue2157">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.7.5 [array.zero]</td>
+<td>24.3.8.5 [array.zero]</td>
 <td>How does <code>std::array&lt;T,0&gt;</code> initialization work when <code>T</code> is not default-constructible?</td>
 <td>Yes</td>
 <td>3</td>
@@ -4178,7 +4178,7 @@ the evaluation of type traits</td>
 <tr>
 <td id="3488"><a href="lwg-active.html#3488" title="Is array&lt;const int, 0&gt; swappable or not? (Status: Open)">3488</a><sup><a href="https://cplusplus.github.io/LWG/issue3488">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.7.4 [array.special]</td>
+<td>24.3.8.4 [array.special]</td>
 <td>Is <code>array&lt;const int, 0&gt;</code> swappable or not?</td>
 <td>Yes</td>
 <td>3</td>
@@ -4223,7 +4223,7 @@ the evaluation of type traits</td>
 <tr>
 <td id="1422"><a href="lwg-active.html#1422" title="vector&lt;bool&gt; iterators are not random access (Status: Open)">1422</a><sup><a href="https://cplusplus.github.io/LWG/issue1422">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.12 [vector.bool]</td>
+<td>24.3.13 [vector.bool]</td>
 <td><code>vector&lt;bool&gt;</code> iterators are not random access</td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
@@ -4268,7 +4268,7 @@ the evaluation of type traits</td>
 <tr>
 <td id="1102"><a href="lwg-active.html#1102" title="std::vector's reallocation policy still unclear (Status: Open)">1102</a><sup><a href="https://cplusplus.github.io/LWG/issue1102">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td><code>std::vector</code>'s reallocation policy still unclear</td>
 <td>Yes</td>
 <td>3</td>
@@ -4295,7 +4295,7 @@ the evaluation of type traits</td>
 <tr>
 <td id="2829"><a href="lwg-active.html#2829" title="LWG 2740 leaves behind vacuous words (Status: Open)">2829</a><sup><a href="https://cplusplus.github.io/LWG/issue2829">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>22.5.3.6 [optional.observe]</td>
+<td>22.5.3.7 [optional.observe]</td>
 <td>LWG 2740 leaves behind vacuous words</td>
 <td><span class="no-pr">No</span></td>
 <td>2</td>
@@ -4412,7 +4412,7 @@ the evaluation of type traits</td>
 <tr>
 <td id="2823"><a href="lwg-active.html#2823" title="std::array initialization is still not permissive enough (Status: Open)">2823</a><sup><a href="https://cplusplus.github.io/LWG/issue2823">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.7.1 [array.overview]</td>
+<td>24.3.8.1 [array.overview]</td>
 <td><code>std::array</code> initialization is still not permissive enough</td>
 <td>Yes</td>
 <td>3</td>

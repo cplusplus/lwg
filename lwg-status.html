@@ -62,7 +62,7 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
 
-<p>Revised 2024-07-21 at 09:56:27 UTC
+<p>Revised 2024-07-21 at 12:18:13 UTC
 </p><h2 id="Ready">Ready (8 issues)</h2>
 <table class="issues-index">
 <tr>
@@ -1359,7 +1359,7 @@ the evaluation of type traits</td>
 <tr>
 <td id="3424"><a href="lwg-active.html#3424" title="optional::value_or should never return a cv-qualified type (Status: New)">3424</a><sup><a href="https://cplusplus.github.io/LWG/issue3424">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>22.5.3.6 [optional.observe]</td>
+<td>22.5.3.7 [optional.observe]</td>
 <td><code>optional::value_or</code> should never return a <i>cv</i>-qualified type</td>
 <td>Yes</td>
 <td>3</td>
@@ -1930,7 +1930,7 @@ arguments when no insertion happens</td>
 <tr>
 <td id="3219"><a href="lwg-active.html#3219" title="std::array overview container requirements are incorrect (Status: New)">3219</a><sup><a href="https://cplusplus.github.io/LWG/issue3219">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>24.3.7.1 [array.overview]</td>
+<td>24.3.8.1 [array.overview]</td>
 <td><code>std::array</code> overview container requirements are incorrect</td>
 <td>Yes</td>
 <td>3</td>
@@ -1939,7 +1939,7 @@ arguments when no insertion happens</td>
 <tr>
 <td id="3308"><a href="lwg-active.html#3308" title="vector and deque iterator erase invalidates elements even when no change occurs (Status: New)">3308</a><sup><a href="https://cplusplus.github.io/LWG/issue3308">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>24.3.8.4 [deque.modifiers]</td>
+<td>24.3.9.4 [deque.modifiers]</td>
 <td><code>vector</code> and <code>deque</code> iterator <code>erase</code> invalidates elements even when no change occurs</td>
 <td>Yes</td>
 <td>3</td>
@@ -1949,7 +1949,7 @@ arguments when no insertion happens</td>
 <td id="3758"><a href="lwg-active.html#3758" title="Element-relocating operations of std::vector and std::deque 
 should conditionally require Cpp17CopyInsertable in their preconditions (Status: New)">3758</a><sup><a href="https://cplusplus.github.io/LWG/issue3758">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td>Element-relocating operations of <code>std::vector</code> and <code>std::deque</code> 
 should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</td>
 <td><span class="no-pr">No</span></td>
@@ -1959,10 +1959,19 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <tr>
 <td id="3638"><a href="lwg-active.html#3638" title="vector&lt;bool&gt;::swap(reference, reference) is useless (Status: New)">3638</a><sup><a href="https://cplusplus.github.io/LWG/issue3638">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>24.3.12 [vector.bool]</td>
+<td>24.3.13 [vector.bool]</td>
 <td><code>vector&lt;bool&gt;::swap(reference, reference)</code> is useless</td>
 <td>Yes</td>
 <td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4122"><a href="lwg-active.html#4122" title="Ill-formed operator&lt;=&gt; can cause hard error when instantiating std::inplace_vector (Status: New)">4122</a><sup><a href="https://cplusplus.github.io/LWG/issue4122">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>24.3.14.1 [inplace.vector.overview]</td>
+<td>Ill-formed <code>operator&lt;=&gt;</code> can cause hard error when instantiating <code>std::inplace_vector</code></td>
+<td>Yes</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -2040,7 +2049,7 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <tr>
 <td id="4000"><a href="lwg-active.html#4000" title="flat_map::insert_range's Effects is not quite right (Status: New)">4000</a><sup><a href="https://cplusplus.github.io/LWG/issue4000">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>24.6.9.6 [flat.map.modifiers]</td>
+<td>24.6.9.7 [flat.map.modifiers]</td>
 <td><code>flat_map::insert_range</code>'s <i>Effects</i> is not quite right</td>
 <td>Yes</td>
 <td>3</td>
@@ -3367,7 +3376,7 @@ required to be correctly formatted?</td>
 <tr>
 <td id="2983"><a href="lwg-active.html#2983" title="money_put::do_put underspecified (Status: New)">2983</a><sup><a href="https://cplusplus.github.io/LWG/issue2983">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>30.4.7.3.2 [locale.money.put.virtuals]</td>
+<td>30.4.7.3.3 [locale.money.put.virtuals]</td>
 <td><code>money_put::do_put</code> underspecified</td>
 <td>Yes</td>
 <td>3</td>
@@ -4003,15 +4012,6 @@ fetch_meow members don't (Status: New)">3047</a><sup><a href="https://cplusplus.
 <td></td>
 </tr>
 <tr>
-<td id="4122"><a href="lwg-active.html#4122" title="Ill-formed operator&lt;=&gt; can cause hard error when instantiating std::inplace_vector (Status: New)">4122</a><sup><a href="https://cplusplus.github.io/LWG/issue4122">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>99 [inplace.vector.overview]</td>
-<td>Ill-formed <code>operator&lt;=&gt;</code> can cause hard error when instantiating <code>std::inplace_vector</code></td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="3812"><a href="lwg-active.html#3812" title="[fund.ts.v3] Incorrect constraint on propagate_const conversion function (Status: New)">3812</a><sup><a href="https://cplusplus.github.io/LWG/issue3812">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>3.2.2.5 [fund.ts.v3::propagate_const.const_observers]</td>
@@ -4235,7 +4235,7 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <tr>
 <td id="2829"><a href="lwg-active.html#2829" title="LWG 2740 leaves behind vacuous words (Status: Open)">2829</a><sup><a href="https://cplusplus.github.io/LWG/issue2829">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>22.5.3.6 [optional.observe]</td>
+<td>22.5.3.7 [optional.observe]</td>
 <td>LWG 2740 leaves behind vacuous words</td>
 <td><span class="no-pr">No</span></td>
 <td>2</td>
@@ -4244,7 +4244,7 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <tr>
 <td id="4015"><a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations (Status: Open)">4015</a><sup><a href="https://cplusplus.github.io/LWG/issue4015">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>22.5.3.7 [optional.monadic]</td>
+<td>22.5.3.8 [optional.monadic]</td>
 <td>LWG 3973 broke <code>const</code> overloads of <code>std::optional</code> monadic operations</td>
 <td>Yes</td>
 <td>1</td>
@@ -4379,7 +4379,7 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <tr>
 <td id="617"><a href="lwg-active.html#617" title="std::array is a sequence that doesn't satisfy the sequence requirements? (Status: Open)">617</a><sup><a href="https://cplusplus.github.io/LWG/issue617">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.7 [array]</td>
+<td>24.3.8 [array]</td>
 <td><code>std::array</code> is a sequence that doesn't satisfy the sequence requirements?</td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
@@ -4388,7 +4388,7 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <tr>
 <td id="2823"><a href="lwg-active.html#2823" title="std::array initialization is still not permissive enough (Status: Open)">2823</a><sup><a href="https://cplusplus.github.io/LWG/issue2823">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.7.1 [array.overview]</td>
+<td>24.3.8.1 [array.overview]</td>
 <td><code>std::array</code> initialization is still not permissive enough</td>
 <td>Yes</td>
 <td>3</td>
@@ -4397,7 +4397,7 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <tr>
 <td id="3488"><a href="lwg-active.html#3488" title="Is array&lt;const int, 0&gt; swappable or not? (Status: Open)">3488</a><sup><a href="https://cplusplus.github.io/LWG/issue3488">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.7.4 [array.special]</td>
+<td>24.3.8.4 [array.special]</td>
 <td>Is <code>array&lt;const int, 0&gt;</code> swappable or not?</td>
 <td>Yes</td>
 <td>3</td>
@@ -4406,7 +4406,7 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <tr>
 <td id="2157"><a href="lwg-active.html#2157" title="How does std::array&lt;T,0&gt; initialization work when T is not default-constructible? (Status: Open)">2157</a><sup><a href="https://cplusplus.github.io/LWG/issue2157">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.7.5 [array.zero]</td>
+<td>24.3.8.5 [array.zero]</td>
 <td>How does <code>std::array&lt;T,0&gt;</code> initialization work when <code>T</code> is not default-constructible?</td>
 <td>Yes</td>
 <td>3</td>
@@ -4415,7 +4415,7 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <tr>
 <td id="2158"><a href="lwg-active.html#2158" title="Conditional copy&#47;move in std::vector (Status: Open)">2158</a><sup><a href="https://cplusplus.github.io/LWG/issue2158">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td>Conditional copy&#47;move in <code>std::vector</code></td>
 <td>Yes</td>
 <td>3</td>
@@ -4424,7 +4424,7 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <tr>
 <td id="1102"><a href="lwg-active.html#1102" title="std::vector's reallocation policy still unclear (Status: Open)">1102</a><sup><a href="https://cplusplus.github.io/LWG/issue1102">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td><code>std::vector</code>'s reallocation policy still unclear</td>
 <td>Yes</td>
 <td>3</td>
@@ -4433,7 +4433,7 @@ don't support <code>DynamicBuffer</code> lvalues</td>
 <tr>
 <td id="1422"><a href="lwg-active.html#1422" title="vector&lt;bool&gt; iterators are not random access (Status: Open)">1422</a><sup><a href="https://cplusplus.github.io/LWG/issue1422">(i)</a></sup></td>
 <td><a href="lwg-active.html#Open">Open</a></td>
-<td>24.3.12 [vector.bool]</td>
+<td>24.3.13 [vector.bool]</td>
 <td><code>vector&lt;bool&gt;</code> iterators are not random access</td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
@@ -6234,7 +6234,7 @@ types &mdash; this is inconsistent with other types in the library</td>
 <tr>
 <td id="3460"><a href="lwg-defects.html#3460" title="Unimplementable noop_coroutine_handle guarantees (Status: C++23)">3460</a><sup><a href="https://cplusplus.github.io/LWG/issue3460">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++23">C++23</a></td>
-<td>17.12.5.2.3 [coroutine.handle.noop.resumption]</td>
+<td>17.12.5.2.4 [coroutine.handle.noop.resumption]</td>
 <td>Unimplementable <code>noop_coroutine_handle</code> guarantees</td>
 <td>Yes</td>
 <td>2</td>
@@ -7095,7 +7095,7 @@ should take precedence over <code>expected(U&amp;&amp;)</code> with operator <co
 <tr>
 <td id="3817"><a href="lwg-defects.html#3817" title="Missing preconditions on forward_list modifiers (Status: C++23)">3817</a><sup><a href="https://cplusplus.github.io/LWG/issue3817">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++23">C++23</a></td>
-<td>24.3.9.5 [forward.list.modifiers]</td>
+<td>24.3.10.5 [forward.list.modifiers]</td>
 <td>Missing preconditions on <code>forward_list</code> modifiers</td>
 <td>Yes</td>
 <td></td>
@@ -7104,7 +7104,7 @@ should take precedence over <code>expected(U&amp;&amp;)</code> with operator <co
 <tr>
 <td id="3088"><a href="lwg-defects.html#3088" title="forward_list::merge behavior unclear when passed *this (Status: C++23)">3088</a><sup><a href="https://cplusplus.github.io/LWG/issue3088">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++23">C++23</a></td>
-<td>24.3.9.6 [forward.list.ops]</td>
+<td>24.3.10.6 [forward.list.ops]</td>
 <td><code>forward_list::merge</code> behavior unclear when passed <code>*this</code></td>
 <td>Yes</td>
 <td>3</td>
@@ -7113,7 +7113,7 @@ should take precedence over <code>expected(U&amp;&amp;)</code> with operator <co
 <tr>
 <td id="2997"><a href="lwg-defects.html#2997" title="LWG 491 and the specification of {forward_,}list::unique (Status: C++23)">2997</a><sup><a href="https://cplusplus.github.io/LWG/issue2997">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++23">C++23</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td>LWG 491 and the specification of <code>{forward_,}list::unique</code></td>
 <td>Yes</td>
 <td>3</td>
@@ -7122,7 +7122,7 @@ should take precedence over <code>expected(U&amp;&amp;)</code> with operator <co
 <tr>
 <td id="3778"><a href="lwg-defects.html#3778" title="vector&lt;bool&gt; missing exception specifications (Status: C++23)">3778</a><sup><a href="https://cplusplus.github.io/LWG/issue3778">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++23">C++23</a></td>
-<td>24.3.12.1 [vector.bool.pspc]</td>
+<td>24.3.13.1 [vector.bool.pspc]</td>
 <td><code>vector&lt;bool&gt;</code> missing exception specifications</td>
 <td>Yes</td>
 <td></td>
@@ -7221,7 +7221,7 @@ should take precedence over <code>expected(U&amp;&amp;)</code> with operator <co
 <tr>
 <td id="3879"><a href="lwg-defects.html#3879" title="erase_if for flat_{,multi}set is incorrectly specified (Status: C++23)">3879</a><sup><a href="https://cplusplus.github.io/LWG/issue3879">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++23">C++23</a></td>
-<td>24.6.11.5 [flat.set.erasure]</td>
+<td>24.6.11.6 [flat.set.erasure]</td>
 <td><code>erase_if</code> for <code>flat_{,multi}set</code> is incorrectly specified</td>
 <td>Yes</td>
 <td></td>
@@ -8504,7 +8504,7 @@ ranges::destroy_n should use std::move (Status: C++23)">3747</a><sup><a href="ht
 <tr>
 <td id="3118"><a href="lwg-defects.html#3118" title="fpos equality comparison unspecified (Status: C++23)">3118</a><sup><a href="https://cplusplus.github.io/LWG/issue3118">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++23">C++23</a></td>
-<td>31.5.3.2 [fpos.operations]</td>
+<td>31.5.3.3 [fpos.operations]</td>
 <td><code>fpos</code> equality comparison unspecified</td>
 <td>Yes</td>
 <td>4</td>
@@ -9903,7 +9903,7 @@ presentation types misformat negative numbers</td>
 <tr>
 <td id="2953"><a href="lwg-defects.html#2953" title="LWG 2853 should apply to deque::erase too (Status: C++20)">2953</a><sup><a href="https://cplusplus.github.io/LWG/issue2953">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++20">C++20</a></td>
-<td>24.3.8.4 [deque.modifiers]</td>
+<td>24.3.9.4 [deque.modifiers]</td>
 <td>LWG 2853 should apply to <code>deque::erase</code> too</td>
 <td>Yes</td>
 <td>0</td>
@@ -9912,7 +9912,7 @@ presentation types misformat negative numbers</td>
 <tr>
 <td id="3017"><a href="lwg-defects.html#3017" title="list splice functions should use addressof (Status: C++20)">3017</a><sup><a href="https://cplusplus.github.io/LWG/issue3017">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++20">C++20</a></td>
-<td>24.3.9.6 [forward.list.ops]</td>
+<td>24.3.10.6 [forward.list.ops]</td>
 <td><code>list splice</code> functions should use <code>addressof</code></td>
 <td>Yes</td>
 <td>0</td>
@@ -9921,7 +9921,7 @@ presentation types misformat negative numbers</td>
 <tr>
 <td id="2998"><a href="lwg-defects.html#2998" title="Requirements on function objects passed to {forward_,}list-specific algorithms (Status: C++20)">2998</a><sup><a href="https://cplusplus.github.io/LWG/issue2998">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++20">C++20</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td>Requirements on function objects passed to <code>{forward_,}list</code>-specific algorithms</td>
 <td>Yes</td>
 <td>0</td>
@@ -9930,7 +9930,7 @@ presentation types misformat negative numbers</td>
 <tr>
 <td id="3087"><a href="lwg-defects.html#3087" title="One final &amp;x in &sect;[list.ops] (Status: C++20)">3087</a><sup><a href="https://cplusplus.github.io/LWG/issue3087">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++20">C++20</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td>One final <code>&amp;x</code> in &sect;[list.ops]</td>
 <td>Yes</td>
 <td>3</td>
@@ -9939,7 +9939,7 @@ presentation types misformat negative numbers</td>
 <tr>
 <td id="2164"><a href="lwg-defects.html#2164" title="What are the semantics of vector.emplace(vector.begin(), vector.back())? (Status: C++20)">2164</a><sup><a href="https://cplusplus.github.io/LWG/issue2164">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++20">C++20</a></td>
-<td>24.3.11.5 [vector.modifiers]</td>
+<td>24.3.12.5 [vector.modifiers]</td>
 <td>What are the semantics of <code>vector.emplace(vector.begin(), vector.back())</code>?</td>
 <td>Yes</td>
 <td>2</td>
@@ -9948,7 +9948,7 @@ presentation types misformat negative numbers</td>
 <tr>
 <td id="3077"><a href="lwg-defects.html#3077" title="(push|emplace)_back should invalidate the end iterator (Status: C++20)">3077</a><sup><a href="https://cplusplus.github.io/LWG/issue3077">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++20">C++20</a></td>
-<td>24.3.11.5 [vector.modifiers]</td>
+<td>24.3.12.5 [vector.modifiers]</td>
 <td><code>(push|emplace)_back</code> should invalidate the <code>end</code> iterator</td>
 <td>Yes</td>
 <td>3</td>
@@ -12327,7 +12327,7 @@ to temporaries and will create dangling references</td>
 <tr>
 <td id="2740"><a href="lwg-defects.html#2740" title="constexpr optional&lt;T&gt;::operator-&gt; (Status: C++17)">2740</a><sup><a href="https://cplusplus.github.io/LWG/issue2740">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++17">C++17</a></td>
-<td>22.5.3.6 [optional.observe]</td>
+<td>22.5.3.7 [optional.observe]</td>
 <td><code>constexpr optional&lt;T&gt;::operator-&gt;</code></td>
 <td>Yes</td>
 <td>0</td>
@@ -12923,7 +12923,7 @@ cleaner interoperation with legacy APIs</td>
 <tr>
 <td id="2310"><a href="lwg-defects.html#2310" title="Public exposition only member in std::array (Status: C++17)">2310</a><sup><a href="https://cplusplus.github.io/LWG/issue2310">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++17">C++17</a></td>
-<td>24.3.7.1 [array.overview]</td>
+<td>24.3.8.1 [array.overview]</td>
 <td>Public <em>exposition only</em> member in <code>std::array</code></td>
 <td>Yes</td>
 <td>4</td>
@@ -12932,7 +12932,7 @@ cleaner interoperation with legacy APIs</td>
 <tr>
 <td id="2590"><a href="lwg-defects.html#2590" title="Aggregate initialization for std::array (Status: C++17)">2590</a><sup><a href="https://cplusplus.github.io/LWG/issue2590">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++17">C++17</a></td>
-<td>24.3.7.1 [array.overview]</td>
+<td>24.3.8.1 [array.overview]</td>
 <td>Aggregate initialization for <code>std::array</code></td>
 <td>Yes</td>
 <td>0</td>
@@ -12941,7 +12941,7 @@ cleaner interoperation with legacy APIs</td>
 <tr>
 <td id="2364"><a href="lwg-defects.html#2364" title="deque and vector pop_back don't specify iterator invalidation requirements (Status: C++17)">2364</a><sup><a href="https://cplusplus.github.io/LWG/issue2364">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++17">C++17</a></td>
-<td>24.3.8.4 [deque.modifiers]</td>
+<td>24.3.9.4 [deque.modifiers]</td>
 <td><code>deque</code> and <code>vector</code> <code>pop_back</code> don't specify iterator invalidation requirements</td>
 <td>Yes</td>
 <td>0</td>
@@ -12950,7 +12950,7 @@ cleaner interoperation with legacy APIs</td>
 <tr>
 <td id="2477"><a href="lwg-defects.html#2477" title="Inconsistency of wordings in std::vector::erase() and std::deque::erase() (Status: C++17)">2477</a><sup><a href="https://cplusplus.github.io/LWG/issue2477">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++17">C++17</a></td>
-<td>24.3.8.4 [deque.modifiers]</td>
+<td>24.3.9.4 [deque.modifiers]</td>
 <td>Inconsistency of wordings in <code>std::vector::erase()</code> and <code>std::deque::erase()</code></td>
 <td>Yes</td>
 <td>0</td>
@@ -12959,7 +12959,7 @@ cleaner interoperation with legacy APIs</td>
 <tr>
 <td id="2585"><a href="lwg-defects.html#2585" title="forward_list::resize(size_type, const value_type&amp;) effects incorrect (Status: C++17)">2585</a><sup><a href="https://cplusplus.github.io/LWG/issue2585">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++17">C++17</a></td>
-<td>24.3.9.5 [forward.list.modifiers]</td>
+<td>24.3.10.5 [forward.list.modifiers]</td>
 <td><code>forward_list::resize(size_type, const value_type&amp;)</code> effects incorrect</td>
 <td>Yes</td>
 <td>0</td>
@@ -12968,7 +12968,7 @@ cleaner interoperation with legacy APIs</td>
 <tr>
 <td id="2824"><a href="lwg-defects.html#2824" title="list::sort should say that the order of elements is unspecified if an exception is thrown (Status: C++17)">2824</a><sup><a href="https://cplusplus.github.io/LWG/issue2824">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++17">C++17</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td><code>list::sort</code> should say that the order of elements is unspecified if an exception is thrown</td>
 <td>Yes</td>
 <td>0</td>
@@ -12977,7 +12977,7 @@ cleaner interoperation with legacy APIs</td>
 <tr>
 <td id="2160"><a href="lwg-defects.html#2160" title="Unintended destruction ordering-specification of resize (Status: C++17)">2160</a><sup><a href="https://cplusplus.github.io/LWG/issue2160">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++17">C++17</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td>Unintended destruction ordering-specification of <code>resize</code></td>
 <td>Yes</td>
 <td>1</td>
@@ -12986,7 +12986,7 @@ cleaner interoperation with legacy APIs</td>
 <tr>
 <td id="2223"><a href="lwg-defects.html#2223" title="shrink_to_fit effect on iterator validity (Status: C++17)">2223</a><sup><a href="https://cplusplus.github.io/LWG/issue2223">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++17">C++17</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td><code>shrink_to_fit</code> effect on iterator validity</td>
 <td>Yes</td>
 <td>2</td>
@@ -12995,7 +12995,7 @@ cleaner interoperation with legacy APIs</td>
 <tr>
 <td id="2596"><a href="lwg-defects.html#2596" title="vector::data() should use addressof (Status: C++17)">2596</a><sup><a href="https://cplusplus.github.io/LWG/issue2596">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++17">C++17</a></td>
-<td>24.3.11.4 [vector.data]</td>
+<td>24.3.12.4 [vector.data]</td>
 <td><code>vector::data()</code> should use <code>addressof</code></td>
 <td>Yes</td>
 <td>0</td>
@@ -13004,7 +13004,7 @@ cleaner interoperation with legacy APIs</td>
 <tr>
 <td id="2853"><a href="lwg-defects.html#2853" title="Possible inconsistency in specification of erase in [vector.modifiers] (Status: C++17)">2853</a><sup><a href="https://cplusplus.github.io/LWG/issue2853">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++17">C++17</a></td>
-<td>24.3.11.5 [vector.modifiers]</td>
+<td>24.3.12.5 [vector.modifiers]</td>
 <td>Possible inconsistency in specification of <code>erase</code> in [vector.modifiers]</td>
 <td>Yes</td>
 <td>0</td>
@@ -14655,7 +14655,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="2045"><a href="lwg-defects.html#2045" title="forward_list::merge and forward_list::splice_after with unequal allocators (Status: C++14)">2045</a><sup><a href="https://cplusplus.github.io/LWG/issue2045">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++14">C++14</a></td>
-<td>24.3.9.6 [forward.list.ops]</td>
+<td>24.3.10.6 [forward.list.ops]</td>
 <td><code>forward_list::merge</code> and <code>forward_list::splice_after</code> with unequal allocators</td>
 <td>Yes</td>
 <td></td>
@@ -14664,7 +14664,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="2123"><a href="lwg-defects.html#2123" title="merge() allocator requirements for lists versus forward lists (Status: C++14)">2123</a><sup><a href="https://cplusplus.github.io/LWG/issue2123">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++14">C++14</a></td>
-<td>24.3.9.6 [forward.list.ops]</td>
+<td>24.3.10.6 [forward.list.ops]</td>
 <td><code>merge()</code> allocator requirements for lists versus forward lists</td>
 <td>Yes</td>
 <td></td>
@@ -14673,7 +14673,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="2222"><a href="lwg-defects.html#2222" title="Inconsistency in description of forward_list::splice_after single-element overload (Status: C++14)">2222</a><sup><a href="https://cplusplus.github.io/LWG/issue2222">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++14">C++14</a></td>
-<td>24.3.9.6 [forward.list.ops]</td>
+<td>24.3.10.6 [forward.list.ops]</td>
 <td>Inconsistency in description of <code>forward_list::splice_after</code> single-element overload</td>
 <td>Yes</td>
 <td></td>
@@ -14682,7 +14682,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="2122"><a href="lwg-defects.html#2122" title="merge() stability for lists versus forward lists (Status: C++14)">2122</a><sup><a href="https://cplusplus.github.io/LWG/issue2122">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++14">C++14</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td><code>merge()</code> stability for lists versus forward lists</td>
 <td>Yes</td>
 <td></td>
@@ -14691,7 +14691,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="2323"><a href="lwg-defects.html#2323" title="vector::resize(n, t)'s specification should be simplified (Status: C++14)">2323</a><sup><a href="https://cplusplus.github.io/LWG/issue2323">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++14">C++14</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td><code>vector::resize(n, t)</code>'s specification should be simplified</td>
 <td>Yes</td>
 <td>0</td>
@@ -14700,7 +14700,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="2033"><a href="lwg-defects.html#2033" title="Preconditions of reserve, shrink_to_fit, and resize functions (Status: C++14)">2033</a><sup><a href="https://cplusplus.github.io/LWG/issue2033">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++14">C++14</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td>Preconditions of <code>reserve</code>, <code>shrink_to_fit</code>, and <code>resize</code> functions</td>
 <td>Yes</td>
 <td></td>
@@ -14709,7 +14709,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="2252"><a href="lwg-defects.html#2252" title="Strong guarantee on vector::push_back() still broken with C++11? (Status: C++14)">2252</a><sup><a href="https://cplusplus.github.io/LWG/issue2252">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++14">C++14</a></td>
-<td>24.3.11.5 [vector.modifiers]</td>
+<td>24.3.12.5 [vector.modifiers]</td>
 <td>Strong guarantee on <code>vector::push_back()</code> still broken with C++11?</td>
 <td>Yes</td>
 <td></td>
@@ -14718,7 +14718,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="2187"><a href="lwg-defects.html#2187" title="vector&lt;bool&gt; is missing emplace and emplace_back member functions (Status: C++14)">2187</a><sup><a href="https://cplusplus.github.io/LWG/issue2187">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++14">C++14</a></td>
-<td>24.3.12 [vector.bool]</td>
+<td>24.3.13 [vector.bool]</td>
 <td><code>vector&lt;bool&gt;</code> is missing <code>emplace</code> and <code>emplace_back</code> member functions</td>
 <td>Yes</td>
 <td></td>
@@ -14808,7 +14808,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="2324"><a href="lwg-defects.html#2324" title="Insert iterator constructors should use addressof() (Status: C++14)">2324</a><sup><a href="https://cplusplus.github.io/LWG/issue2324">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++14">C++14</a></td>
-<td>25.5.2.2.1 [back.insert.iter.ops]</td>
+<td>25.5.2.2.2 [back.insert.iter.ops]</td>
 <td>Insert iterator constructors should use <code>addressof()</code></td>
 <td>Yes</td>
 <td>0</td>
@@ -16674,7 +16674,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1306"><a href="lwg-defects.html#1306" title="pointer and const_pointer for &lt;array&gt; (Status: C++11)">1306</a><sup><a href="https://cplusplus.github.io/LWG/issue1306">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.7 [array]</td>
+<td>24.3.8 [array]</td>
 <td><code>pointer</code> and <code>const_pointer</code> for <code>&lt;array&gt;</code></td>
 <td>Yes</td>
 <td></td>
@@ -16683,7 +16683,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1417"><a href="lwg-defects.html#1417" title="front&#47;back on a zero-sized array should be undefined (Status: C++11)">1417</a><sup><a href="https://cplusplus.github.io/LWG/issue1417">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.7.5 [array.zero]</td>
+<td>24.3.8.5 [array.zero]</td>
 <td><code>front&#47;back</code> on a zero-sized <code>array</code> should be undefined</td>
 <td>Yes</td>
 <td></td>
@@ -16692,7 +16692,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1418"><a href="lwg-defects.html#1418" title="Effects of resize(size()) on a deque (Status: C++11)">1418</a><sup><a href="https://cplusplus.github.io/LWG/issue1418">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.8.3 [deque.capacity]</td>
+<td>24.3.9.3 [deque.capacity]</td>
 <td>Effects of <code>resize(size())</code> on a <code>deque</code></td>
 <td>Yes</td>
 <td></td>
@@ -16701,7 +16701,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="878"><a href="lwg-defects.html#878" title="forward_list preconditions (Status: C++11)">878</a><sup><a href="https://cplusplus.github.io/LWG/issue878">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.9 [forward.list]</td>
+<td>24.3.10 [forward.list]</td>
 <td><code>forward_list</code> preconditions</td>
 <td>Yes</td>
 <td></td>
@@ -16710,7 +16710,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1276"><a href="lwg-defects.html#1276" title="forwardlist missing allocator constructors (Status: C++11)">1276</a><sup><a href="https://cplusplus.github.io/LWG/issue1276">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.9 [forward.list]</td>
+<td>24.3.10 [forward.list]</td>
 <td><code>forwardlist</code> missing allocator constructors</td>
 <td>Yes</td>
 <td></td>
@@ -16719,7 +16719,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="2042"><a href="lwg-defects.html#2042" title="Comparing forward_list::before_begin() to forward_list::end() (Status: C++11)">2042</a><sup><a href="https://cplusplus.github.io/LWG/issue2042">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.9.3 [forward.list.iter]</td>
+<td>24.3.10.3 [forward.list.iter]</td>
 <td>Comparing <code>forward_list::before_begin()</code> to <code>forward_list::end()</code></td>
 <td>Yes</td>
 <td></td>
@@ -16728,7 +16728,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1278"><a href="lwg-defects.html#1278" title="Inconsistent return values for forward_list::insert_after (Status: C++11)">1278</a><sup><a href="https://cplusplus.github.io/LWG/issue1278">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.9.5 [forward.list.modifiers]</td>
+<td>24.3.10.5 [forward.list.modifiers]</td>
 <td>Inconsistent return values for <code>forward_list::insert_after</code></td>
 <td>Yes</td>
 <td></td>
@@ -16737,7 +16737,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1340"><a href="lwg-defects.html#1340" title="Why does forward_list::resize take the object to be copied by value? (Status: C++11)">1340</a><sup><a href="https://cplusplus.github.io/LWG/issue1340">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.9.5 [forward.list.modifiers]</td>
+<td>24.3.10.5 [forward.list.modifiers]</td>
 <td>Why does <code>forward_list::resize</code> take the object to be copied by value?</td>
 <td>Yes</td>
 <td></td>
@@ -16746,7 +16746,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="898"><a href="lwg-defects.html#898" title="Small contradiction in n2723 to forward to committee (Status: C++11)">898</a><sup><a href="https://cplusplus.github.io/LWG/issue898">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.9.6 [forward.list.ops]</td>
+<td>24.3.10.6 [forward.list.ops]</td>
 <td>Small contradiction in n2723 to forward to committee</td>
 <td>Yes</td>
 <td></td>
@@ -16755,7 +16755,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1133"><a href="lwg-defects.html#1133" title="Does N2844 break current specification of list::splice? (Status: C++11)">1133</a><sup><a href="https://cplusplus.github.io/LWG/issue1133">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.9.6 [forward.list.ops]</td>
+<td>24.3.10.6 [forward.list.ops]</td>
 <td>Does N2844 break current specification of list::splice?</td>
 <td>Yes</td>
 <td></td>
@@ -16764,7 +16764,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1310"><a href="lwg-defects.html#1310" title="forward_list splice_after from lvalues (Status: C++11)">1310</a><sup><a href="https://cplusplus.github.io/LWG/issue1310">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.9.6 [forward.list.ops]</td>
+<td>24.3.10.6 [forward.list.ops]</td>
 <td><code>forward_list splice_after</code> from lvalues</td>
 <td>Yes</td>
 <td></td>
@@ -16773,7 +16773,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1420"><a href="lwg-defects.html#1420" title="Effects of resize(size()) on a list (Status: C++11)">1420</a><sup><a href="https://cplusplus.github.io/LWG/issue1420">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.10.3 [list.capacity]</td>
+<td>24.3.11.3 [list.capacity]</td>
 <td>Effects of <code>resize(size())</code> on a <code>list</code></td>
 <td>Yes</td>
 <td></td>
@@ -16782,7 +16782,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1207"><a href="lwg-defects.html#1207" title="Underspecified std::list operations? (Status: C++11)">1207</a><sup><a href="https://cplusplus.github.io/LWG/issue1207">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td>Underspecified <code>std::list</code> operations?</td>
 <td>Yes</td>
 <td></td>
@@ -16791,7 +16791,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1215"><a href="lwg-defects.html#1215" title="list::merge with unequal allocators (Status: C++11)">1215</a><sup><a href="https://cplusplus.github.io/LWG/issue1215">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td><code>list::merge</code> with unequal allocators</td>
 <td>Yes</td>
 <td></td>
@@ -16800,7 +16800,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1525"><a href="lwg-defects.html#1525" title="Effects of resize(size()) on a vector (Status: C++11)">1525</a><sup><a href="https://cplusplus.github.io/LWG/issue1525">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td>Effects of <code>resize(size())</code> on a <code>vector</code></td>
 <td>Yes</td>
 <td></td>
@@ -16809,7 +16809,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1312"><a href="lwg-defects.html#1312" title="vector::data no longer returns a raw pointer (Status: C++11)">1312</a><sup><a href="https://cplusplus.github.io/LWG/issue1312">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.11.4 [vector.data]</td>
+<td>24.3.12.4 [vector.data]</td>
 <td><code>vector::data</code> no longer returns a raw pointer</td>
 <td>Yes</td>
 <td></td>
@@ -16818,7 +16818,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="814"><a href="lwg-defects.html#814" title="vector&lt;bool&gt;::swap(reference, reference) not defined (Status: C++11)">814</a><sup><a href="https://cplusplus.github.io/LWG/issue814">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.12 [vector.bool]</td>
+<td>24.3.13 [vector.bool]</td>
 <td><code>vector&lt;bool&gt;::swap(reference, reference)</code> not defined</td>
 <td>Yes</td>
 <td></td>
@@ -16827,7 +16827,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1254"><a href="lwg-defects.html#1254" title="Misleading sentence in vector&lt;bool&gt;::flip (Status: C++11)">1254</a><sup><a href="https://cplusplus.github.io/LWG/issue1254">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.12 [vector.bool]</td>
+<td>24.3.13 [vector.bool]</td>
 <td>Misleading sentence in <code>vector&lt;bool&gt;::flip</code></td>
 <td>Yes</td>
 <td></td>
@@ -16836,7 +16836,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1284"><a href="lwg-defects.html#1284" title="vector&lt;bool&gt; initializer_list constructor missing an allocator argument (Status: C++11)">1284</a><sup><a href="https://cplusplus.github.io/LWG/issue1284">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>24.3.12 [vector.bool]</td>
+<td>24.3.13 [vector.bool]</td>
 <td><code>vector&lt;bool&gt; initializer_list</code> constructor missing an allocator argument</td>
 <td>Yes</td>
 <td></td>
@@ -17007,7 +17007,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="1334"><a href="lwg-defects.html#1334" title="Insert iterators are broken for some proxy containers compared to C++03 (Status: C++11)">1334</a><sup><a href="https://cplusplus.github.io/LWG/issue1334">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>25.5.2.2.1 [back.insert.iter.ops]</td>
+<td>25.5.2.2.2 [back.insert.iter.ops]</td>
 <td>Insert iterators are broken for some proxy containers compared to C++03</td>
 <td>Yes</td>
 <td></td>
@@ -17511,7 +17511,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
        money_base::none on money_get
     (Status: C++11)">836</a><sup><a href="https://cplusplus.github.io/LWG/issue836">(i)</a></sup></td>
 <td><a href="lwg-active.html#C++11">C++11</a></td>
-<td>30.4.7.2.2 [locale.money.get.virtuals]</td>
+<td>30.4.7.2.3 [locale.money.get.virtuals]</td>
 <td>
        Effects of <code>money_base::space</code> and
        <code>money_base::none</code> on <code>money_get</code>
@@ -19533,7 +19533,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="519"><a href="lwg-defects.html#519" title="Data() undocumented (Status: CD1)">519</a><sup><a href="https://cplusplus.github.io/LWG/issue519">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.7 [array]</td>
+<td>24.3.8 [array]</td>
 <td>Data() undocumented</td>
 <td>Yes</td>
 <td></td>
@@ -19542,7 +19542,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="720"><a href="lwg-defects.html#720" title="Omissions in constexpr usages (Status: CD1)">720</a><sup><a href="https://cplusplus.github.io/LWG/issue720">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.7 [array]</td>
+<td>24.3.8 [array]</td>
 <td>Omissions in constexpr usages</td>
 <td>Yes</td>
 <td></td>
@@ -19551,7 +19551,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="776"><a href="lwg-defects.html#776" title="Undescribed assign function of std::array (Status: CD1)">776</a><sup><a href="https://cplusplus.github.io/LWG/issue776">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.7 [array]</td>
+<td>24.3.8 [array]</td>
 <td>Undescribed <code>assign</code> function of <code>std::array</code></td>
 <td>Yes</td>
 <td></td>
@@ -19560,7 +19560,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="237"><a href="lwg-defects.html#237" title="Undefined expression in complexity specification (Status: CD1)">237</a><sup><a href="https://cplusplus.github.io/LWG/issue237">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.8.2 [deque.cons]</td>
+<td>24.3.9.2 [deque.cons]</td>
 <td>Undefined expression in complexity specification</td>
 <td>Yes</td>
 <td></td>
@@ -19569,7 +19569,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="850"><a href="lwg-defects.html#850" title="Should shrink_to_fit apply to std::deque? (Status: CD1)">850</a><sup><a href="https://cplusplus.github.io/LWG/issue850">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.8.3 [deque.capacity]</td>
+<td>24.3.9.3 [deque.capacity]</td>
 <td>Should <code>shrink_to_fit</code> apply to <code>std::deque</code>?</td>
 <td>Yes</td>
 <td></td>
@@ -19578,7 +19578,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="638"><a href="lwg-defects.html#638" title="deque end invalidation during erase (Status: CD1)">638</a><sup><a href="https://cplusplus.github.io/LWG/issue638">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.8.4 [deque.modifiers]</td>
+<td>24.3.9.4 [deque.modifiers]</td>
 <td><code>deque</code> end invalidation during erase</td>
 <td>Yes</td>
 <td></td>
@@ -19587,7 +19587,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="307"><a href="lwg-defects.html#307" title="Lack of reference typedefs in container adaptors (Status: CD1)">307</a><sup><a href="https://cplusplus.github.io/LWG/issue307">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.10 [list]</td>
+<td>24.3.11 [list]</td>
 <td>Lack of reference typedefs in container adaptors</td>
 <td>Yes</td>
 <td></td>
@@ -19596,7 +19596,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="320"><a href="lwg-defects.html#320" title="list::assign overspecified (Status: CD1)">320</a><sup><a href="https://cplusplus.github.io/LWG/issue320">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.10.2 [list.cons]</td>
+<td>24.3.11.2 [list.cons]</td>
 <td>list::assign overspecified</td>
 <td>Yes</td>
 <td></td>
@@ -19605,7 +19605,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="410"><a href="lwg-defects.html#410" title="Missing semantics for stack and queue comparison operators (Status: CD1)">410</a><sup><a href="https://cplusplus.github.io/LWG/issue410">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.10.2 [list.cons]</td>
+<td>24.3.11.2 [list.cons]</td>
 <td>Missing semantics for stack and queue comparison operators</td>
 <td>Yes</td>
 <td></td>
@@ -19614,7 +19614,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="250"><a href="lwg-defects.html#250" title="splicing invalidates iterators (Status: CD1)">250</a><sup><a href="https://cplusplus.github.io/LWG/issue250">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td>splicing invalidates iterators</td>
 <td>Yes</td>
 <td></td>
@@ -19623,7 +19623,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="278"><a href="lwg-defects.html#278" title="What does iterator validity mean? (Status: CD1)">278</a><sup><a href="https://cplusplus.github.io/LWG/issue278">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td>What does iterator validity mean?</td>
 <td>Yes</td>
 <td></td>
@@ -19632,7 +19632,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="300"><a href="lwg-defects.html#300" title="list::merge() specification incomplete (Status: CD1)">300</a><sup><a href="https://cplusplus.github.io/LWG/issue300">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td>list::merge() specification incomplete</td>
 <td>Yes</td>
 <td></td>
@@ -19641,7 +19641,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="315"><a href="lwg-defects.html#315" title="Bad &quot;range&quot; in list::unique complexity (Status: CD1)">315</a><sup><a href="https://cplusplus.github.io/LWG/issue315">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td>Bad "range" in list::unique complexity</td>
 <td>Yes</td>
 <td></td>
@@ -19650,7 +19650,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="464"><a href="lwg-defects.html#464" title="Suggestion for new member functions in standard containers (Status: CD1)">464</a><sup><a href="https://cplusplus.github.io/LWG/issue464">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.11 [vector]</td>
+<td>24.3.12 [vector]</td>
 <td>Suggestion for new member functions in standard containers</td>
 <td>Yes</td>
 <td></td>
@@ -19659,7 +19659,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="469"><a href="lwg-defects.html#469" title="vector&lt;bool&gt; ill-formed relational operators (Status: CD1)">469</a><sup><a href="https://cplusplus.github.io/LWG/issue469">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.11 [vector]</td>
+<td>24.3.12 [vector]</td>
 <td>vector&lt;bool&gt; ill-formed relational operators</td>
 <td>Yes</td>
 <td></td>
@@ -19668,7 +19668,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="496"><a href="lwg-defects.html#496" title="Illegal use of &quot;T&quot; in vector&lt;bool&gt; (Status: CD1)">496</a><sup><a href="https://cplusplus.github.io/LWG/issue496">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.11 [vector]</td>
+<td>24.3.12 [vector]</td>
 <td>Illegal use of "T" in vector&lt;bool&gt;</td>
 <td>Yes</td>
 <td></td>
@@ -19677,7 +19677,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="329"><a href="lwg-defects.html#329" title="vector capacity, reserve and reallocation (Status: CD1)">329</a><sup><a href="https://cplusplus.github.io/LWG/issue329">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td>vector capacity, reserve and reallocation</td>
 <td>Yes</td>
 <td></td>
@@ -19686,7 +19686,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="341"><a href="lwg-defects.html#341" title="Vector reallocation and swap (Status: CD1)">341</a><sup><a href="https://cplusplus.github.io/LWG/issue341">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td>Vector reallocation and swap</td>
 <td>Yes</td>
 <td></td>
@@ -19695,7 +19695,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="755"><a href="lwg-defects.html#755" title="std::vector and std:string lack explicit shrink-to-fit operations (Status: CD1)">755</a><sup><a href="https://cplusplus.github.io/LWG/issue755">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td><code>std::vector</code> and <code>std:string</code> lack explicit shrink-to-fit operations</td>
 <td>Yes</td>
 <td></td>
@@ -19704,7 +19704,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="247"><a href="lwg-defects.html#247" title="vector, deque::insert complexity (Status: CD1)">247</a><sup><a href="https://cplusplus.github.io/LWG/issue247">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.11.5 [vector.modifiers]</td>
+<td>24.3.12.5 [vector.modifiers]</td>
 <td><code>vector</code>, <code>deque::insert</code> complexity</td>
 <td>Yes</td>
 <td></td>
@@ -19713,7 +19713,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="406"><a href="lwg-defects.html#406" title="vector::insert(s) exception safety (Status: CD1)">406</a><sup><a href="https://cplusplus.github.io/LWG/issue406">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.11.5 [vector.modifiers]</td>
+<td>24.3.12.5 [vector.modifiers]</td>
 <td>vector::insert(s) exception safety</td>
 <td>Yes</td>
 <td></td>
@@ -19722,7 +19722,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="414"><a href="lwg-defects.html#414" title="Which iterators are invalidated by v.erase()? (Status: CD1)">414</a><sup><a href="https://cplusplus.github.io/LWG/issue414">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>24.3.11.5 [vector.modifiers]</td>
+<td>24.3.12.5 [vector.modifiers]</td>
 <td>Which iterators are invalidated by v.erase()?</td>
 <td>Yes</td>
 <td></td>
@@ -19911,7 +19911,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="561"><a href="lwg-defects.html#561" title="inserter overly generic (Status: CD1)">561</a><sup><a href="https://cplusplus.github.io/LWG/issue561">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>25.5.2.4.2 [inserter]</td>
+<td>25.5.2.4.3 [inserter]</td>
 <td>inserter overly generic</td>
 <td>Yes</td>
 <td></td>
@@ -20820,7 +20820,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="328"><a href="lwg-defects.html#328" title="Bad sprintf format modifier in money_put&lt;&gt;::do_put() (Status: CD1)">328</a><sup><a href="https://cplusplus.github.io/LWG/issue328">(i)</a></sup></td>
 <td><a href="lwg-active.html#CD1">CD1</a></td>
-<td>30.4.7.3.2 [locale.money.put.virtuals]</td>
+<td>30.4.7.3.3 [locale.money.put.virtuals]</td>
 <td>Bad sprintf format modifier in money_put&lt;&gt;::do_put()</td>
 <td>Yes</td>
 <td></td>
@@ -21849,7 +21849,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="144"><a href="lwg-defects.html#144" title="Deque constructor complexity wrong  (Status: TC1)">144</a><sup><a href="https://cplusplus.github.io/LWG/issue144">(i)</a></sup></td>
 <td><a href="lwg-active.html#TC1">TC1</a></td>
-<td>24.3.8.2 [deque.cons]</td>
+<td>24.3.9.2 [deque.cons]</td>
 <td>Deque constructor complexity wrong </td>
 <td>Yes</td>
 <td></td>
@@ -21858,7 +21858,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="132"><a href="lwg-defects.html#132" title="list::resize description uses random access iterators (Status: TC1)">132</a><sup><a href="https://cplusplus.github.io/LWG/issue132">(i)</a></sup></td>
 <td><a href="lwg-active.html#TC1">TC1</a></td>
-<td>24.3.10.3 [list.capacity]</td>
+<td>24.3.11.3 [list.capacity]</td>
 <td>list::resize description uses random access iterators</td>
 <td>Yes</td>
 <td></td>
@@ -21867,7 +21867,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="69"><a href="lwg-defects.html#69" title="Must elements of a vector be contiguous? (Status: TC1)">69</a><sup><a href="https://cplusplus.github.io/LWG/issue69">(i)</a></sup></td>
 <td><a href="lwg-active.html#TC1">TC1</a></td>
-<td>24.3.11 [vector]</td>
+<td>24.3.12 [vector]</td>
 <td>Must elements of a vector be contiguous?</td>
 <td>Yes</td>
 <td></td>
@@ -21876,7 +21876,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="134"><a href="lwg-defects.html#134" title="vector constructors over specified (Status: TC1)">134</a><sup><a href="https://cplusplus.github.io/LWG/issue134">(i)</a></sup></td>
 <td><a href="lwg-active.html#TC1">TC1</a></td>
-<td>24.3.11.2 [vector.cons]</td>
+<td>24.3.12.2 [vector.cons]</td>
 <td>vector constructors over specified</td>
 <td>Yes</td>
 <td></td>
@@ -22263,7 +22263,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="164"><a href="lwg-defects.html#164" title="do_put() has apparently unused fill argument (Status: TC1)">164</a><sup><a href="https://cplusplus.github.io/LWG/issue164">(i)</a></sup></td>
 <td><a href="lwg-active.html#TC1">TC1</a></td>
-<td>30.4.6.4.2 [locale.time.put.virtuals]</td>
+<td>30.4.6.4.3 [locale.time.put.virtuals]</td>
 <td>do_put() has apparently unused fill argument</td>
 <td>Yes</td>
 <td></td>
@@ -22389,7 +22389,7 @@ explicit (Status: C++17)">2407</a><sup><a href="https://cplusplus.github.io/LWG/
 <tr>
 <td id="52"><a href="lwg-defects.html#52" title="Small I/O problems (Status: TC1)">52</a><sup><a href="https://cplusplus.github.io/LWG/issue52">(i)</a></sup></td>
 <td><a href="lwg-active.html#TC1">TC1</a></td>
-<td>31.5.3.2 [fpos.operations]</td>
+<td>31.5.3.3 [fpos.operations]</td>
 <td>Small I/O problems</td>
 <td>Yes</td>
 <td></td>
@@ -24311,7 +24311,7 @@ find() members constexpr (Status: Resolved)">2232</a><sup><a href="https://cplus
 <tr>
 <td id="2443"><a href="lwg-defects.html#2443" title="std::array member functions should be constexpr (Status: Resolved)">2443</a><sup><a href="https://cplusplus.github.io/LWG/issue2443">(i)</a></sup></td>
 <td><a href="lwg-active.html#Resolved">Resolved</a></td>
-<td>24.3.7 [array]</td>
+<td>24.3.8 [array]</td>
 <td><code>std::array</code> member functions should be <code>constexpr</code></td>
 <td>Yes</td>
 <td></td>
@@ -24320,7 +24320,7 @@ find() members constexpr (Status: Resolved)">2232</a><sup><a href="https://cplus
 <tr>
 <td id="2897"><a href="lwg-defects.html#2897" title="array::iterator and array::const_iterator should be literal types (Status: Resolved)">2897</a><sup><a href="https://cplusplus.github.io/LWG/issue2897">(i)</a></sup></td>
 <td><a href="lwg-active.html#Resolved">Resolved</a></td>
-<td>24.3.7.1 [array.overview]</td>
+<td>24.3.8.1 [array.overview]</td>
 <td><code>array::iterator</code> and <code>array::const_iterator</code> should be literal types</td>
 <td>Yes</td>
 <td>2</td>
@@ -24329,7 +24329,7 @@ find() members constexpr (Status: Resolved)">2232</a><sup><a href="https://cplus
 <tr>
 <td id="897"><a href="lwg-defects.html#897" title="Forward_list issues... Part 2 (Status: Resolved)">897</a><sup><a href="https://cplusplus.github.io/LWG/issue897">(i)</a></sup></td>
 <td><a href="lwg-active.html#Resolved">Resolved</a></td>
-<td>24.3.9.5 [forward.list.modifiers]</td>
+<td>24.3.10.5 [forward.list.modifiers]</td>
 <td>Forward_list issues... Part 2</td>
 <td>Yes</td>
 <td></td>
@@ -24338,7 +24338,7 @@ find() members constexpr (Status: Resolved)">2232</a><sup><a href="https://cplus
 <tr>
 <td id="2066"><a href="lwg-defects.html#2066" title="Missing specification of vector::resize(size_type) (Status: Resolved)">2066</a><sup><a href="https://cplusplus.github.io/LWG/issue2066">(i)</a></sup></td>
 <td><a href="lwg-active.html#Resolved">Resolved</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td>Missing specification of <code>vector::resize(size_type)</code></td>
 <td>Yes</td>
 <td></td>
@@ -25069,7 +25069,7 @@ C++17 output iterators</td>
 <tr>
 <td id="2808"><a href="lwg-defects.html#2808" title="Requirements for fpos and stateT (Status: Resolved)">2808</a><sup><a href="https://cplusplus.github.io/LWG/issue2808">(i)</a></sup></td>
 <td><a href="lwg-active.html#Resolved">Resolved</a></td>
-<td>31.5.3.2 [fpos.operations]</td>
+<td>31.5.3.3 [fpos.operations]</td>
 <td>Requirements for <code>fpos</code> and <code>stateT</code></td>
 <td>Yes</td>
 <td>4</td>
@@ -25078,7 +25078,7 @@ C++17 output iterators</td>
 <tr>
 <td id="2832"><a href="lwg-defects.html#2832" title="&sect;[fpos.operations] strange requirement for P(i) (Status: Resolved)">2832</a><sup><a href="https://cplusplus.github.io/LWG/issue2832">(i)</a></sup></td>
 <td><a href="lwg-active.html#Resolved">Resolved</a></td>
-<td>31.5.3.2 [fpos.operations]</td>
+<td>31.5.3.3 [fpos.operations]</td>
 <td>&sect;[fpos.operations] strange requirement for <code>P(i)</code></td>
 <td>Yes</td>
 <td>3</td>
@@ -27418,7 +27418,7 @@ UnaryTypeTraits and BinaryTypeTraits (Status: TS)">2568</a><sup><a href="https:/
 <tr>
 <td id="1419"><a href="lwg-closed.html#1419" title="forward_list::erase_after should return an iterator (Status: NAD Editorial)">1419</a><sup><a href="https://cplusplus.github.io/LWG/issue1419">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD_Editorial">NAD Editorial</a></td>
-<td>24.3.9 [forward.list]</td>
+<td>24.3.10 [forward.list]</td>
 <td><code>forward_list::erase_after</code> should return an iterator</td>
 <td>Yes</td>
 <td></td>
@@ -27427,7 +27427,7 @@ UnaryTypeTraits and BinaryTypeTraits (Status: TS)">2568</a><sup><a href="https:/
 <tr>
 <td id="892"><a href="lwg-closed.html#892" title="Forward_list issues... (Status: NAD Editorial)">892</a><sup><a href="https://cplusplus.github.io/LWG/issue892">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD_Editorial">NAD Editorial</a></td>
-<td>24.3.9.6 [forward.list.ops]</td>
+<td>24.3.10.6 [forward.list.ops]</td>
 <td>Forward_list issues...</td>
 <td>Yes</td>
 <td></td>
@@ -27436,7 +27436,7 @@ UnaryTypeTraits and BinaryTypeTraits (Status: TS)">2568</a><sup><a href="https:/
 <tr>
 <td id="101"><a href="lwg-closed.html#101" title="No way to free storage for vector and deque (Status: NAD Editorial)">101</a><sup><a href="https://cplusplus.github.io/LWG/issue101">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD_Editorial">NAD Editorial</a></td>
-<td>24.3.11 [vector]</td>
+<td>24.3.12 [vector]</td>
 <td>No way to free storage for vector and deque</td>
 <td>Yes</td>
 <td></td>
@@ -27445,7 +27445,7 @@ UnaryTypeTraits and BinaryTypeTraits (Status: TS)">2568</a><sup><a href="https:/
 <tr>
 <td id="757"><a href="lwg-closed.html#757" title="Typo in the synopsis of vector (Status: NAD Editorial)">757</a><sup><a href="https://cplusplus.github.io/LWG/issue757">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD_Editorial">NAD Editorial</a></td>
-<td>24.3.11 [vector]</td>
+<td>24.3.12 [vector]</td>
 <td>Typo in the synopsis of vector</td>
 <td>Yes</td>
 <td></td>
@@ -29756,7 +29756,7 @@ difficult to conform to</td>
 <tr>
 <td id="2335"><a href="lwg-closed.html#2335" title="array&lt;array&lt;int, 3&gt;, 4&gt; should be layout-compatible with int[4][3] (Status: NAD)">2335</a><sup><a href="https://cplusplus.github.io/LWG/issue2335">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.7 [array]</td>
+<td>24.3.8 [array]</td>
 <td><code>array&lt;array&lt;int, 3&gt;, 4&gt;</code> should be layout-compatible with <code>int[4][3]</code></td>
 <td>Yes</td>
 <td>3</td>
@@ -29765,7 +29765,7 @@ difficult to conform to</td>
 <tr>
 <td id="851"><a href="lwg-closed.html#851" title="simplified array construction (Status: NAD)">851</a><sup><a href="https://cplusplus.github.io/LWG/issue851">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.7 [array]</td>
+<td>24.3.8 [array]</td>
 <td>simplified array construction</td>
 <td>Yes</td>
 <td></td>
@@ -29774,7 +29774,7 @@ difficult to conform to</td>
 <tr>
 <td id="588"><a href="lwg-closed.html#588" title="requirements on zero sized tr1::arrays and other details (Status: NAD)">588</a><sup><a href="https://cplusplus.github.io/LWG/issue588">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.7 [array]</td>
+<td>24.3.8 [array]</td>
 <td>requirements on zero sized <code>tr1::arrays</code> and other details</td>
 <td>Yes</td>
 <td></td>
@@ -29783,7 +29783,7 @@ difficult to conform to</td>
 <tr>
 <td id="930"><a href="lwg-closed.html#930" title="Access to std::array data as built-in array type (Status: NAD)">930</a><sup><a href="https://cplusplus.github.io/LWG/issue930">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.7 [array]</td>
+<td>24.3.8 [array]</td>
 <td>Access to std::array data as built-in array type</td>
 <td>Yes</td>
 <td></td>
@@ -29792,7 +29792,7 @@ difficult to conform to</td>
 <tr>
 <td id="855"><a href="lwg-closed.html#855" title="capacity() and reserve() for deque? (Status: NAD)">855</a><sup><a href="https://cplusplus.github.io/LWG/issue855">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.8.3 [deque.capacity]</td>
+<td>24.3.9.3 [deque.capacity]</td>
 <td>capacity() and reserve() for deque?</td>
 <td>Yes</td>
 <td></td>
@@ -29801,7 +29801,7 @@ difficult to conform to</td>
 <tr>
 <td id="919"><a href="lwg-closed.html#919" title="(forward_)list specialized remove algorithms are over constrained (Status: NAD)">919</a><sup><a href="https://cplusplus.github.io/LWG/issue919">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.9.6 [forward.list.ops]</td>
+<td>24.3.10.6 [forward.list.ops]</td>
 <td>(<code>forward_</code>)<code>list</code> specialized remove algorithms are over constrained</td>
 <td>Yes</td>
 <td></td>
@@ -29810,7 +29810,7 @@ difficult to conform to</td>
 <tr>
 <td id="2279"><a href="lwg-closed.html#2279" title="Carefully state effects of list::splice function (Status: NAD)">2279</a><sup><a href="https://cplusplus.github.io/LWG/issue2279">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td>Carefully state effects of <code>list::splice</code> function</td>
 <td>Yes</td>
 <td></td>
@@ -29819,7 +29819,7 @@ difficult to conform to</td>
 <tr>
 <td id="131"><a href="lwg-closed.html#131" title="list::splice throws nothing (Status: NAD)">131</a><sup><a href="https://cplusplus.github.io/LWG/issue131">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td>list::splice throws nothing</td>
 <td>Yes</td>
 <td></td>
@@ -29828,7 +29828,7 @@ difficult to conform to</td>
 <tr>
 <td id="491"><a href="lwg-closed.html#491" title="std::list&lt;>::unique incorrectly specified (Status: NAD)">491</a><sup><a href="https://cplusplus.github.io/LWG/issue491">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.10.5 [list.ops]</td>
+<td>24.3.11.5 [list.ops]</td>
 <td>std::list&lt;>::unique incorrectly specified</td>
 <td>Yes</td>
 <td></td>
@@ -29837,7 +29837,7 @@ difficult to conform to</td>
 <tr>
 <td id="1184"><a href="lwg-closed.html#1184" title="Feature request: dynamic bitset (Status: NAD)">1184</a><sup><a href="https://cplusplus.github.io/LWG/issue1184">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.11 [vector]</td>
+<td>24.3.12 [vector]</td>
 <td>Feature request: dynamic bitset</td>
 <td>Yes</td>
 <td></td>
@@ -29846,7 +29846,7 @@ difficult to conform to</td>
 <tr>
 <td id="96"><a href="lwg-closed.html#96" title="Vector&lt;bool&gt; is not a container (Status: NAD)">96</a><sup><a href="https://cplusplus.github.io/LWG/issue96">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.11 [vector]</td>
+<td>24.3.12 [vector]</td>
 <td>Vector&lt;bool&gt; is not a container</td>
 <td>Yes</td>
 <td></td>
@@ -29855,7 +29855,7 @@ difficult to conform to</td>
 <tr>
 <td id="1246"><a href="lwg-closed.html#1246" title="vector::resize() missing efficiency guarantee (Status: NAD)">1246</a><sup><a href="https://cplusplus.github.io/LWG/issue1246">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.11.3 [vector.capacity]</td>
+<td>24.3.12.3 [vector.capacity]</td>
 <td><code>vector::resize()</code> missing efficiency guarantee</td>
 <td>Yes</td>
 <td></td>
@@ -29864,7 +29864,7 @@ difficult to conform to</td>
 <tr>
 <td id="2256"><a href="lwg-closed.html#2256" title="On vector iterator invalidation (Status: NAD)">2256</a><sup><a href="https://cplusplus.github.io/LWG/issue2256">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.11.5 [vector.modifiers]</td>
+<td>24.3.12.5 [vector.modifiers]</td>
 <td>On <code>vector</code> iterator invalidation</td>
 <td>Yes</td>
 <td>3</td>
@@ -29873,7 +29873,7 @@ difficult to conform to</td>
 <tr>
 <td id="2449"><a href="lwg-closed.html#2449" title="vector::insert invalidates end()? (Status: NAD)">2449</a><sup><a href="https://cplusplus.github.io/LWG/issue2449">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.11.5 [vector.modifiers]</td>
+<td>24.3.12.5 [vector.modifiers]</td>
 <td><code>vector::insert</code> invalidates <code>end()</code>?</td>
 <td>Yes</td>
 <td>3</td>
@@ -29882,7 +29882,7 @@ difficult to conform to</td>
 <tr>
 <td id="751"><a href="lwg-closed.html#751" title="change pass-by-reference members of vector&lt;bool&gt; to pass-by-value? (Status: NAD)">751</a><sup><a href="https://cplusplus.github.io/LWG/issue751">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>24.3.12 [vector.bool]</td>
+<td>24.3.13 [vector.bool]</td>
 <td>change pass-by-reference members of <code>vector&lt;bool&gt;</code> to pass-by-value?</td>
 <td>Yes</td>
 <td></td>
@@ -31198,7 +31198,7 @@ max, and minmax (Status: NAD)">1308</a><sup><a href="https://cplusplus.github.io
 <tr>
 <td id="667"><a href="lwg-closed.html#667" title="money_get's widened minus sign (Status: NAD)">667</a><sup><a href="https://cplusplus.github.io/LWG/issue667">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>30.4.7.2.2 [locale.money.get.virtuals]</td>
+<td>30.4.7.2.3 [locale.money.get.virtuals]</td>
 <td><code>money_get</code>'s widened minus sign</td>
 <td>Yes</td>
 <td></td>
@@ -31207,7 +31207,7 @@ max, and minmax (Status: NAD)">1308</a><sup><a href="https://cplusplus.github.io
 <tr>
 <td id="668"><a href="lwg-closed.html#668" title="money_get's empty minus sign (Status: NAD)">668</a><sup><a href="https://cplusplus.github.io/LWG/issue668">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>30.4.7.2.2 [locale.money.get.virtuals]</td>
+<td>30.4.7.2.3 [locale.money.get.virtuals]</td>
 <td><code>money_get</code>'s empty minus sign</td>
 <td>Yes</td>
 <td></td>
@@ -31216,7 +31216,7 @@ max, and minmax (Status: NAD)">1308</a><sup><a href="https://cplusplus.github.io
 <tr>
 <td id="669"><a href="lwg-closed.html#669" title="Equivalent postive and negative signs in money_get (Status: NAD)">669</a><sup><a href="https://cplusplus.github.io/LWG/issue669">(i)</a></sup></td>
 <td><a href="lwg-active.html#NAD">NAD</a></td>
-<td>30.4.7.2.2 [locale.money.get.virtuals]</td>
+<td>30.4.7.2.3 [locale.money.get.virtuals]</td>
 <td>Equivalent postive and negative signs in <code>money_get</code></td>
 <td>Yes</td>
 <td></td>
@@ -32591,7 +32591,7 @@ implicitly convertible, so explicit constructors are ignored.</td>
 <tr>
 <td id="1444"><a href="lwg-closed.html#1444" title="OFF_T is not defined (Status: Dup)">1444</a><sup><a href="https://cplusplus.github.io/LWG/issue1444">(i)</a></sup></td>
 <td><a href="lwg-active.html#Dup">Dup</a></td>
-<td>31.5.3.2 [fpos.operations]</td>
+<td>31.5.3.3 [fpos.operations]</td>
 <td><code>OFF_T</code> is not defined</td>
 <td>Yes</td>
 <td></td>

@@ -67,7 +67,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-07-21</td>
+  <td align="left">2024-07-23</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-07-21 at 12:18:13 UTC
+<p>Revised 2024-07-23 at 10:01:58 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -64074,7 +64074,7 @@ The member <i>typedef-name</i> <code>iterator_category</code> is defined if and 
 <hr>
 <h3 id="4121"><a href="#4121">4121</a><sup><a href="https://cplusplus.github.io/LWG/issue4121">(i)</a></sup>. <code>ranges::to</code> constructs associative containers via <code>c.emplace(c.end(), *it)</code></h3>
 <p><b>Section:</b> 26.5.7.1 <a href="https://wg21.link/range.utility.conv.general">[range.utility.conv.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-16 <b>Last modified:</b> 2024-07-21</p>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-16 <b>Last modified:</b> 2024-07-23</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -64105,6 +64105,10 @@ auto s = std::views::iota(0)
 The proposed resolution simply removes the <code>emplace()</code> branch. Although this means that we always use
 <code>insert()</code> to fill associative containers, such an impact seems negligible.
 </p>
+
+<p><i>[2024-07-23; This was caused by LWG <a href="lwg-defects.html#4016" title="container-insertable checks do not match what container-inserter does (Status: WP)">4016</a>.]</i></p>
+
+
 
 
 <p id="res-4121"><b>Proposed resolution:</b></p>

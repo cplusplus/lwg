@@ -67,7 +67,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-07-23</td>
+  <td align="left">2024-07-24</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-07-23 at 10:01:58 UTC
+<p>Revised 2024-07-24 at 21:45:06 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -40299,7 +40299,7 @@ auto [pcur, pend] = subrange{x.<i>i_</i>.<i>parent_</i>-&gt;<i>pattern_</i>};
 <hr>
 <h3 id="3688"><a href="#3688">3688</a><sup><a href="https://cplusplus.github.io/LWG/issue3688">(i)</a></sup>. Exception specifications of copy/move member functions of <code>std::bad_expected_access</code></h3>
 <p><b>Section:</b> 22.8.4 <a href="https://wg21.link/expected.bad">[expected.bad]</a>, 22.8.5 <a href="https://wg21.link/expected.bad.void">[expected.bad.void]</a>, 22.8.6.6 <a href="https://wg21.link/expected.object.obs">[expected.object.obs]</a>, 22.8.7.6 <a href="https://wg21.link/expected.void.obs">[expected.void.obs]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2022-03-24 <b>Last modified:</b> 2023-05-25</p>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2022-03-24 <b>Last modified:</b> 2024-07-24</p>
 <p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -40344,6 +40344,13 @@ Set priority to 2 after reflector poll.
 <p>
 The last part was clarified by LWG <a href="lwg-defects.html#3843" title="std::expected&lt;T,E&gt;::value() &amp; assumes E is copy constructible (Status: C++23)">3843</a>, confirming that
 <code>value()</code> is ill-formed for move-only <code>E</code>.
+</p>
+
+<p><i>[2024-07-24; Jonathan comments]</i></p>
+
+<p>
+LWG <a href="lwg-defects.html#4031" title="bad_expected_access&lt;void&gt; member functions should be noexcept (Status: WP)">4031</a> made the move (and copy) operations of
+<code>bad_expected_access&lt;void&gt;</code> non-throwing.
 </p>
 
 

@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-07-25 at 11:39:33 UTC
+<p>Revised 2024-07-25 at 19:06:22 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -28271,6 +28271,7 @@ requirements <del>and refer to elements implicitly convertible to <code>value_ty
  <b>Submitter:</b> Billy O'Neal III <b>Opened:</b> 2019-10-29 <b>Last modified:</b> 2019-11-04</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#deque.modifiers">active issues</a> in [deque.modifiers].</p>
 <p><b>View all other</b> <a href="lwg-index.html#deque.modifiers">issues</a> in [deque.modifiers].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -59792,6 +59793,55 @@ namespace std {
 
 </li>
 </ol>
+
+
+
+
+
+<hr>
+<h3 id="4123"><a href="#4123">4123</a><sup><a href="https://cplusplus.github.io/LWG/issue4123">(i)</a></sup>. Container effects use "the assignment operator or move assignment operator"</h3>
+<p><b>Section:</b> 24.3.9.4 <a href="https://wg21.link/deque.modifiers">[deque.modifiers]</a>, 24.3.12.5 <a href="https://wg21.link/vector.modifiers">[vector.modifiers]</a>, 24.3.14.5 <a href="https://wg21.link/inplace.vector.modifiers">[inplace.vector.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-07-25 <b>Last modified:</b> 2024-07-25</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#deque.modifiers">active issues</a> in [deque.modifiers].</p>
+<p><b>View all other</b> <a href="lwg-index.html#deque.modifiers">issues</a> in [deque.modifiers].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The spec for <code class='backtick'>deque::erase</code> talks about a exception
+"thrown by the assignment operator of <code class='backtick'>T</code>" but it's unclear which
+assignment operator this means.
+Arguably, this is fine because it means "the assignment operator that
+is used when repositioning the remaining elements".
+However, <code class='backtick'>deque::append_range</code>, <code class='backtick'>vector::append_range</code>, <code class='backtick'>vector::erase</code>,
+<code class='backtick'>inplace_vector::append_range</code>, and <code class='backtick'>inplace_vector::erase</code> talk about
+"the assignment operator or move assignment operator" which is just odd.
+In C++03 this just said "the assignment operator" and move semantics
+added "or the move assignment operator" but we could improve it.
+</p>
+
+<p>
+What we should talk about is "an assignment operator", or "the assignment
+operator selected by overload resolution for the assignment expressions
+performed by the operation", or something like that.
+</p>
+
+<p>
+This is potentially a bigger issue than just assignment:
+for <code class='backtick'>append_range</code> we say
+"If an exception is thrown other than by the copy constructor,
+move constructor, assignment operator, or move assignment operator [...]"
+and there's no guarantee that the constructor used for initializing a
+<i>Cpp17CopyInsertable</i> type is a copy constructor or move constructor.
+It could be some templated constructor that is a better match than any
+of the special member functions.
+</p>
+
+
+<p id="res-4123"><b>Proposed resolution:</b></p>
+<p>
+</p>
 
 
 

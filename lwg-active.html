@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-07-26 at 21:48:37 UTC
+<p>Revised 2024-07-26 at 21:49:48 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -64227,6 +64227,9 @@ Additionally, it's not specified what output you should get for:
 but there is no <code>operator&lt;&lt;</code> for <i><code class='backtick'>local-time-format-t</code></i>.
 Presumably it should give the same result as <code>operator&lt;&lt;</code> for 
 a <code class='backtick'>zoned_time</code>, i.e. <code class='backtick'>"{:L%F %T %Z}"</code> with padding adjustments etc.
+</p>
+<p>
+The proposed resolution below has been implemented in libstdc++.
 </p>
 
 

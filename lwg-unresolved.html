@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-07-27 at 10:06:21 UTC
+<p>Revised 2024-07-27 at 10:18:02 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -59632,6 +59632,7 @@ return yield_value(ranges::elements_of(nested(
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-12 <b>Last modified:</b> 2024-07-21</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#move.iterator">active issues</a> in [move.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#move.iterator">issues</a> in [move.iterator].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -59979,6 +59980,84 @@ return formatter&lt;chrono::<i>local-time-format-t</i>&lt;<ins>common_type_t&lt;
 </blockquote>
 </p>
 </blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4125"><a href="#4125">4125</a><sup><a href="https://cplusplus.github.io/LWG/issue4125">(i)</a></sup>. <code>move_iterator</code>'s default constructor should be constrained</h3>
+<p><b>Section:</b> 25.5.4.2 <a href="https://wg21.link/move.iterator">[move.iterator]</a>, 25.5.4.4 <a href="https://wg21.link/move.iter.cons">[move.iter.cons]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-22 <b>Last modified:</b> 2024-07-27</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#move.iterator">active issues</a> in [move.iterator].</p>
+<p><b>View all other</b> <a href="lwg-index.html#move.iterator">issues</a> in [move.iterator].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Although it is unclear why <a href="https://wg21.link/P2325" title=" Views should not be required to be default constructible">P2325</a> did not apply to <code>move_iterator</code>, there is 
+implementation divergence among the current libraries (<a href="https://godbolt.org/z/WdoPcjjv4">demo</a>):
+</p>
+<blockquote><pre>
+#include &lt;istream&gt;
+#include &lt;iterator&gt;
+#include &lt;ranges&gt;
+
+using R = std::ranges::istream_view&lt;int&gt;;
+using I = std::ranges::iterator_t&lt;R&gt;;
+using MI = std::move_iterator&lt;I&gt;;
+static_assert(std::default_initializable&lt;MI&gt;); // <span  style="color:#C80000;font-weight:bold">libstdc++ passes, libc++ fails</span>
+</pre></blockquote>
+<p>
+As libc++ additionally requires that its default constructors satisfy <code>is_constructible_v&lt;Iterator&gt;</code>.
+<p/>
+Although this is not current standard-conforming behavior, such constraint does make sense since <code>move_iterator</code> 
+only requires the underlying iterator to be <code>input_iterator</code> which may not be <code>default_initializable</code>.
+</p>
+
+
+<p id="res-4125"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4986" title=" Working Draft, Programming Languages — C++">N4986</a>.
+</p>
+
+<ol>
+<li><p>Modify 25.5.4.2 <a href="https://wg21.link/move.iterator">[move.iterator]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+namespace std {
+  template&lt;class Iterator&gt;
+  class move_iterator {
+  public:
+    [&hellip;]
+    constexpr move_iterator() <ins>requires default_initializable&lt;Iterator&gt; = default</ins>;
+    [&hellip;]
+  private:
+    Iterator current <ins>= Iterator()</ins>;   // <i>exposition only</i>
+  };
+}
+</pre>
+</blockquote>
+
+</li>
+
+<li><p>Modify 25.5.4.4 <a href="https://wg21.link/move.iter.cons">[move.iter.cons]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+<del>constexpr move_iterator();</del>
+</pre>
+<blockquote>
+<p>
+<del>-1- <i>Effects</i>: Value-initializes <code>current</code>.</del>
+</p>
+</blockquote>
+</blockquote>
+
 </li>
 </ol>
 

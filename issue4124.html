@@ -64,7 +64,7 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4124"><a href="lwg-active.html#4124">4124</a>. Cannot format <code class='backtick'>zoned_time</code> with resolution coarser than seconds</h3>
 <p><b>Section:</b> 29.12 <a href="https://wg21.link/time.format">[time.format]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-07-26 <b>Last modified:</b> 2024-07-26</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-07-26 <b>Last modified:</b> 2024-07-27</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#time.format">active issues</a> in [time.format].</p>
@@ -114,7 +114,7 @@ This wording is relative to <a href="https://wg21.link/N4986" title=" Working Dr
 <blockquote>
 <pre>
 template&lt;classDuration, class charT&gt;
-  struct formatter&lt;chrono::local-time-format-t &lt;Duration&gt;, charT&gt;;
+  struct formatter&lt;chrono::<i>local-time-format-t</i>&lt;Duration&gt;, charT&gt;;
 </pre>
 <p>-17-
 Let <code class='backtick'>f</code> be a <code><i>locale-time-format-t</i>&lt;Duration&gt;</code> object

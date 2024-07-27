@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-07-26 at 21:49:48 UTC
+<p>Revised 2024-07-27 at 10:06:21 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -59882,7 +59882,7 @@ of the special member functions.
 <hr>
 <h3 id="4124"><a href="#4124">4124</a><sup><a href="https://cplusplus.github.io/LWG/issue4124">(i)</a></sup>. Cannot format <code class='backtick'>zoned_time</code> with resolution coarser than seconds</h3>
 <p><b>Section:</b> 29.12 <a href="https://wg21.link/time.format">[time.format]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-07-26 <b>Last modified:</b> 2024-07-26</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-07-26 <b>Last modified:</b> 2024-07-27</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#time.format">active issues</a> in [time.format].</p>
@@ -59932,7 +59932,7 @@ This wording is relative to <a href="https://wg21.link/N4986" title=" Working Dr
 <blockquote>
 <pre>
 template&lt;classDuration, class charT&gt;
-  struct formatter&lt;chrono::local-time-format-t &lt;Duration&gt;, charT&gt;;
+  struct formatter&lt;chrono::<i>local-time-format-t</i>&lt;Duration&gt;, charT&gt;;
 </pre>
 <p>-17-
 Let <code class='backtick'>f</code> be a <code><i>locale-time-format-t</i>&lt;Duration&gt;</code> object

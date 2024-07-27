@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Issue 4127: The Standard Library should not use predicates of the form pred(*i) != false</title>
+<meta property="og:title" content="Issue 4127: The Standard Library should not use predicates of the form pred(*i) != false">
+<meta property="og:description" content="C++ library issue. Status: New">
+<meta property="og:url" content="https://cplusplus.github.io/LWG/issue4127.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="http://cplusplus.github.io/LWG/images/cpp_logo.png">
+<meta property="og:image:alt" content="C++ logo">
+<style>
+  p {text-align:justify}
+  li {text-align:justify}
+  pre code.backtick::before { content: "`" }
+  pre code.backtick::after { content: "`" }
+  blockquote.note
+  {
+    background-color:#E0E0E0;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+  ins {background-color:#A0FFA0}
+  del {background-color:#FFA0A0}
+  table.issues-index { border: 1px solid; border-collapse: collapse; }
+  table.issues-index th { text-align: center; padding: 4px; border: 1px solid; }
+  table.issues-index td { padding: 4px; border: 1px solid; }
+  table.issues-index td:nth-child(1) { text-align: right; }
+  table.issues-index td:nth-child(2) { text-align: left; }
+  table.issues-index td:nth-child(3) { text-align: left; }
+  table.issues-index td:nth-child(4) { text-align: left; }
+  table.issues-index td:nth-child(5) { text-align: center; }
+  table.issues-index td:nth-child(6) { text-align: center; }
+  table.issues-index td:nth-child(7) { text-align: left; }
+  table.issues-index td:nth-child(5) span.no-pr { color: red; }
+  @media (prefers-color-scheme: dark) {
+     html {
+        color: #ddd;
+        background-color: black;
+     }
+     ins {
+        background-color: #225522
+     }
+     del {
+        background-color: #662222
+     }
+     a {
+        color: #6af
+     }
+     a:visited {
+        color: #6af
+     }
+     blockquote.note
+     {
+        background-color: rgba(255, 255, 255, .10)
+     }
+  }
+</style>
+</head>
+<body>
+<hr>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
+<h3 id="4127"><a href="lwg-active.html#4127">4127</a>. The Standard Library should not use predicates of the form <code>pred(*i) != false</code></h3>
+<p><b>Section:</b> 22.10.18.3 <a href="https://wg21.link/func.search.bm">[func.search.bm]</a>, 22.10.18.4 <a href="https://wg21.link/func.search.bmh">[func.search.bmh]</a>, 24.2.7.1 <a href="https://wg21.link/associative.reqmts.general">[associative.reqmts.general]</a>, 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, 27.6.6 <a href="https://wg21.link/alg.find">[alg.find]</a>, 27.6.9 <a href="https://wg21.link/alg.find.first.of">[alg.find.first.of]</a>, 27.6.10 <a href="https://wg21.link/alg.adjacent.find">[alg.adjacent.find]</a>, 27.6.11 <a href="https://wg21.link/alg.count">[alg.count]</a>, 27.6.12 <a href="https://wg21.link/alg.mismatch">[alg.mismatch]</a>, 27.6.15 <a href="https://wg21.link/alg.search">[alg.search]</a>, 27.8.1 <a href="https://wg21.link/alg.sorting.general">[alg.sorting.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-25 <b>Last modified:</b> 2024-07-27</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The <code><i>boolean-testable</i></code> concept introduced in <a href="https://wg21.link/P1964R2" title=" Wording for boolean-testable">P1964R2</a> 
+places appropriate constraints on boolean-ish types, so that <code>!pred(x)</code> or 
+<code>i != last &amp;&amp; pred(*i)</code> always has a valid definition.
+<p/>
+Subsequently, <a href="https://wg21.link/P2167R3" title=" Improved Proposed Wording for LWG 2114 (contextually convertible to bool)">P2167R3</a> applied this concept to 27.2 <a href="https://wg21.link/algorithms.requirements">[algorithms.requirements]</a> 
+p6, requiring that <code>decltype(pred(*first))</code> should model <code><i>boolean-testable</i></code>.
+<p/>
+However, <code><i>boolean-testable</i></code> does not guarantee that 
+<code>pred(*i) != false</code> is valid, because the type may overload <code>operator==</code>.
+It is necessary to replace this form of expression with an appropriate one as we do in 
+<a href="https://wg21.link/P1964R2#wording">P1964R2</a>.
+</p>
+
+<p><i>[2024-07-27; Daniel comments]</i></p>
+
+<p>
+I would recommend to add a wrapping "<code><ins>bool(</ins>pred([&hellip;])<ins>)</ins></code>" and possibly 
+even extend to "<code><ins>bool(</ins>pred([&hellip;])<ins>)</ins></code> <ins>is <code>true</code></ins>"
+following our usual wording convention, since an English phrase of the form "if <code>pred([&hellip;])</code>" 
+where <code>pred([&hellip;])</code> is potential non-<code>bool</code> and the English "if" is not a C++ language 
+<code>if</code> (with built-in conversion semantics) doesn't sound like a meaningful phrase to me.
+</p>
+
+
+<p id="res-4127"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4986" title=" Working Draft, Programming Languages — C++">N4986</a>.
+</p>
+
+<ol>
+<li><p>Modify 22.10.18.3 <a href="https://wg21.link/func.search.bm">[func.search.bm]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+boyer_moore_searcher(RandomAccessIterator1 pat_first,
+                     RandomAccessIterator1 pat_last,
+                     Hash hf = Hash(),
+                     BinaryPredicate pred = BinaryPredicate());
+</pre>
+<blockquote>
+<p>
+-1- <i>Preconditions</i>: The value type of <code>RandomAccessIterator1</code> meets the
+<i>Cpp17DefaultConstructible</i>, the <i>Cpp17CopyConstructible</i>, and the 
+<i>Cpp17CopyAssignable</i> requirements.
+<p/>
+-2- Let <code>V</code> be <code>iterator_traits&lt;RandomAccessIterator1&gt;::value_type</code>.
+For any two values <code>A</code> and <code>B</code> of type <code>V</code>, if
+<code>pred(A, B) <del>== true</del></code>, then <code>hf(A) == hf(B)</code> is 
+<code>true</code>.
+</p>
+[&hellip;]
+<p>
+-7- <i>Returns</i>: A pair of iterators <code>i</code> and <code>j</code> such that
+</p>
+<ol style="list-style-type: none">
+<li><p>(7.1) &mdash; <code>i</code> is the first iterator in the range [<code>first</code>,
+<code>last - (pat_last_ - pat_first_)</code>) such that for every non-negative integer 
+<code>n</code> less than <code>pat_last_ - pat_first_</code> the following condition holds: 
+<code>pred(*(i + n), *(pat_first_ + n)) <del>!= false</del></code>, and
+</p>
+</li>
+<li>
+<p>[&hellip;]</p>
+</li>
+</ol>
+</blockquote>
+</blockquote>
+
+</li>
+
+<li><p>Modify 22.10.18.4 <a href="https://wg21.link/func.search.bmh">[func.search.bmh]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+boyer_moore_horspool_searcher(RandomAccessIterator1 pat_first,
+                              RandomAccessIterator1 pat_last,
+                              Hash hf = Hash(),
+                              BinaryPredicate pred = BinaryPredicate());
+</pre>
+<blockquote>
+<p>
+-1- <i>Preconditions</i>: The value type of <code>RandomAccessIterator1</code> meets the
+<i>Cpp17DefaultConstructible</i>, <i>Cpp17CopyConstructible</i>, and <i>Cpp17CopyAssignable</i>
+requirements.
+<p/>
+-2- Let <code>V</code> be <code>iterator_traits&lt;RandomAccessIterator1&gt;::value_type</code>.
+For any two values <code>A</code> and <code>B</code> of type <code>V</code>, if  
+<code>pred(A, B) <del>== true</del></code>, then <code>hf(A) == hf(B)</code> is <code>true</code>.
+</p>
+[&hellip;]
+<p>
+-7- <i>Returns</i>: A pair of iterators <code>i</code> and <code>j</code> such that
+</p>
+<ol style="list-style-type: none">
+<li><p>
+(7.1) &mdash; <code>i</code> is the first iterator in the range [<code>first</code>,
+<code>last - (pat_last_ - pat_first_)</code>) such that for every non-negative integer <code>n</code> 
+less than <code>pat_last_ - pat_first_</code> the following condition holds: 
+<code>pred(*(i + n), *(pat_first_ + n)) <del>!= false</del></code>, and 
+</p></li>
+<li>
+<p>[&hellip;]</p>
+</li>
+</ol>
+</blockquote>
+</blockquote>
+
+</li>
+
+<li><p>Modify 24.2.7.1 <a href="https://wg21.link/associative.reqmts.general">[associative.reqmts.general]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-3- The phrase "equivalence of keys" means the equivalence relation imposed by the comparison object.
+That is, two keys <code>k1</code> and <code>k2</code> are considered to be equivalent if for the 
+comparison object <code>comp</code>, <code><ins>!</ins>comp(k1, k2) <del>== false</del> &amp;&amp; 
+<ins>!</ins>comp(k2, k1) <del>== false</del></code>.
+</p>
+[&hellip;]
+<p>
+-177- The fundamental property of iterators of associative containers is that they iterate through 
+the containers in the non-descending order of keys where non-descending is defined by the comparison 
+that was used to construct them. For any two dereferenceable iterators <code>i</code> and <code>j</code> 
+such that distance from <code>i</code> to <code>j</code> is positive, the following condition holds:
+</p>
+<pre><blockquote><ins>!</ins>value_comp(*j, *i) <del>== false</del></blockquote></pre>
+<p>
+-178- For associative containers with unique keys the stronger condition holds:
+</p>
+<pre><blockquote>value_comp(*i, *j) <del>!= false</del></blockquote></pre>
+</blockquote>
+
+</li>
+
+<li><p>Modify 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+size_type remove(const T&amp; value);
+template&lt;class Predicate&gt; size_type remove_if(Predicate pred);
+</pre>
+<blockquote>
+<p>
+-15- <i>Effects</i>: Erases all the elements in the list referred to by a list iterator 
+<code>i</code> for which the following conditions hold: <code>*i == value, pred(*i) 
+<del>!= false</del></code>. Invalidates only the iterators and references to
+the erased elements.
+<p/>
+-16- <i>Returns</i>: The number of elements erased.
+<p/>
+-17- <i>Throws</i>: Nothing unless an exception is thrown by <code>*i == value</code> or
+<code>pred(*i) <del>!= false</del></code>.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.6.6 <a href="https://wg21.link/alg.find">[alg.find]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- Let <i>E</i> be:
+</p>
+<ol style="list-style-type: none">
+<li>
+<p>(1.1) &mdash; <code>*i == value</code> for <code>find</code>;</p>
+</li>
+<li>
+<p>(1.2) &mdash; <code>pred(*i) <del>!= false</del></code> for <code>find_if</code>;</p>
+</li>
+<li>
+<p>(1.3) &mdash; <code><ins>!</ins>pred(*i) <del>== false</del></code> for <code>find_if_not</code>;
+</p>
+</li>
+[&hellip;]
+</ol>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.6.9 <a href="https://wg21.link/alg.find.first.of">[alg.find.first.of]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- Let <i>E</i> be:
+</p>
+<ol style="list-style-type: none">
+<li><p>
+(1.1) &mdash; <code>*i == *j</code> for the overloads with no parameter <code>pred</code>;
+</p></li>
+<li><p>
+(1.2) &mdash; <code>pred(*i, *j) <del>!= false</del></code> for the overloads with a parameter
+<code>pred</code> and no parameter <code>proj1</code>;
+</p></li>
+[&hellip;]
+</ol>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.6.10 <a href="https://wg21.link/alg.adjacent.find">[alg.adjacent.find]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- Let <i>E</i> be:
+</p>
+<ol style="list-style-type: none">
+<li><p>
+(1.1) &mdash; <code>*i == *(i + 1)</code> for the overloads with no parameter <code>pred</code>;
+</p></li>
+<li><p>
+(1.2) &mdash; <code>pred(*i, *(i + 1)) <del>!= false</del></code> for the overloads with a 
+parameter <code>pred</code> and no parameter <code>proj1</code>;
+</p></li>
+[&hellip;]
+</ol>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.6.11 <a href="https://wg21.link/alg.count">[alg.count]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- Let <i>E</i> be:
+</p>
+<ol style="list-style-type: none">
+<li><p>
+(1.1) &mdash; <code>*i == value</code> for the overloads with no parameter <code>pred</code> 
+or <code>proj</code>;
+</p></li>
+<li><p>
+(1.2) &mdash; <code>pred(*i) <del>!= false</del></code> for the overloads with a parameter
+<code>pred</code> but no parameter <code>proj</code>;
+</p></li>
+[&hellip;]
+</ol>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.6.12 <a href="https://wg21.link/alg.mismatch">[alg.mismatch]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- Let <i>E</i> be:
+</p>
+<ol style="list-style-type: none">
+<li><p>
+(2.1) &mdash; <code>!(*(first1 + n) == *(first2 + n))</code> for the overloads with no 
+parameter <code>pred</code>;
+</p></li>
+<li><p>
+(2.2) &mdash; <code><ins>!</ins>pred(*(first1 + n), *(first2 + n)) <del>== false</del></code> 
+for the overloads with a parameter <code>pred</code> and no parameter <code>proj1</code>;
+</p></li>
+[&hellip;]
+</ol>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.6.15 <a href="https://wg21.link/alg.search">[alg.search]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- <i>Returns</i>: The first iterator <code>i</code> in the range [<code>first1</code>,
+<code>last1 - (last2-first2)</code>) such that for every non-negative integer <code>n</code> 
+less than <code>last2 - first2</code> the following corresponding conditions hold:
+<code>*(i + n) == *(first2 + n), pred(*(i + n), *(first2 + n)) <del>!= false</del></code>.
+Returns <code>first1</code> if [<code>first2</code>, <code>last2</code>) is empty, otherwise 
+returns <code>last1</code> if no such iterator is found.
+</p>
+[&hellip;]
+<p>
+-6- <i>Returns</i>: The first iterator <code>i</code> in the range [<code>first</code>,
+<code>last-count</code>) such that for every non-negative integer <code>n</code> less than 
+<code>count</code> the following corresponding conditions hold: <code>*(i + n) == value, 
+pred(*(i + n), value) <del>!= false</del></code>. Returns <code>last</code> if no such 
+iterator is found.
+</p>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.8.1 <a href="https://wg21.link/alg.sorting.general">[alg.sorting.general]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-3- For all algorithms that take <code>Compare</code>, there is a version that uses 
+<code>operator&lt;</code> instead. That is, <code>comp(*i, *j) <del>!= false</del></code> 
+defaults to <code>*i &lt; *j <del>!= false</del></code>. For algorithms other than those 
+described in 27.8.4 <a href="https://wg21.link/alg.binary.search">[alg.binary.search]</a>, <code>comp</code> shall induce a strict 
+weak ordering on the values.
+</p>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+</body>
+</html>

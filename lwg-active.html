@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-07-27 at 11:07:57 UTC
+<p>Revised 2024-07-27 at 14:45:14 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -199,21 +199,21 @@ ownership of it.
 <ul>
 <li>D125: 2023-06-09 Post-Varna<ul>
 <li><b>Summary:</b><ul>
-<li>517 open issues, up by 87.</li>
+<li>518 open issues, up by 88.</li>
 <li>3091 closed issues, up by 91.</li>
 <li>40 reassigned issues, up by 4.</li>
-<li>3648 issues total, up by 182.</li>
+<li>3649 issues total, up by 183.</li>
 </ul></li>
 <li><b>Details:</b><ul>
 <li>Added the following 4 Ready issues: <a href="lwg-active.html#4027" title="possibly-const-range should prefer returning const R&amp; (Status: Ready)">4027</a>, <a href="lwg-active.html#4044" title="Confusing requirements for std::print on POSIX platforms (Status: Ready)">4044</a>, <a href="lwg-active.html#4064" title="Clarify that std::launder is not needed when using the result of std::memcpy (Status: Ready)">4064</a>, <a href="lwg-active.html#4112" title="has-arrow should required operator-&gt;() to be const-qualified (Status: Ready)">4112</a>.</li>
 <li>Added the following 7 Tentatively NAD issues: <a href="lwg-active.html#3958" title="ranges::to should prioritize the &quot;reserve&quot; branch (Status: Tentatively NAD)">3958</a>, <a href="lwg-active.html#3980" title="The read exclusive ownership of an atomic read-modify-write operation and whether its read and write are two operations are unclear (Status: Tentatively NAD)">3980</a>, <a href="lwg-active.html#3981" title="Range adaptor closure object is underspecified for its return type (Status: Tentatively NAD)">3981</a>, <a href="lwg-active.html#3982" title="is-derived-from-view-interface should require that T is derived from view_interface&lt;T&gt; (Status: Tentatively NAD)">3982</a>, <a href="lwg-active.html#4003" title="view_interface::back is overconstrained (Status: Tentatively NAD)">4003</a>, <a href="lwg-active.html#4006" title="chunk_view::outer-iterator::value_type should provide empty (Status: Tentatively NAD)">4006</a>, <a href="lwg-active.html#4095" title="ranges::fold_meow should explicitly spell out the return type (Status: Tentatively NAD)">4095</a>.</li>
-<li>Added the following 109 New issues: <a href="lwg-active.html#3945" title="&sect;[cstdarg.syn] 'Compatible types' are undefined (Status: New)">3945</a>, <a href="lwg-active.html#3952" title="iter_common_reference_t does not conform to the definition of indirectly_readable (Status: New)">3952</a>, <a href="lwg-active.html#3954" title="Feature-test macros in C headers (&lt;stddef.h&gt; etc.) (Status: New)">3954</a>, <a href="lwg-active.html#3955" title="Add noexcept to several repeat_view[::iterator] member functions (Status: New)">3955</a>, <a href="lwg-active.html#3956" title="chrono::parse uses from_stream as a customization point (Status: New)">3956</a>, <a href="lwg-active.html#3959" title="Should the comparator of std::flat_map/std::flat_multimap be copied twice in some operations? (Status: New)">3959</a>, <a href="lwg-active.html#3960" title="How does chrono::parse handle duplicated data? (Status: New)">3960</a>, <a href="lwg-active.html#3961" title="Does chrono::parse check format strings? (Status: New)">3961</a>, <a href="lwg-active.html#3962" title="What is the &quot;decimal precision of the input&quot;? (Status: New)">3962</a>, <a href="lwg-active.html#3963" title="Different std::flat_map/std::flat_multimap specializations should be able to share same nested classes (Status: New)">3963</a>, <a href="lwg-active.html#3964" title="std::atan2 and std::pow overloads that take two std::valarray parameters 
+<li>Added the following 110 New issues: <a href="lwg-active.html#3945" title="&sect;[cstdarg.syn] 'Compatible types' are undefined (Status: New)">3945</a>, <a href="lwg-active.html#3952" title="iter_common_reference_t does not conform to the definition of indirectly_readable (Status: New)">3952</a>, <a href="lwg-active.html#3954" title="Feature-test macros in C headers (&lt;stddef.h&gt; etc.) (Status: New)">3954</a>, <a href="lwg-active.html#3955" title="Add noexcept to several repeat_view[::iterator] member functions (Status: New)">3955</a>, <a href="lwg-active.html#3956" title="chrono::parse uses from_stream as a customization point (Status: New)">3956</a>, <a href="lwg-active.html#3959" title="Should the comparator of std::flat_map/std::flat_multimap be copied twice in some operations? (Status: New)">3959</a>, <a href="lwg-active.html#3960" title="How does chrono::parse handle duplicated data? (Status: New)">3960</a>, <a href="lwg-active.html#3961" title="Does chrono::parse check format strings? (Status: New)">3961</a>, <a href="lwg-active.html#3962" title="What is the &quot;decimal precision of the input&quot;? (Status: New)">3962</a>, <a href="lwg-active.html#3963" title="Different std::flat_map/std::flat_multimap specializations should be able to share same nested classes (Status: New)">3963</a>, <a href="lwg-active.html#3964" title="std::atan2 and std::pow overloads that take two std::valarray parameters 
 should require the arguments to have the same length (Status: New)">3964</a>, <a href="lwg-active.html#3966" title="The value_type and reference members of std::flat_(multi)map::(const_)iterator are unclear (Status: New)">3966</a>, <a href="lwg-active.html#3967" title="The specification for std::is_nothrow_* traits may be ambiguous in some cases involving noexcept(false) (Status: New)">3967</a>, <a href="lwg-active.html#3968" title="std::endian::native value should be more specific about object representations (Status: New)">3968</a>, <a href="lwg-active.html#3969" title="std::ranges::fold_left_first_with_iter should be more ADL-proof (Status: New)">3969</a>, <a href="lwg-active.html#3972" title="Issues with join_with_view::iterator's iter_swap (Status: New)">3972</a>, <a href="lwg-active.html#3976" title="What does it mean for a type to be &quot;allocator aware&quot;? (Status: New)">3976</a>, <a href="lwg-active.html#3977" title="constexpr and noexcept for operators for bitmask types (Status: New)">3977</a>, <a href="lwg-active.html#3979" title="Should we reject std::bind_front&lt;42&gt;() and its friends? (Status: New)">3979</a>, <a href="lwg-active.html#3983" title="ranges::to adaptors are underconstrained (Status: New)">3983</a>, <a href="lwg-active.html#3985" title="ranges::to should Mandates C not to be view (Status: New)">3985</a>, <a href="lwg-active.html#3986" title="basic_const_iterator doesn't work with optional (Status: New)">3986</a>, <a href="lwg-active.html#3989" title="The whole range for an iterator obtained from a std::span or std::basic_string_view is not clear (Status: New)">3989</a>, <a href="lwg-active.html#3991" title="variant's move assignment should not be guaranteed to produce a valueless by exception state (Status: New)">3991</a>, <a href="lwg-active.html#3992" title="basic_stringbuf::str()&amp;&amp; should enforce &#x1d4aa;(1) (Status: New)">3992</a>, <a href="lwg-active.html#3993" title="The parse function of a BasicFormatter type needs to be constexpr (Status: New)">3993</a>, <a href="lwg-active.html#3994" title="adaptor(args...)(r) is not equivalent to std::bind_back(adaptor, args...)(r) (Status: New)">3994</a>, <a href="lwg-active.html#3995" title="Issue with custom index conversion in &lt;mdspan&gt; (Status: New)">3995</a>, <a href="lwg-active.html#3997" title="std::formatter specializations should be consistently restricted to supported character types (Status: New)">3997</a>, <a href="lwg-active.html#3998" title="Constants in std::regex_constants should be allowed to be enumerators (Status: New)">3998</a>, <a href="lwg-active.html#3999" title="P0439R0 changed the value category of memory order constants (Status: New)">3999</a>, <a href="lwg-active.html#4000" title="flat_map::insert_range's Effects is not quite right (Status: New)">4000</a>, <a href="lwg-active.html#4002" title="The definition of iota_view::iterator::iterator_concept should be improved (Status: New)">4002</a>, <a href="lwg-active.html#4005" title="&quot;Required behavior&quot; too narrowly defined (Status: New)">4005</a>, <a href="lwg-active.html#4007" title="Mystic prohibition of calling a volatile-qualified perfect forwarding call wrapper (Status: New)">4007</a>, <a href="lwg-active.html#4008" title="&sect;[range.utility.conv.to] ranges::to may cause infinite recursion if range_value_t&lt;C&gt; 
 is a non-move-constructible range (Status: New)">4008</a>, <a href="lwg-active.html#4009" title="drop_view::begin const may have &#x1d4aa;(n) complexity (Status: New)">4009</a>, <a href="lwg-active.html#4010" title="subrange::advance should be improved (Status: New)">4010</a>, <a href="lwg-active.html#4014" title="LWG 3809 changes behavior of some existing std::subtract_with_carry_engine code (Status: New)">4014</a>, <a href="lwg-active.html#4017" title="Behavior of std::views::split on an empty range (Status: New)">4017</a>, <a href="lwg-active.html#4018" title="ranges::to's copy branch is underconstrained (Status: New)">4018</a>, <a href="lwg-active.html#4020" title="extents::index-cast weirdness (Status: New)">4020</a>, <a href="lwg-active.html#4021" title="mdspan::is_always_meow() should be noexcept (Status: New)">4021</a>, <a href="lwg-active.html#4022" title="Ambiguity in the formatting of negative years with format specifier %C (Status: New)">4022</a>, <a href="lwg-active.html#4024" title="Underspecified destruction of objects created in std::make_shared_for_overwrite/std::allocate_shared_for_overwrite (Status: New)">4024</a>, <a href="lwg-active.html#4026" title="Assignment operators of std::expected should propagate triviality (Status: New)">4026</a>, <a href="lwg-active.html#4028" title="std::is_(nothrow_)convertible should be reworded to avoid dependence on the return statement (Status: New)">4028</a>, <a href="lwg-active.html#4029" title="basic_string accidentally fails to meet the reversible container requirements (Status: New)">4029</a>, <a href="lwg-active.html#4032" title="Possibly invalid types in the constraints of constructors of std::shared_ptr (Status: New)">4032</a>, <a href="lwg-active.html#4033" title="&sect;[macro.names] defining macros after importing the standard library (Status: New)">4033</a>, <a href="lwg-active.html#4034" title="Clarify specification of std::min and std::max (Status: New)">4034</a>, <a href="lwg-active.html#4039" title="&sect;[ostream.formatted.print]: Inappropriate usage of badbit in definition of 
 vprint_unicode/vprint_nonunicode (Status: New)">4039</a>, <a href="lwg-active.html#4040" title="Contradictory specification of std::tuple_size (Status: New)">4040</a>, <a href="lwg-active.html#4041" title="The requirements on literal type in [concept.swappable] should be removed (Status: New)">4041</a>, <a href="lwg-active.html#4046" title="Effects of inserting into or erasing from flat container adaptors when an exception is thrown need to be more permissive (Status: New)">4046</a>, <a href="lwg-active.html#4047" title="Explicitly specifying template arguments for std::swap should not be supported (Status: New)">4047</a>, <a href="lwg-active.html#4048" title="Inconsistent preconditions for transparent insertion of std::flat_map/std::flat_set (Status: New)">4048</a>, <a href="lwg-active.html#4049" title="C &lt;foo.h&gt; headers not in freestanding (Status: New)">4049</a>, <a href="lwg-active.html#4050" title="Should views::iota(0) | views::take(5) be views::iota(0, 5)? (Status: New)">4050</a>, <a href="lwg-active.html#4051" title="A less hacky and more useful way to compare comparison category types (Status: New)">4051</a>, <a href="lwg-active.html#4052" title="Bogus requirements for piecewise_linear_distribution (Status: New)">4052</a>, <a href="lwg-active.html#4055" title="&sect;[iterator.operations] std::distance is missing a precondition (Status: New)">4055</a>, <a href="lwg-active.html#4057" title="generator::iterator's operator* is not noexcept when it can be (Status: New)">4057</a>, <a href="lwg-active.html#4058" title="std::to_address() should be SFINAE-friendly (Status: New)">4058</a>, <a href="lwg-active.html#4059" title="Leaky abstraction in join_with_view's iterator (Status: New)">4059</a>, <a href="lwg-active.html#4062" title="ranges::empty has no semantic requirements for forward_ranges (Status: New)">4062</a>, <a href="lwg-active.html#4063" title="Freestanding std::char_traits&lt;char&gt;::eof depends on non-freestanding EOF (Status: New)">4063</a>, <a href="lwg-active.html#4065" title="Requirements for fancy pointers might be insufficient for self-referential implementation of containers (Status: New)">4065</a>, <a href="lwg-active.html#4066" title="ranges::to should reserve when sized_sentinel_for is satisfied (Status: New)">4066</a>, <a href="lwg-active.html#4067" title="Inconsistency and potential infinity meta-recursion in std::chrono::zoned_time's constructors (Status: New)">4067</a>, <a href="lwg-active.html#4068" title="Terminology for objects whose types model a concept (Status: New)">4068</a>, <a href="lwg-active.html#4072" title="std::optional comparisons: constrain harder (Status: New)">4072</a>, <a href="lwg-active.html#4073" title="concat_view::size may overflow (Status: New)">4073</a>, <a href="lwg-active.html#4077" title="Unclear preconditions of std::ranges::generate_random (Status: New)">4077</a>, <a href="lwg-active.html#4078" title="What if arguments alias the output buffer in std::format_to? (Status: New)">4078</a>, <a href="lwg-active.html#4080" title="Presumed value and difference types of an iterator type in ranges and non-ranges algorithms (Status: New)">4080</a>, <a href="lwg-active.html#4081" title="concat_view::iterator::operator- is overconstrained (Status: New)">4081</a>, <a href="lwg-active.html#4085" title="ranges::generate_random's helper lambda should specify the return type (Status: New)">4085</a>, <a href="lwg-active.html#4088" title="println ignores the locale imbued in std::ostream (Status: New)">4088</a>, <a href="lwg-active.html#4089" title="concat_view::iterator's iter_swap is overconstrained (Status: New)">4089</a>, <a href="lwg-active.html#4091" title="concat_view rejects non-movable references (Status: New)">4091</a>, <a href="lwg-active.html#4092" title="The monotonic version of common_iterator::operator== is underconstrained (Status: New)">4092</a>, <a href="lwg-active.html#4093" title="ranges::fold_left_first_with_iter incorrectly constructs optional&lt;U&gt; (Status: New)">4093</a>, <a href="lwg-active.html#4094" title="ranges::fold_meow is overconstrained (Status: New)">4094</a>, <a href="lwg-active.html#4099" title="The simple case of views::as_rvalue and views::common are not strictly correct (Status: New)">4099</a>, <a href="lwg-active.html#4100" title="Default arguments and signatures of standard library non-member functions (Status: New)">4100</a>, <a href="lwg-active.html#4101" title="LWG 117 loses the sign for negative NaN on some architectures (Status: New)">4101</a>, <a href="lwg-active.html#4102" title="string_view(Iter, Iter) constructor breaks existing code (Status: New)">4102</a>, <a href="lwg-active.html#4103" title="ranges::unique_copy's constraints for the case where result is an
     input_iterator are not quite right (Status: New)">4103</a>, <a href="lwg-active.html#4104" title="basic_const_iterator&lt;volatile int*&gt; is not a contiguous_iterator (Status: New)">4104</a>, <a href="lwg-active.html#4107" title="Map formatter may conflict with user-defined specializations of pair/tuple formatters (Status: New)">4107</a>, <a href="lwg-active.html#4108" title="lazy_split_view should be sized_range when pattern is empty tiny-range (Status: New)">4108</a>, <a href="lwg-active.html#4109" title="Instantiating templates in &sect;[rand] with int8_t/uint8_t is undefined behavior (Status: New)">4109</a>, <a href="lwg-active.html#4110" title="shared_ptr(nullptr_t, Deleter) is overconstrained, breaking some sensible deleters (Status: New)">4110</a>, <a href="lwg-active.html#4111" title="LWG 270 and ranges version of binary search algorithms (Status: New)">4111</a>, <a href="lwg-active.html#4113" title="Disallow has_unique_object_representations&lt;Incomplete[]&gt; (Status: New)">4113</a>, <a href="lwg-active.html#4114" title="elements_view::iterator::operator* missing conditional noexcept specification (Status: New)">4114</a>, <a href="lwg-active.html#4115" title="move_iterator::operator* should have conditional noexcept specification (Status: New)">4115</a>, <a href="lwg-active.html#4116" title="enumerate_view::iterator and cartesian_product_view::iterator should not
     always provide iterator_category (Status: New)">4116</a>, <a href="lwg-active.html#4117" title="generator::iterator should provide iterator_concept (Status: New)">4117</a>, <a href="lwg-active.html#4118" title="How should duration formatters format custom rep types? (Status: New)">4118</a>, <a href="lwg-active.html#4119" title="generator::promise_type::yield_value(ranges::elements_of&lt;R, Alloc&gt;)'s nested generator may be ill-formed (Status: New)">4119</a>, <a href="lwg-active.html#4120" title="move_iterator should provide iterator_category only when it models
-forward_iterator (Status: New)">4120</a>, <a href="lwg-active.html#4121" title="ranges::to constructs associative containers via c.emplace(c.end(), *it) (Status: New)">4121</a>, <a href="lwg-active.html#4122" title="Ill-formed operator&lt;=&gt; can cause hard error when instantiating std::inplace_vector (Status: New)">4122</a>, <a href="lwg-active.html#4123" title="Container effects use &quot;the assignment operator or move assignment operator&quot; (Status: New)">4123</a>, <a href="lwg-active.html#4124" title="Cannot format zoned_time with resolution coarser than seconds (Status: New)">4124</a>, <a href="lwg-active.html#4125" title="move_iterator's default constructor should be constrained (Status: New)">4125</a>, <a href="lwg-active.html#4126" title="Some feature-test macros for fully freestanding features are not yet marked freestanding (Status: New)">4126</a>.</li>
+forward_iterator (Status: New)">4120</a>, <a href="lwg-active.html#4121" title="ranges::to constructs associative containers via c.emplace(c.end(), *it) (Status: New)">4121</a>, <a href="lwg-active.html#4122" title="Ill-formed operator&lt;=&gt; can cause hard error when instantiating std::inplace_vector (Status: New)">4122</a>, <a href="lwg-active.html#4123" title="Container effects use &quot;the assignment operator or move assignment operator&quot; (Status: New)">4123</a>, <a href="lwg-active.html#4124" title="Cannot format zoned_time with resolution coarser than seconds (Status: New)">4124</a>, <a href="lwg-active.html#4125" title="move_iterator's default constructor should be constrained (Status: New)">4125</a>, <a href="lwg-active.html#4126" title="Some feature-test macros for fully freestanding features are not yet marked freestanding (Status: New)">4126</a>, <a href="lwg-active.html#4127" title="The Standard Library should not use predicates of the form pred(*i) != false (Status: New)">4127</a>.</li>
 <li>Added the following 3 Open issues: <a href="lwg-active.html#3988" title="Should as_const_view and basic_const_iterator provide base()? (Status: Open)">3988</a>, <a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations (Status: Open)">4015</a>, <a href="lwg-active.html#4069" title="std::atomic&lt;volatile T&gt; should be ill-formed (Status: Open)">4069</a>.</li>
 <li>Added the following 3 LEWG issues: <a href="lwg-active.html#4042" title="std::print should permit an efficient implementation (Status: LEWG)">4042</a>, <a href="lwg-active.html#4084" title="std::fixed ignores std::uppercase (Status: LEWG)">4084</a>, <a href="lwg-active.html#4097" title="views::reverse should be specialized for some view types (Status: LEWG)">4097</a>.</li>
 <li>Added the following 2 SG1 issues: <a href="lwg-active.html#4004" title="The load and store operation in &sect;[atomics.order] p1 is ambiguous (Status: SG1)">4004</a>, <a href="lwg-active.html#4075" title="Thread stability requirement on constructors and destructors (Status: SG1)">4075</a>.</li>
@@ -64499,6 +64499,323 @@ by <a href="https://wg21.link/P2291R3" title=" Add Constexpr Modifiers to Functi
 #define __cpp_lib_to_array                          201907L // <i><ins>freestanding,</ins> also in</i> &lt;array&gt;
 [&hellip;]
 </pre>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4127"><a href="#4127">4127</a><sup><a href="https://cplusplus.github.io/LWG/issue4127">(i)</a></sup>. The Standard Library should not use predicates of the form <code>pred(*i) != false</code></h3>
+<p><b>Section:</b> 22.10.18.3 <a href="https://wg21.link/func.search.bm">[func.search.bm]</a>, 22.10.18.4 <a href="https://wg21.link/func.search.bmh">[func.search.bmh]</a>, 24.2.7.1 <a href="https://wg21.link/associative.reqmts.general">[associative.reqmts.general]</a>, 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, 27.6.6 <a href="https://wg21.link/alg.find">[alg.find]</a>, 27.6.9 <a href="https://wg21.link/alg.find.first.of">[alg.find.first.of]</a>, 27.6.10 <a href="https://wg21.link/alg.adjacent.find">[alg.adjacent.find]</a>, 27.6.11 <a href="https://wg21.link/alg.count">[alg.count]</a>, 27.6.12 <a href="https://wg21.link/alg.mismatch">[alg.mismatch]</a>, 27.6.15 <a href="https://wg21.link/alg.search">[alg.search]</a>, 27.8.1 <a href="https://wg21.link/alg.sorting.general">[alg.sorting.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-25 <b>Last modified:</b> 2024-07-27</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The <code><i>boolean-testable</i></code> concept introduced in <a href="https://wg21.link/P1964R2" title=" Wording for boolean-testable">P1964R2</a> 
+places appropriate constraints on boolean-ish types, so that <code>!pred(x)</code> or 
+<code>i != last &amp;&amp; pred(*i)</code> always has a valid definition.
+<p/>
+Subsequently, <a href="https://wg21.link/P2167R3" title=" Improved Proposed Wording for LWG 2114 (contextually convertible to bool)">P2167R3</a> applied this concept to 27.2 <a href="https://wg21.link/algorithms.requirements">[algorithms.requirements]</a> 
+p6, requiring that <code>decltype(pred(*first))</code> should model <code><i>boolean-testable</i></code>.
+<p/>
+However, <code><i>boolean-testable</i></code> does not guarantee that 
+<code>pred(*i) != false</code> is valid, because the type may overload <code>operator==</code>.
+It is necessary to replace this form of expression with an appropriate one as we do in 
+<a href="https://wg21.link/P1964R2#wording">P1964R2</a>.
+</p>
+
+<p><i>[2024-07-27; Daniel comments]</i></p>
+
+<p>
+I would recommend to add a wrapping "<code><ins>bool(</ins>pred([&hellip;])<ins>)</ins></code>" and possibly 
+even extend to "<code><ins>bool(</ins>pred([&hellip;])<ins>)</ins></code> <ins>is <code>true</code></ins>"
+following our usual wording convention, since an English phrase of the form "if <code>pred([&hellip;])</code>" 
+where <code>pred([&hellip;])</code> is potential non-<code>bool</code> and the English "if" is not a C++ language 
+<code>if</code> (with built-in conversion semantics) doesn't sound like a meaningful phrase to me.
+</p>
+
+
+<p id="res-4127"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4986" title=" Working Draft, Programming Languages — C++">N4986</a>.
+</p>
+
+<ol>
+<li><p>Modify 22.10.18.3 <a href="https://wg21.link/func.search.bm">[func.search.bm]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+boyer_moore_searcher(RandomAccessIterator1 pat_first,
+                     RandomAccessIterator1 pat_last,
+                     Hash hf = Hash(),
+                     BinaryPredicate pred = BinaryPredicate());
+</pre>
+<blockquote>
+<p>
+-1- <i>Preconditions</i>: The value type of <code>RandomAccessIterator1</code> meets the
+<i>Cpp17DefaultConstructible</i>, the <i>Cpp17CopyConstructible</i>, and the 
+<i>Cpp17CopyAssignable</i> requirements.
+<p/>
+-2- Let <code>V</code> be <code>iterator_traits&lt;RandomAccessIterator1&gt;::value_type</code>.
+For any two values <code>A</code> and <code>B</code> of type <code>V</code>, if
+<code>pred(A, B) <del>== true</del></code>, then <code>hf(A) == hf(B)</code> is 
+<code>true</code>.
+</p>
+[&hellip;]
+<p>
+-7- <i>Returns</i>: A pair of iterators <code>i</code> and <code>j</code> such that
+</p>
+<ol style="list-style-type: none">
+<li><p>(7.1) &mdash; <code>i</code> is the first iterator in the range [<code>first</code>,
+<code>last - (pat_last_ - pat_first_)</code>) such that for every non-negative integer 
+<code>n</code> less than <code>pat_last_ - pat_first_</code> the following condition holds: 
+<code>pred(*(i + n), *(pat_first_ + n)) <del>!= false</del></code>, and
+</p>
+</li>
+<li>
+<p>[&hellip;]</p>
+</li>
+</ol>
+</blockquote>
+</blockquote>
+
+</li>
+
+<li><p>Modify 22.10.18.4 <a href="https://wg21.link/func.search.bmh">[func.search.bmh]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+boyer_moore_horspool_searcher(RandomAccessIterator1 pat_first,
+                              RandomAccessIterator1 pat_last,
+                              Hash hf = Hash(),
+                              BinaryPredicate pred = BinaryPredicate());
+</pre>
+<blockquote>
+<p>
+-1- <i>Preconditions</i>: The value type of <code>RandomAccessIterator1</code> meets the
+<i>Cpp17DefaultConstructible</i>, <i>Cpp17CopyConstructible</i>, and <i>Cpp17CopyAssignable</i>
+requirements.
+<p/>
+-2- Let <code>V</code> be <code>iterator_traits&lt;RandomAccessIterator1&gt;::value_type</code>.
+For any two values <code>A</code> and <code>B</code> of type <code>V</code>, if  
+<code>pred(A, B) <del>== true</del></code>, then <code>hf(A) == hf(B)</code> is <code>true</code>.
+</p>
+[&hellip;]
+<p>
+-7- <i>Returns</i>: A pair of iterators <code>i</code> and <code>j</code> such that
+</p>
+<ol style="list-style-type: none">
+<li><p>
+(7.1) &mdash; <code>i</code> is the first iterator in the range [<code>first</code>,
+<code>last - (pat_last_ - pat_first_)</code>) such that for every non-negative integer <code>n</code> 
+less than <code>pat_last_ - pat_first_</code> the following condition holds: 
+<code>pred(*(i + n), *(pat_first_ + n)) <del>!= false</del></code>, and 
+</p></li>
+<li>
+<p>[&hellip;]</p>
+</li>
+</ol>
+</blockquote>
+</blockquote>
+
+</li>
+
+<li><p>Modify 24.2.7.1 <a href="https://wg21.link/associative.reqmts.general">[associative.reqmts.general]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-3- The phrase "equivalence of keys" means the equivalence relation imposed by the comparison object.
+That is, two keys <code>k1</code> and <code>k2</code> are considered to be equivalent if for the 
+comparison object <code>comp</code>, <code><ins>!</ins>comp(k1, k2) <del>== false</del> &amp;&amp; 
+<ins>!</ins>comp(k2, k1) <del>== false</del></code>.
+</p>
+[&hellip;]
+<p>
+-177- The fundamental property of iterators of associative containers is that they iterate through 
+the containers in the non-descending order of keys where non-descending is defined by the comparison 
+that was used to construct them. For any two dereferenceable iterators <code>i</code> and <code>j</code> 
+such that distance from <code>i</code> to <code>j</code> is positive, the following condition holds:
+</p>
+<pre><blockquote><ins>!</ins>value_comp(*j, *i) <del>== false</del></blockquote></pre>
+<p>
+-178- For associative containers with unique keys the stronger condition holds:
+</p>
+<pre><blockquote>value_comp(*i, *j) <del>!= false</del></blockquote></pre>
+</blockquote>
+
+</li>
+
+<li><p>Modify 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+size_type remove(const T&amp; value);
+template&lt;class Predicate&gt; size_type remove_if(Predicate pred);
+</pre>
+<blockquote>
+<p>
+-15- <i>Effects</i>: Erases all the elements in the list referred to by a list iterator 
+<code>i</code> for which the following conditions hold: <code>*i == value, pred(*i) 
+<del>!= false</del></code>. Invalidates only the iterators and references to
+the erased elements.
+<p/>
+-16- <i>Returns</i>: The number of elements erased.
+<p/>
+-17- <i>Throws</i>: Nothing unless an exception is thrown by <code>*i == value</code> or
+<code>pred(*i) <del>!= false</del></code>.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.6.6 <a href="https://wg21.link/alg.find">[alg.find]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- Let <i>E</i> be:
+</p>
+<ol style="list-style-type: none">
+<li>
+<p>(1.1) &mdash; <code>*i == value</code> for <code>find</code>;</p>
+</li>
+<li>
+<p>(1.2) &mdash; <code>pred(*i) <del>!= false</del></code> for <code>find_if</code>;</p>
+</li>
+<li>
+<p>(1.3) &mdash; <code><ins>!</ins>pred(*i) <del>== false</del></code> for <code>find_if_not</code>;
+</p>
+</li>
+[&hellip;]
+</ol>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.6.9 <a href="https://wg21.link/alg.find.first.of">[alg.find.first.of]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- Let <i>E</i> be:
+</p>
+<ol style="list-style-type: none">
+<li><p>
+(1.1) &mdash; <code>*i == *j</code> for the overloads with no parameter <code>pred</code>;
+</p></li>
+<li><p>
+(1.2) &mdash; <code>pred(*i, *j) <del>!= false</del></code> for the overloads with a parameter
+<code>pred</code> and no parameter <code>proj1</code>;
+</p></li>
+[&hellip;]
+</ol>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.6.10 <a href="https://wg21.link/alg.adjacent.find">[alg.adjacent.find]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- Let <i>E</i> be:
+</p>
+<ol style="list-style-type: none">
+<li><p>
+(1.1) &mdash; <code>*i == *(i + 1)</code> for the overloads with no parameter <code>pred</code>;
+</p></li>
+<li><p>
+(1.2) &mdash; <code>pred(*i, *(i + 1)) <del>!= false</del></code> for the overloads with a 
+parameter <code>pred</code> and no parameter <code>proj1</code>;
+</p></li>
+[&hellip;]
+</ol>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.6.11 <a href="https://wg21.link/alg.count">[alg.count]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- Let <i>E</i> be:
+</p>
+<ol style="list-style-type: none">
+<li><p>
+(1.1) &mdash; <code>*i == value</code> for the overloads with no parameter <code>pred</code> 
+or <code>proj</code>;
+</p></li>
+<li><p>
+(1.2) &mdash; <code>pred(*i) <del>!= false</del></code> for the overloads with a parameter
+<code>pred</code> but no parameter <code>proj</code>;
+</p></li>
+[&hellip;]
+</ol>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.6.12 <a href="https://wg21.link/alg.mismatch">[alg.mismatch]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- Let <i>E</i> be:
+</p>
+<ol style="list-style-type: none">
+<li><p>
+(2.1) &mdash; <code>!(*(first1 + n) == *(first2 + n))</code> for the overloads with no 
+parameter <code>pred</code>;
+</p></li>
+<li><p>
+(2.2) &mdash; <code><ins>!</ins>pred(*(first1 + n), *(first2 + n)) <del>== false</del></code> 
+for the overloads with a parameter <code>pred</code> and no parameter <code>proj1</code>;
+</p></li>
+[&hellip;]
+</ol>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.6.15 <a href="https://wg21.link/alg.search">[alg.search]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- <i>Returns</i>: The first iterator <code>i</code> in the range [<code>first1</code>,
+<code>last1 - (last2-first2)</code>) such that for every non-negative integer <code>n</code> 
+less than <code>last2 - first2</code> the following corresponding conditions hold:
+<code>*(i + n) == *(first2 + n), pred(*(i + n), *(first2 + n)) <del>!= false</del></code>.
+Returns <code>first1</code> if [<code>first2</code>, <code>last2</code>) is empty, otherwise 
+returns <code>last1</code> if no such iterator is found.
+</p>
+[&hellip;]
+<p>
+-6- <i>Returns</i>: The first iterator <code>i</code> in the range [<code>first</code>,
+<code>last-count</code>) such that for every non-negative integer <code>n</code> less than 
+<code>count</code> the following corresponding conditions hold: <code>*(i + n) == value, 
+pred(*(i + n), value) <del>!= false</del></code>. Returns <code>last</code> if no such 
+iterator is found.
+</p>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.8.1 <a href="https://wg21.link/alg.sorting.general">[alg.sorting.general]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-3- For all algorithms that take <code>Compare</code>, there is a version that uses 
+<code>operator&lt;</code> instead. That is, <code>comp(*i, *j) <del>!= false</del></code> 
+defaults to <code>*i &lt; *j <del>!= false</del></code>. For algorithms other than those 
+described in 27.8.4 <a href="https://wg21.link/alg.binary.search">[alg.binary.search]</a>, <code>comp</code> shall induce a strict 
+weak ordering on the values.
+</p>
 </blockquote>
 
 </li>

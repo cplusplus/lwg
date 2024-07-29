@@ -64,7 +64,7 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4124"><a href="lwg-active.html#4124">4124</a>. Cannot format <code class='backtick'>zoned_time</code> with resolution coarser than seconds</h3>
 <p><b>Section:</b> 29.12 <a href="https://wg21.link/time.format">[time.format]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-07-26 <b>Last modified:</b> 2024-07-27</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-07-26 <b>Last modified:</b> 2024-07-29</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#time.format">active issues</a> in [time.format].</p>
@@ -121,6 +121,8 @@ Let <code class='backtick'>f</code> be a <code><i>locale-time-format-t</i>&lt;Du
 passed to <code class='backtick'>formatter::format</code>.
 </p>
 <p>-18- <i>Remarks</i>:
+<ins>If the <i>chrono-specs</i> is omitted, the result is equivalent to
+using <code class='backtick'>%F %T %Z</code> as the <i>chrono-specs</i>.</ins>
 If <code class='backtick'>%Z</code> is used,
 it is replaced with <code class='backtick'>*f.abbrev</code> if <code class='backtick'>f.abbrev</code> is not a null pointer value.
 If <code class='backtick'>%Z</code> is used and <code class='backtick'>f.abbrev</code> is a null pointer value,
@@ -130,13 +132,7 @@ it is formatted with the value of <code class='backtick'>*f.offset_sec</code> if
 not a null pointer value.
 If <code class='backtick'>%z</code> (or a modified variant of <code class='backtick'>%z</code>) is used and <code class='backtick'>f.offset_sec</code>
 is a null pointer value, then an exception of type <code class='backtick'>format_error</code> is thrown.
-<ins>If the <i>chrono-specs</i> is omitted, <code class='backtick'>f</code> is formatted as if by
-<code class='backtick'>format(loc, "{} {:L%Z}", f.time, f)</code>, where <code class='backtick'>loc</code> is the formatting locale.
-</ins>
 </p>
-<p><i>[Drafting note: The inserted text above is not correct, as it doesn't
-account for padding etc.]</i></p>
-
 <pre>
   template&lt;class Duration, class TimeZonePtr, class charT&gt;
   struct formatter&lt;chrono::zoned_time&lt;Duration, TimeZonePtr&gt;, charT&gt;

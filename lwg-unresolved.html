@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-07-29 at 12:22:21 UTC
+<p>Revised 2024-07-29 at 12:31:11 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -60196,7 +60196,7 @@ by <a href="https://wg21.link/P2291R3" title=" Add Constexpr Modifiers to Functi
 <hr>
 <h3 id="4127"><a href="#4127">4127</a><sup><a href="https://cplusplus.github.io/LWG/issue4127">(i)</a></sup>. The Standard Library should not use predicates of the form <code>pred(*i) != false</code></h3>
 <p><b>Section:</b> 22.10.18.3 <a href="https://wg21.link/func.search.bm">[func.search.bm]</a>, 22.10.18.4 <a href="https://wg21.link/func.search.bmh">[func.search.bmh]</a>, 24.2.7.1 <a href="https://wg21.link/associative.reqmts.general">[associative.reqmts.general]</a>, 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, 27.6.6 <a href="https://wg21.link/alg.find">[alg.find]</a>, 27.6.9 <a href="https://wg21.link/alg.find.first.of">[alg.find.first.of]</a>, 27.6.10 <a href="https://wg21.link/alg.adjacent.find">[alg.adjacent.find]</a>, 27.6.11 <a href="https://wg21.link/alg.count">[alg.count]</a>, 27.6.12 <a href="https://wg21.link/alg.mismatch">[alg.mismatch]</a>, 27.6.15 <a href="https://wg21.link/alg.search">[alg.search]</a>, 27.8.1 <a href="https://wg21.link/alg.sorting.general">[alg.sorting.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-25 <b>Last modified:</b> 2024-07-27</p>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-25 <b>Last modified:</b> 2024-07-29</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -60378,8 +60378,8 @@ the erased elements.
 <li>
 <p>(1.3) &mdash; <code><ins>!</ins>pred(*i) <del>== false</del></code> for <code>find_if_not</code>;
 </p>
-</li>
 [&hellip;]
+</li>
 </ol>
 </blockquote>
 
@@ -60398,8 +60398,9 @@ the erased elements.
 <li><p>
 (1.2) &mdash; <code>pred(*i, *j) <del>!= false</del></code> for the overloads with a parameter
 <code>pred</code> and no parameter <code>proj1</code>;
-</p></li>
+</p>
 [&hellip;]
+</li>
 </ol>
 </blockquote>
 
@@ -60418,8 +60419,9 @@ the erased elements.
 <li><p>
 (1.2) &mdash; <code>pred(*i, *(i + 1)) <del>!= false</del></code> for the overloads with a 
 parameter <code>pred</code> and no parameter <code>proj1</code>;
-</p></li>
+</p>
 [&hellip;]
+</li>
 </ol>
 </blockquote>
 
@@ -60439,8 +60441,9 @@ or <code>proj</code>;
 <li><p>
 (1.2) &mdash; <code>pred(*i) <del>!= false</del></code> for the overloads with a parameter
 <code>pred</code> but no parameter <code>proj</code>;
-</p></li>
+</p>
 [&hellip;]
+</li>
 </ol>
 </blockquote>
 
@@ -60460,8 +60463,9 @@ parameter <code>pred</code>;
 <li><p>
 (2.2) &mdash; <code><ins>!</ins>pred(*(first1 + n), *(first2 + n)) <del>== false</del></code> 
 for the overloads with a parameter <code>pred</code> and no parameter <code>proj1</code>;
-</p></li>
+</p>
 [&hellip;]
+</li>
 </ol>
 </blockquote>
 

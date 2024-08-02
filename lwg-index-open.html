@@ -66,7 +66,7 @@
 <p>This document is the Index by Section for the <a href="lwg-active.html">Library Active Issues List</a>.</p>
 <h2>Index by Section (non-Ready active issues only)</h2>
 <p><a href="lwg-index.html">(view all issues)</a></p>
-<p>Revised 2024-08-02 at 21:15:32 UTC
+<p>Revised 2024-08-02 at 21:52:48 UTC
 </p><h2 id="Section_3">Section 3 (2 issues)</h2>
 <p><a href="lwg-index.html#Section_3">(view all issues)</a></p>
 <table class="issues-index">
@@ -459,7 +459,7 @@ is unclear</td>
 <td>16.4.6.4 [global.functions]<a id="global.functions"></a></td>
 <td>Default arguments and signatures of standard library non-member functions</td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -1213,8 +1213,8 @@ of <code>TransformationTrait</code></td>
 <td></td>
 </tr>
 <tr>
-<td id="4113"><a href="lwg-active.html#4113" title="Disallow has_unique_object_representations&lt;Incomplete[]&gt; (Status: New)">4113</a><sup><a href="https://cplusplus.github.io/LWG/issue4113">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
+<td id="4113"><a href="lwg-active.html#4113" title="Disallow has_unique_object_representations&lt;Incomplete[]&gt; (Status: Tentatively Ready)">4113</a><sup><a href="https://cplusplus.github.io/LWG/issue4113">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
 <td>21.3.5.4 [meta.unary.prop]<a id="meta.unary.prop"></a></td>
 <td>Disallow <code>has_unique_object_representations&lt;Incomplete[]&gt;</code></td>
 <td>Yes</td>
@@ -1773,7 +1773,7 @@ the evaluation of type traits</td>
 <td>22.10.18.3 [func.search.bm]<a id="func.search.bm"></a></td>
 <td>The Standard Library should not use predicates of the form <code>pred(*i) != false</code></td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -2022,7 +2022,7 @@ the evaluation of type traits</td>
 <td>23.3.3.2 [string.view.cons]<a id="string.view.cons"></a></td>
 <td><code class='backtick'>string_view(Iter, Iter)</code> constructor breaks existing code</td>
 <td><span class="no-pr">No</span></td>
-<td></td>
+<td>2</td>
 <td></td>
 </tr>
 <tr>
@@ -2383,7 +2383,7 @@ arguments when no insertion happens</td>
 <td>24.3.9.4 [deque.modifiers]<a id="deque.modifiers"></a></td>
 <td>Container effects use "the assignment operator or move assignment operator"</td>
 <td><span class="no-pr">No</span></td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -2834,23 +2834,23 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td></td>
 </tr>
 <tr>
-<td id="4125"><a href="lwg-active.html#4125" title="move_iterator's default constructor should be constrained (Status: New)">4125</a><sup><a href="https://cplusplus.github.io/LWG/issue4125">(i)</a></sup></td>
+<td id="4120"><a href="lwg-active.html#4120" title="move_iterator should provide iterator_category only when it models
+forward_iterator (Status: New)">4120</a><sup><a href="https://cplusplus.github.io/LWG/issue4120">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>25.5.4.2 [move.iterator]<a id="move.iterator"></a></td>
-<td><code>move_iterator</code>'s default constructor should be constrained</td>
+<td><code>move_iterator</code> should provide <code>iterator_category</code> only when it models
+<code>forward_iterator</code></td>
 <td>Yes</td>
 <td>3</td>
 <td></td>
 </tr>
 <tr>
-<td id="4120"><a href="lwg-active.html#4120" title="move_iterator should provide iterator_category only when it models
-forward_iterator (Status: New)">4120</a><sup><a href="https://cplusplus.github.io/LWG/issue4120">(i)</a></sup></td>
+<td id="4125"><a href="lwg-active.html#4125" title="move_iterator's default constructor should be constrained (Status: New)">4125</a><sup><a href="https://cplusplus.github.io/LWG/issue4125">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>25.5.4.2 [move.iterator]</td>
-<td><code>move_iterator</code> should provide <code>iterator_category</code> only when it models
-<code>forward_iterator</code></td>
+<td><code>move_iterator</code>'s default constructor should be constrained</td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -3009,7 +3009,7 @@ initializer_list (Status: New)">3537</a><sup><a href="https://cplusplus.github.i
 <td>26.5.7.1 [range.utility.conv.general]<a id="range.utility.conv.general"></a></td>
 <td><code>ranges::to</code> constructs associative containers via <code>c.emplace(c.end(), *it)</code></td>
 <td>Yes</td>
-<td></td>
+<td>2</td>
 <td></td>
 </tr>
 <tr>
@@ -3280,18 +3280,9 @@ difference_type is not an integer-class type? (Status: New)">3763</a><sup><a hre
 <td></td>
 </tr>
 <tr>
-<td id="4108"><a href="lwg-active.html#4108" title="lazy_split_view should be sized_range when pattern is empty tiny-range (Status: New)">4108</a><sup><a href="https://cplusplus.github.io/LWG/issue4108">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>26.7.16.2 [range.lazy.split.view]<a id="range.lazy.split.view"></a></td>
-<td><code>lazy_split_view</code> should be <code>sized_range</code> when pattern is empty <code><i>tiny-range</i></code></td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="3855"><a href="lwg-active.html#3855" title="tiny-range is not quite right (Status: New)">3855</a><sup><a href="https://cplusplus.github.io/LWG/issue3855">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>26.7.16.2 [range.lazy.split.view]</td>
+<td>26.7.16.2 [range.lazy.split.view]<a id="range.lazy.split.view"></a></td>
 <td><code><i>tiny-range</i></code> is not quite right</td>
 <td>Yes</td>
 <td>4</td>
@@ -3313,6 +3304,15 @@ difference_type is not an integer-class type? (Status: New)">3763</a><sup><a hre
 <td>The <code>const</code> overload of <code>lazy_split_view::begin</code> should be constrained by <code>const Pattern</code></td>
 <td>Yes</td>
 <td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4108"><a href="lwg-active.html#4108" title="lazy_split_view should be sized_range when pattern is empty tiny-range (Status: SG9)">4108</a><sup><a href="https://cplusplus.github.io/LWG/issue4108">(i)</a></sup></td>
+<td><a href="lwg-active.html#SG9">SG9</a></td>
+<td>26.7.16.2 [range.lazy.split.view]</td>
+<td><code>lazy_split_view</code> should be <code>sized_range</code> when pattern is empty <code><i>tiny-range</i></code></td>
+<td>Yes</td>
+<td>4</td>
 <td></td>
 </tr>
 <tr>
@@ -3408,21 +3408,21 @@ inner-iterator with std::default_sentinel results in null pointer dereference (S
 <td></td>
 </tr>
 <tr>
-<td id="3832"><a href="lwg-active.html#3832" title="Missing change for element_view::iterator in LWG 3798 (Status: New)">3832</a><sup><a href="https://cplusplus.github.io/LWG/issue3832">(i)</a></sup></td>
+<td id="4114"><a href="lwg-active.html#4114" title="elements_view::iterator::operator* missing conditional noexcept specification (Status: New)">4114</a><sup><a href="https://cplusplus.github.io/LWG/issue4114">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>26.7.23.3 [range.elements.iterator]<a id="range.elements.iterator"></a></td>
-<td>Missing change for <code>element_view::<i>iterator</i></code> in LWG 3798</td>
+<td><code>elements_view::<i>iterator</i>::operator*</code> missing conditional <code>noexcept</code> specification</td>
 <td>Yes</td>
 <td>3</td>
 <td></td>
 </tr>
 <tr>
-<td id="4114"><a href="lwg-active.html#4114" title="elements_view::iterator::operator* missing conditional noexcept specification (Status: New)">4114</a><sup><a href="https://cplusplus.github.io/LWG/issue4114">(i)</a></sup></td>
+<td id="3832"><a href="lwg-active.html#3832" title="Missing change for element_view::iterator in LWG 3798 (Status: New)">3832</a><sup><a href="https://cplusplus.github.io/LWG/issue3832">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>26.7.23.3 [range.elements.iterator]</td>
-<td><code>elements_view::<i>iterator</i>::operator*</code> missing conditional <code>noexcept</code> specification</td>
+<td>Missing change for <code>element_view::<i>iterator</i></code> in LWG 3798</td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -3787,21 +3787,21 @@ specified to make <code><i>N</i></code> copies of <code>T</code> into the destin
 <td></td>
 </tr>
 <tr>
-<td id="4085"><a href="lwg-active.html#4085" title="ranges::generate_random's helper lambda should specify the return type (Status: New)">4085</a><sup><a href="https://cplusplus.github.io/LWG/issue4085">(i)</a></sup></td>
+<td id="4077"><a href="lwg-active.html#4077" title="Unclear preconditions of std::ranges::generate_random (Status: New)">4077</a><sup><a href="https://cplusplus.github.io/LWG/issue4077">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>27.12.2 [alg.rand.generate]<a id="alg.rand.generate"></a></td>
-<td><code>ranges::generate_random</code>'s helper lambda should specify the return type</td>
-<td>Yes</td>
-<td></td>
+<td>Unclear preconditions of <code class='backtick'>std::ranges::generate_random</code></td>
+<td><span class="no-pr">No</span></td>
+<td>2</td>
 <td></td>
 </tr>
 <tr>
-<td id="4077"><a href="lwg-active.html#4077" title="Unclear preconditions of std::ranges::generate_random (Status: New)">4077</a><sup><a href="https://cplusplus.github.io/LWG/issue4077">(i)</a></sup></td>
+<td id="4085"><a href="lwg-active.html#4085" title="ranges::generate_random's helper lambda should specify the return type (Status: New)">4085</a><sup><a href="https://cplusplus.github.io/LWG/issue4085">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>27.12.2 [alg.rand.generate]</td>
-<td>Unclear preconditions of <code class='backtick'>std::ranges::generate_random</code></td>
-<td><span class="no-pr">No</span></td>
-<td></td>
+<td><code>ranges::generate_random</code>'s helper lambda should specify the return type</td>
+<td>Yes</td>
+<td>2</td>
 <td></td>
 </tr>
 </table>

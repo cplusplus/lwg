@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4102"><a href="lwg-active.html#4102">4102</a>. <code class='backtick'>string_view(Iter, Iter)</code> constructor breaks existing code</h3>
 <p><b>Section:</b> 23.3.3.2 <a href="https://wg21.link/string.view.cons">[string.view.cons]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Derek Zhang <b>Opened:</b> 2024-05-14 <b>Last modified:</b> 2024-05-20</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Derek Zhang <b>Opened:</b> 2024-05-14 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#string.view.cons">issues</a> in [string.view.cons].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -138,6 +138,14 @@ std::string_view s(arr, arr); // s.size() == 0 and s.data() == arr
 That seems acceptable, because <code class='backtick'>std::string_view s(arr, 0)</code>
 is simpler and clearer anyway.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+"The constructor should be made <code class='backtick'>explicit</code> as part of any resolution for this."
+</p>
+
 
 
 <p id="res-4102"><b>Proposed resolution:</b></p>

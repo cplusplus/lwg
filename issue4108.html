@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Issue 4108: lazy_split_view should be sized_range when pattern is empty tiny-range</title>
 <meta property="og:title" content="Issue 4108: lazy_split_view should be sized_range when pattern is empty tiny-range">
-<meta property="og:description" content="C++ library issue. Status: New">
+<meta property="og:description" content="C++ library issue. Status: SG9">
 <meta property="og:url" content="https://cplusplus.github.io/LWG/issue4108.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="http://cplusplus.github.io/LWG/images/cpp_logo.png">
@@ -61,15 +61,15 @@
 </head>
 <body>
 <hr>
-<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#SG9">SG9</a> status.</em></p>
 <h3 id="4108"><a href="lwg-active.html#4108">4108</a>. <code>lazy_split_view</code> should be <code>sized_range</code> when pattern is empty <code><i>tiny-range</i></code></h3>
-<p><b>Section:</b> 26.7.16.2 <a href="https://wg21.link/range.lazy.split.view">[range.lazy.split.view]</a>, 26.7.17.2 <a href="https://wg21.link/range.split.view">[range.split.view]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-23 <b>Last modified:</b> 2024-05-26</p>
-<p><b>Priority: </b>Not Prioritized
+<p><b>Section:</b> 26.7.16.2 <a href="https://wg21.link/range.lazy.split.view">[range.lazy.split.view]</a>, 26.7.17.2 <a href="https://wg21.link/range.split.view">[range.split.view]</a> <b>Status:</b> <a href="lwg-active.html#SG9">SG9</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-23 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.lazy.split.view">active issues</a> in [range.lazy.split.view].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.lazy.split.view">issues</a> in [range.lazy.split.view].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#SG9">SG9</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 When the pattern range is empty, <code>lazy_split_view</code> will split each element into individual subranges, 
@@ -79,6 +79,16 @@ Since we already have a <code><i>tiny-range</i></code> that can determine whethe
 it seems valuable to provide a <code>size</code> for <code>lazy_split_view</code> in this case, given that we already 
 specifically checked for it by <code>Pattern::size() == 0</code> in <code><i>inner-iterator</i>::operator++()</code>.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll. Set Status to SG9.
+"Design change".
+"<code>tiny-range</code> should accept <code>span&lt;T, 0|1&gt;</code> or <code>ref_view&lt;array&lt;T, 0|1&gt;&gt;</code>,
+see related paper <a href="https://wg21.link/P1419" title=" A SFINAE-friendly trait to determine the extent of statically sized containers">P1419</a>."
+</p>
+
 
 
 <p id="res-4108"><b>Proposed resolution:</b></p>

@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-08-02 at 21:15:32 UTC
+<p>Revised 2024-08-02 at 21:52:48 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -52858,6 +52858,7 @@ ranges::copy(r, <i>container-inserter</i>&lt;range_reference_t&lt;R&gt;&gt;(c));
 <p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#range.reverse">issues</a> in [range.reverse].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#SG9">SG9</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 Consider the following:
@@ -56528,8 +56529,8 @@ Set priority to 3 after reflector poll. Send to SG1.
 <hr>
 <h3 id="4077"><a href="#4077">4077</a><sup><a href="https://cplusplus.github.io/LWG/issue4077">(i)</a></sup>. Unclear preconditions of <code class='backtick'>std::ranges::generate_random</code></h3>
 <p><b>Section:</b> 27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-04-21 <b>Last modified:</b> 2024-04-21</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-04-21 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#alg.rand.generate">active issues</a> in [alg.rand.generate].</p>
 <p><b>View all other</b> <a href="lwg-index.html#alg.rand.generate">issues</a> in [alg.rand.generate].</p>
@@ -56542,6 +56543,14 @@ It also appears that the "shall be equivalent" imposes requirements on both impl
 and the requirements are not very clear. 
 Perhaps we should clarify the conditions in usual <i>Preconditions</i> paragraphs.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+When reviewing this we were clear this imposes requirements on users.
+</p>
+
 
 
 <p id="res-4077"><b>Proposed resolution:</b></p>
@@ -56878,8 +56887,8 @@ floatfield == (ios_base::fixed | ios_base::scientific)` &amp;&amp; !uppercase
 <hr>
 <h3 id="4085"><a href="#4085">4085</a><sup><a href="https://cplusplus.github.io/LWG/issue4085">(i)</a></sup>. <code>ranges::generate_random</code>'s helper lambda should specify the return type</h3>
 <p><b>Section:</b> 27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-28 <b>Last modified:</b> 2024-05-12</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-28 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#alg.rand.generate">active issues</a> in [alg.rand.generate].</p>
 <p><b>View all other</b> <a href="lwg-index.html#alg.rand.generate">issues</a> in [alg.rand.generate].</p>
@@ -56932,6 +56941,13 @@ ranges::generate(std::forward&lt;R&gt;(r), [&amp;d, &amp;g] <ins>-&gt; decltype(
 </blockquote>
 
 <p><i>[2024-05-12, Hewill Kang provides improved wording]</i></p>
+
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+</p>
 
 
 
@@ -58159,8 +58175,8 @@ models <code>common_range</code> <del>and <code>views::all(E)</code> is a well-f
 <hr>
 <h3 id="4100"><a href="#4100">4100</a><sup><a href="https://cplusplus.github.io/LWG/issue4100">(i)</a></sup>. Default arguments and signatures of standard library non-member functions</h3>
 <p><b>Section:</b> 16.4.6.4 <a href="https://wg21.link/global.functions">[global.functions]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-05-11 <b>Last modified:</b> 2024-05-12</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-05-11 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#global.functions">issues</a> in [global.functions].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -58171,6 +58187,15 @@ Some implementors want to split them into more overloads to determine the base 1
 (LLVM issue <a href="https://github.com/llvm/llvm-project/issues/91268">#91268</a>). However, the 
 current standard wording doesn't clearly allow such technique.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+"It's a lot of new text just to say you can't do that, lose the example?"
+"Might be NAD, is this already disallowed?" "Only for member functions."
+</p>
+
 
 
 <p id="res-4100"><b>Proposed resolution:</b></p>
@@ -58355,8 +58380,8 @@ rather than discarded.
 <hr>
 <h3 id="4102"><a href="#4102">4102</a><sup><a href="https://cplusplus.github.io/LWG/issue4102">(i)</a></sup>. <code class='backtick'>string_view(Iter, Iter)</code> constructor breaks existing code</h3>
 <p><b>Section:</b> 23.3.3.2 <a href="https://wg21.link/string.view.cons">[string.view.cons]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Derek Zhang <b>Opened:</b> 2024-05-14 <b>Last modified:</b> 2024-05-20</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Derek Zhang <b>Opened:</b> 2024-05-14 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#string.view.cons">issues</a> in [string.view.cons].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -58429,6 +58454,14 @@ std::string_view s(arr, arr); // s.size() == 0 and s.data() == arr
 That seems acceptable, because <code class='backtick'>std::string_view s(arr, 0)</code>
 is simpler and clearer anyway.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+"The constructor should be made <code class='backtick'>explicit</code> as part of any resolution for this."
+</p>
+
 
 
 <p id="res-4102"><b>Proposed resolution:</b></p>
@@ -58802,13 +58835,13 @@ template&lt;class FormatContext&gt;
 
 <hr>
 <h3 id="4108"><a href="#4108">4108</a><sup><a href="https://cplusplus.github.io/LWG/issue4108">(i)</a></sup>. <code>lazy_split_view</code> should be <code>sized_range</code> when pattern is empty <code><i>tiny-range</i></code></h3>
-<p><b>Section:</b> 26.7.16.2 <a href="https://wg21.link/range.lazy.split.view">[range.lazy.split.view]</a>, 26.7.17.2 <a href="https://wg21.link/range.split.view">[range.split.view]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-23 <b>Last modified:</b> 2024-05-26</p>
-<p><b>Priority: </b>Not Prioritized
+<p><b>Section:</b> 26.7.16.2 <a href="https://wg21.link/range.lazy.split.view">[range.lazy.split.view]</a>, 26.7.17.2 <a href="https://wg21.link/range.split.view">[range.split.view]</a> <b>Status:</b> <a href="lwg-active.html#SG9">SG9</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-05-23 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.lazy.split.view">active issues</a> in [range.lazy.split.view].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.lazy.split.view">issues</a> in [range.lazy.split.view].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#SG9">SG9</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 When the pattern range is empty, <code>lazy_split_view</code> will split each element into individual subranges, 
@@ -58818,6 +58851,16 @@ Since we already have a <code><i>tiny-range</i></code> that can determine whethe
 it seems valuable to provide a <code>size</code> for <code>lazy_split_view</code> in this case, given that we already 
 specifically checked for it by <code>Pattern::size() == 0</code> in <code><i>inner-iterator</i>::operator++()</code>.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll. Set Status to SG9.
+"Design change".
+"<code>tiny-range</code> should accept <code>span&lt;T, 0|1&gt;</code> or <code>ref_view&lt;array&lt;T, 0|1&gt;&gt;</code>,
+see related paper <a href="https://wg21.link/P1419" title=" A SFINAE-friendly trait to determine the extent of statically sized containers">P1419</a>."
+</p>
+
 
 
 <p id="res-4108"><b>Proposed resolution:</b></p>
@@ -59159,99 +59202,10 @@ aren't imposed for these algorithms or change the constraints.
 
 
 <hr>
-<h3 id="4113"><a href="#4113">4113</a><sup><a href="https://cplusplus.github.io/LWG/issue4113">(i)</a></sup>. Disallow <code>has_unique_object_representations&lt;Incomplete[]&gt;</code></h3>
-<p><b>Section:</b> 21.3.5.4 <a href="https://wg21.link/meta.unary.prop">[meta.unary.prop]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-06-25 <b>Last modified:</b> 2024-06-25</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#meta.unary.prop">active issues</a> in [meta.unary.prop].</p>
-<p><b>View all other</b> <a href="lwg-index.html#meta.unary.prop">issues</a> in [meta.unary.prop].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-The type completeness requirements for <code class='backtick'>has_unique_object_representations</code> say:
-<blockquote>
-<code class='backtick'>T</code> shall be a complete type, <i>cv</i> <code class='backtick'>void</code>, or an array of unknown bound.
-</blockquote>
-</p>
-<p>
-This implies that the trait works for all arrays of unknown bound,
-whether the element type is complete or not. That seems to be incorrect,
-because <code>has_unique_object_representations_v&lt;Incomplete[]&gt;</code>
-is required to have the same result as
-<code>has_unique_object_representations_v&lt;Incomplete&gt;</code>
-which is ill-formed if <code class='backtick'>Incomplete</code> is an incomplete class type.
-</p>
-
-<p>
-I think we need the element type to be complete to be able to give an answer.
-Alternatively, if the intended result for an array of unknown bound is false
-(maybe because there can be no objects of type <code class='backtick'>T[]</code>, or because we can't
-know that two objects declared as <code class='backtick'>extern T a[];</code> and <code class='backtick'>extern T b[];</code> have
-the same number of elements?) then the condition for the trait needs to be
-special-cased as <code class='backtick'>false</code> for arrays of unknown bound.
-The current spec is inconsistent, we can't allow arrays of unknown bound
-and apply the current rules to determine the trait's result.
-</p>
-
-
-<p id="res-4113"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
-</p>
-
-<ol>
-<li><p>Modify 21.3.5.4 <a href="https://wg21.link/meta.unary.prop">[meta.unary.prop]</a> as indicated:</p>
-
-<blockquote>
-<table style="border: 1px solid; border-spacing: 1.5em">
-<thead style="text-align: center">
-<tr><th>Template</th><th>Condition</th><th>Preconditions</th></tr>
-</thead>
-<tbody style="vertical-align: top">
-<tr><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td></tr>
-<tr>
-<td>
-<pre><code>template&lt;class T&gt;
-struct has_unique_object_representations;</code></pre>
-</td>
-<td>
-For an array type <code class='backtick'>T</code>, the same result as
-<code>has_unique_object_representations_v&lt;remove_all_extents_t&lt;T&gt;&gt;</code>,
-otherwise <i>see below</i>.
-</td>
-<td>
-<ins><code>remove_all_extents_t&lt;T&gt;</code></ins>
-<del><code>T</code></del>
-shall be a complete type<del>,</del>
-<ins>or</ins> <i>cv</i> <code class='backtick'>void</code><del>, or an array of unknown bound</del>.
-</td>
-</tr>
-</tbody>
-</table>
-</blockquote>
-<blockquote class="note">
-<p>
-[<i>Drafting note</i>: We could use <code>remove_extent_t&lt;T&gt;</code>
-to remove just the first array dimension, because only that first one can
-have an unknown bound.
-The proposed resolution uses <code>remove_all_extents_t&lt;T&gt;</code>
-for consistency with the <b>Condition</b> column.]
-</p>
-</blockquote>
-
-</li>
-</ol>
-
-
-
-
-
-<hr>
 <h3 id="4114"><a href="#4114">4114</a><sup><a href="https://cplusplus.github.io/LWG/issue4114">(i)</a></sup>. <code>elements_view::<i>iterator</i>::operator*</code> missing conditional <code>noexcept</code> specification</h3>
 <p><b>Section:</b> 26.7.23.3 <a href="https://wg21.link/range.elements.iterator">[range.elements.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-02 <b>Last modified:</b> 2024-07-07</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-02 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.elements.iterator">active issues</a> in [range.elements.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.elements.iterator">issues</a> in [range.elements.iterator].</p>
@@ -59286,6 +59240,13 @@ static_assert(noexcept(std::ranges::iter_move(i2)));
 <p>
 The proposed resolution is aligned with the <i>strengthened</i> implementation of MSVC-STL.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
 
 
 <p id="res-4114"><b>Proposed resolution:</b></p>
@@ -59662,8 +59623,8 @@ namespace std {
 <h3 id="4120"><a href="#4120">4120</a><sup><a href="https://cplusplus.github.io/LWG/issue4120">(i)</a></sup>. <code>move_iterator</code> should provide <code>iterator_category</code> only when it models
 <code>forward_iterator</code></h3>
 <p><b>Section:</b> 25.5.4.2 <a href="https://wg21.link/move.iterator">[move.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-12 <b>Last modified:</b> 2024-07-21</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-12 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#move.iterator">active issues</a> in [move.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#move.iterator">issues</a> in [move.iterator].</p>
@@ -59675,6 +59636,14 @@ Following up LWG <a href="lwg-active.html#4116" title="enumerate_view::iterator 
 <code>move_iterator::operator++(int)</code> will return <code>void</code>, which fails to meet the C++17 iterator
 requirements, which should not provide <code>iterator_category</code>.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+"NAD, would be a major breaking change to something present since C++11."
+</p>
+
 
 
 <p id="res-4120"><b>Proposed resolution:</b></p>
@@ -59722,8 +59691,8 @@ The member <i>typedef-name</i> <code>iterator_category</code> is defined if and 
 <hr>
 <h3 id="4121"><a href="#4121">4121</a><sup><a href="https://cplusplus.github.io/LWG/issue4121">(i)</a></sup>. <code>ranges::to</code> constructs associative containers via <code>c.emplace(c.end(), *it)</code></h3>
 <p><b>Section:</b> 26.5.7.1 <a href="https://wg21.link/range.utility.conv.general">[range.utility.conv.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-16 <b>Last modified:</b> 2024-07-23</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-16 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -59756,6 +59725,19 @@ The proposed resolution simply removes the <code>emplace()</code> branch. Althou
 
 <p><i>[2024-07-23; This was caused by LWG <a href="lwg-defects.html#4016" title="container-insertable checks do not match what container-inserter does (Status: WP)">4016</a>.]</i></p>
 
+
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+"Would like to preserve the ability to use <code class='backtick'>emplace</code>. Tim suggested trying
+<code class='backtick'>emplace_hint</code> first, then <code class='backtick'>emplace</code>."
+"I tried it, it gets very verbose, because we might also want to try
+<code class='backtick'>insert(*it)</code> instead of <code class='backtick'>insert(c.end(), *it)</code> if <code class='backtick'>emplace(*it)</code> is not valid
+for associative containers, because <code class='backtick'>c.end()</code> might not be a good hint."
+"It might be suboptimal, but it still works."
+</p>
 
 
 
@@ -59874,8 +59856,8 @@ namespace std {
 <hr>
 <h3 id="4123"><a href="#4123">4123</a><sup><a href="https://cplusplus.github.io/LWG/issue4123">(i)</a></sup>. Container effects use "the assignment operator or move assignment operator"</h3>
 <p><b>Section:</b> 24.3.9.4 <a href="https://wg21.link/deque.modifiers">[deque.modifiers]</a>, 24.3.12.5 <a href="https://wg21.link/vector.modifiers">[vector.modifiers]</a>, 24.3.14.5 <a href="https://wg21.link/inplace.vector.modifiers">[inplace.vector.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-07-25 <b>Last modified:</b> 2024-07-25</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-07-25 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#deque.modifiers">active issues</a> in [deque.modifiers].</p>
 <p><b>View all other</b> <a href="lwg-index.html#deque.modifiers">issues</a> in [deque.modifiers].</p>
@@ -59910,6 +59892,13 @@ and there's no guarantee that the constructor used for initializing a
 It could be some templated constructor that is a better match than any
 of the special member functions.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll. Arthur to draft wording.
+</p>
+
 
 
 <p id="res-4123"><b>Proposed resolution:</b></p>
@@ -60091,8 +60080,8 @@ by <a href="https://wg21.link/P2291R3" title=" Add Constexpr Modifiers to Functi
 <hr>
 <h3 id="4127"><a href="#4127">4127</a><sup><a href="https://cplusplus.github.io/LWG/issue4127">(i)</a></sup>. The Standard Library should not use predicates of the form <code>pred(*i) != false</code></h3>
 <p><b>Section:</b> 22.10.18.3 <a href="https://wg21.link/func.search.bm">[func.search.bm]</a>, 22.10.18.4 <a href="https://wg21.link/func.search.bmh">[func.search.bmh]</a>, 24.2.7.1 <a href="https://wg21.link/associative.reqmts.general">[associative.reqmts.general]</a>, 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, 27.6.6 <a href="https://wg21.link/alg.find">[alg.find]</a>, 27.6.9 <a href="https://wg21.link/alg.find.first.of">[alg.find.first.of]</a>, 27.6.10 <a href="https://wg21.link/alg.adjacent.find">[alg.adjacent.find]</a>, 27.6.11 <a href="https://wg21.link/alg.count">[alg.count]</a>, 27.6.12 <a href="https://wg21.link/alg.mismatch">[alg.mismatch]</a>, 27.6.15 <a href="https://wg21.link/alg.search">[alg.search]</a>, 27.8.1 <a href="https://wg21.link/alg.sorting.general">[alg.sorting.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-25 <b>Last modified:</b> 2024-07-29</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-25 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -60119,6 +60108,19 @@ following our usual wording convention, since an English phrase of the form "if 
 where <code>pred([&hellip;])</code> is potential non-<code>bool</code> and the English "if" is not a C++ language 
 <code>if</code> (with built-in conversion semantics) doesn't sound like a meaningful phrase to me.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll. "Needs more 'is <code class='backtick'>true</code>' added".
+"Would prefer not to have explicit conversions to <code class='backtick'>bool</code> unless
+<i><code class='backtick'>boolean-testable</code></i> requires that.
+The 'Let E be' lists don't need an 'is true' there,
+but the use of 'E' should say 'is true'".
+[alg.search] and [func.search.bm] have changed editorially in the draft,
+the proposed resolution needs updating.
+</p>
+
 
 
 <p id="res-4127"><b>Proposed resolution:</b></p>

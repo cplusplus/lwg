@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4114"><a href="lwg-active.html#4114">4114</a>. <code>elements_view::<i>iterator</i>::operator*</code> missing conditional <code>noexcept</code> specification</h3>
 <p><b>Section:</b> 26.7.23.3 <a href="https://wg21.link/range.elements.iterator">[range.elements.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-02 <b>Last modified:</b> 2024-07-07</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-02 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.elements.iterator">active issues</a> in [range.elements.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.elements.iterator">issues</a> in [range.elements.iterator].</p>
@@ -100,6 +100,13 @@ static_assert(noexcept(std::ranges::iter_move(i2)));
 <p>
 The proposed resolution is aligned with the <i>strengthened</i> implementation of MSVC-STL.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
 
 
 <p id="res-4114"><b>Proposed resolution:</b></p>

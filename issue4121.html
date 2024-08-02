@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4121"><a href="lwg-active.html#4121">4121</a>. <code>ranges::to</code> constructs associative containers via <code>c.emplace(c.end(), *it)</code></h3>
 <p><b>Section:</b> 26.5.7.1 <a href="https://wg21.link/range.utility.conv.general">[range.utility.conv.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-16 <b>Last modified:</b> 2024-07-23</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-16 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -98,6 +98,19 @@ The proposed resolution simply removes the <code>emplace()</code> branch. Althou
 
 <p><i>[2024-07-23; This was caused by LWG <a href="lwg-defects.html#4016" title="container-insertable checks do not match what container-inserter does (Status: WP)">4016</a>.]</i></p>
 
+
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+"Would like to preserve the ability to use <code class='backtick'>emplace</code>. Tim suggested trying
+<code class='backtick'>emplace_hint</code> first, then <code class='backtick'>emplace</code>."
+"I tried it, it gets very verbose, because we might also want to try
+<code class='backtick'>insert(*it)</code> instead of <code class='backtick'>insert(c.end(), *it)</code> if <code class='backtick'>emplace(*it)</code> is not valid
+for associative containers, because <code class='backtick'>c.end()</code> might not be a good hint."
+"It might be suboptimal, but it still works."
+</p>
 
 
 

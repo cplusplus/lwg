@@ -67,8 +67,8 @@ forward_iterator">
 <h3 id="4120"><a href="lwg-active.html#4120">4120</a>. <code>move_iterator</code> should provide <code>iterator_category</code> only when it models
 <code>forward_iterator</code></h3>
 <p><b>Section:</b> 25.5.4.2 <a href="https://wg21.link/move.iterator">[move.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-12 <b>Last modified:</b> 2024-07-21</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-12 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#move.iterator">active issues</a> in [move.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#move.iterator">issues</a> in [move.iterator].</p>
@@ -80,6 +80,14 @@ Following up LWG <a href="lwg-active.html#4116" title="enumerate_view::iterator 
 <code>move_iterator::operator++(int)</code> will return <code>void</code>, which fails to meet the C++17 iterator
 requirements, which should not provide <code>iterator_category</code>.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+"NAD, would be a major breaking change to something present since C++11."
+</p>
+
 
 
 <p id="res-4120"><b>Proposed resolution:</b></p>

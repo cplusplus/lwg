@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4034"><a href="lwg-active.html#4034">4034</a>. Clarify specification of <code>std::min</code> and <code>std::max</code></h3>
 <p><b>Section:</b> 27.8.9 <a href="https://wg21.link/alg.min.max">[alg.min.max]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2023-12-29 <b>Last modified:</b> 2024-01-15</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2023-12-29 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#alg.min.max">issues</a> in [alg.min.max].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -99,6 +99,19 @@ This leaves a few questions open:
 <li><p>How is the smaller value determined? Must it be through the less-than operator?</p></li>
 <li><p>For <code>std::max</code>, can the "larger" value be determined through the greater-than operator or must it be through less-than?</p></li>
 </ul>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll.
+Suggestions for NAD. "The result can be determined in any way that is allowed
+by the constaints the function imposes on its arguments. Since the arguments
+must be <i>Cpp17LessThanComparable</i>, obviously it has to use a less-than
+operation, because it can't assume any other operation is possible."
+Some of the submitter's questions could be addressed with an
+<a href="https://github.com/cplusplus/draft/pull/6776">editorial change</a>.
+</p>
+
 
 
 <p id="res-4034"><b>Proposed resolution:</b></p>

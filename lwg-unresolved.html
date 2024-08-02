@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-08-02 at 21:52:48 UTC
+<p>Revised 2024-08-02 at 23:17:10 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -53922,8 +53922,8 @@ is_convertible_v&lt;Y(*)[], T*&gt;</code> is <code>true</code>.
 <hr>
 <h3 id="4033"><a href="#4033">4033</a><sup><a href="https://cplusplus.github.io/LWG/issue4033">(i)</a></sup>. &sect;[macro.names] defining macros after importing the standard library</h3>
 <p><b>Section:</b> 16.4.5.3.3 <a href="https://wg21.link/macro.names">[macro.names]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2023-12-27 <b>Last modified:</b> 2024-01-13</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2023-12-27 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#macro.names">issues</a> in [macro.names].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -53952,6 +53952,14 @@ the program is undefined, in which case IFNDR is the better way to say that.
 If we expect implementations to diagnose users defining macros that match library names we
 should say so more clearly, but I am not aware of any current tool-chain that does so.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+"Why should <code class='backtick'>import std</code> care if I <code class='backtick'>#define vector potato</code>?"
+</p>
+
 
 
 <p id="res-4033"><b>Proposed resolution:</b></p>
@@ -53989,8 +53997,8 @@ the names <code>likely</code> and <code>unlikely</code> may be defined as functi
 <hr>
 <h3 id="4034"><a href="#4034">4034</a><sup><a href="https://cplusplus.github.io/LWG/issue4034">(i)</a></sup>. Clarify specification of <code>std::min</code> and <code>std::max</code></h3>
 <p><b>Section:</b> 27.8.9 <a href="https://wg21.link/alg.min.max">[alg.min.max]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2023-12-29 <b>Last modified:</b> 2024-01-15</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jan Schultke <b>Opened:</b> 2023-12-29 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#alg.min.max">issues</a> in [alg.min.max].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -54024,6 +54032,19 @@ This leaves a few questions open:
 <li><p>How is the smaller value determined? Must it be through the less-than operator?</p></li>
 <li><p>For <code>std::max</code>, can the "larger" value be determined through the greater-than operator or must it be through less-than?</p></li>
 </ul>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll.
+Suggestions for NAD. "The result can be determined in any way that is allowed
+by the constaints the function imposes on its arguments. Since the arguments
+must be <i>Cpp17LessThanComparable</i>, obviously it has to use a less-than
+operation, because it can't assume any other operation is possible."
+Some of the submitter's questions could be addressed with an
+<a href="https://github.com/cplusplus/draft/pull/6776">editorial change</a>.
+</p>
+
 
 
 <p id="res-4034"><b>Proposed resolution:</b></p>
@@ -59992,85 +60013,6 @@ namespace std {
 </blockquote>
 
 </li>
-</ol>
-
-
-
-
-
-<hr>
-<h3 id="4126"><a href="#4126">4126</a><sup><a href="https://cplusplus.github.io/LWG/issue4126">(i)</a></sup>. Some feature-test macros for fully freestanding features are not yet marked freestanding</h3>
-<p><b>Section:</b> 17.3.2 <a href="https://wg21.link/version.syn">[version.syn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-07-24 <b>Last modified:</b> 2024-08-02</p>
-<p><b>Priority: </b>2
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#version.syn">active issues</a> in [version.syn].</p>
-<p><b>View all other</b> <a href="lwg-index.html#version.syn">issues</a> in [version.syn].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-Currently (<a href="https://wg21.link/N4986" title=" Working Draft, Programming Languages — C++">N4986</a>), it's a bit weird in 17.3.2 <a href="https://wg21.link/version.syn">[version.syn]</a> that some feature-test
-macros are not marked freestanding, despite the indicated features being fully freestanding. The 
-freestanding status seems sometimes implicitly covered by "also in" headers that are mostly or all 
-freestanding, but sometimes not.
-<p/>
-I think it's more consistent to ensure feature-test macros for fully freestanding features are also freestanding.
-</p>
-
-<p><i>[2024-08-02; Reflector poll]</i></p>
-
-<p>
-Set priority to 2 after reflector poll.
-</p>
-
-
-
-<p id="res-4126"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4986" title=" Working Draft, Programming Languages — C++">N4986</a>.
-</p>
-
-<ol>
-<li><p>Modify 17.3.2 <a href="https://wg21.link/version.syn">[version.syn]</a> as indicated:</p>
-
-<blockquote class="note">
-<p>
-[<i>Drafting note</i>:  <code>&lt;charconv&gt;</code> is not fully freestanding, but all functions made <code>constexpr</code> 
-by <a href="https://wg21.link/P2291R3" title=" Add Constexpr Modifiers to Functions to_chars and from_chars for Integral Types in Header">P2291R3</a> are furtherly made freestanding by <a href="https://wg21.link/P2338R4" title=" Freestanding Library: Character primitives and the C library">P2338R4</a>. ]
-</p>
-</blockquote>
-
-<blockquote>
-<pre>
-[&hellip;]
-#define __cpp_lib_common_reference                  202302L // <i><ins>freestanding,</ins> also in</i> &lt;type_traits&gt;
-#define __cpp_lib_common_reference_wrapper          202302L // <i><ins>freestanding,</ins> also in</i> &lt;functional&gt;
-[&hellip;]                                                                              
-#define __cpp_lib_constexpr_charconv                202207L // <i><ins>freestanding,</ins> also in</i> &lt;charconv&gt;
-[&hellip;]                                                                              
-#define __cpp_lib_coroutine                         201902L // <i><ins>freestanding,</ins> also in</i> &lt;coroutine&gt;
-[&hellip;]                                                                              
-#define __cpp_lib_is_implicit_lifetime              202302L // <i><ins>freestanding,</ins> also in</i> &lt;type_traits&gt;
-[&hellip;]                                                                              
-#define __cpp_lib_is_virtual_base_of                202406L // <i><ins>freestanding,</ins> also in</i> &lt;type_traits&gt;
-[&hellip;]                                                                              
-#define __cpp_lib_is_within_lifetime                202306L // <i><ins>freestanding,</ins> also in</i> &lt;type_traits&gt;
-[&hellip;]                                                                              
-#define __cpp_lib_mdspan                            202406L // <i><ins>freestanding,</ins> also in</i> &lt;mdspan&gt;
-[&hellip;]                                                                              
-#define __cpp_lib_ratio                             202306L // <i><ins>freestanding,</ins> also in</i> &lt;ratio&gt;
-[&hellip;]                                                                              
-#define __cpp_lib_span_initializer_list             202311L // <i><ins>freestanding,</ins> also in</i> &lt;span&gt;
-[&hellip;]                                                                              
-#define __cpp_lib_submdspan                         202403L // <i><ins>freestanding,</ins> also in</i> &lt;mdspan&gt;
-[&hellip;]                                                                              
-#define __cpp_lib_to_array                          201907L // <i><ins>freestanding,</ins> also in</i> &lt;array&gt;
-[&hellip;]
-</pre>
-</blockquote>
-
-</li>
-
 </ol>
 
 

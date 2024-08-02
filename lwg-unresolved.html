@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-08-02 at 23:17:10 UTC
+<p>Revised 2024-08-02 at 23:52:04 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -60348,6 +60348,126 @@ weak ordering on the values.
 </li>
 
 </ol>
+
+
+
+
+
+<hr>
+<h3 id="4128"><a href="#4128">4128</a><sup><a href="https://cplusplus.github.io/LWG/issue4128">(i)</a></sup>. Allocator requirements should not allow rebinding conversions to be explicit</h3>
+<p><b>Section:</b> 99 [allcoator.requirements.general] <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-08-02 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The <i>Cpp17Allocator</i> requirements require a non-explicit copy constructor,
+but do not require a non-explicit converting constructor used for rebinding.
+</p>
+<p>
+Since C++14 it has been clearly stated that
+"An allocator type <code class='backtick'>X</code> shall satisfy the requirements of CopyConstructible".
+That requires <code class='backtick'>X u = a;</code> to work as well as <code class='backtick'>X u(a);</code>,
+but only when the type of <code class='backtick'>a</code> is <code class='backtick'>X</code>.
+Constructing a rebound allocator from another specialization of the same
+allocator class template is only required to work using direct-initialization,
+<code class='backtick'>X u(b);</code>.
+This means it's permitted to make the converting constructor explicit, so that <code class='backtick'>X u = b;</code> is ill-formed.
+There seems to be no good reason to allow allocators to make that ill-formed.
+</p>
+<p>
+In fact, there seems to be a good reason to <i>not</i> allow it.
+The <code class='backtick'>uses_allocator</code> trait is defined in terms of <code class='backtick'>is_convertible</code>,
+not <code class='backtick'>is_constructible</code>, which means that if <code>Alloc&lt;T&gt;</code>
+has an explicit converting constructor,
+then <code>uses_allocator_v&lt;X, Alloc&lt;T&gt;&gt;</code> will be false
+for a type with <code>X::allocator_type = Alloc&lt;U&gt;</code>,
+because you would need to explicitly convert an <code>Alloc&lt;T&gt;</code> to
+<code>Alloc&lt;U&gt;</code> before passing it to <code>X</code>'s constructor.
+</p>
+<p>
+That is at least consistent:
+the trait gives the right answer even for allocators with explicit conversions.
+It doesn't seem very useful though, and if users don't carefully check
+<code class='backtick'>uses_allocator</code> with exactly the right types they might get errors unless
+they carefully rebind and convert their allocators explicitly.
+Or worse, if they rely on other library components to check <code class='backtick'>uses_allocator</code>,
+they might silently get the wrong behaviour.
+For example, trying to construct an <code>X</code> with an <code>Alloc&lt;T&gt;</code>
+(e.g. via <code class='backtick'>make_obj_using_allocator</code>)
+could silently fail to pass the allocator to the constructor
+because there's no implicit conversion to <code class='backtick'>X::allocator_type</code>,
+even though you're providing an allocator of the right "family"
+and trying to use it. So a constructor without an allocator argument could be
+chosen when you thought you were supplying an allocator for the object to use.
+</p>
+<p>
+There seemed to be consensus when LWG discussed it that we should just 
+require conversions to be implicit, so that allocators are not
+silently ignored because they cannot be implicitly converted.
+</p>
+<p>
+During the discussion it was noted that assigning allocators is only needed
+when the propagation trait is true,
+but such assignments are always done between objects of the same allocator type.
+So the allocator requirements do not need to require converting assignments
+to work.
+</p>
+
+
+<p id="res-4128"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4986" title=" Working Draft, Programming Languages — C++">N4986</a>.
+</p>
+<ol>
+<li><p>Modify 16.4.4.6.1 <a href="https://wg21.link/allocator.requirements.general">[allocator.requirements.general]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+X u(a);
+X u = a;
+</pre>
+<p>-63-
+<i>Postconditions</i>: <code class='backtick'>u == a</code> <ins>is <code class='backtick'>true</code>.</ins>
+</p>
+<p>-64-
+<i>Throws</i>: Nothing.
+</p>
+<pre>
+X u(b);
+<ins>X u = b;</ins>
+</pre>
+<p>-65-
+<i>Postconditions</i>: <code class='backtick'>Y(u) == b</code> and <code class='backtick'>u == X(b)</code> <ins>are both <code class='backtick'>true</code></ins>.
+</p>
+<p>-66-
+<i>Throws</i>: Nothing.
+</p>
+<pre>
+X u(std::move(a));
+X u = std::move(a);
+</pre>
+<p>-67-
+<i>Postconditions</i>: The value of <code class='backtick'>a</code> is unchanged and is equal to <code class='backtick'>u</code>.
+</p>
+<p>-68-
+<i>Throws</i>: Nothing.
+</p>
+<pre>
+X u(std::move(b));
+<ins>X u = std::move(b);</ins>
+</pre>
+<p>-69-
+<i>Postconditions</i>: <code class='backtick'>u</code> is equal to the prior value of <code class='backtick'>X(b)</code>.
+</p>
+<p>-70-
+<i>Throws</i>: Nothing.
+</p>
+</blockquote>
+</li>
+</ol>
+
 
 
 

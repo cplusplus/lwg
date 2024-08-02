@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4081"><a href="lwg-active.html#4081">4081</a>. <code>concat_view::<i>iterator</i>::operator-</code> is overconstrained</h3>
 <p><b>Section:</b> 26.7.18.3 <a href="https://wg21.link/range.concat.iterator">[range.concat.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-26 <b>Last modified:</b> 2024-04-27</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-26 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.concat.iterator">active issues</a> in [range.concat.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.concat.iterator">issues</a> in [range.concat.iterator].</p>
@@ -92,6 +92,13 @@ auto d = it - c.begin(); // <span style="color:red;font-weight:bolder">error: no
 <p>
 The proposed resolution lists a minimal constraint formula based on the implementation details of <code>operator-</code>.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
 
 
 <p id="res-4081"><b>Proposed resolution:</b></p>

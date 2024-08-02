@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4115"><a href="lwg-active.html#4115">4115</a>. <code>move_iterator::operator*</code> should have conditional <code>noexcept</code> specification</h3>
 <p><b>Section:</b> 25.5.4.6 <a href="https://wg21.link/move.iter.elem">[move.iter.elem]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-03 <b>Last modified:</b> 2024-07-07</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-03 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#move.iter.elem">issues</a> in [move.iter.elem].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -78,6 +78,16 @@ specification, which seems to be an oversight given that the standard goes to su
 preserve the noexceptness of <code>iter_move</code>, and the main purpose of <code>move_iterator</code> is 
 precisely to apply <code>iter_move</code> to the underlying iterator via dereferencing.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll.
+"Do we have evidence conditional noexcept matters here?
+Do we have a policy that <code class='backtick'>operator*</code> should be noexcept whenever possible?
+What criteria are we using to decide here?"
+</p>
+
 
 
 <p id="res-4115"><b>Proposed resolution:</b></p>

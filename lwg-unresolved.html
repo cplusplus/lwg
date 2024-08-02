@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-07-31 at 11:17:11 UTC
+<p>Revised 2024-08-02 at 21:15:32 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -56641,8 +56641,8 @@ Set priority to 3 after reflector poll.
 <hr>
 <h3 id="4081"><a href="#4081">4081</a><sup><a href="https://cplusplus.github.io/LWG/issue4081">(i)</a></sup>. <code>concat_view::<i>iterator</i>::operator-</code> is overconstrained</h3>
 <p><b>Section:</b> 26.7.18.3 <a href="https://wg21.link/range.concat.iterator">[range.concat.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-26 <b>Last modified:</b> 2024-04-27</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-26 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.concat.iterator">active issues</a> in [range.concat.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#range.concat.iterator">issues</a> in [range.concat.iterator].</p>
@@ -56669,6 +56669,13 @@ auto d = it - c.begin(); // <span style="color:red;font-weight:bolder">error: no
 <p>
 The proposed resolution lists a minimal constraint formula based on the implementation details of <code>operator-</code>.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
 
 
 <p id="res-4081"><b>Proposed resolution:</b></p>
@@ -59348,8 +59355,8 @@ namespace std::ranges {
 <hr>
 <h3 id="4115"><a href="#4115">4115</a><sup><a href="https://cplusplus.github.io/LWG/issue4115">(i)</a></sup>. <code>move_iterator::operator*</code> should have conditional <code>noexcept</code> specification</h3>
 <p><b>Section:</b> 25.5.4.6 <a href="https://wg21.link/move.iter.elem">[move.iter.elem]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-03 <b>Last modified:</b> 2024-07-07</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-03 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#move.iter.elem">issues</a> in [move.iter.elem].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -59362,6 +59369,16 @@ specification, which seems to be an oversight given that the standard goes to su
 preserve the noexceptness of <code>iter_move</code>, and the main purpose of <code>move_iterator</code> is 
 precisely to apply <code>iter_move</code> to the underlying iterator via dereferencing.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll.
+"Do we have evidence conditional noexcept matters here?
+Do we have a policy that <code class='backtick'>operator*</code> should be noexcept whenever possible?
+What criteria are we using to decide here?"
+</p>
+
 
 
 <p id="res-4115"><b>Proposed resolution:</b></p>
@@ -59479,8 +59496,8 @@ namespace std::ranges {
 <hr>
 <h3 id="4117"><a href="#4117">4117</a><sup><a href="https://cplusplus.github.io/LWG/issue4117">(i)</a></sup>. <code>generator::<i>iterator</i></code> should provide <code>iterator_concept</code></h3>
 <p><b>Section:</b> 26.8.6 <a href="https://wg21.link/coro.generator.iterator">[coro.generator.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-07 <b>Last modified:</b> 2024-07-07</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-07 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#coro.generator.iterator">active issues</a> in [coro.generator.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#coro.generator.iterator">issues</a> in [coro.generator.iterator].</p>
@@ -59491,6 +59508,15 @@ namespace std::ranges {
 While this does not affect it being an <code>input_iterator</code>, providing <code>iterator_concept</code> 
 does improve consistency given that other C++20 iterators have such a member type alias.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll.
+Six votes for P0 (tentatively ready) but one NAD vote saying that if this
+has no effect on the category then there's no reason to add it.
+</p>
+
 
 
 <p id="res-4117"><b>Proposed resolution:</b></p>
@@ -59624,78 +59650,6 @@ namespace std {
   template&lt;class Duration, class charT&gt;
     struct formatter&lt;chrono::sys_time&lt;Duration&gt;, charT&gt;;
 </code></pre>
-</blockquote>
-</li>
-</ol>
-
-
-
-
-
-<hr>
-<h3 id="4119"><a href="#4119">4119</a><sup><a href="https://cplusplus.github.io/LWG/issue4119">(i)</a></sup>. <code>generator::promise_type::yield_value(ranges::elements_of&lt;R, Alloc&gt;)</code>'s nested <code>generator</code> may be ill-formed</h3>
-<p><b>Section:</b> 26.8.5 <a href="https://wg21.link/coro.generator.promise">[coro.generator.promise]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-11 <b>Last modified:</b> 2024-07-21</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#coro.generator.promise">active issues</a> in [coro.generator.promise].</p>
-<p><b>View all other</b> <a href="lwg-index.html#coro.generator.promise">issues</a> in [coro.generator.promise].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-The nested coroutine is specified to return <code>generator&lt;yielded, ranges::range_value_t&lt;R&gt;, Alloc&gt;</code> 
-which can be problematic as the value type of <code>R</code> is really irrelevant to <code>yielded</code>, 
-unnecessarily violating the <code>generator</code>'s <i>Mandates</i> (<a href="https://godbolt.org/z/PzGP3G7rr">demo</a>):
-</p>
-<blockquote><pre>
-#include &lt;generator&gt;
-#include &lt;vector&gt;
-
-std::generator&lt;std::span&lt;int&gt;&gt; f() {
-  std::vector&lt;int&gt; v;
-  co_yield v; // ok
-}
-
-std::generator&lt;std::span&lt;int&gt;&gt; g() {
-  std::vector&lt;std::vector&lt;int&gt;&gt; v;
-  co_yield std::ranges::elements_of(v); // <span style="color:red;font-weight:bolder">hard error</span>
-}
-</pre></blockquote>
-<p>
-This proposed resolution is to change the second template parameter from <code>range_value_t&lt;R&gt;</code> 
-to <code>void</code> since that type doesn't matter to us.
-</p>
-
-
-<p id="res-4119"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4986" title=" Working Draft, Programming Languages — C++">N4986</a>.
-</p>
-<ol>
-<li><p>Modify 26.8.5 <a href="https://wg21.link/coro.generator.promise">[coro.generator.promise]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-template&lt;ranges::input_range R, class Alloc&gt;
-  requires convertible_to&lt;ranges::range_reference_t&lt;R&gt;, yielded&gt;
-  auto yield_value(ranges::elements_of&lt;R, Alloc&gt; r);
-</pre>
-<blockquote>
-<p>
--13- <i>Effects</i>: Equivalent to:
-</p>
-<blockquote><pre>
-auto nested = [](allocator_arg_t, Alloc, ranges::iterator_t&lt;R&gt; i, ranges::sentinel_t&lt;R&gt; s)
-  -&gt; generator&lt;yielded, <del>ranges::range_value_t&lt;R&gt;</del><ins>void</ins>, Alloc&gt; {
-    for (; i != s; ++i) {
-      co_yield static_cast&lt;yielded&gt;(*i);
-    }
-  };
-return yield_value(ranges::elements_of(nested(
-  allocator_arg, r.allocator, ranges::begin(r.range), ranges::end(r.range))));
-</pre></blockquote>
-[&hellip;]
-</blockquote>
 </blockquote>
 </li>
 </ol>
@@ -59857,8 +59811,8 @@ constexpr auto <i>container-append</i>(Container&amp; c) {     <i>// exposition 
 <hr>
 <h3 id="4122"><a href="#4122">4122</a><sup><a href="https://cplusplus.github.io/LWG/issue4122">(i)</a></sup>. Ill-formed <code>operator&lt;=&gt;</code> can cause hard error when instantiating <code>std::inplace_vector</code></h3>
 <p><b>Section:</b> 24.3.14.1 <a href="https://wg21.link/inplace.vector.overview">[inplace.vector.overview]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-07-20 <b>Last modified:</b> 2024-07-21</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-07-20 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -59868,6 +59822,13 @@ As the <code>operator&lt;=&gt;</code> overload for <code>std::inplace_vector</co
 type (<code><i>synth-three-way-result</i>&lt;T&gt;</code>) is not deduced, when the return type is ill-formed, hard 
 error occurs in the instantiation of the enclosing <code>std::inplace_vector&lt;T, N&gt;</code>.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+</p>
+
 
 
 <p id="res-4122"><b>Proposed resolution:</b></p>
@@ -59960,113 +59921,10 @@ of the special member functions.
 
 
 <hr>
-<h3 id="4124"><a href="#4124">4124</a><sup><a href="https://cplusplus.github.io/LWG/issue4124">(i)</a></sup>. Cannot format <code class='backtick'>zoned_time</code> with resolution coarser than seconds</h3>
-<p><b>Section:</b> 29.12 <a href="https://wg21.link/time.format">[time.format]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-07-26 <b>Last modified:</b> 2024-07-29</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#time.format">active issues</a> in [time.format].</p>
-<p><b>View all other</b> <a href="lwg-index.html#time.format">issues</a> in [time.format].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-The
-<code>std::formatter&lt;std::chrono::zoned_time&lt;Duration, TimeZonePtr&gt;&gt;</code>
-specialization calls <code class='backtick'>tp.get_local_time()</code> for the object it passes to its
-base class' <code class='backtick'>format</code> function. But <code class='backtick'>get_local_time()</code> does not return a
-<code>local_time&lt;Duration&gt;</code>, it returns
-<code>local_time&lt;common_type_t&lt;Duration, seconds&gt;&gt;</code>.
-The base class' <code class='backtick'>format</code> function is only defined for
-<code>local_time&lt;Duration&gt;</code>.
-That means this is ill-formed, even though the static assert passes:
-<pre><code>using namespace std::chrono;
-  static_assert( std::formattable&lt;zoned_time&lt;minutes&gt;, char&gt; );
-  zoned_time&lt;minutes&gt; zt;
-  (void) std::format("{}", zt); // error: cannot convert local_time&lt;seconds&gt; to local_time&lt;minutes&gt;
-</code></pre>
-</p>
-
-<p>
-Additionally, it's not specified what output you should get for:
-<pre><code><code class='backtick'>std::format("{}", local_time_format(zt.get_local_time()));</code>
-</code></pre>
-29.12 <a href="https://wg21.link/time.format">[time.format]</a> p7 says it's formatted as if by streaming to an
-<code class='backtick'>ostringstream</code>,
-but there is no <code>operator&lt;&lt;</code> for <i><code class='backtick'>local-time-format-t</code></i>.
-Presumably it should give the same result as <code>operator&lt;&lt;</code> for 
-a <code class='backtick'>zoned_time</code>, i.e. <code class='backtick'>"{:L%F %T %Z}"</code> with padding adjustments etc.
-</p>
-<p>
-The proposed resolution below has been implemented in libstdc++.
-</p>
-
-
-<p id="res-4124"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4986" title=" Working Draft, Programming Languages — C++">N4986</a>.
-</p>
-
-<ol>
-<li><p>Modify 29.12 <a href="https://wg21.link/time.format">[time.format]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-template&lt;classDuration, class charT&gt;
-  struct formatter&lt;chrono::<i>local-time-format-t</i>&lt;Duration&gt;, charT&gt;;
-</pre>
-<p>-17-
-Let <code class='backtick'>f</code> be a <code><i>locale-time-format-t</i>&lt;Duration&gt;</code> object
-passed to <code class='backtick'>formatter::format</code>.
-</p>
-<p>-18- <i>Remarks</i>:
-<ins>If the <i>chrono-specs</i> is omitted, the result is equivalent to
-using <code class='backtick'>%F %T %Z</code> as the <i>chrono-specs</i>.</ins>
-If <code class='backtick'>%Z</code> is used,
-it is replaced with <code class='backtick'>*f.abbrev</code> if <code class='backtick'>f.abbrev</code> is not a null pointer value.
-If <code class='backtick'>%Z</code> is used and <code class='backtick'>f.abbrev</code> is a null pointer value,
-an exception of type <code class='backtick'>format_error</code> is thrown.
-If <code class='backtick'>%z</code> (or a modified variant of <code class='backtick'>%z</code>) is used,
-it is formatted with the value of <code class='backtick'>*f.offset_sec</code> if <code class='backtick'>f.offset_sec</code> is
-not a null pointer value.
-If <code class='backtick'>%z</code> (or a modified variant of <code class='backtick'>%z</code>) is used and <code class='backtick'>f.offset_sec</code>
-is a null pointer value, then an exception of type <code class='backtick'>format_error</code> is thrown.
-</p>
-<pre>
-  template&lt;class Duration, class TimeZonePtr, class charT&gt;
-  struct formatter&lt;chrono::zoned_time&lt;Duration, TimeZonePtr&gt;, charT&gt;
-      : formatter&lt;chrono::<i>local-time-format-t</i>&lt;<ins>common_type_t&lt;</ins>Duration<ins>, seconds&gt;</ins>&gt;, charT&gt; {
-    template&lt;class FormatContext&gt;
-      typename FormatContext::iterator
-      format(const chrono::zoned_time&lt;Duration, TimeZonePtr&gt;&amp; tp, FormatContext&amp; ctx) const;
-  };
-</pre>
-<pre>
-template&lt;class FormatContext&gt;
-  typename FormatContext::iterator
-    format(const chrono::zoned_time&lt;Duration, TimeZonePtr&gt;&amp; tp, FormatContext&amp; ctx) const;
-</pre>
-<p>-19- <i>Effects</i>: Equivalent to:
-<blockquote>
-<pre>
-sys_info info = tp.get_info();
-return formatter&lt;chrono::<i>local-time-format-t</i>&lt;<ins>common_type_t&lt;</ins>Duration<ins>, seconds&gt;</ins>&gt;, charT&gt;::
-         format({tp.get_local_time(), &amp;info.abbrev, &amp;info.offset}, ctx);
-</pre>
-</blockquote>
-</p>
-</blockquote>
-</li>
-</ol>
-
-
-
-
-
-<hr>
 <h3 id="4125"><a href="#4125">4125</a><sup><a href="https://cplusplus.github.io/LWG/issue4125">(i)</a></sup>. <code>move_iterator</code>'s default constructor should be constrained</h3>
 <p><b>Section:</b> 25.5.4.2 <a href="https://wg21.link/move.iterator">[move.iterator]</a>, 25.5.4.4 <a href="https://wg21.link/move.iter.cons">[move.iter.cons]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-22 <b>Last modified:</b> 2024-07-27</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-22 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#move.iterator">active issues</a> in [move.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#move.iterator">issues</a> in [move.iterator].</p>
@@ -60092,6 +59950,17 @@ As libc++ additionally requires that its default constructors satisfy <code>is_c
 Although this is not current standard-conforming behavior, such constraint does make sense since <code>move_iterator</code> 
 only requires the underlying iterator to be <code>input_iterator</code> which may not be <code>default_initializable</code>.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+Five P0 (tentatively rady) votes but one for NAD:
+"design change, needs paper. Not constraining this seems to be intended by
+<a href="https://wg21.link/P2325R3" title=" Views should not be required to be default constructible">P2325R3</a>. Even if we want to constrain it,
+why <code class='backtick'>default_initializable</code> rather than just <code class='backtick'>is_constructible_v</code>?"
+</p>
+
 
 
 <p id="res-4125"><b>Proposed resolution:</b></p>
@@ -60143,8 +60012,8 @@ namespace std {
 <hr>
 <h3 id="4126"><a href="#4126">4126</a><sup><a href="https://cplusplus.github.io/LWG/issue4126">(i)</a></sup>. Some feature-test macros for fully freestanding features are not yet marked freestanding</h3>
 <p><b>Section:</b> 17.3.2 <a href="https://wg21.link/version.syn">[version.syn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-07-24 <b>Last modified:</b> 2024-07-27</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-07-24 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#version.syn">active issues</a> in [version.syn].</p>
 <p><b>View all other</b> <a href="lwg-index.html#version.syn">issues</a> in [version.syn].</p>
@@ -60158,6 +60027,13 @@ freestanding, but sometimes not.
 <p/>
 I think it's more consistent to ensure feature-test macros for fully freestanding features are also freestanding.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+</p>
+
 
 
 <p id="res-4126"><b>Proposed resolution:</b></p>

@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4117"><a href="lwg-active.html#4117">4117</a>. <code>generator::<i>iterator</i></code> should provide <code>iterator_concept</code></h3>
 <p><b>Section:</b> 26.8.6 <a href="https://wg21.link/coro.generator.iterator">[coro.generator.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-07 <b>Last modified:</b> 2024-07-07</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-07-07 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>4
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#coro.generator.iterator">active issues</a> in [coro.generator.iterator].</p>
 <p><b>View all other</b> <a href="lwg-index.html#coro.generator.iterator">issues</a> in [coro.generator.iterator].</p>
@@ -76,6 +76,15 @@
 While this does not affect it being an <code>input_iterator</code>, providing <code>iterator_concept</code> 
 does improve consistency given that other C++20 iterators have such a member type alias.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 4 after reflector poll.
+Six votes for P0 (tentatively ready) but one NAD vote saying that if this
+has no effect on the category then there's no reason to add it.
+</p>
+
 
 
 <p id="res-4117"><b>Proposed resolution:</b></p>

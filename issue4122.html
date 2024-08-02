@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4122"><a href="lwg-active.html#4122">4122</a>. Ill-formed <code>operator&lt;=&gt;</code> can cause hard error when instantiating <code>std::inplace_vector</code></h3>
 <p><b>Section:</b> 24.3.14.1 <a href="https://wg21.link/inplace.vector.overview">[inplace.vector.overview]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-07-20 <b>Last modified:</b> 2024-07-21</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-07-20 <b>Last modified:</b> 2024-08-02</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -75,6 +75,13 @@ As the <code>operator&lt;=&gt;</code> overload for <code>std::inplace_vector</co
 type (<code><i>synth-three-way-result</i>&lt;T&gt;</code>) is not deduced, when the return type is ill-formed, hard 
 error occurs in the instantiation of the enclosing <code>std::inplace_vector&lt;T, N&gt;</code>.
 </p>
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+</p>
+
 
 
 <p id="res-4122"><b>Proposed resolution:</b></p>

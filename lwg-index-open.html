@@ -66,7 +66,7 @@
 <p>This document is the Index by Section for the <a href="lwg-active.html">Library Active Issues List</a>.</p>
 <h2>Index by Section (non-Ready active issues only)</h2>
 <p><a href="lwg-index.html">(view all issues)</a></p>
-<p>Revised 2024-07-31 at 11:17:11 UTC
+<p>Revised 2024-08-02 at 21:15:32 UTC
 </p><h2 id="Section_3">Section 3 (2 issues)</h2>
 <p><a href="lwg-index.html#Section_3">(view all issues)</a></p>
 <table class="issues-index">
@@ -521,21 +521,21 @@ is unclear</td>
 <td></td>
 </tr>
 <tr>
-<td id="3931"><a href="lwg-active.html#3931" title="Too many paper bump __cpp_lib_ranges (Status: New)">3931</a><sup><a href="https://cplusplus.github.io/LWG/issue3931">(i)</a></sup></td>
+<td id="4126"><a href="lwg-active.html#4126" title="Some feature-test macros for fully freestanding features are not yet marked freestanding (Status: New)">4126</a><sup><a href="https://cplusplus.github.io/LWG/issue4126">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>17.3.2 [version.syn]<a id="version.syn"></a></td>
-<td>Too many paper bump <code>__cpp_lib_ranges</code></td>
+<td>Some feature-test macros for fully freestanding features are not yet marked freestanding</td>
 <td>Yes</td>
-<td>3</td>
+<td>2</td>
 <td></td>
 </tr>
 <tr>
-<td id="4126"><a href="lwg-active.html#4126" title="Some feature-test macros for fully freestanding features are not yet marked freestanding (Status: New)">4126</a><sup><a href="https://cplusplus.github.io/LWG/issue4126">(i)</a></sup></td>
+<td id="3931"><a href="lwg-active.html#3931" title="Too many paper bump __cpp_lib_ranges (Status: New)">3931</a><sup><a href="https://cplusplus.github.io/LWG/issue3931">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>17.3.2 [version.syn]</td>
-<td>Some feature-test macros for fully freestanding features are not yet marked freestanding</td>
+<td>Too many paper bump <code>__cpp_lib_ranges</code></td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -2448,7 +2448,7 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td>24.3.14.1 [inplace.vector.overview]<a id="inplace.vector.overview"></a></td>
 <td>Ill-formed <code>operator&lt;=&gt;</code> can cause hard error when instantiating <code>std::inplace_vector</code></td>
 <td>Yes</td>
-<td></td>
+<td>2</td>
 <td></td>
 </tr>
 <tr>
@@ -2839,7 +2839,7 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td>25.5.4.2 [move.iterator]<a id="move.iterator"></a></td>
 <td><code>move_iterator</code>'s default constructor should be constrained</td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -2859,7 +2859,7 @@ forward_iterator (Status: New)">4120</a><sup><a href="https://cplusplus.github.i
 <td>25.5.4.6 [move.iter.elem]<a id="move.iter.elem"></a></td>
 <td><code>move_iterator::operator*</code> should have conditional <code>noexcept</code> specification</td>
 <td>Yes</td>
-<td></td>
+<td>4</td>
 <td></td>
 </tr>
 <tr>
@@ -3354,21 +3354,21 @@ inner-iterator with std::default_sentinel results in null pointer dereference (S
 <td></td>
 </tr>
 <tr>
-<td id="4089"><a href="lwg-active.html#4089" title="concat_view::iterator's iter_swap is overconstrained (Status: New)">4089</a><sup><a href="https://cplusplus.github.io/LWG/issue4089">(i)</a></sup></td>
+<td id="4081"><a href="lwg-active.html#4081" title="concat_view::iterator::operator- is overconstrained (Status: New)">4081</a><sup><a href="https://cplusplus.github.io/LWG/issue4081">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>26.7.18.3 [range.concat.iterator]<a id="range.concat.iterator"></a></td>
-<td><code>concat_view::<i>iterator</i></code>'s <code>iter_swap</code> is overconstrained</td>
+<td><code>concat_view::<i>iterator</i>::operator-</code> is overconstrained</td>
 <td>Yes</td>
 <td>3</td>
 <td></td>
 </tr>
 <tr>
-<td id="4081"><a href="lwg-active.html#4081" title="concat_view::iterator::operator- is overconstrained (Status: New)">4081</a><sup><a href="https://cplusplus.github.io/LWG/issue4081">(i)</a></sup></td>
+<td id="4089"><a href="lwg-active.html#4089" title="concat_view::iterator's iter_swap is overconstrained (Status: New)">4089</a><sup><a href="https://cplusplus.github.io/LWG/issue4089">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>26.7.18.3 [range.concat.iterator]</td>
-<td><code>concat_view::<i>iterator</i>::operator-</code> is overconstrained</td>
+<td><code>concat_view::<i>iterator</i></code>'s <code>iter_swap</code> is overconstrained</td>
 <td>Yes</td>
-<td></td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -3482,8 +3482,8 @@ inner-iterator with std::default_sentinel results in null pointer dereference (S
 <td></td>
 </tr>
 <tr>
-<td id="4119"><a href="lwg-active.html#4119" title="generator::promise_type::yield_value(ranges::elements_of&lt;R, Alloc&gt;)'s nested generator may be ill-formed (Status: New)">4119</a><sup><a href="https://cplusplus.github.io/LWG/issue4119">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
+<td id="4119"><a href="lwg-active.html#4119" title="generator::promise_type::yield_value(ranges::elements_of&lt;R, Alloc&gt;)'s nested generator may be ill-formed (Status: Tentatively Ready)">4119</a><sup><a href="https://cplusplus.github.io/LWG/issue4119">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
 <td>26.8.5 [coro.generator.promise]<a id="coro.generator.promise"></a></td>
 <td><code>generator::promise_type::yield_value(ranges::elements_of&lt;R, Alloc&gt;)</code>'s nested <code>generator</code> may be ill-formed</td>
 <td>Yes</td>
@@ -3496,7 +3496,7 @@ inner-iterator with std::default_sentinel results in null pointer dereference (S
 <td>26.8.6 [coro.generator.iterator]<a id="coro.generator.iterator"></a></td>
 <td><code>generator::<i>iterator</i></code> should provide <code>iterator_concept</code></td>
 <td>Yes</td>
-<td></td>
+<td>4</td>
 <td></td>
 </tr>
 <tr>
@@ -4040,21 +4040,21 @@ should require the arguments to have the same length</td>
 <td></td>
 </tr>
 <tr>
-<td id="4118"><a href="lwg-active.html#4118" title="How should duration formatters format custom rep types? (Status: New)">4118</a><sup><a href="https://cplusplus.github.io/LWG/issue4118">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
+<td id="4124"><a href="lwg-active.html#4124" title="Cannot format zoned_time with resolution coarser than seconds (Status: Tentatively Ready)">4124</a><sup><a href="https://cplusplus.github.io/LWG/issue4124">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
 <td>29.12 [time.format]<a id="time.format"></a></td>
-<td>How should <code class='backtick'>duration</code> formatters format custom <code class='backtick'>rep</code> types?</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4124"><a href="lwg-active.html#4124" title="Cannot format zoned_time with resolution coarser than seconds (Status: New)">4124</a><sup><a href="https://cplusplus.github.io/LWG/issue4124">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>29.12 [time.format]</td>
 <td>Cannot format <code class='backtick'>zoned_time</code> with resolution coarser than seconds</td>
 <td>Yes</td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4118"><a href="lwg-active.html#4118" title="How should duration formatters format custom rep types? (Status: New)">4118</a><sup><a href="https://cplusplus.github.io/LWG/issue4118">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>29.12 [time.format]</td>
+<td>How should <code class='backtick'>duration</code> formatters format custom <code class='backtick'>rep</code> types?</td>
+<td>Yes</td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>

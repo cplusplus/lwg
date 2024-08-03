@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-08-03 at 06:59:30 UTC
+<p>Revised 2024-08-03 at 07:14:53 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -60524,6 +60524,65 @@ its <del>arguments</del><ins>parameters</ins> or via elements of its container
 <del>arguments</del><ins>parameters</ins> except by invoking functions required by its 
 specification on those container elements.
 </p>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4130"><a href="#4130">4130</a><sup><a href="https://cplusplus.github.io/LWG/issue4130">(i)</a></sup>. Preconditions for <code>std::launder</code> might be overly strict</h3>
+<p><b>Section:</b> 17.6.5 <a href="https://wg21.link/ptr.launder">[ptr.launder]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-07-30 <b>Last modified:</b> 2024-08-03</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#ptr.launder">issues</a> in [ptr.launder].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+From issue <a href="https://github.com/cplusplus/draft/issues/4553">cplusplus/draft#4553</a> 
+which is considered non-editorial.
+<p/>
+Currently, <code>std::launder</code> has a precondition that the pointed to object must be within 
+its lifetime. However, per the example added by <a href="https://wg21.link/P0593R6" title=" Implicit creation of objects for low-level object manipulation">P0593R6</a>, it's probably intended 
+that the result of <code>std::launder</code> should be allowed to point to an array element 
+subobject whose lifetime has not started yet.
+</p>
+
+
+<p id="res-4130"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4986" title=" Working Draft, Programming Languages — C++">N4986</a>.
+</p>
+
+<ol>
+<li><p>Modify 17.6.5 <a href="https://wg21.link/ptr.launder">[ptr.launder]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class T&gt; [[nodiscard]] constexpr T* launder(T* p) noexcept;
+</pre>
+<blockquote>
+<p>
+-1- <i>Mandates</i>: <code>!is_function_v&lt;T&gt; &amp;&amp; !is_void_v&lt;T&gt;</code> is <code>true</code>.
+<p/>
+-2- <i>Preconditions</i>: <code>p</code> represents the address <i>A</i> of a byte in memory. 
+An object <i>X</i> <del>that is within its lifetime (6.7.3 <a href="https://wg21.link/basic.life">[basic.life]</a>) and</del> 
+whose type is similar (7.3.6 <a href="https://wg21.link/conv.qual">[conv.qual]</a>) to <code>T</code> is located at the address 
+<i>A</i><ins>, and is either within its lifetime (6.7.3 <a href="https://wg21.link/basic.life">[basic.life]</a>) or is an array 
+element subobject whose containing array object is within its lifetime</ins>. All bytes of storage 
+that would be reachable through (6.8.4 <a href="https://wg21.link/basic.compound">[basic.compound]</a>) the result are reachable through 
+<code>p</code>.
+<p/>
+-3- Returns: A value of type <code>T*</code> that points to <i>X</i>.
+<p/>
+[&hellip;]
+</p>
+</blockquote>
 </blockquote>
 
 </li>

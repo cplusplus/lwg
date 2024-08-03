@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-08-03 at 07:14:53 UTC
+<p>Revised 2024-08-03 at 07:46:49 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -33330,6 +33330,7 @@ and <code>[first2, last2)</code> contains <code><i>n</i></code> elements that ar
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2021-03-21 <b>Last modified:</b> 2021-04-20</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#iterator.range">active issues</a> in [iterator.range].</p>
 <p><b>View all other</b> <a href="lwg-index.html#iterator.range">issues</a> in [iterator.range].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -60583,6 +60584,62 @@ that would be reachable through (6.8.4 <a href="https://wg21.link/basic.compound
 [&hellip;]
 </p>
 </blockquote>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4131"><a href="#4131">4131</a><sup><a href="https://cplusplus.github.io/LWG/issue4131">(i)</a></sup>. Including <code>&lt;optional&gt;</code> doesn't provide <code>std::begin/end</code></h3>
+<p><b>Section:</b> 25.7 <a href="https://wg21.link/iterator.range">[iterator.range]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-08-02 <b>Last modified:</b> 2024-08-03</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#iterator.range">active issues</a> in [iterator.range].</p>
+<p><b>View all other</b> <a href="lwg-index.html#iterator.range">issues</a> in [iterator.range].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Since <code>optional</code> now provides <code>begin/end</code> members, it is reasonable
+to ensure the validity of <code>std::begin/end</code> after including <code>&lt;optional&gt;</code>.
+</p>
+
+
+<p id="res-4131"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4986" title=" Working Draft, Programming Languages — C++">N4986</a>.
+</p>
+
+<ol>
+<li><p>Modify 25.7 <a href="https://wg21.link/iterator.range">[iterator.range]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- In addition to being available via inclusion of the <code>&lt;iterator&gt;</code> header, the function
+templates in 25.7 <a href="https://wg21.link/iterator.range">[iterator.range]</a> are available when any of the following headers are included: 
+<code>&lt;array&gt;</code> (24.3.2 <a href="https://wg21.link/array.syn">[array.syn]</a>), 
+<code>&lt;deque&gt;</code> (24.3.3 <a href="https://wg21.link/deque.syn">[deque.syn]</a>), 
+<code>&lt;flat_map&gt;</code> (24.6.4 <a href="https://wg21.link/flat.map.syn">[flat.map.syn]</a>), 
+<code>&lt;flat_set&gt;</code> (24.6.5 <a href="https://wg21.link/flat.set.syn">[flat.set.syn]</a>), 
+<code>&lt;forward_list&gt;</code> (24.3.4 <a href="https://wg21.link/forward.list.syn">[forward.list.syn]</a>), 
+<code>&lt;inplace_vector&gt;</code> (24.3.7 <a href="https://wg21.link/inplace.vector.syn">[inplace.vector.syn]</a>),
+<code>&lt;list&gt;</code> (24.3.5 <a href="https://wg21.link/list.syn">[list.syn]</a>), 
+<code>&lt;map&gt;</code> (24.4.2 <a href="https://wg21.link/associative.map.syn">[associative.map.syn]</a>), 
+<ins><code>&lt;optional&gt;</code> (22.5.2 <a href="https://wg21.link/optional.syn">[optional.syn]</a>),</ins> 
+<code>&lt;regex&gt;</code> (32.3 <a href="https://wg21.link/re.syn">[re.syn]</a>), 
+<code>&lt;set&gt;</code> (24.4.3 <a href="https://wg21.link/associative.set.syn">[associative.set.syn]</a>), 
+<code>&lt;span&gt;</code> (24.7.2.1 <a href="https://wg21.link/span.syn">[span.syn]</a>), 
+<code>&lt;string&gt;</code> (23.4.2 <a href="https://wg21.link/string.syn">[string.syn]</a>), 
+<code>&lt;string_view&gt;</code> (23.3.2 <a href="https://wg21.link/string.view.synop">[string.view.synop]</a>), 
+<code>&lt;unordered_map&gt;</code> (24.5.2 <a href="https://wg21.link/unord.map.syn">[unord.map.syn]</a>), 
+<code>&lt;unordered_set&gt;</code> (24.5.3 <a href="https://wg21.link/unord.set.syn">[unord.set.syn]</a>), 
+and <code>&lt;vector&gt;</code> (24.3.6 <a href="https://wg21.link/vector.syn">[vector.syn]</a>).
+</p>
 </blockquote>
 
 </li>

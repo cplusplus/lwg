@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-08-05 at 15:26:48 UTC
+<p>Revised 2024-08-06 at 17:42:00 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -61208,14 +61208,14 @@ template&lt;class BinaryPredicate&gt; size_type unique(BinaryPredicate binary_pr
 
 <hr>
 <h3 id="4133"><a href="#4133">4133</a><sup><a href="https://cplusplus.github.io/LWG/issue4133">(i)</a></sup>. <code><i>awaitable-receiver</i></code>'s members are potentially throwing</h3>
-<p><b>Section:</b> 99 [exec.as.awaitable] <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 34.12.1 <a href="https://wg21.link/exec.as.awaitable">[exec.as.awaitable]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2024-07-30 <b>Last modified:</b> 2024-08-05</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-The specification of <code><i>awaitable-receiver</i></code> in 99 [exec.as.awaitable]/p4 
+The specification of <code><i>awaitable-receiver</i></code> in 34.12.1 <a href="https://wg21.link/exec.as.awaitable">[exec.as.awaitable]</a>/p4 
 as of <a href="https://wg21.link/N4988">N4988</a> is not taking into consideration the fact that the <code>resume()</code> 
 and <code>promise()</code> member functions on <code>coroutine_handle&lt;P&gt;</code> are not marked <code>noexcept</code>. 
 <code><i>awaitable-receiver</i></code>'s member functions must all be <code>noexcept</code>, but they are 

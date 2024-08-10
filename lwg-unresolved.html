@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-08-10 at 16:13:03 UTC
+<p>Revised 2024-08-10 at 17:42:20 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -55587,7 +55587,7 @@ template&lt;class I&gt;
 <hr>
 <h3 id="4059"><a href="#4059">4059</a><sup><a href="https://cplusplus.github.io/LWG/issue4059">(i)</a></sup>. Leaky abstraction in <code>join_with_view</code>'s iterator</h3>
 <p><b>Section:</b> 26.7.15.3 <a href="https://wg21.link/range.join.with.iterator">[range.join.with.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> S. B. Tam <b>Opened:</b> 2024-03-23 <b>Last modified:</b> 2024-06-24</p>
+ <b>Submitter:</b> S. B. Tam <b>Opened:</b> 2024-03-23 <b>Last modified:</b> 2024-08-10</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#range.join.with.iterator">active issues</a> in [range.join.with.iterator].</p>
@@ -55620,9 +55620,103 @@ Set priority to 3 after reflector poll.
 We like the suggestion to require "not valueless" as a precondition.
 </p>
 
+<p><i>[2024-08-08, Inbal Levi provides wording]</i></p>
+
 
 
 <p id="res-4059"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 26.7.15.3 <a href="https://wg21.link/range.join.with.iterator">[range.join.with.iterator]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+constexpr void <i>satisfy</i>();
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Preconditions:</i> <code><i>inner_it_</i>.valueless_by_exception()</code> is <code>false</code>.</ins>
+<p/>
+-8- <i>Effects</i>: Equivalent to: [&hellip;]
+</p>
+</blockquote>
+<p>
+[&hellip;]
+</p>
+<pre>
+constexpr <i>iterator</i>(<i>iterator</i>&lt;!Const&gt; i)
+    requires Const &amp;&amp; convertible_to&lt;iterator_t&lt;V&gt;, <i>OuterIter</i>&gt; &amp;&amp;
+             convertible_to&lt;iterator_t&lt;<i>InnerRng</i>&gt;, <i>InnerIter</i>&gt; &amp;&amp;
+             convertible_to&lt;iterator_t&lt;Pattern&gt;, <i>PatternIter</i>&gt;;
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Preconditions:</i> <code><i>inner_it_</i>.valueless_by_exception()</code> is <code>false</code>.</ins>
+<p/>
+-10- <i>Effects</i>: [&hellip;]
+</p>
+</blockquote>
+<pre>
+constexpr decltype(auto) operator*() const;
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Preconditions:</i> <code><i>inner_it_</i>.valueless_by_exception()</code> is <code>false</code>.</ins>
+<p/>
+-12- <i>Effects</i>: Equivalent to: [&hellip;]
+</p>
+</blockquote>
+<pre>
+constexpr <i>iterator</i>&amp; operator++();
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Preconditions:</i> <code><i>inner_it_</i>.valueless_by_exception()</code> is <code>false</code>.</ins>
+<p/>
+-13- <i>Effects</i>: Equivalent to: [&hellip;]
+</p>
+</blockquote>
+<pre>
+constexpr void operator++(int);
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Preconditions:</i> <code><i>inner_it_</i>.valueless_by_exception()</code> is <code>false</code>.</ins>
+<p/>
+-14- <i>Effects</i>: Equivalent to: <code>++*this</code>.
+</p>
+</blockquote>
+<pre>
+constexpr <i>iterator</i> operator++(int)
+  requires <i>ref-is-glvalue</i> &amp;&amp; forward_iterator&lt;<i>OuterIter</i>&gt; &amp;&amp; forward_iterator&lt;<i>InnerIter</i>&gt;;
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Preconditions:</i> <code><i>inner_it_</i>.valueless_by_exception()</code> is <code>false</code>.</ins>
+<p/>
+-15- <i>Effects</i>: Equivalent to: [&hellip;]
+</p>
+</blockquote>
+<pre>
+constexpr <i>iterator</i>&amp; operator--()
+  requires <i>ref-is-glvalue</i> &amp;&amp; bidirectional_range&lt;<i>Base</i>&gt; &amp;&amp;
+           <i>bidirectional-common</i>&lt;<i>InnerBase</i>&gt; &amp;&amp; <i>bidirectional-common</i>&lt;<i>PatternBase</i>&gt;;
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Preconditions:</i> <code><i>inner_it_</i>.valueless_by_exception()</code> is <code>false</code>.</ins>
+<p/>
+-16- <i>Effects</i>: Equivalent to: [&hellip;]
+</p>
+</blockquote>
+</blockquote>
+</li>
+
+</ol>
 
 
 

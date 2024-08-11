@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-08-11 at 10:44:34 UTC
+<p>Revised 2024-08-11 at 11:04:44 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -62072,6 +62072,79 @@ template&lt;class ExecutionPolicy,
 </blockquote>
 
 </li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4138"><a href="#4138">4138</a><sup><a href="https://cplusplus.github.io/LWG/issue4138">(i)</a></sup>. <code>is_within_lifetime</code> should mandate <code>is_object</code></h3>
+<p><b>Section:</b> 21.3.11 <a href="https://wg21.link/meta.const.eval">[meta.const.eval]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Corentin <b>Opened:</b> 2024-08-09 <b>Last modified:</b> 2024-08-11</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<blockquote><pre>
+int f();
+std::is_within_lifetime&lt;int()&gt;(f);
+</pre></blockquote>
+<p>
+This is currently well-formed, and only fails when evaluated because 
+<code>is_within_lifetime</code> is not constrained. However talking of lifetime 
+of a non-object does not make sense, and the lack of constraint makes the 
+implementation and use of that function and underlying built-in more 
+convoluted than necessary.
+</p>
+
+
+<p id="res-4138"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 21.3.3 <a href="https://wg21.link/meta.type.synop">[meta.type.synop]</a>, header <code>&lt;type_traits&gt;</code> synopsis, as indicated:</p>
+
+<blockquote>
+<pre>
+[&hellip;]
+// <i>21.3.11 <a href="https://wg21.link/meta.const.eval">[meta.const.eval]</a>, constant evaluation context</i>
+constexpr bool is_constant_evaluated() noexcept;
+<ins>template&lt;class T&gt;</ins>
+consteval bool is_within_lifetime(const <ins>T</ins><del>auto</del>*) noexcept;
+</pre>
+</blockquote>
+
+</li>
+
+
+<li><p>Modify 21.3.11 <a href="https://wg21.link/meta.const.eval">[meta.const.eval]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+<ins>template&lt;class T&gt;</ins>
+consteval bool is_within_lifetime(const <ins>T</ins><del>auto</del>* p) noexcept;
+</pre>
+<blockquote>
+<p>
+<ins>-?- <i>Mandates</i>: <code>is_object_v&lt;T&gt;</code> is <code>true</code>.</ins>
+<p/>
+-3- <i>Returns</i>: <code>true</code> if <code>p</code> is a pointer to an object that is 
+within its lifetime (6.7.3 <a href="https://wg21.link/basic.life">[basic.life]</a>); otherwise, <code>false</code>.
+<p/>
+-4- <i>Remarks</i>: During the evaluation of an expression <code>E</code> as a core 
+constant expression, a call to this function is ill-formed unless <code>p</code> 
+points to an object that is usable in constant expressions or whose complete
+object's lifetime began within <code>E</code>.
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+
 </ol>
 
 

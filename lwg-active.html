@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-08-21 at 19:57:54 UTC
+<p>Revised 2024-08-21 at 21:46:24 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -227,7 +227,7 @@ forward_iterator (Status: New)">4120</a>, <a href="lwg-active.html#4121" title="
 <li>Changed the following 3 issues to Ready (from New): <a href="lwg-active.html#3436" title="std::construct_at should support arrays (Status: Ready)">3436</a>, <a href="lwg-active.html#3899" title="co_yielding elements of an lvalue generator is unnecessarily inefficient (Status: Ready)">3899</a>, <a href="lwg-active.html#3900" title="The allocator_arg_t overloads of generator::promise_type::operator new
 should not be constrained (Status: Ready)">3900</a>.</li>
 <li>Changed the following issue to Ready (from LEWG): <a href="lwg-active.html#3918" title="std::uninitialized_move/_n and guaranteed copy elision (Status: Ready)">3918</a>.</li>
-<li>Changed the following 2 issues to Open (from New): <a href="lwg-active.html#3343" title="Ordering of calls to unlock() and notify_all() in Effects element of notify_all_at_thread_exit() should be reversed (Status: Open)">3343</a>, <a href="lwg-active.html#3508" title="atomic_ref&lt;cv T&gt; is not well-specified (Status: Open)">3508</a>.</li>
+<li>Changed the following 4 issues to Open (from New): <a href="lwg-active.html#2939" title="Some type-completeness constraints of traits are overspecified (Status: Open)">2939</a>, <a href="lwg-active.html#3099" title="is_assignable&lt;Incomplete&amp;, Incomplete&amp;&gt; (Status: Open)">3099</a>, <a href="lwg-active.html#3343" title="Ordering of calls to unlock() and notify_all() in Effects element of notify_all_at_thread_exit() should be reversed (Status: Open)">3343</a>, <a href="lwg-active.html#3508" title="atomic_ref&lt;cv T&gt; is not well-specified (Status: Open)">3508</a>.</li>
 <li>Changed the following 17 issues to WP (from Tentatively Ready): <a href="lwg-defects.html#2994" title="Needless UB for basic_string and basic_string_view (Status: WP)">2994</a>, <a href="lwg-defects.html#3884" title="flat_foo is missing allocator-extended copy/move constructors (Status: WP)">3884</a>, <a href="lwg-defects.html#3885" title="'op' should be in [zombie.names] (Status: WP)">3885</a>, <a href="lwg-defects.html#3887" title="Version macro for allocate_at_least (Status: WP)">3887</a>, <a href="lwg-defects.html#3893" title="LWG 3661 broke atomic&lt;shared_ptr&lt;T&gt;&gt; a; a = nullptr; (Status: WP)">3893</a>, <a href="lwg-defects.html#3894" title="generator::promise_type::yield_value(ranges::elements_of&lt;Rng, Alloc&gt;) should not be noexcept (Status: WP)">3894</a>, <a href="lwg-defects.html#3903" title="span destructor is redundantly noexcept (Status: WP)">3903</a>, <a href="lwg-defects.html#3904" title="lazy_split_view::outer-iterator's const-converting constructor isn't setting trailing_empty_ (Status: WP)">3904</a>, <a href="lwg-defects.html#3905" title="Type of std::fexcept_t (Status: WP)">3905</a>, <a href="lwg-defects.html#3912" title="enumerate_view::iterator::operator- should be noexcept (Status: WP)">3912</a>, <a href="lwg-defects.html#3914" title="Inconsistent template-head of ranges::enumerate_view (Status: WP)">3914</a>, <a href="lwg-defects.html#3915" title="Redundant paragraph about expression variations (Status: WP)">3915</a>, <a href="lwg-defects.html#3925" title="Concept formattable's definition is incorrect (Status: WP)">3925</a>, <a href="lwg-defects.html#3927" title="Unclear preconditions for operator[] for sequence containers (Status: WP)">3927</a>, <a href="lwg-defects.html#3935" title="template&lt;class X&gt; constexpr complex&amp; operator=(const complex&lt;X&gt;&amp;) has no specification (Status: WP)">3935</a>, <a href="lwg-defects.html#3938" title="Cannot use std::expected monadic ops with move-only error_type (Status: WP)">3938</a>, <a href="lwg-defects.html#3940" title="std::expected&lt;void, E&gt;::value() also needs E to be copy constructible (Status: WP)">3940</a>.</li>
 <li>Changed the following 8 issues to WP (from New): <a href="lwg-defects.html#2392" title="&quot;character type&quot; is used but not defined (Status: WP)">2392</a>, <a href="lwg-defects.html#3203" title="span element access invalidation (Status: WP)">3203</a>, <a href="lwg-defects.html#3431" title="&lt;=&gt; for containers should require three_way_comparable&lt;T&gt; instead of &lt;=&gt; (Status: WP)">3431</a>, <a href="lwg-defects.html#3749" title="common_iterator should handle integer-class difference types (Status: WP)">3749</a>, <a href="lwg-defects.html#3809" title="Is std::subtract_with_carry_engine&lt;uint16_t&gt; supposed to work? (Status: WP)">3809</a>, <a href="lwg-defects.html#3892" title="Incorrect formatting of nested ranges and tuples (Status: WP)">3892</a>, <a href="lwg-defects.html#3897" title="inout_ptr will not update raw pointer to 0 (Status: WP)">3897</a>, <a href="lwg-defects.html#3919" title="enumerate_view may invoke UB for sized common non-forward underlying ranges (Status: WP)">3919</a>.</li>
 <li>Changed the following 2 issues to WP (from Open): <a href="lwg-defects.html#3305" title="any_cast&lt;void&gt; (Status: WP)">3305</a>, <a href="lwg-defects.html#3767" title="codecvt&lt;charN_t, char8_t, mbstate_t&gt; incorrectly added to locale (Status: WP)">3767</a>.</li>
@@ -729,7 +729,7 @@ to meet their postconditions (Status: C++20)">3112</a>, <a href="lwg-defects.htm
 </ul></li>
 <li><b>Details:</b><ul>
 <li>Added the following 4 Tentatively Ready issues: <a href="lwg-defects.html#3094" title="&sect;[time.duration.io]p4 makes surprising claims about encoding (Status: C++20)">3094</a>, <a href="lwg-defects.html#3100" title="Unnecessary and confusing &quot;empty span&quot; wording (Status: C++20)">3100</a>, <a href="lwg-defects.html#3102" title="Clarify span iterator and const_iterator behavior (Status: C++20)">3102</a>, <a href="lwg-defects.html#3104" title="Fixing duration division (Status: C++20)">3104</a>.</li>
-<li>Added the following 13 New issues: <a href="lwg-active.html#3093" title="LWG 2294/2192 missed a std::abs overload (Status: New)">3093</a>, <a href="lwg-active.html#3095" title="strstreambuf refers to nonexistent member of fpos, fpos::offset (Status: New)">3095</a>, <a href="lwg-defects.html#3096" title="path::lexically_relative is confused by trailing slashes (Status: C++20)">3096</a>, <a href="lwg-active.html#3097" title="basic_stringbuf seekoff effects trigger undefined behavior and have contradictory returns (Status: New)">3097</a>, <a href="lwg-active.html#3098" title="Misleading example for filesystem::path::filename() (Status: New)">3098</a>, <a href="lwg-active.html#3099" title="is_assignable&lt;Incomplete&amp;, Incomplete&amp;&gt; (Status: New)">3099</a>, <a href="lwg-defects.html#3101" title="span's Container constructors need another constraint (Status: C++20)">3101</a>, <a href="lwg-defects.html#3103" title="Errors in taking subview of span should be ill-formed where possible (Status: C++20)">3103</a>, <a href="lwg-active.html#3105" title="T1 is convertible to T2 (Status: New)">3105</a>, <a href="lwg-closed.html#3106" title="nothrow should be inline constexpr rather that extern const (Status: NAD)">3106</a>, <a href="lwg-active.html#3107" title="istreambuf_iterator has public exposition-only member (Status: New)">3107</a>, <a href="lwg-active.html#3108" title="istreambuf_iterator::proxy::operator* should be const (Status: New)">3108</a>, <a href="lwg-active.html#3109" title="strstreambuf is copyable (Status: New)">3109</a>.</li>
+<li>Added the following 13 New issues: <a href="lwg-active.html#3093" title="LWG 2294/2192 missed a std::abs overload (Status: New)">3093</a>, <a href="lwg-active.html#3095" title="strstreambuf refers to nonexistent member of fpos, fpos::offset (Status: New)">3095</a>, <a href="lwg-defects.html#3096" title="path::lexically_relative is confused by trailing slashes (Status: C++20)">3096</a>, <a href="lwg-active.html#3097" title="basic_stringbuf seekoff effects trigger undefined behavior and have contradictory returns (Status: New)">3097</a>, <a href="lwg-active.html#3098" title="Misleading example for filesystem::path::filename() (Status: New)">3098</a>, <a href="lwg-active.html#3099" title="is_assignable&lt;Incomplete&amp;, Incomplete&amp;&gt; (Status: Open)">3099</a>, <a href="lwg-defects.html#3101" title="span's Container constructors need another constraint (Status: C++20)">3101</a>, <a href="lwg-defects.html#3103" title="Errors in taking subview of span should be ill-formed where possible (Status: C++20)">3103</a>, <a href="lwg-active.html#3105" title="T1 is convertible to T2 (Status: New)">3105</a>, <a href="lwg-closed.html#3106" title="nothrow should be inline constexpr rather that extern const (Status: NAD)">3106</a>, <a href="lwg-active.html#3107" title="istreambuf_iterator has public exposition-only member (Status: New)">3107</a>, <a href="lwg-active.html#3108" title="istreambuf_iterator::proxy::operator* should be const (Status: New)">3108</a>, <a href="lwg-active.html#3109" title="strstreambuf is copyable (Status: New)">3109</a>.</li>
 <li>No issues changed.</li>
 </ul></li>
 </ul>
@@ -917,7 +917,7 @@ find() members constexpr (Status: Resolved)">2232</a>.</li>
 <li><b>Details:</b><ul>
 <li>Added the following Ready issue: <a href="lwg-defects.html#2932" title="Constraints on parallel algorithm implementations are underspecified (Status: C++20)">2932</a>.</li>
 <li>Added the following Tentatively Ready issue: <a href="lwg-defects.html#2937" title="Is equivalent(&quot;existing_thing&quot;, &quot;not_existing_thing&quot;) an error? (Status: C++20)">2937</a>.</li>
-<li>Added the following 13 New issues: <a href="lwg-defects.html#2929" title="basic_string misuses &quot;Effects: Equivalent to&quot; (Status: Resolved)">2929</a>, <a href="lwg-defects.html#2933" title="PR for LWG 2773 could be clearer (Status: Resolved)">2933</a>, <a href="lwg-defects.html#2935" title="What should create_directories do when p already exists but is not a directory? (Status: C++20)">2935</a>, <a href="lwg-defects.html#2936" title="Path comparison is defined in terms of the generic format (Status: C++20)">2936</a>, <a href="lwg-defects.html#2938" title="basic_string_view::const_iterator should be literal types (Status: Resolved)">2938</a>, <a href="lwg-active.html#2939" title="Some type-completeness constraints of traits are overspecified (Status: New)">2939</a>, <a href="lwg-defects.html#2940" title="result_of specification also needs a little cleanup (Status: C++20)">2940</a>, <a href="lwg-defects.html#2941" title="&sect;[thread.req.timing] wording should apply to both member and namespace-level functions (Status: C++20)">2941</a>, <a href="lwg-defects.html#2942" title="LWG 2873's resolution missed weak_ptr::owner_before (Status: C++20)">2942</a>, <a href="lwg-defects.html#2943" title="Problematic specification of the wide version of basic_filebuf::open (Status: C++20)">2943</a>, <a href="lwg-defects.html#2944" title="LWG 2905 accidentally removed requirement that construction of the deleter doesn't throw an exception (Status: C++20)">2944</a>, <a href="lwg-defects.html#2945" title="Order of template parameters in optional comparisons (Status: C++20)">2945</a>, <a href="lwg-defects.html#2946" title="LWG 2758's resolution missed further corrections (Status: C++20)">2946</a>.</li>
+<li>Added the following 13 New issues: <a href="lwg-defects.html#2929" title="basic_string misuses &quot;Effects: Equivalent to&quot; (Status: Resolved)">2929</a>, <a href="lwg-defects.html#2933" title="PR for LWG 2773 could be clearer (Status: Resolved)">2933</a>, <a href="lwg-defects.html#2935" title="What should create_directories do when p already exists but is not a directory? (Status: C++20)">2935</a>, <a href="lwg-defects.html#2936" title="Path comparison is defined in terms of the generic format (Status: C++20)">2936</a>, <a href="lwg-defects.html#2938" title="basic_string_view::const_iterator should be literal types (Status: Resolved)">2938</a>, <a href="lwg-active.html#2939" title="Some type-completeness constraints of traits are overspecified (Status: Open)">2939</a>, <a href="lwg-defects.html#2940" title="result_of specification also needs a little cleanup (Status: C++20)">2940</a>, <a href="lwg-defects.html#2941" title="&sect;[thread.req.timing] wording should apply to both member and namespace-level functions (Status: C++20)">2941</a>, <a href="lwg-defects.html#2942" title="LWG 2873's resolution missed weak_ptr::owner_before (Status: C++20)">2942</a>, <a href="lwg-defects.html#2943" title="Problematic specification of the wide version of basic_filebuf::open (Status: C++20)">2943</a>, <a href="lwg-defects.html#2944" title="LWG 2905 accidentally removed requirement that construction of the deleter doesn't throw an exception (Status: C++20)">2944</a>, <a href="lwg-defects.html#2945" title="Order of template parameters in optional comparisons (Status: C++20)">2945</a>, <a href="lwg-defects.html#2946" title="LWG 2758's resolution missed further corrections (Status: C++20)">2946</a>.</li>
 <li>Added the following Open issue: <a href="lwg-active.html#2931" title="Missed optimization opportunity with single-argument std::next (Status: Open)">2931</a>.</li>
 <li>Added the following WP issue: <a href="lwg-defects.html#2934" title="optional&lt;const T&gt; doesn't compare with T (Status: C++17)">2934</a>.</li>
 <li>Added the following NAD issue: <a href="lwg-closed.html#2930" title="Are implementations allowed to split non-member functions into several overloads? (Status: NAD)">2930</a>.</li>
@@ -19839,13 +19839,13 @@ what we optimize).
 
 <hr>
 <h3 id="2939"><a href="#2939">2939</a><sup><a href="https://cplusplus.github.io/LWG/issue2939">(i)</a></sup>. Some type-completeness constraints of traits are overspecified</h3>
-<p><b>Section:</b> 21.3.3 <a href="https://wg21.link/meta.type.synop">[meta.type.synop]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 21.3.3 <a href="https://wg21.link/meta.type.synop">[meta.type.synop]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
  <b>Submitter:</b> Daniel Kr&uuml;gler <b>Opened:</b> 2017-03-02 <b>Last modified:</b> 2024-08-21</p>
 <p><b>Priority: </b>2
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#meta.type.synop">active issues</a> in [meta.type.synop].</p>
 <p><b>View all other</b> <a href="lwg-index.html#meta.type.synop">issues</a> in [meta.type.synop].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 LWG <a href="lwg-defects.html#2797" title="Trait precondition violations (Status: Resolved)">2797</a> (RU 2) suggests that certain type-traits should be required to
@@ -19888,7 +19888,7 @@ this issue suggests to fix the current situation <em>before</em> enforcing a dia
 
 <p><i>[2018-08 Batavia Monday issue discussion]</i></p>
 
-<p>Issues <a href="lwg-defects.html#2797" title="Trait precondition violations (Status: Resolved)">2797</a>, <a href="lwg-active.html#2939" title="Some type-completeness constraints of traits are overspecified (Status: New)">2939</a>, <a href="lwg-defects.html#3022" title="is_convertible&lt;derived*, base*&gt; may lead to ODR (Status: Resolved)">3022</a>, and <a href="lwg-active.html#3099" title="is_assignable&lt;Incomplete&amp;, Incomplete&amp;&gt; (Status: New)">3099</a> are all closely related. Walter to write a paper resolving them.</p>
+<p>Issues <a href="lwg-defects.html#2797" title="Trait precondition violations (Status: Resolved)">2797</a>, <a href="lwg-active.html#2939" title="Some type-completeness constraints of traits are overspecified (Status: Open)">2939</a>, <a href="lwg-defects.html#3022" title="is_convertible&lt;derived*, base*&gt; may lead to ODR (Status: Resolved)">3022</a>, and <a href="lwg-active.html#3099" title="is_assignable&lt;Incomplete&amp;, Incomplete&amp;&gt; (Status: Open)">3099</a> are all closely related. Walter to write a paper resolving them.</p>
 
 <p><i>[2020-02 Prague Thursday issue discussion]</i></p>
 
@@ -24780,16 +24780,16 @@ path("..").filename();           <i>// yields</i> ".."
 
 <hr>
 <h3 id="3099"><a href="#3099">3099</a><sup><a href="https://cplusplus.github.io/LWG/issue3099">(i)</a></sup>. <code>is_assignable&lt;Incomplete&amp;, Incomplete&amp;&gt;</code></h3>
-<p><b>Section:</b> 21.3.3 <a href="https://wg21.link/meta.type.synop">[meta.type.synop]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 21.3.3 <a href="https://wg21.link/meta.type.synop">[meta.type.synop]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
  <b>Submitter:</b> Casey Carter <b>Opened:</b> 2018-04-10 <b>Last modified:</b> 2024-08-21</p>
 <p><b>Priority: </b>2
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#meta.type.synop">active issues</a> in [meta.type.synop].</p>
 <p><b>View all other</b> <a href="lwg-index.html#meta.type.synop">issues</a> in [meta.type.synop].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-LWG <a href="lwg-active.html#2939" title="Some type-completeness constraints of traits are overspecified (Status: New)">2939</a> suggests that the the preconditions of the type traits need reevaluation.
+LWG <a href="lwg-active.html#2939" title="Some type-completeness constraints of traits are overspecified (Status: Open)">2939</a> suggests that the the preconditions of the type traits need reevaluation.
 This issue focuses specifically on <code>is_assignable</code> and, by extension, its variants:
 <ul>
 <li><code>is_copy_assignable&lt;T&gt;</code>, equivalent to <code>is_assignable&lt;T&amp;, const T&amp;&gt;</code>,
@@ -24827,7 +24827,7 @@ the referent type is complete when given a reference type parameter to be implem
 
 <p><i>[2018-08 Batavia Monday issue discussion]</i></p>
 
-<p>Issues <a href="lwg-defects.html#2797" title="Trait precondition violations (Status: Resolved)">2797</a>, <a href="lwg-active.html#2939" title="Some type-completeness constraints of traits are overspecified (Status: New)">2939</a>, <a href="lwg-defects.html#3022" title="is_convertible&lt;derived*, base*&gt; may lead to ODR (Status: Resolved)">3022</a>, and <a href="lwg-active.html#3099" title="is_assignable&lt;Incomplete&amp;, Incomplete&amp;&gt; (Status: New)">3099</a> are all closely related. Walter to write a paper resolving them.</p>
+<p>Issues <a href="lwg-defects.html#2797" title="Trait precondition violations (Status: Resolved)">2797</a>, <a href="lwg-active.html#2939" title="Some type-completeness constraints of traits are overspecified (Status: Open)">2939</a>, <a href="lwg-defects.html#3022" title="is_convertible&lt;derived*, base*&gt; may lead to ODR (Status: Resolved)">3022</a>, and <a href="lwg-active.html#3099" title="is_assignable&lt;Incomplete&amp;, Incomplete&amp;&gt; (Status: Open)">3099</a> are all closely related. Walter to write a paper resolving them.</p>
 
 <p><i>[2020-02-14, Prague]</i></p>
 
@@ -26485,7 +26485,7 @@ struct X {
 </pre></blockquote>
 <p>
 <code>unique_ptr::pointer</code> is <code>IncompleteDerived*</code>, but <code>is_invocable&lt;Deleter, IncompleteDerived*&gt;</code> 
-is unknowable until the type is complete (see LWG <a href="lwg-active.html#3099" title="is_assignable&lt;Incomplete&amp;, Incomplete&amp;&gt; (Status: New)">3099</a> etc).
+is unknowable until the type is complete (see LWG <a href="lwg-active.html#3099" title="is_assignable&lt;Incomplete&amp;, Incomplete&amp;&gt; (Status: Open)">3099</a> etc).
 <p/>
 The intention is that <code>IncompleteDerived</code> only needs to be complete when the deleter is invoked, which is in the 
 definition of <code>X::~X()</code> for this example. But the requirement for <code>d(ptr)</code> to be valid requires a complete type. 
@@ -38223,12 +38223,12 @@ template&lt;class Allocator&gt; struct hash&lt;vector&lt;bool, Allocator&gt;&gt;
 <ins>namespace std {
   template&lt;class Allocator&gt; class vector&lt;bool, Allocator&gt; {
   public:
-    constexpr static void swap(reference x, reference y) noexcept;
+    static constexpr void swap(reference x, reference y) noexcept;
   };
 }</ins>
 </pre>
 <pre>
-<ins>constexpr static void swap(reference x, reference y) noexcept;</ins>
+<ins>static constexpr void swap(reference x, reference y) noexcept;</ins>
 </pre>
 <blockquote>
 <p>
@@ -49474,7 +49474,7 @@ wording style.
 Set priority to 3 after reflector poll.
 </p>
 <p>
-See also issue <a href="lwg-active.html#2939" title="Some type-completeness constraints of traits are overspecified (Status: New)">2939</a>. We should not turn the preconditions into
+See also issue <a href="lwg-active.html#2939" title="Some type-completeness constraints of traits are overspecified (Status: Open)">2939</a>. We should not turn the preconditions into
 <i>Mandates</i> without fixing them first.
 </p>
 

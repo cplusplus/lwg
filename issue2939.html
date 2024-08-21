@@ -64,7 +64,7 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="2939"><a href="lwg-active.html#2939">2939</a>. Some type-completeness constraints of traits are overspecified</h3>
 <p><b>Section:</b> 21.3.3 <a href="https://wg21.link/meta.type.synop">[meta.type.synop]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Daniel Kr&uuml;gler <b>Opened:</b> 2017-03-02 <b>Last modified:</b> 2024-05-20</p>
+ <b>Submitter:</b> Daniel Kr&uuml;gler <b>Opened:</b> 2017-03-02 <b>Last modified:</b> 2024-08-21</p>
 <p><b>Priority: </b>2
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#meta.type.synop">active issues</a> in [meta.type.synop].</p>
@@ -136,9 +136,9 @@ This doesn't seem important to support, but if we wanted to then we could say:
 <i>cv</i> <code class='backtick'>void</code>, or <ins>an array</ins><del>arrays</del> of unknown bound.
 </blockquote>
 </p>
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
 
-
-<p id="res-2939"><b>Proposed resolution:</b></p>
 <p>This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.</p>
 <blockquote>
 <ol>
@@ -216,6 +216,164 @@ as defined below, is known not to throw any exceptions
 <ins>
 Either <code class='backtick'>T</code> is a reference type and <code class='backtick'>Args</code> contains a single type that
 is similar (7.3.6 <a href="https://wg21.link/conv.qual">[conv.qual]</a>) to
+<code>remove_reference_t&lt;T&gt;</code>, or
+</ins>
+<code class='backtick'>T</code> and all types in the template parameter pack <code class='backtick'>Args</code> shall be complete types,
+<i>cv</i> <code class='backtick'>void</code>, or arrays of unknown bound.
+</td>
+</tr>
+<tr><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td></tr>
+</tbody>
+</table>
+</blockquote>
+</li>
+<li>
+In 21.3.7 <a href="https://wg21.link/meta.rel">[meta.rel]</a> Table 53,
+change the <b>Comments</b> text for
+<code class='backtick'>is_convertible</code> and <code class='backtick'>is_nothrow_convertible</code>
+as indicated.
+<blockquote>
+<table style="border: 1px solid; border-spacing: 1.5em">
+<thead style="text-align: center">
+<tr><th>Template</th><th>Condition</th><th>Comments</th></tr>
+</thead>
+<tbody style="vertical-align: top">
+<tr><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td></tr>
+<tr>
+<td>
+<pre><code>template&lt;class From, class To&gt;
+struct is_convertible;</code></pre>
+</td>
+<td>
+<i>see below</i>
+</td>
+<td>
+<ins>
+Either <code class='backtick'>To</code> is a reference type and <code class='backtick'>From</code>
+is similar (7.3.6 <a href="https://wg21.link/conv.qual">[conv.qual]</a>) to
+<code>remove_reference_t&lt;To&gt;</code>, or
+</ins>
+<code class='backtick'>From</code> and <code class='backtick'>To</code> shall be complete types,
+<i>cv</i> <code class='backtick'>void</code>, or arrays of unknown bound.
+</td>
+</tr>
+<tr>
+<td>
+<pre><code>template&lt;class From, class To&gt;
+struct is_nothrow_convertible;</code></pre>
+</td>
+<td>
+<code>is_convertible_v&lt;From, To&gt;</code>
+is <code class='backtick'>true</code> and the conversion, as defined by <code class='backtick'>is_convertible</code>,
+is known not to throw any exceptions
+(7.6.2.7 <a href="https://wg21.link/expr.unary.noexcept">[expr.unary.noexcept]</a>).
+</td>
+<td>
+<ins>
+Either <code class='backtick'>To</code> is a reference type and <code class='backtick'>From</code>
+is similar (7.3.6 <a href="https://wg21.link/conv.qual">[conv.qual]</a>) to
+<code>remove_reference_t&lt;To&gt;</code>, or
+</ins>
+<code class='backtick'>From</code> and <code class='backtick'>To</code> shall be complete types,
+<i>cv</i> <code class='backtick'>void</code>, or arrays of unknown bound.
+</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+</blockquote>
+
+<p><i>[2024-08-21; Jonathan provides improved wording]</i></p>
+
+<p>
+Following on LWG telecon review,
+change "Args contains a single type that is similar"
+to "Args contains a single type and that type is similar".
+</p>
+
+
+
+<p id="res-2939"><b>Proposed resolution:</b></p>
+<p>This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.</p>
+<blockquote>
+<ol>
+<li>
+In 21.3.5.4 <a href="https://wg21.link/meta.unary.prop">[meta.unary.prop]</a> Table 51,
+change the <b>Preconditions</b> text for
+<code class='backtick'>is_constructible</code>, <code class='backtick'>is_trivially_constructible</code>, <code class='backtick'>is_nothrow_constructible</code>,
+<code class='backtick'>is_convertible</code>, and <code class='backtick'>is_nothrow_convertible</code>,
+as indicated.
+<blockquote>
+<table style="border: 1px solid; border-spacing: 1.5em">
+<thead style="text-align: center">
+<tr><th>Template</th><th>Condition</th><th>Preconditions</th></tr>
+</thead>
+<tbody style="vertical-align: top">
+<tr><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td></tr>
+<tr>
+<td>
+<pre><code>template&lt;class T, class... Args&gt;
+struct is_constructible;</code></pre>
+</td>
+<td>
+For a function type <code class='backtick'>T</code> or
+for a <i>cv</i> <code class='backtick'>void</code> type <code class='backtick'>T</code>,
+<code>is_constructible_v&lt;T, Args...&gt;</code>
+is <code class='backtick'>false</code>,
+otherwise <i>see below</i>
+<ins>.</ins>
+</td>
+<td>
+<ins>
+Either <code class='backtick'>T</code> is a reference type and <code class='backtick'>Args</code> contains a single type
+and that type is similar (7.3.6 <a href="https://wg21.link/conv.qual">[conv.qual]</a>) to
+<code>remove_reference_t&lt;T&gt;</code>, or
+</ins>
+<code class='backtick'>T</code> and all types in the template parameter pack <code class='backtick'>Args</code> shall be complete types,
+<i>cv</i> <code class='backtick'>void</code>, or arrays of unknown bound.
+</td>
+</tr>
+<tr><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td></tr>
+<tr>
+<td>
+<pre><code>template&lt;class T, class... Args&gt;
+struct is_trivially_constructible;</code></pre>
+</td>
+<td>
+<code>is_constructible_v&lt;T, Args...&gt;</code>
+is <code class='backtick'>true</code> and the variable definition for <code class='backtick'>is_constructible</code>,
+as defined below, is known to call no operation that is not trivial
+(6.8.1 <a href="https://wg21.link/basic.types.general">[basic.types.general]</a>, 11.4.4 <a href="https://wg21.link/special">[special]</a>).
+</td>
+<td>
+<ins>
+Either <code class='backtick'>T</code> is a reference type and <code class='backtick'>Args</code> contains a single type
+and that type is similar (7.3.6 <a href="https://wg21.link/conv.qual">[conv.qual]</a>) to
+<code>remove_reference_t&lt;T&gt;</code>, or
+</ins>
+<code class='backtick'>T</code> and all types in the template parameter pack <code class='backtick'>Args</code> shall be complete types,
+<i>cv</i> <code class='backtick'>void</code>, or arrays of unknown bound.
+</td>
+</tr>
+<tr><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td></tr>
+<tr>
+<td>
+<pre><code>template&lt;class T, class... Args&gt;
+struct is_nothrow_constructible;</code></pre>
+</td>
+<td>
+<code>is_constructible_v&lt;T, Args...&gt;</code>
+is <code class='backtick'>true</code> and the variable definition for <code class='backtick'>is_constructible</code>,
+as defined below, is known not to throw any exceptions
+(7.6.2.7 <a href="https://wg21.link/expr.unary.noexcept">[expr.unary.noexcept]</a>).
+</td>
+<td>
+<ins>
+Either <code class='backtick'>T</code> is a reference type and <code class='backtick'>Args</code> contains a single type
+and that type is similar (7.3.6 <a href="https://wg21.link/conv.qual">[conv.qual]</a>) to
 <code>remove_reference_t&lt;T&gt;</code>, or
 </ins>
 <code class='backtick'>T</code> and all types in the template parameter pack <code class='backtick'>Args</code> shall be complete types,

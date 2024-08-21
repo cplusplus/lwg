@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4139"><a href="lwg-active.html#4139">4139</a>. &sect;[time.zone.leap] recursive constraint in <code>&lt;=&gt;</code></h3>
 <p><b>Section:</b> 29.11.8 <a href="https://wg21.link/time.zone.leap">[time.zone.leap]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Corentin <b>Opened:</b> 2024-08-18 <b>Last modified:</b> 2024-08-18</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Corentin <b>Opened:</b> 2024-08-18 <b>Last modified:</b> 2024-08-21</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#time.zone.leap">issues</a> in [time.zone.leap].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -105,6 +105,15 @@ Suggested resolution:
 Specify that <code>leap_seconds</code> operators are hidden friends. This would avoid the recursion, and would be easier 
 on compilers.
 </p>
+
+<p><i>[2024-08-21; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+Support for changing all relational ops for calendar types to hidden friends,
+but only doing it for <code class='backtick'>leap_second</code> would be in scope for this issue.
+</p>
+
 
 
 <p id="res-4139"><b>Proposed resolution:</b></p>

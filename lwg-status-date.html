@@ -67,7 +67,7 @@
 This document is the Index by Status and Date for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
-<p>Revised 2024-08-21 at 14:37:31 UTC
+<p>Revised 2024-08-21 at 15:08:28 UTC
 </p><h2 id="Ready">Ready (8 issues)</h2>
 <table class="issues-index">
 <tr>
@@ -154,7 +154,7 @@ should not be constrained</td>
 <td></td>
 </tr>
 </table>
-<h2 id="Tentatively_Ready">Tentatively Ready (4 issues)</h2>
+<h2 id="Tentatively_Ready">Tentatively Ready (5 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -164,6 +164,17 @@ should not be constrained</td>
   <th>Proposed Resolution</th>
   <th><a href="unresolved-prioritized.html">Priority</a></th>
   <th>Duplicates</th>
+</tr>
+<tr>
+<td id="4135"><a href="lwg-active.html#4135" title="The helper lambda of std::erase for list should specify return type as
+  bool (Status: Tentatively Ready)">4135</a><sup><a href="https://cplusplus.github.io/LWG/issue4135">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>24.3.10.7 [forward.list.erasure]</td>
+<td>The helper lambda of <code>std::erase</code> for <code>list</code> should specify return type as
+  <code>bool</code></td>
+<td>Yes</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td id="4126"><a href="lwg-active.html#4126" title="Some feature-test macros for fully freestanding features are not yet marked freestanding (Status: Tentatively Ready)">4126</a><sup><a href="https://cplusplus.github.io/LWG/issue4126">(i)</a></sup></td>
@@ -295,7 +306,7 @@ should not be constrained</td>
 <td></td>
 </tr>
 </table>
-<h2 id="New">New (430 issues)</h2>
+<h2 id="New">New (429 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -307,6 +318,15 @@ should not be constrained</td>
   <th>Duplicates</th>
 </tr>
 <tr>
+<td id="4049"><a href="lwg-active.html#4049" title="C &lt;foo.h&gt; headers not in freestanding (Status: New)">4049</a><sup><a href="https://cplusplus.github.io/LWG/issue4049">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>16.4.2 [organization]</td>
+<td>C <code>&lt;<i>foo</i>.h&gt;</code> headers not in freestanding</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
 <td id="4140"><a href="lwg-active.html#4140" title="Useless default constructor for bitset&lt;N&gt;::reference (Status: New)">4140</a><sup><a href="https://cplusplus.github.io/LWG/issue4140">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>22.9.2.1 [template.bitset.general]</td>
@@ -316,12 +336,12 @@ should not be constrained</td>
 <td></td>
 </tr>
 <tr>
-<td id="4128"><a href="lwg-active.html#4128" title="Allocator requirements should not allow rebinding conversions to be explicit (Status: New)">4128</a><sup><a href="https://cplusplus.github.io/LWG/issue4128">(i)</a></sup></td>
+<td id="4134"><a href="lwg-active.html#4134" title="Issue with Philox algorithm specification (Status: New)">4134</a><sup><a href="https://cplusplus.github.io/LWG/issue4134">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
-<td>16.4.4.6.1 [allocator.requirements.general]</td>
-<td>Allocator requirements should not allow rebinding conversions to be explicit</td>
+<td>28.5.4.5 [rand.eng.philox]</td>
+<td>Issue with Philox algorithm specification</td>
 <td>Yes</td>
-<td></td>
+<td>1</td>
 <td></td>
 </tr>
 <tr>
@@ -330,6 +350,24 @@ should not be constrained</td>
 <td>29.11.8 [time.zone.leap]</td>
 <td>&sect;[time.zone.leap] recursive constraint in <code>&lt;=&gt;</code></td>
 <td><span class="no-pr">No</span></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4133"><a href="lwg-active.html#4133" title="awaitable-receiver's members are potentially throwing (Status: New)">4133</a><sup><a href="https://cplusplus.github.io/LWG/issue4133">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>34.12.1 [exec.as.awaitable]</td>
+<td><code><i>awaitable-receiver</i></code>'s members are potentially throwing</td>
+<td><span class="no-pr">No</span></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td id="4128"><a href="lwg-active.html#4128" title="Allocator requirements should not allow rebinding conversions to be explicit (Status: New)">4128</a><sup><a href="https://cplusplus.github.io/LWG/issue4128">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>16.4.4.6.1 [allocator.requirements.general]</td>
+<td>Allocator requirements should not allow rebinding conversions to be explicit</td>
+<td>Yes</td>
 <td></td>
 <td></td>
 </tr>
@@ -352,30 +390,10 @@ should not be constrained</td>
 <td></td>
 </tr>
 <tr>
-<td id="4134"><a href="lwg-active.html#4134" title="Issue with Philox algorithm specification (Status: New)">4134</a><sup><a href="https://cplusplus.github.io/LWG/issue4134">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>28.5.4.5 [rand.eng.philox]</td>
-<td>Issue with Philox algorithm specification</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="4137"><a href="lwg-active.html#4137" title="Fix Mandates, Preconditions, and Complexity elements of [linalg] algorithms (Status: New)">4137</a><sup><a href="https://cplusplus.github.io/LWG/issue4137">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>28.9.14 [linalg.algs.blas2]</td>
 <td>Fix <i>Mandates</i>, <i>Preconditions</i>, and <i>Complexity</i> elements of [linalg] algorithms</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4135"><a href="lwg-active.html#4135" title="The helper lambda of std::erase for list should specify return type as
-  bool (Status: New)">4135</a><sup><a href="https://cplusplus.github.io/LWG/issue4135">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>24.3.10.7 [forward.list.erasure]</td>
-<td>The helper lambda of <code>std::erase</code> for <code>list</code> should specify return type as
-  <code>bool</code></td>
 <td>Yes</td>
 <td></td>
 <td></td>
@@ -396,15 +414,6 @@ should not be constrained</td>
 <td>The Standard Library should not use predicates of the form <code>pred(*i) != false</code></td>
 <td>Yes</td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4133"><a href="lwg-active.html#4133" title="awaitable-receiver's members are potentially throwing (Status: New)">4133</a><sup><a href="https://cplusplus.github.io/LWG/issue4133">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>34.12.1 [exec.as.awaitable]</td>
-<td><code><i>awaitable-receiver</i></code>'s members are potentially throwing</td>
-<td><span class="no-pr">No</span></td>
-<td></td>
 <td></td>
 </tr>
 <tr>
@@ -1225,15 +1234,6 @@ is a non-move-constructible range</td>
 <td>Atomics are copy constructible and copy assignable from <code>volatile</code> atomics</td>
 <td>Yes</td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4049"><a href="lwg-active.html#4049" title="C &lt;foo.h&gt; headers not in freestanding (Status: New)">4049</a><sup><a href="https://cplusplus.github.io/LWG/issue4049">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>16.4.2 [organization]</td>
-<td>C <code>&lt;<i>foo</i>.h&gt;</code> headers not in freestanding</td>
-<td>Yes</td>
-<td></td>
 <td></td>
 </tr>
 <tr>

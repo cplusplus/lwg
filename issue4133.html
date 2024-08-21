@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4133"><a href="lwg-active.html#4133">4133</a>. <code><i>awaitable-receiver</i></code>'s members are potentially throwing</h3>
 <p><b>Section:</b> 34.12.1 <a href="https://wg21.link/exec.as.awaitable">[exec.as.awaitable]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2024-07-30 <b>Last modified:</b> 2024-08-05</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2024-07-30 <b>Last modified:</b> 2024-08-21</p>
+<p><b>Priority: </b>1
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -77,6 +77,20 @@ and <code>promise()</code> member functions on <code>coroutine_handle&lt;P&gt;</
 specified as being "equivalent to" statement that call <code>resume()</code> and <code>promise()</code> 
 outside of <code>try</code>/<code>catch</code> blocks.
 </p>
+
+<p><i>[2024-08-21; Reflector poll]</i></p>
+
+<p>
+Set priority to 1 after reflector poll.
+</p>
+<p>
+<code class='backtick'>promise()</code> can probably be <i>Throws</i>: Nothing
+(along with a bunch of other coroutine_handle members),
+but <code class='backtick'>resume()</code> certainly can throw.
+Also AS-EXCEPT-PTR can throw for the <code class='backtick'>error_code</code> case
+(that might be worth a separate issue though).
+</p>
+
 
 
 <p id="res-4133"><b>Proposed resolution:</b></p>

@@ -64,7 +64,7 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Open">Open</a> status.</em></p>
 <h3 id="4015"><a href="lwg-active.html#4015">4015</a>. LWG 3973 broke <code>const</code> overloads of <code>std::optional</code> monadic operations</h3>
 <p><b>Section:</b> 22.5.3.8 <a href="https://wg21.link/optional.monadic">[optional.monadic]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-11-24 <b>Last modified:</b> 2024-06-24</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-11-24 <b>Last modified:</b> 2024-08-21</p>
 <p><b>Priority: </b>1
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
@@ -869,6 +869,8 @@ to destroy the contained value <ins>and sets <code><i>has_val</i></code> to <cod
 
 <p><i>[St. Louis 2024-06-24; Jonathan provides improved wording]</i></p>
 
+<p><i>[LWG telecon 2024-06-24; Replace 22.5.3.1 <a href="https://wg21.link/optional.optional.general">[optional.optional.general]</a> p1 and p2]</i></p>
+
 
 
 
@@ -905,28 +907,40 @@ namespace std {
 
 <blockquote>
 <p>
+-1-
+<ins>
+When its member <code><i>val</i></code> is active
+(11.5.1 <a href="https://wg21.link/class.union.general">[class.union.general]</a>),
+an instance of <code>optional&lt;T&gt;</code> is said to
+<i>contain a value</i>, and <code><i>val</i></code> is referred to as its
+<i>contained value</i>.
+</ins>
+<del>
+Any instance of <code>optional&lt;T&gt;</code> at any given time either
+contains a value or does not contain a value.
+When an instance of <code>optional&lt;T&gt;</code> <i>contains a value</i>,
+it means that an object of type <code>T</code>,
+referred to as the optional object's <i>contained</i> value,
+is allocated within the storage of the optional object.
+Implementations are not permitted to use additional storage,
+such as dynamic memory, to allocate its contained value.
+When an object of type <code>optional&lt;T&gt;</code>
+is contextually converted to <code>bool</code>,
+the conversion returns <code class='backtick'>true</code> if the object contains a value;
+otherwise the conversion returns <code class='backtick'>false</code>.
+</del>
+</p>
+<p>
+<del>
 -2- When an <code>optional&lt;T&gt;</code> object contains a value,
-<ins>the</ins>
 member <code>val</code>
-<ins>is active (11.5.1 <a href="https://wg21.link/class.union.general">[class.union.general]</a>)</ins>
-<del>points to the contained value</del>.
+points to the contained value.
+</del>
 </p>
 </blockquote>
 </li>
 
 <li><p>Modify 22.5.3.2 <a href="https://wg21.link/optional.ctor">[optional.ctor]</a> as indicated:</p>
-
-<blockquote class="note">
-<p>
-[<i>Drafting note</i>: Normatively, this subclause doesn't require any changes, but Daniel suggested to replace
-phrases of the form "[&hellip;]initializes the contained value with"] by "[&hellip;]initializes <code><i>val</i></code> with"
-as we do in 22.8.6.2 <a href="https://wg21.link/expected.object.cons">[expected.object.cons]</a>.
-I think this is an improvement, since the edit to [optional.ctor] above does
-not actually say that <code class='backtick'>val</code> <i>is</i> the contained value, so the changes
-below make it clear that we begin/end the lifetime of <code class='backtick'>val</code>, not something else.
-]
-</p>
-</blockquote>
 
 <blockquote>
 <pre>

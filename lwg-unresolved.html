@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-08-21 at 17:28:23 UTC
+<p>Revised 2024-08-21 at 19:57:54 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -51461,7 +51461,7 @@ to
 <hr>
 <h3 id="4015"><a href="#4015">4015</a><sup><a href="https://cplusplus.github.io/LWG/issue4015">(i)</a></sup>. LWG 3973 broke <code>const</code> overloads of <code>std::optional</code> monadic operations</h3>
 <p><b>Section:</b> 22.5.3.8 <a href="https://wg21.link/optional.monadic">[optional.monadic]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-11-24 <b>Last modified:</b> 2024-06-24</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-11-24 <b>Last modified:</b> 2024-08-21</p>
 <p><b>Priority: </b>1
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
@@ -52266,6 +52266,8 @@ to destroy the contained value <ins>and sets <code><i>has_val</i></code> to <cod
 
 <p><i>[St. Louis 2024-06-24; Jonathan provides improved wording]</i></p>
 
+<p><i>[LWG telecon 2024-06-24; Replace 22.5.3.1 <a href="https://wg21.link/optional.optional.general">[optional.optional.general]</a> p1 and p2]</i></p>
+
 
 
 
@@ -52302,28 +52304,40 @@ namespace std {
 
 <blockquote>
 <p>
+-1-
+<ins>
+When its member <code><i>val</i></code> is active
+(11.5.1 <a href="https://wg21.link/class.union.general">[class.union.general]</a>),
+an instance of <code>optional&lt;T&gt;</code> is said to
+<i>contain a value</i>, and <code><i>val</i></code> is referred to as its
+<i>contained value</i>.
+</ins>
+<del>
+Any instance of <code>optional&lt;T&gt;</code> at any given time either
+contains a value or does not contain a value.
+When an instance of <code>optional&lt;T&gt;</code> <i>contains a value</i>,
+it means that an object of type <code>T</code>,
+referred to as the optional object's <i>contained</i> value,
+is allocated within the storage of the optional object.
+Implementations are not permitted to use additional storage,
+such as dynamic memory, to allocate its contained value.
+When an object of type <code>optional&lt;T&gt;</code>
+is contextually converted to <code>bool</code>,
+the conversion returns <code class='backtick'>true</code> if the object contains a value;
+otherwise the conversion returns <code class='backtick'>false</code>.
+</del>
+</p>
+<p>
+<del>
 -2- When an <code>optional&lt;T&gt;</code> object contains a value,
-<ins>the</ins>
 member <code>val</code>
-<ins>is active (11.5.1 <a href="https://wg21.link/class.union.general">[class.union.general]</a>)</ins>
-<del>points to the contained value</del>.
+points to the contained value.
+</del>
 </p>
 </blockquote>
 </li>
 
 <li><p>Modify 22.5.3.2 <a href="https://wg21.link/optional.ctor">[optional.ctor]</a> as indicated:</p>
-
-<blockquote class="note">
-<p>
-[<i>Drafting note</i>: Normatively, this subclause doesn't require any changes, but Daniel suggested to replace
-phrases of the form "[&hellip;]initializes the contained value with"] by "[&hellip;]initializes <code><i>val</i></code> with"
-as we do in 22.8.6.2 <a href="https://wg21.link/expected.object.cons">[expected.object.cons]</a>.
-I think this is an improvement, since the edit to [optional.ctor] above does
-not actually say that <code class='backtick'>val</code> <i>is</i> the contained value, so the changes
-below make it clear that we begin/end the lifetime of <code class='backtick'>val</code>, not something else.
-]
-</p>
-</blockquote>
 
 <blockquote>
 <pre>
@@ -61194,8 +61208,8 @@ that would be reachable through (6.8.4 <a href="https://wg21.link/basic.compound
 <hr>
 <h3 id="4131"><a href="#4131">4131</a><sup><a href="https://cplusplus.github.io/LWG/issue4131">(i)</a></sup>. Including <code>&lt;optional&gt;</code> doesn't provide <code>std::begin/end</code></h3>
 <p><b>Section:</b> 25.7 <a href="https://wg21.link/iterator.range">[iterator.range]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-08-02 <b>Last modified:</b> 2024-08-03</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-08-02 <b>Last modified:</b> 2024-08-21</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#iterator.range">active issues</a> in [iterator.range].</p>
 <p><b>View all other</b> <a href="lwg-index.html#iterator.range">issues</a> in [iterator.range].</p>
@@ -61205,6 +61219,17 @@ that would be reachable through (6.8.4 <a href="https://wg21.link/basic.compound
 Since <code>optional</code> now provides <code>begin/end</code> members, it is reasonable
 to ensure the validity of <code>std::begin/end</code> after including <code>&lt;optional&gt;</code>.
 </p>
+
+<p><i>[2024-08-21; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+"I would like to hear opinion of <a href="https://wg21.link/P3168" title=" Give std::optional Range Support">P3168</a> authors,
+or have the change discussed as a part of <a href="https://wg21.link/P3016" title=" Resolve inconsistencies in begin/end for valarray and braced initializer lists">P3016</a>.
+</p>
+
 
 
 <p id="res-4131"><b>Proposed resolution:</b></p>

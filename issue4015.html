@@ -929,8 +929,8 @@ it means that an object of type <code>T</code>,
 referred to as the</del>
 <ins>An</ins>
 optional object's
-<del><i>contained value</i></del>
-<ins>contained value</ins>,
+<ins>contained value</ins>
+<del><i>contained value</i>, </del>
 is allocated within the storage of the optional object.
 Implementations are not permitted to use additional storage,
 such as dynamic memory, to allocate its contained value.
@@ -1173,8 +1173,8 @@ constexpr optional&lt;T&gt;&amp; operator=(optional&amp;&amp; rhs) noexcept(<i>s
 unchanged. If an exception is thrown during the call to <code>T</code>'s move constructor, the state 
 of <code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception 
 safety guarantee of <code>T</code>'s move constructor. If an exception is thrown during the call to 
-<code>T</code>'s move assignment, the state of <code><del>*</del><ins><i>val</i></ins><del>val</del></code> 
-and <code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception 
+<code>T</code>'s move assignment, the <ins>states</ins> <del>state</del> of <code><del>*</del><ins><i>val</i></ins><del>val</del></code>
+and <code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> <ins>are</ins> <del>is</del> determined by the exception
 safety guarantee of <code>T</code>'s move assignment.
 </p>
 </blockquote>
@@ -1196,8 +1196,8 @@ to <ins><code><i>val</i></code></ins><del>the contained value</del>; otherwise d
 -18- <i>Remarks</i>: If any exception is thrown, the result of the expression <code>this-&gt;has_value()</code> 
 remains unchanged. If an exception is thrown during the call to <code>T</code>'s constructor, the state of 
 <code>v</code> is determined by the exception safety guarantee of <code>T</code>'s constructor. If an exception 
-is thrown during the call to <code>T</code>'s assignment, the state of <code><ins><i>val</i></ins><del>*val</del></code> 
-and <code>v</code> is determined by the exception safety guarantee of <code>T</code>'s assignment.   
+is thrown during the call to <code>T</code>'s assignment, the <ins>states</ins> <del>state</del> of <code><ins><i>val</i></ins><del>*val</del></code>
+and <code>v</code> <ins>are</ins> <del>is</del> determined by the exception safety guarantee of <code>T</code>'s assignment.
 </p>
 </blockquote>
 <pre>
@@ -1241,8 +1241,8 @@ with <code><del>*</del>rhs<ins>.<i>val</i></ins></code> </td>
 unchanged. If an exception is thrown during the call to <code>T</code>'s constructor, the state of 
 <code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception safety 
 guarantee of <code>T</code>'s constructor. If an exception is thrown during the call to <code>T</code>'s
-assignment, the state of <code><ins><i>val</i></ins><del>*val</del></code> and 
-<code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception safety 
+assignment, the <ins>states</ins> <del>state</del> of <code><ins><i>val</i></ins><del>*val</del></code> and
+<code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> <ins>are</ins> <del>is</del> determined by the exception safety
 guarantee of <code>T</code>'s assignment.
 </p>
 </blockquote>
@@ -1287,8 +1287,8 @@ template&lt;class U&gt; constexpr optional&lt;T&gt;&amp; operator=(optional&lt;U
 unchanged. If an exception is thrown during the call to <code>T</code>'s constructor, the state of 
 <code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception safety 
 guarantee of <code>T</code>'s constructor. If an exception is thrown during the call to <code>T</code>'s
-assignment, the state of <code><ins><i>val</i></ins><del>*val</del></code> and 
-<code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception safety 
+assignment, the <ins>states</ins> <del>state</del> of <code><ins><i>val</i></ins><del>*val</del></code> and
+<code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> <ins>are</ins> <del>is</del> determined by the exception safety
 guarantee of <code>T</code>'s assignment.
 </p>
 </blockquote>
@@ -1388,8 +1388,8 @@ contains a value</td>
 the state of <code><ins><i>val</i></ins><del>*val</del></code> and 
 <code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception safety 
 guarantee of <code>swap</code> for lvalues of <code>T</code>. If an exception is thrown during the call to 
-<code>T</code>'s move constructor, the state of <code><ins><i>val</i></ins><del>*val</del></code> and 
-<code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> is determined by the exception safety 
+<code>T</code>'s move constructor, the <ins>states</ins> <del>state</del> of <code><ins><i>val</i></ins><del>*val</del></code> and
+<code><del>*</del>rhs.<ins><i>val</i></ins><del>val</del></code> <ins>are</ins> <del>is</del> determined by the exception safety
 guarantee of <code>T</code>'s move constructor.
 <p/>
 </p>

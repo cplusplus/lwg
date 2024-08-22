@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-08-22 at 11:30:02 UTC
+<p>Revised 2024-08-22 at 11:44:20 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -52267,8 +52267,14 @@ to destroy the contained value <ins>and sets <code><i>has_val</i></code> to <cod
 
 <p><i>[St. Louis 2024-06-24; Jonathan provides improved wording]</i></p>
 
-<p><i>[LWG telecon 2024-06-24; Replace 22.5.3.1 <a href="https://wg21.link/optional.optional.general">[optional.optional.general]</a> p1 and p2]</i></p>
+<p><i>[2024-08-21; LWG telecon]</i></p>
 
+<p>
+During telecon review it was suggested to replace
+22.5.3.1 <a href="https://wg21.link/optional.optional.general">[optional.optional.general]</a> p1 and p2.
+On the reflector Daniel requested to keep the "additional storage" prohibition,
+so that will be addressed by issue <a href="lwg-active.html#4141" title="Improve prohibitions on &quot;additional storage&quot; (Status: New)">4141</a> instead.
+</p>
 
 
 
@@ -52318,10 +52324,15 @@ Any instance of <code>optional&lt;T&gt;</code> at any given time either
 contains a value or does not contain a value.
 When an instance of <code>optional&lt;T&gt;</code> <i>contains a value</i>,
 it means that an object of type <code>T</code>,
-referred to as the optional object's <i>contained value</i>,
+referred to as the</del>
+<ins>The</ins>
+optional object's
+<del><i>contained value</i></del>
+<ins>contained value</ins>,
 is allocated within the storage of the optional object.
 Implementations are not permitted to use additional storage,
 such as dynamic memory, to allocate its contained value.
+<del>
 When an object of type <code>optional&lt;T&gt;</code>
 is contextually converted to <code>bool</code>,
 the conversion returns <code class='backtick'>true</code> if the object contains a value;
@@ -62159,6 +62170,9 @@ namespace std {
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
+This issue was split out from issue <a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations (Status: Open)">4015</a>.
+</p>
+<p>
 <code class='backtick'>optional</code>, <code class='backtick'>variant</code> and <code class='backtick'>expected</code> all use similar wording to require
 their contained value to be a subobject, rather than dynamically allocated
 and referred to by a pointer, e.g.
@@ -62207,7 +62221,7 @@ This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
 
 <blockquote class="note">
 [<i>Drafting note</i>:
-This edit modifies the same paragraph as <a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations (Status: Open)">4015</a>,
+This edit modifies the same paragraph as issue <a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations (Status: Open)">4015</a>,
 but that other issue intentionally doesn't touch the affected sentence here
 (except for removing the italics on "contained value").
 The intention is that the merge conflict can be resolved in the obvious way.]

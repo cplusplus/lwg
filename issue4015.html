@@ -869,8 +869,14 @@ to destroy the contained value <ins>and sets <code><i>has_val</i></code> to <cod
 
 <p><i>[St. Louis 2024-06-24; Jonathan provides improved wording]</i></p>
 
-<p><i>[LWG telecon 2024-06-24; Replace 22.5.3.1 <a href="https://wg21.link/optional.optional.general">[optional.optional.general]</a> p1 and p2]</i></p>
+<p><i>[2024-08-21; LWG telecon]</i></p>
 
+<p>
+During telecon review it was suggested to replace
+22.5.3.1 <a href="https://wg21.link/optional.optional.general">[optional.optional.general]</a> p1 and p2.
+On the reflector Daniel requested to keep the "additional storage" prohibition,
+so that will be addressed by issue <a href="lwg-active.html#4141" title="Improve prohibitions on &quot;additional storage&quot; (Status: New)">4141</a> instead.
+</p>
 
 
 
@@ -920,10 +926,15 @@ Any instance of <code>optional&lt;T&gt;</code> at any given time either
 contains a value or does not contain a value.
 When an instance of <code>optional&lt;T&gt;</code> <i>contains a value</i>,
 it means that an object of type <code>T</code>,
-referred to as the optional object's <i>contained value</i>,
+referred to as the</del>
+<ins>The</ins>
+optional object's
+<del><i>contained value</i></del>
+<ins>contained value</ins>,
 is allocated within the storage of the optional object.
 Implementations are not permitted to use additional storage,
 such as dynamic memory, to allocate its contained value.
+<del>
 When an object of type <code>optional&lt;T&gt;</code>
 is contextually converted to <code>bool</code>,
 the conversion returns <code class='backtick'>true</code> if the object contains a value;

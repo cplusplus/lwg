@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-08-22 at 11:44:20 UTC
+<p>Revised 2024-08-22 at 11:54:40 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -55491,7 +55491,7 @@ contains a value or does not contain a value.
 When an instance of <code>optional&lt;T&gt;</code> <i>contains a value</i>,
 it means that an object of type <code>T</code>,
 referred to as the</del>
-<ins>The</ins>
+<ins>An</ins>
 optional object's
 <del><i>contained value</i></del>
 <ins>contained value</ins>,
@@ -67530,7 +67530,9 @@ This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
 This edit modifies the same paragraph as issue <a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations (Status: Open)">4015</a>,
 but that other issue intentionally doesn't touch the affected sentence here
 (except for removing the italics on "contained value").
-The intention is that the merge conflict can be resolved in the obvious way.]
+The intention is that the merge conflict can be resolved in the obvious way:
+"An optional object's contained value
+is nested within (6.7.2 <a href="https://wg21.link/intro.object">[intro.object]</a>) the optional object."]
 </blockquote>
 
 <blockquote>

@@ -234,7 +234,12 @@ point<del>s</del><ins>ing</ins> to storage suitable to hold an object of type
 <ins>potentially</ins> rebound copy of the allocator <code>a</code> passed to <code>allocate_shared</code>
 <del>such that its <code>value_type</code> is <code>remove_cv_t&lt;U&gt;</code></del>.</p></li>
 <li><p>[&hellip;]</p></li>
-<li><p>(7.11) &mdash; When a (sub)object of non-array type <code>U</code> that was initialized by
+<li>
+<blockquote class="note"><p>[<i>Drafting note</i>:
+Issue <a href="lwg-active.html#4024" title="Underspecified destruction of objects created in std::make_shared_for_overwrite/std::allocate_shared_for_overwrite (Status: Ready)">4024</a> will add <code class='backtick'>make_shared_for_overwrite</code>
+and <code class='backtick'>allocate_shared_for_overwrite</code> to (7.11) but that doesn't conflict with this next edit.]
+</p></blockquote>
+<p>(7.11) &mdash; When a (sub)object of non-array type <code>U</code> that was initialized by
 <code>make_shared</code> is to be destroyed, it is destroyed via the expression
 <code>p<del>v</del><ins>u</ins>->~U()</code> where <code>p<del>v</del><ins>u</ins></code>
 points to that object of type <code>U</code>.</p></li>

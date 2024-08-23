@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-08-23 at 10:32:58 UTC
+<p>Revised 2024-08-23 at 10:39:08 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -26666,6 +26666,8 @@ allocator <code>a</code> passed to <code>allocate_shared</code> <del>such that i
 <p>
 <code class='backtick'>make_shared_default_init</code> and <code class='backtick'>allocate_shared_default_init</code> were renamed
 by <a href="https://wg21.link/P1973R1" title=" Rename _default_init functions (NB Comment DE002)">P1973R1</a> so this needs a rebase.
+The edit to (7.11) is just for consistency, so that <code class='backtick'>pv</code> is always <code class='backtick'>void*</code>
+and <code class='backtick'>pu</code> is <code>remove_cv_t&lt;U&gt;*</code>.
 Accepting this proposed resolution would also resolve issue <a href="lwg-active.html#3210" title="allocate_shared is inconsistent about removing const from the pointer 
 passed to allocator construct and destroy (Status: New)">3210</a>.
 </p>
@@ -26726,6 +26728,10 @@ point<del>s</del><ins>ing</ins> to storage suitable to hold an object of type
 <ins>potentially</ins> rebound copy of the allocator <code>a</code> passed to <code>allocate_shared</code>
 <del>such that its <code>value_type</code> is <code>remove_cv_t&lt;U&gt;</code></del>.</p></li>
 <li><p>[&hellip;]</p></li>
+<li><p>(7.11) &mdash; When a (sub)object of non-array type <code>U</code> that was initialized by
+<code>make_shared</code> is to be destroyed, it is destroyed via the expression
+<code>p<del>v</del><ins>u</ins>->~U()</code> where <code>p<del>v</del><ins>u</ins></code>
+points to that object of type <code>U</code>.</p></li>
 <li><p>(7.12) &mdash; When a (sub)object of non-array type <code>U</code> that was initialized by
 <code>allocate_shared</code> is to be destroyed, it is destroyed via the expression
 <code>allocator_traits&lt;A2&gt;::destroy(a2, p<del>v</del><ins>u</ins>)</code> where

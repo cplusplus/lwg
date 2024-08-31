@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-08-31 at 14:12:43 UTC
+<p>Revised 2024-08-31 at 14:22:21 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -61201,6 +61201,7 @@ X u(std::move(b));
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-07-30 <b>Last modified:</b> 2024-08-03</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#res.on.data.races">active issues</a> in [res.on.data.races].</p>
 <p><b>View all other</b> <a href="lwg-index.html#res.on.data.races">issues</a> in [res.on.data.races].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -62667,6 +62668,31 @@ and <code class='backtick'>A::const_void_pointer</code> may be used as
 </blockquote>
 </li>
 </ol>
+
+
+
+
+
+<hr>
+<h3 id="4145"><a href="#4145">4145</a><sup><a href="https://cplusplus.github.io/LWG/issue4145">(i)</a></sup>. Unclear how [res.on.data.races] apply to templated functions</h3>
+<p><b>Section:</b> 16.4.6.10 <a href="https://wg21.link/res.on.data.races">[res.on.data.races]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Tim Song <b>Opened:</b> 2024-08-22 <b>Last modified:</b> 2024-08-31</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#res.on.data.races">active issues</a> in [res.on.data.races].</p>
+<p><b>View all other</b> <a href="lwg-index.html#res.on.data.races">issues</a> in [res.on.data.races].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+It's unclear how 16.4.6.10 <a href="https://wg21.link/res.on.data.races">[res.on.data.races]</a> applies to templated functions that 
+invoke user-supplied operations. In particular, there's no way to meet those requirements 
+when a user-supplied operation can perform arbitrary operations.
+<p/>
+Perhaps we need to exclude the invocation of such operations from the scope of the requirements.
+</p>
+
+
+<p id="res-4145"><b>Proposed resolution:</b></p>
 
 
 

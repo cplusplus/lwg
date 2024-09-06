@@ -67,7 +67,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-09-05</td>
+  <td align="left">2024-09-06</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-09-05 at 17:38:16 UTC
+<p>Revised 2024-09-06 at 17:15:31 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -68288,7 +68288,7 @@ function-like macros (15.6 <a href="https://wg21.link/cpp.replace">[cpp.replace]
 <hr>
 <h3 id="4150"><a href="#4150">4150</a><sup><a href="https://cplusplus.github.io/LWG/issue4150">(i)</a></sup>. The preconditions on <code>run_loop::run()</code> are too strict</h3>
 <p><b>Section:</b> 34.11.1.4 <a href="https://wg21.link/exec.run.loop.members">[exec.run.loop.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2024-09-05 <b>Last modified:</b> 2024-09-05</p>
+ <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2024-09-05 <b>Last modified:</b> 2024-09-06</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -68301,7 +68301,7 @@ Given that <code>run_loop::finish()</code> puts the loop in the <i>finishing</i>
 is that one cannot call <code>finish()</code> before calling <code>run()</code>.
 <p/>
 However, in most cases <code>sync_wait</code> is calling <code>finish()</code> on its <code>run_loop</code> 
-before calling run<code>()</code>, violating this precondition. <code>sync_wait</code> does the following:
+before calling <code>run()</code>, violating this precondition. <code>sync_wait</code> does the following:
 </p>
 <blockquote><pre>
 run_loop loop;

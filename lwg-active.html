@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-09-07 at 08:52:47 UTC
+<p>Revised 2024-09-07 at 17:16:30 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -66509,6 +66509,8 @@ template&lt;class BinaryPredicate&gt; size_type unique(BinaryPredicate binary_pr
 <p>
 During LWG reflector discussion it has been proposed to add similar wording to the 
 throwing prohibition in <i>Cpp17NullablePointer</i> and <code><i>nothrow-sentinel-for</i></code>, too.
+Furthermore, the existing wording changes are becoming now more harmonized in their
+stylistic forms.
 </p>
 
 
@@ -66539,9 +66541,9 @@ a.merge(a2)
 <p>
 [&hellip;]
 <p/>
--116- <i>Throws</i>: Nothing unless the <ins>evaluation of the</ins> comparison object 
-<ins>including every selected <code><i>boolean-testable</i></code> (18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) 
-operation</ins> throws.
+-116- <i>Throws</i>: Nothing unless <ins>an exception is thrown by evaluation of</ins> the comparison 
+object<ins>, including any selected <code><i>boolean-testable</i></code> (18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) 
+operations</ins><del>throws</del>.
 </p>
 </blockquote>
 </blockquote>
@@ -66558,9 +66560,10 @@ template&lt;class Predicate&gt; size_type remove_if(Predicate pred);
 <p>
 [&hellip;]
 <p/>
--15- <i>Throws</i>: Nothing unless an exception is thrown by the equality comparison or the 
-predicate <ins>evaluation including every selected <code><i>boolean-testable</i></code> 
-(18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) operation</ins>.
+-15- <i>Throws</i>: Nothing unless an exception is thrown by the equality comparison 
+<ins>(for <code>remove()</code>)</ins> or the predicate <ins>(for <code>remove_if()</code>), 
+including any selected <code><i>boolean-testable</i></code> (18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) 
+operations</ins>.
 </p>
 </blockquote>
 <p>
@@ -66574,9 +66577,9 @@ template&lt;class BinaryPredicate&gt; size_type unique(BinaryPredicate binary_pr
 <p>
 [&hellip;]
 <p/>
--22- <i>Throws</i>: Nothing unless an exception is thrown by the predicate 
-<ins>evaluation including every selected <code><i>boolean-testable</i></code> 
-(18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) operation</ins>.
+-22- <i>Throws</i>: Nothing unless an exception is thrown by <ins>evaluation of</ins> 
+the predicate<ins>, including any selected <code><i>boolean-testable</i></code> 
+(18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) operations</ins>.
 </p>
 </blockquote>
 </blockquote>
@@ -66600,9 +66603,10 @@ template&lt;class Predicate&gt; size_type remove_if(Predicate pred);
 <p>
 [&hellip;]
 <p/>
--17- <i>Throws</i>: Nothing unless an exception is thrown by <code>*i == value</code> or
-<code>pred(*i)</code> <ins>including every selected <code><i>boolean-testable</i></code> 
-(18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) operation</ins>.
+-17- <i>Throws</i>: Nothing unless an exception is thrown by <del><code>*i == value</code> or
+<code>pred(*i)</code></del><ins>the equality comparison (for <code>remove()</code>) or evaluation 
+of the predicate (for <code>remove_if()</code>), including any selected <code><i>boolean-testable</i></code> 
+(18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) operations</ins>.
 <p/>
 [&hellip;]
 </p>
@@ -66615,9 +66619,9 @@ template&lt;class BinaryPredicate&gt; size_type unique(BinaryPredicate binary_pr
 <p>
 [&hellip;]
 <p/>
--24- <i>Throws</i>: Nothing unless an exception is thrown by the predicate 
-<ins>evaluation including every selected <code><i>boolean-testable</i></code> 
-(18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) operation</ins>.
+-24- <i>Throws</i>: Nothing unless an exception is thrown by <ins>evaluation of</ins> the 
+predicate<ins>, including any selected <code><i>boolean-testable</i></code> 
+(18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) operations</ins>.
 <p/>
 [&hellip;]
 </p>

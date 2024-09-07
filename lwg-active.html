@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-09-07 at 17:16:30 UTC
+<p>Revised 2024-09-07 at 17:19:53 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -66524,8 +66524,8 @@ This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
 
 <blockquote>
 <p>
--4- No operation which is part of the <i>Cpp17NullablePointer</i> requirements <ins>including each 
-of its <code><i>boolean-testable</i></code> (18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) operations</ins> 
+-4- No operation which is part of the <i>Cpp17NullablePointer</i> requirements<ins>, including each 
+of its <code><i>boolean-testable</i></code> (18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) operations,</ins> 
 shall exit via an exception.
 </p>
 </blockquote>
@@ -66640,8 +66640,8 @@ concept <i>nothrow-sentinel-for</i> = sentinel_for&lt;S, I&gt;; // <i>exposition
 <p>
 -4- Types <code>S</code> and <code>I</code> model <code><i>nothrow-sentinel-for</i></code> only if no exceptions 
 are thrown from copy construction, move construction, copy assignment, move assignment, or comparisons 
-<ins>including each of its <code><i>boolean-testable</i></code> (18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) 
-operations</ins> between valid values of type <code>I</code> and <code>S</code>.
+<ins>, including each of its <code><i>boolean-testable</i></code> (18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) 
+operations,</ins> between valid values of type <code>I</code> and <code>S</code>.
 <p/>
 -5- [<i>Note 2</i>: This concept allows some <code>sentinel_for</code> (25.3.4.7 <a href="https://wg21.link/iterator.concept.sentinel">[iterator.concept.sentinel]</a>) 
 operations to throw exceptions. &mdash; <i>end note</i>]

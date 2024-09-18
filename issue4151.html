@@ -64,21 +64,21 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4151"><a href="lwg-active.html#4151">4151</a>. Precondition of <code>inplace_vector::swap</code></h3>
 <p><b>Section:</b> 24.3.14.5 <a href="https://wg21.link/inplace.vector.modifiers">[inplace.vector.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Arthur O'Dwyer <b>Opened:</b> 2024-09-07 <b>Last modified:</b> 2024-09-08</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Arthur O'Dwyer <b>Opened:</b> 2024-09-07 <b>Last modified:</b> 2024-09-18</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Right now <code>inplace_vector::swap</code> has only a declaration in the class synopsis; it doesn't 
-specify what the behavior of <code>swap</code> for <code>inplace_vector</code>s actually is. So I think 
-the behavior ends up being governed by 24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a>, which are written from 
-the point of view of a container that manages an external heap allocation so that swapping 
+Right now <code>inplace_vector::swap</code> has only a declaration in the class synopsis; it doesn't
+specify what the behavior of <code>swap</code> for <code>inplace_vector</code>s actually is. So I think
+the behavior ends up being governed by 24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a>, which are written from
+the point of view of a container that manages an external heap allocation so that swapping
 containers doesn't touch the elements at all, just changes their ownership.
 <p/>
-<code>inplace_vector::swap</code> actually works more like <code>array::swap</code>, which has its own 
-specification in 24.3.8.3 <a href="https://wg21.link/array.members">[array.members]</a>, where it is defined in terms of <code>std::swap_ranges</code>. 
-The <code>std::swap_ranges</code> algorithm (27.7.3 <a href="https://wg21.link/alg.swap">[alg.swap]</a>) has a precondition! This 
+<code>inplace_vector::swap</code> actually works more like <code>array::swap</code>, which has its own
+specification in 24.3.8.3 <a href="https://wg21.link/array.members">[array.members]</a>, where it is defined in terms of <code>std::swap_ranges</code>.
+The <code>std::swap_ranges</code> algorithm (27.7.3 <a href="https://wg21.link/alg.swap">[alg.swap]</a>) has a precondition! This
 precondition is missing from <code>inplace_vector::swap</code>.
 <p/>
 That is, I think we currently have no wording that explains why
@@ -91,10 +91,19 @@ v2.emplace_back(1);
 v1.swap(v2);
 </pre></blockquote>
 <p>
-is undefined behavior. The current spec seems to say this Just Works, even though it physically 
-cannot work because <code>v1[0]</code> and <code>v2[0]</code> don't dynamically meet the semantic requirements 
+is undefined behavior. The current spec seems to say this Just Works, even though it physically
+cannot work because <code>v1[0]</code> and <code>v2[0]</code> don't dynamically meet the semantic requirements
 of being "swappable with" each other, and <code>v1.swap(v2)</code> is necessarily going to try to swap them.
 </p>
+
+<p><i>[2024-09-18; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+The <i>Preconditions</i>: (but not the <i>Effects</i>:) would be changed
+again if <a href="https://wg21.link/P3160R2">P3160R2</a> is approved.
+</p>
+
 
 
 <p id="res-4151"><b>Proposed resolution:</b></p>
@@ -118,10 +127,10 @@ subclause]
 </pre>
 <blockquote>
 <p>
-<ins>-?- <i>Preconditions</i>: Let <code><i>M</i></code> be <code>min(size(), x.size())</code>. For each 
-non-negative integer <code><i>n</i> &lt; <i>M</i></code>, <code>(*this)[<i>n</i>]</code> is swappable with 
+<ins>-?- <i>Preconditions</i>: Let <code><i>M</i></code> be <code>min(size(), x.size())</code>. For each
+non-negative integer <code><i>n</i> &lt; <i>M</i></code>, <code>(*this)[<i>n</i>]</code> is swappable with
 (16.4.4.3 <a href="https://wg21.link/swappable.requirements">[swappable.requirements]</a>) <code>x[<i>n</i>]</code>.</ins>
-<p/> 
+<p/>
 <ins>-?- <i>Effects</i>: Exchanges the contents of <code>*this</code> and <code>x</code>.</ins>
 </p>
 </blockquote>

@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-09-18 at 22:30:20 UTC
+<p>Revised 2024-09-18 at 22:41:36 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -62138,23 +62138,32 @@ but only doing it for <code class='backtick'>leap_second</code> would be in scop
 <hr>
 <h3 id="4143"><a href="#4143">4143</a><sup><a href="https://cplusplus.github.io/LWG/issue4143">(i)</a></sup>. <code>execution::set_value/set_error/set_stopped/start</code> should always return <code>void</code></h3>
 <p><b>Section:</b> 34.7.2 <a href="https://wg21.link/exec.set.value">[exec.set.value]</a>, 34.7.3 <a href="https://wg21.link/exec.set.error">[exec.set.error]</a>, 34.7.4 <a href="https://wg21.link/exec.set.stopped">[exec.set.stopped]</a>, 34.8.2 <a href="https://wg21.link/exec.opstate.start">[exec.opstate.start]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-08-20 <b>Last modified:</b> 2024-08-31</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-08-20 <b>Last modified:</b> 2024-09-18</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-In editorial issue <a href="https://github.com/cplusplus/draft/issues/7222">#7222</a>, 
-it was observed that currently <code>execution::start</code> may have a non-<code>void</code> 
-return value, which possibly interacts with overloaded <code>operator,</code>. But the 
+In editorial issue <a href="https://github.com/cplusplus/draft/issues/7222">#7222</a>,
+it was observed that currently <code>execution::start</code> may have a non-<code>void</code>
+return value, which possibly interacts with overloaded <code>operator,</code>. But the
 return value of <code>execution::start</code> doesn't seem used anywhere.
 <p/>
-In addition to <code>execution::start</code>, the return values of <code>execution::set_value</code>, 
-<code>execution::set_error</code>, and <code>execution::set_stopped</code> also seem never used, 
-and the return type of these CPOs are always <code>void</code> in 
-<a href="https://github.com/NVIDIA/stdexec">stdexec</a>. Perhaps it would be better to 
+In addition to <code>execution::start</code>, the return values of <code>execution::set_value</code>,
+<code>execution::set_error</code>, and <code>execution::set_stopped</code> also seem never used,
+and the return type of these CPOs are always <code>void</code> in
+<a href="https://github.com/NVIDIA/stdexec">stdexec</a>. Perhaps it would be better to
 specified in the standard that these CPOs always return <code>void</code>.
 </p>
+
+<p><i>[2024-09-18; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+Should require the expressions to have type <code class='backtick'>void</code>,
+rather than just discarding anything that is returned.
+</p>
+
 
 
 <p id="res-4143"><b>Proposed resolution:</b></p>
@@ -62167,10 +62176,10 @@ This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
 
 <blockquote>
 <p>
--1- <code>set_value</code> is a value completion function (34.3 <a href="https://wg21.link/exec.async.ops">[exec.async.ops]</a>). 
-Its associated completion tag is <code>set_value_t</code>. The expression <code>set_value(rcvr, vs...)</code> 
-for a subexpression <code>rcvr</code> and pack of subexpressions <code>vs</code> is ill-formed if 
-<code>rcvr</code> is an lvalue or an rvalue of const type. Otherwise, it is expression-equivalent to 
+-1- <code>set_value</code> is a value completion function (34.3 <a href="https://wg21.link/exec.async.ops">[exec.async.ops]</a>).
+Its associated completion tag is <code>set_value_t</code>. The expression <code>set_value(rcvr, vs...)</code>
+for a subexpression <code>rcvr</code> and pack of subexpressions <code>vs</code> is ill-formed if
+<code>rcvr</code> is an lvalue or an rvalue of const type. Otherwise, it is expression-equivalent to
 <code><i>MANDATE-NOTHROW</i>(<ins>void(</ins>rcvr.set_value(vs...)<ins>)</ins>)</code>.
 </p>
 </blockquote>
@@ -62180,10 +62189,10 @@ for a subexpression <code>rcvr</code> and pack of subexpressions <code>vs</code>
 
 <blockquote>
 <p>
--1- <code>set_error</code> is an error completion function (34.3 <a href="https://wg21.link/exec.async.ops">[exec.async.ops]</a>). 
-Its associated completion tag is <code>set_error_t</code>. The expression <code>set_error(rcvr, err)</code> 
+-1- <code>set_error</code> is an error completion function (34.3 <a href="https://wg21.link/exec.async.ops">[exec.async.ops]</a>).
+Its associated completion tag is <code>set_error_t</code>. The expression <code>set_error(rcvr, err)</code>
 for some subexpressions <code>rcvr</code> and <code>err</code> is ill-formed if <code>rcvr</code> is an
-lvalue or an rvalue of const type. Otherwise, it is expression-equivalent to 
+lvalue or an rvalue of const type. Otherwise, it is expression-equivalent to
 <code><i>MANDATE-NOTHROW</i>(<ins>void(</ins>rcvr.set_error(err)<ins>)</ins>)</code>.
 </p>
 </blockquote>
@@ -62193,10 +62202,10 @@ lvalue or an rvalue of const type. Otherwise, it is expression-equivalent to
 
 <blockquote>
 <p>
--1- <code>set_stopped</code> is a stopped completion function (34.3 <a href="https://wg21.link/exec.async.ops">[exec.async.ops]</a>). 
-Its associated completion tag is <code>set_stopped_t</code>. The expression <code>set_stopped(rcvr)</code> 
+-1- <code>set_stopped</code> is a stopped completion function (34.3 <a href="https://wg21.link/exec.async.ops">[exec.async.ops]</a>).
+Its associated completion tag is <code>set_stopped_t</code>. The expression <code>set_stopped(rcvr)</code>
 for a subexpression <code>rcvr</code> is ill-formed if <code>rcvr</code> is an lvalue or an rvalue of
-const type. Otherwise, it is expression-equivalent to 
+const type. Otherwise, it is expression-equivalent to
 <code><i>MANDATE-NOTHROW</i>(<ins>void(</ins>rcvr.set_stopped()<ins>)</ins>)</code>.
 </p>
 </blockquote>
@@ -62206,9 +62215,9 @@ const type. Otherwise, it is expression-equivalent to
 
 <blockquote>
 <p>
--1- The name <code>start</code> denotes a customization point object that starts (34.3 <a href="https://wg21.link/exec.async.ops">[exec.async.ops]</a>) 
-the asynchronous operation associated with the operation state object. For a subexpression <code>op</code>, 
-the expression <code>start(op)</code> is ill-formed if <code>op</code> is an rvalue. Otherwise, it is 
+-1- The name <code>start</code> denotes a customization point object that starts (34.3 <a href="https://wg21.link/exec.async.ops">[exec.async.ops]</a>)
+the asynchronous operation associated with the operation state object. For a subexpression <code>op</code>,
+the expression <code>start(op)</code> is ill-formed if <code>op</code> is an rvalue. Otherwise, it is
 expression-equivalent to <code><i>MANDATE-NOTHROW</i>(<ins>void(</ins>op.start()<ins>)</ins>)</code>.
 </p>
 </blockquote>
@@ -62425,64 +62434,6 @@ namespace std {
 
 
 <hr>
-<h3 id="4147"><a href="#4147">4147</a><sup><a href="https://cplusplus.github.io/LWG/issue4147">(i)</a></sup>. Precondition on <code>inplace_vector::emplace</code></h3>
-<p><b>Section:</b> 24.2.4 <a href="https://wg21.link/sequence.reqmts">[sequence.reqmts]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Arthur O'Dwyer <b>Opened:</b> 2024-08-26 <b>Last modified:</b> 2024-09-01</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#sequence.reqmts">active issues</a> in [sequence.reqmts].</p>
-<p><b>View all other</b> <a href="lwg-index.html#sequence.reqmts">issues</a> in [sequence.reqmts].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-Inserting into the middle of an <code>inplace_vector</code>, just like inserting into the middle of a 
-<code>vector</code> or <code>deque</code>, requires that we construct the new element out-of-line, shift 
-down the trailing elements (<i>Cpp17MoveAssignable</i>), and then move-construct the new element 
-into place (<i>Cpp17MoveInsertable</i>). <a href="https://wg21.link/P0843R14" title=" inplace_vector">P0843R14</a> failed to make this change, but 
-it should have.
-</p>
-
-
-<p id="res-4147"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
-</p>
-
-<ol>
-<li><p>Modify 24.2.4 <a href="https://wg21.link/sequence.reqmts">[sequence.reqmts]</a> as indicated:</p>
-
-<blockquote><pre>
-a.emplace(p, args)
-</pre>
-<blockquote>
-<p>
--19- <i>Result</i>: <code>iterator</code>.
-<p/>
--20- <i>Preconditions</i>: <code>T</code> is <i>Cpp17EmplaceConstructible</i> into <code>X</code> 
-from <code>args</code>. For <code>vector</code><ins>, inplace_vector,</ins> and <code>deque</code>, 
-<code>T</code> is also <i>Cpp17MoveInsertable</i> into <code>X</code> and <i>Cpp17MoveAssignable</i>.
-<p/>
--21- <i>Effects</i>: Inserts an object of type <code>T</code> constructed with 
-<code>std::forward&lt;Args&gt;(args)...</code> before <code>p</code>.
-<p/>
-[<i>Note 1</i>: <code>args</code> can directly or indirectly refer to a value in <code>a</code>. 
-&mdash; <i>end note</i>]
-<p/>
--22- <i>Returns</i>: An iterator that points to the new element constructed from <code>args</code> 
-into <code>a</code>.
-</p>
-</blockquote>
-</blockquote>
-</li>
-
-</ol>
-
-
-
-
-
-
-<hr>
 <h3 id="4149"><a href="#4149">4149</a><sup><a href="https://cplusplus.github.io/LWG/issue4149">(i)</a></sup>. User defined macros without standard headers (294 redux)</h3>
 <p><b>Section:</b> 16.4.5.3.3 <a href="https://wg21.link/macro.names">[macro.names]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-09-05 <b>Last modified:</b> 2024-09-05</p>
@@ -62633,21 +62584,21 @@ while (auto* op = <i>pop-front</i>()) {
 <hr>
 <h3 id="4151"><a href="#4151">4151</a><sup><a href="https://cplusplus.github.io/LWG/issue4151">(i)</a></sup>. Precondition of <code>inplace_vector::swap</code></h3>
 <p><b>Section:</b> 24.3.14.5 <a href="https://wg21.link/inplace.vector.modifiers">[inplace.vector.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Arthur O'Dwyer <b>Opened:</b> 2024-09-07 <b>Last modified:</b> 2024-09-08</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Arthur O'Dwyer <b>Opened:</b> 2024-09-07 <b>Last modified:</b> 2024-09-18</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Right now <code>inplace_vector::swap</code> has only a declaration in the class synopsis; it doesn't 
-specify what the behavior of <code>swap</code> for <code>inplace_vector</code>s actually is. So I think 
-the behavior ends up being governed by 24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a>, which are written from 
-the point of view of a container that manages an external heap allocation so that swapping 
+Right now <code>inplace_vector::swap</code> has only a declaration in the class synopsis; it doesn't
+specify what the behavior of <code>swap</code> for <code>inplace_vector</code>s actually is. So I think
+the behavior ends up being governed by 24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a>, which are written from
+the point of view of a container that manages an external heap allocation so that swapping
 containers doesn't touch the elements at all, just changes their ownership.
 <p/>
-<code>inplace_vector::swap</code> actually works more like <code>array::swap</code>, which has its own 
-specification in 24.3.8.3 <a href="https://wg21.link/array.members">[array.members]</a>, where it is defined in terms of <code>std::swap_ranges</code>. 
-The <code>std::swap_ranges</code> algorithm (27.7.3 <a href="https://wg21.link/alg.swap">[alg.swap]</a>) has a precondition! This 
+<code>inplace_vector::swap</code> actually works more like <code>array::swap</code>, which has its own
+specification in 24.3.8.3 <a href="https://wg21.link/array.members">[array.members]</a>, where it is defined in terms of <code>std::swap_ranges</code>.
+The <code>std::swap_ranges</code> algorithm (27.7.3 <a href="https://wg21.link/alg.swap">[alg.swap]</a>) has a precondition! This
 precondition is missing from <code>inplace_vector::swap</code>.
 <p/>
 That is, I think we currently have no wording that explains why
@@ -62660,10 +62611,19 @@ v2.emplace_back(1);
 v1.swap(v2);
 </pre></blockquote>
 <p>
-is undefined behavior. The current spec seems to say this Just Works, even though it physically 
-cannot work because <code>v1[0]</code> and <code>v2[0]</code> don't dynamically meet the semantic requirements 
+is undefined behavior. The current spec seems to say this Just Works, even though it physically
+cannot work because <code>v1[0]</code> and <code>v2[0]</code> don't dynamically meet the semantic requirements
 of being "swappable with" each other, and <code>v1.swap(v2)</code> is necessarily going to try to swap them.
 </p>
+
+<p><i>[2024-09-18; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+The <i>Preconditions</i>: (but not the <i>Effects</i>:) would be changed
+again if <a href="https://wg21.link/P3160R2">P3160R2</a> is approved.
+</p>
+
 
 
 <p id="res-4151"><b>Proposed resolution:</b></p>
@@ -62687,10 +62647,10 @@ subclause]
 </pre>
 <blockquote>
 <p>
-<ins>-?- <i>Preconditions</i>: Let <code><i>M</i></code> be <code>min(size(), x.size())</code>. For each 
-non-negative integer <code><i>n</i> &lt; <i>M</i></code>, <code>(*this)[<i>n</i>]</code> is swappable with 
+<ins>-?- <i>Preconditions</i>: Let <code><i>M</i></code> be <code>min(size(), x.size())</code>. For each
+non-negative integer <code><i>n</i> &lt; <i>M</i></code>, <code>(*this)[<i>n</i>]</code> is swappable with
 (16.4.4.3 <a href="https://wg21.link/swappable.requirements">[swappable.requirements]</a>) <code>x[<i>n</i>]</code>.</ins>
-<p/> 
+<p/>
 <ins>-?- <i>Effects</i>: Exchanges the contents of <code>*this</code> and <code>x</code>.</ins>
 </p>
 </blockquote>

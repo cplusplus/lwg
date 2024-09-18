@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-09-18 at 20:09:49 UTC
+<p>Revised 2024-09-18 at 20:25:08 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -63520,6 +63520,87 @@ The effect shall be as if <code class='backtick'>p != nullptr</code> had been ev
 </tr>
 </tbody>
 </table>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4156"><a href="#4156">4156</a><sup><a href="https://cplusplus.github.io/LWG/issue4156">(i)</a></sup>. <code>error_category</code> messages have unspecified encoding</h3>
+<p><b>Section:</b> 99 [section.ref.here] <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Victor Zverovich <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-09-18</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+19.5.3.1 <a href="https://wg21.link/syserr.errcat.overview">[syserr.errcat.overview]</a> says:
+<blockquote>
+The class <code class='backtick'>error_category</code> serves as a base class for types used to identify
+the source and encoding of a particular category of error code.
+</blockquote>
+</p>
+<p>
+However, it actually fails to identify any encodings and, remarkably,
+this is the only place in the whole diagnostics section that mentions the
+word "encoding". The definition of <code class='backtick'>error_category::message</code>
+(19.5.3.2 <a href="https://wg21.link/syserr.errcat.virtuals">[syserr.errcat.virtuals]</a> p5) just says:
+<blockquote>
+<pre><code>virtual string message(int ev) const = 0;</code></pre>
+<p>
+<i>Returns</i>:
+A string that describes the error condition denoted by <code class='backtick'>ev</code>.
+</p>
+</blockquote>
+This makes it pretty much impossible to reliably use the provided API
+for its intended purpose.
+</p>
+<p>
+There is also implementation divergence:
+some implementations use variants of <code class='backtick'>strerror</code> which return messages
+in the current C locale encoding,
+but at least one major implementation doesn't use the current C locale:
+<a href="https://github.com/microsoft/STL/issues/4711">MSVC STL issue 4711</a>.
+</p>
+<p>
+Using the current C locale is obviously problematic.
+First, it is inconsistent with other C++ APIs that normally use C++ locales.
+Second, because it is a global state, it may change
+(possibly from another thread)
+between the time the message is obtained and the time it needs to be consumed,
+which may lead to mojibake.
+At the very least there should be a mechanism that captures the encoding
+information in a race-free manner and communicates it to the caller
+if the locale encoding is used
+although it is better not to use it in the first place.
+</p>
+<p>
+This is somewhat related to LWG <a href="lwg-active.html#4087" title="Standard exception messages have unspecified encoding (Status: SG16)">4087</a>
+but should probably be addressed first because it may affect
+how some exceptions are defined.
+</p>
+<p>
+The proposed resolution is similar to the one of LWG <a href="lwg-active.html#4087" title="Standard exception messages have unspecified encoding (Status: SG16)">4087</a>.
+</p>
+
+
+<p id="res-4156"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+</p>
+
+<ol>
+<li><p>Modify 19.5.3.2 <a href="https://wg21.link/syserr.errcat.virtuals">[syserr.errcat.virtuals]</a> as indicated:</p>
+<blockquote>
+<pre><code>virtual string message(int ev) const = 0;</code></pre>
+<p>
+<i>Returns</i>:
+A string <ins>in the ordinary literal encoding</ins>
+that describes the error condition denoted by <code class='backtick'>ev</code>.
+</p>
 </blockquote>
 </li>
 </ol>

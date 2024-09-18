@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-09-18 at 20:56:11 UTC
+<p>Revised 2024-09-18 at 21:01:13 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -68852,9 +68852,9 @@ the source and encoding of a particular category of error code.
 </blockquote>
 </p>
 <p>
-However, it actually fails to identify any encodings and, remarkably,
-this is the only place in the whole diagnostics section that mentions the
-word "encoding". The definition of <code class='backtick'>error_category::message</code>
+However, this doesn't seem to be referring to a character encoding,
+just something about how an error is encoded into an integer value.
+The definition of <code class='backtick'>error_category::message</code>
 (19.5.3.2 <a href="https://wg21.link/syserr.errcat.virtuals">[syserr.errcat.virtuals]</a> p5) just says:
 <blockquote>
 <pre><code>virtual string message(int ev) const = 0;</code></pre>
@@ -68863,8 +68863,7 @@ word "encoding". The definition of <code class='backtick'>error_category::messag
 A string that describes the error condition denoted by <code class='backtick'>ev</code>.
 </p>
 </blockquote>
-This makes it pretty much impossible to reliably use the provided API
-for its intended purpose.
+This says nothing about character encoding either.
 </p>
 <p>
 There is also implementation divergence:
@@ -68893,6 +68892,13 @@ how some exceptions are defined.
 <p>
 The proposed resolution is similar to the one of LWG <a href="lwg-active.html#4087" title="Standard exception messages have unspecified encoding (Status: SG16)">4087</a>.
 </p>
+
+<p><i>[2024-09-18; Jonathan comments]</i></p>
+
+<p>It might make sense to stop using the word "encoding" in
+19.5.3.1 <a href="https://wg21.link/syserr.errcat.overview">[syserr.errcat.overview]</a>.
+</p>
+
 
 
 <p id="res-4156"><b>Proposed resolution:</b></p>

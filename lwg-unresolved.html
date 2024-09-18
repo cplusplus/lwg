@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-09-18 at 19:54:06 UTC
+<p>Revised 2024-09-18 at 20:09:49 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -63462,6 +63462,64 @@ the object's stored task
 <ins>of type <code>decay_t&lt;F&gt;</code></ins>
 with <code>std::forward&lt;F&gt;(f)</code>.
 </p>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4155"><a href="#4155">4155</a><sup><a href="https://cplusplus.github.io/LWG/issue4155">(i)</a></sup>. <i>Cpp17NullablePointer</i> should require that some expression can be contextually converted to bool</h3>
+<p><b>Section:</b> 16.4.4.4 <a href="https://wg21.link/nullablepointer.requirements">[nullablepointer.requirements]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-09-18</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#nullablepointer.requirements">issues</a> in [nullablepointer.requirements].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Currently, 16.4.4.4 <a href="https://wg21.link/nullablepointer.requirements">[nullablepointer.requirements]</a>/3 requires
+"An object <code class='backtick'>p</code> of type <code class='backtick'>P</code> can be contextually converted to <code class='backtick'>bool</code>",
+while the core language wording (7.3.1 <a href="https://wg21.link/conv.general">[conv.general]</a>/4) only says
+some expressions can be contextually converted to <code class='backtick'>bool</code>.
+Moreover, the value category and cv-qualification are not mentioned,
+presumably both non-const and const <code class='backtick'>P</code>,
+together with all value categories are expected.
+</p>
+
+
+<p id="res-4155"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+</p>
+
+<ol>
+<li><p>Modify 16.4.4.4 <a href="https://wg21.link/nullablepointer.requirements">[nullablepointer.requirements]</a> as indicated:</p>
+<blockquote>
+<p>
+<del>-3- An object <code class='backtick'>p</code> of type <code class='backtick'>P</code> can be contextually converted to <code class='backtick'>bool</code>.
+The effect shall be as if <code class='backtick'>p != nullptr</code> had been evaluated in place of <code class='backtick'>p</code>.
+</del>
+</p>
+</blockquote>
+</li>
+<li><p>Add a row to the bottom of [tab:cpp17.nullablepointer]:</p>
+<blockquote>
+<table style="border: 1px solid; border-spacing: 1.5em">
+<thead style="text-align: center">
+<tr><th>Expression</th><th>Return type</th><th>Operational semantics</th></tr>
+</thead>
+<tbody>
+<tr> <td>...</td> <td>...</td> <td>...</td> </tr>
+<tr>
+<td><ins><code class='backtick'>a ? true : false</code></ins></td>
+<td><ins><code class='backtick'>bool</code></ins></td>
+<td><ins><code class='backtick'>a != np</code></ins></td>
+</tr>
+</tbody>
+</table>
 </blockquote>
 </li>
 </ol>

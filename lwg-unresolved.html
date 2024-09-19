@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-09-18 at 22:41:36 UTC
+<p>Revised 2024-09-19 at 11:37:48 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -32646,44 +32646,44 @@ for the purpose of exposition</del>, calls <code><ins>p</ins><del>buf</del>-&gt;
 <hr>
 <h3 id="3503"><a href="#3503">3503</a><sup><a href="https://cplusplus.github.io/LWG/issue3503">(i)</a></sup>. <code>chrono::ceil</code> has surprising requirement</h3>
 <p><b>Section:</b> 29.5.8 <a href="https://wg21.link/time.duration.cast">[time.duration.cast]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2020-11-18 <b>Last modified:</b> 2020-11-29</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2020-11-18 <b>Last modified:</b> 2024-09-19</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#time.duration.cast">issues</a> in [time.duration.cast].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-29.5.8 <a href="https://wg21.link/time.duration.cast">[time.duration.cast]</a> p7 requires that the return value is "The least result <code>t</code> 
+29.5.8 <a href="https://wg21.link/time.duration.cast">[time.duration.cast]</a> p7 requires that the return value is "The least result <code>t</code>
 representable in <code>ToDuration</code> for which <code>t &gt;= d</code>".
 <p/>
-This means that <code>chrono::ceil&lt;chrono::microseconds&gt;(chrono::duration&lt;float, milli&gt;(m)).count()</code> 
-is required to be the smallest integer <code>n</code> such that <code>(float)n == m*1000.0f</code>, which might be less 
-than the mathematically correct value of <code>m x 1000</code>.
+This means that <code>chrono::ceil&lt;chrono::microseconds&gt;(chrono::duration&lt;float, milli&gt;(m)).count()</code>
+is required to be the smallest integer <code>n</code> such that <code>(float)n == m*1000.0f</code>, which might be less
+than the mathematically correct value of <code>m &times; 1000</code>.
 <p/>
-(The specific values below assume <code>float</code> uses the IEEE binary32 format and default rounding, but 
+(The specific values below assume <code>float</code> uses the IEEE binary32 format and default rounding, but
 similar problems will exist for other formats, even if the specific values are different.)
 <p/>
-For example, if <code>m == 13421772.0f</code> then the naively expected result is <code>n == 13421772000</code>, but 
-the standard requires <code>n == 13421771265</code>, a significantly lower value. This surprising result is a 
-consequence of how the <code>chrono::ceil</code> spec interacts with floating-point arithmetic, due to the fact that 
-for the integers in the range <code>[13421770753, 13421772799]</code>, only one can be exactly represented as 
+For example, if <code>m == 13421772.0f</code> then the naively expected result is <code>n == 13421772000</code>, but
+the standard requires <code>n == 13421771265</code>, a significantly lower value. This surprising result is a
+consequence of how the <code>chrono::ceil</code> spec interacts with floating-point arithmetic, due to the fact that
+for the integers in the range <code>[13421770753, 13421772799]</code>, only one can be exactly represented as
 32-bit <code>float</code>. All but that one will be rounded to a different value when converted to <code>float</code>.
 <p/>
-A straightforward implementation of <code>chrono::ceil</code> will produce <code>(long long)(13421772.0f * 1000)</code> 
-which is <code>13421771776</code>, which is less than the expected result, but compares equal using the <code>t &gt;= d</code> 
-expression. That expression converts both operands to their <code>common_type</code>, which is 
-<code>chrono::duration&lt;float, micro&gt;</code>. That means we compare <code>(float)13421771776 &gt;= (13421772.0f * 1000)</code> 
-which is <code>true</code>. But the spec requires an even worse result. All integers in <code>[13421771265, 13421771776)</code> 
-are also rounded to that value when converted to <code>float</code>. That means <code>chrono::microseconds(13421771265)</code> 
+A straightforward implementation of <code>chrono::ceil</code> will produce <code>(long long)(13421772.0f * 1000)</code>
+which is <code>13421771776</code>, which is less than the expected result, but compares equal using the <code>t &gt;= d</code>
+expression. That expression converts both operands to their <code>common_type</code>, which is
+<code>chrono::duration&lt;float, micro&gt;</code>. That means we compare <code>(float)13421771776 &gt;= (13421772.0f * 1000)</code>
+which is <code>true</code>. But the spec requires an even worse result. All integers in <code>[13421771265, 13421771776)</code>
+are also rounded to that value when converted to <code>float</code>. That means <code>chrono::microseconds(13421771265)</code>
 is "the least result representable in <code>ToDuration</code> for which <code>t &gt;= d</code>".
 <p/>
-Meeting the "least result" requirement is impractical, and unhelpful. The straightforward result <code>13421771776</code> 
-is already lower than the naively expected result (which is surprising for a "ceil" function). To meet the 
-standard's requirements the implementation would have to do extra work, just to produce an even lower (and even 
+Meeting the "least result" requirement is impractical, and unhelpful. The straightforward result <code>13421771776</code>
+is already lower than the naively expected result (which is surprising for a "ceil" function). To meet the
+standard's requirements the implementation would have to do extra work, just to produce an even lower (and even
 more surprising) result.
 <p/>
-It might be impractical to require the naively expected value to be returned (the additional work might have 
-unacceptable performance implications), but the standard  should at least permit the straightforward result 
+It might be impractical to require the naively expected value to be returned (the additional work might have
+unacceptable performance implications), but the standard  should at least permit the straightforward result
 instead of requiring an even worse one.
 <p/>
 The same problem almost certainly exists for <code>chrono::floor</code> in reverse.
@@ -32694,9 +32694,109 @@ The same problem almost certainly exists for <code>chrono::floor</code> in rever
 <p>
 Set priority to 3 during reflector discussions.
 </p>
+<p><i>[2024-09-05; Jonathan adds a note]</i></p>
+
+<p>
+Another problem discovered by STL occurs when the result is floating-point.
+We can't just add 1. In fact, there is no requirement for whole-numberness.
+</p>
+<p>
+For example, when converting from <code class='backtick'>double</code> to <code class='backtick'>float</code>:
+<pre>
+<code>chrono::floor&lt;duration&lt;float&gt;&gt;(duration&lt;double&gt;(0.1))</code>
+</pre>
+This produces the result <code>duration&lt;float&gt;(-0.9f)</code>
+with the reference implementation in <a href="https://wg21.link/P0092R1" title=" Polishing">P0092R1</a>,
+and the implementations in libstdc++, libc++, and MSVC.
+This is because <code>0.1f &lt;= 0.1</code> is false,
+so the result is <code>duration&lt;float&gt;(0.1f - 1.0f)</code>,
+which is not the greatest value representable that is not greater than <code class='backtick'>1.0</code>.
+The correct result according to the standard would be
+<code>duration&lt;float&gt;(nexttoward(0.1f, -HUGE_VAL))</code>,
+but we can't use <code class='backtick'>nexttoward</code> for arbitrary <code class='backtick'>treat_as_floating_point</code> types,
+only for <code class='backtick'>float</code>, <code class='backtick'>double</code> and <code class='backtick'>long double</code>.
+</p>
+<p>
+STL found cases where
+<code>ceil&lt;duration&lt;float&gt;&gt;(duration&lt;double&gt;(x))</code>
+produces a value that is lower than <code class='backtick'>x</code>, e.g. for <code class='backtick'>x = 13421771263.0</code>
+the result is <code class='backtick'>13421770752.0f</code>.
+</p>
+<p>
+A possible resolution for this problem would be to make <code class='backtick'>ceil</code> and <code class='backtick'>floor</code>
+behave exactly like <code class='backtick'>duration_cast</code> when the result is a floating-point type.
+This would still permit a <code class='backtick'>ceil</code> that is smaller than the input
+(and a <code class='backtick'>floor</code> result that is larger) but that's just a consequence of
+converting to a floating-point type with less precision.
+We could also specify that for non-floating-point result types,
+the effects should be what all known implementations do.
+That would mean the behaviour is at least predictable and explainable,
+even if the result is not always the correct mathematical value.
+</p>
 
 
 <p id="res-3503"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+</p>
+<ol>
+<li><p>Modify 29.5.8 <a href="https://wg21.link/time.duration.cast">[time.duration.cast]</a> as indicated:</p>
+<blockquote>
+<pre>
+template&lt;class ToDuration, class Rep, class Period&gt;
+  constexpr ToDuration floor(const duration&lt;Rep, Period&gt;&amp; d);
+</pre>
+<p>-4-
+<i>Constraints</i>: <code class='backtick'>ToDuration</code> is a specialization of <code class='backtick'>duration</code>.
+</p>
+<p>-5-
+<del>
+<i>Returns</i>:
+The greatest result <code class='backtick'>t</code> representable in <code class='backtick'>ToDuration</code> for which
+<code>t &lt;= d</code>.
+</del>
+</p>
+<p>
+<ins><i>Effects</i>: Equivalent to:</ins>
+<pre><code><ins>auto t = duration_cast&lt;ToDuration&gt;(d);
+if constexpr (treat_as_floating_point_v&lt;typename ToDuration::rep&gt;)
+  return t;
+else if (t &lt;= d)
+  return t;
+else
+  return --t;
+</ins></code></pre>
+</p>
+
+<pre>
+template&lt;class ToDuration, class Rep, class Period&gt;
+  constexpr ToDuration ceil(const duration&lt;Rep, Period&gt;&amp; d);
+</pre>
+<p>-6-
+<i>Constraints</i>: <code class='backtick'>ToDuration</code> is a specialization of <code class='backtick'>duration</code>.
+</p>
+<p>-7-
+<del>
+<i>Returns</i>:
+The least result <code class='backtick'>t</code> representable in <code class='backtick'>ToDuration</code> for which
+<code>t &gt;= d</code>.
+</del>
+</p>
+<p>
+<ins><i>Effects</i>: Equivalent to:</ins>
+<pre><code><ins>auto t = duration_cast&lt;ToDuration&gt;(d);
+if constexpr (treat_as_floating_point_v&lt;typename ToDuration::rep&gt;)
+  return t;
+else if (t &lt;= d)
+  return t;
+else
+  return ++t;
+</ins></code></pre>
+</p>
+</blockquote>
+</li>
+</ol>
+
 
 
 
@@ -56923,118 +57023,6 @@ element. The expression in the <i>requires-clause</i> is equivalent to:</ins>
 </li>
 
 </ol>
-
-
-
-
-
-<hr>
-<h3 id="4084"><a href="#4084">4084</a><sup><a href="https://cplusplus.github.io/LWG/issue4084">(i)</a></sup>. <code>std::fixed</code> ignores <code>std::uppercase</code></h3>
-<p><b>Section:</b> 30.4.3.3.3 <a href="https://wg21.link/facet.num.put.virtuals">[facet.num.put.virtuals]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-04-30 <b>Last modified:</b> 2024-09-17</p>
-<p><b>Priority: </b>3
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#facet.num.put.virtuals">active issues</a> in [facet.num.put.virtuals].</p>
-<p><b>View all other</b> <a href="lwg-index.html#facet.num.put.virtuals">issues</a> in [facet.num.put.virtuals].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-In Table 114 &ndash; Floating-point conversions [tab:facet.num.put.fp]
-we specify that a floating-point value should be printed as if by <code class='backtick'>%f</code>
-when <code>(flags &amp; floatfield) == fixed</code>.
-This ignores whether <code class='backtick'>uppercase</code> is also set in <code class='backtick'>flags</code>,
-meaning there is no way to use the conversion specifier <code class='backtick'>%F</code>
-that was added to <code class='backtick'>printf</code> in C99.
-</p>
-<p>
-That's fine for finite values, because 1.23 in fixed format has
-no exponent character and no hex digits that would need to use uppercase.
-But <code class='backtick'>%f</code> and <code class='backtick'>%F</code> are not equivalent for non-finite values,
-because <code class='backtick'>%F</code> prints <code class='backtick'>"NAN"</code> and <code class='backtick'>"INF"</code> (or <code class='backtick'>"INFINITY"</code>).
-It seems there is no way to print <code class='backtick'>"NAN"</code> or <code class='backtick'>"INF"</code> using <code class='backtick'>std::num_put</code>.
-</p>
-<p>
-Libstdc++ and MSVC print <code class='backtick'>"inf"</code> for the following code,
-but libc++ prints <code class='backtick'>"INF"</code> which I think is non-conforming:
-</p>
-<pre><code>    std::cout &lt;&lt; std::uppercase &lt;&lt; std::fixed &lt;&lt; std::numeric_limits&lt;double&gt;::infinity();
-</code></pre>
-<p>
-The libc++ behaviour seems more useful and less surprising.
-</p>
-
-<p><i>[2024-05-08; Reflector poll]</i></p>
-
-<p>
-Set priority to 3 after reflector poll. Send to LEWG.
-</p>
-<p><i>[2024-09-17; LEWG mailing list vote]</i></p>
-
-<p>
-Set status to Open after LEWG approved the proposed change.
-</p>
-
-
-
-<p id="res-4084"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
-</p>
-<ol>
-<li><p>Modify 30.4.3.3.3 <a href="https://wg21.link/facet.num.put.virtuals">[facet.num.put.virtuals]</a> as indicated:</p>
-
-<blockquote>
-<table style="border: 1px solid">
-<caption style="caption-side: top">
-Table 114 &ndash; Floating-point conversions [tab:facet.num.put.fp]
-</caption>
-<tr style="text-align: center">
-<th style="border-bottom: 1px solid">State</th>
-<th style="border-bottom: 1px solid"><code class='backtick'>stdio</code> equivalent</th>
-</tr>
-<tr>
-<td>
-<code class='backtick'>floatfield == ios_base::fixed</code> <ins><code>&amp;&amp; !uppercase</code></ins>
-</td>
-<td style="text-align: center"><code class='backtick'>%f</code></td>
-</tr>
-<tr>
-<td><ins><code class='backtick'>floatfield == ios_base::fixed</code></ins></td>
-<td style="text-align: center"><ins><code class='backtick'>%F</code></ins></td>
-</tr>
-<tr>
-<td><code>floatfield == ios_base::scientific &amp;&amp; !uppercase</code></td>
-<td style="text-align: center"><code class='backtick'>%e</code></td>
-</tr>
-<tr>
-<td><code>floatfield == ios_base::scientific</code></td>
-<td style="text-align: center"><code class='backtick'>%E</code></td>
-</tr>
-<tr>
-<td>
-<code>
-floatfield == (ios_base::fixed | ios_base::scientific)` &amp;&amp; !uppercase
-</code>
-</td>
-<td style="text-align: center"><code class='backtick'>%a</code></td>
-</tr>
-<tr>
-<td><code>floatfield == (ios_base::fixed | ios_base::scientific)</code></td>
-<td style="text-align: center"><code class='backtick'>%A</code></td>
-</tr>
-<tr>
-<td><code class='backtick'>!uppercase</code></td>
-<td style="text-align: center"><code class='backtick'>%g</code></td>
-</tr>
-<tr>
-<td><em>otherwise</em></td>
-<td style="text-align: center"><code class='backtick'>%G</code></td>
-</tr>
-</table>
-</blockquote>
-</li>
-</ol>
-
 
 
 

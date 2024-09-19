@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-09-19 at 11:54:33 UTC
+<p>Revised 2024-09-19 at 12:35:35 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -32787,7 +32787,7 @@ The least result <code class='backtick'>t</code> representable in <code class='b
 <pre><code><ins>auto t = duration_cast&lt;ToDuration&gt;(d);
 if constexpr (treat_as_floating_point_v&lt;typename ToDuration::rep&gt;)
   return t;
-else if (t &lt;= d)
+else if (t &gt;= d)
   return t;
 else
   return ++t;

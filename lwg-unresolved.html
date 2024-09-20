@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-09-19 at 12:35:35 UTC
+<p>Revised 2024-09-20 at 12:27:48 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -3567,7 +3567,7 @@ this topic until the final outcome of that paper and its proposed resolution is 
 <p><i>[2019-06-03 Jonathan Wakely provides updated wording]</i></p>
 
 <p>Jonathan updates wording post-<a href="lwg-defects.html#2976" title="Dangling uses_allocator specialization for packaged_task (Status: C++20)">2976</a>
-and observes that this resolution conflicts with <a href="lwg-active.html#3003" title="&lt;future&gt; still has type-erased allocators in promise (Status: Open)">3003</a>.</p>
+and observes that this resolution conflicts with <a href="lwg-active.html#3003" title="&lt;future&gt; still has type-erased allocators in promise (Status: LEWG)">3003</a>.</p>
 
 <p><strong>Previous resolution [SUPERSEDED]:</strong></p>
 <blockquote class="note">
@@ -18528,7 +18528,7 @@ to "Args contains a single type and that type is similar".
 
 
 <p id="res-2939"><b>Proposed resolution:</b></p>
-<p>This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.</p>
+<p>This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.</p>
 <blockquote>
 <ol>
 <li>
@@ -19877,25 +19877,25 @@ variant(const variant&amp; w) <ins>noexcept(<i>see below</i>)</ins>;
 
 <hr>
 <h3 id="3003"><a href="#3003">3003</a><sup><a href="https://cplusplus.github.io/LWG/issue3003">(i)</a></sup>. <code>&lt;future&gt;</code> still has type-erased allocators in <code>promise</code></h3>
-<p><b>Section:</b> 33.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
- <b>Submitter:</b> Billy O'Neal III <b>Opened:</b> 2017-07-16 <b>Last modified:</b> 2020-09-06</p>
+<p><b>Section:</b> 33.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> <b>Status:</b> <a href="lwg-active.html#LEWG">LEWG</a>
+ <b>Submitter:</b> Billy O'Neal III <b>Opened:</b> 2017-07-16 <b>Last modified:</b> 2024-09-20</p>
 <p><b>Priority: </b>2
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#futures.promise">active issues</a> in [futures.promise].</p>
 <p><b>View all other</b> <a href="lwg-index.html#futures.promise">issues</a> in [futures.promise].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#LEWG">LEWG</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-In Toronto Saturday afternoon LWG discussed LWG <a href="lwg-defects.html#2976" title="Dangling uses_allocator specialization for packaged_task (Status: C++20)">2976</a> which finishes the job of removing allocator 
-support from <code>packaged_task</code>. LWG confirmed that, despite the removal of <code>packaged_task</code> allocators 
-"because it looks like <code>std::function</code>" was incorrect, they wanted to keep the allocator removals anyway, 
+In Toronto Saturday afternoon LWG discussed LWG <a href="lwg-defects.html#2976" title="Dangling uses_allocator specialization for packaged_task (Status: C++20)">2976</a> which finishes the job of removing allocator
+support from <code>packaged_task</code>. LWG confirmed that, despite the removal of <code>packaged_task</code> allocators
+"because it looks like <code>std::function</code>" was incorrect, they wanted to keep the allocator removals anyway,
 in large part due to this resolution being a response to an NB comment.
 <p/>
-If we don't want the type erased allocator situation at all, then we should remove them from the remaining place 
+If we don't want the type erased allocator situation at all, then we should remove them from the remaining place
 they exist in <code>&lt;future&gt;</code>, namely, in <code>promise</code>.
 <p/>
-This change also resolves potential implementation divergence on whether <code>allocator::construct</code> is intended 
-to be used on elements constructed in the shared state, and allows the emplace-construction-in-<code>future</code> paper, 
+This change also resolves potential implementation divergence on whether <code>allocator::construct</code> is intended
+to be used on elements constructed in the shared state, and allows the emplace-construction-in-<code>future</code> paper,
 <a href="https://wg21.link/p0319">P0319</a>, to be implemented without potential problems there.
 </p>
 
@@ -19911,6 +19911,9 @@ to be used on elements constructed in the shared state, and allows the emplace-c
 
 <p>Jonathan observes that this resolution conflicts with <a href="lwg-active.html#2095" title="promise and packaged_task missing constructors needed for uses-allocator construction (Status: LEWG)">2095</a>.</p>
 
+<p><i>[Varna 2023-06-13; Change status to "LEWG"]</i></p>
+
+
 
 <p id="res-3003"><b>Proposed resolution:</b></p>
 <p>This resolution is relative to <a href="https://wg21.link/n4659">N4659</a>.</p>
@@ -19920,7 +19923,7 @@ to be used on elements constructed in the shared state, and allows the emplace-c
 
 <blockquote>
 <pre>
-template&lt;class R&gt; 
+template&lt;class R&gt;
 class promise {
 public:
   promise();
@@ -23350,7 +23353,7 @@ and open a new issue for the broader issue.
 
 
 <p id="res-3099"><b>Proposed resolution:</b></p>
-<p>This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.</p>
+<p>This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.</p>
 <blockquote>
 <ol>
 <li>In 21.3.5.4 <a href="https://wg21.link/meta.unary.prop">[meta.unary.prop]</a> Table 51, change the Precondition text for <code>is_assignable</code>,
@@ -26675,7 +26678,7 @@ passed to allocator construct and destroy (Status: New)">3210</a>.
 
 
 <p id="res-3216"><b>Proposed resolution:</b></p>
-<p>This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.</p>
+<p>This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.</p>
 
 <ol>
 <li><p>Modify 20.3.2.2.7 <a href="https://wg21.link/util.smartptr.shared.create">[util.smartptr.shared.create]</a> as indicated:</p>
@@ -32737,7 +32740,7 @@ even if the result is not always the correct mathematical value.
 
 <p id="res-3503"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 <ol>
 <li><p>Modify 29.5.8 <a href="https://wg21.link/time.duration.cast">[time.duration.cast]</a> as indicated:</p>
@@ -36492,7 +36495,7 @@ new subclauses.
 
 <p id="res-3638"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -52261,7 +52264,7 @@ so that will be addressed by issue <a href="lwg-active.html#4141" title="Improve
 
 <p id="res-4015"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -55145,7 +55148,7 @@ Some discomfort requiring <code class='backtick'>errno.h</code> and <code class=
 when they are not in C23. <code class='backtick'>string.h</code> is not freestanding in C17, but is in C23
 (but C++ is still based on C17).
 <code class='backtick'>stdlib.h</code> is "conditionally partially freestanding" in C23, but not in C17.
-Suggestion to incorporate this into <a href="https://wg21.link/P3348">P3348</a>.
+Suggestion to incorporate this into <a href="https://wg21.link/P3348" title=" C++26 should refer to C23 not C17">P3348</a>.
 </p>
 
 
@@ -55814,7 +55817,7 @@ efficient use of LWG's time.
 
 <p id="res-4057"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -55981,7 +55984,7 @@ We like the suggestion to require "not valueless" as a precondition.
 
 <p id="res-4059"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -60505,7 +60508,7 @@ related to the other consistency adjustments done by the wording below.
 
 <p id="res-4127"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -61367,7 +61370,7 @@ stylistic forms.
 
 <p id="res-4132"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -61517,7 +61520,7 @@ operations to throw exceptions. &mdash; <i>end note</i>]
 <p><b>Discussion:</b></p>
 <p>
 The specification of <code><i>awaitable-receiver</i></code> in 34.12.1 <a href="https://wg21.link/exec.as.awaitable">[exec.as.awaitable]</a>/p4 
-as of <a href="https://wg21.link/N4988">N4988</a> is not taking into consideration the fact that the <code>resume()</code> 
+as of <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a> is not taking into consideration the fact that the <code>resume()</code> 
 and <code>promise()</code> member functions on <code>coroutine_handle&lt;P&gt;</code> are not marked <code>noexcept</code>. 
 <code><i>awaitable-receiver</i></code>'s member functions must all be <code>noexcept</code>, but they are 
 specified as being "equivalent to" statement that call <code>resume()</code> and <code>promise()</code> 
@@ -61613,7 +61616,7 @@ affect the behavior of [linalg] Hermitian algorithms.
 
 <p id="res-4136"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -61658,7 +61661,7 @@ As <a href="https://github.com/ORNL/cpp-proposals-pub/issues/464">pointed out by
 
 <p id="res-4137"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -61842,7 +61845,7 @@ template&lt;class ExecutionPolicy,
 
 <blockquote class="note">
 <p>
-[<i>Drafting note</i>: <a href="https://wg21.link/P3371R0">P3371R0</a>, to be submitted in the August 15 mailing for 
+[<i>Drafting note</i>: <a href="https://wg21.link/P3371R0" title=" Fix C++26 by making the symmetric and Hermitian rank-k and rank-2k updates consistent with the BLAS">P3371R0</a>, to be submitted in the August 15 mailing for 
 LEWG review, contains the same wording changes to 28.9.15.4 <a href="https://wg21.link/linalg.algs.blas3.rankk">[linalg.algs.blas3.rankk]</a> 
 and 28.9.15.5 <a href="https://wg21.link/linalg.algs.blas3.rank2k">[linalg.algs.blas3.rank2k]</a> as proposed here, with additional changes 
 corresponding to that proposal. Please apply this LWG issue's changes first, before P3371 merges]
@@ -62012,7 +62015,7 @@ convoluted than necessary.
 
 <p id="res-4138"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -62156,7 +62159,7 @@ rather than just discarding anything that is returned.
 
 <p id="res-4143"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -62260,7 +62263,7 @@ disallowing these specializations for non-pointable types.
 
 <p id="res-4144"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -62387,7 +62390,7 @@ modified since neither MSVC nor Clang like this partial specialization form.)
 
 <p id="res-4146"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -62535,7 +62538,7 @@ on the loop before <code>loop.run()</code> is called, violating <code>run</code>
 
 <p id="res-4150"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -62616,7 +62619,7 @@ again if <a href="https://wg21.link/P3160R2">P3160R2</a> is approved.
 
 <p id="res-4151"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -62675,7 +62678,7 @@ since C++20.
 
 <p id="res-4152"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -62734,7 +62737,7 @@ If somebody thinks otherwise, please provide such feedback.
 
 <p id="res-4153"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -62760,6 +62763,7 @@ and the template parameter <i>w</i> defines the range of the produced numbers.
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-09-18</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#futures.task.members">active issues</a> in [futures.task.members].</p>
 <p><b>View all other</b> <a href="lwg-index.html#futures.task.members">issues</a> in [futures.task.members].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -62784,7 +62788,7 @@ perhaps we should also so specify for <code class='backtick'>std::packaged_task<
 
 <p id="res-4154"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 <ol>
 <li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
@@ -62832,7 +62836,7 @@ together with all value categories are expected.
 
 <p id="res-4155"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -62935,7 +62939,7 @@ The proposed resolution is similar to the one of LWG <a href="lwg-active.html#40
 
 <p id="res-4156"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 
 <ol>
@@ -62978,7 +62982,7 @@ which rendered the type of <code>F &lt; E</code> underconstrained.
 
 <p id="res-4157"><b>Proposed resolution:</b></p>
 <p>
-This wording is relative to <a href="https://wg21.link/N4988">N4988</a>.
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 <ol>
 <li><p>Modify 17.11.6 <a href="https://wg21.link/cmp.alg">[cmp.alg]</a> as indicated:</p>
@@ -62998,6 +63002,80 @@ models <i><code class='backtick'>boolean-testable</code></i>,
            partial_ordering::unordered
 </code></pre>
 except that <code class='backtick'>E</code> and <code class='backtick'>F</code> are evaluated only once.
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4158"><a href="#4158">4158</a><sup><a href="https://cplusplus.github.io/LWG/issue4158">(i)</a></sup>. <code>packaged_task::operator=</code> should abandon its shared state</h3>
+<p><b>Section:</b> 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-09-19 <b>Last modified:</b> 2024-09-20</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#futures.task.members">active issues</a> in [futures.task.members].</p>
+<p><b>View all other</b> <a href="lwg-index.html#futures.task.members">issues</a> in [futures.task.members].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The <code class='backtick'>packaged_task</code> move assignment operator is specified to release
+the previous shared state. This means it releases ownership, but does
+not make the shared state ready. Any future that shares ownership of the
+shared state will never receive a result, because the provider is gone.
+This means that any thread that waits on the future will block forever.
+</p>
+<p>
+There is a note on <code class='backtick'>packaged_task::reset()</code> which claims that assignment
+abandons the state, which is not supported by any normative wording:
+</p>
+<blockquote>
+<pre>void reset();</pre>
+<p>
+-26- <i>Effects</i>:
+As if <code class='backtick'>*this = packaged_task(std::move(f))</code>,
+where <code class='backtick'>f</code> is the task stored in <code class='backtick'>*this</code>.
+</p>
+<p>
+[<i>Note 2</i>: This constructs a new shared state for <code class='backtick'>*this</code>.
+The old state is abandoned (33.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>).
+&mdash; <i>end note</i>]
+</p>
+</blockquote>
+<p>
+Presumably, the intended behaviour of assignment was to abandon the
+shared state,
+i.e.  make it ready with a <code class='backtick'>broken_promise</code> error, and then release it.
+That is what the <code class='backtick'>std::promise</code> move assignment does
+(see 33.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> p9).
+Both libstdc++ and libc++ abandon the state, despite what the standard says.
+</p>
+
+
+<p id="res-4158"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
+</p>
+<ol>
+<li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
+<blockquote>
+<pre>
+packaged_task&amp; operator=(packaged_task&amp;&amp; rhs) noexcept;
+</pre>
+<p>-11- <i>Effects</i>:
+<ol style="list-style-type: none">
+<li>(11.1) &mdash;
+<del>Releases</del> <ins>Abandons</ins>
+any shared state (33.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>);
+</li>
+<li>(11.2) &mdash;
+calls <code class='backtick'>packaged_task(std::move(rhs)).swap(*this)</code>.
+</li>
+</ol>
+</p>
+<p><ins>-?- <i>Returns</i>: <code class='backtick'>*this</code>.</ins></p>
 </blockquote>
 </li>
 </ol>

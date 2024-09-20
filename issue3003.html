@@ -170,6 +170,8 @@ That was removed by issue <a href="lwg-defects.html#2921" title="packaged_task a
 argues that there was no good reason to do that. Removing <code class='backtick'>uses_allocator</code>
 for <code class='backtick'>packaged_task</code> would have made sense (as proposed below for <code class='backtick'>promise</code>)
 but 2921 didn't do that (which is why 2976 was needed).
+If we restore that <code class='backtick'>packaged_task</code> constructor then we need to fix <code class='backtick'>reset()</code>
+as discussed in issue <a href="lwg-defects.html#2245" title="packaged_task::reset() memory allocation (Status: Resolved)">2245</a>.
 </p>
 <p>In summary:
 <ul>
@@ -177,6 +179,7 @@ but 2921 didn't do that (which is why 2976 was needed).
 <li>Remove <code class='backtick'>uses_allocator</code> specialization for <code class='backtick'>promise</code>.</li>
 <li>Restore support for using an allocator for the shared state of <code class='backtick'>packaged_task</code>.</li>
 <li>Do not restore <code class='backtick'>uses_allocator</code> specialization for <code class='backtick'>packaged_task</code>.</li>
+<li>Update <code class='backtick'>packaged_task::reset()</code> to deal with allocators.</li>
 </ul>
 </p>
 

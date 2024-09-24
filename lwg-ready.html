@@ -62,7 +62,7 @@
 </tr>
 <tr>
 <td align="left">Date:</td>
-<td align="left">Revised 2024-09-22 at 09:58:48 UTC
+<td align="left">Revised 2024-09-24 at 20:13:48 UTC
 </td>
 </tr>
 <tr>
@@ -2021,8 +2021,8 @@ to the "compare with value" overloads so that they won't be used when the
 
 <p>
 A similar change was made to <code class='backtick'>optional</code>'s <code>operator&lt;=&gt;</code> by
-LWG <a href="lwg-defects.html#3566" title="Constraint recursion for operator&lt;=&gt;(optional&lt;T&gt;, U) (Status: C++23)">3566</a>, and modified by LWG <a href="lwg-defects.html#3746" title="optional's spaceship with U with a type derived from optional 
-causes infinite constraint meta-recursion (Status: C++23)">3746</a>.
+LWG <a href="lwg-defects.html#3566" title="Constraint recursion for operator&lt;=&gt;(optional&lt;T&gt;, U) (Status: C++23)">3566</a><sup><a href="https://cplusplus.github.io/LWG/issue3566" title="Latest snapshot">(i)</a></sup>, and modified by LWG <a href="lwg-defects.html#3746" title="optional's spaceship with U with a type derived from optional 
+causes infinite constraint meta-recursion (Status: C++23)">3746</a><sup><a href="https://cplusplus.github.io/LWG/issue3746" title="Latest snapshot">(i)</a></sup>.
 I haven't analyzed whether we need the modification here too.
 </p>
 
@@ -2036,7 +2036,7 @@ has been implemented and tested in libstdc++.
 <p>
 Set priority to 1 after reflector poll.
 LWG <a href="lwg-defects.html#3746" title="optional's spaceship with U with a type derived from optional 
-causes infinite constraint meta-recursion (Status: C++23)">3746</a> changes might be needed here too,
+causes infinite constraint meta-recursion (Status: C++23)">3746</a><sup><a href="https://cplusplus.github.io/LWG/issue3746" title="Latest snapshot">(i)</a></sup> changes might be needed here too,
 i.e, consider types derived from <code class='backtick'>optional</code>, not only <code class='backtick'>optional</code> itself.
 </p>
 
@@ -3178,7 +3178,7 @@ namespace std {
 <p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-This issue was split out from issue <a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations (Status: Open)">4015</a>.
+This issue was split out from issue <a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations (Status: Open)">4015</a><sup><a href="https://cplusplus.github.io/LWG/issue4015" title="Latest snapshot">(i)</a></sup>.
 </p>
 <p>
 <code class='backtick'>optional</code>, <code class='backtick'>variant</code> and <code class='backtick'>expected</code> all use similar wording to require
@@ -3236,7 +3236,7 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 
 <blockquote class="note">
 [<i>Drafting note</i>:
-This edit modifies the same paragraph as issue <a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations (Status: Open)">4015</a>,
+This edit modifies the same paragraph as issue <a href="lwg-active.html#4015" title="LWG 3973 broke const overloads of std::optional monadic operations (Status: Open)">4015</a><sup><a href="https://cplusplus.github.io/LWG/issue4015" title="Latest snapshot">(i)</a></sup>,
 but that other issue intentionally doesn't touch the affected sentence here
 (except for removing the italics on "contained value").
 The intention is that the merge conflict can be resolved in the obvious way:

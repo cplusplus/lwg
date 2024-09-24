@@ -67,7 +67,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-09-22</td>
+  <td align="left">2024-09-24</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Closed Issues List (Revision D125)</h1>
-<p>Revised 2024-09-22 at 09:58:48 UTC
+<p>Revised 2024-09-24 at 20:13:48 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -1704,7 +1704,7 @@ the value type is the same as the <b>constant</b> key type.</p>
 <p><b>Rationale:</b></p>
 <p>Not a defect. The Standard is correct as written; it uses a
 different mechanism (const &amp;) for <code>set</code> and
-<code>multiset</code>. See issue <a href="lwg-defects.html#103" title="set::iterator is required to be modifiable, but this allows modification of keys (Status: CD1)">103</a> for a related
+<code>multiset</code>. See issue <a href="lwg-defects.html#103" title="set::iterator is required to be modifiable, but this allows modification of keys (Status: CD1)">103</a><sup><a href="https://cplusplus.github.io/LWG/issue103" title="Latest snapshot">(i)</a></sup> for a related
 issue.</p>
 
 
@@ -1839,7 +1839,7 @@ maximum. </p>
 
 <p><b>Rationale:</b></p>
 <p>Considered a duplicate because it will be solved by the resolution
-of issue <a href="lwg-defects.html#83" title="String::npos vs. string::max_size() (Status: TC1)">83</a>.</p>
+of issue <a href="lwg-defects.html#83" title="String::npos vs. string::max_size() (Status: TC1)">83</a><sup><a href="https://cplusplus.github.io/LWG/issue83" title="Latest snapshot">(i)</a></sup>.</p>
 
 
 
@@ -2165,7 +2165,7 @@ to allow us to close this issue as NAD.
 </p>
 
 <p>
-I recommend we spawn a separate issue (<a href="lwg-closed.html#1184" title="Feature request: dynamic bitset (Status: NAD)">1184</a>) requesting a dynamic length bitset
+I recommend we spawn a separate issue (<a href="lwg-closed.html#1184" title="Feature request: dynamic bitset (Status: NAD)">1184</a><sup><a href="https://cplusplus.github.io/LWG/issue1184" title="Latest snapshot">(i)</a></sup>) requesting a dynamic length bitset
 and pre-emptively file it as NAD Future.  It is difficult to resolve #96
 when it effectively contains two separate sub-issues.
 </p>
@@ -2299,7 +2299,7 @@ incorrect code to work, rather than the other way around.</p>
 
 <blockquote>
 <p>
-This issue has been revisited and addressed (<a href="lwg-defects.html#755" title="std::vector and std:string lack explicit shrink-to-fit operations (Status: CD1)">755</a>, <a href="lwg-defects.html#850" title="Should shrink_to_fit apply to std::deque? (Status: CD1)">850</a>). This issues should be reclassified to NAD Editorial to reflect
+This issue has been revisited and addressed (<a href="lwg-defects.html#755" title="std::vector and std:string lack explicit shrink-to-fit operations (Status: CD1)">755</a><sup><a href="https://cplusplus.github.io/LWG/issue755" title="Latest snapshot">(i)</a></sup>, <a href="lwg-defects.html#850" title="Should shrink_to_fit apply to std::deque? (Status: CD1)">850</a><sup><a href="https://cplusplus.github.io/LWG/issue850" title="Latest snapshot">(i)</a></sup>). This issues should be reclassified to NAD Editorial to reflect
 this action.
 </p>
 </blockquote>
@@ -2343,7 +2343,7 @@ container is O(1)!</p>
 
 
 <p><b>Rationale:</b></p>
-<p>Subsumed by issue <a href="lwg-defects.html#264" title="Associative container insert(i, j) complexity requirements are not feasible. (Status: CD1)">264</a>.</p>
+<p>Subsumed by issue <a href="lwg-defects.html#264" title="Associative container insert(i, j) complexity requirements are not feasible. (Status: CD1)">264</a><sup><a href="https://cplusplus.github.io/LWG/issue264" title="Latest snapshot">(i)</a></sup>.</p>
 
 
 
@@ -2860,7 +2860,7 @@ Moved to NAD.
 <p><b>Rationale:</b></p>
 <p> The standard as written is mildly misleading, but the correct fix
 is to deal with the underlying problem in the <code>ctype_byname</code> base class,
-not in the specialization. See issue <a href="lwg-defects.html#228" title="Incorrect specification of &quot;..._byname&quot; facets (Status: CD1)">228</a>.</p>
+not in the specialization. See issue <a href="lwg-defects.html#228" title="Incorrect specification of &quot;..._byname&quot; facets (Status: CD1)">228</a><sup><a href="https://cplusplus.github.io/LWG/issue228" title="Latest snapshot">(i)</a></sup>.</p>
 
 
 
@@ -2897,7 +2897,7 @@ T&gt;' is not assignable; the `const Key' cannot be assigned
 to. So,&nbsp; map&lt;Key, T&gt;::value_type does not satisfy the
 assignable requirement imposed by a container.</p>
 
-<p><i>[See issue <a href="lwg-defects.html#103" title="set::iterator is required to be modifiable, but this allows modification of keys (Status: CD1)">103</a> for the slightly related issue of
+<p><i>[See issue <a href="lwg-defects.html#103" title="set::iterator is required to be modifiable, but this allows modification of keys (Status: CD1)">103</a><sup><a href="https://cplusplus.github.io/LWG/issue103" title="Latest snapshot">(i)</a></sup> for the slightly related issue of
 modification of set keys.]</i></p>
 
 
@@ -3107,7 +3107,7 @@ have to conform to the &quot;common requirements&quot; from 31.7.5.3.1 <a href="
 (... but setting <code>noskipws</code> using the manipulator syntax would
 also skip whitespace :-)</p>
 
-<p>See also issue <a href="lwg-closed.html#166" title="Really &quot;formatted output functions&quot;? (Status: Dup)">166</a> for the same problem in formatted
+<p>See also issue <a href="lwg-closed.html#166" title="Really &quot;formatted output functions&quot;? (Status: Dup)">166</a><sup><a href="https://cplusplus.github.io/LWG/issue166" title="Latest snapshot">(i)</a></sup> for the same problem in formatted
 output</p>
 
 
@@ -3165,7 +3165,7 @@ clarification should be used.</p>
 defined in 31.7.6.3.3 <a href="https://wg21.link/ostream.inserters">[ostream.inserters]</a> have to construct a
 <code>sentry</code> object. Is this really intended?</p> 
 
-<p>This is basically the same problem as issue <a href="lwg-closed.html#162" title="Really &quot;formatted input functions&quot;? (Status: Dup)">162</a> but
+<p>This is basically the same problem as issue <a href="lwg-closed.html#162" title="Really &quot;formatted input functions&quot;? (Status: Dup)">162</a><sup><a href="https://cplusplus.github.io/LWG/issue162" title="Latest snapshot">(i)</a></sup> but
 for output instead of input.</p>
 
 
@@ -3801,7 +3801,7 @@ respectively.</p>
 
 
 <p><b>Rationale:</b></p>
-<p>Subsumed by issue <a href="lwg-defects.html#153" title="Typo in narrow() semantics (Status: CD1)">153</a>, which addresses the same
+<p>Subsumed by issue <a href="lwg-defects.html#153" title="Typo in narrow() semantics (Status: CD1)">153</a><sup><a href="https://cplusplus.github.io/LWG/issue153" title="Latest snapshot">(i)</a></sup>, which addresses the same
 paragraphs.</p>
 
 
@@ -3913,7 +3913,7 @@ more-or-less what the Standard contains.</p>
 
 <p><b>Rationale:</b></p>
 <p>The resolution of this defect is subsumed by the proposed resolution for
-issue <a href="lwg-defects.html#193" title="Heap operations description incorrect (Status: TC1)">193</a>.</p>
+issue <a href="lwg-defects.html#193" title="Heap operations description incorrect (Status: TC1)">193</a><sup><a href="https://cplusplus.github.io/LWG/issue193" title="Latest snapshot">(i)</a></sup>.</p>
 
 <p><i>[Tokyo: The LWG agrees that this is a defect and notes that it
 occurs additional places in the section, all requiring fixes.]</i></p>
@@ -4335,7 +4335,7 @@ int is big enough for reasonable buffers.
 Move to NAD Future.
 </p>
 <p>
-This is related to LWG <a href="lwg-active.html#423" title="Effects of negative streamsize in iostreams (Status: Open)">423</a>.
+This is related to LWG <a href="lwg-active.html#423" title="Effects of negative streamsize in iostreams (Status: Open)">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423" title="Latest snapshot">(i)</a></sup>.
 </p>
 </blockquote>
 
@@ -4596,8 +4596,8 @@ behavior of the program is undefined.
 
 
 <p><b>Rationale:</b></p>
-<p>This is related to issue <a href="lwg-closed.html#65" title="Underspecification of strstreambuf::seekoff (Status: NAD)">65</a>: it's not clear what it
-means to seek beyond the current area.  Without resolving issue <a href="lwg-closed.html#65" title="Underspecification of strstreambuf::seekoff (Status: NAD)">65</a> we can't resolve this.  As with issue <a href="lwg-closed.html#65" title="Underspecification of strstreambuf::seekoff (Status: NAD)">65</a>, 
+<p>This is related to issue <a href="lwg-closed.html#65" title="Underspecification of strstreambuf::seekoff (Status: NAD)">65</a><sup><a href="https://cplusplus.github.io/LWG/issue65" title="Latest snapshot">(i)</a></sup>: it's not clear what it
+means to seek beyond the current area.  Without resolving issue <a href="lwg-closed.html#65" title="Underspecification of strstreambuf::seekoff (Status: NAD)">65</a><sup><a href="https://cplusplus.github.io/LWG/issue65" title="Latest snapshot">(i)</a></sup> we can't resolve this.  As with issue <a href="lwg-closed.html#65" title="Underspecification of strstreambuf::seekoff (Status: NAD)">65</a><sup><a href="https://cplusplus.github.io/LWG/issue65" title="Latest snapshot">(i)</a></sup>, 
 the library working group does not wish to invest time nailing down
 corner cases in a deprecated feature.</p>
 
@@ -4718,7 +4718,7 @@ even if it is misunderstood.</p>
 
 <p>
 This came from an email from Steve Cleary to Fergus in reference to
-issue <a href="lwg-defects.html#179" title="Comparison of const_iterators to iterators doesn't work (Status: CD1)">179</a>. The library working group briefly discussed
+issue <a href="lwg-defects.html#179" title="Comparison of const_iterators to iterators doesn't work (Status: CD1)">179</a><sup><a href="https://cplusplus.github.io/LWG/issue179" title="Latest snapshot">(i)</a></sup>. The library working group briefly discussed
 this in Toronto and believes it should be a separate issue.
 </p>
 
@@ -4769,7 +4769,7 @@ does not see this as a defect: it's possible to imagine cases in which
 it would be useful for the categories to be different.</p>
 
 <p>It may be desirable to require X::iterator and X::const_iterator to
-have the same value type, but that is a new issue. (Issue <a href="lwg-defects.html#322" title="iterator and const_iterator should have the same value type (Status: CD1)">322</a>.)</p>
+have the same value type, but that is a new issue. (Issue <a href="lwg-defects.html#322" title="iterator and const_iterator should have the same value type (Status: CD1)">322</a><sup><a href="https://cplusplus.github.io/LWG/issue322" title="Latest snapshot">(i)</a></sup>.)</p>
 
 
 
@@ -5252,7 +5252,7 @@ Solved by
 <p>
 The effects of <code>codecvt&lt;&gt;::do_length()</code> are described in
 22.2.1.5.2, paragraph 10.  As implied by that paragraph, and clarified
-in issue <a href="lwg-defects.html#75" title="Contradiction in codecvt::length's argument types (Status: TC1)">75</a>, <code>codecvt&lt;&gt;::do_length()</code> must
+in issue <a href="lwg-defects.html#75" title="Contradiction in codecvt::length's argument types (Status: TC1)">75</a><sup><a href="https://cplusplus.github.io/LWG/issue75" title="Latest snapshot">(i)</a></sup>, <code>codecvt&lt;&gt;::do_length()</code> must
 process the source data and update the <code>stateT</code> argument just
 as if the data had been processed by <code>codecvt&lt;&gt;::in()</code>.
 However, the standard does not specify how <code>do_length()</code> would
@@ -5385,9 +5385,9 @@ others propagate.
 The text also mentions that the functions may call setstate(failbit)
 (without actually saying on what object, but presumably the stream
 argument is meant).  That may have been fine for
-basic_istream&lt;&gt;::sentry prior to issue <a href="lwg-defects.html#195" title="Should basic_istream::sentry's constructor ever set eofbit? (Status: TC1)">195</a>, since
+basic_istream&lt;&gt;::sentry prior to issue <a href="lwg-defects.html#195" title="Should basic_istream::sentry's constructor ever set eofbit? (Status: TC1)">195</a><sup><a href="https://cplusplus.github.io/LWG/issue195" title="Latest snapshot">(i)</a></sup>, since
 the function performs an input operation which may fail. However,
-issue <a href="lwg-defects.html#195" title="Should basic_istream::sentry's constructor ever set eofbit? (Status: TC1)">195</a> amends  [istream::sentry], p2 to
+issue <a href="lwg-defects.html#195" title="Should basic_istream::sentry's constructor ever set eofbit? (Status: TC1)">195</a><sup><a href="https://cplusplus.github.io/LWG/issue195" title="Latest snapshot">(i)</a></sup> amends  [istream::sentry], p2 to
 clarify that the function should actually call setstate(failbit |
 eofbit), so the sentence in p3 is redundant or even somewhat
 contradictory.
@@ -5835,7 +5835,7 @@ the correct headers are #included.
 <p>Redmond: PJP reports that C99 adds two new kinds of <code>abs</code>: <code>complex</code>,
 and <code>int_max_abs</code>.</p>
 
-<p>Related issue: <a href="lwg-defects.html#343" title="Unspecified library header dependencies (Status: Resolved)">343</a>.</p>
+<p>Related issue: <a href="lwg-defects.html#343" title="Unspecified library header dependencies (Status: Resolved)">343</a><sup><a href="https://cplusplus.github.io/LWG/issue343" title="Latest snapshot">(i)</a></sup>.</p>
 
 <p><i>[
 Bellevue:
@@ -5947,7 +5947,7 @@ could give library implementors proper guidance in such a delicate
 matter.  The non-normative example we're giving is no worse than
 any other choice would be.</p>
 
-<p>See issue <a href="lwg-defects.html#347" title="locale::category and bitmask requirements (Status: CD1)">347</a>.</p>
+<p>See issue <a href="lwg-defects.html#347" title="locale::category and bitmask requirements (Status: CD1)">347</a><sup><a href="https://cplusplus.github.io/LWG/issue347" title="Latest snapshot">(i)</a></sup>.</p>
 
 
 
@@ -6009,7 +6009,7 @@ report.  Additionally, nobody saw a clear need for this extension;
 <p><b>Discussion:</b></p>
 <p>I think we have a defect.</p>
 
-<p>According to lwg issue <a href="lwg-defects.html#60" title="What is a formatted input function? (Status: TC1)">60</a> which is now a dr, the
+<p>According to lwg issue <a href="lwg-defects.html#60" title="What is a formatted input function? (Status: TC1)">60</a><sup><a href="https://cplusplus.github.io/LWG/issue60" title="Latest snapshot">(i)</a></sup> which is now a dr, the
 description of seekg in 31.7.5.4 <a href="https://wg21.link/istream.unformatted">[istream.unformatted]</a> paragraph 38 now looks
 like:</p>
 
@@ -6021,7 +6021,7 @@ gcount(). After constructing a sentry object, if fail() != true,
 executes rdbuf()->pubseekpos( pos).
 </p></blockquote>
 
-<p>And according to lwg issue <a href="lwg-defects.html#243" title="get and getline when sentry reports failure (Status: CD1)">243</a> which is also now a dr,
+<p>And according to lwg issue <a href="lwg-defects.html#243" title="get and getline when sentry reports failure (Status: CD1)">243</a><sup><a href="https://cplusplus.github.io/LWG/issue243" title="Latest snapshot">(i)</a></sup> which is also now a dr,
 27.6.1.3, paragraph 1 looks like:</p>
 
 <blockquote><p>
@@ -6078,7 +6078,7 @@ Ready state:
 <li>It should apply to both overloads of seekg.</li>
 <li>tellg has similar issues, except that it should not call clear().</li>
 <li>The point about clear() seems to apply to seekp().</li>
-<li>Depending on the outcome of <a href="lwg-defects.html#419" title="istream extractors not setting failbit if eofbit is already set (Status: C++11)">419</a>
+<li>Depending on the outcome of <a href="lwg-defects.html#419" title="istream extractors not setting failbit if eofbit is already set (Status: C++11)">419</a><sup><a href="https://cplusplus.github.io/LWG/issue419" title="Latest snapshot">(i)</a></sup>
 if the sentry
 sets <code>failbit</code> when it finds <code>eofbit</code> already set, then
 you can never seek away from the end of stream.</li>
@@ -6429,8 +6429,8 @@ lib-9224, lib-9226, lib-9229, lib-9270, lib-9272, lib-9273, lib-9274,
 lib-9277, lib-9279.
 </p>
 
-<p>Issue <a href="lwg-defects.html#339" title="definition of bitmask type restricted to clause 27 (Status: CD1)">339</a> is related, but not identical.  The
-proposed resolution if issue <a href="lwg-defects.html#339" title="definition of bitmask type restricted to clause 27 (Status: CD1)">339</a> says that
+<p>Issue <a href="lwg-defects.html#339" title="definition of bitmask type restricted to clause 27 (Status: CD1)">339</a><sup><a href="https://cplusplus.github.io/LWG/issue339" title="Latest snapshot">(i)</a></sup> is related, but not identical.  The
+proposed resolution if issue <a href="lwg-defects.html#339" title="definition of bitmask type restricted to clause 27 (Status: CD1)">339</a><sup><a href="https://cplusplus.github.io/LWG/issue339" title="Latest snapshot">(i)</a></sup> says that
 ctype_base::mask must be a bitmask type. It does not say that the
 ctype_base::mask elements are bitmask elements, so it doesn't
 directly affect this issue.</p>
@@ -7001,7 +7001,7 @@ out of scope?
 
 <p id="res-378"><b>Proposed resolution:</b></p>
 <p><i>[Summer '04 mid-meeting mailing: Martin and Dietmar believe this
-  is a duplicate of issue <a href="lwg-defects.html#31" title="Immutable locale values (Status: TC1)">31</a> and recommend that it be
+  is a duplicate of issue <a href="lwg-defects.html#31" title="Immutable locale values (Status: TC1)">31</a><sup><a href="https://cplusplus.github.io/LWG/issue31" title="Latest snapshot">(i)</a></sup> and recommend that it be
   closed.
 ]</i></p>
 
@@ -7199,7 +7199,7 @@ not be allowed.
 <p><i>[
 2007-01-12, Howard: First, despite the note above, references <b>are</b>
 copy constructible. They just aren't assignable.  Second, this is very
-closely related to <a href="lwg-defects.html#92" title="Incomplete Algorithm Requirements (Status: CD1)">92</a> and should be consistent with that.
+closely related to <a href="lwg-defects.html#92" title="Incomplete Algorithm Requirements (Status: CD1)">92</a><sup><a href="https://cplusplus.github.io/LWG/issue92" title="Latest snapshot">(i)</a></sup> and should be consistent with that.
 That issue already says that implementations are allowed to copy
 function objects.  If one passes in a reference, it is copyable, but
 susceptible to slicing if one passes in a reference to a base.  Third,
@@ -7210,8 +7210,8 @@ CopyConstructible). Finally (and fwiw), if we wanted to, it is easy to
 code all of the std::algorithms such that they do not copy function
 objects internally.  One merely passes them by reference internally if
 desired (this has been fully implemented and shipped for several years).
- If this were mandated, it would reverse <a href="lwg-defects.html#92" title="Incomplete Algorithm Requirements (Status: CD1)">92</a>, allowing
-function objects to reliably maintain state.  E.g. the example in <a href="lwg-defects.html#92" title="Incomplete Algorithm Requirements (Status: CD1)">92</a> would reliably remove only the third element.
+ If this were mandated, it would reverse <a href="lwg-defects.html#92" title="Incomplete Algorithm Requirements (Status: CD1)">92</a><sup><a href="https://cplusplus.github.io/LWG/issue92" title="Latest snapshot">(i)</a></sup>, allowing
+function objects to reliably maintain state.  E.g. the example in <a href="lwg-defects.html#92" title="Incomplete Algorithm Requirements (Status: CD1)">92</a><sup><a href="https://cplusplus.github.io/LWG/issue92" title="Latest snapshot">(i)</a></sup> would reliably remove only the third element.
 ]</i></p>
 
 
@@ -7264,7 +7264,7 @@ over to <code>std::less&lt;T&gt;</code> which is used, among other things, by as
 containers as an ordering useful to meet complexity requirements.
 </p>
 
-<p>Related issue: <a href="lwg-closed.html#348" title="Minor issue with std::pair operator&lt; (Status: Dup)">348</a>.</p>
+<p>Related issue: <a href="lwg-closed.html#348" title="Minor issue with std::pair operator&lt; (Status: Dup)">348</a><sup><a href="https://cplusplus.github.io/LWG/issue348" title="Latest snapshot">(i)</a></sup>.</p>
 
 <p><i>[
 Pre Bellevue: Reopened at the request of Alisdair.
@@ -7298,7 +7298,7 @@ function object. NAD
 believes this should not be treated a DR: it's a request for a design
 change, not a defect in the existing standard.  Most people (10-3)
 believed that we probably don't want this change, period: as with
-issue <a href="lwg-closed.html#348" title="Minor issue with std::pair operator&lt; (Status: Dup)">348</a>, it's hard to know where to draw the line.
+issue <a href="lwg-closed.html#348" title="Minor issue with std::pair operator&lt; (Status: Dup)">348</a><sup><a href="https://cplusplus.github.io/LWG/issue348" title="Latest snapshot">(i)</a></sup>, it's hard to know where to draw the line.
 The LWG noted that users who want to put objects into an associative
 container for which <code>operator&lt;</code> isn't defined can simply
 provide their own comparison function object.</p>
@@ -7358,7 +7358,7 @@ the address-of operator with the following function template:
 </pre>
 
 <p>
-Note: this relates directly to library issue <a href="lwg-closed.html#350" title="allocator&lt;&gt;::address (Status: Dup)">350</a>, which
+Note: this relates directly to library issue <a href="lwg-closed.html#350" title="allocator&lt;&gt;::address (Status: Dup)">350</a><sup><a href="https://cplusplus.github.io/LWG/issue350" title="Latest snapshot">(i)</a></sup>, which
 will need to be reexamined if the CopyConstructible requirements
 change.
 </p>
@@ -7673,7 +7673,7 @@ sentry::~sentry() should internally catch any exceptions it might cause.
 
 
 <p><i>[
-See <a href="lwg-closed.html#418" title="exceptions thrown during iostream cleanup (Status: NAD)">418</a> and <a href="lwg-defects.html#622" title="behavior of filebuf dtor and close on error (Status: CD1)">622</a> for related issues.
+See <a href="lwg-closed.html#418" title="exceptions thrown during iostream cleanup (Status: NAD)">418</a><sup><a href="https://cplusplus.github.io/LWG/issue418" title="Latest snapshot">(i)</a></sup> and <a href="lwg-defects.html#622" title="behavior of filebuf dtor and close on error (Status: CD1)">622</a><sup><a href="https://cplusplus.github.io/LWG/issue622" title="Latest snapshot">(i)</a></sup> for related issues.
 ]</i></p>
 
 
@@ -7694,7 +7694,7 @@ Move to Review. Add "Throws: nothing" to the specification of <code>ostream::sen
 
 
 <blockquote><p>
-The proposed resolution of <a href="lwg-defects.html#835" title="Tying two streams together (correction to DR 581) (Status: C++11)">835</a> is written to match the outcome
+The proposed resolution of <a href="lwg-defects.html#835" title="Tying two streams together (correction to DR 581) (Status: C++11)">835</a><sup><a href="https://cplusplus.github.io/LWG/issue835" title="Latest snapshot">(i)</a></sup> is written to match the outcome
 of this issue.
 </p></blockquote>
 
@@ -7704,7 +7704,7 @@ of this issue.
 
 
 <blockquote><p>
-Move to Open.  Our intent is to solve this issue with <a href="lwg-defects.html#835" title="Tying two streams together (correction to DR 581) (Status: C++11)">835</a>.
+Move to Open.  Our intent is to solve this issue with <a href="lwg-defects.html#835" title="Tying two streams together (correction to DR 581) (Status: C++11)">835</a><sup><a href="https://cplusplus.github.io/LWG/issue835" title="Latest snapshot">(i)</a></sup>.
 </p></blockquote>
 
 <p><i>[
@@ -7725,7 +7725,7 @@ Moved to NAD Editorial.
 
 <p><b>Rationale:</b></p>
 <p>
-Solved by <a href="lwg-defects.html#835" title="Tying two streams together (correction to DR 581) (Status: C++11)">835</a>.
+Solved by <a href="lwg-defects.html#835" title="Tying two streams together (correction to DR 581) (Status: C++11)">835</a><sup><a href="https://cplusplus.github.io/LWG/issue835" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 
@@ -7994,7 +7994,7 @@ adapter's argument type.  It should make clear that, e.g., the
 </p>
 
 <p>
-Issue <a href="lwg-defects.html#235" title="No specification of default ctor for reverse_iterator (Status: CD1)">235</a>, which defines <code>reverse_iterator</code>'s default
+Issue <a href="lwg-defects.html#235" title="No specification of default ctor for reverse_iterator (Status: CD1)">235</a><sup><a href="https://cplusplus.github.io/LWG/issue235" title="Latest snapshot">(i)</a></sup>, which defines <code>reverse_iterator</code>'s default
 constructor more precisely, has some relevance to this issue.
 However, it is not the whole story.
 </p>
@@ -8020,7 +8020,7 @@ uninitialized, and possibly equal to an existing pointer value, or
 
 <p>
 8.5 paragraph 5 seems to make clear that the second is required to
-satisfy DR <a href="lwg-defects.html#235" title="No specification of default ctor for reverse_iterator (Status: CD1)">235</a>, at least for non-class Iterator argument
+satisfy DR <a href="lwg-defects.html#235" title="No specification of default ctor for reverse_iterator (Status: CD1)">235</a><sup><a href="https://cplusplus.github.io/LWG/issue235" title="Latest snapshot">(i)</a></sup>, at least for non-class Iterator argument
 types.
 </p>
 
@@ -8047,7 +8047,7 @@ are default-initialized, and it should explicitly allow destroying any
 iterator value, singular or not, default-initialized or not.
 </p>
 
-<p>Related issues: <a href="lwg-defects.html#407" title="Can singular iterators be destroyed? (Status: CD1)">407</a>, <a href="lwg-defects.html#1012" title="reverse_iterator default ctor should value initialize (Status: C++11)">1012</a></p>
+<p>Related issues: <a href="lwg-defects.html#407" title="Can singular iterators be destroyed? (Status: CD1)">407</a><sup><a href="https://cplusplus.github.io/LWG/issue407" title="Latest snapshot">(i)</a></sup>, <a href="lwg-defects.html#1012" title="reverse_iterator default ctor should value initialize (Status: C++11)">1012</a><sup><a href="https://cplusplus.github.io/LWG/issue1012" title="Latest snapshot">(i)</a></sup></p>
 <p><i>[
 We don't want to require all singular iterators to be copyable,
 because that is not the case for pointers.  However, default
@@ -8076,18 +8076,18 @@ resolved.  That just leaves copying (with moving implied).
 
 <blockquote>
 <p>
-This is related to LWG <a href="lwg-defects.html#1012" title="reverse_iterator default ctor should value initialize (Status: C++11)">1012</a>.
+This is related to LWG <a href="lwg-defects.html#1012" title="reverse_iterator default ctor should value initialize (Status: C++11)">1012</a><sup><a href="https://cplusplus.github.io/LWG/issue1012" title="Latest snapshot">(i)</a></sup>.
 </p>
 <p>
-Note that there is a bug in the proposed resolution to LWG <a href="lwg-defects.html#1012" title="reverse_iterator default ctor should value initialize (Status: C++11)">1012</a>. The
+Note that there is a bug in the proposed resolution to LWG <a href="lwg-defects.html#1012" title="reverse_iterator default ctor should value initialize (Status: C++11)">1012</a><sup><a href="https://cplusplus.github.io/LWG/issue1012" title="Latest snapshot">(i)</a></sup>. The
 change to  [reverse.iter.con] should be modified so that the word
 "default" in the second sentence of the Effects clause is replaced by
 "value."
 </p>
 <p>
-We believe that the proposed fix to LWG <a href="lwg-defects.html#1012" title="reverse_iterator default ctor should value initialize (Status: C++11)">1012</a> (now corrected) is
+We believe that the proposed fix to LWG <a href="lwg-defects.html#1012" title="reverse_iterator default ctor should value initialize (Status: C++11)">1012</a><sup><a href="https://cplusplus.github.io/LWG/issue1012" title="Latest snapshot">(i)</a></sup> (now corrected) is
 sufficient to solve the problem for reverse_iterator. However, Alisdair
-pointed out that LWG <a href="lwg-defects.html#1012" title="reverse_iterator default ctor should value initialize (Status: C++11)">1012</a> does not solve the general problem for authors
+pointed out that LWG <a href="lwg-defects.html#1012" title="reverse_iterator default ctor should value initialize (Status: C++11)">1012</a><sup><a href="https://cplusplus.github.io/LWG/issue1012" title="Latest snapshot">(i)</a></sup> does not solve the general problem for authors
 of iterator adaptors.
 </p>
 <p>
@@ -8107,7 +8107,7 @@ Move to Review after Alisdair updates the wording.
 
 <p><i>[
 2009-08-17 Alisdair and Daniel collaborate on slightly revised wording.
-This issue depends upon <a href="lwg-defects.html#724" title="DefaultConstructible is not defined (Status: C++11)">724</a>
+This issue depends upon <a href="lwg-defects.html#724" title="DefaultConstructible is not defined (Status: C++11)">724</a><sup><a href="https://cplusplus.github.io/LWG/issue724" title="Latest snapshot">(i)</a></sup>
 ]</i></p>
 
 
@@ -8117,7 +8117,7 @@ This issue depends upon <a href="lwg-defects.html#724" title="DefaultConstructib
 
 
 <blockquote><p>
-There is a clear dependency on <a href="lwg-active.html#1213" title="Meaning of valid and singular iterator underspecified (Status: Open)">1213</a>, because the term "singular",
+There is a clear dependency on <a href="lwg-active.html#1213" title="Meaning of valid and singular iterator underspecified (Status: Open)">1213</a><sup><a href="https://cplusplus.github.io/LWG/issue1213" title="Latest snapshot">(i)</a></sup>, because the term "singular",
 which is used as part of the resolution, is not properly defined yet.
 </p></blockquote>
 
@@ -8270,7 +8270,7 @@ object throws.
 
 
 <p><i>[
-See <a href="lwg-closed.html#397" title="ostream::sentry dtor throws exceptions (Status: NAD Editorial)">397</a> and <a href="lwg-defects.html#622" title="behavior of filebuf dtor and close on error (Status: CD1)">622</a> for related issues.
+See <a href="lwg-closed.html#397" title="ostream::sentry dtor throws exceptions (Status: NAD Editorial)">397</a><sup><a href="https://cplusplus.github.io/LWG/issue397" title="Latest snapshot">(i)</a></sup> and <a href="lwg-defects.html#622" title="behavior of filebuf dtor and close on error (Status: CD1)">622</a><sup><a href="https://cplusplus.github.io/LWG/issue622" title="Latest snapshot">(i)</a></sup> for related issues.
 ]</i></p>
 
 
@@ -8317,7 +8317,7 @@ of the standard provide a compiler-generated copy ctor and assignment
 operator yet fail to specify their semantics.  It's believed that the
 only types for which this is actually a problem (i.e. types where the
 compiler-generated default may be inappropriate and may not have been
-intended) are locale facets.  See issue <a href="lwg-closed.html#439" title="Should facets be copyable? (Status: NAD)">439</a>.
+intended) are locale facets.  See issue <a href="lwg-closed.html#439" title="Should facets be copyable? (Status: NAD)">439</a><sup><a href="https://cplusplus.github.io/LWG/issue439" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 <p><i>[
@@ -8767,7 +8767,7 @@ conversions from C and the function pointer is converted to bool.
   behavior is probably inappropriate.  We should either make these
   classes uncopyable or else specify exactly what their constructors do.</p>
 
-<p>Related issue: <a href="lwg-closed.html#421" title="is basic_streambuf copy-constructible? (Status: NAD)">421</a>.</p>
+<p>Related issue: <a href="lwg-closed.html#421" title="is basic_streambuf copy-constructible? (Status: NAD)">421</a><sup><a href="https://cplusplus.github.io/LWG/issue421" title="Latest snapshot">(i)</a></sup>.</p>
 
 <pre>
         ctype_base
@@ -8831,7 +8831,7 @@ unqualified <code>sin</code>?
 <p>The issue, of course, is whether we want to use
 argument-dependent lookup in the case where <code>T</code> is a
 user-defined type.  This is similar to the issue of valarray
-transcendentals, as discussed in issue <a href="lwg-defects.html#226" title="User supplied specializations or overloads of namespace std function templates (Status: CD1)">226</a>.</p>
+transcendentals, as discussed in issue <a href="lwg-defects.html#226" title="User supplied specializations or overloads of namespace std function templates (Status: CD1)">226</a><sup><a href="https://cplusplus.github.io/LWG/issue226" title="Latest snapshot">(i)</a></sup>.</p>
 
 <p>This issue differs from valarray transcendentals in two important
 ways.  First, "the effect of instantiating the template
@@ -9465,7 +9465,7 @@ drastic. Existing implementations with the exception of libstdc++
 currently already use narrow() so the impact of the change on programs
 would presumably be isolated to just a single implementation. Further,
 since narrow() is not required to translate alternate wide digit
-representations such as those mentioned in issue <a href="lwg-defects.html#303" title="Bitset input operator underspecified (Status: CD1)">303</a> to
+representations such as those mentioned in issue <a href="lwg-defects.html#303" title="Bitset input operator underspecified (Status: CD1)">303</a><sup><a href="https://cplusplus.github.io/LWG/issue303" title="Latest snapshot">(i)</a></sup> to
 their narrow equivalents (i.e., the portable source characters '0'
 through '9'), the change does not necessarily imply that these
 alternate digits would be treated as ordinary digits and accepted as
@@ -9560,7 +9560,7 @@ destruction but not require it.
 
 <p><i>[
 Howard:  The course of action recommended in Batavia would undo LWG
-issue <a href="lwg-defects.html#3" title="Atexit registration during atexit() call is not described (Status: TC1)">3</a> and break current code implementing the "phoenix
+issue <a href="lwg-defects.html#3" title="Atexit registration during atexit() call is not described (Status: TC1)">3</a><sup><a href="https://cplusplus.github.io/LWG/issue3" title="Latest snapshot">(i)</a></sup> and break current code implementing the "phoenix
 singleton". Search the net for "phoenix singleton atexit" to get a feel
 for the size of the adverse impact this change would have.  Below is
 sample code which implements the phoenix singleton and would break if
@@ -9990,7 +9990,7 @@ references <code>auto_ptr_ref</code>. This risk seems to indicate that a
 decision which would not touch the current spec of <code>auto_ptr</code> at
 all (but deprecating it) and instead recommending to use
 <code>unique_ptr</code> for new code instead might have the best
-cost-benefit ratio. IMO the current solution of <a href="lwg-defects.html#1100" title="auto_ptr to unique_ptr conversion (Status: Resolved)">1100</a> can
+cost-benefit ratio. IMO the current solution of <a href="lwg-defects.html#1100" title="auto_ptr to unique_ptr conversion (Status: Resolved)">1100</a><sup><a href="https://cplusplus.github.io/LWG/issue1100" title="Latest snapshot">(i)</a></sup> can
 be considered as an active user-support for this transition.
 </p>
 </blockquote>
@@ -10001,7 +10001,7 @@ be considered as an active user-support for this transition.
 
 
 <blockquote><p>
-Mark as NAD. Alisdair will open a new issue (<a href="lwg-defects.html#1247" title="auto_ptr is overspecified (Status: C++11)">1247</a>) with
+Mark as NAD. Alisdair will open a new issue (<a href="lwg-defects.html#1247" title="auto_ptr is overspecified (Status: C++11)">1247</a><sup><a href="https://cplusplus.github.io/LWG/issue1247" title="Latest snapshot">(i)</a></sup>) with
 proposed wording to handle <code>auto_ptr_ref</code>.
 </p></blockquote>
 
@@ -10307,7 +10307,7 @@ There is no "Returns:" clause for std::equal_range, which returns non-void.
 
 
 <p><b>Rationale:</b></p>
-<p>Fixed as part of issue <a href="lwg-defects.html#270" title="Binary search requirements overly strict (Status: CD1)">270</a>.</p>
+<p>Fixed as part of issue <a href="lwg-defects.html#270" title="Binary search requirements overly strict (Status: CD1)">270</a><sup><a href="https://cplusplus.github.io/LWG/issue270" title="Latest snapshot">(i)</a></sup>.</p>
 
 
 
@@ -10338,7 +10338,7 @@ iterators non-conforming.  I think we need to sever the refinement
 relationship between forward iterator and output iterator.
 </p>
 
-<p>Related issue: <a href="lwg-defects.html#200" title="Forward iterator requirements don't allow constant iterators (Status: CD1)">200</a>.  But this is not a dup.</p>
+<p>Related issue: <a href="lwg-defects.html#200" title="Forward iterator requirements don't allow constant iterators (Status: CD1)">200</a><sup><a href="https://cplusplus.github.io/LWG/issue200" title="Latest snapshot">(i)</a></sup>.  But this is not a dup.</p>
 
 
 
@@ -10396,7 +10396,7 @@ of referenced members.  But Paragraph 11 of [lib.iterator.requirements] says:
 <p>AFAICT if we need the second line at all, it should read the same
 as the first line.</p>
 
-<p>Related issue: <a href="lwg-defects.html#478" title="Should forward iterator requirements table have a line for r->m? (Status: CD1)">478</a></p>
+<p>Related issue: <a href="lwg-defects.html#478" title="Should forward iterator requirements table have a line for r->m? (Status: CD1)">478</a><sup><a href="https://cplusplus.github.io/LWG/issue478" title="Latest snapshot">(i)</a></sup></p>
 
 
 <p id="res-477"><b>Proposed resolution:</b></p>
@@ -10405,7 +10405,7 @@ as the first line.</p>
 <p><b>Rationale:</b></p>
 <p>The LWG agrees that this is a real problem.  Marked as a DUP
   because the LWG chose to adopt the solution proposed in
-  <a href="lwg-defects.html#478" title="Should forward iterator requirements table have a line for r->m? (Status: CD1)">478</a>.
+  <a href="lwg-defects.html#478" title="Should forward iterator requirements table have a line for r->m? (Status: CD1)">478</a><sup><a href="https://cplusplus.github.io/LWG/issue478" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 
@@ -10672,7 +10672,7 @@ operator that takes a T, or a T may be convertible to the type of *i.
 
 
 <p><b>Rationale:</b></p>
-<p>Duplicate of (a subset of) issue <a href="lwg-defects.html#283" title="std::replace() requirement incorrect/insufficient (Status: CD1)">283</a>.</p>
+<p>Duplicate of (a subset of) issue <a href="lwg-defects.html#283" title="std::replace() requirement incorrect/insufficient (Status: CD1)">283</a><sup><a href="https://cplusplus.github.io/LWG/issue283" title="Latest snapshot">(i)</a></sup>.</p>
 
 
 
@@ -11596,7 +11596,7 @@ Keep open and ask Bill to provide wording.
 
 
 <blockquote><p>
-This issue is related to <a href="lwg-defects.html#997" title="&quot;Effects: Equivalent to&quot; is underspecified (Status: C++11)">997</a>.
+This issue is related to <a href="lwg-defects.html#997" title="&quot;Effects: Equivalent to&quot; is underspecified (Status: C++11)">997</a><sup><a href="https://cplusplus.github.io/LWG/issue997" title="Latest snapshot">(i)</a></sup>.
 </p></blockquote>
 
 <p><i>[
@@ -12468,7 +12468,7 @@ intended.  Moved to Ready.
 <p><b>Rationale:</b></p>
 <p>
 Jens: I'm using an explicit type here, because fixing the
-prose would probably not qualify for the (with issue <a href="lwg-closed.html#504" title="Integer types in pseudo-random number engine requirements (Status: NAD Editorial)">504</a> even
+prose would probably not qualify for the (with issue <a href="lwg-closed.html#504" title="Integer types in pseudo-random number engine requirements (Status: NAD Editorial)">504</a><sup><a href="https://cplusplus.github.io/LWG/issue504" title="Latest snapshot">(i)</a></sup> even
 stricter) requirements we have for seed(Gen&amp;).
 </p>
 
@@ -13403,7 +13403,7 @@ Recommend NAD and fix as editorial with the proposed resolution.
 <p><b>Discussion:</b></p>
 <p>
 I believe we have a bug in the resolution of:
-<a href="lwg-defects.html#184" title="numeric_limits&lt;bool&gt; wording problems (Status: CD1)">184</a>
+<a href="lwg-defects.html#184" title="numeric_limits&lt;bool&gt; wording problems (Status: CD1)">184</a><sup><a href="https://cplusplus.github.io/LWG/issue184" title="Latest snapshot">(i)</a></sup>
 (WP status).
 </p>
 
@@ -14433,7 +14433,7 @@ destroy temporaries.
 
 
 <p><i>[
-Howard: This same paragraph will need some work to accommodate <a href="lwg-defects.html#431" title="Swapping containers with unequal allocators (Status: Resolved)">431</a>.
+Howard: This same paragraph will need some work to accommodate <a href="lwg-defects.html#431" title="Swapping containers with unequal allocators (Status: Resolved)">431</a><sup><a href="https://cplusplus.github.io/LWG/issue431" title="Latest snapshot">(i)</a></sup>.
 ]</i></p>
 
 
@@ -14456,7 +14456,7 @@ post Oxford:  This would be rendered NAD Editorial by acceptance of
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 
-<p>Related to <a href="lwg-closed.html#1029" title="Specialized algorithms for memory management need to be concept-constrained templates (Status: NAD Concepts)">1029</a></p>
+<p>Related to <a href="lwg-closed.html#1029" title="Specialized algorithms for memory management need to be concept-constrained templates (Status: NAD Concepts)">1029</a><sup><a href="https://cplusplus.github.io/LWG/issue1029" title="Latest snapshot">(i)</a></sup></p>
         <p>
 
 The specialized  algorithms [lib.specialized.algorithms] are specified
@@ -14491,9 +14491,9 @@ properly expressed if iterator returns rvalue.
 
 <blockquote>
 
-<p>Propose that Issue <a href="lwg-closed.html#582" title="specialized algorithms and volatile storage (Status: NAD)">582</a> be closed NAD.</p>
+<p>Propose that Issue <a href="lwg-closed.html#582" title="specialized algorithms and volatile storage (Status: NAD)">582</a><sup><a href="https://cplusplus.github.io/LWG/issue582" title="Latest snapshot">(i)</a></sup> be closed NAD.</p>
 <p>
-Issue <a href="lwg-closed.html#582" title="specialized algorithms and volatile storage (Status: NAD)">582</a> asks that <code>uninitialized_copy</code>,
+Issue <a href="lwg-closed.html#582" title="specialized algorithms and volatile storage (Status: NAD)">582</a><sup><a href="https://cplusplus.github.io/LWG/issue582" title="Latest snapshot">(i)</a></sup> asks that <code>uninitialized_copy</code>,
 <code>uninitialized_fill</code>, and <code>uninitialized_fill_n</code> should be
 well-formed if the result type is volatile.  My feeling is that the
 standard does not, and should not, guarantee any useful behavior when
@@ -15805,7 +15805,7 @@ Solved by
 
 <p>
 2010-01-31: The draft standard is well specified as is, and this specification
-is desired.  Issues <a href="lwg-defects.html#556" title="Is Compare a BinaryPredicate? (Status: C++11)">556</a> and <a href="lwg-defects.html#870" title="Do unordered containers not support function pointers for predicate&#47;hasher? (Status: C++11)">870</a> solve the remaining
+is desired.  Issues <a href="lwg-defects.html#556" title="Is Compare a BinaryPredicate? (Status: C++11)">556</a><sup><a href="https://cplusplus.github.io/LWG/issue556" title="Latest snapshot">(i)</a></sup> and <a href="lwg-defects.html#870" title="Do unordered containers not support function pointers for predicate&#47;hasher? (Status: C++11)">870</a><sup><a href="https://cplusplus.github.io/LWG/issue870" title="Latest snapshot">(i)</a></sup> solve the remaining
 unclearness regarding the meaning of BinaryPredicate.
 </p>
 
@@ -16080,7 +16080,7 @@ Change 28.7 <a href="https://wg21.link/c.math">[c.math]</a>, paragraph 10,
 <p><b>Discussion:</b></p>
 <p>
 There already exist two active DR's for the wording of  [istream::extractors]/13
-from 14882:2003(E), namely <a href="lwg-defects.html#64" title="Exception handling in basic_istream::operator&gt;&gt;(basic_streambuf*) (Status: TC1)">64</a> and <a href="lwg-defects.html#413" title="Proposed resolution to LDR#64 still wrong (Status: CD1)">413</a>.
+from 14882:2003(E), namely <a href="lwg-defects.html#64" title="Exception handling in basic_istream::operator&gt;&gt;(basic_streambuf*) (Status: TC1)">64</a><sup><a href="https://cplusplus.github.io/LWG/issue64" title="Latest snapshot">(i)</a></sup> and <a href="lwg-defects.html#413" title="Proposed resolution to LDR#64 still wrong (Status: CD1)">413</a><sup><a href="https://cplusplus.github.io/LWG/issue413" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 <p>
@@ -16265,7 +16265,7 @@ Oxford:  Editorial.
 <p>
 The standard wording of N2134 has extended the 14882:2003(E)
 wording for the ifstream/ofstream/fstream open function to fix
-a long standing problem, see <a href="lwg-defects.html#409" title="Closing an fstream should clear error state (Status: CD1)">409</a>.
+a long standing problem, see <a href="lwg-defects.html#409" title="Closing an fstream should clear error state (Status: CD1)">409</a><sup><a href="https://cplusplus.github.io/LWG/issue409" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 <p>
@@ -17293,7 +17293,7 @@ Kona (2007): Bill to provide proposed wording and interpretation of existing wor
 
 
 <p>
-Related to <a href="lwg-closed.html#669" title="Equivalent postive and negative signs in money_get (Status: NAD)">669</a>.
+Related to <a href="lwg-closed.html#669" title="Equivalent postive and negative signs in money_get (Status: NAD)">669</a><sup><a href="https://cplusplus.github.io/LWG/issue669" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 <p><i>[
@@ -17353,7 +17353,7 @@ $-123  // a parse error
 
 
 <p>
-And (regarding <a href="lwg-closed.html#669" title="Equivalent postive and negative signs in money_get (Status: NAD)">669</a>):
+And (regarding <a href="lwg-closed.html#669" title="Equivalent postive and negative signs in money_get (Status: NAD)">669</a><sup><a href="https://cplusplus.github.io/LWG/issue669" title="Latest snapshot">(i)</a></sup>):
 </p>
 
 <blockquote><pre>
@@ -17368,7 +17368,7 @@ $-123  // a positive value
 
 <p>
 The text seems both unambiguous and clear to me.  I recommend NAD for
-both this issue and <a href="lwg-closed.html#669" title="Equivalent postive and negative signs in money_get (Status: NAD)">669</a>.  However I would have no
+both this issue and <a href="lwg-closed.html#669" title="Equivalent postive and negative signs in money_get (Status: NAD)">669</a><sup><a href="https://cplusplus.github.io/LWG/issue669" title="Latest snapshot">(i)</a></sup>.  However I would have no
 objection to adding examples such as those above.
 </p>
 </blockquote>
@@ -17379,7 +17379,7 @@ Batavia (2009-05):
 
 <blockquote>
 <p>
-This discussion applies equally to issue <a href="lwg-closed.html#669" title="Equivalent postive and negative signs in money_get (Status: NAD)">669</a> (q.v.).
+This discussion applies equally to issue <a href="lwg-closed.html#669" title="Equivalent postive and negative signs in money_get (Status: NAD)">669</a><sup><a href="https://cplusplus.github.io/LWG/issue669" title="Latest snapshot">(i)</a></sup> (q.v.).
 Howard has added examples above,
 and recommends either NAD or a resolution that adds his (or similar) examples
 to the Working Paper.
@@ -17391,7 +17391,7 @@ Alan would like to rewrite paragraph 3.
 We recommend moving to NAD.
 Anyone who feels strongly about adding the examples
 is invited to submit corresponding wording.
-We further recommend issue <a href="lwg-closed.html#669" title="Equivalent postive and negative signs in money_get (Status: NAD)">669</a> be handled identically.
+We further recommend issue <a href="lwg-closed.html#669" title="Equivalent postive and negative signs in money_get (Status: NAD)">669</a><sup><a href="https://cplusplus.github.io/LWG/issue669" title="Latest snapshot">(i)</a></sup> be handled identically.
 </p>
 </blockquote>
 
@@ -17505,7 +17505,7 @@ Bill to provide proposed wording and interpretation of existing wording.
 
 
 <p><i>[
-2009-05-17 See Howard's comments in related issue <a href="lwg-closed.html#668" title="money_get's empty minus sign (Status: NAD)">668</a>.
+2009-05-17 See Howard's comments in related issue <a href="lwg-closed.html#668" title="money_get's empty minus sign (Status: NAD)">668</a><sup><a href="https://cplusplus.github.io/LWG/issue668" title="Latest snapshot">(i)</a></sup>.
 ]</i></p>
 
 
@@ -17515,7 +17515,7 @@ Batavia (2009-05):
 
 <blockquote>
 <p>
-This discussion applies equally to issue <a href="lwg-closed.html#668" title="money_get's empty minus sign (Status: NAD)">668</a> (q.v.).
+This discussion applies equally to issue <a href="lwg-closed.html#668" title="money_get's empty minus sign (Status: NAD)">668</a><sup><a href="https://cplusplus.github.io/LWG/issue668" title="Latest snapshot">(i)</a></sup> (q.v.).
 Howard has added examples there,
 and recommends either NAD or a resolution that adds his (or similar) examples
 to the Working Paper.
@@ -17524,7 +17524,7 @@ to the Working Paper.
 We recommend moving to NAD.
 Anyone who feels strongly about adding the examples
 is invited to submit corresponding wording.
-We further recommend issue <a href="lwg-closed.html#668" title="money_get's empty minus sign (Status: NAD)">668</a> be handled identically.
+We further recommend issue <a href="lwg-closed.html#668" title="money_get's empty minus sign (Status: NAD)">668</a><sup><a href="https://cplusplus.github.io/LWG/issue668" title="Latest snapshot">(i)</a></sup> be handled identically.
 </p>
 </blockquote>
 
@@ -18034,7 +18034,7 @@ Kona (2007): Bill and Nick to provide wording.
 <p><i>[
 San Francisco: Bill and Nick still intend to provide wording, but this
 is a part of the task to be addressed by the group that will look into
-issue <a href="lwg-defects.html#860" title="Floating-Point State (Status: C++11)">860</a>.
+issue <a href="lwg-defects.html#860" title="Floating-Point State (Status: C++11)">860</a><sup><a href="https://cplusplus.github.io/LWG/issue860" title="Latest snapshot">(i)</a></sup>.
 ]</i></p>
 
 
@@ -18081,7 +18081,7 @@ Move to NAD Future.
 <p><b>Discussion:</b></p>
 <p>
 Since the return type of <code>valarray</code>'s <code>operator[] const</code> overload has been
-changed to <code>const T&amp;</code> as described in <a href="lwg-defects.html#389" title="Const overload of valarray::operator[] returns by value (Status: CD1)">389</a> several paragraphs of
+changed to <code>const T&amp;</code> as described in <a href="lwg-defects.html#389" title="Const overload of valarray::operator[] returns by value (Status: CD1)">389</a><sup><a href="https://cplusplus.github.io/LWG/issue389" title="Latest snapshot">(i)</a></sup> several paragraphs of
 the section 28.6.2.4 <a href="https://wg21.link/valarray.access">[valarray.access]</a> are now
 incompletely
 specified, because many requirements and guarantees should now also
@@ -18420,13 +18420,13 @@ Daniel to tweak for us.
 </p></blockquote>
 
 <p><i>[
-2009-07-25 Daniel tweaks both this issue and <a href="lwg-defects.html#727" title="regex_replace() doesn't accept basic_strings with custom traits and allocators (Status: C++11)">727</a>.
+2009-07-25 Daniel tweaks both this issue and <a href="lwg-defects.html#727" title="regex_replace() doesn't accept basic_strings with custom traits and allocators (Status: C++11)">727</a><sup><a href="https://cplusplus.github.io/LWG/issue727" title="Latest snapshot">(i)</a></sup>.
 ]</i></p>
 
 
 <blockquote>
 <p>
-This is solved by the proposed resolution of <a href="lwg-defects.html#727" title="regex_replace() doesn't accept basic_strings with custom traits and allocators (Status: C++11)">727</a>.
+This is solved by the proposed resolution of <a href="lwg-defects.html#727" title="regex_replace() doesn't accept basic_strings with custom traits and allocators (Status: C++11)">727</a><sup><a href="https://cplusplus.github.io/LWG/issue727" title="Latest snapshot">(i)</a></sup>.
 </p>
 </blockquote>
 
@@ -18437,7 +18437,7 @@ This is solved by the proposed resolution of <a href="lwg-defects.html#727" titl
 
 <blockquote><p>
 Leave Open. Though we believe this is solved by the proposed resolution
-to <a href="lwg-defects.html#727" title="regex_replace() doesn't accept basic_strings with custom traits and allocators (Status: C++11)">727</a>.
+to <a href="lwg-defects.html#727" title="regex_replace() doesn't accept basic_strings with custom traits and allocators (Status: C++11)">727</a><sup><a href="https://cplusplus.github.io/LWG/issue727" title="Latest snapshot">(i)</a></sup>.
 </p></blockquote>
 
 <p><i>[
@@ -18449,7 +18449,7 @@ Rationale added below.
 
 <p><b>Rationale:</b></p>
 <p>
-Solved by <a href="lwg-defects.html#727" title="regex_replace() doesn't accept basic_strings with custom traits and allocators (Status: C++11)">727</a>.
+Solved by <a href="lwg-defects.html#727" title="regex_replace() doesn't accept basic_strings with custom traits and allocators (Status: C++11)">727</a><sup><a href="https://cplusplus.github.io/LWG/issue727" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 
@@ -19065,7 +19065,7 @@ Stephan Tolksdorf adds pre-Bellevue:
 <blockquote><p>
 In reply to the discussion in
 <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2424.pdf">N2424</a>
-I'd like to make the same comments as for <a href="lwg-closed.html#736" title="Comment on [rand.dist.samp.discrete] (Status: NAD)">736</a>.
+I'd like to make the same comments as for <a href="lwg-closed.html#736" title="Comment on [rand.dist.samp.discrete] (Status: NAD)">736</a><sup><a href="https://cplusplus.github.io/LWG/issue736" title="Latest snapshot">(i)</a></sup>.
 </p></blockquote>
 
 <p><i>[
@@ -19543,7 +19543,7 @@ These two issues should move to OPEN pending AM paper on type traits.
 
 
 <blockquote><p>
-Duplicate of <a href="lwg-defects.html#719" title="std::is_literal type traits should be provided (Status: Resolved)">719</a> (for our purposes).
+Duplicate of <a href="lwg-defects.html#719" title="std::is_literal type traits should be provided (Status: Resolved)">719</a><sup><a href="https://cplusplus.github.io/LWG/issue719" title="Latest snapshot">(i)</a></sup> (for our purposes).
 </p></blockquote>
 
 <p><i>[
@@ -19597,7 +19597,7 @@ Many in the group feel that for vector&lt;bool&gt;, this is a "don't care",
 and that at this point in the process it's not worth the bandwidth.
 </p>
 <p>
-Issue <a href="lwg-defects.html#679" title="resize parameter by value (Status: CD1)">679</a> -- which was in ready status pre-Bellevue and is
+Issue <a href="lwg-defects.html#679" title="resize parameter by value (Status: CD1)">679</a><sup><a href="https://cplusplus.github.io/LWG/issue679" title="Latest snapshot">(i)</a></sup> -- which was in ready status pre-Bellevue and is
 now in the working paper -- is related to this, though not a duplicate.
 </p>
 <p>
@@ -19822,7 +19822,7 @@ implemented anyway.
 </p>
 
 <p><i>[
-Related to <a href="lwg-defects.html#767" title="Forwarding and backward compatibility (Status: Resolved)">767</a> and to <a href="lwg-defects.html#2164" title="What are the semantics of vector.emplace(vector.begin(), vector.back())? (Status: C++20)">2164</a>
+Related to <a href="lwg-defects.html#767" title="Forwarding and backward compatibility (Status: Resolved)">767</a><sup><a href="https://cplusplus.github.io/LWG/issue767" title="Latest snapshot">(i)</a></sup> and to <a href="lwg-defects.html#2164" title="What are the semantics of vector.emplace(vector.begin(), vector.back())? (Status: C++20)">2164</a><sup><a href="https://cplusplus.github.io/LWG/issue2164" title="Latest snapshot">(i)</a></sup>
 ]</i></p>
 
 
@@ -19861,7 +19861,7 @@ NAD Future.
 <p><i>[2015-02 Cologne]</i></p>
 
 <p>
-LWG believes that <a href="lwg-defects.html#2164" title="What are the semantics of vector.emplace(vector.begin(), vector.back())? (Status: C++20)">2164</a> addresses this issue and therefore considers <a href="lwg-closed.html#760" title="The emplace issue (Status: NAD)">760</a> as NAD. 
+LWG believes that <a href="lwg-defects.html#2164" title="What are the semantics of vector.emplace(vector.begin(), vector.back())? (Status: C++20)">2164</a><sup><a href="https://cplusplus.github.io/LWG/issue2164" title="Latest snapshot">(i)</a></sup> addresses this issue and therefore considers <a href="lwg-closed.html#760" title="The emplace issue (Status: NAD)">760</a><sup><a href="https://cplusplus.github.io/LWG/issue760" title="Latest snapshot">(i)</a></sup> as NAD. 
 </p>
 
 
@@ -19916,7 +19916,7 @@ a <code>const_iterator</code> as first argument.
 </p>
 
 <p><i>[
-Related to <a href="lwg-defects.html#767" title="Forwarding and backward compatibility (Status: Resolved)">767</a>
+Related to <a href="lwg-defects.html#767" title="Forwarding and backward compatibility (Status: Resolved)">767</a><sup><a href="https://cplusplus.github.io/LWG/issue767" title="Latest snapshot">(i)</a></sup>
 ]</i></p>
 
 
@@ -19931,7 +19931,7 @@ the case when the non-default choice is desired. We believe that desire
 will be rare.
 </p>
 
-<p><i>[For related discussion see <a href="lwg-closed.html#1302" title="different emplace semantics for sequence and associated containers (Status: NAD)">1302</a>]</i></p>
+<p><i>[For related discussion see <a href="lwg-closed.html#1302" title="different emplace semantics for sequence and associated containers (Status: NAD)">1302</a><sup><a href="https://cplusplus.github.io/LWG/issue1302" title="Latest snapshot">(i)</a></sup>]</i></p>
 
 
 <p>
@@ -20266,7 +20266,7 @@ Bellevue:
 
 
 <blockquote><p>
-Overcome by the previous proposal. NAD mooted by resolution of <a href="lwg-defects.html#789" title="xor_combine_engine(result_type) should be explicit (Status: CD1)">789</a>.
+Overcome by the previous proposal. NAD mooted by resolution of <a href="lwg-defects.html#789" title="xor_combine_engine(result_type) should be explicit (Status: CD1)">789</a><sup><a href="https://cplusplus.github.io/LWG/issue789" title="Latest snapshot">(i)</a></sup>.
 </p></blockquote>
 
 
@@ -20373,7 +20373,7 @@ Stephan Tolksdorf notes:
 
 
 <blockquote><p>
-This appears to be a duplicate of <a href="lwg-defects.html#732" title="Defect in [rand.dist.samp.genpdf] (Status: Resolved)">732</a>.
+This appears to be a duplicate of <a href="lwg-defects.html#732" title="Defect in [rand.dist.samp.genpdf] (Status: Resolved)">732</a><sup><a href="https://cplusplus.github.io/LWG/issue732" title="Latest snapshot">(i)</a></sup>.
 </p></blockquote>
 
 
@@ -21081,10 +21081,10 @@ Thanks to Jens Maurer, Gabriel Dos Reis, and Bjarne Stroustrup for clarification
 </p>
 
 <p>
-LWG issue <a href="lwg-defects.html#804" title="Some problems with classes error_code/error_condition (Status: CD1)">804</a> is related in that it raises the question of whether the
+LWG issue <a href="lwg-defects.html#804" title="Some problems with classes error_code/error_condition (Status: CD1)">804</a><sup><a href="https://cplusplus.github.io/LWG/issue804" title="Latest snapshot">(i)</a></sup> is related in that it raises the question of whether the
 exposition only member <code>cat_</code> of class <code>error_code</code> (19.5.4 <a href="https://wg21.link/syserr.errcode">[syserr.errcode]</a>) and class
 <code>error_condition</code> (19.5.5 <a href="https://wg21.link/syserr.errcondition">[syserr.errcondition]</a>) should be presented as a reference or pointer.
-While in the context of <a href="lwg-defects.html#804" title="Some problems with classes error_code/error_condition (Status: CD1)">804</a> that is arguably an editorial question,
+While in the context of <a href="lwg-defects.html#804" title="Some problems with classes error_code/error_condition (Status: CD1)">804</a><sup><a href="https://cplusplus.github.io/LWG/issue804" title="Latest snapshot">(i)</a></sup> that is arguably an editorial question,
 presenting it as a pointer becomes more or less required with this
 proposal, given <code>constexpr</code> does not play well with references. The
 proposed resolution thus changes the private member to a pointer, which
@@ -21123,9 +21123,9 @@ Gabriel and Jens Maurer.
 
 <p id="res-832"><b>Proposed resolution:</b></p>
 <p>
-The proposed wording assumes the LWG <a href="lwg-defects.html#805" title="posix_error::posix_errno concerns (Status: CD1)">805</a> proposed wording has been
+The proposed wording assumes the LWG <a href="lwg-defects.html#805" title="posix_error::posix_errno concerns (Status: CD1)">805</a><sup><a href="https://cplusplus.github.io/LWG/issue805" title="Latest snapshot">(i)</a></sup> proposed wording has been
 applied to the WP, resulting in the former <code>posix_category</code> being renamed
-<code>generic_category</code>. If <a href="lwg-defects.html#805" title="posix_error::posix_errno concerns (Status: CD1)">805</a> has not been applied, the names in this
+<code>generic_category</code>. If <a href="lwg-defects.html#805" title="posix_error::posix_errno concerns (Status: CD1)">805</a><sup><a href="https://cplusplus.github.io/LWG/issue805" title="Latest snapshot">(i)</a></sup> has not been applied, the names in this
 proposal must be adjusted accordingly.
 </p>
 
@@ -24205,7 +24205,7 @@ Move to NAD Editorial, Pending. Howard to open a new issue to handle the
 problems with the complexity requirements.
 </p>
 <p>
-Opened <a href="lwg-defects.html#897" title="Forward_list issues... Part 2 (Status: Resolved)">897</a>.
+Opened <a href="lwg-defects.html#897" title="Forward_list issues... Part 2 (Status: Resolved)">897</a><sup><a href="https://cplusplus.github.io/LWG/issue897" title="Latest snapshot">(i)</a></sup>.
 </p>
 </blockquote>
 
@@ -24439,7 +24439,7 @@ Move to NAD.
 
 <ol>
 <li>
-If <a href="lwg-closed.html#1009" title="InputIterator post-increment dangerous (Status: NAD)">1009</a> is accepted, <code>OutputIterator</code> does no longer support post increment.
+If <a href="lwg-closed.html#1009" title="InputIterator post-increment dangerous (Status: NAD)">1009</a><sup><a href="https://cplusplus.github.io/LWG/issue1009" title="Latest snapshot">(i)</a></sup> is accepted, <code>OutputIterator</code> does no longer support post increment.
 </li>
 <li>
 To support backward compatibility a second overload of <code>operator*</code>
@@ -24528,7 +24528,7 @@ fails the program has undefined behaviour and therefore an
 implementation may throw an exception already.
 </li>
 <li>
-33.6.4.2.2 <a href="https://wg21.link/thread.mutex.class">[thread.mutex.class]</a>/3 bullet 2: Already addressed by issue <a href="lwg-defects.html#893" title="std::mutex issue (Status: C++11)">893</a>.
+33.6.4.2.2 <a href="https://wg21.link/thread.mutex.class">[thread.mutex.class]</a>/3 bullet 2: Already addressed by issue <a href="lwg-defects.html#893" title="std::mutex issue (Status: C++11)">893</a><sup><a href="https://cplusplus.github.io/LWG/issue893" title="Latest snapshot">(i)</a></sup>.
 </li>
 <li>
 33.6.4.2.2 <a href="https://wg21.link/thread.mutex.class">[thread.mutex.class]</a>/3 proposed addition: NAD. This is
@@ -24716,12 +24716,12 @@ requirement on the value of <code>rv</code> after the assignment.  <i>--end note
 <p>
 The sentence contains a typo (what is the "constructed <code>T</code> object"?)
 probably due to a cut&amp;paste from <code>MoveConstructible</code>. Moreover, the
-discussion of LWG issue <a href="lwg-defects.html#675" title="Move assignment of containers (Status: CD1)">675</a> shows that the postcondition is too generic
+discussion of LWG issue <a href="lwg-defects.html#675" title="Move assignment of containers (Status: CD1)">675</a><sup><a href="https://cplusplus.github.io/LWG/issue675" title="Latest snapshot">(i)</a></sup> shows that the postcondition is too generic
 and might not reflect the user expectations. An implementation of the
 move assignment that just calls <code>swap()</code> would always fulfill the
 postcondition as stated, but might have surprising side-effects in case
 the source rvalue refers to an object that is not going to be
-immediately destroyed. See LWG issue <a href="lwg-defects.html#900" title="Stream move-assignment (Status: C++11)">900</a> for another example. Due to
+immediately destroyed. See LWG issue <a href="lwg-defects.html#900" title="Stream move-assignment (Status: C++11)">900</a><sup><a href="https://cplusplus.github.io/LWG/issue900" title="Latest snapshot">(i)</a></sup> for another example. Due to
 the sometimes intangible nature of the "user expectation", it seems
 difficult to have precise normative wording that could cover all cases
 without introducing unnecessary restrictions. However a non-normative
@@ -24838,7 +24838,7 @@ Walter will consult with Dave and Doug.
 
 
 <blockquote><p>
-We believe this is handled by the resolution to issue <a href="lwg-defects.html#1204" title="Global permission to move (Status: C++11)">1204</a>,
+We believe this is handled by the resolution to issue <a href="lwg-defects.html#1204" title="Global permission to move (Status: C++11)">1204</a><sup><a href="https://cplusplus.github.io/LWG/issue1204" title="Latest snapshot">(i)</a></sup>,
 but there is to much going on in this area to be sure.  Defer for now.
 </p></blockquote>
 
@@ -24885,7 +24885,7 @@ by <code>*this</code> are released instead of transferred to <code>rv</code>. <i
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD Concepts">NAD Concepts</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-With the adaption of <a href="lwg-defects.html#809" title="std::swap should be overloaded for array types (Status: CD1)">809</a>
+With the adaption of <a href="lwg-defects.html#809" title="std::swap should be overloaded for array types (Status: CD1)">809</a><sup><a href="https://cplusplus.github.io/LWG/issue809" title="Latest snapshot">(i)</a></sup>
 we have a new algorithm <code>swap</code> for C-arrays, which needs to be conceptualized.
 </p>
 
@@ -25283,7 +25283,7 @@ smallest value and <code>y</code> largest value in the <code>initializer_list</c
 <p><b>View all other</b> <a href="lwg-index.html#pairs">issues</a> in [pairs].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
-<p><b>see also <a href="lwg-closed.html#917" title="Redundant move-assignment operator of tuple should be removed (Status: NAD)">917</a>.</b></p>
+<p><b>see also <a href="lwg-closed.html#917" title="Redundant move-assignment operator of tuple should be removed (Status: NAD)">917</a><sup><a href="https://cplusplus.github.io/LWG/issue917" title="Latest snapshot">(i)</a></sup>.</b></p>
 
 <p>
 The current WP provides the following assignment operators for <code>pair</code>
@@ -25348,7 +25348,7 @@ Leave this open pending the removal of concepts from the WD.
 
 
 <blockquote><p>
-Mark as NAD, see issue <a href="lwg-defects.html#801" title="tuple and pair trivial members (Status: Resolved)">801</a>.
+Mark as NAD, see issue <a href="lwg-defects.html#801" title="tuple and pair trivial members (Status: Resolved)">801</a><sup><a href="https://cplusplus.github.io/LWG/issue801" title="Latest snapshot">(i)</a></sup>.
 </p></blockquote>
 
 
@@ -25385,7 +25385,7 @@ Remove p.13+p.14
 <p><b>View all other</b> <a href="lwg-index.html#tuple.cnstr">issues</a> in [tuple.cnstr].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
-<p><b>see also <a href="lwg-closed.html#916" title="Redundant move-assignment operator of pair should be removed (Status: NAD)">916</a>.</b></p>
+<p><b>see also <a href="lwg-closed.html#916" title="Redundant move-assignment operator of pair should be removed (Status: NAD)">916</a><sup><a href="https://cplusplus.github.io/LWG/issue916" title="Latest snapshot">(i)</a></sup>.</b></p>
 <p>
 N2770 (and thus now the WP) removed the
 non-template move-assignment operator from tuple's class definition,
@@ -25437,7 +25437,7 @@ Leave this open pending the removal of concepts from the WD.
 
 
 <blockquote><p>
-Mark as NAD, see issue <a href="lwg-defects.html#801" title="tuple and pair trivial members (Status: Resolved)">801</a>.
+Mark as NAD, see issue <a href="lwg-defects.html#801" title="tuple and pair trivial members (Status: Resolved)">801</a><sup><a href="https://cplusplus.github.io/LWG/issue801" title="Latest snapshot">(i)</a></sup>.
 </p></blockquote>
 
 
@@ -25498,7 +25498,7 @@ element of <code>*this</code>.</del>
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD Concepts">NAD Concepts</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Issue <a href="lwg-defects.html#522" title="Tuple doesn't define swap (Status: CD1)">522</a> was accepted after <code>tuple</code> had been conceptualized,
+Issue <a href="lwg-defects.html#522" title="Tuple doesn't define swap (Status: CD1)">522</a><sup><a href="https://cplusplus.github.io/LWG/issue522" title="Latest snapshot">(i)</a></sup> was accepted after <code>tuple</code> had been conceptualized,
 therefore this step needs to be completed.
 </p>
 
@@ -26816,7 +26816,7 @@ void* atomic_exchange(volatile atomic_address*<ins>, void*</ins>);
 </pre></blockquote>
 
 <p>
-Note, that this is <em>not</em> covered by <a href="lwg-defects.html#880" title="Missing atomic exchange parameter (Status: Resolved)">880</a> "Missing atomic exchange parameter",
+Note, that this is <em>not</em> covered by <a href="lwg-defects.html#880" title="Missing atomic exchange parameter (Status: Resolved)">880</a><sup><a href="https://cplusplus.github.io/LWG/issue880" title="Latest snapshot">(i)</a></sup> "Missing atomic exchange parameter",
 which only talks about the <code>atomic_bool</code>.
 </p>
 </blockquote>
@@ -26930,7 +26930,7 @@ all clear what this means if we don't ignore floating-point types.
 </p>
 
 <p>
-This issue is related to <a href="lwg-closed.html#952" title="Various threading bugs #2 (Status: NAD Editorial)">952</a>.
+This issue is related to <a href="lwg-closed.html#952" title="Various threading bugs #2 (Status: NAD Editorial)">952</a><sup><a href="https://cplusplus.github.io/LWG/issue952" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 <p><i>[
@@ -26961,7 +26961,7 @@ Batavia (2009-05):
 
 <blockquote>
 <p>
-We view this as a specific case of issue <a href="lwg-closed.html#952" title="Various threading bugs #2 (Status: NAD Editorial)">952</a>,
+We view this as a specific case of issue <a href="lwg-closed.html#952" title="Various threading bugs #2 (Status: NAD Editorial)">952</a><sup><a href="https://cplusplus.github.io/LWG/issue952" title="Latest snapshot">(i)</a></sup>,
 and should be resolved when that issue is resolved.
 </p>
 <p>
@@ -26995,7 +26995,7 @@ text requirements). Pick one.
 </p>
 
 <p>
-This issue is related to <a href="lwg-closed.html#946" title="duration_cast improperly specified (Status: NAD)">946</a>.
+This issue is related to <a href="lwg-closed.html#946" title="duration_cast improperly specified (Status: NAD)">946</a><sup><a href="https://cplusplus.github.io/LWG/issue946" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 <p><i>[
@@ -27419,7 +27419,7 @@ Summit:
 
 
 <blockquote><p>
-Move to open. Associate with LWG <a href="lwg-defects.html#859" title="Monotonic Clock is Conditionally Supported? (Status: C++11)">859</a> and any other monotonic-clock
+Move to open. Associate with LWG <a href="lwg-defects.html#859" title="Monotonic Clock is Conditionally Supported? (Status: C++11)">859</a><sup><a href="https://cplusplus.github.io/LWG/issue859" title="Latest snapshot">(i)</a></sup> and any other monotonic-clock
 related issues.
 </p></blockquote>
 
@@ -27429,8 +27429,8 @@ related issues.
 
 
 <blockquote><p>
-I believe that <a href="lwg-defects.html#859" title="Monotonic Clock is Conditionally Supported? (Status: C++11)">859</a> (currently Ready) addresses this issue, and
-that this issue should be marked NAD, solved by <a href="lwg-defects.html#859" title="Monotonic Clock is Conditionally Supported? (Status: C++11)">859</a> (assuming
+I believe that <a href="lwg-defects.html#859" title="Monotonic Clock is Conditionally Supported? (Status: C++11)">859</a><sup><a href="https://cplusplus.github.io/LWG/issue859" title="Latest snapshot">(i)</a></sup> (currently Ready) addresses this issue, and
+that this issue should be marked NAD, solved by <a href="lwg-defects.html#859" title="Monotonic Clock is Conditionally Supported? (Status: C++11)">859</a><sup><a href="https://cplusplus.github.io/LWG/issue859" title="Latest snapshot">(i)</a></sup> (assuming
 it moves to WP).
 </p></blockquote>
 
@@ -27476,7 +27476,7 @@ Rationale added below.
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD Editorial">NAD Editorial</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Library Issue <a href="lwg-defects.html#475" title="May the function object passed to for_each modify the elements of the iterated sequence? (Status: CD1)">475</a> has CD1 status, but the non-normative note in
+Library Issue <a href="lwg-defects.html#475" title="May the function object passed to for_each modify the elements of the iterated sequence? (Status: CD1)">475</a><sup><a href="https://cplusplus.github.io/LWG/issue475" title="Latest snapshot">(i)</a></sup> has CD1 status, but the non-normative note in
 <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2723.pdf">N2723</a>
 was removed in
 <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2008/n2798.pdf">N2798</a>
@@ -27709,7 +27709,7 @@ In addition to the requirements set forth below, instances of
 <p>
 Note: The proposed resolution of this issue does not deal with the
 instance of the term "Assignable" in 99 [auto.ptr], as this is dealt
-with more specifically by LWG <a href="lwg-closed.html#973" title="auto_ptr characteristics (Status: NAD Editorial)">973</a>, "<code>auto_ptr</code> characteristics", submitted
+with more specifically by LWG <a href="lwg-closed.html#973" title="auto_ptr characteristics (Status: NAD Editorial)">973</a><sup><a href="https://cplusplus.github.io/LWG/issue973" title="Latest snapshot">(i)</a></sup>, "<code>auto_ptr</code> characteristics", submitted
 by Maarten Hilferink.
 </p>
 
@@ -28631,11 +28631,11 @@ template&lt;ForwardIterator Iter, <del>EquivalenceRelation</del><ins>Predicate</
 <p><b>Addresses UK 78</b></p>
 
 <p>
-Related to <a href="lwg-closed.html#1063" title="03 iterator compatibilty (Status: NAD Concepts)">1063</a>.
+Related to <a href="lwg-closed.html#1063" title="03 iterator compatibilty (Status: NAD Concepts)">1063</a><sup><a href="https://cplusplus.github.io/LWG/issue1063" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 <p>
-This is effectively an extension of LWG issue <a href="lwg-defects.html#343" title="Unspecified library header dependencies (Status: Resolved)">343</a>.
+This is effectively an extension of LWG issue <a href="lwg-defects.html#343" title="Unspecified library header dependencies (Status: Resolved)">343</a><sup><a href="https://cplusplus.github.io/LWG/issue343" title="Latest snapshot">(i)</a></sup>.
 </p>
 <p>
 We know there is an increasing trend (encouraged by conformance testers and
@@ -28671,7 +28671,7 @@ iterator
 locale
 list
 map
-memory          // if <a href="lwg-closed.html#1029" title="Specialized algorithms for memory management need to be concept-constrained templates (Status: NAD Concepts)">1029</a> is adopted
+memory          // if <a href="lwg-closed.html#1029" title="Specialized algorithms for memory management need to be concept-constrained templates (Status: NAD Concepts)">1029</a><sup><a href="https://cplusplus.github.io/LWG/issue1029" title="Latest snapshot">(i)</a></sup> is adopted
 memory_concepts
 numeric
 random
@@ -28815,7 +28815,7 @@ all with one resolution.
 Alisdair: I'd prefer to see this closed as NAD and have this resolution
 be the subject of some other, new issue.
 <p/>
-Move to NAD Concepts. Howard to open a new issue (<a href="lwg-defects.html#1178" title="Header dependencies (Status: C++11)">1178</a>) in Ready state with the
+Move to NAD Concepts. Howard to open a new issue (<a href="lwg-defects.html#1178" title="Header dependencies (Status: C++11)">1178</a><sup><a href="https://cplusplus.github.io/LWG/issue1178" title="Latest snapshot">(i)</a></sup>) in Ready state with the
 Proposed Resolution above. Beman will write up a discussion for the new
 issue.
 </p>
@@ -28984,7 +28984,7 @@ library interface, so should be supported.
 <p>
 (it is anticipated the resolution will come via an update to paper
 <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2009/n2814.pdf">N2814</a>)
-(see also LWG <a href="lwg-closed.html#833" title="Freestanding implementations header list needs review for C++0x (Status: NAD)">833</a>)
+(see also LWG <a href="lwg-closed.html#833" title="Freestanding implementations header list needs review for C++0x (Status: NAD)">833</a><sup><a href="https://cplusplus.github.io/LWG/issue833" title="Latest snapshot">(i)</a></sup>)
 </p>
 </blockquote>
 
@@ -29053,7 +29053,7 @@ Summit:
 
 
 <blockquote><p>
-Alisdair will provide a solution as part of treatment of axioms and LWG <a href="lwg-closed.html#902" title="Regular is the wrong concept to constrain numeric_limits (Status: NAD Concepts)">902</a>.
+Alisdair will provide a solution as part of treatment of axioms and LWG <a href="lwg-closed.html#902" title="Regular is the wrong concept to constrain numeric_limits (Status: NAD Concepts)">902</a><sup><a href="https://cplusplus.github.io/LWG/issue902" title="Latest snapshot">(i)</a></sup>.
 </p></blockquote>
 
 <p><i>[
@@ -29333,7 +29333,7 @@ Change 25.3.5.5 <a href="https://wg21.link/forward.iterators">[forward.iterators
 </p>
 
 <p><i>[
-See <a href="lwg-closed.html#1084" title="Concept ForwardIterator should provide default implementation for post-increment (Status: NAD Concepts)">1084</a> which is attempting to change this same area in a compatible
+See <a href="lwg-closed.html#1084" title="Concept ForwardIterator should provide default implementation for post-increment (Status: NAD Concepts)">1084</a><sup><a href="https://cplusplus.github.io/LWG/issue1084" title="Latest snapshot">(i)</a></sup> which is attempting to change this same area in a compatible
 way.
 ]</i></p>
 
@@ -29631,7 +29631,7 @@ float/double etc. Also not clear how we are supposed to match values to
 concepts.
 </p>
 <p>
-Recommend NAD and treat as a subset of issue <a href="lwg-closed.html#902" title="Regular is the wrong concept to constrain numeric_limits (Status: NAD Concepts)">902</a>.
+Recommend NAD and treat as a subset of issue <a href="lwg-closed.html#902" title="Regular is the wrong concept to constrain numeric_limits (Status: NAD Concepts)">902</a><sup><a href="https://cplusplus.github.io/LWG/issue902" title="Latest snapshot">(i)</a></sup>.
 </p>
 </blockquote>
 
@@ -29675,7 +29675,7 @@ Summit:
 
 <blockquote>
 <p>
-Recommend that we handle the same as JP 33 / <a href="lwg-closed.html#1016" title="Provide LessThanComparable and EqualityComparable for FloatingPointType (Status: NAD Concepts)">1016</a>.
+Recommend that we handle the same as JP 33 / <a href="lwg-closed.html#1016" title="Provide LessThanComparable and EqualityComparable for FloatingPointType (Status: NAD Concepts)">1016</a><sup><a href="https://cplusplus.github.io/LWG/issue1016" title="Latest snapshot">(i)</a></sup>.
 </p>
 </blockquote>
 
@@ -29686,7 +29686,7 @@ Post Summit, Alisdair adds:
 
 <blockquote>
 <p>
-Recommend Open, and review after resolution of <a href="lwg-closed.html#902" title="Regular is the wrong concept to constrain numeric_limits (Status: NAD Concepts)">902</a> and revised axiom
+Recommend Open, and review after resolution of <a href="lwg-closed.html#902" title="Regular is the wrong concept to constrain numeric_limits (Status: NAD Concepts)">902</a><sup><a href="https://cplusplus.github.io/LWG/issue902" title="Latest snapshot">(i)</a></sup> and revised axiom
 feature.
 </p>
 </blockquote>
@@ -29765,7 +29765,7 @@ expansion, e.g. to implement a classic discriminated union template.
 <p><b>Original proposed resolutuion:</b></p>
 
 <p>
-Restore <code>aligned_union</code> template that was removed by LWG issue <a href="lwg-defects.html#856" title="Removal of aligned_union (Status: CD1)">856</a>. 
+Restore <code>aligned_union</code> template that was removed by LWG issue <a href="lwg-defects.html#856" title="Removal of aligned_union (Status: CD1)">856</a><sup><a href="https://cplusplus.github.io/LWG/issue856" title="Latest snapshot">(i)</a></sup>. 
 </p>
 
 <p><i>[
@@ -29858,7 +29858,7 @@ belongs either a subsection of either 22 <a href="https://wg21.link/utilities">[
 
 <p><b>Addresses DE 22 [CD1]</b></p>
 
-<p>Related to issue <a href="lwg-defects.html#1114" title="Type traits underspecified (Status: C++11)">1114</a>.</p>
+<p>Related to issue <a href="lwg-defects.html#1114" title="Type traits underspecified (Status: C++11)">1114</a><sup><a href="https://cplusplus.github.io/LWG/issue1114" title="Latest snapshot">(i)</a></sup>.</p>
 
 <p>
 The conditions for deriving from <code>std::unary_function</code> and
@@ -29970,7 +29970,7 @@ There are no requires corresponding to <code>F</code> of <code>std::function</co
 
 
 <blockquote><p>
-<a href="lwg-defects.html#1070" title="Ambiguous move overloads in function (Status: C++11)">1070</a> removes the second constructor.
+<a href="lwg-defects.html#1070" title="Ambiguous move overloads in function (Status: C++11)">1070</a><sup><a href="https://cplusplus.github.io/LWG/issue1070" title="Latest snapshot">(i)</a></sup> removes the second constructor.
 </p></blockquote>
 
 <p><i>[
@@ -29980,7 +29980,7 @@ Batavia (2009-05):
 <blockquote><p>
 We agree with the proposed resolution.
 Move to Tentatively Ready.
-If issue <a href="lwg-defects.html#1070" title="Ambiguous move overloads in function (Status: C++11)">1070</a> is accepted,
+If issue <a href="lwg-defects.html#1070" title="Ambiguous move overloads in function (Status: C++11)">1070</a><sup><a href="https://cplusplus.github.io/LWG/issue1070" title="Latest snapshot">(i)</a></sup> is accepted,
 the changes to the second constructor
 in this issue are moot.
 </p></blockquote>
@@ -30275,7 +30275,7 @@ require some kind of proxy formulation to support generalised InputIterators.
 
 <p><b>Addresses UK 210 [CD1]</b></p>
 
-<p>Related to <a href="lwg-closed.html#582" title="specialized algorithms and volatile storage (Status: NAD)">582</a></p>
+<p>Related to <a href="lwg-closed.html#582" title="specialized algorithms and volatile storage (Status: NAD)">582</a><sup><a href="https://cplusplus.github.io/LWG/issue582" title="Latest snapshot">(i)</a></sup></p>
 
 <p>
 Specialized algorithms for memory management need requirements to be
@@ -30710,7 +30710,7 @@ Agree. The proposed resolution is incomplete. Further work required.
 
 
 <blockquote><p>
-Issue <a href="lwg-closed.html#1099" title="Various issues (Status: NAD)">1099</a> also suggests adding move constructor to this.
+Issue <a href="lwg-closed.html#1099" title="Various issues (Status: NAD)">1099</a><sup><a href="https://cplusplus.github.io/LWG/issue1099" title="Latest snapshot">(i)</a></sup> also suggests adding move constructor to this.
 </p></blockquote>
 
 <p><i>[
@@ -31012,7 +31012,7 @@ Add at the end of the synopsis in 24.3.12 <a href="https://wg21.link/vector">[ve
 <p><b>Addresses UK 279 [CD1]</b></p>
 
 <p>
-The reason the return type became unspecified is LWG issue <a href="lwg-defects.html#386" title="Reverse iterator's operator[] has impossible return type (Status: CD1)">386</a>. This
+The reason the return type became unspecified is LWG issue <a href="lwg-defects.html#386" title="Reverse iterator's operator[] has impossible return type (Status: CD1)">386</a><sup><a href="https://cplusplus.github.io/LWG/issue386" title="Latest snapshot">(i)</a></sup>. This
 reasoning no longer applies as there are at least two ways to get the right
 return type with the new language facilities added since the previous
 standard.
@@ -31759,7 +31759,7 @@ Which header must a user <code>#include</code> to obtain the library-supplied
 This is important information, as existing user code will break if this
 header is not included, and we should make a point of mandating this header
 is <code>#include</code>-d by library headers likely to make use of it, notably
-<code>&lt;algorithm&gt;</code>.  See issue <a href="lwg-closed.html#1001" title="Pointers, concepts and headers (Status: NAD Concepts)">1001</a> for more details.
+<code>&lt;algorithm&gt;</code>.  See issue <a href="lwg-closed.html#1001" title="Pointers, concepts and headers (Status: NAD Concepts)">1001</a><sup><a href="https://cplusplus.github.io/LWG/issue1001" title="Latest snapshot">(i)</a></sup> for more details.
 </p>
 
 <p><i>[
@@ -32066,7 +32066,7 @@ Leave open. Walter to provide drafting as part of his planned paper.
 
 <blockquote><p>
 <code>seed_seq</code> is explicitly not copyable, so, much like LWG issue
-<a href="lwg-closed.html#1068" title="class random_device should be movable (Status: NAD)">1068</a>, LWG issue 1069 could be marked NAD to be consistent
+<a href="lwg-closed.html#1068" title="class random_device should be movable (Status: NAD)">1068</a><sup><a href="https://cplusplus.github.io/LWG/issue1068" title="Latest snapshot">(i)</a></sup>, LWG issue 1069 could be marked NAD to be consistent
 with this.
 </p></blockquote>
 
@@ -32147,7 +32147,7 @@ Move to Open.
 
 <p>
 [To the editor: This resolution is merge-compatible to the
-resolution of <a href="lwg-closed.html#1078" title="DE-17: Remove class type_index (Status: NAD Concepts)">1078</a>]
+resolution of <a href="lwg-closed.html#1078" title="DE-17: Remove class type_index (Status: NAD Concepts)">1078</a><sup><a href="https://cplusplus.github.io/LWG/issue1078" title="Latest snapshot">(i)</a></sup>]
 </p>
 
 <ol>
@@ -33080,7 +33080,7 @@ is in preparation.
 
 <p id="res-1084"><b>Proposed resolution:</b></p>
 <p><i>[
-This wording assumes the acceptance of UK 251 / <a href="lwg-closed.html#1009" title="InputIterator post-increment dangerous (Status: NAD)">1009</a>.  Both
+This wording assumes the acceptance of UK 251 / <a href="lwg-closed.html#1009" title="InputIterator post-increment dangerous (Status: NAD)">1009</a><sup><a href="https://cplusplus.github.io/LWG/issue1009" title="Latest snapshot">(i)</a></sup>.  Both
 wordings change the same paragraphs.
 ]</i></p>
 
@@ -33152,7 +33152,7 @@ Howard will open an issue.
 <blockquote><p>
 This issue cannot currently be resolved as suggested, because
 that would render auto-detection of the return type
-<code>postdecrement_result</code> invalid, see <a href="lwg-closed.html#1084" title="Concept ForwardIterator should provide default implementation for post-increment (Status: NAD Concepts)">1084</a>.
+<code>postdecrement_result</code> invalid, see <a href="lwg-closed.html#1084" title="Concept ForwardIterator should provide default implementation for post-increment (Status: NAD Concepts)">1084</a><sup><a href="https://cplusplus.github.io/LWG/issue1084" title="Latest snapshot">(i)</a></sup>.
 </p></blockquote>
 
 
@@ -33348,7 +33348,7 @@ constrain their common base template <code>integral_constant</code>. This can be
 without enforcing depending classes to be constrained as well, but not
 vice versa
 without brute force <code>late_check</code> usages. The following proposed resolution depends
-on the resolution of LWG issue <a href="lwg-defects.html#1019" title="Make integral_constant objects useable in integral-constant-expressions (Status: C++11)">1019</a>.
+on the resolution of LWG issue <a href="lwg-defects.html#1019" title="Make integral_constant objects useable in integral-constant-expressions (Status: C++11)">1019</a><sup><a href="https://cplusplus.github.io/LWG/issue1019" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 <p><i>[
@@ -33551,7 +33551,7 @@ This one is serious and unrelated to the move issue.
 
 
 <blockquote><p>
-This could be done as part of <a href="lwg-closed.html#1035" title="&lt;array&gt;::swap can invalidate references, pointers, and iterators (Status: NAD)">1035</a>, which already handles
+This could be done as part of <a href="lwg-closed.html#1035" title="&lt;array&gt;::swap can invalidate references, pointers, and iterators (Status: NAD)">1035</a><sup><a href="https://cplusplus.github.io/LWG/issue1035" title="Latest snapshot">(i)</a></sup>, which already handles
 deviation of <code>std::array</code> from container tables.
 </p></blockquote>
 
@@ -33601,7 +33601,7 @@ deviation of <code>std::array</code> from container tables.
 
 
 <blockquote><p>
-This part of the issue is already covered by <a href="lwg-closed.html#1077" title="Nonesense tuple declarations (Status: NAD Editorial)">1077</a>.
+This part of the issue is already covered by <a href="lwg-closed.html#1077" title="Nonesense tuple declarations (Status: NAD Editorial)">1077</a><sup><a href="https://cplusplus.github.io/LWG/issue1077" title="Latest snapshot">(i)</a></sup>.
 </p></blockquote>
 
 <p>
@@ -34701,7 +34701,7 @@ wording to that for add/multiply below.
 </p>
 <p>
 Note that the proposed resolution is potentially incompatible with that
-proposed for <a href="lwg-defects.html#921" title="Rational Arithmetic should use template aliases (Status: C++11)">921</a>, although the addition of the typedef to ratio would be
+proposed for <a href="lwg-defects.html#921" title="Rational Arithmetic should use template aliases (Status: C++11)">921</a><sup><a href="https://cplusplus.github.io/LWG/issue921" title="Latest snapshot">(i)</a></sup>, although the addition of the typedef to ratio would be
 equally useful.
 </p>
 
@@ -34713,7 +34713,7 @@ equally useful.
 <blockquote>
 <p>
 The consensus of the group when we reviewed this in Santa Cruz was that
-<a href="lwg-defects.html#921" title="Rational Arithmetic should use template aliases (Status: C++11)">921</a> would proceed to Ready as planned, and the
+<a href="lwg-defects.html#921" title="Rational Arithmetic should use template aliases (Status: C++11)">921</a><sup><a href="https://cplusplus.github.io/LWG/issue921" title="Latest snapshot">(i)</a></sup> would proceed to Ready as planned, and the
 multi-paramater add/multiply templates should be renamed as
 <code>ratio_sum</code> and <code>ratio_product</code> to avoid the problem
 mixing template aliases with partial specializations.
@@ -36085,7 +36085,7 @@ template &lt;class F<del>, class ...Args</del>&gt; thread(F&amp;&amp; f<del>, Ar
 </pre></blockquote>
 
 <p>
-See <a href="lwg-defects.html#929" title="Thread constructor (Status: C++11)">929</a> for wording which specifies an rvalue-ref signature but
+See <a href="lwg-defects.html#929" title="Thread constructor (Status: C++11)">929</a><sup><a href="https://cplusplus.github.io/LWG/issue929" title="Latest snapshot">(i)</a></sup> for wording which specifies an rvalue-ref signature but
 with "decay behavior", but using variadics.
 </p>
 
@@ -36121,7 +36121,7 @@ The (tentative) concensus of the LWG is to keep the variadic thread constructor.
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD Editorial">NAD Editorial</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-While reviewing <a href="lwg-closed.html#971" title="Spurious diagnostic conversion function (Status: NAD)">971</a> I noted that 16.3.2.4 <a href="https://wg21.link/structure.specifications">[structure.specifications]</a>/7 says:
+While reviewing <a href="lwg-closed.html#971" title="Spurious diagnostic conversion function (Status: NAD)">971</a><sup><a href="https://cplusplus.github.io/LWG/issue971" title="Latest snapshot">(i)</a></sup> I noted that 16.3.2.4 <a href="https://wg21.link/structure.specifications">[structure.specifications]</a>/7 says:
 </p>
 
 <blockquote><p>
@@ -36235,7 +36235,7 @@ other things that we say. We believe that this is editorial.
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Opened at Alisdair's request, steming from <a href="lwg-closed.html#96" title="Vector&lt;bool&gt; is not a container (Status: NAD)">96</a>.
+Opened at Alisdair's request, steming from <a href="lwg-closed.html#96" title="Vector&lt;bool&gt; is not a container (Status: NAD)">96</a><sup><a href="https://cplusplus.github.io/LWG/issue96" title="Latest snapshot">(i)</a></sup>.
 Alisdair recommends NAD Future.
 </p>
 
@@ -36602,7 +36602,7 @@ and 24.5.7 <a href="https://wg21.link/unord.multiset">[unord.multiset]</a>.
 </p>
 
 <p>
-If issue <a href="lwg-closed.html#1188" title="Unordered containers should have a minimum load factor as well as a maximum (Status: NAD)">1188</a> is also accepted, make the same changes for
+If issue <a href="lwg-closed.html#1188" title="Unordered containers should have a minimum load factor as well as a maximum (Status: NAD)">1188</a><sup><a href="https://cplusplus.github.io/LWG/issue1188" title="Latest snapshot">(i)</a></sup> is also accepted, make the same changes for
 <code>min_load_factor</code>.
 </p>
 
@@ -36863,7 +36863,7 @@ struct integral_constant {
 
 <p>
 [Footnote] It turns out <code>constexpr</code> is part of the Tentatively Ready
-resolution for <a href="lwg-defects.html#1019" title="Make integral_constant objects useable in integral-constant-expressions (Status: C++11)">1019</a>.  I don't want to interfere with that issue, but
+resolution for <a href="lwg-defects.html#1019" title="Make integral_constant objects useable in integral-constant-expressions (Status: C++11)">1019</a><sup><a href="https://cplusplus.github.io/LWG/issue1019" title="Latest snapshot">(i)</a></sup>.  I don't want to interfere with that issue, but
 would like a new issue to consider if the fixed-base enum implementation
 should be allowed.
 </p>
@@ -37102,7 +37102,7 @@ ownership_level/ would fix it.
 </p>
 
 <p><i>[
-2009-11-11 Alisdair notes that this issue is very closely related to <a href="lwg-defects.html#1159" title="Unclear spec for resource_deadlock_would_occur (Status: C++11)">1159</a>,
+2009-11-11 Alisdair notes that this issue is very closely related to <a href="lwg-defects.html#1159" title="Unclear spec for resource_deadlock_would_occur (Status: C++11)">1159</a><sup><a href="https://cplusplus.github.io/LWG/issue1159" title="Latest snapshot">(i)</a></sup>,
 if not a dup.
 ]</i></p>
 
@@ -37318,7 +37318,7 @@ syntax.
 </p>
 
 <p><i>[
-<a href="lwg-defects.html#920" title="Ref-qualification support in the library (Status: C++11)">920</a> as a similar proposed resolution.
+<a href="lwg-defects.html#920" title="Ref-qualification support in the library (Status: C++11)">920</a><sup><a href="https://cplusplus.github.io/LWG/issue920" title="Latest snapshot">(i)</a></sup> as a similar proposed resolution.
 ]</i></p>
 
 
@@ -38135,7 +38135,7 @@ void swap(multiset&lt;Key,Compare,Allocator&gt;&amp; x, multiset&lt;Key,Compare,
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD Editorial">NAD Editorial</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Related to <a href="lwg-defects.html#296" title="Missing descriptions and requirements of pair operators (Status: C++11)">296</a>.  Some <code>unique_ptr</code> signatures are missing
+Related to <a href="lwg-defects.html#296" title="Missing descriptions and requirements of pair operators (Status: C++11)">296</a><sup><a href="https://cplusplus.github.io/LWG/issue296" title="Latest snapshot">(i)</a></sup>.  Some <code>unique_ptr</code> signatures are missing
 from the synopsis in 20.2 <a href="https://wg21.link/memory">[memory]</a>.
 </p>
 
@@ -38652,13 +38652,13 @@ therefore addressing the concern of this issue.
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-I just came across issue <a href="lwg-defects.html#1204" title="Global permission to move (Status: C++11)">1204</a> -- Global permission to move, which
+I just came across issue <a href="lwg-defects.html#1204" title="Global permission to move (Status: C++11)">1204</a><sup><a href="https://cplusplus.github.io/LWG/issue1204" title="Latest snapshot">(i)</a></sup> -- Global permission to move, which
 seems to address the concern raised by the example in c++std-lib-25030.
 </p>
 <p>
 IIUC, the example violates the permission to assume that arguments
 bound to rvalue references are unnamed temporaries granted to
-implementations by the resolution of issue <a href="lwg-defects.html#1204" title="Global permission to move (Status: C++11)">1204</a> - Global permission
+implementations by the resolution of issue <a href="lwg-defects.html#1204" title="Global permission to move (Status: C++11)">1204</a><sup><a href="https://cplusplus.github.io/LWG/issue1204" title="Latest snapshot">(i)</a></sup> - Global permission
 to move.
 </p>
 
@@ -39671,7 +39671,7 @@ would be to mention in Table 94 that this "may also invalidate the past-the-end
 iterator" and then to mention for all specific containers where this does not
 happen, the exception, [1] e.g. in <code>std::vector</code>. <code>std::vector</code>
 has no own specification of <code>clear()</code> and one aspect of the closed issue
-<a href="lwg-active.html#1102" title="std::vector's reallocation policy still unclear (Status: Open)">1102</a> was to realize just that (indirectly via <code>erase</code>). IMO
+<a href="lwg-active.html#1102" title="std::vector's reallocation policy still unclear (Status: Open)">1102</a><sup><a href="https://cplusplus.github.io/LWG/issue1102" title="Latest snapshot">(i)</a></sup> was to realize just that (indirectly via <code>erase</code>). IMO
 we should now add an extra specification for <code>clear()</code>. Btw.:
 <code>std::vector::erase</code> reads to me that it would invalidate previous
 past-the-end values (and that seems correct in general).
@@ -39697,7 +39697,7 @@ Rationale added below.
 
 <p><b>Rationale:</b></p>
 <p>
-Solved as proposed by LWG <a href="lwg-defects.html#704" title="MoveAssignable requirement for container value type overly strict (Status: C++11)">704</a>.
+Solved as proposed by LWG <a href="lwg-defects.html#704" title="MoveAssignable requirement for container value type overly strict (Status: C++11)">704</a><sup><a href="https://cplusplus.github.io/LWG/issue704" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 
@@ -40144,7 +40144,7 @@ Remove both variadic templates and <code>initializer_list</code> overloads of
 <blockquote>
 <p><i>[
 Note: This proposed resolution will resolve LWG <a href="lwg-closed.html#915" title="minmax with initializer_list should return
-pair of T, not pair of const T&amp; (Status: NAD Editorial)">915</a> as NAD.
+pair of T, not pair of const T&amp; (Status: NAD Editorial)">915</a><sup><a href="https://cplusplus.github.io/LWG/issue915" title="Latest snapshot">(i)</a></sup> as NAD.
 ]</i></p>
 
 </blockquote>
@@ -40175,7 +40175,7 @@ void param(OutputIterator ob);
 <p>
 The fact that this function returns <code>void</code> instead of the value of
 <code>ob</code> after accepting the sequence data leads to the same problem as in
-issue <a href="lwg-defects.html#865" title="More algorithms that throw away information (Status: C++11)">865</a> - In case of pure output iterators there is no way to
+issue <a href="lwg-defects.html#865" title="More algorithms that throw away information (Status: C++11)">865</a><sup><a href="https://cplusplus.github.io/LWG/issue865" title="Latest snapshot">(i)</a></sup> - In case of pure output iterators there is no way to
 serialize further data into that data sink.
 </p>
 
@@ -41006,16 +41006,16 @@ History:
 </p>
 
 <p>
-Issue <a href="lwg-defects.html#676" title="Moving the unordered containers (Status: C++11)">676</a> added move semantics to unordered containers.
+Issue <a href="lwg-defects.html#676" title="Moving the unordered containers (Status: C++11)">676</a><sup><a href="https://cplusplus.github.io/LWG/issue676" title="Latest snapshot">(i)</a></sup> added move semantics to unordered containers.
 For the added insert functions the Editor requested to put their
 semantic description into a requirements table rather than describing
 them for each container individually. The text however was taken from
 the associative containers, where we also have the semantics for each
-container described. Also, <a href="lwg-defects.html#1034" title="Clarify generality of Container Requirement tables (Status: C++11)">1034</a> is to some extend
+container described. Also, <a href="lwg-defects.html#1034" title="Clarify generality of Container Requirement tables (Status: C++11)">1034</a><sup><a href="https://cplusplus.github.io/LWG/issue1034" title="Latest snapshot">(i)</a></sup> is to some extend
 requesting a clarification of the requirement tables and it turned out
 that in other places we have the same problem (e.g. we have no general
 requirement for type pointer and const_pointer although each container
-has them with issue <a href="lwg-defects.html#1306" title="pointer and const_pointer for &lt;array&gt; (Status: C++11)">1306</a>).
+has them with issue <a href="lwg-defects.html#1306" title="pointer and const_pointer for &lt;array&gt; (Status: C++11)">1306</a><sup><a href="https://cplusplus.github.io/LWG/issue1306" title="Latest snapshot">(i)</a></sup>).
 </p>
 
 <p>
@@ -43584,7 +43584,7 @@ strong one is preferable. &mdash; <em>end note</em> ]
 </p></blockquote>
 
 <p><i>[
-See <a href="lwg-defects.html#1474" title="weak compare-and-exchange confusion (Status: C++11)">1474</a> for the proposed resolution
+See <a href="lwg-defects.html#1474" title="weak compare-and-exchange confusion (Status: C++11)">1474</a><sup><a href="https://cplusplus.github.io/LWG/issue1474" title="Latest snapshot">(i)</a></sup> for the proposed resolution
 ]</i></p>
 
 
@@ -45088,7 +45088,7 @@ way as copying from a <code>const string&amp;</code> argument.
 <p><b>Discussion:</b></p>
 
 <p>
-LWG issue <a href="lwg-defects.html#550" title="What should the return type of pow(float,int) be? (Status: CD1)">550</a> removed the functions:
+LWG issue <a href="lwg-defects.html#550" title="What should the return type of pow(float,int) be? (Status: CD1)">550</a><sup><a href="https://cplusplus.github.io/LWG/issue550" title="Latest snapshot">(i)</a></sup> removed the functions:
 </p>
 <blockquote><pre>
 float       pow(float, int);
@@ -45424,7 +45424,7 @@ subtle ways to satisfy this rule and still return a short-lived reference, meani
 algorithms can't be guaranteed that <code>forward_iterator_tag</code> will imply 
 long-lived references.
 <p/>
-On the other hand, defect <a href="lwg-defects.html#198" title="Validity of pointers and references unspecified after iterator destruction (Status: CD1)">198</a>, which added the invalidation wording
+On the other hand, defect <a href="lwg-defects.html#198" title="Validity of pointers and references unspecified after iterator destruction (Status: CD1)">198</a><sup><a href="https://cplusplus.github.io/LWG/issue198" title="Latest snapshot">(i)</a></sup>, which added the invalidation wording
 to iterator.requirements.general, refers to iterators with short-lived references 
 being used as arguments to reverse_iterator, which requires <code>BidirectionalIterator</code>s. 
 If <code>ForwardIterator</code> required long-lived references, this would be impossible.
@@ -45472,7 +45472,7 @@ as a simple issue.
 <p><b>Discussion:</b></p>
 
 <p>
-Related to LWG <a href="lwg-defects.html#2112" title="User-defined classes that cannot be derived from (Status: C++14)">2112</a> the question has been raised whether a library implementation <em>may</em> declare
+Related to LWG <a href="lwg-defects.html#2112" title="User-defined classes that cannot be derived from (Status: C++14)">2112</a><sup><a href="https://cplusplus.github.io/LWG/issue2112" title="Latest snapshot">(i)</a></sup> the question has been raised whether a library implementation <em>may</em> declare
 non-polymorphic library components, such as class template <code>std::vector</code> or <code>std::basic_string</code>,
 as <code>final</code> class types.
 <p/>
@@ -45544,7 +45544,7 @@ assume the ability to derive from unspecified library types.
 <p><b>Discussion:</b></p>
 
 <p>
-This issue was raised while discussing issue <a href="lwg-defects.html#1448" title="Concerns about basic_stringbuf::str(basic_string) postconditions (Status: C++11)">1448</a>.
+This issue was raised while discussing issue <a href="lwg-defects.html#1448" title="Concerns about basic_stringbuf::str(basic_string) postconditions (Status: C++11)">1448</a><sup><a href="https://cplusplus.github.io/LWG/issue1448" title="Latest snapshot">(i)</a></sup>.
 <p/>
 Note the following program:
 </p>
@@ -45574,7 +45574,7 @@ I also would read that from  [ios::openmode] claiming:
 <code>app</code>&nbsp;&nbsp;&nbsp;seek to end before each write
 </p></blockquote>
 <p>
-However in issue <a href="lwg-defects.html#1448" title="Concerns about basic_stringbuf::str(basic_string) postconditions (Status: C++11)">1448</a> P.J.Plauger comments:
+However in issue <a href="lwg-defects.html#1448" title="Concerns about basic_stringbuf::str(basic_string) postconditions (Status: C++11)">1448</a><sup><a href="https://cplusplus.github.io/LWG/issue1448" title="Latest snapshot">(i)</a></sup> P.J.Plauger comments:
 </p>
 <blockquote><p>
 I think we should say nothing special about <code>app</code> at construction time (thus leaving the write pointer at the beginning of the buffer).
@@ -45884,7 +45884,7 @@ Problem here is that 33.6.4.3 <a href="https://wg21.link/thread.timedmutex.requi
 it only refers to &quot;<i>timed mutex types</i>&quot;
 </p>
 
-<p><i>[See also issue <a href="lwg-closed.html#2126" title="Several specification problems in regard to mutex requirements (Status: Pending NAD Editorial)">2126</a>]</i></p>
+<p><i>[See also issue <a href="lwg-closed.html#2126" title="Several specification problems in regard to mutex requirements (Status: Pending NAD Editorial)">2126</a><sup><a href="https://cplusplus.github.io/LWG/issue2126" title="Latest snapshot">(i)</a></sup>]</i></p>
 
 
 <p><i>[2012, Portland: move to Tentatively NAD Editorial]</i></p>
@@ -45942,7 +45942,7 @@ and 33.6.4.3.3 <a href="https://wg21.link/thread.timedmutex.recursive">[thread.t
 to the new subclause in 33.6.4.2 <a href="https://wg21.link/thread.mutex.requirements.mutex">[thread.mutex.requirements.mutex]</a>.
 </p>
 
-<p><i>[See also issue <a href="lwg-closed.html#2125" title="TimedMutex specification problem (Status: Pending NAD Editorial)">2125</a>]</i></p>
+<p><i>[See also issue <a href="lwg-closed.html#2125" title="TimedMutex specification problem (Status: Pending NAD Editorial)">2125</a><sup><a href="https://cplusplus.github.io/LWG/issue2125" title="Latest snapshot">(i)</a></sup>]</i></p>
 
 
 <p><i>[2012, Portland: move to Tentatively NAD Editorial]</i></p>
@@ -47176,7 +47176,7 @@ simply got sloppy in our specification.
 <p><i>[2016-05 Issues Telecon]</i></p>
 
 <p>
-This is related to <a href="lwg-defects.html#2698" title="Effect of assign() on iterators/pointers/references (Status: C++17)">2698</a>
+This is related to <a href="lwg-defects.html#2698" title="Effect of assign() on iterators/pointers/references (Status: C++17)">2698</a><sup><a href="https://cplusplus.github.io/LWG/issue2698" title="Latest snapshot">(i)</a></sup>
 </p>
 
 <p><i>[2017-03-04, Kona]</i></p>
@@ -48774,7 +48774,7 @@ const reference. This const reference cannot be converted back to a
 mutable reference.
 <p/>
 This issue is related to the "<em>unspecified</em>" return value of
-<code>reverse_iterator::operator[]</code>, see defect <a href="lwg-defects.html#386" title="Reverse iterator's operator[] has impossible return type (Status: CD1)">386</a>.
+<code>reverse_iterator::operator[]</code>, see defect <a href="lwg-defects.html#386" title="Reverse iterator's operator[] has impossible return type (Status: CD1)">386</a><sup><a href="https://cplusplus.github.io/LWG/issue386" title="Latest snapshot">(i)</a></sup>.
 <p/>
 The -1 is due to "current" pointing one item beyond the
 <code>reverse_iterator</code>'s real current value.
@@ -49754,7 +49754,7 @@ constructor.
 <p><i>[2016-03 Jacksonville]</i></p>
 
 <p>
-Closed as NAD, noting that <a href="lwg-defects.html#2583" title="There is no way to supply an allocator for basic_string(str, pos) (Status: C++17)">2583</a> is a related issue.
+Closed as NAD, noting that <a href="lwg-defects.html#2583" title="There is no way to supply an allocator for basic_string(str, pos) (Status: C++17)">2583</a><sup><a href="https://cplusplus.github.io/LWG/issue2583" title="Latest snapshot">(i)</a></sup> is a related issue.
 </p>
 
 <p><i>[2023-08-5; Arthur O'Dwyer comments]</i></p>
@@ -49836,19 +49836,19 @@ The existing wording is intended.
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-When LWG <a href="lwg-defects.html#488" title="rotate throws away useful information (Status: CD1)">488</a> was resolved, the intention was to return "where the subrange <code>[first, middle)</code> starts after 
+When LWG <a href="lwg-defects.html#488" title="rotate throws away useful information (Status: CD1)">488</a><sup><a href="https://cplusplus.github.io/LWG/issue488" title="Latest snapshot">(i)</a></sup> was resolved, the intention was to return "where the subrange <code>[first, middle)</code> starts after 
 the rotate is performed". However, this wasn't achieved in one case.
 <p/>
 When <code>middle == last</code>, <code>rotate()</code> does nothing and returns <code>first</code>. This is good.
 <p/>
 When <code>middle == first</code>, <code>rotate()</code> does nothing and returns <code>last</code>. This is bad. In addition to being 
 inconsistent with the other do-nothing case, it prevents <code>rotate()</code> from providing the useful guarantee that LWG 
-<a href="lwg-defects.html#488" title="rotate throws away useful information (Status: CD1)">488</a> wanted: when <code>[first, last)</code> is non-empty, <code>rotate()</code>'s return value should always be 
+<a href="lwg-defects.html#488" title="rotate throws away useful information (Status: CD1)">488</a><sup><a href="https://cplusplus.github.io/LWG/issue488" title="Latest snapshot">(i)</a></sup> wanted: when <code>[first, last)</code> is non-empty, <code>rotate()</code>'s return value should always be 
 dereferenceable to get the originally-first element.
 <p/>
 Howard Hinnant:
 <p/>
-As the author of LWG <a href="lwg-defects.html#488" title="rotate throws away useful information (Status: CD1)">488</a> I can assure everyone that the edge cases the proposed resolution specifies were 
+As the author of LWG <a href="lwg-defects.html#488" title="rotate throws away useful information (Status: CD1)">488</a><sup><a href="https://cplusplus.github.io/LWG/issue488" title="Latest snapshot">(i)</a></sup> I can assure everyone that the edge cases the proposed resolution specifies were 
 not specified by accident. <code>rotate(i, i, j)</code> should return <code>j</code> and <code>rotate(i, j, j)</code> should return <code>i</code>.  
 Doing otherwise will break working code. These return values were motivated by the uses of <code>rotate</code> in the implementation 
 of algorithms such as <code>stable_partition</code> and <code>inplace_merge</code>. The results of these edge cases were not chosen lightly.
@@ -49914,7 +49914,7 @@ debug mode. Shouldn't release mode preserve hints?
 <p/>
 Daniel:
 <p/>
-The corresponding resolution should take care not to conflict with the intention behind LWG <a href="lwg-defects.html#2234" title="assert() should allow usage in constant expressions (Status: C++17)">2234</a>.
+The corresponding resolution should take care not to conflict with the intention behind LWG <a href="lwg-defects.html#2234" title="assert() should allow usage in constant expressions (Status: C++17)">2234</a><sup><a href="https://cplusplus.github.io/LWG/issue2234" title="Latest snapshot">(i)</a></sup>.
 </p>
 <p><i>[2023-06-13, Varna; Status changed: New &rarr; NAD.]</i></p>
 
@@ -49943,7 +49943,7 @@ Needs a paper to make changes here, or incorporate into <a href="https://wg21.li
 <p>
 Currently, <code>std::experimental::optional::operator==</code> imposes the <code>EqualityComparable</code> requirement which provides
 two guarantees: It ensures that <code>operator!=</code> can rely on the equivalence-relation property and more importantly, that
-the <code>BooleanTestable</code> requirements suggested by issue <a href="lwg-defects.html#2114" title="Incorrect &quot;contextually convertible to bool&quot; requirements (Status: Resolved)">2114</a> are automatically implied.
+the <code>BooleanTestable</code> requirements suggested by issue <a href="lwg-defects.html#2114" title="Incorrect &quot;contextually convertible to bool&quot; requirements (Status: Resolved)">2114</a><sup><a href="https://cplusplus.github.io/LWG/issue2114" title="Latest snapshot">(i)</a></sup> are automatically implied.
 <p/>
 <code>std::experimental::optional::operator&lt;</code> doesn't provide a <code>LessThanComparable</code> requirement, but there was quite
 an historic set of changes involved with that family of types: As of <a href="https://wg21.link/N3527" title=" A proposal to add a utility class to represent optional objects (Revision 2)">N3527</a>
@@ -49954,7 +49954,7 @@ and the <code>LessThanComparable</code> requirement had been removed.
 The inconsistency between <code>operator==</code> and <code>operator&lt;</code> should be removed. One possible course of action would be
 to add the <code>LessThanComparable</code> to <code>std::experimental::optional::operator&lt;</code>. The <code>EqualityComparable</code> requirement
 of <code>operator==</code> could also be removed, but in that case both operators would at least need to require the <code>BooleanTestable</code>
-requirements (see <a href="lwg-defects.html#2114" title="Incorrect &quot;contextually convertible to bool&quot; requirements (Status: Resolved)">2114</a>) for the result type of <code>T</code>'s <code>operator==</code> and <code>operator&lt;</code>.
+requirements (see <a href="lwg-defects.html#2114" title="Incorrect &quot;contextually convertible to bool&quot; requirements (Status: Resolved)">2114</a><sup><a href="https://cplusplus.github.io/LWG/issue2114" title="Latest snapshot">(i)</a></sup>) for the result type of <code>T</code>'s <code>operator==</code> and <code>operator&lt;</code>.
 <p/>
 Arguably, corresponding operators for <code>pair</code> and <code>tuple</code> do not impose <code>LessThanComparable</code> (nor
 <code>EqualityComparable</code>), albeit the definition of the "derived" relation functions depend on properties ensured by
@@ -50001,7 +50001,7 @@ where I was then in turn asked to report the issue.
 <p/>
 The problem: The <code>std::basic_ostringstream</code> class template can be instantiated with an allocator type, but none of the 
 constructors provided accept an allocator argument, which means it's impossible to use <code>std::basic_ostringstream</code> with 
-stateful allocators. The C++ Standard Library Defect Report List seems to already mention a similar issue (<a href="lwg-defects.html#2210" title="Missing allocator-extended constructor for allocator-aware containers (Status: C++14)">2210</a>).
+stateful allocators. The C++ Standard Library Defect Report List seems to already mention a similar issue (<a href="lwg-defects.html#2210" title="Missing allocator-extended constructor for allocator-aware containers (Status: C++14)">2210</a><sup><a href="https://cplusplus.github.io/LWG/issue2210" title="Latest snapshot">(i)</a></sup>).
 </p>
 
 <p><i>[2014-11 Urbana]</i></p>
@@ -50423,7 +50423,7 @@ default for all user-defined types.
 <p>VV: I don't personally have this problem, but the proposed resolution seems frightening to me.</p>
 <p>VV: There's a related issue, 2294, and also 2192.</p>
 <p>STL: 2086 is about user-defined types in &lt;cmath&gt;, fixed in C++14. The PR for 2474 wants to undo the fix.</p>
-<p>Link to <a href="lwg-defects.html#2086" title="Overly generic type support for math functions (Status: C++14)">2086</a> and NAD.</p>
+<p>Link to <a href="lwg-defects.html#2086" title="Overly generic type support for math functions (Status: C++14)">2086</a><sup><a href="https://cplusplus.github.io/LWG/issue2086" title="Latest snapshot">(i)</a></sup> and NAD.</p>
 
 
 <p id="res-2474"><b>Proposed resolution:</b></p>
@@ -50861,7 +50861,7 @@ Not a defect. The LWG believes this missing feature is not sufficiently serious 
 <p><b>Discussion:</b></p>
 <p>
 The combination of 16.4.6.5 <a href="https://wg21.link/member.functions">[member.functions]</a>, paragraphs 2 and 3 that LWG 
-<a href="lwg-defects.html#2259" title="Issues in 17.6.5.5 rules for member functions (Status: C++17)">2259</a> does seems to drop a requirement that any call behaves as if 
+<a href="lwg-defects.html#2259" title="Issues in 17.6.5.5 rules for member functions (Status: C++17)">2259</a><sup><a href="https://cplusplus.github.io/LWG/issue2259" title="Latest snapshot">(i)</a></sup> does seems to drop a requirement that any call behaves as if 
 no overloads were added. Paragraph 3 used to say
 "A call to a member function signature described in the C ++ standard
 library behaves as if the implementation
@@ -50907,14 +50907,14 @@ int main()
 <p>This example is accepted by libstdc++, msvc rejects it, and clang+libc++
 segfault on melpon.org/wandbox o_O. An earlier clang+libc++ just accepts
 it. I don't think the implementation divergence is caused by the acceptance
-of the referred-to <a href="lwg-defects.html#2259" title="Issues in 17.6.5.5 rules for member functions (Status: C++17)">2259</a>, but it certainly seems to increasingly bless
+of the referred-to <a href="lwg-defects.html#2259" title="Issues in 17.6.5.5 rules for member functions (Status: C++17)">2259</a><sup><a href="https://cplusplus.github.io/LWG/issue2259" title="Latest snapshot">(i)</a></sup>, but it certainly seems to increasingly bless
 the implementation divergence.
 </p>
 
 <p><i>[2016-05 Issues Telecon]</i></p>
 
 <p>
-This is related to issue <a href="lwg-active.html#2695" title="&quot;As if&quot; unclear in [member.functions] (Status: New)">2695</a>.
+This is related to issue <a href="lwg-active.html#2695" title="&quot;As if&quot; unclear in [member.functions] (Status: New)">2695</a><sup><a href="https://cplusplus.github.io/LWG/issue2695" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 <p><i>[2018-08 Batavia Monday issue discussion]</i></p>
@@ -51009,7 +51009,7 @@ basic_string&amp; assign(basic_string&amp;&amp; str)
 </blockquote>
 </blockquote>
 <p>
-Marshall says: There is another issue <a href="lwg-defects.html#2579" title="Inconsistency wrt Allocators in basic_string assignment vs. basic_string::assign (Status: C++17)">2579</a> here, to change /1 to be similar to /2.
+Marshall says: There is another issue <a href="lwg-defects.html#2579" title="Inconsistency wrt Allocators in basic_string assignment vs. basic_string::assign (Status: C++17)">2579</a><sup><a href="https://cplusplus.github.io/LWG/issue2579" title="Latest snapshot">(i)</a></sup> here, to change /1 to be similar to /2.
 <p/>
 In 32.7.3 <a href="https://wg21.link/re.regex.assign">[re.regex.assign]</a>, we have:
 </p>
@@ -51088,7 +51088,7 @@ Changed <code>basic_regex</code> to match <code>string</code> as an editorial ch
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-DR <a href="lwg-defects.html#41" title="Ios_base needs clear(), exceptions() (Status: TC1)">41</a>, "Ios_base needs <code>clear()</code>, <code>exceptions()</code>" stopped short of providing the interface 
+DR <a href="lwg-defects.html#41" title="Ios_base needs clear(), exceptions() (Status: TC1)">41</a><sup><a href="https://cplusplus.github.io/LWG/issue41" title="Latest snapshot">(i)</a></sup>, "Ios_base needs <code>clear()</code>, <code>exceptions()</code>" stopped short of providing the interface 
 suggested in its title, but it did require the underlying state to be stored in <code>ios_base</code>. Because <code>rdstate()</code> 
 is also missing, <code>ios_base</code> manipulators relying on <code>iword</code> and <code>pword</code> cannot detect failure. 
 The only safe alternative is to manipulate a derived class, which must be a template.
@@ -51869,7 +51869,7 @@ reason other than [EIO], any file named by new shall be unaffected." holds for C
 
 <p>
 <code>unique_path(const path&amp;)</code> cannot be declared as <code>noexcept</code>, because it returns an object
-during whose construction a memory allocation request may fail, see the rationale provided in <a href="lwg-defects.html#2637" title="[filesys.ts] [PDTS] All functions with error_code arguments should be noexcept (Status: TS)">2637</a>.
+during whose construction a memory allocation request may fail, see the rationale provided in <a href="lwg-defects.html#2637" title="[filesys.ts] [PDTS] All functions with error_code arguments should be noexcept (Status: TS)">2637</a><sup><a href="https://cplusplus.github.io/LWG/issue2637" title="Latest snapshot">(i)</a></sup>.
 <p/>
 <code>exists(const path&amp;)</code> and the <code>is_*(const path&amp;)</code> functions cannot be <code>noexcept</code>, because 
 they are specified in terms of <code>status(const path&amp;)</code>, which again may throw an exception, which is explicitly 
@@ -51889,10 +51889,10 @@ Based on this interpretation of the issue discussion I recommend to resolve this
 <p><i>[Beman Dawes 2014-02-27]</i></p>
 
 
-  <p/>Issues <a href="lwg-defects.html#2637" title="[filesys.ts] [PDTS] All functions with error_code arguments should be noexcept (Status: TS)">2637</a>,
-  <a href="lwg-closed.html#2638" title="[filesys.ts] [PDTS] Make certain functions noexcept and drop error_code version (Status: NAD)">2638</a>,
-  <a href="lwg-defects.html#2641" title="[filesys.ts] [PDTS] directory_iterator, recursive_directory_iterator, move construct/assign should be noexcept (Status: TS)">2641</a>,
-  and <a href="lwg-defects.html#2649" title="[filesys.ts] [PDTS] path and directory_entry move ctors should not be noexcept (Status: TS)">2649</a> are concerned with signatures which should or should not
+  <p/>Issues <a href="lwg-defects.html#2637" title="[filesys.ts] [PDTS] All functions with error_code arguments should be noexcept (Status: TS)">2637</a><sup><a href="https://cplusplus.github.io/LWG/issue2637" title="Latest snapshot">(i)</a></sup>,
+  <a href="lwg-closed.html#2638" title="[filesys.ts] [PDTS] Make certain functions noexcept and drop error_code version (Status: NAD)">2638</a><sup><a href="https://cplusplus.github.io/LWG/issue2638" title="Latest snapshot">(i)</a></sup>,
+  <a href="lwg-defects.html#2641" title="[filesys.ts] [PDTS] directory_iterator, recursive_directory_iterator, move construct/assign should be noexcept (Status: TS)">2641</a><sup><a href="https://cplusplus.github.io/LWG/issue2641" title="Latest snapshot">(i)</a></sup>,
+  and <a href="lwg-defects.html#2649" title="[filesys.ts] [PDTS] path and directory_entry move ctors should not be noexcept (Status: TS)">2649</a><sup><a href="https://cplusplus.github.io/LWG/issue2649" title="Latest snapshot">(i)</a></sup> are concerned with signatures which should or should not
   be <code>noexcept</code>. I will provide unified proposed wording for these issues, possibly in a separate paper.
   
   <p><i>[17 Jun 2014 Rapperswil LWG closes as NAD. Working paper correct as written.]</i></p>
@@ -51994,7 +51994,7 @@ I'd remove it and add proper wording.
 
 
 <p>
-This issue is a duplicate of <a href="lwg-defects.html#2650" title="[filesys.ts] [PDTS] path::compare(const string&amp; s) wrong argument type (Status: TS)">2650</a>. The suggested wording of that issue would resolve this issue here as well.
+This issue is a duplicate of <a href="lwg-defects.html#2650" title="[filesys.ts] [PDTS] path::compare(const string&amp; s) wrong argument type (Status: TS)">2650</a><sup><a href="https://cplusplus.github.io/LWG/issue2650" title="Latest snapshot">(i)</a></sup>. The suggested wording of that issue would resolve this issue here as well.
 </p>
   
   <p><i>[2014-02-13 LWG/SG-3 Issaquah: Agrees with Daniel.]</i></p>
@@ -52069,10 +52069,10 @@ ones).</p>
 <p><i>[2014-02-08 Daniel comments]</i></p>
 
 <p>
-I noticed the same problem when trying to resolve <a href="lwg-defects.html#2652" title="[filesys.ts] [PDTS] Better to avoid deriving from std::iterator (Status: TS)">2652</a>. The currently suggested wording for that
+I noticed the same problem when trying to resolve <a href="lwg-defects.html#2652" title="[filesys.ts] [PDTS] Better to avoid deriving from std::iterator (Status: TS)">2652</a><sup><a href="https://cplusplus.github.io/LWG/issue2652" title="Latest snapshot">(i)</a></sup>. The currently suggested wording for that
 issue should fix the here mentioned problem as well.
 <p/>
-I recommend to solve this issue as "Resolved by the proposed wording for <a href="lwg-defects.html#2652" title="[filesys.ts] [PDTS] Better to avoid deriving from std::iterator (Status: TS)">2652</a>".
+I recommend to solve this issue as "Resolved by the proposed wording for <a href="lwg-defects.html#2652" title="[filesys.ts] [PDTS] Better to avoid deriving from std::iterator (Status: TS)">2652</a><sup><a href="https://cplusplus.github.io/LWG/issue2652" title="Latest snapshot">(i)</a></sup>".
 </p>
   <p><i>[2014-02-13 LWG/SG-3 Issaquah: Daniel's resolution accepted.]</i></p>
 
@@ -52882,7 +52882,7 @@ Is the difference intentional?
 
 <p><i>[2017-03-04, Kona]</i></p>
 
-<p>Close as a duplicate of <a href="lwg-defects.html#2820" title="Clarify &lt;cstdint&gt; macros (Status: C++23)">2820</a> per Thomas' request.</p>
+<p>Close as a duplicate of <a href="lwg-defects.html#2820" title="Clarify &lt;cstdint&gt; macros (Status: C++23)">2820</a><sup><a href="https://cplusplus.github.io/LWG/issue2820" title="Latest snapshot">(i)</a></sup> per Thomas' request.</p>
 
 
 <p id="res-2764"><b>Proposed resolution:</b></p>
@@ -52998,7 +52998,7 @@ and provide the guarantee that <code>nh</code> will be unchanged if an element w
 <p><i>[2016-09-06, Howard comments]</i></p>
 
 <p>
-This is related to LWG <a href="lwg-defects.html#839" title="Maps and sets missing splice operation (Status: Resolved)">839</a>.
+This is related to LWG <a href="lwg-defects.html#839" title="Maps and sets missing splice operation (Status: Resolved)">839</a><sup><a href="https://cplusplus.github.io/LWG/issue839" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 <p><i>[2018-1-26 issues processing telecon]</i></p>
@@ -53080,14 +53080,14 @@ return tmp.operator-&gt;();</ins>
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-The new constructor added for LWG <a href="lwg-defects.html#2742" title="Inconsistent string interface taking string_view (Status: C++17)">2742</a> causes an ambiguity when attempting to construct from a (non-const) <code>char*</code>
+The new constructor added for LWG <a href="lwg-defects.html#2742" title="Inconsistent string interface taking string_view (Status: C++17)">2742</a><sup><a href="https://cplusplus.github.io/LWG/issue2742" title="Latest snapshot">(i)</a></sup> causes an ambiguity when attempting to construct from a (non-const) <code>char*</code>
 </p>
 <blockquote><pre>
 char s[] = "whoops"; 
 std::string str(s, 2, 4);
 </pre></blockquote>
 <p>
-This is the same problem discussed in <a href="lwg-defects.html#2758" title="std::string{}.assign(&quot;ABCDE&quot;, 0, 1) is ambiguous (Status: C++17)">2758</a>, and the fix is the same: disable that new constructor if <code>T</code> 
+This is the same problem discussed in <a href="lwg-defects.html#2758" title="std::string{}.assign(&quot;ABCDE&quot;, 0, 1) is ambiguous (Status: C++17)">2758</a><sup><a href="https://cplusplus.github.io/LWG/issue2758" title="Latest snapshot">(i)</a></sup>, and the fix is the same: disable that new constructor if <code>T</code> 
 is convertible to <code>const_pointer</code>, so that the old constructor is used instead.
 </p>
 
@@ -53522,7 +53522,7 @@ This can be fixed by restricting <code>launder</code> from returning pointers to
 
 <p><i>[2017-03-04, Kona]</i></p>
 
-<p>Set priority to 2. This was discussed in EWG (via a paper). Assign this (and <a href="lwg-defects.html#2859" title="Definition of reachable in [ptr.launder] misses pointer arithmetic from pointer-interconvertible object (Status: C++20)">2859</a>) to Core.</p>
+<p>Set priority to 2. This was discussed in EWG (via a paper). Assign this (and <a href="lwg-defects.html#2859" title="Definition of reachable in [ptr.launder] misses pointer arithmetic from pointer-interconvertible object (Status: C++20)">2859</a><sup><a href="https://cplusplus.github.io/LWG/issue2859" title="Latest snapshot">(i)</a></sup>) to Core.</p>
 
 <p><i>[2017-08-14, CWG telecon note]</i></p>
 
@@ -53661,7 +53661,7 @@ this subclause is ill-formed; no diagnostic required.
 </blockquote>
 
 <p>
-See also <a href="lwg-closed.html#2909" title="User specializations of is_execution_policy should be ill-formed (Status: NAD)">2909</a>
+See also <a href="lwg-closed.html#2909" title="User specializations of is_execution_policy should be ill-formed (Status: NAD)">2909</a><sup><a href="https://cplusplus.github.io/LWG/issue2909" title="Latest snapshot">(i)</a></sup>
 </p>
 
 <p><i>[2017-07 Toronto Thurs Issue Prioritization]</i></p>
@@ -53888,14 +53888,14 @@ in mind before it went into the working draft.
 <p><i>[2017-02-03, Daniel comments]</i></p>
 
 <p>
-This issue unintentionally became added a second time, it should be considered as a pure duplicate of LWG <a href="lwg-defects.html#2869" title="Deprecate sub-clause [locale.stdcvt] (Status: Resolved)">2869</a>. 
+This issue unintentionally became added a second time, it should be considered as a pure duplicate of LWG <a href="lwg-defects.html#2869" title="Deprecate sub-clause [locale.stdcvt] (Status: Resolved)">2869</a><sup><a href="https://cplusplus.github.io/LWG/issue2869" title="Latest snapshot">(i)</a></sup>. 
 By a wit of fortuity, both issues can also be transformed into each other by transposing the last two digits of the issue numbers.
 </p>
 
 
 <p id="res-2896"><b>Proposed resolution:</b></p>
 <p>
-This issue is a duplicate of LWG <a href="lwg-defects.html#2869" title="Deprecate sub-clause [locale.stdcvt] (Status: Resolved)">2869</a>.
+This issue is a duplicate of LWG <a href="lwg-defects.html#2869" title="Deprecate sub-clause [locale.stdcvt] (Status: Resolved)">2869</a><sup><a href="https://cplusplus.github.io/LWG/issue2869" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 
@@ -54018,7 +54018,7 @@ running the destructor for <code>d</code> only when the last <code>weak_ptr</cod
 but ensuring that <code>d(p)</code> completes before the <code>shared_ptr</code> gives up its weak reference; making a copy of 
 <code>d</code> in the destructor before manipulating the weak count, and then using this copy to run <code>d(p)</code>, even while 
 the control-block could be concurrently reclaimed with an expiring <code>weak_ptr</code> in another thread. Note that this 
-may be related to LWG <a href="lwg-active.html#2751" title="shared_ptr deleter not specified to observe expired weak_ptr instances (Status: New)">2751</a>. (Also, see the note in 20.11.2.2.10 p1 [util.smartptr.getdeleter])</p>
+may be related to LWG <a href="lwg-active.html#2751" title="shared_ptr deleter not specified to observe expired weak_ptr instances (Status: New)">2751</a><sup><a href="https://cplusplus.github.io/LWG/issue2751" title="Latest snapshot">(i)</a></sup>. (Also, see the note in 20.11.2.2.10 p1 [util.smartptr.getdeleter])</p>
 
 <p>Proposed change: Clarify that the <code>shared_ptr</code> weak ownership of the control block is released at the end of the 
 destructor, and not as the destructor begins. Otherwise, the deleter might be destroyed even before the destructor gets to 
@@ -54052,7 +54052,7 @@ move a copy to call safely.</p>
 <blockquote><p>Unless otherwise specified, a program that adds specializations for <code>is_execution_policy</code> is ill-formed; 
 no diagnostic required.</p></blockquote>
 
-See also LWG <a href="lwg-closed.html#2871" title="User specializations of type traits should be ill-formed (Status: NAD)">2871</a>.
+See also LWG <a href="lwg-closed.html#2871" title="User specializations of type traits should be ill-formed (Status: NAD)">2871</a><sup><a href="https://cplusplus.github.io/LWG/issue2871" title="Latest snapshot">(i)</a></sup>.
 
 <p><i>[2017-03-03, Kona Friday AM]</i></p>
 
@@ -54089,7 +54089,7 @@ See also LWG <a href="lwg-closed.html#2871" title="User specializations of type 
 
 <p><i>[2017-07 Toronto Thurs Issue Prioritization]</i></p>
 
-<p>Duplicate of <a href="lwg-active.html#2922" title="The *_constant&lt;&gt; templates do not make use of template&lt;auto&gt; (Status: LEWG)">2922</a>.</p>
+<p>Duplicate of <a href="lwg-active.html#2922" title="The *_constant&lt;&gt; templates do not make use of template&lt;auto&gt; (Status: LEWG)">2922</a><sup><a href="https://cplusplus.github.io/LWG/issue2922" title="Latest snapshot">(i)</a></sup>.</p>
 
 
 <p id="res-2910"><b>Proposed resolution:</b></p>
@@ -54557,7 +54557,7 @@ private:
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-LWG issue <a href="lwg-defects.html#2555" title="[fund.ts.v2] No handling for over-aligned types in optional (Status: TS)">2555</a> added "It is implementation-defined whether over-aligned types are supported (C++14 &sect;3.11)."
+LWG issue <a href="lwg-defects.html#2555" title="[fund.ts.v2] No handling for over-aligned types in optional (Status: TS)">2555</a><sup><a href="https://cplusplus.github.io/LWG/issue2555" title="Latest snapshot">(i)</a></sup> added "It is implementation-defined whether over-aligned types are supported (C++14 &sect;3.11)."
 to the specification of <code>std::experimental::optional</code> in LFTS, however that issue wasn't moved until <code>optional</code> had 
 already been merged to the IS working paper, so it isn't present in the specification of <code>std::optional</code>. Should the 
 same rule be added for <code>std::optional</code> as well?
@@ -55319,7 +55319,7 @@ unchanged by any input function.
 <blockquote class="note">
 <p>
 [<i>Drafting note:</i> The modification of 29.13 <a href="https://wg21.link/time.parse">[time.parse]</a> p1 is intended to be non-conflictingly 
-mergeable with the change suggested by LWG <a href="lwg-defects.html#3269" title="Parse manipulators do not specify the result of the extraction from stream (Status: C++20)">3269</a> at the same paragraph.]
+mergeable with the change suggested by LWG <a href="lwg-defects.html#3269" title="Parse manipulators do not specify the result of the extraction from stream (Status: C++20)">3269</a><sup><a href="https://cplusplus.github.io/LWG/issue3269" title="Latest snapshot">(i)</a></sup> at the same paragraph.]
 </p>
 </blockquote>
 
@@ -55461,7 +55461,7 @@ implicit conversion from floating point type happens while assigning to <code>st
 
 <p><i>[2019-11 Status to Duplicate during Tuesday morning issue processing in Belfast.]</i></p>
 
-<p>Duplicate of <a href="lwg-closed.html#2372" title="Assignment from int to std::string (Status: NAD)">2372</a>.</p>
+<p>Duplicate of <a href="lwg-closed.html#2372" title="Assignment from int to std::string (Status: NAD)">2372</a><sup><a href="https://cplusplus.github.io/LWG/issue2372" title="Latest snapshot">(i)</a></sup>.</p>
 
 
 <p id="res-3311"><b>Proposed resolution:</b></p>
@@ -55522,12 +55522,12 @@ declaration and in member-function description for <code>polymorphic_allocator</
 <p><i>[Daniel comments]</i></p>
 
 <p>
-This issue is related to LWG <a href="lwg-defects.html#3304" title="Allocate functions of std::polymorphic_allocator should require [[nodiscard]] (Status: C++20)">3304</a>.
+This issue is related to LWG <a href="lwg-defects.html#3304" title="Allocate functions of std::polymorphic_allocator should require [[nodiscard]] (Status: C++20)">3304</a><sup><a href="https://cplusplus.github.io/LWG/issue3304" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 <p><i>[2019-11 Status to Duplicate during Tuesday morning issue processing in Belfast.]</i></p>
 
-<p>Duplicate of <a href="lwg-defects.html#3304" title="Allocate functions of std::polymorphic_allocator should require [[nodiscard]] (Status: C++20)">3304</a>.</p>
+<p>Duplicate of <a href="lwg-defects.html#3304" title="Allocate functions of std::polymorphic_allocator should require [[nodiscard]] (Status: C++20)">3304</a><sup><a href="https://cplusplus.github.io/LWG/issue3304" title="Latest snapshot">(i)</a></sup>.</p>
 
 
 <p id="res-3312"><b>Proposed resolution:</b></p>
@@ -55742,7 +55742,7 @@ Jonathan and Casey have concerns about the proposed resolution. Casey: The wordi
 as if this iterator is supposed to be an <code><i>cpp17-input-iterator</i></code>.
 <p/>
 See also LWG <a href="lwg-defects.html#3283" title="Types satisfying input_iterator but not equality_comparable look like
-C++17 output iterators (Status: Resolved)">3283</a> and  <a href="lwg-defects.html#3289" title="Cannot opt out of C++17 iterator-ness without also opting out of C++20 iterator-ness (Status: Resolved)">3289</a>.
+C++17 output iterators (Status: Resolved)">3283</a><sup><a href="https://cplusplus.github.io/LWG/issue3283" title="Latest snapshot">(i)</a></sup> and  <a href="lwg-defects.html#3289" title="Cannot opt out of C++17 iterator-ness without also opting out of C++20 iterator-ness (Status: Resolved)">3289</a><sup><a href="https://cplusplus.github.io/LWG/issue3289" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 <p><i>[2020-02 Prioritized as P2 Monday morning in Prague]</i></p>
@@ -55785,7 +55785,7 @@ LWG decided for NAD: The <code>ranges::basic_istream_view::iterator</code> is a 
 and thus cannot meet the <i>Cpp17</i> requirements (even <code>output_iterator_tag</code>), as such it should not 
 specialize <code>iterator_traits</code>, to avoid misleading results when it is passed to new algorithms.
 <p/>
-A related issue, LWG <a href="lwg-defects.html#3397" title="ranges::basic_istream_view::iterator should not provide iterator_category (Status: C++20)">3397</a>, is supposed to take care for a problem with the definition of the
+A related issue, LWG <a href="lwg-defects.html#3397" title="ranges::basic_istream_view::iterator should not provide iterator_category (Status: C++20)">3397</a><sup><a href="https://cplusplus.github.io/LWG/issue3397" title="Latest snapshot">(i)</a></sup>, is supposed to take care for a problem with the definition of the
 <code>iterator_category</code> member type of this template.
 </p>
 <p><i>[2020-11-09 Status changed: Tentatively NAD &rarr; NAD.]</i></p>
@@ -56396,7 +56396,7 @@ friend constexpr range_difference_t&lt;<del><i>Base</i></del><ins><i>maybe-const
 <p>
 22.5.4 <a href="https://wg21.link/optional.nullopt">[optional.nullopt]</a> p2 requires that <code>nullopt_t</code> shall not have a default constructor 
 ([&hellip;] or an initializer-list constructor, and shall not be an aggregate). However, after the final 
-resolution of LWG issue <a href="lwg-defects.html#2510" title="Tag types should not be DefaultConstructible (Status: C++17)">2510</a> and <a href="https://wg21.link/cwg1518">CWG 1518</a> it seems 
+resolution of LWG issue <a href="lwg-defects.html#2510" title="Tag types should not be DefaultConstructible (Status: C++17)">2510</a><sup><a href="https://cplusplus.github.io/LWG/issue2510" title="Latest snapshot">(i)</a></sup> and <a href="https://wg21.link/cwg1518">CWG 1518</a> it seems 
 as if the following synopsis would suffice:
 </p>
 <blockquote><pre>
@@ -56406,7 +56406,7 @@ struct nullopt_t { explicit nullopt_t() = default; };
 Which would also be consistent with other tag types.
 <p/>
 22.5.4 <a href="https://wg21.link/optional.nullopt">[optional.nullopt]</a> p2 in its current form was written prior to the final resolution of LWG issue 
-<a href="lwg-defects.html#2510" title="Tag types should not be DefaultConstructible (Status: C++17)">2510</a> and <a href="https://wg21.link/cwg1518">CWG 1518</a>, and is arguably based on using an 
+<a href="lwg-defects.html#2510" title="Tag types should not be DefaultConstructible (Status: C++17)">2510</a><sup><a href="https://cplusplus.github.io/LWG/issue2510" title="Latest snapshot">(i)</a></sup> and <a href="https://wg21.link/cwg1518">CWG 1518</a>, and is arguably based on using an 
 earlier proposed approach for tag types which was later superseded.
 <p/>
 <b>Details:</b>
@@ -56419,14 +56419,14 @@ from section 'Not assignable from <code>{}</code>':
 To re-enforce this design, there is an pending issue 2510-Tag types should not be DefaultConstructible Core issue 2510.
 </p></blockquote>
 <p>
-At the time of <a href="https://wg21.link/P0032R3" title=" Homogeneous interface for variant, any and optional (Revision 3)">P0032R3</a>, the resolution of LWG issue <a href="lwg-defects.html#2510" title="Tag types should not be DefaultConstructible (Status: C++17)">2510</a> was indeed for all tag types
+At the time of <a href="https://wg21.link/P0032R3" title=" Homogeneous interface for variant, any and optional (Revision 3)">P0032R3</a>, the resolution of LWG issue <a href="lwg-defects.html#2510" title="Tag types should not be DefaultConstructible (Status: C++17)">2510</a><sup><a href="https://cplusplus.github.io/LWG/issue2510" title="Latest snapshot">(i)</a></sup> was indeed for all tag types
 to not be <i>DefaultConstructible</i>, but this resolution was later superseded as part of the resolution of 
 CWG issue <a href="https://wg21.link/cwg1518">CWG 1518</a>, which in turn reverted parts of the resolution of 
 CWG issue <a href="https://wg21.link/cwg1630">CWG 1630</a> (which "went too far in allowing use of explicit 
 constructors for default initialization").
 <p/>
 The final resolution for CWG 1518 (<a href="https://wg21.link/P0398R0" title=" Core issue 1518: Explicit default constructors and copy-list-initialization">P0398R0</a>) lead to the requirement for aggregate classes to not 
-have any explicit [user-declared] constructors, and LWG <a href="lwg-defects.html#2510" title="Tag types should not be DefaultConstructible (Status: C++17)">2510</a> was resolved accordingly by making all 
+have any explicit [user-declared] constructors, and LWG <a href="lwg-defects.html#2510" title="Tag types should not be DefaultConstructible (Status: C++17)">2510</a><sup><a href="https://cplusplus.github.io/LWG/issue2510" title="Latest snapshot">(i)</a></sup> was resolved accordingly by making all 
 tag types have explicit user-declared (constexpr) default constructors.
 <p/>
 However, the spec of <code>nullopt_t</code> never changed after these events or as part of updating other tag types, 
@@ -56823,7 +56823,7 @@ and any such modification could create a data race if another thread is reading 
 Set priority to 2 after reflector poll. Send to SG1.
 </p>
 <p>
-This is <a href="lwg-defects.html#2426" title="Issue about compare_exchange (Status: C++17)">2426</a> again,
+This is <a href="lwg-defects.html#2426" title="Issue about compare_exchange (Status: C++17)">2426</a><sup><a href="https://cplusplus.github.io/LWG/issue2426" title="Latest snapshot">(i)</a></sup> again,
 but the new requirement to clear padding bits changes things.
 </p>
 
@@ -56900,7 +56900,7 @@ no other macro is associated with such a large set of headers (20 headers in tot
 record-holder is <code>__cpp_lib_nonmember_container_access</code> with 12 headers). For this reason, it should 
 be considered whether perhaps the new macro should only be defined in <code>&lt;version&gt;</code> (which would, 
 however, make it an outlier). The proposed wording currently contains an exhaustive list (note that the 
-deduction guides for <code>&lt;mutex&gt;</code> were removed by LWG <a href="lwg-defects.html#2981" title="Remove redundant deduction guides from standard library (Status: C++20)">2981</a>).
+deduction guides for <code>&lt;mutex&gt;</code> were removed by LWG <a href="lwg-defects.html#2981" title="Remove redundant deduction guides from standard library (Status: C++20)">2981</a><sup><a href="https://cplusplus.github.io/LWG/issue2981" title="Latest snapshot">(i)</a></sup>).
 </p>
 
 <p><i>[2022-01-30; Reflector poll]</i></p>
@@ -57481,7 +57481,7 @@ it always invokes the non-<code>const</code> object's <code>operator-&gt;()</cod
 <p/>
 <code>common_iterator::operator-&gt;</code> also requires that <code>I::operator-&gt;()</code> must be 
 <code>const</code>-qualified, which seems reasonable since the return type of <code>get&lt;I&gt;(v_)</code> 
-is <code>const I&amp;</code>. However, LWG <a href="lwg-defects.html#3672" title="common_iterator::operator-&gt;() should return by value (Status: C++23)">3672</a> makes <code>common_iterator::operator-&gt;()</code> 
+is <code>const I&amp;</code>. However, LWG <a href="lwg-defects.html#3672" title="common_iterator::operator-&gt;() should return by value (Status: C++23)">3672</a><sup><a href="https://cplusplus.github.io/LWG/issue3672" title="Latest snapshot">(i)</a></sup> makes <code>common_iterator::operator-&gt;()</code> 
 always return a value, which makes it unnecessary to detect the constness of <code>I::operator-&gt;()</code>, 
 because it will be invoked with a non-<code>const</code> returned object anyway.
 <p/>
@@ -57494,7 +57494,7 @@ consistent, and I believe this relaxation of constraints can bring some value.
 <p/>
 <b>Daniel:</b>
 <p/>
-This issue's second part of the resolution actually depends on <a href="lwg-defects.html#3672" title="common_iterator::operator-&gt;() should return by value (Status: C++23)">3672</a> being applied. But
+This issue's second part of the resolution actually depends on <a href="lwg-defects.html#3672" title="common_iterator::operator-&gt;() should return by value (Status: C++23)">3672</a><sup><a href="https://cplusplus.github.io/LWG/issue3672" title="Latest snapshot">(i)</a></sup> being applied. But
 note that the reference wording below is still <a href="https://wg21.link/N4910" title=" Working Draft, Standard for Programming Language C++">N4910</a>.
 </p>
 
@@ -57614,7 +57614,7 @@ constexpr decltype(auto) operator-&gt;() const
 <code>N</code> is given at compile time.
 <p/>
 Since the case where <code>N</code> is <code>0</code> does not make sense for <code>slide_view</code>, 
-LWG <a href="lwg-defects.html#3711" title="Missing preconditions for slide_view constructor (Status: C++23)">3711</a> and LWG <a href="lwg-defects.html#3712" title="chunk_view and slide_view should not be default_initializable (Status: C++23)">3712</a> added preconditions to the constructor and 
+LWG <a href="lwg-defects.html#3711" title="Missing preconditions for slide_view constructor (Status: C++23)">3711</a><sup><a href="https://cplusplus.github.io/LWG/issue3711" title="Latest snapshot">(i)</a></sup> and LWG <a href="lwg-defects.html#3712" title="chunk_view and slide_view should not be default_initializable (Status: C++23)">3712</a><sup><a href="https://cplusplus.github.io/LWG/issue3712" title="Latest snapshot">(i)</a></sup> added preconditions to the constructor and 
 removed the default constructor, respectively.
 <p/>
 But for <code>views::adjacent</code>, we can still specify <code>N</code> to be <code>0</code>. According to 
@@ -57808,14 +57808,14 @@ if (sz &gt; 0) sz = 0;
 return <i>to-unsigned-like</i>(sz);
 </pre>
 <p>
-There are two problems worth noting here. First, as described in LWG <a href="lwg-closed.html#3739" title="chunk_view::size should preserve the signedness of the size of the underlying range (Status: NAD)">3739</a>, 
+There are two problems worth noting here. First, as described in LWG <a href="lwg-closed.html#3739" title="chunk_view::size should preserve the signedness of the size of the underlying range (Status: NAD)">3739</a><sup><a href="https://cplusplus.github.io/LWG/issue3739" title="Latest snapshot">(i)</a></sup>, 
 <code>ranges::distance(<i>base_</i>)</code> and <code><i>n_</i></code> may have 
 different types, which makes the actual type of <code>sz</code> not deterministic.
 Also, the return type is unconditionally converted to an unsigned type, even though 
 the underlying range may have a signed size type.
 </p>
 Second, even if <code>V</code> has the same <code>difference_type</code> as <code>const V</code>, 
-there may still be integer promotion issues mentioned by LWG <a href="lwg-active.html#3730" title="std::ranges::drop_view may have different size type from its underlying view (Status: New)">3730</a>
+there may still be integer promotion issues mentioned by LWG <a href="lwg-active.html#3730" title="std::ranges::drop_view may have different size type from its underlying view (Status: New)">3730</a><sup><a href="https://cplusplus.github.io/LWG/issue3730" title="Latest snapshot">(i)</a></sup>
 since we add an integer <code>1</code> at the end here.
 <p>
 I think converting <code>sz</code> to the size type of the underlying range before 
@@ -57981,7 +57981,7 @@ Set status to Tentatively NAD after reflector poll.
 "If you want to provide a different allocator, you can use the substring constructor."
 </p>
 <p>
-"This matches the constructor, whose choice of allocator has been already considered in <a href="lwg-closed.html#2402" title="basic_string(const basic_string&amp; str, size_type pos, size_type n = npos) shouldn't use Allocator() (Status: NAD)">2402</a>. Any changes here need a paper."
+"This matches the constructor, whose choice of allocator has been already considered in <a href="lwg-closed.html#2402" title="basic_string(const basic_string&amp; str, size_type pos, size_type n = npos) shouldn't use Allocator() (Status: NAD)">2402</a><sup><a href="https://cplusplus.github.io/LWG/issue2402" title="Latest snapshot">(i)</a></sup>. Any changes here need a paper."
 </p>
 
 <p><i>[2022-11-30 LWG telecon. Status changed: Tentatively NAD &rarr; NAD.]</i></p>
@@ -58139,7 +58139,7 @@ If LEWG agree the direction PR can be polished."
 <p><i>[Varna 2023-06-16; Status changed: LEWG &rarr; NAD.]</i></p>
 
 <p>
-Resolved differently by LWG <a href="lwg-defects.html#3892" title="Incorrect formatting of nested ranges and tuples (Status: WP)">3892</a>.
+Resolved differently by LWG <a href="lwg-defects.html#3892" title="Incorrect formatting of nested ranges and tuples (Status: WP)">3892</a><sup><a href="https://cplusplus.github.io/LWG/issue3892" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 
@@ -58810,7 +58810,7 @@ denotes the type <code>iterator_traits&lt;Iterator&gt;::iterator_category</code>
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-LWG <a href="lwg-defects.html#3785" title="ranges::to is over-constrained on the destination type being a range (Status: C++23)">3785</a> enables <code>ranges::to</code> to construct a non-range object from a range, 
+LWG <a href="lwg-defects.html#3785" title="ranges::to is over-constrained on the destination type being a range (Status: C++23)">3785</a><sup><a href="https://cplusplus.github.io/LWG/issue3785" title="Latest snapshot">(i)</a></sup> enables <code>ranges::to</code> to construct a non-range object from a range, 
 confirming that this is the intended part of the original design.
 <p/>
 However, the feature test macro for <code>ranges::to</code> is still named <code>__cpp_lib_ranges_to_container</code>, 
@@ -58856,7 +58856,7 @@ This wording is relative to <a href="https://wg21.link/N4928" title=" Working Dr
 <p><b>View all issues with</b> <a href="lwg-status.html#NAD">NAD</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-LWG <a href="lwg-defects.html#3870" title="Remove voidify (Status: C++23)">3870</a> made <code>std::construct_at</code> unable to create an object of a <i>cv</i>-qualified type, 
+LWG <a href="lwg-defects.html#3870" title="Remove voidify (Status: C++23)">3870</a><sup><a href="https://cplusplus.github.io/LWG/issue3870" title="Latest snapshot">(i)</a></sup> made <code>std::construct_at</code> unable to create an object of a <i>cv</i>-qualified type, 
 which affects <code>std::uninitialized_construct_using_allocator</code>. However, uses-allocator construction is 
 currently not required to be equivalent to some call to <code>std::uninitialized_construct_using_allocator</code>, 
 which possibly implies that uses-allocator construction of a <i>cv</i>-qualified type may still be required to be 
@@ -58915,7 +58915,7 @@ Send to SG9 to be looked at with <a href="https://wg21.link/P2836" title=" std::
 <p><i>[Kona 2023-11-07; SG9]</i></p>
 
 <p>
-SG9 considered this and noted it's obsolete due to LWG <a href="lwg-defects.html#3946" title="The definition of const_iterator_t should be reworked (Status: WP)">3946</a>.
+SG9 considered this and noted it's obsolete due to LWG <a href="lwg-defects.html#3946" title="The definition of const_iterator_t should be reworked (Status: WP)">3946</a><sup><a href="https://cplusplus.github.io/LWG/issue3946" title="Latest snapshot">(i)</a></sup>.
 To support this case now would require changing <code>ranges::cbegin</code>
 to add a special case for arrays of unknown bound, which would require a paper.
 </p>

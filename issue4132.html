@@ -84,7 +84,7 @@ The expressions <code>*i == value</code> (by [tab:cpp17.equalitycomparable]) and
 (by 27.2 <a href="https://wg21.link/algorithms.requirements">[algorithms.requirements]</a>) both require to have a type that models 
 <code><i>boolean-testable</i></code>, so their actual evaluation potentially requires an additional 
 conversion to <code>bool</code> (The part "<code>!= false</code>" was not guaranteed to realize that as 
-pointed out by LWG <a href="lwg-active.html#4127" title="The Standard Library should not use predicates of the form pred(*i) != false (Status: New)">4127</a> and will therefore be removed by that issue).
+pointed out by LWG <a href="lwg-active.html#4127" title="The Standard Library should not use predicates of the form pred(*i) != false (Status: New)">4127</a><sup><a href="https://cplusplus.github.io/LWG/issue4127" title="Latest snapshot">(i)</a></sup> and will therefore be removed by that issue).
 <p/>
 The <code><i>boolean-testable</i></code> requirements (18.5.2 <a href="https://wg21.link/concept.booleantestable">[concept.booleantestable]</a>) doesn't 
 say anything about potential exceptions thrown by this conversion, so we must assume that this 
@@ -171,7 +171,7 @@ template&lt;class BinaryPredicate&gt; size_type unique(BinaryPredicate binary_pr
 
 <blockquote class="note">
 <p>
-[<i>Drafting note</i>: The adjustment of p17 is presented as if issue LWG <a href="lwg-active.html#4127" title="The Standard Library should not use predicates of the form pred(*i) != false (Status: New)">4127</a> 
+[<i>Drafting note</i>: The adjustment of p17 is presented as if issue LWG <a href="lwg-active.html#4127" title="The Standard Library should not use predicates of the form pred(*i) != false (Status: New)">4127</a><sup><a href="https://cplusplus.github.io/LWG/issue4127" title="Latest snapshot">(i)</a></sup> 
 proposed wording has already been applied]
 </p>
 </blockquote>
@@ -298,7 +298,7 @@ the predicate<ins>, including any selected <code><i>boolean-testable</i></code>
 
 <blockquote class="note">
 <p>
-[<i>Drafting note</i>: The adjustment of p17 is presented as if issue LWG <a href="lwg-active.html#4127" title="The Standard Library should not use predicates of the form pred(*i) != false (Status: New)">4127</a> 
+[<i>Drafting note</i>: The adjustment of p17 is presented as if issue LWG <a href="lwg-active.html#4127" title="The Standard Library should not use predicates of the form pred(*i) != false (Status: New)">4127</a><sup><a href="https://cplusplus.github.io/LWG/issue4127" title="Latest snapshot">(i)</a></sup> 
 proposed wording has already been applied]
 </p>
 </blockquote>

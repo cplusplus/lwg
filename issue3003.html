@@ -72,7 +72,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#LEWG">LEWG</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-In Toronto Saturday afternoon LWG discussed LWG <a href="lwg-defects.html#2976" title="Dangling uses_allocator specialization for packaged_task (Status: C++20)">2976</a> which finishes the job of removing allocator
+In Toronto Saturday afternoon LWG discussed LWG <a href="lwg-defects.html#2976" title="Dangling uses_allocator specialization for packaged_task (Status: C++20)">2976</a><sup><a href="https://cplusplus.github.io/LWG/issue2976" title="Latest snapshot">(i)</a></sup> which finishes the job of removing allocator
 support from <code>packaged_task</code>. LWG confirmed that, despite the removal of <code>packaged_task</code> allocators
 "because it looks like <code>std::function</code>" was incorrect, they wanted to keep the allocator removals anyway,
 in large part due to this resolution being a response to an NB comment.
@@ -95,7 +95,7 @@ to be used on elements constructed in the shared state, and allows the emplace-c
 
 <p><i>[2019-06-03]</i></p>
 
-<p>Jonathan observes that this resolution conflicts with <a href="lwg-active.html#2095" title="promise and packaged_task missing constructors needed for uses-allocator construction (Status: LEWG)">2095</a>.</p>
+<p>Jonathan observes that this resolution conflicts with <a href="lwg-active.html#2095" title="promise and packaged_task missing constructors needed for uses-allocator construction (Status: LEWG)">2095</a><sup><a href="https://cplusplus.github.io/LWG/issue2095" title="Latest snapshot">(i)</a></sup>.</p>
 
 <p><i>[Varna 2023-06-13; Change status to "LEWG"]</i></p>
 
@@ -152,7 +152,7 @@ to allocate memory for the shared state.</del>
 <p><i>[2024-09-19; Jonathan provides improved wording]</i></p>
 
 <p>
-In July 2023 LEWG  considered this and LWG issue <a href="lwg-active.html#2095" title="promise and packaged_task missing constructors needed for uses-allocator construction (Status: LEWG)">2095</a>
+In July 2023 LEWG  considered this and LWG issue <a href="lwg-active.html#2095" title="promise and packaged_task missing constructors needed for uses-allocator construction (Status: LEWG)">2095</a><sup><a href="https://cplusplus.github.io/LWG/issue2095" title="Latest snapshot">(i)</a></sup>
 and requested a new proposed resolution that kept the existing constructor
 (which is useful for controlling how the shared state is allocated)
 but removed the <code class='backtick'>uses_allocator</code> specialization that makes <code class='backtick'>promise</code>
@@ -161,17 +161,17 @@ Some of the rationale in <a href="https://wg21.link/P2787R1" title=" pmr::genera
 </p>
 <p>
 Without the <code class='backtick'>uses_allocator</code> specialization, there's no reason to provide
-an allocator-extended move constructor, resolving issue <a href="lwg-active.html#2095" title="promise and packaged_task missing constructors needed for uses-allocator construction (Status: LEWG)">2095</a>.
+an allocator-extended move constructor, resolving issue <a href="lwg-active.html#2095" title="promise and packaged_task missing constructors needed for uses-allocator construction (Status: LEWG)">2095</a><sup><a href="https://cplusplus.github.io/LWG/issue2095" title="Latest snapshot">(i)</a></sup>.
 </p>
 <p>
 And if we're going to continue supporting <code class='backtick'>std::promise</code> construction
 with an allocator, we could restore that for <code class='backtick'>std::packaged_task</code> too.
-That was removed by issue <a href="lwg-defects.html#2921" title="packaged_task and type-erased allocators (Status: C++17)">2921</a>, but issue <a href="lwg-defects.html#2976" title="Dangling uses_allocator specialization for packaged_task (Status: C++20)">2976</a>
+That was removed by issue <a href="lwg-defects.html#2921" title="packaged_task and type-erased allocators (Status: C++17)">2921</a><sup><a href="https://cplusplus.github.io/LWG/issue2921" title="Latest snapshot">(i)</a></sup>, but issue <a href="lwg-defects.html#2976" title="Dangling uses_allocator specialization for packaged_task (Status: C++20)">2976</a><sup><a href="https://cplusplus.github.io/LWG/issue2976" title="Latest snapshot">(i)</a></sup>
 argues that there was no good reason to do that. Removing <code class='backtick'>uses_allocator</code>
 for <code class='backtick'>packaged_task</code> would have made sense (as proposed below for <code class='backtick'>promise</code>)
 but 2921 didn't do that (which is why 2976 was needed).
 If we restore that <code class='backtick'>packaged_task</code> constructor then we need to fix <code class='backtick'>reset()</code>
-as discussed in issue <a href="lwg-defects.html#2245" title="packaged_task::reset() memory allocation (Status: Resolved)">2245</a>.
+as discussed in issue <a href="lwg-defects.html#2245" title="packaged_task::reset() memory allocation (Status: Resolved)">2245</a><sup><a href="https://cplusplus.github.io/LWG/issue2245" title="Latest snapshot">(i)</a></sup>.
 </p>
 <p>In summary:
 <ul>
@@ -253,7 +253,7 @@ other constructor and without using <code class='backtick'>std::allocator</code>
 </p>
 <blockquote class="note">
 [<i>Drafting note</i>:
-Issue <a href="lwg-active.html#4154" title="The Mandates for std::packaged_task's constructor from a callable entity should consider decaying (Status: New)">4154</a> alters these <i>Mandates</i>: and <i>Effects</i>:
+Issue <a href="lwg-active.html#4154" title="The Mandates for std::packaged_task's constructor from a callable entity should consider decaying (Status: New)">4154</a><sup><a href="https://cplusplus.github.io/LWG/issue4154" title="Latest snapshot">(i)</a></sup> alters these <i>Mandates</i>: and <i>Effects</i>:
 but the two edits should combine cleanly.]
 </blockquote>
 <p>-4- <i>Preconditions</i>:

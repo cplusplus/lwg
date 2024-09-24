@@ -91,7 +91,7 @@ assert(std::char_traits&lt;char&gt;::compare(p, "aab", 3) == 0);
 </pre></blockquote>
 <p>
 If the intention is to allow <code>memcpy</code> as a valid implementation then the precondition is 
-wrong (unfortunately nobody realized this when fixing <code>char_traits::move</code> in LWG DR <a href="lwg-defects.html#7" title="String clause minor problems (Status: TC1)">7</a>). 
+wrong (unfortunately nobody realized this when fixing <code>char_traits::move</code> in LWG DR <a href="lwg-defects.html#7" title="String clause minor problems (Status: TC1)">7</a><sup><a href="https://cplusplus.github.io/LWG/issue7" title="Latest snapshot">(i)</a></sup>). 
 If the intention is to require <code>memmove</code> then it is strange to have separate <code>copy</code> and 
 <code>move</code> functions that both use <code>memmove</code>.
 <p/>

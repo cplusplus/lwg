@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-10-02 at 12:46:08 UTC
+<p>Revised 2024-10-02 at 12:50:00 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -62956,12 +62956,20 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 <ol>
 <li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
 <blockquote>
+<pre><code>template&lt;class F&gt;
+  explicit packaged_task(F&amp;&amp; f);</code></pre>
+<p>
+-2- <i>Constraints</i>:
+<code>remove_cvref_t&lt;F&gt;</code> is not the same type as
+<code>packaged_task&lt;R(ArgTypes...)&gt;</code>.
+</p>
 <p>
 -3- <i>Mandates</i>:
 <code>is_invocable_r_v&lt;R, <del>F</del><ins>decay_t&lt;F&gt;</ins>&amp;, ArgTypes...&gt;</code>
 is <code class='backtick'>true</code>.
 </p>
-<p><del>-4- <i>Preconditions</i>:
+<p>
+<del>-4- <i>Preconditions</i>:
 Invoking a copy of <code class='backtick'>f</code> behaves the same as invoking <code class='backtick'>f</code>.
 </del>
 </p>

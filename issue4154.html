@@ -64,8 +64,8 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4154"><a href="lwg-active.html#4154">4154</a>. The Mandates for <code>std::packaged_task</code>'s constructor from a callable entity should consider decaying</h3>
 <p><b>Section:</b> 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-09-18</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-10-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#futures.task.members">active issues</a> in [futures.task.members].</p>
 <p><b>View all other</b> <a href="lwg-index.html#futures.task.members">issues</a> in [futures.task.members].</p>
@@ -88,6 +88,17 @@ and thus the cv-qualification is unrecognizable in <code class='backtick'>operat
 Since 22.10.17.3.2 <a href="https://wg21.link/func.wrap.func.con">[func.wrap.func.con]</a> uses a decayed type,
 perhaps we should also so specify for <code class='backtick'>std::packaged_task</code>.
 </p>
+
+<p><i>[2024-10-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+"Fix preconditions, since <code class='backtick'>f</code> doesn't need to be invocable, we only invoke
+the copy."
+</p>
+
 
 
 <p id="res-4154"><b>Proposed resolution:</b></p>

@@ -67,7 +67,7 @@
 This document is the Index by Status and Date for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
-<p>Revised 2024-10-02 at 12:03:28 UTC
+<p>Revised 2024-10-02 at 12:43:54 UTC
 </p><h2 id="Ready">Ready (11 issues)</h2>
 <table class="issues-index">
 <tr>
@@ -181,7 +181,7 @@ should not be constrained</td>
 <td></td>
 </tr>
 </table>
-<h2 id="Tentatively_Ready">Tentatively Ready (13 issues)</h2>
+<h2 id="Tentatively_Ready">Tentatively Ready (15 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -193,12 +193,30 @@ should not be constrained</td>
   <th>Duplicates</th>
 </tr>
 <tr>
+<td id="4157"><a href="lwg-active.html#4157" title="The resolution of LWG3465 was damaged by P2167R3 (Status: Tentatively Ready)">4157</a><sup><a href="https://cplusplus.github.io/LWG/issue4157">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>17.11.6 [cmp.alg]</td>
+<td>The resolution of LWG3465 was damaged by P2167R3</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td id="3216"><a href="lwg-active.html#3216" title="Rebinding the allocator before calling construct/destroy in allocate_shared (Status: Tentatively Ready)">3216</a><sup><a href="https://cplusplus.github.io/LWG/issue3216">(i)</a></sup></td>
 <td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
 <td>20.3.2.2.7 [util.smartptr.shared.create]</td>
 <td>Rebinding the allocator before calling <code>construct</code>/<code>destroy</code> in <code>allocate_shared</code></td>
 <td>Yes</td>
 <td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4153"><a href="lwg-active.html#4153" title="Fix extra &quot;-1&quot; for philox_engine::max() (Status: Tentatively Ready)">4153</a><sup><a href="https://cplusplus.github.io/LWG/issue4153">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>28.5.4.5 [rand.eng.philox]</td>
+<td>Fix extra "-1" for <code>philox_engine::max()</code></td>
+<td>Yes</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -405,7 +423,7 @@ should not be constrained</td>
 <td></td>
 </tr>
 </table>
-<h2 id="New">New (436 issues)</h2>
+<h2 id="New">New (434 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -415,6 +433,24 @@ should not be constrained</td>
   <th>Proposed Resolution</th>
   <th><a href="unresolved-prioritized.html">Priority</a></th>
   <th>Duplicates</th>
+</tr>
+<tr>
+<td id="4155"><a href="lwg-active.html#4155" title="Cpp17NullablePointer should require that some expression can be contextually converted to bool (Status: New)">4155</a><sup><a href="https://cplusplus.github.io/LWG/issue4155">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>16.4.4.4 [nullablepointer.requirements]</td>
+<td><i>Cpp17NullablePointer</i> should require that some expression can be contextually converted to bool</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4145"><a href="lwg-active.html#4145" title="Unclear how [res.on.data.races] apply to templated functions (Status: New)">4145</a><sup><a href="https://cplusplus.github.io/LWG/issue4145">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>16.4.6.10 [res.on.data.races]</td>
+<td>Unclear how [res.on.data.races] apply to templated functions</td>
+<td><span class="no-pr">No</span></td>
+<td>3</td>
+<td></td>
 </tr>
 <tr>
 <td id="3210"><a href="lwg-active.html#3210" title="allocate_shared is inconsistent about removing const from the pointer
@@ -434,6 +470,24 @@ passed to allocator <code>construct</code> and <code>destroy</code></td>
 <td>LWG 3870 breaks <code>std::expected&lt;<i>cv</i> T, E&gt;</code></td>
 <td>Yes</td>
 <td>2</td>
+<td></td>
+</tr>
+<tr>
+<td id="4132"><a href="lwg-active.html#4132" title="Throws specifications need to include boolean-testable operations (Status: New)">4132</a><sup><a href="https://cplusplus.github.io/LWG/issue4132">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>24.2.7.1 [associative.reqmts.general]</td>
+<td><i>Throws</i> specifications need to include <code><i>boolean-testable</i></code> operations</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4154"><a href="lwg-active.html#4154" title="The Mandates for std::packaged_task's constructor from a callable entity should consider decaying (Status: New)">4154</a><sup><a href="https://cplusplus.github.io/LWG/issue4154">(i)</a></sup></td>
+<td><a href="lwg-active.html#New">New</a></td>
+<td>33.10.10.2 [futures.task.members]</td>
+<td>The Mandates for <code>std::packaged_task</code>'s constructor from a callable entity should consider decaying</td>
+<td>Yes</td>
+<td>3</td>
 <td></td>
 </tr>
 <tr>
@@ -464,24 +518,6 @@ passed to allocator <code>construct</code> and <code>destroy</code></td>
 <td></td>
 </tr>
 <tr>
-<td id="4155"><a href="lwg-active.html#4155" title="Cpp17NullablePointer should require that some expression can be contextually converted to bool (Status: New)">4155</a><sup><a href="https://cplusplus.github.io/LWG/issue4155">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>16.4.4.4 [nullablepointer.requirements]</td>
-<td><i>Cpp17NullablePointer</i> should require that some expression can be contextually converted to bool</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4157"><a href="lwg-active.html#4157" title="The resolution of LWG3465 was damaged by P2167R3 (Status: New)">4157</a><sup><a href="https://cplusplus.github.io/LWG/issue4157">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>17.11.6 [cmp.alg]</td>
-<td>The resolution of LWG3465 was damaged by P2167R3</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="4156"><a href="lwg-active.html#4156" title="error_category messages have unspecified encoding (Status: New)">4156</a><sup><a href="https://cplusplus.github.io/LWG/issue4156">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>19.5.3.2 [syserr.errcat.virtuals]</td>
@@ -497,24 +533,6 @@ passed to allocator <code>construct</code> and <code>destroy</code></td>
 <td>Precondition of <code>inplace_vector::swap</code></td>
 <td>Yes</td>
 <td>2</td>
-<td></td>
-</tr>
-<tr>
-<td id="4153"><a href="lwg-active.html#4153" title="Fix extra &quot;-1&quot; for philox_engine::max() (Status: New)">4153</a><sup><a href="https://cplusplus.github.io/LWG/issue4153">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>28.5.4.5 [rand.eng.philox]</td>
-<td>Fix extra "-1" for <code>philox_engine::max()</code></td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4154"><a href="lwg-active.html#4154" title="The Mandates for std::packaged_task's constructor from a callable entity should consider decaying (Status: New)">4154</a><sup><a href="https://cplusplus.github.io/LWG/issue4154">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>33.10.10.2 [futures.task.members]</td>
-<td>The Mandates for <code>std::packaged_task</code>'s constructor from a callable entity should consider decaying</td>
-<td>Yes</td>
-<td></td>
 <td></td>
 </tr>
 <tr>
@@ -545,15 +563,6 @@ passed to allocator <code>construct</code> and <code>destroy</code></td>
 <td></td>
 </tr>
 <tr>
-<td id="4132"><a href="lwg-active.html#4132" title="Throws specifications need to include boolean-testable operations (Status: New)">4132</a><sup><a href="https://cplusplus.github.io/LWG/issue4132">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>24.2.7.1 [associative.reqmts.general]</td>
-<td><i>Throws</i> specifications need to include <code><i>boolean-testable</i></code> operations</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td id="4150"><a href="lwg-active.html#4150" title="The preconditions on run_loop::run() are too strict (Status: New)">4150</a><sup><a href="https://cplusplus.github.io/LWG/issue4150">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>34.11.1.4 [exec.run.loop.members]</td>
@@ -577,15 +586,6 @@ passed to allocator <code>construct</code> and <code>destroy</code></td>
 <td>22.14.6.4 [format.formatter.spec]</td>
 <td>&sect;[format.formatter.spec]/3 unconditionally enables nonlocking for container adaptors</td>
 <td>Yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4145"><a href="lwg-active.html#4145" title="Unclear how [res.on.data.races] apply to templated functions (Status: New)">4145</a><sup><a href="https://cplusplus.github.io/LWG/issue4145">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>16.4.6.10 [res.on.data.races]</td>
-<td>Unclear how [res.on.data.races] apply to templated functions</td>
-<td><span class="no-pr">No</span></td>
 <td></td>
 <td></td>
 </tr>

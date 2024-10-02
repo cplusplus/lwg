@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-10-02 at 12:03:28 UTC
+<p>Revised 2024-10-02 at 12:43:54 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -61369,8 +61369,8 @@ and <code>&lt;vector&gt;</code> (24.3.6 <a href="https://wg21.link/vector.syn">[
 <hr>
 <h3 id="4132"><a href="#4132">4132</a><sup><a href="https://cplusplus.github.io/LWG/issue4132">(i)</a></sup>. <i>Throws</i> specifications need to include <code><i>boolean-testable</i></code> operations</h3>
 <p><b>Section:</b> 24.2.7.1 <a href="https://wg21.link/associative.reqmts.general">[associative.reqmts.general]</a>, 24.3.11.5 <a href="https://wg21.link/list.ops">[list.ops]</a>, 24.3.10.6 <a href="https://wg21.link/forward.list.ops">[forward.list.ops]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Daniel Krügler <b>Opened:</b> 2024-08-03 <b>Last modified:</b> 2024-09-07</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Daniel Krügler <b>Opened:</b> 2024-08-03 <b>Last modified:</b> 2024-10-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#associative.reqmts.general">active issues</a> in [associative.reqmts.general].</p>
 <p><b>View all other</b> <a href="lwg-index.html#associative.reqmts.general">issues</a> in [associative.reqmts.general].</p>
@@ -61526,6 +61526,13 @@ throwing prohibition in <i>Cpp17NullablePointer</i> and <code><i>nothrow-sentine
 Furthermore, the existing wording changes are becoming now more harmonized in their
 stylistic forms.
 </p>
+
+<p><i>[2024-10-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
 
 
 <p id="res-4132"><b>Proposed resolution:</b></p>
@@ -62485,8 +62492,8 @@ and <code class='backtick'>A::const_void_pointer</code> may be used as
 <hr>
 <h3 id="4145"><a href="#4145">4145</a><sup><a href="https://cplusplus.github.io/LWG/issue4145">(i)</a></sup>. Unclear how [res.on.data.races] apply to templated functions</h3>
 <p><b>Section:</b> 16.4.6.10 <a href="https://wg21.link/res.on.data.races">[res.on.data.races]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Tim Song <b>Opened:</b> 2024-08-22 <b>Last modified:</b> 2024-08-31</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Tim Song <b>Opened:</b> 2024-08-22 <b>Last modified:</b> 2024-10-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#res.on.data.races">active issues</a> in [res.on.data.races].</p>
 <p><b>View all other</b> <a href="lwg-index.html#res.on.data.races">issues</a> in [res.on.data.races].</p>
@@ -62499,6 +62506,13 @@ when a user-supplied operation can perform arbitrary operations.
 <p/>
 Perhaps we need to exclude the invocation of such operations from the scope of the requirements.
 </p>
+
+<p><i>[2024-10-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
 
 
 <p id="res-4145"><b>Proposed resolution:</b></p>
@@ -62867,61 +62881,10 @@ and possibly makes the program ill-formed.</ins>
 
 
 <hr>
-<h3 id="4153"><a href="#4153">4153</a><sup><a href="https://cplusplus.github.io/LWG/issue4153">(i)</a></sup>. Fix extra "-1" for <code>philox_engine::max()</code></h3>
-<p><b>Section:</b> 28.5.4.5 <a href="https://wg21.link/rand.eng.philox">[rand.eng.philox]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Ruslan Arutyunyan <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-09-18</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#rand.eng.philox">active issues</a> in [rand.eng.philox].</p>
-<p><b>View all other</b> <a href="lwg-index.html#rand.eng.philox">issues</a> in [rand.eng.philox].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-There is a typo in <code class='backtick'>philox_engine</code> wording that makes "-1" two times
-instead of one for <code class='backtick'>max()</code> method.
-The reason for that typo is that the wording was originally inspired by
-<code class='backtick'>mersenne_twister_engine</code> but after getting feedback that what is written in
-the <code class='backtick'>philox_engine</code> synopsis is not C++ code, the authors introduced the
-<i>m</i> variable (as in <code class='backtick'>subtract_with_carry_engine</code>) but forgot to remove
-"-1" in the <i>m</i> definition.
-</p>
-<p>
-Note: after the proposed resolution below is applied the <i>m</i> variable
-could be reused in other places: basically in all places where the <code class='backtick'>mod  2^w</code>
-pattern appears (like <code class='backtick'>subtract_with_carry_engine</code> does).
-The authors don’t think it’s worth changing the rest of the wording to reuse
-the <i>m</i> variable.
-If somebody thinks otherwise, please provide such feedback.
-</p>
-
-
-<p id="res-4153"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
-</p>
-
-<ol>
-<li><p>Modify 28.5.4.5 <a href="https://wg21.link/rand.eng.philox">[rand.eng.philox]</a> as indicated:</p>
-<blockquote>
--1-
-A <code class='backtick'>philox_engine</code> random number engine produces unsigned integer random numbers
-in the <del>closed</del> interval [0, <i>m</i><del>]</del><ins>)</ins>,
-where <i>m</i> = 2<sup><i>w</i></sup><del> − 1</del>
-and the template parameter <i>w</i> defines the range of the produced numbers.
-</blockquote>
-</li>
-</ol>
-
-
-
-
-
-
-<hr>
 <h3 id="4154"><a href="#4154">4154</a><sup><a href="https://cplusplus.github.io/LWG/issue4154">(i)</a></sup>. The Mandates for <code>std::packaged_task</code>'s constructor from a callable entity should consider decaying</h3>
 <p><b>Section:</b> 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-09-18</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-10-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#futures.task.members">active issues</a> in [futures.task.members].</p>
 <p><b>View all other</b> <a href="lwg-index.html#futures.task.members">issues</a> in [futures.task.members].</p>
@@ -62944,6 +62907,17 @@ and thus the cv-qualification is unrecognizable in <code class='backtick'>operat
 Since 22.10.17.3.2 <a href="https://wg21.link/func.wrap.func.con">[func.wrap.func.con]</a> uses a decayed type,
 perhaps we should also so specify for <code class='backtick'>std::packaged_task</code>.
 </p>
+
+<p><i>[2024-10-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+"Fix preconditions, since <code class='backtick'>f</code> doesn't need to be invocable, we only invoke
+the copy."
+</p>
+
 
 
 <p id="res-4154"><b>Proposed resolution:</b></p>
@@ -62977,8 +62951,8 @@ with <code>std::forward&lt;F&gt;(f)</code>.
 <hr>
 <h3 id="4155"><a href="#4155">4155</a><sup><a href="https://cplusplus.github.io/LWG/issue4155">(i)</a></sup>. <i>Cpp17NullablePointer</i> should require that some expression can be contextually converted to bool</h3>
 <p><b>Section:</b> 16.4.4.4 <a href="https://wg21.link/nullablepointer.requirements">[nullablepointer.requirements]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-09-18</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-10-02</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#nullablepointer.requirements">issues</a> in [nullablepointer.requirements].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -62992,6 +62966,18 @@ Moreover, the value category and cv-qualification are not mentioned,
 presumably both non-const and const <code class='backtick'>P</code>,
 together with all value categories are expected.
 </p>
+
+<p><i>[2024-10-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+"This is an improvement, but judging from
+<a href="https://github.com/microsoft/STL/issues/4964">microsoft/STL 4964</a>,
+I think we actually want to define a "contextually-boolean-testable" for this."
+</p>
+
 
 
 <p id="res-4155"><b>Proposed resolution:</b></p>
@@ -63120,57 +63106,6 @@ that describes the error condition denoted by <code class='backtick'>ev</code>.
 
 
 <hr>
-<h3 id="4157"><a href="#4157">4157</a><sup><a href="https://cplusplus.github.io/LWG/issue4157">(i)</a></sup>. The resolution of LWG3465 was damaged by P2167R3</h3>
-<p><b>Section:</b> 17.11.6 <a href="https://wg21.link/cmp.alg">[cmp.alg]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-09-18</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#cmp.alg">active issues</a> in [cmp.alg].</p>
-<p><b>View all other</b> <a href="lwg-index.html#cmp.alg">issues</a> in [cmp.alg].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-In the resolution of LWG <a href="lwg-defects.html#3465" title="compare_partial_order_fallback requires F &lt; E (Status: C++23)">3465</a><sup><a href="https://cplusplus.github.io/LWG/issue3465" title="Latest snapshot">(i)</a></sup>,
-<code>F &lt; E</code> was required to be well-formed and
-implicitly convertible to <code class='backtick'>bool</code>.
-However, <a href="https://wg21.link/P2167R3" title=" Improved Proposed Wording for LWG 2114 (contextually convertible to bool)">P2167R3</a> replaced the convertibility requirements
-with just "each of <code class='backtick'>decltype(E == F)</code> and <code>decltype(E &lt; F)</code>
-models <i><code class='backtick'>boolean-testable</code></i>",
-which rendered the type of <code>F &lt; E</code> underconstrained.
-</p>
-
-
-<p id="res-4157"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
-</p>
-<ol>
-<li><p>Modify 17.11.6 <a href="https://wg21.link/cmp.alg">[cmp.alg]</a> as indicated:</p>
-<blockquote>
-(6.3) &mdash;
-Otherwise, if the expressions
-<code>E == F</code>, <code>E &lt; F</code>, and <code>F &lt; E</code>
-are all well-formed and each of <code class='backtick'>decltype(E == F)</code>
-<del>and</del><ins>,</ins>
-<code>decltype(E &lt; F)</code>
-<ins>, and <code>decltype(F &lt; E)</code></ins>
-models <i><code class='backtick'>boolean-testable</code></i>,
-<pre><code>
-  E == F ? partial_ordering::equivalent :
-  E &lt; F  ? partial_ordering::less :
-  F &lt; E  ? partial_ordering::greater :
-           partial_ordering::unordered
-</code></pre>
-except that <code class='backtick'>E</code> and <code class='backtick'>F</code> are evaluated only once.
-</blockquote>
-</li>
-</ol>
-
-
-
-
-
-<hr>
 <h3 id="4158"><a href="#4158">4158</a><sup><a href="https://cplusplus.github.io/LWG/issue4158">(i)</a></sup>. <code>packaged_task::operator=</code> should abandon its shared state</h3>
 <p><b>Section:</b> 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-09-19 <b>Last modified:</b> 2024-10-02</p>
@@ -63273,7 +63208,9 @@ Releases
 any shared state (33.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>);</del>
 </li>
 <li><del>(11.2) &mdash;
-calls</del> <code class='backtick'>packaged_task(std::move(rhs)).swap(*this)</code>.
+calls</del>
+<ins>Equivalent to</ins>
+<code class='backtick'>packaged_task(std::move(rhs)).swap(*this)</code>.
 </li>
 </ol>
 </p>

@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-09-24 at 20:13:48 UTC
+<p>Revised 2024-10-02 at 09:31:47 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -19878,7 +19878,7 @@ variant(const variant&amp; w) <ins>noexcept(<i>see below</i>)</ins>;
 <hr>
 <h3 id="3003"><a href="#3003">3003</a><sup><a href="https://cplusplus.github.io/LWG/issue3003">(i)</a></sup>. <code>&lt;future&gt;</code> still has type-erased allocators in <code>promise</code></h3>
 <p><b>Section:</b> 33.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> <b>Status:</b> <a href="lwg-active.html#LEWG">LEWG</a>
- <b>Submitter:</b> Billy O'Neal III <b>Opened:</b> 2017-07-16 <b>Last modified:</b> 2024-09-20</p>
+ <b>Submitter:</b> Billy O'Neal III <b>Opened:</b> 2017-07-16 <b>Last modified:</b> 2024-10-02</p>
 <p><b>Priority: </b>2
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#futures.promise">active issues</a> in [futures.promise].</p>
@@ -19984,8 +19984,11 @@ That was removed by issue <a href="lwg-defects.html#2921" title="packaged_task a
 argues that there was no good reason to do that. Removing <code class='backtick'>uses_allocator</code>
 for <code class='backtick'>packaged_task</code> would have made sense (as proposed below for <code class='backtick'>promise</code>)
 but 2921 didn't do that (which is why 2976 was needed).
-If we restore that <code class='backtick'>packaged_task</code> constructor then we need to fix <code class='backtick'>reset()</code>
-as discussed in issue <a href="lwg-defects.html#2245" title="packaged_task::reset() memory allocation (Status: Resolved)">2245</a><sup><a href="https://cplusplus.github.io/LWG/issue2245" title="Latest snapshot">(i)</a></sup>.
+We can restore the <code class='backtick'>packaged_task</code> constructor that takes an allocator,
+and just not restore the <code class='backtick'>uses_allocator</code> specialization that implies
+it should be fully allocator-aware.
+Finally, if we restore that <code class='backtick'>packaged_task</code> constructor then we need to
+fix <code class='backtick'>reset()</code> as discussed in issue <a href="lwg-defects.html#2245" title="packaged_task::reset() memory allocation (Status: Resolved)">2245</a><sup><a href="https://cplusplus.github.io/LWG/issue2245" title="Latest snapshot">(i)</a></sup>.
 </p>
 <p>In summary:
 <ul>

@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-10-02 at 12:43:54 UTC
+<p>Revised 2024-10-02 at 12:46:08 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -69311,9 +69311,38 @@ perhaps we should also so specify for <code class='backtick'>std::packaged_task<
 Set priority to 3 after reflector poll.
 </p>
 <p>
-"Fix preconditions, since <code class='backtick'>f</code> doesn't need to be invocable, we only invoke
-the copy."
+"Fix preconditions, <code class='backtick'>f</code> doesn't need to be invocable, we only invoke the copy."
 </p>
+
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
+
+<p>
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
+</p>
+<ol>
+<li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
+<blockquote>
+<p>
+-3- <i>Mandates</i>:
+<code>is_invocable_r_v&lt;R, <del>F</del><ins>decay_t&lt;F&gt;</ins>&amp;, ArgTypes...&gt;</code>
+is <code class='backtick'>true</code>.
+</p>
+[...]
+<p>
+-5- <i>Effects</i>:
+Constructs a new <code class='backtick'>packaged_task</code> object with a shared state and initializes
+the object's stored task
+<ins>of type <code>decay_t&lt;F&gt;</code></ins>
+with <code>std::forward&lt;F&gt;(f)</code>.
+</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+
+<p><i>[2024-10-02; Jonathan provides improved wording]</i></p>
+
 
 
 
@@ -69329,7 +69358,10 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 <code>is_invocable_r_v&lt;R, <del>F</del><ins>decay_t&lt;F&gt;</ins>&amp;, ArgTypes...&gt;</code>
 is <code class='backtick'>true</code>.
 </p>
-[...]
+<p><del>-4- <i>Preconditions</i>:
+Invoking a copy of <code class='backtick'>f</code> behaves the same as invoking <code class='backtick'>f</code>.
+</del>
+</p>
 <p>
 -5- <i>Effects</i>:
 Constructs a new <code class='backtick'>packaged_task</code> object with a shared state and initializes

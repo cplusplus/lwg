@@ -64,7 +64,7 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4158"><a href="lwg-active.html#4158">4158</a>. <code>packaged_task::operator=</code> should abandon its shared state</h3>
 <p><b>Section:</b> 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-09-19 <b>Last modified:</b> 2024-10-02</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-09-19 <b>Last modified:</b> 2024-10-03</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#futures.task.members">active issues</a> in [futures.task.members].</p>
@@ -169,13 +169,14 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 <pre>
 promise&amp; operator=(promise&amp;&amp; rhs) noexcept;
 </pre>
-<p>-2- <i>Effects</i>:
+<p>-9- <i>Effects</i>:
 <del>
 Abandons any shared state (33.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>) and then as if
 </del>
 <ins>Equivalent to</ins>
 <code class='backtick'>promise(std::move(rhs)).swap(*this)</code>.
 </p>
+<p>-10- <i>Returns</i>: <code class='backtick'>*this</code>.</p>
 </blockquote>
 </li>
 <li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>

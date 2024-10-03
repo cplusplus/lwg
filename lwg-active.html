@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-10-03 at 09:10:53 UTC
+<p>Revised 2024-10-03 at 09:47:18 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -69628,7 +69628,7 @@ except that <code class='backtick'>E</code> and <code class='backtick'>F</code> 
 <hr>
 <h3 id="4158"><a href="#4158">4158</a><sup><a href="https://cplusplus.github.io/LWG/issue4158">(i)</a></sup>. <code>packaged_task::operator=</code> should abandon its shared state</h3>
 <p><b>Section:</b> 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-09-19 <b>Last modified:</b> 2024-10-02</p>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-09-19 <b>Last modified:</b> 2024-10-03</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#futures.task.members">active issues</a> in [futures.task.members].</p>
@@ -69733,13 +69733,14 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 <pre>
 promise&amp; operator=(promise&amp;&amp; rhs) noexcept;
 </pre>
-<p>-2- <i>Effects</i>:
+<p>-9- <i>Effects</i>:
 <del>
 Abandons any shared state (33.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>) and then as if
 </del>
 <ins>Equivalent to</ins>
 <code class='backtick'>promise(std::move(rhs)).swap(*this)</code>.
 </p>
+<p>-10- <i>Returns</i>: <code class='backtick'>*this</code>.</p>
 </blockquote>
 </li>
 <li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>

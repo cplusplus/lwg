@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-10-03 at 12:20:44 UTC
+<p>Revised 2024-10-03 at 12:34:09 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -63361,6 +63361,37 @@ namespace std {
 </blockquote>
 </li>
 </ol>
+
+
+
+
+
+<hr>
+<h3 id="4161"><a href="#4161">4161</a><sup><a href="https://cplusplus.github.io/LWG/issue4161">(i)</a></sup>. Some free functions don't automatically work for program-defined <code>std::complex&lt;<i>NonFloatingPoint</i>&gt;</code></h3>
+<p><b>Section:</b> 28.4 <a href="https://wg21.link/complex.numbers">[complex.numbers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-29 <b>Last modified:</b> 2024-10-03</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#complex.numbers">issues</a> in [complex.numbers].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code>std::complex&lt;<i>NonFloatingPoint</i>&gt;</code> is possibly a program-defined specialization and thus 
+instantiation of such a specialization can have determined effect. However, it's improbable for implementations 
+to ensure that some free functions, e.g. <code>abs</code>, <code>sin</code>, <code>exp</code>, work for such a specialization.
+<p/>
+Moreover, <a href="https://wg21.link/P2819R2" title=" Add tuple protocol to complex">P2819R2</a> made all <code>std::complex</code> specializations tuple-like types, despite that 
+<code>std::get</code> overloads need to touch implementation details and thus don't work for program-defined specializations.
+<p/>
+It seems better to make only <code>complex&lt;floating-point&gt;</code> tuple-like types, and add <i>Constraints</i> 
+to some free functions that can't be guaranteed to work to only accept cases where <code>T</code> is a <i>cv</i>-unqualified 
+floating-point type. However, it's unclear to me how to handle cases where the implementation intentionally supports 
+<code>complex&lt;X&gt;</code> (where <code>X</code> is not a program-defined type) as extension, and whether <i>Mandates</i> 
+should be used.
+</p>
+
+
+<p id="res-4161"><b>Proposed resolution:</b></p>
 
 
 

@@ -143,7 +143,18 @@ calls <code class='backtick'>packaged_task(std::move(rhs)).swap(*this)</code>.
 
 <p>
 Following reflector discussion, remove the "Releases any shared state" text
-completely. The remaining effects imply that the state will be abandoned anyway.</p>
+completely.
+The remaining effects imply that the state will be abandoned anyway.
+This makes it safe against self-assignment.
+</p>
+
+<p><i>[2024-10-02; LWG telecon]</i></p>
+
+<p>
+Agreed to change <code class='backtick'>promise</code> the same way, which is safe for self-assignment
+and matches what all three of libstdc++, libc++ and MSVC do today.
+Ask SG1 to review.
+</p>
 
 
 
@@ -152,6 +163,21 @@ completely. The remaining effects imply that the state will be abandoned anyway.
 This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 <ol>
+
+<li><p>Modify 33.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> as indicated:</p>
+<blockquote>
+<pre>
+promise&amp; operator=(promise&amp;&amp; rhs) noexcept;
+</pre>
+<p>-2- <i>Effects</i>:
+<del>
+Abandons any shared state (33.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>) and then as if
+</del>
+<ins>Equivalent to</ins>
+<code class='backtick'>promise(std::move(rhs)).swap(*this)</code>.
+</p>
+</blockquote>
+</li>
 <li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
 <blockquote>
 <pre>

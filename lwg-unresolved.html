@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-10-02 at 12:53:51 UTC
+<p>Revised 2024-10-03 at 09:10:53 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -57469,75 +57469,6 @@ is obtained is destroyed or a non-<code>const</code> member function of the exce
 
 
 <hr>
-<h3 id="4088"><a href="#4088">4088</a><sup><a href="https://cplusplus.github.io/LWG/issue4088">(i)</a></sup>. <code>println</code> ignores the locale imbued in <code>std::ostream</code></h3>
-<p><b>Section:</b> 31.7.6.3.5 <a href="https://wg21.link/ostream.formatted.print">[ostream.formatted.print]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jens Maurer <b>Opened:</b> 2024-04-30 <b>Last modified:</b> 2024-05-04</p>
-<p><b>Priority: </b>Not Prioritized
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#ostream.formatted.print">active issues</a> in [ostream.formatted.print].</p>
-<p><b>View all other</b> <a href="lwg-index.html#ostream.formatted.print">issues</a> in [ostream.formatted.print].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-31.7.6.3.5 <a href="https://wg21.link/ostream.formatted.print">[ostream.formatted.print]</a> specifies that <code>std::print</code> uses the locale
-imbued in the <code>std::ostream&amp;</code> argument for formatting, by using this equivalence:
-</p>
-<blockquote>
-<pre>
-vformat(os.getloc(), fmt, args);
-</pre>
-</blockquote>
-<p>
-(in the <code>vformat_(non)unicode</code> delegation).
-<p/>
-However, <code>std::println</code> ignores the <code>std::ostream</code>'s locale
-for its locale-dependent formatting:
-</p>
-<blockquote>
-<pre>
-print(os, "{}\n", format(fmt, std::forward&lt;Args&gt;(args)...));
-</pre>
-</blockquote>
-<p>
-This is inconsistent.
-</p>
-
-
-<p id="res-4088"><b>Proposed resolution:</b></p>
-<p>
-This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
-</p>
-
-<ol>
-
-<li><p>Modify 31.7.6.3.5 <a href="https://wg21.link/ostream.formatted.print">[ostream.formatted.print]</a> as indicated:</p>
-
-<blockquote>
-<pre>
-template&lt;class... Args&gt;
-  void println(ostream&amp; os, format_string&lt;Args...&gt; fmt, Args&amp;&amp;... args);
-</pre>
-<blockquote>
-<p>
--2- <i>Effects</i>: Equivalent to:
-</p>
-<blockquote>
-<pre>
-print(os, "{}\n", format(<ins>os.getloc(),</ins> fmt, std::forward&lt;Args&gt;(args)...));
-</pre>
-</blockquote>
-</blockquote>
-</blockquote>
-
-</li>
-</ol>
-
-
-
-
-
-
-<hr>
 <h3 id="4089"><a href="#4089">4089</a><sup><a href="https://cplusplus.github.io/LWG/issue4089">(i)</a></sup>. <code>concat_view::<i>iterator</i></code>'s <code>iter_swap</code> is overconstrained</h3>
 <p><b>Section:</b> 26.7.18.3 <a href="https://wg21.link/range.concat.iterator">[range.concat.iterator]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-30 <b>Last modified:</b> 2024-06-24</p>
@@ -62953,6 +62884,14 @@ with <code>std::forward&lt;F&gt;(f)</code>.
 
 <p><i>[2024-10-02; Jonathan provides improved wording]</i></p>
 
+<p>Drop preconditions as suggested on reflector.</p>
+
+<p><i>[2024-10-02; LWG telecon]</i></p>
+
+<p>
+Clarify that "of type <code>decay_t&lt;F&gt;</code>"
+is supposed to be specifying the type of the stored task.
+</p>
 
 
 
@@ -62982,9 +62921,12 @@ Invoking a copy of <code class='backtick'>f</code> behaves the same as invoking 
 </p>
 <p>
 -5- <i>Effects</i>:
-Constructs a new <code class='backtick'>packaged_task</code> object with a shared state and initializes
+Constructs a new <code class='backtick'>packaged_task</code> object with
+<ins>a stored task of type <code>decay_t&lt;F&gt;</code> and</ins>
+a shared state
+<ins>. Initializes</ins>
+<del>and initializes</del>
 the object's stored task
-<ins>of type <code>decay_t&lt;F&gt;</code></ins>
 with <code>std::forward&lt;F&gt;(f)</code>.
 </p>
 </blockquote>
@@ -63234,7 +63176,18 @@ calls <code class='backtick'>packaged_task(std::move(rhs)).swap(*this)</code>.
 
 <p>
 Following reflector discussion, remove the "Releases any shared state" text
-completely. The remaining effects imply that the state will be abandoned anyway.</p>
+completely.
+The remaining effects imply that the state will be abandoned anyway.
+This makes it safe against self-assignment.
+</p>
+
+<p><i>[2024-10-02; LWG telecon]</i></p>
+
+<p>
+Agreed to change <code class='backtick'>promise</code> the same way, which is safe for self-assignment
+and matches what all three of libstdc++, libc++ and MSVC do today.
+Ask SG1 to review.
+</p>
 
 
 
@@ -63243,6 +63196,21 @@ completely. The remaining effects imply that the state will be abandoned anyway.
 This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 <ol>
+
+<li><p>Modify 33.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> as indicated:</p>
+<blockquote>
+<pre>
+promise&amp; operator=(promise&amp;&amp; rhs) noexcept;
+</pre>
+<p>-2- <i>Effects</i>:
+<del>
+Abandons any shared state (33.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>) and then as if
+</del>
+<ins>Equivalent to</ins>
+<code class='backtick'>promise(std::move(rhs)).swap(*this)</code>.
+</p>
+</blockquote>
+</li>
 <li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
 <blockquote>
 <pre>

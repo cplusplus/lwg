@@ -62,7 +62,7 @@
 </tr>
 <tr>
 <td align="left">Date:</td>
-<td align="left">Revised 2024-10-02 at 12:53:51 UTC
+<td align="left">Revised 2024-10-03 at 09:10:53 UTC
 </td>
 </tr>
 <tr>
@@ -2496,6 +2496,82 @@ floatfield == (ios_base::fixed | ios_base::scientific)` &amp;&amp; !uppercase
 </tr>
 </table>
 </blockquote>
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4088"><a href="#4088">4088</a><sup><a href="https://cplusplus.github.io/LWG/issue4088">(i)</a></sup>. <code>println</code> ignores the locale imbued in <code>std::ostream</code></h3>
+<p><b>Section:</b> 31.7.6.3.5 <a href="https://wg21.link/ostream.formatted.print">[ostream.formatted.print]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Jens Maurer <b>Opened:</b> 2024-04-30 <b>Last modified:</b> 2024-10-03</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#ostream.formatted.print">active issues</a> in [ostream.formatted.print].</p>
+<p><b>View all other</b> <a href="lwg-index.html#ostream.formatted.print">issues</a> in [ostream.formatted.print].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+31.7.6.3.5 <a href="https://wg21.link/ostream.formatted.print">[ostream.formatted.print]</a> specifies that <code>std::print</code> uses the locale
+imbued in the <code>std::ostream&amp;</code> argument for formatting, by using this equivalence:
+</p>
+<blockquote>
+<pre>
+vformat(os.getloc(), fmt, args);
+</pre>
+</blockquote>
+<p>
+(in the <code>vformat_(non)unicode</code> delegation).
+<p/>
+However, <code>std::println</code> ignores the <code>std::ostream</code>'s locale
+for its locale-dependent formatting:
+</p>
+<blockquote>
+<pre>
+print(os, "{}\n", format(fmt, std::forward&lt;Args&gt;(args)...));
+</pre>
+</blockquote>
+<p>
+This is inconsistent.
+</p>
+
+<p><i>[2024-10-03; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after seven votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4088"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 31.7.6.3.5 <a href="https://wg21.link/ostream.formatted.print">[ostream.formatted.print]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class... Args&gt;
+  void println(ostream&amp; os, format_string&lt;Args...&gt; fmt, Args&amp;&amp;... args);
+</pre>
+<blockquote>
+<p>
+-2- <i>Effects</i>: Equivalent to:
+</p>
+<blockquote>
+<pre>
+print(os, "{}\n", format(<ins>os.getloc(),</ins> fmt, std::forward&lt;Args&gt;(args)...));
+</pre>
+</blockquote>
+</blockquote>
+</blockquote>
+
 </li>
 </ol>
 

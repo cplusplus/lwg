@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-10-05 at 10:32:51 UTC
+<p>Revised 2024-10-05 at 11:10:55 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -63777,6 +63777,90 @@ As the divergence implementation strategies is observable, perhaps we should cla
 
 
 <p id="res-4163"><b>Proposed resolution:</b></p>
+
+
+
+
+
+<hr>
+<h3 id="4164"><a href="#4164">4164</a><sup><a href="https://cplusplus.github.io/LWG/issue4164">(i)</a></sup>. Missing guarantees for <code class='backtick'>forward_list</code> modifiers</h3>
+<p><b>Section:</b> 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-10-05 <b>Last modified:</b> 2024-10-05</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#forward.list.modifiers">issues</a> in [forward.list.modifiers].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The new <code class='backtick'>std::list</code> members added by <a href="https://wg21.link/P1206R7" title=" Conversions from ranges to containers">P1206R7</a>,
+<code>insert_range(const_iterator, R&amp;&amp;)</code>,
+<code>prepend_range(R&amp;&amp;)</code>, and
+<code>append_range(R&amp;&amp;)</code>,
+have the same exception safety guarantee as
+<code class='backtick'>std::list::insert(const_iterator, InputIterator, InputIterator)</code>, which is:
+<blockquote>
+<i>Remarks</i>:
+Does not affect the validity of iterators and references.
+If an exception is thrown, there are no effects.
+</blockquote>
+</p>
+<p>
+This guarantee was achieved for the new <code class='backtick'>list</code> functions simply by placing
+them in the same set of declarations as the existing <code class='backtick'>insert</code> overloads,
+at the start of 24.3.11.4 <a href="https://wg21.link/list.modifiers">[list.modifiers]</a>.
+</p>
+
+<p>
+However, the new <code class='backtick'>std::forward_list</code> members,
+<code>insert_range_after(const_iterator, R&amp;&amp;)</code> and
+<code>prepend_range(R&amp;&amp;)</code>,
+do not have the same guarantee as <code class='backtick'>forward_list::insert_after</code>.
+This looks like an omission caused by the fact that <code class='backtick'>insert_after</code>'s
+exception safety guarantee is given in a separate paragraph at the start
+of 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a>:
+<blockquote>
+None of the overloads of <code class='backtick'>insert_after</code>
+shall affect the validity of iterators and references,
+and <code class='backtick'>erase_after</code> shall invalidate only iterators and references
+to the erased elements.
+If an exception is thrown during <code class='backtick'>insert_after</code> there shall be no effect.
+</blockquote>
+</p>
+
+<p>
+I think we should give similar guarantees for <code class='backtick'>insert_range_after</code>
+and <code class='backtick'>prepend_range</code>.
+The change might also be appropriate for <code class='backtick'>emplace_after</code> as well.
+A "no effects" guarantee is already given for <code class='backtick'>push_front</code> and <code class='backtick'>emplace_front</code>
+in 24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a> p66, although that doesn't say anything
+about iterator invalidation so we might want to add that to
+24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> too.
+</p>
+
+
+
+<p id="res-4164"><b>Proposed resolution:</b></p>
+<p>This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.</p>
+
+<ol>
+<li>
+<p>Change 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> as indicated:</p>
+<blockquote>
+None of the <del>overloads of <code class='backtick'>insert_after</code> shall</del>
+<ins>member functions in this subclause that insert elements</ins>
+affect the validity of iterators and references,
+and <code class='backtick'>erase_after</code> <del>shall invalidate</del> <ins>invalidates</ins>
+only iterators and references to the erased elements.
+If an exception is thrown
+<del>during <code class='backtick'>insert_after</code></del>
+<ins>by any of these member functions that insert elements</ins>
+there <del>shall be</del> <ins>is</ins> no effect
+<ins>on the <code class='backtick'>forward_list</code></ins>.
+</blockquote>
+
+</li>
+</ol>
+
 
 
 

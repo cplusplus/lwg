@@ -67,7 +67,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-10-03</td>
+  <td align="left">2024-10-05</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-10-03 at 20:13:18 UTC
+<p>Revised 2024-10-05 at 10:32:51 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -5833,7 +5833,7 @@ generates a decimal-point character unconditionally in generated floatingpoint o
 <hr>
 <h3 id="2136"><a href="#2136">2136</a><sup><a href="https://cplusplus.github.io/LWG/issue2136">(i)</a></sup>. Postconditions vs. exceptions</h3>
 <p><b>Section:</b> 16.3.2 <a href="https://wg21.link/structure">[structure]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
- <b>Submitter:</b> Jens Maurer <b>Opened:</b> 2012-03-08 <b>Last modified:</b> 2024-10-03</p>
+ <b>Submitter:</b> Jens Maurer <b>Opened:</b> 2012-03-08 <b>Last modified:</b> 2024-10-05</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
@@ -5887,8 +5887,23 @@ Nonetheless, the editorial change seems to be applicable even without having thi
 it doesn't actually change the normative state by itself.
 </p>
 
+<p><i>[2024-10-03; Jonathan adds wording]</i></p>
+
+
 
 <p id="res-2136"><b>Proposed resolution:</b></p>
+<p>This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.</p>
+
+<ol>
+<li>
+<p>Change 16.3.2.4 <a href="https://wg21.link/structure.specifications">[structure.specifications]</a> as indicated:</p>
+<blockquote>
+(3.6) &mdash;
+<i>Postconditions</i>: the conditions (sometimes termed observable results)
+established by the function <ins>when a call to it returns normally</ins>.
+</blockquote>
+</li>
+</ol>
 
 
 

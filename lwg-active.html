@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-10-05 at 11:10:55 UTC
+<p>Revised 2024-10-05 at 11:58:06 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -70366,6 +70366,11 @@ A "no effects" guarantee is already given for <code class='backtick'>push_front<
 in 24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a> p66, although that doesn't say anything
 about iterator invalidation so we might want to add that to
 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> too.
+For the functions that insert a single element, it's trivial to not modify
+the list if allocating a new node of constructing the element throws.
+The strong exception safety guarantee for the multi-element insertion functions
+is easily achieved by inserting into a temporary <code class='backtick'>forward_list</code> first,
+then using <code class='backtick'>splice_after</code> which is non-throwing.
 </p>
 
 

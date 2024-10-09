@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-10-09 at 16:56:23 UTC
+<p>Revised 2024-10-09 at 17:05:30 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -70484,7 +70484,7 @@ there <del>shall be</del> <ins>is</ins> no effect
 The proposed resolution potentially mandates a change to <code class='backtick'>resize</code> when
 increasing the size, requiring implementations to "roll back" earlier
 insertions if a later one throws, so that the size is left unchanged.
-It appears that all of libstdc++, libc++ and MSVC already do this.
+It appears that libstdc++ and MSVC already do this, libc++ does not.
 </p>
 
 <p><i>[2024-10-09; LWG telecon: Move to Ready]</i></p>

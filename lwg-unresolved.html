@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-10-05 at 11:58:06 UTC
+<p>Revised 2024-10-09 at 14:22:45 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -63526,15 +63526,15 @@ calls</del>
 <hr>
 <h3 id="4159"><a href="#4159">4159</a><sup><a href="https://cplusplus.github.io/LWG/issue4159">(i)</a></sup>. Uses-allocator construction mechanisms should be opted out for node handles</h3>
 <p><b>Section:</b> 24.2.5 <a href="https://wg21.link/container.node">[container.node]</a>, 20.2.8.1 <a href="https://wg21.link/allocator.uses.trait">[allocator.uses.trait]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-21 <b>Last modified:</b> 2024-09-22</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-21 <b>Last modified:</b> 2024-10-09</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Currently, node handle types (24.2.5 <a href="https://wg21.link/container.node">[container.node]</a>) have the member 
-<code>allocator_type</code> type alias, which makes <code>std::uses_allocator</code> report 
-<code>true</code> for them. However, they don't have allocator-extended constructors, 
+Currently, node handle types (24.2.5 <a href="https://wg21.link/container.node">[container.node]</a>) have the member
+<code>allocator_type</code> type alias, which makes <code>std::uses_allocator</code> report
+<code>true</code> for them. However, they don't have allocator-extended constructors,
 and it's unclear to me whether it's better to make them have such constructors.
 <p/>
 The status quo renders the following seemingly reasonable program ill-formed.
@@ -63552,6 +63552,51 @@ int main() {
 <p>
 Perhaps we should consistently treat node handles not uses-allocator-constructible.
 </p>
+<p><i>[2024-10-09; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+"Strike the carve outs for program-defined specializations."
+If it's broken for <code>uses_allocator&lt;NH, A&gt;</code> to be true
+when <code class='backtick'>NH</code> is not a program-defined type, then we don't want to allow users
+to make it true for a program-defined <code class='backtick'>A</code>, that would still be broken.
+</p>
+
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
+
+<p>
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
+</p>
+
+<ol>
+<li><p>Modify 24.2.5.1 <a href="https://wg21.link/container.node.overview">[container.node.overview]</a> as indicated:</p>
+
+<blockquote>
+<p>
+[&hellip;]
+<p/>
+-4- If a user-defined specialization of <code>pair</code> exists for <code>pair&lt;const Key, T&gt;</code>
+or <code>pair&lt;Key, T&gt;</code>, where <code>Key</code> is the container's <code>key_type</code> and
+<code>T</code> is the container's <code>mapped_type</code>, the behavior of operations involving node handles
+is undefined.
+<p/>
+<ins>-?- For each node handle type <code>NH</code> and any type <code>A</code>, if
+<code>uses_allocator&lt;NH, A&gt;</code> is not a program-defined specialization, it meets the
+<i>Cpp17BinaryTypeTrait</i> requirements (21.3.2 <a href="https://wg21.link/meta.rqmts">[meta.rqmts]</a>) and its base characteristic
+is <code>false_type</code>.</ins>
+</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+
+<p><i>[2024-10-09; Adjust wording as requested in reflector poll]</i></p>
+
+
+
 
 
 <p id="res-4159"><b>Proposed resolution:</b></p>
@@ -63566,15 +63611,15 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 <p>
 [&hellip;]
 <p/>
--4- If a user-defined specialization of <code>pair</code> exists for <code>pair&lt;const Key, T&gt;</code> 
-or <code>pair&lt;Key, T&gt;</code>, where <code>Key</code> is the container's <code>key_type</code> and 
+-4- If a user-defined specialization of <code>pair</code> exists for <code>pair&lt;const Key, T&gt;</code>
+or <code>pair&lt;Key, T&gt;</code>, where <code>Key</code> is the container's <code>key_type</code> and
 <code>T</code> is the container's <code>mapped_type</code>, the behavior of operations involving node handles
 is undefined.
 <p/>
-<ins>-?- For each node handle type <code>NH</code> and any type <code>A</code>, if 
-<code>uses_allocator&lt;NH, A&gt;</code> is not a program-defined specialization, it meets the 
-<i>Cpp17BinaryTypeTrait</i> requirements (21.3.2 <a href="https://wg21.link/meta.rqmts">[meta.rqmts]</a>) and its base characteristic 
-is <code>false_type</code>.</ins>
+<ins>-?- For each node handle type <code>NH</code> and any type <code>A</code>,
+<code>uses_allocator&lt;NH, A&gt;</code> meets the
+<i>Cpp17BinaryTypeTrait</i> requirements (21.3.2 <a href="https://wg21.link/meta.rqmts">[meta.rqmts]</a>)
+and its base characteristic is <code>false_type</code>.</ins>
 </p>
 </blockquote>
 </li>
@@ -63684,19 +63729,30 @@ should be used.
 <hr>
 <h3 id="4162"><a href="#4162">4162</a><sup><a href="https://cplusplus.github.io/LWG/issue4162">(i)</a></sup>. Worst time complexity of non-parallel versions of <code>nth_element</code> is underspecified</h3>
 <p><b>Section:</b> 27.8.3 <a href="https://wg21.link/alg.nth.element">[alg.nth.element]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-29 <b>Last modified:</b> 2024-10-03</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-29 <b>Last modified:</b> 2024-10-09</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#alg.nth.element">issues</a> in [alg.nth.element].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Currently, 27.8.3 <a href="https://wg21.link/alg.nth.element">[alg.nth.element]</a> doesn't specify the worst time complexity for <code>nth_element</code> 
-without <code>ExecutionPolicy</code> parameter, which seemingly allows a complexity that is 
-<code>&#x1d4aa;(<i>N</i><sup>2</sup>)</code> or even worse. Presumably we should make the worst time complexity 
-consistent between parallel and non-parallel versions. For <code>sort</code>, LWG <a href="lwg-defects.html#713" title="sort() complexity is too lax (Status: CD1)">713</a><sup><a href="https://cplusplus.github.io/LWG/issue713" title="Latest snapshot">(i)</a></sup> already 
+Currently, 27.8.3 <a href="https://wg21.link/alg.nth.element">[alg.nth.element]</a> doesn't specify the worst time complexity for <code>nth_element</code>
+without <code>ExecutionPolicy</code> parameter, which seemingly allows a complexity that is
+<code>&#x1d4aa;(<i>N</i><sup>2</sup>)</code> or even worse. Presumably we should make the worst time complexity
+consistent between parallel and non-parallel versions. For <code>sort</code>, LWG <a href="lwg-defects.html#713" title="sort() complexity is too lax (Status: CD1)">713</a><sup><a href="https://cplusplus.github.io/LWG/issue713" title="Latest snapshot">(i)</a></sup> already
 strengthened complexity requirements.
 </p>
+
+<p><i>[2024-10-09; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+"This seems to require changes to implementations for them to meet this
+complexity guarantee."
+</p>
+
 
 
 <p id="res-4162"><b>Proposed resolution:</b></p>
@@ -63733,8 +63789,8 @@ template&lt;random_access_iterator I, sentinel_for&lt;I&gt; S, class Comp = rang
 <p>
 [&hellip;]
 <p/>
--5- <i>Complexity</i>: <del>For the overloads with no <code>ExecutionPolicy</code>, linear on average. 
-For the overloads with an <code>ExecutionPolicy</code>,</del> <code>&#x1d4aa;(<i>N</i>)</code> applications 
+-5- <i>Complexity</i>: <del>For the overloads with no <code>ExecutionPolicy</code>, linear on average.
+For the overloads with an <code>ExecutionPolicy</code>,</del> <code>&#x1d4aa;(<i>N</i>)</code> applications
 of the predicate<del>,</del> and <code>&#x1d4aa;(<i>N</i> log <i>N</i>)</code> swaps, where <code><i>N</i> =
 last - first</code>. <ins>For the overloads with no <code>ExecutionPolicy</code>, <code>&#x1d4aa;(<i>N</i>)</code>
 on average.</ins>
@@ -63785,8 +63841,8 @@ As the divergence implementation strategies is observable, perhaps we should cla
 <hr>
 <h3 id="4164"><a href="#4164">4164</a><sup><a href="https://cplusplus.github.io/LWG/issue4164">(i)</a></sup>. Missing guarantees for <code class='backtick'>forward_list</code> modifiers</h3>
 <p><b>Section:</b> 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-10-05 <b>Last modified:</b> 2024-10-05</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-10-05 <b>Last modified:</b> 2024-10-09</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#forward.list.modifiers">issues</a> in [forward.list.modifiers].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -63843,6 +63899,20 @@ then using <code class='backtick'>splice_after</code> which is non-throwing.
 </p>
 
 
+<p><i>[2024-10-09; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>It was suggested to change
+"If an exception is thrown by any of these member functions
+that insert elements there is no effect on the forward_list"
+to simply
+"If an exception is thrown by any of these member functions
+there is no effect on the forward_list"
+</p>
+
+
 
 <p id="res-4164"><b>Proposed resolution:</b></p>
 <p>This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.</p>
@@ -63858,7 +63928,7 @@ and <code class='backtick'>erase_after</code> <del>shall invalidate</del> <ins>i
 only iterators and references to the erased elements.
 If an exception is thrown
 <del>during <code class='backtick'>insert_after</code></del>
-<ins>by any of these member functions that insert elements</ins>
+<ins>by any of these member functions</ins>
 there <del>shall be</del> <ins>is</ins> no effect
 <ins>on the <code class='backtick'>forward_list</code></ins>.
 </blockquote>

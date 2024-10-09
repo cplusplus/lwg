@@ -64,19 +64,30 @@
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4162"><a href="lwg-active.html#4162">4162</a>. Worst time complexity of non-parallel versions of <code>nth_element</code> is underspecified</h3>
 <p><b>Section:</b> 27.8.3 <a href="https://wg21.link/alg.nth.element">[alg.nth.element]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-29 <b>Last modified:</b> 2024-10-03</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-29 <b>Last modified:</b> 2024-10-09</p>
+<p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#alg.nth.element">issues</a> in [alg.nth.element].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Currently, 27.8.3 <a href="https://wg21.link/alg.nth.element">[alg.nth.element]</a> doesn't specify the worst time complexity for <code>nth_element</code> 
-without <code>ExecutionPolicy</code> parameter, which seemingly allows a complexity that is 
-<code>&#x1d4aa;(<i>N</i><sup>2</sup>)</code> or even worse. Presumably we should make the worst time complexity 
-consistent between parallel and non-parallel versions. For <code>sort</code>, LWG <a href="lwg-defects.html#713" title="sort() complexity is too lax (Status: CD1)">713</a><sup><a href="https://cplusplus.github.io/LWG/issue713" title="Latest snapshot">(i)</a></sup> already 
+Currently, 27.8.3 <a href="https://wg21.link/alg.nth.element">[alg.nth.element]</a> doesn't specify the worst time complexity for <code>nth_element</code>
+without <code>ExecutionPolicy</code> parameter, which seemingly allows a complexity that is
+<code>&#x1d4aa;(<i>N</i><sup>2</sup>)</code> or even worse. Presumably we should make the worst time complexity
+consistent between parallel and non-parallel versions. For <code>sort</code>, LWG <a href="lwg-defects.html#713" title="sort() complexity is too lax (Status: CD1)">713</a><sup><a href="https://cplusplus.github.io/LWG/issue713" title="Latest snapshot">(i)</a></sup> already
 strengthened complexity requirements.
 </p>
+
+<p><i>[2024-10-09; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+"This seems to require changes to implementations for them to meet this
+complexity guarantee."
+</p>
+
 
 
 <p id="res-4162"><b>Proposed resolution:</b></p>
@@ -113,8 +124,8 @@ template&lt;random_access_iterator I, sentinel_for&lt;I&gt; S, class Comp = rang
 <p>
 [&hellip;]
 <p/>
--5- <i>Complexity</i>: <del>For the overloads with no <code>ExecutionPolicy</code>, linear on average. 
-For the overloads with an <code>ExecutionPolicy</code>,</del> <code>&#x1d4aa;(<i>N</i>)</code> applications 
+-5- <i>Complexity</i>: <del>For the overloads with no <code>ExecutionPolicy</code>, linear on average.
+For the overloads with an <code>ExecutionPolicy</code>,</del> <code>&#x1d4aa;(<i>N</i>)</code> applications
 of the predicate<del>,</del> and <code>&#x1d4aa;(<i>N</i> log <i>N</i>)</code> swaps, where <code><i>N</i> =
 last - first</code>. <ins>For the overloads with no <code>ExecutionPolicy</code>, <code>&#x1d4aa;(<i>N</i>)</code>
 on average.</ins>

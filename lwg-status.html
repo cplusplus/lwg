@@ -62,8 +62,8 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
 
-<p>Revised 2024-10-09 at 14:22:45 UTC
-</p><h2 id="Ready">Ready (11 issues)</h2>
+<p>Revised 2024-10-09 at 16:56:23 UTC
+</p><h2 id="Ready">Ready (15 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -97,6 +97,15 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <td><a href="lwg-active.html#Ready">Ready</a></td>
 <td>23.5.3 [cstring.syn]</td>
 <td>Clarify that <code>std::launder</code> is not needed when using the result of <code>std::memcpy</code></td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4164"><a href="lwg-active.html#4164" title="Missing guarantees for forward_list modifiers (Status: Ready)">4164</a><sup><a href="https://cplusplus.github.io/LWG/issue4164">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>24.3.10.5 [forward.list.modifiers]</td>
+<td>Missing guarantees for <code class='backtick'>forward_list</code> modifiers</td>
 <td>Yes</td>
 <td>3</td>
 <td></td>
@@ -158,6 +167,24 @@ should not be constrained</td>
 <td></td>
 </tr>
 <tr>
+<td id="4085"><a href="lwg-active.html#4085" title="ranges::generate_random's helper lambda should specify the return type (Status: Ready)">4085</a><sup><a href="https://cplusplus.github.io/LWG/issue4085">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>27.12.2 [alg.rand.generate]</td>
+<td><code>ranges::generate_random</code>'s helper lambda should specify the return type</td>
+<td>Yes</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td id="4014"><a href="lwg-active.html#4014" title="LWG 3809 changes behavior of some existing std::subtract_with_carry_engine code (Status: Ready)">4014</a><sup><a href="https://cplusplus.github.io/LWG/issue4014">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>28.5.4.4 [rand.eng.sub]</td>
+<td>LWG 3809 changes behavior of some existing <code>std::subtract_with_carry_engine</code> code</td>
+<td>Yes</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
 <td id="4134"><a href="lwg-active.html#4134" title="Issue with Philox algorithm specification (Status: Ready)">4134</a><sup><a href="https://cplusplus.github.io/LWG/issue4134">(i)</a></sup></td>
 <td><a href="lwg-active.html#Ready">Ready</a></td>
 <td>28.5.4.5 [rand.eng.philox]</td>
@@ -171,6 +198,15 @@ should not be constrained</td>
 <td><a href="lwg-active.html#Ready">Ready</a></td>
 <td>31.7.10 [print.fun]</td>
 <td>Confusing requirements for <code>std::print</code> on POSIX platforms</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="4154"><a href="lwg-active.html#4154" title="The Mandates for std::packaged_task's constructor from a callable entity should consider decaying (Status: Ready)">4154</a><sup><a href="https://cplusplus.github.io/LWG/issue4154">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Ready</a></td>
+<td>33.10.10.2 [futures.task.members]</td>
+<td>The Mandates for <code>std::packaged_task</code>'s constructor from a callable entity should consider decaying</td>
 <td>Yes</td>
 <td>3</td>
 <td></td>
@@ -427,7 +463,7 @@ should not be constrained</td>
 <td></td>
 </tr>
 </table>
-<h2 id="New">New (438 issues)</h2>
+<h2 id="New">New (434 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -2185,15 +2221,6 @@ arguments when no insertion happens</td>
 <td></td>
 </tr>
 <tr>
-<td id="4164"><a href="lwg-active.html#4164" title="Missing guarantees for forward_list modifiers (Status: New)">4164</a><sup><a href="https://cplusplus.github.io/LWG/issue4164">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>24.3.10.5 [forward.list.modifiers]</td>
-<td>Missing guarantees for <code class='backtick'>forward_list</code> modifiers</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
 <td id="3758"><a href="lwg-active.html#3758" title="Element-relocating operations of std::vector and std::deque 
 should conditionally require Cpp17CopyInsertable in their preconditions (Status: New)">3758</a><sup><a href="https://cplusplus.github.io/LWG/issue3758">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
@@ -3285,15 +3312,6 @@ specified to make <code><i>N</i></code> copies of <code>T</code> into the destin
 <td></td>
 </tr>
 <tr>
-<td id="4085"><a href="lwg-active.html#4085" title="ranges::generate_random's helper lambda should specify the return type (Status: New)">4085</a><sup><a href="https://cplusplus.github.io/LWG/issue4085">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>27.12.2 [alg.rand.generate]</td>
-<td><code>ranges::generate_random</code>'s helper lambda should specify the return type</td>
-<td>Yes</td>
-<td>2</td>
-<td></td>
-</tr>
-<tr>
 <td id="4161"><a href="lwg-active.html#4161" title="Some free functions don't automatically work for program-defined std::complex&lt;NonFloatingPoint&gt; (Status: New)">4161</a><sup><a href="https://cplusplus.github.io/LWG/issue4161">(i)</a></sup></td>
 <td><a href="lwg-active.html#New">New</a></td>
 <td>28.4 [complex.numbers]</td>
@@ -3345,15 +3363,6 @@ specified to make <code><i>N</i></code> copies of <code>T</code> into the destin
 <td>Instantiating templates in &sect;[rand] with <code>int8_t</code>/<code>uint8_t</code> is undefined behavior</td>
 <td>Yes</td>
 <td></td>
-<td></td>
-</tr>
-<tr>
-<td id="4014"><a href="lwg-active.html#4014" title="LWG 3809 changes behavior of some existing std::subtract_with_carry_engine code (Status: New)">4014</a><sup><a href="https://cplusplus.github.io/LWG/issue4014">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>28.5.4.4 [rand.eng.sub]</td>
-<td>LWG 3809 changes behavior of some existing <code>std::subtract_with_carry_engine</code> code</td>
-<td>Yes</td>
-<td>2</td>
 <td></td>
 </tr>
 <tr>
@@ -4264,15 +4273,6 @@ fetch_meow members don't (Status: New)">3047</a><sup><a href="https://cplusplus.
 <td><a href="lwg-active.html#New">New</a></td>
 <td>33.10.10.2 [futures.task.members]</td>
 <td><code>packaged_task::operator=</code> should abandon its shared state</td>
-<td>Yes</td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4154"><a href="lwg-active.html#4154" title="The Mandates for std::packaged_task's constructor from a callable entity should consider decaying (Status: New)">4154</a><sup><a href="https://cplusplus.github.io/LWG/issue4154">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>33.10.10.2 [futures.task.members]</td>
-<td>The Mandates for <code>std::packaged_task</code>'s constructor from a callable entity should consider decaying</td>
 <td>Yes</td>
 <td>3</td>
 <td></td>

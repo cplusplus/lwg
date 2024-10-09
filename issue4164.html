@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Issue 4164: Missing guarantees for forward_list modifiers</title>
 <meta property="og:title" content="Issue 4164: Missing guarantees for forward_list modifiers">
-<meta property="og:description" content="C++ library issue. Status: New">
+<meta property="og:description" content="C++ library issue. Status: Ready">
 <meta property="og:url" content="https://cplusplus.github.io/LWG/issue4164.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="http://cplusplus.github.io/LWG/images/cpp_logo.png">
@@ -61,14 +61,14 @@
 </head>
 <body>
 <hr>
-<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Ready">Ready</a> status.</em></p>
 <h3 id="4164"><a href="lwg-active.html#4164">4164</a>. Missing guarantees for <code class='backtick'>forward_list</code> modifiers</h3>
-<p><b>Section:</b> 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-10-05 <b>Last modified:</b> 2024-10-09</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#forward.list.modifiers">issues</a> in [forward.list.modifiers].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Ready">Ready</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 The new <code class='backtick'>std::list</code> members added by <a href="https://wg21.link/P1206R7" title=" Conversions from ranges to containers">P1206R7</a>,
@@ -135,9 +135,9 @@ to simply
 there is no effect on the forward_list"
 </p>
 
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
 
-
-<p id="res-4164"><b>Proposed resolution:</b></p>
 <p>This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.</p>
 
 <ol>
@@ -158,6 +158,51 @@ there <del>shall be</del> <ins>is</ins> no effect
 
 </li>
 </ol>
+
+</blockquote>
+
+<p><i>[2024-10-09; LWG suggested improved wording]</i></p>
+
+<p>
+The proposed resolution potentially mandates a change to <code class='backtick'>resize</code> when
+increasing the size, requiring implementations to "roll back" earlier
+insertions if a later one throws, so that the size is left unchanged.
+It appears that all of libstdc++, libc++ and MSVC already do this.
+</p>
+
+<p><i>[2024-10-09; LWG telecon: Move to Ready]</i></p>
+
+
+
+
+<p id="res-4164"><b>Proposed resolution:</b></p>
+<p>This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.</p>
+
+<ol>
+<li>
+<p>Change 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> as indicated:</p>
+<blockquote>
+<del>
+None of the overloads of <code class='backtick'>insert_after</code> shall
+affect the validity of iterators and references,
+and <code class='backtick'>erase_after</code> shall invalidate
+only iterators and references to the erased elements.
+</del>
+<ins>The member functions in this subclause do not
+affect the validity of iterators and references when inserting elements,
+and when erasing elements invalidate iterators and references
+to the erased elements only.
+</ins>
+If an exception is thrown
+<del>during <code class='backtick'>insert_after</code></del>
+<ins>by any of these member functions</ins>
+there <del>shall be</del> <ins>is</ins> no effect
+<ins>on the container</ins>.
+</blockquote>
+
+</li>
+</ol>
+
 
 
 

@@ -62,7 +62,7 @@
 </tr>
 <tr>
 <td align="left">Date:</td>
-<td align="left">Revised 2024-10-09 at 14:22:45 UTC
+<td align="left">Revised 2024-10-09 at 16:56:23 UTC
 </td>
 </tr>
 <tr>
@@ -1312,6 +1312,231 @@ return {first, result};
 
 
 <hr>
+<h3 id="4014"><a href="#4014">4014</a><sup><a href="https://cplusplus.github.io/LWG/issue4014">(i)</a></sup>. LWG 3809 changes behavior of some existing <code>std::subtract_with_carry_engine</code> code</h3>
+<p><b>Section:</b> 28.5.4.4 <a href="https://wg21.link/rand.eng.sub">[rand.eng.sub]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
+ <b>Submitter:</b> Matt Stephanson <b>Opened:</b> 2023-11-15 <b>Last modified:</b> 2024-10-09</p>
+<p><b>Priority: </b>2
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#rand.eng.sub">issues</a> in [rand.eng.sub].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Ready">Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Issue <a href="lwg-defects.html#3809" title="Is std::subtract_with_carry_engine&lt;uint16_t&gt; supposed to work? (Status: WP)">3809</a><sup><a href="https://cplusplus.github.io/LWG/issue3809" title="Latest snapshot">(i)</a></sup> pointed out that <code>subtract_with_carry_engine&lt;T&gt;</code> can be seeded with values
+from a <code>linear_congruential_engine&lt;T, 40014u, 0u, 2147483563u&gt;</code> object, which results in narrowing
+when <code>T</code> is less than 32 bits. Part of the resolution was to modify the LCG seed sequence as follows:
+</p>
+<blockquote>
+<pre>explicit subtract_with_carry_engine(result_type value);</pre>
+<p>-7- <i>Effects</i>:
+Sets the values of
+<math>
+  <mrow>
+    <msub> <mi>X</mi> <mrow> <mo>-</mo> <mi>r</mi> </mrow> </msub>
+    <mo separator="true">,</mo>
+    <mo>&hellip;</mo>
+    <mo separator="true">,</mo>
+    <msub> <mi>X</mi> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </msub>
+  </mrow>
+</math>,
+in that order, as specified below. If
+<math>
+  <mrow>
+    <msub> <mi>X</mi> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </msub>
+  </mrow>
+</math>
+is then <math> <mn>0</mn> </math>,
+sets <math> <mi>c</mi> </math> to <math> <mn>1</mn> </math>;
+otherwise sets <math> <mi>c</mi> </math> to <math> <mn>0</mn> </math>.
+</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;
+To set the values
+<math> <mrow> <msub> <mi>X</mi> <mi>k</mi> </msub> </mrow> </math>,
+first construct <code>e</code>, a <code>linear_congruential_engine</code> object,
+as if by the following definition:
+</p>
+<blockquote><pre>
+linear_congruential_engine&lt;<del>result_type</del><ins>uint_least32_t</ins>,
+                           40014u,0u,2147483563u&gt; e(value == 0u ? default_seed : value);
+</pre></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;
+Then, to set each
+<math> <mrow> <msub> <mi>X</mi> <mi>k</mi> </msub> </mrow> </math>,
+obtain new values
+<math>
+  <mrow>
+    <msub> <mi>z</mi> <mn>0</mn> </msub>
+    <mo separator="true">,</mo>
+    <mo>&hellip;</mo>
+    <mo separator="true">,</mo>
+    <msub> <mi>z</mi> <mrow> <mi>n</mi> <mo>-</mo> <mn>1</mn> </mrow> </msub>
+  </mrow>
+</math>
+from
+<math>
+  <mrow>
+    <mi>n</mi> <mo>=</mo>
+    <mo form="prefix" stretchy="false">&#x2308;</mo>
+    <mi>w</mi> <mo lspace="0em" rspace="0em">/</mo> <mn>32</mn>
+    <mo form="postfix" stretchy="false">&#x2309;</mo>
+  </mrow>
+</math>
+successive invocations of <code>e</code>.
+Set
+<math> <mrow> <msub> <mi>X</mi> <mi>k</mi> </msub> </mrow> </math>
+to
+<math>
+  <mrow>
+    <mrow>
+      <mo fence="true" form="prefix">(</mo>
+      <msubsup>
+        <mo movablelimits="false">&sum;</mo>
+        <mrow> <mi>j</mi> <mo>=</mo> <mn>0</mn> </mrow>
+        <mrow> <mi>n</mi> <mo>-</mo> <mn>1</mn> </mrow>
+      </msubsup>
+      <msub> <mi>z</mi> <mi>j</mi> </msub>
+      <mo>&#x2219;</mo>
+      <msup> <mn>2</mn> <mrow> <mn>32</mn> <mi>j</mi> </mrow> </msup>
+      <mo fence="true" form="postfix">)</mo>
+    </mrow>
+    <mo lspace="0.2222em" rspace="0.2222em">mod</mo>
+    <mi>m</mi>
+  </mrow>
+</math>.
+</p>
+</blockquote>
+<p>
+Inside <code>linear_congruential_engine</code>, the seed is reduced modulo 2147483563, so <code>uint_least32_t</code>
+is fine from that point on. This resolution, however, forces <code>value</code>, the user-provided seed, to be
+truncated from <code>result_type</code> to <code>uint_least32_t</code> before the reduction, which generally will
+change the result. It also breaks the existing behavior that two seeds are equivalent if they're in the same
+congruence class modulo the divisor.
+</p>
+
+<p><i>[2024-01-11; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+
+<p><i>[2024-01-11; Jonathan comments]</i></p>
+
+<p>
+More precisely, the resolution forces <code>value</code> to be <i>converted</i>
+to <code>uint_least32_t</code>, which doesn't necessarily truncate, and if it
+does truncate, it doesn't necessarily change the value.
+But it will truncate whenever <code>value_type</code> is wider than
+<code>uint_least32_t</code>,
+e.g. for 32-bit <code>uint_least32_t</code> you get a different result for
+<code>std::ranlux48_base(UINT_MAX + 1LL)()</code>.
+The new proposed resolution below restores the old behaviour for that type.
+</p>
+
+</p>
+
+<p><i>[2024-10-09; LWG telecon: Move to Ready]</i></p>
+
+
+
+
+<p id="res-4014"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4964" title=" Working Draft, Programming Languages — C++">N4964</a> <em>after the wording changes applied</em> by LWG <a href="lwg-defects.html#3809" title="Is std::subtract_with_carry_engine&lt;uint16_t&gt; supposed to work? (Status: WP)">3809</a><sup><a href="https://cplusplus.github.io/LWG/issue3809" title="Latest snapshot">(i)</a></sup>,
+which had been accepted into the working paper during the Kona 2023-11 meeting.
+</p>
+
+<ol>
+
+<li><p>Modify 28.5.4.4 <a href="https://wg21.link/rand.eng.sub">[rand.eng.sub]</a> as indicated:</p>
+
+<blockquote>
+<pre>explicit subtract_with_carry_engine(result_type value);</pre>
+<p>-7- <i>Effects</i>:
+Sets the values of
+<math>
+  <mrow>
+    <msub> <mi>X</mi> <mrow> <mo>-</mo> <mi>r</mi> </mrow> </msub>
+    <mo separator="true">,</mo>
+    <mo>&hellip;</mo>
+    <mo separator="true">,</mo>
+    <msub> <mi>X</mi> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </msub>
+  </mrow>
+</math>,
+in that order, as specified below. If
+<math>
+  <mrow>
+    <msub> <mi>X</mi> <mrow> <mo>-</mo> <mn>1</mn> </mrow> </msub>
+  </mrow>
+</math>
+is then <math> <mn>0</mn> </math>,
+sets <math> <mi>c</mi> </math> to <math> <mn>1</mn> </math>;
+otherwise sets <math> <mi>c</mi> </math> to <math> <mn>0</mn> </math>.
+</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;
+To set the values
+<math> <mrow> <msub> <mi>X</mi> <mi>k</mi> </msub> </mrow> </math>,
+first construct <code>e</code>, a <code>linear_congruential_engine</code> object,
+as if by the following definition:
+</p>
+<blockquote><pre>
+linear_congruential_engine&lt;uint_least32_t,
+                           40014u,0u,2147483563u&gt; e(value == 0u ? default_seed :
+                           <ins>static_cast&lt;uint_least32_t&gt;(</ins>value<ins> % 2147483563u)</ins>);
+</pre></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;
+Then, to set each
+<math> <mrow> <msub> <mi>X</mi> <mi>k</mi> </msub> </mrow> </math>,
+obtain new values
+<math>
+  <mrow>
+    <msub> <mi>z</mi> <mn>0</mn> </msub>
+    <mo separator="true">,</mo>
+    <mo>&hellip;</mo>
+    <mo separator="true">,</mo>
+    <msub> <mi>z</mi> <mrow> <mi>n</mi> <mo>-</mo> <mn>1</mn> </mrow> </msub>
+  </mrow>
+</math>
+from
+<math>
+  <mrow>
+    <mi>n</mi> <mo>=</mo>
+    <mo form="prefix" stretchy="false">&#x2308;</mo>
+    <mi>w</mi> <mo lspace="0em" rspace="0em">/</mo> <mn>32</mn>
+    <mo form="postfix" stretchy="false">&#x2309;</mo>
+  </mrow>
+</math>
+successive invocations of <code>e</code>.
+Set
+<math> <mrow> <msub> <mi>X</mi> <mi>k</mi> </msub> </mrow> </math>
+to
+<math>
+  <mrow>
+    <mrow>
+      <mo fence="true" form="prefix">(</mo>
+      <msubsup>
+        <mo movablelimits="false">&sum;</mo>
+        <mrow> <mi>j</mi> <mo>=</mo> <mn>0</mn> </mrow>
+        <mrow> <mi>n</mi> <mo>-</mo> <mn>1</mn> </mrow>
+      </msubsup>
+      <msub> <mi>z</mi> <mi>j</mi> </msub>
+      <mo>&#x2219;</mo>
+      <msup> <mn>2</mn> <mrow> <mn>32</mn> <mi>j</mi> </mrow> </msup>
+      <mo fence="true" form="postfix">)</mo>
+    </mrow>
+    <mo lspace="0.2222em" rspace="0.2222em">mod</mo>
+    <mi>m</mi>
+  </mrow>
+</math>.
+</p>
+</blockquote>
+
+</li>
+
+</ol>
+
+
+
+
+
+<hr>
 <h3 id="4024"><a href="#4024">4024</a><sup><a href="https://cplusplus.github.io/LWG/issue4024">(i)</a></sup>. Underspecified destruction of objects created in <code>std::make_shared_for_overwrite/std::allocate_shared_for_overwrite</code></h3>
 <p><b>Section:</b> 20.3.2.2.7 <a href="https://wg21.link/util.smartptr.shared.create">[util.smartptr.shared.create]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-12-16 <b>Last modified:</b> 2024-08-21</p>
@@ -2496,6 +2721,148 @@ floatfield == (ios_base::fixed | ios_base::scientific)` &amp;&amp; !uppercase
 </tr>
 </table>
 </blockquote>
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4085"><a href="#4085">4085</a><sup><a href="https://cplusplus.github.io/LWG/issue4085">(i)</a></sup>. <code>ranges::generate_random</code>'s helper lambda should specify the return type</h3>
+<p><b>Section:</b> 27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-04-28 <b>Last modified:</b> 2024-10-09</p>
+<p><b>Priority: </b>2
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#alg.rand.generate">active issues</a> in [alg.rand.generate].</p>
+<p><b>View all other</b> <a href="lwg-index.html#alg.rand.generate">issues</a> in [alg.rand.generate].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Ready">Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The non-specialized case of <code>generate_random(r, g, d)</code> would call
+<code>ranges::generate(r, [&amp;d, &amp;g] { return invoke(d, g); })</code>.
+However, the lambda does not explicitly specify the return type, which leads
+to a hard error when <code>invoke</code> returns a reference to the object that is not copyable or
+<code>R</code> is not the <code>output_range</code> for <code>decay_t&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt;</code>.
+</p>
+
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
+
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class R, class G, class D&gt;
+  requires output_range&lt;R, invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; &amp;&amp; invocable&lt;D&amp;, G&amp;&gt; &amp;&amp;
+           uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt;
+constexpr borrowed_iterator_t&lt;R&gt; ranges::generate_random(R&amp;&amp; r, G&amp;&amp; g, D&amp;&amp; d);
+</pre>
+<p>-5- <i>Effects</i>:</p>
+<ol style="list-style-type: none">
+<li><p>(5.1) &mdash; [&hellip;]</p></li>
+<li><p>(5.2) &mdash; [&hellip;]</p></li>
+<li><p>(5.3) &mdash; Otherwise, calls:</p>
+<blockquote><pre>
+ranges::generate(std::forward&lt;R&gt;(r), [&amp;d, &amp;g] <ins>-&gt; decltype(auto)</ins> { return invoke(d, g); });
+</pre></blockquote>
+</li>
+</ol>
+<p>-6- <i>Returns</i>: <code>ranges::end(r)</code></p>
+<p>-7- <i>Remarks</i>: The effects of <code>generate_random(r, g, d)</code> shall be equivalent to</p>
+<blockquote><pre>
+ranges::generate(std::forward&lt;R&gt;(r), [&amp;d, &amp;g] <ins>-&gt; decltype(auto)</ins> { return invoke(d, g); })
+</pre></blockquote>
+</blockquote>
+
+</li>
+</ol>
+</blockquote>
+
+<p><i>[2024-05-12, Hewill Kang provides improved wording]</i></p>
+
+
+<p><i>[2024-08-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+</p>
+
+<p><i>[2024-10-09; LWG telecon: Move to Ready]</i></p>
+
+
+
+
+<p id="res-4085"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4981" title=" Working Draft, Programming Languages — C++">N4981</a>.
+</p>
+
+<ol>
+<li><p>Modify 28.5.2 <a href="https://wg21.link/rand.synopsis">[rand.synopsis]</a>, header <code>&lt;random&gt;</code> synopsis, as indicated:</p>
+
+<blockquote>
+<pre>
+#include &lt;initializer_list&gt;     // <i>see 17.10.2 <a href="https://wg21.link/initializer.list.syn">[initializer.list.syn]</a></i>
+
+namespace std {
+  [&hellip;]
+  namespace ranges {
+    [&hellip;]
+    template&lt;class R, class G, class D&gt;
+      requires output_range&lt;R, invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; &amp;&amp; invocable&lt;D&amp;, G&amp;&gt; &amp;&amp;
+               uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt; <ins>&amp;&amp;
+               is_arithmetic_v&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt;</ins>
+    constexpr borrowed_iterator_t&lt;R&gt; generate_random(R&amp;&amp; r, G&amp;&amp; g, D&amp;&amp; d);
+
+    template&lt;class G, class D, output_iterator&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; O, sentinel_for&lt;O&gt; S&gt;
+      requires invocable&lt;D&amp;, G&amp;&gt; &amp;&amp; uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt; <ins>&amp;&amp;
+               is_arithmetic_v&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt;</ins>
+    constexpr O generate_random(O first, S last, G&amp;&amp; g, D&amp;&amp; d);
+  }
+  [&hellip;]
+}
+</pre>
+</blockquote>
+
+</li>
+
+<li><p>Modify 27.12.2 <a href="https://wg21.link/alg.rand.generate">[alg.rand.generate]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class R, class G, class D&gt;
+  requires output_range&lt;R, invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; &amp;&amp; invocable&lt;D&amp;, G&amp;&gt; &amp;&amp;
+           uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt; <ins>&amp;&amp;
+           is_arithmetic_v&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt;</ins>
+constexpr borrowed_iterator_t&lt;R&gt; ranges::generate_random(R&amp;&amp; r, G&amp;&amp; g, D&amp;&amp; d);
+</pre>
+<blockquote>
+<p>
+-5- <i>Effects</i>:
+</p>
+[&hellip;]
+</blockquote>
+<pre>
+template&lt;class G, class D, output_iterator&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt; O, sentinel_for&lt;O&gt; S&gt;
+  requires invocable&lt;D&amp;, G&amp;&gt; &amp;&amp; uniform_random_bit_generator&lt;remove_cvref_t&lt;G&gt;&gt; <ins>&amp;&amp;
+           is_arithmetic_v&lt;invoke_result_t&lt;D&amp;, G&amp;&gt;&gt;</ins>
+constexpr O ranges::generate_random(O first, S last, G&amp;&amp; g, D&amp;&amp; d);
+</pre>
+<blockquote>
+<p>
+-8- <i>Effects</i>: Equivalent to:
+</p>
+[&hellip;]
+</blockquote>
+</blockquote>
+
 </li>
 </ol>
 
@@ -3884,6 +4251,128 @@ and the template parameter <i>w</i> defines the range of the produced numbers.
 
 
 <hr>
+<h3 id="4154"><a href="#4154">4154</a><sup><a href="https://cplusplus.github.io/LWG/issue4154">(i)</a></sup>. The Mandates for <code>std::packaged_task</code>'s constructor from a callable entity should consider decaying</h3>
+<p><b>Section:</b> 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-10-09</p>
+<p><b>Priority: </b>3
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#futures.task.members">active issues</a> in [futures.task.members].</p>
+<p><b>View all other</b> <a href="lwg-index.html#futures.task.members">issues</a> in [futures.task.members].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Ready">Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Currently, 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a>/3 states:
+<blockquote>
+<i>Mandates</i>:
+<code>is_invocable_r_v&lt;R, F&amp;, ArgTypes...&gt;</code> is <code class='backtick'>true</code>.
+</blockquote>
+where <code>F&amp;</code> can be a reference to a cv-qualified function object type.
+</p>
+<p>
+However, in mainstream implementations (libc++, libstdc++, and MSVC STL),
+the stored task object always has a cv-unqualified type,
+and thus the cv-qualification is unrecognizable in <code class='backtick'>operator()</code>.
+</p>
+<p>
+Since 22.10.17.3.2 <a href="https://wg21.link/func.wrap.func.con">[func.wrap.func.con]</a> uses a decayed type,
+perhaps we should also so specify for <code class='backtick'>std::packaged_task</code>.
+</p>
+
+<p><i>[2024-10-02; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>
+"Fix preconditions, <code class='backtick'>f</code> doesn't need to be invocable, we only invoke the copy."
+</p>
+
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
+
+<p>
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
+</p>
+<ol>
+<li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
+<blockquote>
+<p>
+-3- <i>Mandates</i>:
+<code>is_invocable_r_v&lt;R, <del>F</del><ins>decay_t&lt;F&gt;</ins>&amp;, ArgTypes...&gt;</code>
+is <code class='backtick'>true</code>.
+</p>
+[...]
+<p>
+-5- <i>Effects</i>:
+Constructs a new <code class='backtick'>packaged_task</code> object with a shared state and initializes
+the object's stored task
+<ins>of type <code>decay_t&lt;F&gt;</code></ins>
+with <code>std::forward&lt;F&gt;(f)</code>.
+</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+
+<p><i>[2024-10-02; Jonathan provides improved wording]</i></p>
+
+<p>Drop preconditions as suggested on reflector.</p>
+
+<p><i>[2024-10-02; LWG telecon]</i></p>
+
+<p>
+Clarify that "of type <code>decay_t&lt;F&gt;</code>"
+is supposed to be specifying the type of the stored task.
+</p>
+
+<p><i>[2024-10-09; LWG telecon: Move to Ready]</i></p>
+
+
+
+
+<p id="res-4154"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
+</p>
+<ol>
+<li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
+<blockquote>
+<pre><code>template&lt;class F&gt;
+  explicit packaged_task(F&amp;&amp; f);</code></pre>
+<p>
+-2- <i>Constraints</i>:
+<code>remove_cvref_t&lt;F&gt;</code> is not the same type as
+<code>packaged_task&lt;R(ArgTypes...)&gt;</code>.
+</p>
+<p>
+-3- <i>Mandates</i>:
+<code>is_invocable_r_v&lt;R, <del>F</del><ins>decay_t&lt;F&gt;</ins>&amp;, ArgTypes...&gt;</code>
+is <code class='backtick'>true</code>.
+</p>
+<p>
+<del>-4- <i>Preconditions</i>:
+Invoking a copy of <code class='backtick'>f</code> behaves the same as invoking <code class='backtick'>f</code>.
+</del>
+</p>
+<p>
+-5- <i>Effects</i>:
+Constructs a new <code class='backtick'>packaged_task</code> object with
+<ins>a stored task of type <code>decay_t&lt;F&gt;</code> and</ins>
+a shared state
+<ins>. Initializes</ins>
+<del>and initializes</del>
+the object's stored task
+with <code>std::forward&lt;F&gt;(f)</code>.
+</p>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
 <h3 id="4157"><a href="#4157">4157</a><sup><a href="https://cplusplus.github.io/LWG/issue4157">(i)</a></sup>. The resolution of LWG3465 was damaged by P2167R3</h3>
 <p><b>Section:</b> 17.11.6 <a href="https://wg21.link/cmp.alg">[cmp.alg]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-10-02</p>
@@ -3936,6 +4425,154 @@ except that <code class='backtick'>E</code> and <code class='backtick'>F</code> 
 </blockquote>
 </li>
 </ol>
+
+
+
+
+
+<hr>
+<h3 id="4164"><a href="#4164">4164</a><sup><a href="https://cplusplus.github.io/LWG/issue4164">(i)</a></sup>. Missing guarantees for <code class='backtick'>forward_list</code> modifiers</h3>
+<p><b>Section:</b> 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-10-05 <b>Last modified:</b> 2024-10-09</p>
+<p><b>Priority: </b>3
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#forward.list.modifiers">issues</a> in [forward.list.modifiers].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Ready">Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The new <code class='backtick'>std::list</code> members added by <a href="https://wg21.link/P1206R7" title=" Conversions from ranges to containers">P1206R7</a>,
+<code>insert_range(const_iterator, R&amp;&amp;)</code>,
+<code>prepend_range(R&amp;&amp;)</code>, and
+<code>append_range(R&amp;&amp;)</code>,
+have the same exception safety guarantee as
+<code class='backtick'>std::list::insert(const_iterator, InputIterator, InputIterator)</code>, which is:
+<blockquote>
+<i>Remarks</i>:
+Does not affect the validity of iterators and references.
+If an exception is thrown, there are no effects.
+</blockquote>
+</p>
+<p>
+This guarantee was achieved for the new <code class='backtick'>list</code> functions simply by placing
+them in the same set of declarations as the existing <code class='backtick'>insert</code> overloads,
+at the start of 24.3.11.4 <a href="https://wg21.link/list.modifiers">[list.modifiers]</a>.
+</p>
+
+<p>
+However, the new <code class='backtick'>std::forward_list</code> members,
+<code>insert_range_after(const_iterator, R&amp;&amp;)</code> and
+<code>prepend_range(R&amp;&amp;)</code>,
+do not have the same guarantee as <code class='backtick'>forward_list::insert_after</code>.
+This looks like an omission caused by the fact that <code class='backtick'>insert_after</code>'s
+exception safety guarantee is given in a separate paragraph at the start
+of 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a>:
+<blockquote>
+None of the overloads of <code class='backtick'>insert_after</code>
+shall affect the validity of iterators and references,
+and <code class='backtick'>erase_after</code> shall invalidate only iterators and references
+to the erased elements.
+If an exception is thrown during <code class='backtick'>insert_after</code> there shall be no effect.
+</blockquote>
+</p>
+
+<p>
+I think we should give similar guarantees for <code class='backtick'>insert_range_after</code>
+and <code class='backtick'>prepend_range</code>.
+The change might also be appropriate for <code class='backtick'>emplace_after</code> as well.
+A "no effects" guarantee is already given for <code class='backtick'>push_front</code> and <code class='backtick'>emplace_front</code>
+in 24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a> p66, although that doesn't say anything
+about iterator invalidation so we might want to add that to
+24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> too.
+For the functions that insert a single element, it's trivial to not modify
+the list if allocating a new node of constructing the element throws.
+The strong exception safety guarantee for the multi-element insertion functions
+is easily achieved by inserting into a temporary <code class='backtick'>forward_list</code> first,
+then using <code class='backtick'>splice_after</code> which is non-throwing.
+</p>
+
+
+<p><i>[2024-10-09; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+<p>It was suggested to change
+"If an exception is thrown by any of these member functions
+that insert elements there is no effect on the forward_list"
+to simply
+"If an exception is thrown by any of these member functions
+there is no effect on the forward_list"
+</p>
+
+<p><strong>Previous resolution [SUPERSEDED]:</strong></p>
+<blockquote class="note">
+
+<p>This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.</p>
+
+<ol>
+<li>
+<p>Change 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> as indicated:</p>
+<blockquote>
+None of the <del>overloads of <code class='backtick'>insert_after</code> shall</del>
+<ins>member functions in this subclause that insert elements</ins>
+affect the validity of iterators and references,
+and <code class='backtick'>erase_after</code> <del>shall invalidate</del> <ins>invalidates</ins>
+only iterators and references to the erased elements.
+If an exception is thrown
+<del>during <code class='backtick'>insert_after</code></del>
+<ins>by any of these member functions</ins>
+there <del>shall be</del> <ins>is</ins> no effect
+<ins>on the <code class='backtick'>forward_list</code></ins>.
+</blockquote>
+
+</li>
+</ol>
+
+</blockquote>
+
+<p><i>[2024-10-09; LWG suggested improved wording]</i></p>
+
+<p>
+The proposed resolution potentially mandates a change to <code class='backtick'>resize</code> when
+increasing the size, requiring implementations to "roll back" earlier
+insertions if a later one throws, so that the size is left unchanged.
+It appears that all of libstdc++, libc++ and MSVC already do this.
+</p>
+
+<p><i>[2024-10-09; LWG telecon: Move to Ready]</i></p>
+
+
+
+
+<p id="res-4164"><b>Proposed resolution:</b></p>
+<p>This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.</p>
+
+<ol>
+<li>
+<p>Change 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> as indicated:</p>
+<blockquote>
+<del>
+None of the overloads of <code class='backtick'>insert_after</code> shall
+affect the validity of iterators and references,
+and <code class='backtick'>erase_after</code> shall invalidate
+only iterators and references to the erased elements.
+</del>
+<ins>The member functions in this subclause do not
+affect the validity of iterators and references when inserting elements,
+and when erasing elements invalidate iterators and references
+to the erased elements only.
+</ins>
+If an exception is thrown
+<del>during <code class='backtick'>insert_after</code></del>
+<ins>by any of these member functions</ins>
+there <del>shall be</del> <ins>is</ins> no effect
+<ins>on the container</ins>.
+</blockquote>
+
+</li>
+</ol>
+
+
 
 
 

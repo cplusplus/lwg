@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-10-09 at 17:05:30 UTC
+<p>Revised 2024-10-13 at 10:14:31 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -54948,6 +54948,7 @@ The first part of the issue was
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-01-20 <b>Last modified:</b> 2024-03-15</p>
 <p><b>Priority: </b>4
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#concept.swappable">active issues</a> in [concept.swappable].</p>
 <p><b>View all other</b> <a href="lwg-index.html#concept.swappable">issues</a> in [concept.swappable].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -63353,6 +63354,37 @@ As the divergence implementation strategies is observable, perhaps we should cla
 
 
 <p id="res-4163"><b>Proposed resolution:</b></p>
+
+
+
+
+
+<hr>
+<h3 id="4165"><a href="#4165">4165</a><sup><a href="https://cplusplus.github.io/LWG/issue4165">(i)</a></sup>. Should swapping a built-in array or <code class='backtick'>std::array</code> with itself result in UB?</h3>
+<p><b>Section:</b> 18.4.9 <a href="https://wg21.link/concept.swappable">[concept.swappable]</a>, 22.2.2 <a href="https://wg21.link/utility.swap">[utility.swap]</a>, 24.3.8.3 <a href="https://wg21.link/array.members">[array.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-10-13 <b>Last modified:</b> 2024-10-13</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#concept.swappable">active issues</a> in [concept.swappable].</p>
+<p><b>View all other</b> <a href="lwg-index.html#concept.swappable">issues</a> in [concept.swappable].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Currently, the <code class='backtick'>std::swap</code> overload for built-in arrays, the <code class='backtick'>swap</code> member function of 
+<code class='backtick'>std::array</code>, the <code class='backtick'>std::swap</code> overload for <code class='backtick'>std::array</code>, and the expression-equivalent-to 
+operation of <code class='backtick'>std::ranges::swap</code> for built-in arrays are specified to be equivalent to performing 
+<code class='backtick'>std::(ranges::)swap_ranges</code>. As <code class='backtick'>swap_ranges</code> functions require that the swapped ranges shall 
+not overlap (27.7.3 <a href="https://wg21.link/alg.swap">[alg.swap]</a>/2), swapping a built-in array or a nonzero-length 
+<code>std::array</code> with itself results in undefined behavior.
+<p/>
+It seems that no other swap operation in the standard library has precondition that both arguments 
+don't refer to the same object. Should we make self-swapping of arrays well-defined? If so, 
+perhaps we should change the semantics to plain loops that execute <code class='backtick'>swap</code> or <code class='backtick'>ranges::swap</code> on 
+elements.
+</p>
+
+
+<p id="res-4165"><b>Proposed resolution:</b></p>
 
 
 

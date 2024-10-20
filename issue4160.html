@@ -63,7 +63,7 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4160"><a href="lwg-active.html#4160">4160</a>. <code>packaged_task</code> should reject rvalue reference return types</h3>
-<p><b>Section:</b> 33.10.10.1 <a href="https://wg21.link/futures.task.general">[futures.task.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 32.10.10.1 <a href="https://wg21.link/futures.task.general">[futures.task.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Casey Carter <b>Opened:</b> 2024-09-28 <b>Last modified:</b> 2024-10-03</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -71,7 +71,7 @@
 <p><b>Discussion:</b></p>
 <p>
 <code class='backtick'>promise</code>, <code class='backtick'>future</code>, and <code class='backtick'>shared_future</code> all refuse rvalue reference types as template arguments 
-(e.g., 33.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> paragraphs 1 and 2), but <code>packaged_task&lt;meow&amp;&amp;()&gt;</code> 
+(e.g., 32.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> paragraphs 1 and 2), but <code>packaged_task&lt;meow&amp;&amp;()&gt;</code> 
 violates no requirements. Its member <code class='backtick'>get_future</code> returns <code>future&lt;meow&amp;&amp;&gt;</code>, 
 which is ill-formed, but the other member functions appear to be callable. Nonetheless, at least MSVCSTL, 
 libc++, and libstdc++ all fail to compile simple uses of <code class='backtick'>packaged_task</code> with a function type that has 
@@ -89,7 +89,7 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 </p>
 
 <ol>
-<li><p>Modify 33.10.10.1 <a href="https://wg21.link/futures.task.general">[futures.task.general]</a> as indicated:</p>
+<li><p>Modify 32.10.10.1 <a href="https://wg21.link/futures.task.general">[futures.task.general]</a> as indicated:</p>
 
 <blockquote>
 <p>

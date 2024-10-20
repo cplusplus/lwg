@@ -63,7 +63,7 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4165"><a href="lwg-active.html#4165">4165</a>. Should swapping a built-in array or <code class='backtick'>std::array</code> with itself result in UB?</h3>
-<p><b>Section:</b> 18.4.9 <a href="https://wg21.link/concept.swappable">[concept.swappable]</a>, 22.2.2 <a href="https://wg21.link/utility.swap">[utility.swap]</a>, 24.3.8.3 <a href="https://wg21.link/array.members">[array.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 18.4.9 <a href="https://wg21.link/concept.swappable">[concept.swappable]</a>, 22.2.2 <a href="https://wg21.link/utility.swap">[utility.swap]</a>, 23.3.3.3 <a href="https://wg21.link/array.members">[array.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-10-13 <b>Last modified:</b> 2024-10-13</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -76,7 +76,7 @@ Currently, the <code class='backtick'>std::swap</code> overload for built-in arr
 <code class='backtick'>std::array</code>, the <code class='backtick'>std::swap</code> overload for <code class='backtick'>std::array</code>, and the expression-equivalent-to 
 operation of <code class='backtick'>std::ranges::swap</code> for built-in arrays are specified to be equivalent to performing 
 <code class='backtick'>std::(ranges::)swap_ranges</code>. As <code class='backtick'>swap_ranges</code> functions require that the swapped ranges shall 
-not overlap (27.7.3 <a href="https://wg21.link/alg.swap">[alg.swap]</a>/2), swapping a built-in array or a nonzero-length 
+not overlap (26.7.3 <a href="https://wg21.link/alg.swap">[alg.swap]</a>/2), swapping a built-in array or a nonzero-length 
 <code>std::array</code> with itself results in undefined behavior.
 <p/>
 It seems that no other swap operation in the standard library has precondition that both arguments 

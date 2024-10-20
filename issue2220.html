@@ -63,7 +63,7 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Open">Open</a> status.</em></p>
 <h3 id="2220"><a href="lwg-active.html#2220">2220</a>. Under-specification of <code>operator==</code> for <code>regex_token_iterator</code></h3>
-<p><b>Section:</b> 32.11.2.3 <a href="https://wg21.link/re.tokiter.comp">[re.tokiter.comp]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
+<p><b>Section:</b> 28.6.11.2.3 <a href="https://wg21.link/re.tokiter.comp">[re.tokiter.comp]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
  <b>Submitter:</b> Pete Becker <b>Opened:</b> 2012-11-21 <b>Last modified:</b> 2024-10-03</p>
 <p><b>Priority: </b>3
 </p>
@@ -82,7 +82,7 @@ std::regex rg1("b");
 std::regex_token_iterator it1(str1.begin(), str1.end(), rg1, -1); // points at "x" in str1
 </pre></blockquote>
 <p>
-32.11.2.3 <a href="https://wg21.link/re.tokiter.comp">[re.tokiter.comp]</a> p1 says that <code>it0.operator==(it1)</code> returns true "if
+28.6.11.2.3 <a href="https://wg21.link/re.tokiter.comp">[re.tokiter.comp]</a> p1 says that <code>it0.operator==(it1)</code> returns true "if
 <code>*this</code> and <code>right</code> are both suffix iterators and <code>suffix == right.suffix</code>"; both
 conditions are satisfied in this example. It does not say that they must both be iterators
 into the same sequence, nor does it say (as general iterator requirements do) that they must
@@ -110,7 +110,7 @@ denote elements of the same sequence.
 <p>This wording is relative to <a href="https://wg21.link/n4762">N4762</a>.</p>
 
 <ul>
-<li><p>Modify 32.11.2.3 <a href="https://wg21.link/re.tokiter.comp">[re.tokiter.comp]</a> as follows:</p>
+<li><p>Modify 28.6.11.2.3 <a href="https://wg21.link/re.tokiter.comp">[re.tokiter.comp]</a> as follows:</p>
 <blockquote>
 <pre>
 bool operator==(const regex_token_iterator&amp; right) const;
@@ -145,7 +145,7 @@ end-of-sequence iterators or both have the same underlying sequence.</ins>
 <p>This wording is relative to <a href="https://wg21.link/n4762">N4762</a>.</p>
 
 <ul>
-<li><p>Modify 32.11.2.3 <a href="https://wg21.link/re.tokiter.comp">[re.tokiter.comp]</a> as follows:</p>
+<li><p>Modify 28.6.11.2.3 <a href="https://wg21.link/re.tokiter.comp">[re.tokiter.comp]</a> as follows:</p>
 <blockquote>
 <pre>
 bool operator==(const regex_token_iterator&amp; right) const;
@@ -182,7 +182,7 @@ same underlying sequence.</ins>
 <p>This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.</p>
 
 <ul>
-<li><p>Modify 32.11.2.3 <a href="https://wg21.link/re.tokiter.comp">[re.tokiter.comp]</a> as follows:</p>
+<li><p>Modify 28.6.11.2.3 <a href="https://wg21.link/re.tokiter.comp">[re.tokiter.comp]</a> as follows:</p>
 <blockquote>
 <pre>
 bool operator==(const regex_token_iterator&amp; right) const;

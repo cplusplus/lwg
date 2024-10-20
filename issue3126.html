@@ -63,7 +63,7 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="3126"><a href="lwg-active.html#3126">3126</a>. There's no <code>std::sub_match::compare(string_view)</code> overload</h3>
-<p><b>Section:</b> 32.8 <a href="https://wg21.link/re.submatch">[re.submatch]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 28.6.8 <a href="https://wg21.link/re.submatch">[re.submatch]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2018-06-26 <b>Last modified:</b> 2024-10-03</p>
 <p><b>Priority: </b>3
 </p>
@@ -97,7 +97,7 @@ This wording is relative to <a href="https://wg21.link/n4750">N4750</a>.
 
 <ol>
 <li>
-<p>Change 32.3 <a href="https://wg21.link/re.syn">[re.syn]</a>, header <code>&lt;regex&gt;</code> synopsis, as indicated:</p>
+<p>Change 28.6.3 <a href="https://wg21.link/re.syn">[re.syn]</a>, header <code>&lt;regex&gt;</code> synopsis, as indicated:</p>
 
 <blockquote>
 <pre>
@@ -110,7 +110,7 @@ namespace std {
   using ssub_match = sub_match&lt;string::const_iterator&gt;;
   using wssub_match = sub_match&lt;wstring::const_iterator&gt;;
 
-  <del><i>// 32.8.3 <a href="https://wg21.link/re.submatch.op">[re.submatch.op]</a>, sub_match non-member operators</i>
+  <del><i>// 28.6.8.3 <a href="https://wg21.link/re.submatch.op">[re.submatch.op]</a>, sub_match non-member operators</i>
   template&lt;class BiIter&gt;
   bool operator==(const sub_match&lt;BiIter&gt;&amp; lhs, const sub_match&lt;BiIter&gt;&amp; rhs);
   [&hellip;]
@@ -128,7 +128,7 @@ namespace std {
 </li>
 
 <li>
-<p>Change 32.8 <a href="https://wg21.link/re.submatch">[re.submatch]</a>, class template <code>sub_match</code> synopsis, as indicated:</p>
+<p>Change 28.6.8 <a href="https://wg21.link/re.submatch">[re.submatch]</a>, class template <code>sub_match</code> synopsis, as indicated:</p>
 
 <blockquote>
 <pre>
@@ -150,7 +150,7 @@ namespace std {
 </li>
 
 <li>
-<p>Change 32.8.2 <a href="https://wg21.link/re.submatch.members">[re.submatch.members]</a> as indicated:</p>
+<p>Change 28.6.8.2 <a href="https://wg21.link/re.submatch.members">[re.submatch.members]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -173,7 +173,7 @@ int compare(const value_type* s) const;
 </li>
 
 <li>
-<p>Change sub-clause 32.8.3 <a href="https://wg21.link/re.submatch.op">[re.submatch.op]</a> as indicated:</p>
+<p>Change sub-clause 28.6.8.3 <a href="https://wg21.link/re.submatch.op">[re.submatch.op]</a> as indicated:</p>
 
 <blockquote>
 <p>
@@ -317,7 +317,7 @@ case <code><i>STR</i>(x)</code> is <code>basic_string_view&lt;S::value_type&gt;(
 
 <ol>
 <li>
-<p>Change 32.3 <a href="https://wg21.link/re.syn">[re.syn]</a>, header <code>&lt;regex&gt;</code> synopsis, as indicated:</p>
+<p>Change 28.6.3 <a href="https://wg21.link/re.syn">[re.syn]</a>, header <code>&lt;regex&gt;</code> synopsis, as indicated:</p>
 
 <blockquote>
 <pre>
@@ -326,7 +326,7 @@ case <code><i>STR</i>(x)</code> is <code>basic_string_view&lt;S::value_type&gt;(
   using ssub_match = sub_match&lt;string::const_iterator&gt;;
   using wssub_match = sub_match&lt;wstring::const_iterator&gt;;
 
-  <i>// 32.8.3 <a href="https://wg21.link/re.submatch.op">[re.submatch.op]</a>, sub_match non-member operators</i>
+  <i>// 28.6.8.3 <a href="https://wg21.link/re.submatch.op">[re.submatch.op]</a>, sub_match non-member operators</i>
   template&lt;class BiIter&gt;
     bool operator==(const sub_match&lt;BiIter&gt;&amp; lhs, const sub_match&lt;BiIter&gt;&amp; rhs);
   template&lt;class BiIter&gt;
@@ -372,7 +372,7 @@ case <code><i>STR</i>(x)</code> is <code>basic_string_view&lt;S::value_type&gt;(
 </li>
 
 <li>
-<p>Change 32.8 <a href="https://wg21.link/re.submatch">[re.submatch]</a>, class template <code>sub_match</code> synopsis, as indicated:</p>
+<p>Change 28.6.8 <a href="https://wg21.link/re.submatch">[re.submatch]</a>, class template <code>sub_match</code> synopsis, as indicated:</p>
 
 <blockquote>
 <pre>
@@ -394,7 +394,7 @@ namespace std {
 </li>
 
 <li>
-<p>Change 32.8.2 <a href="https://wg21.link/re.submatch.members">[re.submatch.members]</a> as indicated:</p>
+<p>Change 28.6.8.2 <a href="https://wg21.link/re.submatch.members">[re.submatch.members]</a> as indicated:</p>
 
 <blockquote>
 <pre>
@@ -417,7 +417,7 @@ int compare(const value_type* s) const;
 </li>
 
 <li>
-<p>Change sub-clause 32.8.3 <a href="https://wg21.link/re.submatch.op">[re.submatch.op]</a> as indicated:</p>
+<p>Change sub-clause 28.6.8.3 <a href="https://wg21.link/re.submatch.op">[re.submatch.op]</a> as indicated:</p>
 
 <blockquote>
 <p>

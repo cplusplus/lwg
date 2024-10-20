@@ -63,7 +63,7 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Ready">Ready</a> status.</em></p>
 <h3 id="4154"><a href="lwg-active.html#4154">4154</a>. The Mandates for <code>std::packaged_task</code>'s constructor from a callable entity should consider decaying</h3>
-<p><b>Section:</b> 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
+<p><b>Section:</b> 32.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-18 <b>Last modified:</b> 2024-10-09</p>
 <p><b>Priority: </b>3
 </p>
@@ -72,7 +72,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#Ready">Ready</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Currently, 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a>/3 states:
+Currently, 32.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a>/3 states:
 <blockquote>
 <i>Mandates</i>:
 <code>is_invocable_r_v&lt;R, F&amp;, ArgTypes...&gt;</code> is <code class='backtick'>true</code>.
@@ -105,7 +105,7 @@ Set priority to 3 after reflector poll.
 This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 <ol>
-<li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
+<li><p>Modify 32.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
 <blockquote>
 <p>
 -3- <i>Mandates</i>:
@@ -146,7 +146,7 @@ is supposed to be specifying the type of the stored task.
 This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 <ol>
-<li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
+<li><p>Modify 32.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
 <blockquote>
 <pre><code>template&lt;class F&gt;
   explicit packaged_task(F&amp;&amp; f);</code></pre>

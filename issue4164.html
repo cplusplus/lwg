@@ -63,7 +63,7 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#Ready">Ready</a> status.</em></p>
 <h3 id="4164"><a href="lwg-active.html#4164">4164</a>. Missing guarantees for <code class='backtick'>forward_list</code> modifiers</h3>
-<p><b>Section:</b> 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
+<p><b>Section:</b> 23.3.7.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Ready</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-10-05 <b>Last modified:</b> 2024-10-09</p>
 <p><b>Priority: </b>3
 </p>
@@ -86,7 +86,7 @@ If an exception is thrown, there are no effects.
 <p>
 This guarantee was achieved for the new <code class='backtick'>list</code> functions simply by placing
 them in the same set of declarations as the existing <code class='backtick'>insert</code> overloads,
-at the start of 24.3.11.4 <a href="https://wg21.link/list.modifiers">[list.modifiers]</a>.
+at the start of 23.3.9.4 <a href="https://wg21.link/list.modifiers">[list.modifiers]</a>.
 </p>
 
 <p>
@@ -96,7 +96,7 @@ However, the new <code class='backtick'>std::forward_list</code> members,
 do not have the same guarantee as <code class='backtick'>forward_list::insert_after</code>.
 This looks like an omission caused by the fact that <code class='backtick'>insert_after</code>'s
 exception safety guarantee is given in a separate paragraph at the start
-of 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a>:
+of 23.3.7.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a>:
 <blockquote>
 None of the overloads of <code class='backtick'>insert_after</code>
 shall affect the validity of iterators and references,
@@ -111,9 +111,9 @@ I think we should give similar guarantees for <code class='backtick'>insert_rang
 and <code class='backtick'>prepend_range</code>.
 The change might also be appropriate for <code class='backtick'>emplace_after</code> as well.
 A "no effects" guarantee is already given for <code class='backtick'>push_front</code> and <code class='backtick'>emplace_front</code>
-in 24.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a> p66, although that doesn't say anything
+in 23.2.2.2 <a href="https://wg21.link/container.reqmts">[container.reqmts]</a> p66, although that doesn't say anything
 about iterator invalidation so we might want to add that to
-24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> too.
+23.3.7.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> too.
 For the functions that insert a single element, it's trivial to not modify
 the list if allocating a new node of constructing the element throws.
 The strong exception safety guarantee for the multi-element insertion functions
@@ -142,7 +142,7 @@ there is no effect on the forward_list"
 
 <ol>
 <li>
-<p>Change 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> as indicated:</p>
+<p>Change 23.3.7.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> as indicated:</p>
 <blockquote>
 None of the <del>overloads of <code class='backtick'>insert_after</code> shall</del>
 <ins>member functions in this subclause that insert elements</ins>
@@ -180,7 +180,7 @@ It appears that libstdc++ and MSVC already do this, libc++ does not.
 
 <ol>
 <li>
-<p>Change 24.3.10.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> as indicated:</p>
+<p>Change 23.3.7.5 <a href="https://wg21.link/forward.list.modifiers">[forward.list.modifiers]</a> as indicated:</p>
 <blockquote>
 <del>
 None of the overloads of <code class='backtick'>insert_after</code> shall

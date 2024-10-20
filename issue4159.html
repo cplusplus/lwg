@@ -63,14 +63,14 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4159"><a href="lwg-active.html#4159">4159</a>. Uses-allocator construction mechanisms should be opted out for node handles</h3>
-<p><b>Section:</b> 24.2.5 <a href="https://wg21.link/container.node">[container.node]</a>, 20.2.8.1 <a href="https://wg21.link/allocator.uses.trait">[allocator.uses.trait]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 23.2.5 <a href="https://wg21.link/container.node">[container.node]</a>, 20.2.8.1 <a href="https://wg21.link/allocator.uses.trait">[allocator.uses.trait]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-21 <b>Last modified:</b> 2024-10-09</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Currently, node handle types (24.2.5 <a href="https://wg21.link/container.node">[container.node]</a>) have the member
+Currently, node handle types (23.2.5 <a href="https://wg21.link/container.node">[container.node]</a>) have the member
 <code>allocator_type</code> type alias, which makes <code>std::uses_allocator</code> report
 <code>true</code> for them. However, they don't have allocator-extended constructors,
 and it's unclear to me whether it's better to make them have such constructors.
@@ -110,7 +110,7 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 </p>
 
 <ol>
-<li><p>Modify 24.2.5.1 <a href="https://wg21.link/container.node.overview">[container.node.overview]</a> as indicated:</p>
+<li><p>Modify 23.2.5.1 <a href="https://wg21.link/container.node.overview">[container.node.overview]</a> as indicated:</p>
 
 <blockquote>
 <p>
@@ -143,7 +143,7 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 </p>
 
 <ol>
-<li><p>Modify 24.2.5.1 <a href="https://wg21.link/container.node.overview">[container.node.overview]</a> as indicated:</p>
+<li><p>Modify 23.2.5.1 <a href="https://wg21.link/container.node.overview">[container.node.overview]</a> as indicated:</p>
 
 <blockquote>
 <p>

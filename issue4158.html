@@ -63,7 +63,7 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4158"><a href="lwg-active.html#4158">4158</a>. <code>packaged_task::operator=</code> should abandon its shared state</h3>
-<p><b>Section:</b> 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 32.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-09-19 <b>Last modified:</b> 2024-10-03</p>
 <p><b>Priority: </b>3
 </p>
@@ -91,7 +91,7 @@ where <code class='backtick'>f</code> is the task stored in <code class='backtic
 </p>
 <p>
 [<i>Note 2</i>: This constructs a new shared state for <code class='backtick'>*this</code>.
-The old state is abandoned (33.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>).
+The old state is abandoned (32.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>).
 &mdash; <i>end note</i>]
 </p>
 </blockquote>
@@ -100,7 +100,7 @@ Presumably, the intended behaviour of assignment was to abandon the
 shared state,
 i.e.  make it ready with a <code class='backtick'>broken_promise</code> error, and then release it.
 That is what the <code class='backtick'>std::promise</code> move assignment does
-(see 33.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> p9).
+(see 32.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> p9).
 Both libstdc++ and libc++ abandon the state, despite what the standard says.
 </p>
 
@@ -117,7 +117,7 @@ Set priority to 3 after reflector poll.
 This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 <ol>
-<li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
+<li><p>Modify 32.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
 <blockquote>
 <pre>
 packaged_task&amp; operator=(packaged_task&amp;&amp; rhs) noexcept;
@@ -126,7 +126,7 @@ packaged_task&amp; operator=(packaged_task&amp;&amp; rhs) noexcept;
 <ol style="list-style-type: none">
 <li>(11.1) &mdash;
 <del>Releases</del> <ins>Abandons</ins>
-any shared state (33.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>);
+any shared state (32.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>);
 </li>
 <li>(11.2) &mdash;
 calls <code class='backtick'>packaged_task(std::move(rhs)).swap(*this)</code>.
@@ -164,14 +164,14 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 </p>
 <ol>
 
-<li><p>Modify 33.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> as indicated:</p>
+<li><p>Modify 32.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> as indicated:</p>
 <blockquote>
 <pre>
 promise&amp; operator=(promise&amp;&amp; rhs) noexcept;
 </pre>
 <p>-9- <i>Effects</i>:
 <del>
-Abandons any shared state (33.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>) and then as if
+Abandons any shared state (32.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>) and then as if
 </del>
 <ins>Equivalent to</ins>
 <code class='backtick'>promise(std::move(rhs)).swap(*this)</code>.
@@ -179,7 +179,7 @@ Abandons any shared state (33.10.5 <a href="https://wg21.link/futures.state">[fu
 <p>-10- <i>Returns</i>: <code class='backtick'>*this</code>.</p>
 </blockquote>
 </li>
-<li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
+<li><p>Modify 32.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
 <blockquote>
 <pre>
 packaged_task&amp; operator=(packaged_task&amp;&amp; rhs) noexcept;
@@ -188,7 +188,7 @@ packaged_task&amp; operator=(packaged_task&amp;&amp; rhs) noexcept;
 <ol style="list-style-type: none">
 <li><del>(11.1) &mdash;
 Releases
-any shared state (33.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>);</del>
+any shared state (32.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>);</del>
 </li>
 <li><del>(11.2) &mdash;
 calls</del>

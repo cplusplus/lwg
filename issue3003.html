@@ -63,7 +63,7 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#LEWG">LEWG</a> status.</em></p>
 <h3 id="3003"><a href="lwg-active.html#3003">3003</a>. <code>&lt;future&gt;</code> still has type-erased allocators in <code>promise</code></h3>
-<p><b>Section:</b> 33.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> <b>Status:</b> <a href="lwg-active.html#LEWG">LEWG</a>
+<p><b>Section:</b> 32.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> <b>Status:</b> <a href="lwg-active.html#LEWG">LEWG</a>
  <b>Submitter:</b> Billy O'Neal III <b>Opened:</b> 2017-07-16 <b>Last modified:</b> 2024-10-02</p>
 <p><b>Priority: </b>2
 </p>
@@ -105,7 +105,7 @@ to be used on elements constructed in the shared state, and allows the emplace-c
 <p>This resolution is relative to <a href="https://wg21.link/n4659">N4659</a>.</p>
 
 <ol>
-<li><p>Edit 33.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a>, class template <code>promise</code> synopsis, as indicated:</p>
+<li><p>Edit 32.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a>, class template <code>promise</code> synopsis, as indicated:</p>
 
 <blockquote>
 <pre>
@@ -193,7 +193,7 @@ fix <code class='backtick'>reset()</code> as discussed in issue <a href="lwg-def
 This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
 </p>
 <ol>
-<li><p>Modify 33.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> as indicated:</p>
+<li><p>Modify 32.10.6 <a href="https://wg21.link/futures.promise">[futures.promise]</a> as indicated:</p>
 <blockquote>
 <pre>
 <del>template &lt;class R, class Alloc&gt;
@@ -212,7 +212,7 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 </blockquote>
 </blockquote>
 </li>
-<li><p>Modify 33.10.10.1 <a href="https://wg21.link/futures.task.general">[futures.task.general]</a> as indicated:</p>
+<li><p>Modify 32.10.10.1 <a href="https://wg21.link/futures.task.general">[futures.task.general]</a> as indicated:</p>
 <blockquote>
 <pre>
   template&lt;class R, class... ArgTypes&gt;
@@ -228,7 +228,7 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 </pre>
 </blockquote>
 </li>
-<li><p>Modify 33.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
+<li><p>Modify 32.10.10.2 <a href="https://wg21.link/futures.task.members">[futures.task.members]</a> as indicated:</p>
 <blockquote>
 <pre>template&lt;class F&gt;
   explicit packaged_task(F&amp;&amp; f);
@@ -306,7 +306,7 @@ where <code class='backtick'>f</code> is the task stored in <code class='backtic
 </p>
 <p>
 [<i>Note 2</i>: This constructs a new shared state for <code class='backtick'>*this</code>.
-The old state is abandoned (33.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>).
+The old state is abandoned (32.10.5 <a href="https://wg21.link/futures.state">[futures.state]</a>).
 &mdash; <i>end note</i>]
 </p>
 <p>-27- <i>Throws</i>:

@@ -63,7 +63,7 @@
 <hr>
 <p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
 <h3 id="4162"><a href="lwg-active.html#4162">4162</a>. Worst time complexity of non-parallel versions of <code>nth_element</code> is underspecified</h3>
-<p><b>Section:</b> 27.8.3 <a href="https://wg21.link/alg.nth.element">[alg.nth.element]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 26.8.3 <a href="https://wg21.link/alg.nth.element">[alg.nth.element]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-09-29 <b>Last modified:</b> 2024-10-09</p>
 <p><b>Priority: </b>3
 </p>
@@ -71,7 +71,7 @@
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-Currently, 27.8.3 <a href="https://wg21.link/alg.nth.element">[alg.nth.element]</a> doesn't specify the worst time complexity for <code>nth_element</code>
+Currently, 26.8.3 <a href="https://wg21.link/alg.nth.element">[alg.nth.element]</a> doesn't specify the worst time complexity for <code>nth_element</code>
 without <code>ExecutionPolicy</code> parameter, which seemingly allows a complexity that is
 <code>&#x1d4aa;(<i>N</i><sup>2</sup>)</code> or even worse. Presumably we should make the worst time complexity
 consistent between parallel and non-parallel versions. For <code>sort</code>, LWG <a href="lwg-defects.html#713" title="sort() complexity is too lax (Status: CD1)">713</a><sup><a href="https://cplusplus.github.io/LWG/issue713" title="Latest snapshot">(i)</a></sup> already
@@ -96,7 +96,7 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 </p>
 
 <ol>
-<li><p>Modify 27.8.3 <a href="https://wg21.link/alg.nth.element">[alg.nth.element]</a> as indicated:</p>
+<li><p>Modify 26.8.3 <a href="https://wg21.link/alg.nth.element">[alg.nth.element]</a> as indicated:</p>
 
 <blockquote>
 <pre>

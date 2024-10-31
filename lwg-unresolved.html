@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-10-26 at 16:01:09 UTC
+<p>Revised 2024-10-31 at 07:30:53 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -30410,6 +30410,7 @@ into each <i>Throws:</i> element, but perhaps something more specific is necessa
  <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2020-03-19 <b>Last modified:</b> 2020-09-06</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#atomics.types.operations">active issues</a> in [atomics.types.operations].</p>
 <p><b>View all other</b> <a href="lwg-index.html#atomics.types.operations">issues</a> in [atomics.types.operations].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#SG1">SG1</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -63883,6 +63884,95 @@ type <code class='backtick'>U</code> denoting <code><i>o</i></code>, except that
 for each indeterminate bit <code><i>b</i></code> in the value representation of the result, the smallest 
 object containing that bit <code><i>b</i></code> has indeterminate value where the behavior would otherwise 
 be undefined</ins>. The value of any other created object is unspecified.
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+<hr>
+<h3 id="4169"><a href="#4169">4169</a><sup><a href="https://cplusplus.github.io/LWG/issue4169">(i)</a></sup>. <code>std::atomic&ltT&gt;</code>'s default constructor should be constrained</h3>
+<p><b>Section:</b> 32.5.8.2 <a href="https://wg21.link/atomics.types.operations">[atomics.types.operations]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Giuseppe D'Angelo <b>Opened:</b> 2024-10-15 <b>Last modified:</b> 2024-10-31</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#atomics.types.operations">active issues</a> in [atomics.types.operations].</p>
+<p><b>View all other</b> <a href="lwg-index.html#atomics.types.operations">issues</a> in [atomics.types.operations].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The current wording for <code class='backtick'>std::atomic</code>'s default constructor in
+32.5.8.2 <a href="https://wg21.link/atomics.types.operations">[atomics.types.operations]</a> specifies:
+</p>
+<blockquote>
+<pre>
+constexpr atomic() noexcept(is_nothrow_default_constructible_v&lt;T&gt;);
+</pre>
+<blockquote>
+<p>
+<i>Mandates</i>: <code>is_default_constructible_v&lt;T&gt;</code> is <code>true</code>.
+</p>
+</blockquote>
+</blockquote>
+<p>
+This wording has been added by <a href="https://wg21.link/P0883R2" title=" Fixing Atomic Initialization">P0883R2</a> for C++20, which changed
+<code class='backtick'>std::atomic</code>'s default constructor to always value-initialize. Before,
+the behavior of this constructor was not well specified (this was LWG
+issue <a href="lwg-defects.html#2334" title="atomic's default constructor requires &quot;uninitialized&quot; state even for types with non-trivial default-constructor (Status: Resolved)">2334</a><sup><a href="https://cplusplus.github.io/LWG/issue2334" title="Latest snapshot">(i)</a></sup>).
+<p/>
+The usage of a <i>Mandates</i> element in the specification has as a
+consequence that <code>std::atomic&lt;T&gt;</code> is always default constructible, even
+when <code>T</code> is not. For instance:
+</p>
+<blockquote>
+<pre>
+// not default constructible:
+struct NDC { NDC(int) {} };
+
+static_assert(std::is_default_constructible&lt;std::atomic&lt;NDC&gt;&gt;); // OK
+</pre>
+</blockquote>
+<p>
+The above check is OK as per language rules, but this is user-hostile:
+actually using <code>std::atomic&lt;NDC&gt;</code>'s default constructor results in an
+error, despite the detection saying otherwise.
+<p/>
+Given that <code>std::atomic&lt;T&gt;</code> already requires <code>T</code> to be complete anyhow
+(32.5.8.1 <a href="https://wg21.link/atomics.types.generic.general">[atomics.types.generic.general]</a> checks for various type properties
+which require completeness) it would be more appropriate to use a
+constraint instead, so that <code>std::atomic&lt;T&gt;</code> is default constructible if
+and only if <code>T</code> also is.
+</p>
+
+
+<p id="res-4169"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4993">N4993</a>.
+</p>
+
+<ol>
+<li><p>Modify 32.5.8.2 <a href="https://wg21.link/atomics.types.operations">[atomics.types.operations]</a> as indicated:</p>
+
+<blockquote class="note">
+<p>
+[<i>Drafting note</i>: There is implementation divergence at the moment; libstdc++ already
+implements the proposed resolution and has done so for a while.]
+</p>
+</blockquote>
+
+<blockquote>
+<pre>
+constexpr atomic() noexcept(is_nothrow_default_constructible_v&lt;T&gt;);
+</pre>
+<blockquote>
+<p>
+-1- <i><ins>Constraints</ins><del>Mandates</del></i>: <code>is_default_constructible_v&lt;T&gt;</code> is <code>true</code>.
+<p/>
+-2- <i>Effects</i>: [&hellip;]
 </p>
 </blockquote>
 </blockquote>

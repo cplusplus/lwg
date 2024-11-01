@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-11-01 at 14:17:37 UTC
+<p>Revised 2024-11-01 at 16:19:33 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -63993,22 +63993,21 @@ constexpr atomic() noexcept(is_nothrow_default_constructible_v&lt;T&gt;);
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-The design intent of the <code class='backtick'>contiguous_iterator</code> concept is that iterators can be converted 
-to pointers that denote the same sequence of elements. Practically, that means that a common range 
-<code class='backtick'>[i, j)</code> or counted range <code class='backtick'>i + [0, n)</code> can be processed with extremely efficient 
-low-level C or assembly code that operates on <code class='backtick'>[to_address(i), to_address(j))</code> (respectively 
-<code class='backtick'>to_address(i) + [0, n)</code>). A value-initialized iterator <code class='backtick'>I{}</code> can be used to denote the empty 
-ranges <code class='backtick'>[I{}, I{})</code> and <code class='backtick'>I{} + [0, 0)</code>. While the existing semantic requirements of 
-<code class='backtick'>contiguous_iterator</code> enable us to convert both dereferenceable and past-the-end iterators with 
-<code class='backtick'>to_address</code> converting such ranges to pointer ranges requires either (1) <code class='backtick'>to_address(I{})</code> 
-is well-defined and equality preserving so e.g. <code class='backtick'>copy(i, j)</code> can directly dispatch to 
-<code class='backtick'>__vectorized_copy(to_address(j), to_address(i), j - i)</code> when it detects contiguous iterators 
-to types that can be trivially copied, or (2) we have to introduce a branch guarding such calls 
-with <code class='backtick'>i != j</code> (or <code>n &gt; 0</code> for counted ranges). 
-<p/>
-Since we already require <code class='backtick'>to_address</code> to be equality-preserving, we need only require 
-<code class='backtick'>to_address(I{})</code> to be well-defined. It's then easily demonstrable that 
-<code class='backtick'>to_address(I{}) == to_address(I{})</code> and <code class='backtick'>to_address(I{}) == to_address(I{)) + 0</code> hold.
+The design intent of the <code class='backtick'>contiguous_iterator</code> concept is that iterators can be converted
+to pointers denoting the same sequence of elements. This enables a common range <code class='backtick'>[i, j)</code>
+or counted range <code class='backtick'>i + [0, n)</code> to be processed with extremely efficient low-level C
+or assembly code that operates on <code class='backtick'>[to_address(i), to_address(j))</code> (respectively
+<code class='backtick'>to_address(i) + [0, n)</code>).
+</p><p>
+A value-initialized iterator <code class='backtick'>I{}</code> can be used to denote the empty ranges <code class='backtick'>[I{}, I{})</code>
+and <code class='backtick'>I{} + [0, 0)</code>. While the existing semantic requirements of <code class='backtick'>contiguous_iterator</code> enable us
+to convert both dereferenceable and past-the-end iterators with <code class='backtick'>to_address</code>, converting
+ranges involving value-initialized iterators to pointer ranges additionally needs
+<code class='backtick'>to_address(I{})</code> to be well-defined. Note that <code class='backtick'>to_address</code> is already implicitly
+equality-preserving for <code class='backtick'>contiguous_iterator</code> arguments. Given this additional requirement
+<code class='backtick'>to_address(I{}) == to_address(I{})</code> and <code class='backtick'>to_address(I{}) == to_address(I{)) + 0</code>
+both hold, so the two types of empty ranges involving value-initialized iterators convert
+to empty pointer ranges as desired.
 </p>
 
 
@@ -64039,8 +64038,8 @@ template&lt;class I&gt;
 </pre>
 </blockquote>
 <p>
--2- Let <code class='backtick'>a</code> and <code class='backtick'>b</code> be dereferenceable iterators and <code class='backtick'>c</code> be a non-dereferenceable iterator of type 
-<code class='backtick'>I</code> such that <code class='backtick'>b</code> is reachable from <code class='backtick'>a</code> and <code class='backtick'>c</code> is reachable from <code class='backtick'>b</code>, and let <code class='backtick'>D</code> be 
+-2- Let <code class='backtick'>a</code> and <code class='backtick'>b</code> be dereferenceable iterators and <code class='backtick'>c</code> be a non-dereferenceable iterator of type
+<code class='backtick'>I</code> such that <code class='backtick'>b</code> is reachable from <code class='backtick'>a</code> and <code class='backtick'>c</code> is reachable from <code class='backtick'>b</code>, and let <code class='backtick'>D</code> be
 <code>iter_difference_t&lt;I&gt;</code>. The type <code class='backtick'>I</code> models <code class='backtick'>contiguous_iterator</code> only if
 </p>
 
@@ -64049,9 +64048,9 @@ template&lt;class I&gt;
 <li><p>(2.2) &mdash; <code class='backtick'>to_address(b) == to_address(a) + D(b - a)</code>,</p></li>
 <li><p>(2.3) &mdash; <code class='backtick'>to_address(c) == to_address(a) + D(c - a)</code>,</p></li>
 <li><p><ins>(2.?) &mdash; <code class='backtick'>to_address(I{})</code> is well-defined,</ins></p></li>
-<li><p>(2.4) &mdash; <code class='backtick'>ranges::iter_move(a)</code> has the same type, value category, and effects as 
+<li><p>(2.4) &mdash; <code class='backtick'>ranges::iter_move(a)</code> has the same type, value category, and effects as
 <code class='backtick'>std::move(*a)</code>, and</p></li>
-<li><p>(2.5) &mdash; if <code class='backtick'>ranges::iter_swap(a, b)</code> is well-formed, it has effects equivalent to 
+<li><p>(2.5) &mdash; if <code class='backtick'>ranges::iter_swap(a, b)</code> is well-formed, it has effects equivalent to
 <code class='backtick'>ranges::swap(*a, *b)</code>.</p></li>
 </ol>
 </blockquote>

@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-11-02 at 12:15:14 UTC
+<p>Revised 2024-11-03 at 09:22:05 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -64057,6 +64057,51 @@ template&lt;class I&gt;
 
 </li>
 </ol>
+
+
+
+
+<hr>
+<h3 id="4171"><a href="#4171">4171</a><sup><a href="https://cplusplus.github.io/LWG/issue4171">(i)</a></sup>. P2609R3 breaks code that uses <code class='backtick'>views::zip</code> and <code>get&lt;T&gt;</code></h3>
+<p><b>Section:</b> 24.3.6.3 <a href="https://wg21.link/indirectcallable.indirectinvocable">[indirectcallable.indirectinvocable]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> S. B. Tam <b>Opened:</b> 2024-11-01 <b>Last modified:</b> 2024-11-03</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The following use of <code class='backtick'>std::ranges::for_each</code> is valid before <a href="https://wg21.link/P2609R3" title=" Relaxing Ranges Just A Smidge">P2609R3</a> and invalid after that.
+</p>
+<blockquote><pre>
+#include &lt;algorithm&gt;
+#include &lt;ranges&gt;
+#include &lt;tuple&gt;
+using namespace std::ranges;
+
+void f() {
+  int a[1];
+  auto fun = [](auto t) {
+    [[maybe_unused]] auto x = std::get&lt;int&amp;&gt;(t);
+  };
+  for_each(views::zip(a), fun);
+}
+</pre></blockquote>
+<p>
+The reason is that, <a href="https://wg21.link/P2609R3" title=" Relaxing Ranges Just A Smidge">P2609R3</a> requires <code class='backtick'>fun</code> to be <code class='backtick'>invocable</code> with <code>iter_value_t&lt;I&gt;&amp;</code>, 
+which is <code>tuple&lt;int&gt;&amp;</code> when <code class='backtick'>I</code> is <code class='backtick'>zip_view</code>'s iterator, and <code>tuple&lt;int&gt;&amp;</code> 
+doesn't support <code>std::get&lt;int&amp;&gt;(t)</code> because there isn't a <code>int&amp;</code> member.
+<p/>
+P2609R3 argues that "The actual consequence on user code seems small", but I believe that this code pattern is 
+common enough, and it hurts if we cannot use <code>get&lt;int&amp;&gt;(t)</code> in the lambda body.
+<p/>
+Note that <code class='backtick'>for_each</code> doesn't actually call <code class='backtick'>fun</code> with <code>iter_value_t&lt;I&gt;</code>, as can be seen by adding 
+an explicit return type to <code class='backtick'>fun</code>.
+<p/>
+Did LWG foresee this impact of <a href="https://wg21.link/P2609R3" title=" Relaxing Ranges Just A Smidge">P2609R3</a>? Could P2609R3 be reverted to unbreak this code pattern?
+</p>
+
+
+<p id="res-4171"><b>Proposed resolution:</b></p>
 
 
 

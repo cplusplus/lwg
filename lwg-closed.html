@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Closed Issues List (Revision D125)</h1>
-<p>Revised 2024-11-04 at 08:58:30 UTC
+<p>Revised 2024-11-04 at 20:57:11 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -47796,7 +47796,7 @@ void* operator new[](std::size_t size, void* ptr) noexcept;
 
 <hr>
 <h3 id="2305"><a href="#2305">2305</a><sup><a href="https://cplusplus.github.io/LWG/issue2305">(i)</a></sup>. [fund.ts] <code>optional</code> forwarding construction/assignment</h3>
-<p><b>Section:</b> 5.3.1 [fund.ts::optional.object.ctor] <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 5.3.1 <a href="https://cplusplus.github.io/fundamentals-ts/v1.html#optional.object.ctor">[fund.ts::optional.object.ctor]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Cassio Neri <b>Opened:</b> 2013-09-23 <b>Last modified:</b> 2015-10-26</p>
 <p><b>Priority: </b>4
 </p>
@@ -47876,7 +47876,7 @@ Move to NAD
 <p>This wording is relative to N3691.</p>
 
 <ol>
-<li><p>Change 5.3.1 [fund.ts::optional.object.ctor] as indicated:</p>
+<li><p>Change 5.3.1 <a href="https://cplusplus.github.io/fundamentals-ts/v1.html#optional.object.ctor">[fund.ts::optional.object.ctor]</a> as indicated:</p>
 
 <blockquote><pre>
 template &lt;class U, class... Args&gt; 
@@ -47896,7 +47896,7 @@ constexpr explicit optional(in_place_t, initializer_list&lt;U&gt;<ins>&amp;&amp;
 </blockquote>
 </blockquote>
 </li>
-<li><p>Change 5.3.3 [fund.ts::optional.object.assign] as indicated:</p>
+<li><p>Change 5.3.3 <a href="https://cplusplus.github.io/fundamentals-ts/v1.html#optional.object.assign">[fund.ts::optional.object.assign]</a> as indicated:</p>
 
 <blockquote><pre>
 template &lt;class U, class... Args&gt;
@@ -49948,7 +49948,7 @@ Needs a paper to make changes here, or incorporate into <a href="https://wg21.li
 
 <hr>
 <h3 id="2417"><a href="#2417">2417</a><sup><a href="https://cplusplus.github.io/LWG/issue2417">(i)</a></sup>. [fund.ts.v2] <code>std::experimental::optional::operator&lt;</code> and <code>LessThanComparable</code> requirement</h3>
-<p><b>Section:</b> 5.7 [fund.ts.v2::optional.relops], 5.9 [fund.ts.v2::optional.comp_with_t] <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 5.7 <a href="https://cplusplus.github.io/fundamentals-ts/v2.html#optional.relops">[fund.ts.v2::optional.relops]</a>, 5.9 <a href="https://cplusplus.github.io/fundamentals-ts/v2.html#optional.comp_with_t">[fund.ts.v2::optional.comp_with_t]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Daniel Kr&uuml;gler <b>Opened:</b> 2014-06-20 <b>Last modified:</b> 2023-06-17</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -50688,7 +50688,7 @@ This should be addressed by a paper addressed to LEWG.
 
 <hr>
 <h3 id="2553"><a href="#2553">2553</a><sup><a href="https://cplusplus.github.io/LWG/issue2553">(i)</a></sup>. [fund.ts.v2] <code>basic_string_view</code> substring constructor</h3>
-<p><b>Section:</b> 7.3 [fund.ts.v2::string.view.cons] <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
+<p><b>Section:</b> 7.3 <a href="https://cplusplus.github.io/fundamentals-ts/v2.html#string.view.cons">[fund.ts.v2::string.view.cons]</a> <b>Status:</b> <a href="lwg-active.html#NAD">NAD</a>
  <b>Submitter:</b> Evan Teran <b>Opened:</b> 2015-10-29 <b>Last modified:</b> 2018-06-23</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -50792,7 +50792,7 @@ This wording is relative to <a href="http://www.open-std.org/jtc1/sc22/wg21/docs
 </p>
 
 <ol>
-<li><p>Insert between 7.3 [fund.ts.v2::string.view.cons] p5 and p6 the following sequence of paragraphs:</p>
+<li><p>Insert between 7.3 <a href="https://cplusplus.github.io/fundamentals-ts/v2.html#string.view.cons">[fund.ts.v2::string.view.cons]</a> p5 and p6 the following sequence of paragraphs:</p>
 
 <blockquote>
 <pre>

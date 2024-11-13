@@ -66,7 +66,7 @@
 <p>This document is the Index by Section for the <a href="lwg-active.html">Library Active Issues List</a>, <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.</p>
 <h2>Index by Section</h2>
 <p><a href="lwg-index-open.html">(view only non-Ready open issues)</a></p>
-<p>Revised 2024-11-07 at 13:31:35 UTC
+<p>Revised 2024-11-13 at 20:39:34 UTC
 </p><h2 id="Section_17">Section 17 (2 issues)</h2>
 <p><a href="lwg-index-open.html#Section_17">(view only non-Ready open issues)</a></p>
 <table class="issues-index">
@@ -98,7 +98,7 @@
 <td></td>
 </tr>
 </table>
-<h2 id="Section_20">Section 20 (3 issues)</h2>
+<h2 id="Section_20">Section 20 (4 issues)</h2>
 <p><a href="lwg-index-open.html#Section_20">(view only non-Ready open issues)</a></p>
 <table class="issues-index">
 <tr>
@@ -109,6 +109,15 @@
   <th>Proposed Resolution</th>
   <th><a href="unresolved-prioritized.html">Priority</a></th>
   <th>Duplicates</th>
+</tr>
+<tr>
+<td id="4144"><a href="lwg-active.html#4144" title="Disallow unique_ptr&lt;T&amp;, D&gt; (Status: Tentatively Ready)">4144</a><sup><a href="https://cplusplus.github.io/LWG/issue4144">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>20.3.1.3.1 [unique.ptr.single.general]<a id="unique.ptr.single.general"></a></td>
+<td>Disallow <code>unique_ptr&lt;T&amp;, D&gt;</code></td>
+<td>Yes</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td id="4148"><a href="lwg-active.html#4148" title="unique_ptr::operator* should not allow dangling references (Status: Tentatively Ready)">4148</a><sup><a href="https://cplusplus.github.io/LWG/issue4148">(i)</a></sup></td>
@@ -246,6 +255,28 @@
 <td>23.3.7.7 [forward.list.erasure]<a id="forward.list.erasure"></a></td>
 <td>The helper lambda of <code>std::erase</code> for <code>list</code> should specify return type as
   <code>bool</code></td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<h2 id="Section_24">Section 24 (1 issues)</h2>
+<p><a href="lwg-index-open.html#Section_24">(view only non-Ready open issues)</a></p>
+<table class="issues-index">
+<tr>
+  <th><a href="lwg-toc.html">Issue</a></th>
+  <th><a href="lwg-status.html">Status</a></th>
+  <th><a href="lwg-index.html">Section</a></th>
+  <th>Title</th>
+  <th>Proposed Resolution</th>
+  <th><a href="unresolved-prioritized.html">Priority</a></th>
+  <th>Duplicates</th>
+</tr>
+<tr>
+<td id="4170"><a href="lwg-active.html#4170" title="contiguous_iterator should require to_address(I{}) (Status: Tentatively Ready)">4170</a><sup><a href="https://cplusplus.github.io/LWG/issue4170">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>24.3.4.14 [iterator.concept.contiguous]<a id="iterator.concept.contiguous"></a></td>
+<td><code class='backtick'>contiguous_iterator</code> should require <code class='backtick'>to_address(I{})</code></td>
 <td>Yes</td>
 <td></td>
 <td></td>
@@ -495,7 +526,8 @@ should not be constrained</td>
 <td></td>
 </tr>
 </table>
-<h2 id="Section_32">Section 32 (1 issues)</h2>
+<h2 id="Section_32">Section 32 (2 issues)</h2>
+<p><a href="lwg-index-open.html#Section_32">(view only non-Ready open issues)</a></p>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -505,6 +537,15 @@ should not be constrained</td>
   <th>Proposed Resolution</th>
   <th><a href="unresolved-prioritized.html">Priority</a></th>
   <th>Duplicates</th>
+</tr>
+<tr>
+<td id="4169"><a href="lwg-active.html#4169" title="std::atomic&lt;T&gt;'s default constructor should be constrained (Status: Tentatively Ready)">4169</a><sup><a href="https://cplusplus.github.io/LWG/issue4169">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>32.5.8.2 [atomics.types.operations]<a id="atomics.types.operations"></a></td>
+<td><code>std::atomic&lt;T&gt;</code>'s default constructor should be constrained</td>
+<td>Yes</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td id="4154"><a href="lwg-active.html#4154" title="The Mandates for std::packaged_task's constructor from a callable entity should consider decaying (Status: Ready)">4154</a><sup><a href="https://cplusplus.github.io/LWG/issue4154">(i)</a></sup></td>

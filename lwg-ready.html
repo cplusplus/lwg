@@ -62,7 +62,7 @@
 </tr>
 <tr>
 <td align="left">Date:</td>
-<td align="left">Revised 2024-11-07 at 13:31:35 UTC
+<td align="left">Revised 2024-11-13 at 20:39:34 UTC
 </td>
 </tr>
 <tr>
@@ -4059,6 +4059,115 @@ is one of the types in <code class='backtick'>Ts...</code>.</li>
 
 
 <hr>
+<h3 id="4144"><a href="#4144">4144</a><sup><a href="https://cplusplus.github.io/LWG/issue4144">(i)</a></sup>. Disallow <code>unique_ptr&lt;T&amp;, D&gt;</code></h3>
+<p><b>Section:</b> 20.3.1.3.1 <a href="https://wg21.link/unique.ptr.single.general">[unique.ptr.single.general]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-08-30 <b>Last modified:</b> 2024-11-13</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#unique.ptr.single.general">issues</a> in [unique.ptr.single.general].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+It seems that we currently allow nonsensical specializations of <code class='backtick'>unique_ptr</code>
+such as <code>unique_ptr&lt;int&amp;, D&gt;</code>
+and <code>unique_ptr&lt;void()const, D&gt;</code>
+(a custom deleter that defines <code class='backtick'>D::pointer</code> is needed, because otherwise
+the <code class='backtick'>pointer</code> type would default to invalid types like
+<code>int&amp;*</code> or <code>void(*)()const</code>).
+There seems to be no reason to support these "unique pointer to reference"
+and "unique pointer to abominable function type" specializations,
+or any specialization for a type that you couldn't form a raw pointer to.
+</p>
+
+<p>
+Prior to C++17, the major library implementations rejected such specializations
+as a side effect of the constraints for the
+<code>unique_ptr(auto_ptr&lt;U&gt;&amp;&amp;)</code> constructor
+being defined in terms of <code>is_convertible&lt;U*, T*&gt;</code>.
+This meant that overload resolution for any constructor of <code class='backtick'>unique_ptr</code>
+would attempt to form the type <code class='backtick'>T*</code> and fail if that was invalid.
+With the removal of <code class='backtick'>auto_ptr</code> in C++17, that constructor was removed
+and now <code>unique_ptr&lt;int&amp;, D&gt;</code> can be instantiated
+(assuming any zombie definition of <code class='backtick'>auto_ptr</code> is not enabled by the library).
+This wasn't intentional, but just an accident caused by not explicitly
+forbidding such types.
+</p>
+
+<p>
+Discussion on the LWG reflector led to near-unanimous support for explicitly
+disallowing these specializations for non-pointable types.
+</p>
+
+<p><i>[2024-11-13; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after eight votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4144"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a>.
+</p>
+
+<ol>
+<li><p>Modify 20.3.1.3.1 <a href="https://wg21.link/unique.ptr.single.general">[unique.ptr.single.general]</a> as indicated:</p>
+<blockquote>
+<p><ins>-?-
+A program that instantiates the definition of
+<code>unique_ptr&lt;T, D&gt;</code>
+is ill-formed if <code class='backtick'>T*</code> is an invalid type.
+<br/>
+[<em>Note</em>:
+This prevents the intantiation of specializations such as
+<code>unique_ptr&lt;T&amp;, D&gt;</code>
+and <code>unique_ptr&lt;int() const, D&gt;</code>.
+&mdash; <em>end note</em>]
+</ins>
+</p>
+<p>-1-
+The default type for the template parameter <code class='backtick'>D</code> is <code class='backtick'>default_delete</code>.
+A client-supplied template argument <code class='backtick'>D</code> shall be a function object type
+(22.10 <a href="https://wg21.link/function.objects">[function.objects]</a>), lvalue reference to function,
+or lvalue reference to function object type for which,
+given a value <code class='backtick'>d</code> of type <code class='backtick'>D</code> and a value <code class='backtick'>ptr</code> of type
+<code>unique_ptr&lt;T, D&gt;::pointer</code>,
+the expression <code class='backtick'>d(ptr)</code> is valid and has the effect of disposing of the pointer
+as appropriate for that deleter.
+</p>
+<p>-2-
+If the deleter’s type <code class='backtick'>D</code> is not a reference type,
+<code class='backtick'>D</code> shall meet the <em>Cpp17Destructible</em> requirements (Table 35).
+</p>
+<p>-3-
+If the <i>qualified-id</i> <code>remove_reference_t&lt;D&gt;::pointer</code>
+is valid and denotes a type (13.10.3 <a href="https://wg21.link/temp.deduct">[temp.deduct]</a>),
+then <code>unique_ptr&lt;T, D&gt;::pointer</code>
+shall be a synonym for <code>remove_reference_t&lt;D&gt;::pointer</code>.
+Otherwise <code>unique_ptr&lt;T, D&gt;::pointer</code> shall be a synonym for
+<code>element_type*</code>.
+The type <code>unique_ptr&lt;T, D&gt;::pointer</code> shall meet the
+<em>Cpp17NullablePointer</em> requirements (Table 36).
+</p>
+<p>-4-
+[<em>Example 1</em>:
+ Given an allocator type <code class='backtick'>X</code> (16.4.4.6.1 <a href="https://wg21.link/allocator.requirements.general">[allocator.requirements.general]</a>)
+and letting <code class='backtick'>A</code> be a synonym for <code>allocator_traits&lt;X&gt;</code>,
+the types <code class='backtick'>A::pointer</code>, <code class='backtick'>A::const_pointer</code>, <code class='backtick'>A::void_pointer</code>,
+and <code class='backtick'>A::const_void_pointer</code> may be used as
+<code>unique_ptr&lt;T, D&gt;::pointer</code>.
+&mdash; <em>end example</em>]
+</p>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+<hr>
 <h3 id="4147"><a href="#4147">4147</a><sup><a href="https://cplusplus.github.io/LWG/issue4147">(i)</a></sup>. Precondition on <code>inplace_vector::emplace</code></h3>
 <p><b>Section:</b> 23.2.4 <a href="https://wg21.link/sequence.reqmts">[sequence.reqmts]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
  <b>Submitter:</b> Arthur O'Dwyer <b>Opened:</b> 2024-08-26 <b>Last modified:</b> 2024-09-18</p>
@@ -4574,6 +4683,187 @@ there <del>shall be</del> <ins>is</ins> no effect
 
 
 
+
+
+
+
+<hr>
+<h3 id="4169"><a href="#4169">4169</a><sup><a href="https://cplusplus.github.io/LWG/issue4169">(i)</a></sup>. <code>std::atomic&lt;T&gt;</code>'s default constructor should be constrained</h3>
+<p><b>Section:</b> 32.5.8.2 <a href="https://wg21.link/atomics.types.operations">[atomics.types.operations]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Giuseppe D'Angelo <b>Opened:</b> 2024-10-15 <b>Last modified:</b> 2024-11-13</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#atomics.types.operations">active issues</a> in [atomics.types.operations].</p>
+<p><b>View all other</b> <a href="lwg-index.html#atomics.types.operations">issues</a> in [atomics.types.operations].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The current wording for <code class='backtick'>std::atomic</code>'s default constructor in
+32.5.8.2 <a href="https://wg21.link/atomics.types.operations">[atomics.types.operations]</a> specifies:
+</p>
+<blockquote>
+<pre>
+constexpr atomic() noexcept(is_nothrow_default_constructible_v&lt;T&gt;);
+</pre>
+<blockquote>
+<p>
+<i>Mandates</i>: <code>is_default_constructible_v&lt;T&gt;</code> is <code>true</code>.
+</p>
+</blockquote>
+</blockquote>
+<p>
+This wording has been added by <a href="https://wg21.link/P0883R2" title=" Fixing Atomic Initialization">P0883R2</a> for C++20, which changed
+<code class='backtick'>std::atomic</code>'s default constructor to always value-initialize. Before,
+the behavior of this constructor was not well specified (this was LWG
+issue <a href="lwg-defects.html#2334" title="atomic's default constructor requires &quot;uninitialized&quot; state even for types with non-trivial default-constructor (Status: Resolved)">2334</a><sup><a href="https://cplusplus.github.io/LWG/issue2334" title="Latest snapshot">(i)</a></sup>).
+<p/>
+The usage of a <i>Mandates</i> element in the specification has as a
+consequence that <code>std::atomic&lt;T&gt;</code> is always default constructible, even
+when <code>T</code> is not. For instance:
+</p>
+<blockquote>
+<pre>
+// not default constructible:
+struct NDC { NDC(int) {} };
+
+static_assert(std::is_default_constructible&lt;std::atomic&lt;NDC&gt;&gt;); // OK
+</pre>
+</blockquote>
+<p>
+The above check is OK as per language rules, but this is user-hostile:
+actually using <code>std::atomic&lt;NDC&gt;</code>'s default constructor results in an
+error, despite the detection saying otherwise.
+<p/>
+Given that <code>std::atomic&lt;T&gt;</code> already requires <code>T</code> to be complete anyhow
+(32.5.8.1 <a href="https://wg21.link/atomics.types.generic.general">[atomics.types.generic.general]</a> checks for various type properties
+which require completeness) it would be more appropriate to use a
+constraint instead, so that <code>std::atomic&lt;T&gt;</code> is default constructible if
+and only if <code>T</code> also is.
+</p>
+
+<p><i>[2024-11-13; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after seven votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4169"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4993" title=" Working Draft, Programming Languages — C++">N4993</a>.
+</p>
+
+<ol>
+<li><p>Modify 32.5.8.2 <a href="https://wg21.link/atomics.types.operations">[atomics.types.operations]</a> as indicated:</p>
+
+<blockquote class="note">
+<p>
+[<i>Drafting note</i>: There is implementation divergence at the moment; libstdc++ already
+implements the proposed resolution and has done so for a while.]
+</p>
+</blockquote>
+
+<blockquote>
+<pre>
+constexpr atomic() noexcept(is_nothrow_default_constructible_v&lt;T&gt;);
+</pre>
+<blockquote>
+<p>
+-1- <i><ins>Constraints</ins><del>Mandates</del></i>: <code>is_default_constructible_v&lt;T&gt;</code> is <code>true</code>.
+<p/>
+-2- <i>Effects</i>: [&hellip;]
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+</ol>
+
+
+
+
+<hr>
+<h3 id="4170"><a href="#4170">4170</a><sup><a href="https://cplusplus.github.io/LWG/issue4170">(i)</a></sup>. <code class='backtick'>contiguous_iterator</code> should require <code class='backtick'>to_address(I{})</code></h3>
+<p><b>Section:</b> 24.3.4.14 <a href="https://wg21.link/iterator.concept.contiguous">[iterator.concept.contiguous]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Casey Carter <b>Opened:</b> 2024-11-01 <b>Last modified:</b> 2024-11-13</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#iterator.concept.contiguous">issues</a> in [iterator.concept.contiguous].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The design intent of the <code class='backtick'>contiguous_iterator</code> concept is that iterators can be converted
+to pointers denoting the same sequence of elements. This enables a common range <code class='backtick'>[i, j)</code>
+or counted range <code class='backtick'>i + [0, n)</code> to be processed with extremely efficient low-level C
+or assembly code that operates on <code class='backtick'>[to_address(i), to_address(j))</code> (respectively
+<code class='backtick'>to_address(i) + [0, n)</code>).
+</p><p>
+A value-initialized iterator <code class='backtick'>I{}</code> can be used to denote the empty ranges <code class='backtick'>[I{}, I{})</code>
+and <code class='backtick'>I{} + [0, 0)</code>. While the existing semantic requirements of <code class='backtick'>contiguous_iterator</code> enable us
+to convert both dereferenceable and past-the-end iterators with <code class='backtick'>to_address</code>, converting
+ranges involving value-initialized iterators to pointer ranges additionally needs
+<code class='backtick'>to_address(I{})</code> to be well-defined. Note that <code class='backtick'>to_address</code> is already implicitly
+equality-preserving for <code class='backtick'>contiguous_iterator</code> arguments. Given this additional requirement
+<code class='backtick'>to_address(I{}) == to_address(I{})</code> and <code class='backtick'>to_address(I{}) == to_address(I{)) + 0</code>
+both hold, so the two types of empty ranges involving value-initialized iterators convert
+to empty pointer ranges as desired.
+</p>
+
+<p><i>[2024-11-13; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after eight votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-4170"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4993" title=" Working Draft, Programming Languages — C++">N4993</a>.
+</p>
+
+<ol>
+<li><p>Modify 24.3.4.14 <a href="https://wg21.link/iterator.concept.contiguous">[iterator.concept.contiguous]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-1- The <code class='backtick'>contiguous_iterator</code> concept provides a guarantee that the denoted elements are stored contiguously
+in memory.
+</p>
+<blockquote>
+<pre>
+template&lt;class I&gt;
+  concept contiguous_iterator =
+    random_access_iterator&lt;I&gt; &amp;&amp;
+    derived_from&lt;<i>ITER_CONCEPT</i>(I), contiguous_iterator_tag&gt; &amp;&amp;
+    is_lvalue_reference_v&lt;iter_reference_t&lt;I&gt;&gt; &amp;&amp;
+    same_as&lt;iter_value_t&lt;I&gt;, remove_cvref_t&lt;iter_reference_t&lt;I&gt;&gt;&gt; &amp;&amp;
+    requires(const I&amp; i) {
+      { to_address(i) } -&gt; same_as&lt;add_pointer_t&lt;iter_reference_t&lt;I&gt;&gt;&gt;;
+    };
+</pre>
+</blockquote>
+<p>
+-2- Let <code class='backtick'>a</code> and <code class='backtick'>b</code> be dereferenceable iterators and <code class='backtick'>c</code> be a non-dereferenceable iterator of type
+<code class='backtick'>I</code> such that <code class='backtick'>b</code> is reachable from <code class='backtick'>a</code> and <code class='backtick'>c</code> is reachable from <code class='backtick'>b</code>, and let <code class='backtick'>D</code> be
+<code>iter_difference_t&lt;I&gt;</code>. The type <code class='backtick'>I</code> models <code class='backtick'>contiguous_iterator</code> only if
+</p>
+
+<ol style="list-style-type: none">
+<li><p>(2.1) &mdash; <code class='backtick'>to_address(a) == addressof(*a)</code>,</p></li>
+<li><p>(2.2) &mdash; <code class='backtick'>to_address(b) == to_address(a) + D(b - a)</code>,</p></li>
+<li><p>(2.3) &mdash; <code class='backtick'>to_address(c) == to_address(a) + D(c - a)</code>,</p></li>
+<li><p><ins>(2.?) &mdash; <code class='backtick'>to_address(I{})</code> is well-defined,</ins></p></li>
+<li><p>(2.4) &mdash; <code class='backtick'>ranges::iter_move(a)</code> has the same type, value category, and effects as
+<code class='backtick'>std::move(*a)</code>, and</p></li>
+<li><p>(2.5) &mdash; if <code class='backtick'>ranges::iter_swap(a, b)</code> is well-formed, it has effects equivalent to
+<code class='backtick'>ranges::swap(*a, *b)</code>.</p></li>
+</ol>
+</blockquote>
+
+</li>
+</ol>
 
 
 

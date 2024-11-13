@@ -62,7 +62,7 @@ This document is the Index by Status and Section for the <a href="lwg-active.htm
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
 
-<p>Revised 2024-11-07 at 13:31:35 UTC
+<p>Revised 2024-11-13 at 20:39:34 UTC
 </p><h2 id="Ready">Ready (15 issues)</h2>
 <table class="issues-index">
 <tr>
@@ -212,7 +212,7 @@ should not be constrained</td>
 <td></td>
 </tr>
 </table>
-<h2 id="Tentatively_Ready">Tentatively Ready (16 issues)</h2>
+<h2 id="Tentatively_Ready">Tentatively Ready (19 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -237,6 +237,15 @@ should not be constrained</td>
 <td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
 <td>17.11.6 [cmp.alg]</td>
 <td>The resolution of LWG3465 was damaged by P2167R3</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4144"><a href="lwg-active.html#4144" title="Disallow unique_ptr&lt;T&amp;, D&gt; (Status: Tentatively Ready)">4144</a><sup><a href="https://cplusplus.github.io/LWG/issue4144">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>20.3.1.3.1 [unique.ptr.single.general]</td>
+<td>Disallow <code>unique_ptr&lt;T&amp;, D&gt;</code></td>
 <td>Yes</td>
 <td></td>
 <td></td>
@@ -316,6 +325,15 @@ should not be constrained</td>
 <td></td>
 </tr>
 <tr>
+<td id="4170"><a href="lwg-active.html#4170" title="contiguous_iterator should require to_address(I{}) (Status: Tentatively Ready)">4170</a><sup><a href="https://cplusplus.github.io/LWG/issue4170">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>24.3.4.14 [iterator.concept.contiguous]</td>
+<td><code class='backtick'>contiguous_iterator</code> should require <code class='backtick'>to_address(I{})</code></td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td id="4119"><a href="lwg-active.html#4119" title="generator::promise_type::yield_value(ranges::elements_of&lt;R, Alloc&gt;)'s nested generator may be ill-formed (Status: Tentatively Ready)">4119</a><sup><a href="https://cplusplus.github.io/LWG/issue4119">(i)</a></sup></td>
 <td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
 <td>25.8.5 [coro.generator.promise]</td>
@@ -365,6 +383,15 @@ should not be constrained</td>
 <td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
 <td>31.7.6.3.5 [ostream.formatted.print]</td>
 <td><code>println</code> ignores the locale imbued in <code>std::ostream</code></td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="4169"><a href="lwg-active.html#4169" title="std::atomic&lt;T&gt;'s default constructor should be constrained (Status: Tentatively Ready)">4169</a><sup><a href="https://cplusplus.github.io/LWG/issue4169">(i)</a></sup></td>
+<td><a href="lwg-active.html#Ready">Tentatively Ready</a></td>
+<td>32.5.8.2 [atomics.types.operations]</td>
+<td><code>std::atomic&lt;T&gt;</code>'s default constructor should be constrained</td>
 <td>Yes</td>
 <td></td>
 <td></td>
@@ -463,7 +490,7 @@ should not be constrained</td>
 <td></td>
 </tr>
 </table>
-<h2 id="New">New (441 issues)</h2>
+<h2 id="New">New (438 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -1261,15 +1288,6 @@ and user requirements</td>
 <td>&sect;[unique.ptr.single] requirements on deleter may be too strict</td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4144"><a href="lwg-active.html#4144" title="Disallow unique_ptr&lt;T&amp;, D&gt; (Status: New)">4144</a><sup><a href="https://cplusplus.github.io/LWG/issue4144">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>20.3.1.3.1 [unique.ptr.single.general]</td>
-<td>Disallow <code>unique_ptr&lt;T&amp;, D&gt;</code></td>
-<td>Yes</td>
-<td></td>
 <td></td>
 </tr>
 <tr>
@@ -2200,15 +2218,6 @@ should conditionally require <i>Cpp17CopyInsertable</i> in their preconditions</
 <td>&sect;[iterator.concept.forward][forward.iterators] Two different definitions of multi-pass guarantee</td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4170"><a href="lwg-active.html#4170" title="contiguous_iterator should require to_address(I{}) (Status: New)">4170</a><sup><a href="https://cplusplus.github.io/LWG/issue4170">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>24.3.4.14 [iterator.concept.contiguous]</td>
-<td><code class='backtick'>contiguous_iterator</code> should require <code class='backtick'>to_address(I{})</code></td>
-<td>Yes</td>
-<td></td>
 <td></td>
 </tr>
 <tr>
@@ -4257,15 +4266,6 @@ vprint_unicode/vprint_nonunicode (Status: New)">4039</a><sup><a href="https://cp
 <td>Too lax description of <code>atomic_ref&lt;T&gt;::required_alignment</code></td>
 <td>Yes</td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4169"><a href="lwg-active.html#4169" title="std::atomic&lt;T&gt;'s default constructor should be constrained (Status: New)">4169</a><sup><a href="https://cplusplus.github.io/LWG/issue4169">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>32.5.8.2 [atomics.types.operations]</td>
-<td><code>std::atomic&lt;T&gt;</code>'s default constructor should be constrained</td>
-<td>Yes</td>
-<td></td>
 <td></td>
 </tr>
 <tr>

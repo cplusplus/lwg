@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-11-14 at 11:34:10 UTC
+<p>Revised 2024-11-18 at 13:27:23 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -63690,8 +63690,8 @@ Did LWG foresee this impact of <a href="https://wg21.link/P2609R3" title=" Relax
 
 <hr>
 <h3 id="4172"><a href="#4172">4172</a><sup><a href="https://cplusplus.github.io/LWG/issue4172">(i)</a></sup>. unique_lock self-move-assignment is broken</h3>
-<p><b>Section:</b> 32.6.5.4.2 <a href="https://wg21.link/thread.lock.unique.cons">[thread.lock.unique.cons]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Casey Carter <b>Opened:</b> 2024-11-13 <b>Last modified:</b> 2024-11-13</p>
+<p><b>Section:</b> 32.6.5.4.2 <a href="https://wg21.link/thread.lock.unique.cons">[thread.lock.unique.cons]</a>, 32.6.5.5.2 <a href="https://wg21.link/thread.lock.shared.cons">[thread.lock.shared.cons]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Casey Carter <b>Opened:</b> 2024-11-13 <b>Last modified:</b> 2024-11-18</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#thread.lock.unique.cons">issues</a> in [thread.lock.unique.cons].</p>
@@ -63715,6 +63715,12 @@ from self-move-assignment as of LWG <a href="lwg-defects.html#2839" title="Self-
 </p>
 <p>
 Also, the move assignment operator doesn't specify what it returns.
+</p>
+
+<p><i>[2024-11-18; Casey expands the PR to cover <code class='backtick'>shared_lock</code>]</i></p>
+
+<p>
+<code class='backtick'>shared_lock</code> has the same problems, and can be fixed in the same way.
 </p>
 
 
@@ -63784,6 +63790,33 @@ In this case, *this will own the mutex after the assignment and u will not.
 </p>
 <p>
 <del>-21- Throws: Nothing.</del>
+</p>
+</blockquote>
+</li>
+
+<li>
+<p>
+Modify 32.6.5.5.2 <a href="https://wg21.link/thread.lock.shared.cons">[thread.lock.shared.cons]</a> as follows:
+</p>
+
+<blockquote>
+<pre><code>
+shared_lock&amp; operator=(shared_lock&amp;&amp; sl) noexcept;
+</code></pre>
+<p>
+-17- <i>Effects</i>:
+<del>If <code class='backtick'>owns</code> calls <code class='backtick'>pm-&gt;unlock_shared()</code>.</del>
+<ins>Equivalent to: <code class='backtick'>shared_lock{std::move(sl)}.swap(*this)</code>.</ins>
+</p>
+<p>
+<ins>-?- <i>Returns</i>: <code class='backtick'>*this</code>.</ins>
+</p>
+<p>
+<del>-18- <i>Postconditions</i>:
+<code class='backtick'>pm == sl_p.pm</code> and <code class='backtick'>owns == sl_p.owns</code>
+(where <code class='backtick'>sl_p</code> is the state of <code class='backtick'>sl</code> just prior to this assignment),
+<code class='backtick'>sl.pm == nullptr</code> and <code class='backtick'>sl.owns == false</code>.
+</del>
 </p>
 </blockquote>
 </li>

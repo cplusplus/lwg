@@ -67,8 +67,8 @@
 This document is the Index by Status and Date for the <a href="lwg-active.html">Library Active Issues List</a>,
 <a href="lwg-defects.html">Library Defect Reports and Accepted Issues</a>, and <a href="lwg-closed.html">Library Closed Issues List</a>.
 </p>
-<p>Revised 2024-11-18 at 13:27:23 UTC
-</p><h2 id="New">New (439 issues)</h2>
+<p>Revised 2024-11-19 at 16:10:33 UTC
+</p><h2 id="New">New (438 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -222,15 +222,6 @@ max, and minmax is unclear (Status: New)">4167</a><sup><a href="https://cplusplu
 <td>16.4.6.10 [res.on.data.races]</td>
 <td>Unclear how [res.on.data.races] apply to templated functions</td>
 <td><span class="no-pr">No</span></td>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="4130"><a href="lwg-active.html#4130" title="Preconditions for std::launder might be overly strict (Status: New)">4130</a><sup><a href="https://cplusplus.github.io/LWG/issue4130">(i)</a></sup></td>
-<td><a href="lwg-active.html#New">New</a></td>
-<td>17.6.5 [ptr.launder]</td>
-<td>Preconditions for <code>std::launder</code> might be overly strict</td>
-<td>Yes</td>
 <td>3</td>
 <td></td>
 </tr>
@@ -4085,7 +4076,7 @@ the evaluation of type traits</td>
 <td></td>
 </tr>
 </table>
-<h2 id="Open">Open (78 issues)</h2>
+<h2 id="Open">Open (81 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -4095,6 +4086,33 @@ the evaluation of type traits</td>
   <th>Proposed Resolution</th>
   <th><a href="unresolved-prioritized.html">Priority</a></th>
   <th>Duplicates</th>
+</tr>
+<tr>
+<td id="4130"><a href="lwg-active.html#4130" title="Preconditions for std::launder might be overly strict (Status: Open)">4130</a><sup><a href="https://cplusplus.github.io/LWG/issue4130">(i)</a></sup></td>
+<td><a href="lwg-active.html#Open">Open</a></td>
+<td>17.6.5 [ptr.launder]</td>
+<td>Preconditions for <code>std::launder</code> might be overly strict</td>
+<td>Yes</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td id="3454"><a href="lwg-active.html#3454" title="pointer_traits::pointer_to should be constexpr (Status: Open)">3454</a><sup><a href="https://cplusplus.github.io/LWG/issue3454">(i)</a></sup></td>
+<td><a href="lwg-active.html#Open">Open</a></td>
+<td>20.2.3 [pointer.traits]</td>
+<td><code>pointer_traits::pointer_to</code> should be <code>constexpr</code></td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td id="2991"><a href="lwg-active.html#2991" title="variant copy constructor missing noexcept(see below) (Status: Open)">2991</a><sup><a href="https://cplusplus.github.io/LWG/issue2991">(i)</a></sup></td>
+<td><a href="lwg-active.html#Open">Open</a></td>
+<td>22.6.3.2 [variant.ctor]</td>
+<td><code>variant</code> copy constructor missing <code>noexcept(<i>see below</i>)</code></td>
+<td>Yes</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td id="2136"><a href="lwg-active.html#2136" title="Postconditions vs. exceptions (Status: Open)">2136</a><sup><a href="https://cplusplus.github.io/LWG/issue2136">(i)</a></sup></td>
@@ -4799,7 +4817,7 @@ the evaluation of type traits</td>
 <td></td>
 </tr>
 </table>
-<h2 id="LEWG">LEWG (28 issues)</h2>
+<h2 id="LEWG">LEWG (26 issues)</h2>
 <table class="issues-index">
 <tr>
   <th><a href="lwg-toc.html">Issue</a></th>
@@ -4853,15 +4871,6 @@ the evaluation of type traits</td>
 <td>Is <code>&lt;ranges&gt;</code> sufficient for <code>istream_view</code>?</td>
 <td><span class="no-pr">No</span></td>
 <td>3</td>
-<td></td>
-</tr>
-<tr>
-<td id="3454"><a href="lwg-active.html#3454" title="pointer_traits::pointer_to should be constexpr (Status: LEWG)">3454</a><sup><a href="https://cplusplus.github.io/LWG/issue3454">(i)</a></sup></td>
-<td><a href="lwg-active.html#LEWG">LEWG</a></td>
-<td>20.2.3 [pointer.traits]</td>
-<td><code>pointer_traits::pointer_to</code> should be <code>constexpr</code></td>
-<td>Yes</td>
-<td></td>
 <td></td>
 </tr>
 <tr>
@@ -4982,15 +4991,6 @@ types &mdash; this is inconsistent with other types in the library</td>
 <td>The standard library should provide <code>string_view</code> parameters instead or in addition for functions 
       defined with <code>char const *</code> or <code>string const &amp;</code> as parameter types.</td>
 <td><span class="no-pr">No</span></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td id="2991"><a href="lwg-active.html#2991" title="variant copy constructor missing noexcept(see below) (Status: LEWG)">2991</a><sup><a href="https://cplusplus.github.io/LWG/issue2991">(i)</a></sup></td>
-<td><a href="lwg-active.html#LEWG">LEWG</a></td>
-<td>22.6.3.2 [variant.ctor]</td>
-<td><code>variant</code> copy constructor missing <code>noexcept(<i>see below</i>)</code></td>
-<td>Yes</td>
 <td></td>
 <td></td>
 </tr>

@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-11-21 at 08:48:41 UTC
+<p>Revised 2024-11-21 at 09:58:17 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -63863,7 +63863,10 @@ The Containers clause often uses "references, pointers, or iterators" which
 is verbose, and needs to be said in full whenever talking about iterator
 invalidation. It would be helpful to have a term of art that refers to all
 of them, something like "element references" or to avoid any confusion with
-actual references, "element indicators".
+actual references, "element indicators". Maybe "element handles" but that
+could be confused with node handles for associative containers, and
+(based on Wikipedia) has connotations of additional indirection, and something
+which would <i>not</i> be invalidated when the underlying storage changes.
 </p>
 
 

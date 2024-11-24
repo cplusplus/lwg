@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-11-21 at 09:58:17 UTC
+<p>Revised 2024-11-24 at 11:51:42 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -63871,6 +63871,63 @@ which would <i>not</i> be invalidated when the underlying storage changes.
 
 
 <p id="res-4173"><b>Proposed resolution:</b></p>
+<p>
+</p>
+
+
+
+
+
+<hr>
+<h3 id="4174"><a href="#4174">4174</a><sup><a href="https://cplusplus.github.io/LWG/issue4174">(i)</a></sup>. How does [atomics.order] p3 apply when then modification is an initialization?</h3>
+<p><b>Section:</b> 32.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> jim x <b>Opened:</b> 2024-11-13 <b>Last modified:</b> 2024-11-24</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#atomics.order">active issues</a> in [atomics.order].</p>
+<p><b>View all other</b> <a href="lwg-index.html#atomics.order">issues</a> in [atomics.order].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+Consider this example
+</p>
+<blockquote><pre>
+std::atomic&lt;int&gt; v = 0;
+// thread 1:
+v.load(std::memory_order::seq_cst);
+//thread 2:
+v.store(1,std::memory_order::seq_cst);
+</pre></blockquote>
+<p>
+If the load operation reads the value <code class='backtick'>0</code>, how are load and store operations ordered in the single total order? 
+According to 32.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> p3 (emphasize mine)
+</p>
+<blockquote style="border-left: 3px solid #ccc;padding-left: 15px;">
+<p>
+An atomic operation <i>A</i> on some atomic object <i>M</i> is <i>coherence-ordered before</i> 
+another atomic operation <i>B</i> on <i>M</i> if
+</p>
+<ol style="list-style-type: none">
+<li><p>[&hellip;]</p></li>
+<li><p>(3.3) &mdash; <i>A</i> and <i>B</i> are not the same atomic read-modify-write operation, 
+and there exists an <b>atomic modification <i>X</i></b> of <i>M</i> such that <i>A</i> reads the value stored by 
+<i>X</i> and <i>X</i> precedes <i>B</i> in the modification order of <i>M</i>, or</p></li>
+</ol>
+</blockquote>
+<p>
+According to 32.5.8.2 <a href="https://wg21.link/atomics.types.operations">[atomics.types.operations]</a> p3 (emphasize mine)
+</p>
+<blockquote style="border-left: 3px solid #ccc;padding-left: 15px;">
+<i>Effects</i>: Initializes the object with the value <code>desired</code>. <b>Initialization is not an atomic operation</b> 
+(6.9.2 <a href="https://wg21.link/intro.multithread">[intro.multithread]</a>).
+</blockquote>
+<p>
+So, how does 32.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> p3 apply to this example such that the load operation precedes 
+the store operation in the single total order <i>S</i>?
+</p>
+
+
+<p id="res-4174"><b>Proposed resolution:</b></p>
 <p>
 </p>
 

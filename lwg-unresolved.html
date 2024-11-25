@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-11-24 at 18:39:09 UTC
+<p>Revised 2024-11-25 at 13:42:07 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -63924,6 +63924,41 @@ According to 32.5.8.2 <a href="https://wg21.link/atomics.types.operations">[atom
 <p>
 So, how does 32.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> p3 apply to this example such that the load operation precedes 
 the store operation in the single total order <i>S</i>?
+</p>
+
+
+<p id="res-4174"><b>Proposed resolution:</b></p>
+<p>
+</p>
+
+
+
+
+
+<hr>
+<h3 id="4174"><a href="#4174">4174</a><sup><a href="https://cplusplus.github.io/LWG/issue4174">(i)</a></sup>. Refer back to container requirements when extending them</h3>
+<p><b>Section:</b> 23 <a href="https://wg21.link/containers">[containers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-11-22 <b>Last modified:</b> 2024-11-25</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#containers">active issues</a> in [containers].</p>
+<p><b>View all other</b> <a href="lwg-index.html#containers">issues</a> in [containers].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+We sometimes give detailed specifications of container members which add
+additional specification to the common requirements in
+23.2.2 <a href="https://wg21.link/container.requirements.general">[container.requirements.general]</a>, for example
+23.3.11.5 <a href="https://wg21.link/vector.modifiers">[vector.modifiers]</a> defines <code class='backtick'>vector::erase</code> without actually
+saying it erases any elements. The actual effects of <code class='backtick'>erase</code> are given in
+23.2.4 <a href="https://wg21.link/sequence.reqmts">[sequence.reqmts]</a>.
+</p>
+<p>
+Authors of library wording often struggle with this non-local form of
+specification, where we sometimes do spell out container member functions
+in full, and sometimes rely on distant wording that applies to all containers.
+It would be easier if <code class='backtick'>vector::erase</code> referred back to
+23.2.4 <a href="https://wg21.link/sequence.reqmts">[sequence.reqmts]</a>.
 </p>
 
 

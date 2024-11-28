@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-11-25 at 14:50:55 UTC
+<p>Revised 2024-11-28 at 21:41:29 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -20008,7 +20008,7 @@ other constructor and without using <code class='backtick'>std::allocator</code>
 </p>
 <blockquote class="note">
 [<i>Drafting note</i>:
-Issue <a href="lwg-active.html#4154" title="The Mandates for std::packaged_task's constructor from a callable entity should consider decaying (Status: Voting)">4154</a><sup><a href="https://cplusplus.github.io/LWG/issue4154" title="Latest snapshot">(i)</a></sup> alters these <i>Mandates</i>: and <i>Effects</i>:
+Issue <a href="lwg-defects.html#4154" title="The Mandates for std::packaged_task's constructor from a callable entity should consider decaying (Status: WP)">4154</a><sup><a href="https://cplusplus.github.io/LWG/issue4154" title="Latest snapshot">(i)</a></sup> alters these <i>Mandates</i>: and <i>Effects</i>:
 but the two edits should combine cleanly.]
 </blockquote>
 <p>-4- <i>Preconditions</i>:
@@ -21800,52 +21800,6 @@ element without including the iteration order.
 
 
 <p id="res-3063"><b>Proposed resolution:</b></p>
-
-
-
-
-
-<hr>
-<h3 id="3064"><a href="#3064">3064</a><sup><a href="https://cplusplus.github.io/LWG/issue3064">(i)</a></sup>. How do uninitialized memory algorithms obtain pointer without undefined behavior?</h3>
-<p><b>Section:</b> 26.11 <a href="https://wg21.link/specialized.algorithms">[specialized.algorithms]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2018-02-12 <b>Last modified:</b> 2020-05-02</p>
-<p><b>Priority: </b>3
-</p>
-<p><b>View other</b> <a href="lwg-index-open.html#specialized.algorithms">active issues</a> in [specialized.algorithms].</p>
-<p><b>View all other</b> <a href="lwg-index.html#specialized.algorithms">issues</a> in [specialized.algorithms].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
-<p><b>Discussion:</b></p>
-<p>
-A typical specification of the algorithms for initializing raw memory in <code>&lt;memory&gt;</code> looks like:
-</p>
-<blockquote>
-<p>
-<i>Effects:</i> Equivalent to:
-</p>
-<blockquote><pre>
-for (; first != last; ++first)
-  ::new (static_cast&lt;void*&gt;(addressof(*first)))
-    typename iterator_traits&lt;ForwardIterator&gt;::value_type;
-</pre></blockquote>
-</blockquote>
-<p>
-However, this hides a nasty question:
-<p/>
-How do we bind a reference to an uninitialized object when dereferencing our iterator,
-so that <code>static_cast&lt;void*&gt;(addressof(*first))</code> does not trigger undefined behavior on
-the call to <code>*first</code>?
-<p/>
-When pointers are the only iterators we cared about, we could simply cast the iterator
-value to <code>void*</code> without dereferencing. I don't see how to implement this spec safely
-without introducing another customization point for iterators that performs the same
-function as casting a pointer to <code>void*</code> in order to get the address of the element.
-</p>
-
-<p><i>[2018-02-20, Priority set to 3 after mailing list discussion]</i></p>
-
-
-
-<p id="res-3064"><b>Proposed resolution:</b></p>
 
 
 
@@ -26571,7 +26525,6 @@ passed to allocator <code>construct</code> and <code>destroy</code></h3>
  <b>Submitter:</b> Billy O'Neal III <b>Opened:</b> 2019-05-29 <b>Last modified:</b> 2024-10-02</p>
 <p><b>Priority: </b>3
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#util.smartptr.shared.create">active issues</a> in [util.smartptr.shared.create].</p>
 <p><b>View all other</b> <a href="lwg-index.html#util.smartptr.shared.create">issues</a> in [util.smartptr.shared.create].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -26680,7 +26633,7 @@ Also, the current specification doesn't seem to specify the type of <code>pv</co
 because <code>pv</code> is merely specified to point some storage instead of an object.
 </p>
 
-<p><i>[2024-10-02; will be resolved by issue <a href="lwg-active.html#3216" title="Rebinding the allocator before calling construct/destroy in allocate_shared (Status: Voting)">3216</a><sup><a href="https://cplusplus.github.io/LWG/issue3216" title="Latest snapshot">(i)</a></sup>.]</i></p>
+<p><i>[2024-10-02; will be resolved by issue <a href="lwg-defects.html#3216" title="Rebinding the allocator before calling construct/destroy in allocate_shared (Status: WP)">3216</a><sup><a href="https://cplusplus.github.io/LWG/issue3216" title="Latest snapshot">(i)</a></sup>.]</i></p>
 
 
 
@@ -30270,7 +30223,6 @@ into each <i>Throws:</i> element, but perhaps something more specific is necessa
  <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2020-03-19 <b>Last modified:</b> 2020-09-06</p>
 <p><b>Priority: </b>3
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#atomics.types.operations">active issues</a> in [atomics.types.operations].</p>
 <p><b>View all other</b> <a href="lwg-index.html#atomics.types.operations">issues</a> in [atomics.types.operations].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#SG1">SG1</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -32050,7 +32002,7 @@ and <code>is_constructible&lt;T[1], T&gt;</code> are false?
 </p>
 
 <p>
-There may be some interaction with LWG <a href="lwg-active.html#3436" title="std::construct_at should support arrays (Status: Voting)">3436</a><sup><a href="https://cplusplus.github.io/LWG/issue3436" title="Latest snapshot">(i)</a></sup>.
+There may be some interaction with LWG <a href="lwg-defects.html#3436" title="std::construct_at should support arrays (Status: WP)">3436</a><sup><a href="https://cplusplus.github.io/LWG/issue3436" title="Latest snapshot">(i)</a></sup>.
 </p>
 
 
@@ -40251,7 +40203,6 @@ accesses beyond what is required to determine the result of the comparison. &mda
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2022-06-30 <b>Last modified:</b> 2022-07-08</p>
 <p><b>Priority: </b>4
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#ranges.syn">active issues</a> in [ranges.syn].</p>
 <p><b>View all other</b> <a href="lwg-index.html#ranges.syn">issues</a> in [ranges.syn].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -44949,7 +44900,6 @@ headers under the standard library namespace is unspecified.</ins>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-02-17 <b>Last modified:</b> 2023-03-22</p>
 <p><b>Priority: </b>3
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#specialized.construct">active issues</a> in [specialized.construct].</p>
 <p><b>View all other</b> <a href="lwg-index.html#specialized.construct">issues</a> in [specialized.construct].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -46218,7 +46168,6 @@ ordered initialization <del>(6.9.3.3 <a href="https://wg21.link/basic.start.dyna
  <b>Submitter:</b> Brian Bi <b>Opened:</b> 2023-03-27 <b>Last modified:</b> 2023-06-01</p>
 <p><b>Priority: </b>3
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#unique.ptr.single.observers">active issues</a> in [unique.ptr.single.observers].</p>
 <p><b>View all other</b> <a href="lwg-index.html#unique.ptr.single.observers">issues</a> in [unique.ptr.single.observers].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -47256,7 +47205,6 @@ title "<b>Comments</b>" to "<b>Mandates</b>".</p>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-05-03 <b>Last modified:</b> 2024-07-27</p>
 <p><b>Priority: </b>3
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#version.syn">active issues</a> in [version.syn].</p>
 <p><b>View all other</b> <a href="lwg-index.html#version.syn">issues</a> in [version.syn].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -52336,7 +52284,7 @@ to destroy the contained value <ins>and sets <code><i>has_val</i></code> to <cod
 During telecon review it was suggested to replace
 22.5.3.1 <a href="https://wg21.link/optional.optional.general">[optional.optional.general]</a> p1 and p2.
 On the reflector Daniel requested to keep the "additional storage" prohibition,
-so that will be addressed by issue <a href="lwg-active.html#4141" title="Improve prohibitions on &quot;additional storage&quot; (Status: Voting)">4141</a><sup><a href="https://cplusplus.github.io/LWG/issue4141" title="Latest snapshot">(i)</a></sup> instead.
+so that will be addressed by issue <a href="lwg-defects.html#4141" title="Improve prohibitions on &quot;additional storage&quot; (Status: WP)">4141</a><sup><a href="https://cplusplus.github.io/LWG/issue4141" title="Latest snapshot">(i)</a></sup> instead.
 </p>
 
 <p><i>[2024-10-02; Jonathan tweaks proposed resolution]</i></p>
@@ -54686,7 +54634,6 @@ of the overloads in namespace <code>std</code>.</del>
  <b>Submitter:</b> Jan Kokemüller <b>Opened:</b> 2024-01-13 <b>Last modified:</b> 2024-01-20</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#ostream.formatted.print">active issues</a> in [ostream.formatted.print].</p>
 <p><b>View all other</b> <a href="lwg-index.html#ostream.formatted.print">issues</a> in [ostream.formatted.print].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -54933,7 +54880,6 @@ are constant subexpressions.
  <b>Submitter:</b> Victor Zverovich <b>Opened:</b> 2024-01-20 <b>Last modified:</b> 2024-03-12</p>
 <p><b>Priority: </b>3
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#print.fun">active issues</a> in [print.fun].</p>
 <p><b>View all other</b> <a href="lwg-index.html#print.fun">issues</a> in [print.fun].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#LEWG">LEWG</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -56880,7 +56826,6 @@ Set priority to 3 after reflector poll. Send to SG1.
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-04-21 <b>Last modified:</b> 2024-08-02</p>
 <p><b>Priority: </b>2
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#alg.rand.generate">active issues</a> in [alg.rand.generate].</p>
 <p><b>View all other</b> <a href="lwg-index.html#alg.rand.generate">issues</a> in [alg.rand.generate].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -62677,7 +62622,6 @@ that describes the error condition denoted by <code class='backtick'>ev</code>.
  <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2024-09-19 <b>Last modified:</b> 2024-10-03</p>
 <p><b>Priority: </b>3
 </p>
-<p><b>View other</b> <a href="lwg-index-open.html#futures.task.members">active issues</a> in [futures.task.members].</p>
 <p><b>View all other</b> <a href="lwg-index.html#futures.task.members">issues</a> in [futures.task.members].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>

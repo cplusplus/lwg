@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-11-30 at 14:30:09 UTC
+<p>Revised 2024-11-30 at 14:37:30 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -64119,6 +64119,11 @@ long-time-run loop).
 From this perspective, the <code class='backtick'>while</code> case is something like the <code class='backtick'>if</code>, for <code class='backtick'>if</code>, the condition is not 
 <code class='backtick'>true</code>, and the code thereof cannot be executed. Similarly, a code after a while cannot be executed 
 if the loop doesn't exit.
+<p/>
+<b>Suggested resolution:</b>
+<p/>
+ Either accurately specify what "circularly depend on their own computation" means, or add a paradigmatic 
+ example regarding loop to indicate what it means.
 </p>
 
 

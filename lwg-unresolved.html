@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-11-28 at 21:41:29 UTC
+<p>Revised 2024-11-30 at 14:30:09 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -64066,6 +64066,63 @@ It would be easier if <code class='backtick'>vector::erase</code> referred back 
 
 
 <p id="res-4176"><b>Proposed resolution:</b></p>
+<p>
+</p>
+
+
+
+
+
+<hr>
+<h3 id="4177"><a href="#4177">4177</a><sup><a href="https://cplusplus.github.io/LWG/issue4177">(i)</a></sup>. &sect;[atomics.order] p8 "circularly depend on their own computation" is unclear for loop</h3>
+<p><b>Section:</b> 32.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> jim x <b>Opened:</b> 2024-11-29 <b>Last modified:</b> 2024-11-30</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#atomics.order">active issues</a> in [atomics.order].</p>
+<p><b>View all other</b> <a href="lwg-index.html#atomics.order">issues</a> in [atomics.order].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+32.5.4 <a href="https://wg21.link/atomics.order">[atomics.order]</a> p8 and p9 gave two paradigmatic examples of how "circularly depend on 
+their own computation" means. However, consider this example:
+</p>
+<blockquote><pre>
+std::atomic&lt;int&gt; x = 0, y = 2;
+
+// thread 1:
+if (y.load(relaxed) == 1) { // #1
+  x.store(1, relaxed); // #2
+}
+
+//thread 2:
+int pre = x.load(relaxed); // #3
+while (pre != 0) {
+  if (x.compare_exchange_strong(pre, pre + 1, acquire, relaxed)) {  // #4
+    break;
+  }
+}
+y.store(1, relaxed); // #5
+</pre></blockquote>
+<p>
+when both <code class='backtick'>#1</code> and <code class='backtick'>#3</code> read <code class='backtick'>1</code>, is this a kind of OOTA? <code class='backtick'>#3</code> depends on <code class='backtick'>#2</code>, <code class='backtick'>#2</code> depends on <code class='backtick'>#1</code>, 
+<code class='backtick'>#1</code> depends on <code class='backtick'>#5</code>, and the execution of <code class='backtick'>#5</code> depends on the exiting of the loop, which in turn initially 
+depends on <code class='backtick'>pre</code>.
+<p/>
+The loop can never execute, exit after certain iterations, or be a long-time-running without exiting 
+(i.e. <code class='backtick'>cmpxchg</code> keeps failing). So, it is unclear whether the execution of <code class='backtick'>#5</code> depends on the loop. 
+However, it resembles the <code class='backtick'>spin-loop</code> (a failed <code class='backtick'>cmpxchg</code> is a pure load with a relaxed load), and the 
+subsequent codes won't execute until the loop exits. So, the scenario of spin-lock seems to agree that 
+the code after a loop depends on the loop(regardless of whether the loop can quickly exit or be a 
+long-time-run loop).
+<p/>
+From this perspective, the <code class='backtick'>while</code> case is something like the <code class='backtick'>if</code>, for <code class='backtick'>if</code>, the condition is not 
+<code class='backtick'>true</code>, and the code thereof cannot be executed. Similarly, a code after a while cannot be executed 
+if the loop doesn't exit.
+</p>
+
+
+<p id="res-4177"><b>Proposed resolution:</b></p>
 <p>
 </p>
 

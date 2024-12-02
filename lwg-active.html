@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-12-02 at 19:15:45 UTC
+<p>Revised 2024-12-02 at 19:29:04 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -66915,7 +66915,10 @@ replace all occurrences of "<code>writable</code>" (the concept) with "<code>ind
 </p>
 </blockquote>
 <p>
-has not been completed through-out the working draft.
+has either been incorrectly applied 24.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a> (because that position did not
+actually refer to the <code>writable</code> concept) or if the interpretation that the original <i>writable</i>
+definition from 24.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a> was intended to be aliased with the <code>writable</code>
+concept this substitution has been incompletely applied to the working draft.
 </p>
 
 

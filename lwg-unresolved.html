@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-12-02 at 18:33:22 UTC
+<p>Revised 2024-12-02 at 19:15:45 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -64219,7 +64219,7 @@ e.g., for the <code class='backtick'>std::fill</code> algorithm, 26.7.6 <a href=
 </blockquote>
 <p>
 However, checking 24.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a> I can find no definition for the term "writable".
-Checking past standard, I found that in C++17 we have the following definition:
+Checking past standards, I found that in C++17 we have the following definition:
 </p>
 <blockquote>
 <p>
@@ -64238,14 +64238,8 @@ An output iterator <code class='backtick'>i</code> has a non-empty set of types 
 where the term of power is no longer defined, but a concept is used to define the relationship between 
 iterator and value instead. We need to either find and fix each reference to "writable" (or more properly 
 "writable to" &mdash; the old term is a relationship between two types, not a property of just one) using 
-the <code class='backtick'>indirectly_writable</code> concept, or restore a definition of the term of power &mdash; likely phased in 
+the <code class='backtick'>indirectly_writable</code> concept, or restore a definition of the term of power &mdash; likely phrased in 
 terms of the <code class='backtick'>indirectly_writable</code> concept.
-<p/>
-There is some urgency to this issue, as I am drafting wording for an EWG paper with a library component 
-that should land for C++26, and I am modeling that wording on existing algorithms which is how I ran into 
-this issue. It would be helpful to have a recommendation for how to write mandates clauses until this issue 
-is resolved &mdash; should we perpetuate the bad "writable" wording to be part of a global fix, or attempt 
-to use <code class='backtick'>indirectly_writable</code>, not knowing if that would be the preferred consistent direction for the future?
 <p/>
 <b>Daniel:</b>
 <p/>

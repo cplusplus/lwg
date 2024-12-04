@@ -67,7 +67,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2024-12-02</td>
+  <td align="left">2024-12-04</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-12-02 at 19:29:04 UTC
+<p>Revised 2024-12-04 at 15:09:34 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -23979,7 +23979,7 @@ is set to a value with magnitude no greater than <code>std::numeric_limits&lt;T&
 <hr>
 <h3 id="3082"><a href="#3082">3082</a><sup><a href="https://cplusplus.github.io/LWG/issue3082">(i)</a></sup>. <code>from_chars</code> specification regarding floating point rounding is inconsistent</h3>
 <p><b>Section:</b> 28.2.3 <a href="https://wg21.link/charconv.from.chars">[charconv.from.chars]</a> <b>Status:</b> <a href="lwg-active.html#Open">Open</a>
- <b>Submitter:</b> Greg Falcon <b>Opened:</b> 2018-03-12 <b>Last modified:</b> 2020-09-06</p>
+ <b>Submitter:</b> Greg Falcon <b>Opened:</b> 2018-03-12 <b>Last modified:</b> 2024-12-04</p>
 <p><b>Priority: </b>2
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#charconv.from.chars">active issues</a> in [charconv.from.chars].</p>
@@ -24006,6 +24006,63 @@ the text suggesting a latitude in rounding logic should be removed.
 <p><i>[2018-08-23 Batavia Issues processing]</i></p>
 
 <p>Marshall to talk to Jens about this</p>
+
+<p><i>[2024-12-04; add comments from Richard Smith]</i></p>
+
+<p>
+In editorial issue
+<a href="https://github.com/cplusplus/draft/issues/6730">#6730</a>
+Richard said:
+</p>
+<blockquote>
+28.2.3 <a href="https://wg21.link/charconv.from.chars">[charconv.from.chars]</a>/6.4 says:
+
+<blockquote>
+In any case, the resulting value is one of at most two floating-point
+values closest to the value of the string matching the pattern.
+</blockquote>
+
+This is ambiguous. It could mean either:
+<ol>
+<li>
+The resulting value is the implementation's choice of one of a set of values,
+and that set contains the two values closest to the value of the string.
+</li>
+<li>
+The resulting value is the implementation's choice of one of a set of values,
+and that set contains all values that are closest to the value of the string
+(of which it turns out there can be up to two).
+</li>
+</ol>
+<p>
+I think the normal English interpretation would be (1),
+but the intended interpretation is actually (2).
+</p>
+<p>
+(Under (1), the string <code class='backtick'>"1.0"</code> can produce the value one ULP less than 1.0
+or it can produce 1.0, and the string <code>"1.00&lt;lots of 0s&gt;1"</code>
+can produce those same two values, because the value one ULP less than 1.0
+is closer to that string than the value one ULP greater than 1.0.)
+</p>
+<p>
+Perhaps the wording from 7.3.10 <a href="https://wg21.link/conv.double">[conv.double]</a>/2 and
+7.6.1.9 <a href="https://wg21.link/expr.static.cast">[expr.static.cast]</a>/11 can be used instead:
+</p>
+<blockquote>
+If the source value can be exactly represented in the destination type,
+the result of the conversion is that exact representation.
+If the source value is between two adjacent destination values,
+the result of the conversion is an implementation-defined choice
+of either of those values.
+</blockquote>
+</blockquote>
+<p>
+Editorial pull request
+<a href="https://github.com/cplusplus/draft/pull/6833">#6833</a>
+proposed a change along those lines, but conflicts with the proposed resolution
+to this issue.
+We should address Richard's comment as part of this issue.
+</p>
 
 
 <p id="res-3082"><b>Proposed resolution:</b></p>
@@ -35613,7 +35670,7 @@ but we might want to have consistency with <code>list::merge</code> instead."
 <hr>
 <h3 id="3578"><a href="#3578">3578</a><sup><a href="https://cplusplus.github.io/LWG/issue3578">(i)</a></sup>. Iterator SCARYness in the context of associative container merging</h3>
 <p><b>Section:</b> 23.2.7.1 <a href="https://wg21.link/associative.reqmts.general">[associative.reqmts.general]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Joaqu&iacute;n M L&oacute;pez Mu&ntilde;oz <b>Opened:</b> 2021-08-04 <b>Last modified:</b> 2021-08-20</p>
+ <b>Submitter:</b> Joaqu&iacute;n M L&oacute;pez Mu&ntilde;oz <b>Opened:</b> 2021-08-04 <b>Last modified:</b> 2024-12-04</p>
 <p><b>Priority: </b>3
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#associative.reqmts.general">active issues</a> in [associative.reqmts.general].</p>
@@ -35651,9 +35708,91 @@ to unordered associative containers as well.
 Set priority to 3 after reflector poll.
 </p>
 
+<p><i>[2024-12-04; Jonathan provides wording]</i></p>
+
+<p>
+If we want to require <a href="https://www.stroustrup.com/SCARY.pdf">SCARY</a>
+iterators then that should be a proposal that goes through LEWG design review.
+I propose an almost minimal change to make the spec consistent without
+imposing any new requirements on implementations.
+</p>
+<p>
+The minimal change would be to say that iterators remain valid if <code class='backtick'>a</code> and <code class='backtick'>a2</code>
+have the same type, which is the minimum portable guarantee that always holds.
+However what matters in practice is whether the iterator types are the same.
+That would not be a portable guarantee, because it depends on whether the
+implementation uses SCARY iterators for its maps and sets, so users could
+write code that works on one implementation and fails to compile when moved
+to a different implementation. But that portability trap would be present
+even if we only say iterators remain valid when <code class='backtick'>a</code> and <code class='backtick'>a2</code> are the same type.
+If the code compiles and works on an implementation with SCARY iterators,
+then users will rely on that, even if unintentionally. Leaving that case
+unspecified or undefined in the standard doesn't prevent users from relying
+on it. It doesn't seem to serve any benefit to pretend it doesn't work when
+it actually does on some implementations.
+</p>
+<p>
+N.B. Libstdc++ associative container iterators are SCARY by default,
+but non-SCARY when <code class='backtick'>-D_GLIBCXX_DEBUG</code> is used to enable Debug Mode
+(see <a href="https://gcc.gnu.org/PR62169">Bug 62169</a>).
+I believe libc++ iterators are SCARY even when
+<code class='backtick'>-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG</code> is used,
+and MSVC STL iterators are SCARY even when <code class='backtick'>/D_ITERATOR_DEBUG_LEVEL</code> is used.
+</p>
+
 
 
 <p id="res-3578"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4993" title=" Working Draft, Programming Languages — C++">N4993</a>.
+</p>
+
+<ol>
+<li>
+<p>
+Modify 23.2.7.1 <a href="https://wg21.link/associative.reqmts.general">[associative.reqmts.general]</a> as indicated:
+</p>
+
+<blockquote>
+<pre><code>a.merge(a2)</code></pre>
+<p>-112-
+<i>Result</i>: <code class='backtick'>void</code>
+</p>
+<p>-113-
+<i>Preconditions</i>:
+<code class='backtick'>a.get_allocator() == a2.get_allocator()</code><ins> is <code class='backtick'>true</code></ins>.
+</p>
+<p>-114-
+<i>Effects</i>:
+Attempts to extract each element in <code class='backtick'>a2</code> and insert it into <code class='backtick'>a</code>
+using the comparison object of <code class='backtick'>a</code>.
+In containers with unique keys,
+if there is an element in <code class='backtick'>a</code> with key equivalent to
+the key of an element from <code class='backtick'>a2</code>,
+then that element is not extracted from <code class='backtick'>a2</code>.
+</p>
+<p>-115-
+<i>Postconditions</i>:
+Pointers and references to the transferred elements of <code class='backtick'>a2</code>
+refer to those same elements but as members of <code class='backtick'>a</code>.
+<ins>If <code class='backtick'>a.begin()</code> and <code class='backtick'>a2.begin()</code> have the same type, iterators</ins>
+<del>Iterators</del>
+referring to the transferred elements will continue to refer to their elements,
+but they now behave as iterators into <code class='backtick'>a</code>, not into <code class='backtick'>a2</code>.
+</p>
+<p>-116-
+<i>Throws</i>:
+Nothing unless the comparison objects throws.
+</p>
+<p>-117-
+<i>Complexity</i>:
+<i>N</i> log(<code class='backtick'>a.size()</code>+<i>N</i>), where <i>N</i> has the value <code class='backtick'>a2.size()</code>.
+</p>
+
+</blockquote>
+</li>
+</ol>
+
 
 
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Issue 4178: writable is no longer a term of power</title>
 <meta property="og:title" content="Issue 4178: writable is no longer a term of power">
-<meta property="og:description" content="C++ library issue. Status: New">
+<meta property="og:description" content="C++ library issue. Status: NAD Editorial">
 <meta property="og:url" content="https://cplusplus.github.io/LWG/issue4178.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="http://cplusplus.github.io/LWG/images/cpp_logo.png">
@@ -61,14 +61,14 @@
 </head>
 <body>
 <hr>
-<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#New">New</a> status.</em></p>
-<h3 id="4178"><a href="lwg-active.html#4178">4178</a>. <i>writable</i> is no longer a term of power</h3>
-<p><b>Section:</b> 24.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a>, 24.3.5.1 <a href="https://wg21.link/iterator.cpp17.general">[iterator.cpp17.general]</a>, 26.7.5 <a href="https://wg21.link/alg.replace">[alg.replace]</a>, 26.7.6 <a href="https://wg21.link/alg.fill">[alg.fill]</a>, 26.7.8 <a href="https://wg21.link/alg.remove">[alg.remove]</a>, 26.7.9 <a href="https://wg21.link/alg.unique">[alg.unique]</a>, 26.7.12 <a href="https://wg21.link/alg.random.sample">[alg.random.sample]</a>, 26.8.2.4 <a href="https://wg21.link/partial.sort.copy">[partial.sort.copy]</a>, 26.8.5 <a href="https://wg21.link/alg.partitions">[alg.partitions]</a>, 26.10.7 <a href="https://wg21.link/partial.sum">[partial.sum]</a>, 26.10.12 <a href="https://wg21.link/adjacent.difference">[adjacent.difference]</a>, 29.5.8.1 <a href="https://wg21.link/rand.util.seedseq">[rand.util.seedseq]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2024-11-27 <b>Last modified:</b> 2024-12-02</p>
+<p><em>This page is a snapshot from the LWG issues list, see the <a href="lwg-active.html">Library Active Issues List</a> for more information and the meaning of <a href="lwg-active.html#NAD_Editorial">NAD Editorial</a> status.</em></p>
+<h3 id="4178"><a href="lwg-closed.html#4178">4178</a>. <i>writable</i> is no longer a term of power</h3>
+<p><b>Section:</b> 24.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a>, 24.3.5.1 <a href="https://wg21.link/iterator.cpp17.general">[iterator.cpp17.general]</a>, 26.7.5 <a href="https://wg21.link/alg.replace">[alg.replace]</a>, 26.7.6 <a href="https://wg21.link/alg.fill">[alg.fill]</a>, 26.7.8 <a href="https://wg21.link/alg.remove">[alg.remove]</a>, 26.7.9 <a href="https://wg21.link/alg.unique">[alg.unique]</a>, 26.7.12 <a href="https://wg21.link/alg.random.sample">[alg.random.sample]</a>, 26.8.2.4 <a href="https://wg21.link/partial.sort.copy">[partial.sort.copy]</a>, 26.8.5 <a href="https://wg21.link/alg.partitions">[alg.partitions]</a>, 26.10.7 <a href="https://wg21.link/partial.sum">[partial.sum]</a>, 26.10.12 <a href="https://wg21.link/adjacent.difference">[adjacent.difference]</a>, 29.5.8.1 <a href="https://wg21.link/rand.util.seedseq">[rand.util.seedseq]</a> <b>Status:</b> <a href="lwg-active.html#NAD_Editorial">NAD Editorial</a>
+ <b>Submitter:</b> Alisdair Meredith <b>Opened:</b> 2024-11-27 <b>Last modified:</b> 2024-12-04</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#iterator.requirements.general">issues</a> in [iterator.requirements.general].</p>
-<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#NAD Editorial">NAD Editorial</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
 There are a numerous algorithms that mandate an iterator is "writable (24.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a>)":
@@ -119,6 +119,8 @@ actually refer to the <code>writable</code> concept) or if the interpretation th
 definition from 24.3.1 <a href="https://wg21.link/iterator.requirements.general">[iterator.requirements.general]</a> was intended to be aliased with the <code>writable</code>
 concept this substitution has been incompletely applied to the working draft.
 </p>
+<p><i>[2024-12-04 Status changed: New &rarr; NAD Editorial.]</i></p>
+
 
 
 <p id="res-4178"><b>Proposed resolution:</b></p>

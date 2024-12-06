@@ -121,8 +121,9 @@ is exactly equal to the number of elements inserted.
 </blockquote>
 In addition to incorrectly talking about "the copy constructor or move
 constructor", it should not should not talk about any "call to a constructor"
-because scalars and aggregates do not have constructors at all.
-We should talk about calls to <code class='backtick'>allocator_traits::construct</code> not constructors.
+because scalars do not have constructors at all.
+We should talk about calls to <code class='backtick'>allocator_traits::construct</code> not constructors,
+or objects being constructed.
 </p>
 <p>
 Similarly, p5 says:

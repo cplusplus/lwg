@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2024-12-06 at 21:02:56 UTC
+<p>Revised 2024-12-06 at 21:10:13 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -62849,9 +62849,9 @@ template&lt;<i>container-compatible-range</i>&lt;T&gt; R&gt;
 The complexity is linear in the number of elements inserted plus
 the lesser of the distances to the beginning and end of the deque.
 Inserting a single element at either the beginning or end of a deque
-always takes constant time and causes
-<del>a single call to a constructor of T</del>
-<ins>construction of a single object of type <code class='backtick'>T</code></ins>.
+always takes constant time and 
+<del>causes a single call to a constructor of T</del>
+<ins>constructs a single object of type <code class='backtick'>T</code></ins>.
 </p>
 <p>
 -3- <i>Remarks</i>:
@@ -62935,9 +62935,10 @@ linear in <code class='backtick'>n</code> and the number of <del>calls to the de
 <blockquote>
 <p>
 -1- <i>Complexity</i>:
-Insertion of a single element into a list takes constant time and exactly one
+Insertion of a single element into a list takes constant time and
+<ins>constructs</ins> exactly one
 <del>call to a constructor of <code class='backtick'>T</code></del>
-<ins>object of type <code class='backtick'>T</code> is constructed</ins>
+<ins>object of type <code class='backtick'>T</code></ins>.
 Insertion of multiple elements into a list is linear in the number of
 elements inserted and the number of
 <del>calls to the copy constructor or move constructor of <code class='backtick'>T</code></del>
@@ -62987,17 +62988,17 @@ using the specified allocator.
 </p>
 <p>
 -10- <i>Complexity</i>:
-<del>Makes only <i>N</i> calls to the copy constructor of</del>
-<ins>Initializes exactly <i>N</i> objects of type</ins>
-<code class='backtick'>T</code>
+<del>Makes only <i>N</i> calls to the copy constructor of <code class='backtick'>T</code></del>
+<ins>Initializes exactly <i>N</i> elements</ins>
+
 (where <i>N</i> is the distance between <code class='backtick'>first</code> and <code class='backtick'>last</code>)
 and no reallocations if iterators <code class='backtick'>first</code> and <code class='backtick'>last</code> are of forward,
 bidirectional, or random access categories.
 It <del>makes</del> <ins>initializes</ins> order
 <i>N</i>
-<del>calls to the copy constructor of</del>
-<ins>objects of type</ins>
-<code class='backtick'>T</code> and <ins>performs</ins>
+<del>calls to the copy constructor of <code class='backtick'>T</code></del>
+<ins>elements</ins>
+ and <ins>performs</ins>
 order log <i>N</i> reallocations if they are just input iterators.
 </p>
 <pre>template&lt;<i>container-compatible-range</i>&lt;T&gt; R&gt;
@@ -63014,8 +63015,8 @@ successive iterators of <code class='backtick'>rg</code>, where <i>N</i> is <cod
 Performs no reallocations if <code class='backtick'>R</code> models <code class='backtick'>ranges::forward_range</code> or
 <code class='backtick'>ranges::sized_range</code>; otherwise, performs order log <i>N</i> reallocations
 and <ins>initializes</ins> order <i>N</i>
-<del>calls to the copy or move constructor of</del>
-<ins>objects of type</ins> <code class='backtick'>T</code>.
+<del>calls to the copy or move constructor of <code class='backtick'>T</code></del>
+<ins>elements</ins>.
 </p>
 </blockquote>
 </li>

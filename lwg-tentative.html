@@ -54,8 +54,146 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-12-07 at 14:45:18 UTC
+<p>Revised 2024-12-09 at 16:10:47 UTC
 </p><h2>Tentative Issues</h2>
+<hr>
+<h3 id="3578"><a href="#3578">3578</a><sup><a href="https://cplusplus.github.io/LWG/issue3578">(i)</a></sup>. Iterator SCARYness in the context of associative container merging</h3>
+<p><b>Section:</b> 23.2.7.1 <a href="https://wg21.link/associative.reqmts.general">[associative.reqmts.general]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Joaqu&iacute;n M L&oacute;pez Mu&ntilde;oz <b>Opened:</b> 2021-08-04 <b>Last modified:</b> 2024-12-09</p>
+<p><b>Priority: </b>3
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#associative.reqmts.general">active issues</a> in [associative.reqmts.general].</p>
+<p><b>View all other</b> <a href="lwg-index.html#associative.reqmts.general">issues</a> in [associative.reqmts.general].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+For the expression <code>a.merge(a2)</code>, postconditions say that "iterators referring to the transferred elements 
+[&hellip;] now behave as iterators into <code>a</code> [&hellip;]". When <code>a</code> and <code>a2</code> are of different 
+types, this seems to imply, under the widest interpretation for "behaving as", that <code>a</code>-iterators and 
+<code>a2</code>-iterators are actually of the same type, that is, that associative containers have SCARY iterators,
+ which is, to the best of my knowledge, not currently mandated by the standard.
+<p/>
+There are (at least) three possible resolutions to this ambiguity, ordered by intrusiveness:
+</p>
+<ul>
+<li><p>Indicate that "behaving as" only applies to the case where <code>a</code> and <code>a2</code> are of the same type.</p></li>
+<li><p>Clarify what "behaving as" means. A non-SCARY interpretation is that an <code>a2</code>-iterator to a transferred 
+element can still be dereferenced, incremented (if not past the last element of <code>a</code>) and decremented (if 
+not pointing to the first element of <code>a</code>), while comparison with <code>a</code>-iterators and use in the 
+interface of <code>a</code> is not guaranteed.</p></li>
+<li><p>Mandate SCARY iterators by, for instance, requiring that associative containers with compatible nodes 
+(23.2.5.1 <a href="https://wg21.link/container.node.overview">[container.node.overview]</a>/1) have the same iterator types.</p></li>
+</ul>
+<p>
+Note that this issue does not extend to unordered associative containers, as there (23.2.8.1 <a href="https://wg21.link/unord.req.general">[unord.req.general]</a>) 
+iterators to transferred elements are invalidated, which makes the point of SCARYness irrelevant. That said, 
+if SCARY iterators are finally required for associative containers, it makes much sense to extend the requirement 
+to unordered associative containers as well.
+</p>
+
+<p><i>[2021-08-20; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
+<p><i>[2024-12-04; Jonathan provides wording]</i></p>
+
+<p>
+If we want to require <a href="https://www.stroustrup.com/SCARY.pdf">SCARY</a>
+iterators then that should be a proposal that goes through LEWG design review.
+I propose an almost minimal change to make the spec consistent without
+imposing any new requirements on implementations.
+</p>
+<p>
+The minimal change would be to say that iterators remain valid if <code class='backtick'>a</code> and <code class='backtick'>a2</code>
+have the same type, which is the minimum portable guarantee that always holds.
+However what matters in practice is whether the iterator types are the same.
+That would not be a portable guarantee, because it depends on whether the
+implementation uses SCARY iterators for its maps and sets, so users could
+write code that works on one implementation and fails to compile when moved
+to a different implementation. But that portability trap would be present
+even if we only say iterators remain valid when <code class='backtick'>a</code> and <code class='backtick'>a2</code> are the same type.
+If the code compiles and works on an implementation with SCARY iterators,
+then users will rely on that, even if unintentionally. Leaving that case
+unspecified or undefined in the standard doesn't prevent users from relying
+on it. It doesn't seem to serve any benefit to pretend it doesn't work when
+it actually does on some implementations.
+</p>
+<p>
+N.B. Libstdc++ associative container iterators are SCARY by default,
+but non-SCARY when <code class='backtick'>-D_GLIBCXX_DEBUG</code> is used to enable Debug Mode
+(see <a href="https://gcc.gnu.org/PR62169">Bug 62169</a>).
+I believe libc++ iterators are SCARY even when
+<code class='backtick'>-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG</code> is used,
+and MSVC STL iterators are SCARY even when <code class='backtick'>/D_ITERATOR_DEBUG_LEVEL</code> is used.
+</p>
+
+
+<p><i>[2024-12-09; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after eight votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-3578"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4993" title=" Working Draft, Programming Languages — C++">N4993</a>.
+</p>
+
+<ol>
+<li>
+<p>
+Modify 23.2.7.1 <a href="https://wg21.link/associative.reqmts.general">[associative.reqmts.general]</a> as indicated:
+</p>
+
+<blockquote>
+<pre><code>a.merge(a2)</code></pre>
+<p>-112-
+<i>Result</i>: <code class='backtick'>void</code>
+</p>
+<p>-113-
+<i>Preconditions</i>:
+<code class='backtick'>a.get_allocator() == a2.get_allocator()</code><ins> is <code class='backtick'>true</code></ins>.
+</p>
+<p>-114-
+<i>Effects</i>:
+Attempts to extract each element in <code class='backtick'>a2</code> and insert it into <code class='backtick'>a</code>
+using the comparison object of <code class='backtick'>a</code>.
+In containers with unique keys,
+if there is an element in <code class='backtick'>a</code> with key equivalent to
+the key of an element from <code class='backtick'>a2</code>,
+then that element is not extracted from <code class='backtick'>a2</code>.
+</p>
+<p>-115-
+<i>Postconditions</i>:
+Pointers and references to the transferred elements of <code class='backtick'>a2</code>
+refer to those same elements but as members of <code class='backtick'>a</code>.
+<ins>If <code class='backtick'>a.begin()</code> and <code class='backtick'>a2.begin()</code> have the same type, iterators</ins>
+<del>Iterators</del>
+referring to the transferred elements will continue to refer to their elements,
+but they now behave as iterators into <code class='backtick'>a</code>, not into <code class='backtick'>a2</code>.
+</p>
+<p>-116-
+<i>Throws</i>:
+Nothing unless the comparison objects throws.
+</p>
+<p>-117-
+<i>Complexity</i>:
+<i>N</i> log(<code class='backtick'>a.size()</code>+<i>N</i>), where <i>N</i> has the value <code class='backtick'>a2.size()</code>.
+</p>
+
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+
 <hr>
 <h3 id="3908"><a href="#3908">3908</a><sup><a href="https://cplusplus.github.io/LWG/issue3908">(i)</a></sup>. <code>enumerate_view::<i>iterator</i></code> constructor is explicit</h3>
 <p><b>Section:</b> 25.7.24.3 <a href="https://wg21.link/range.enumerate.iterator">[range.enumerate.iterator]</a> <b>Status:</b> <a href="lwg-active.html#NAD">Tentatively NAD</a>
@@ -232,6 +370,120 @@ and let <code>BoundArgs</code> be a pack that denotes <code>decay_t&lt;decltype(
 The expression <code>adaptor(args...)</code> produces a range adaptor closure object
 <code>f</code> that is a perfect forwarding call wrapper (22.10.4 <a href="https://wg21.link/func.require">[func.require]</a>)
 with the following properties: [...]
+</p>
+</blockquote>
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="3956"><a href="#3956">3956</a><sup><a href="https://cplusplus.github.io/LWG/issue3956">(i)</a></sup>. <code>chrono::parse</code> uses <code>from_stream</code> as a customization point</h3>
+<p><b>Section:</b> 30.13 <a href="https://wg21.link/time.parse">[time.parse]</a> <b>Status:</b> <a href="lwg-active.html#Ready">Tentatively Ready</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2023-07-15 <b>Last modified:</b> 2024-12-09</p>
+<p><b>Priority: </b>3
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#time.parse">active issues</a> in [time.parse].</p>
+<p><b>View all other</b> <a href="lwg-index.html#time.parse">issues</a> in [time.parse].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#Tentatively Ready">Tentatively Ready</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+30.13 <a href="https://wg21.link/time.parse">[time.parse]</a> says: "Each <code>parse</code> overload specified
+in this subclause calls <code>from_stream</code> unqualified,
+so as to enable argument dependent lookup (6.5.4 <a href="https://wg21.link/basic.lookup.argdep">[basic.lookup.argdep]</a>)."
+That name should be added to 16.4.2.2 <a href="https://wg21.link/contents">[contents]</a> along with
+<code>swap</code>,
+<code>make_error_code</code>, and
+<code>make_error_condition</code>.
+</p>
+
+<p>
+We should decide whether calls to <code>from_stream</code> should use normal
+lookup (i.e. unqualified lookup plus ADL) or just ADL, as was done for
+<code>make_error_code</code> and <code>make_error_condition</code>
+(see LWG <a href="lwg-defects.html#3629" title="make_error_code and make_error_condition are customization points (Status: C++23)">3629</a><sup><a href="https://cplusplus.github.io/LWG/issue3629" title="Latest snapshot">(i)</a></sup>).
+</p>
+
+<p><i>[2023-10-30; Reflector poll]</i></p>
+
+<p>
+Set priority to 3 after reflector poll.
+</p>
+
+<p><i>[2024-12-02; Jonathan provides wording]</i></p>
+
+<p>
+I suggest that <code class='backtick'>from_stream</code> should only be found via ADL,
+not unqualified lookup. This is consistent with what we did for
+<code class='backtick'>make_error_code</code> and <code class='backtick'>make_error_condition</code>, and more recently for
+<code class='backtick'>submdspan_mapping</code>.  I see no reason to treat <code class='backtick'>from_stream</code> differently.
+This implies that implementations might need a poison poll in <code class='backtick'>std::chrono</code>
+so that unqualified lookup stops as soon as those are found.
+</p>
+
+
+<p><i>[2024-12-09; Reflector poll]</i></p>
+
+<p>
+Set status to Tentatively Ready after six votes in favour during reflector poll.
+</p>
+
+
+
+<p id="res-3956"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4993" title=" Working Draft, Programming Languages — C++">N4993</a>.
+</p>
+
+<ol>
+<li><p>Modify 16.4.2.2 <a href="https://wg21.link/contents">[contents]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-3-
+Whenever an unqualified name other than
+<code class='backtick'>swap</code>, <code class='backtick'>make_error_code</code>, <code class='backtick'>make_error_condition</code>,
+<ins><code class='backtick'>from_stream</code>,</ins>
+or <code class='backtick'>submdspan_mapping</code>
+is used in the specification of a declaration <code class='backtick'>D</code>
+in Clause 17 through Clause 33 or Annex D,
+its meaning is established as-if by performing unqualified name lookup
+(6.5.3 <a href="https://wg21.link/basic.lookup.unqual">[basic.lookup.unqual]</a>)
+in the context of <code class='backtick'>D</code>.
+</p>
+<p>
+[<i>Note 1</i>:
+Argument-dependent lookup is not performed. &mdash; <i>end note</i>]
+</p>
+<p>
+Similarly, the meaning of a <i>qualified-id</i> is established as-if
+by performing qualified name lookup (6.5.5 <a href="https://wg21.link/basic.lookup.qual">[basic.lookup.qual]</a>)
+in the context of <code class='backtick'>D</code>.
+</p>
+<p>
+[<i>Example 1</i>:
+The reference to <code class='backtick'>is_array_v</code> in the specification of <code class='backtick'>std::to_array</code>
+(23.3.3.6 <a href="https://wg21.link/array.creation">[array.creation]</a>) refers to <code class='backtick'>::std::is_array_v</code>.
+&mdash; <i>end example</i>]
+</p>
+<p>
+[<i>Note 2</i>: Operators in expressions (12.2.2.3 <a href="https://wg21.link/over.match.oper">[over.match.oper]</a>)
+are not so constrained; see 16.4.6.4 <a href="https://wg21.link/global.functions">[global.functions]</a>.
+&mdash; <i>end note</i>]
+</p>
+<p>
+The meaning of the unqualified name <code class='backtick'>swap</code> is established
+in an overload resolution context for swappable values
+(16.4.4.3 <a href="https://wg21.link/swappable.requirements">[swappable.requirements]</a>).
+The meanings of the unqualified names
+<code class='backtick'>make_error_code</code>, <code class='backtick'>make_error_condition</code>,
+<ins><code class='backtick'>from_stream</code>,</ins>
+and <code class='backtick'>submdspan_mapping</code>
+are established as-if by performing argument-dependent lookup
+(6.5.4 <a href="https://wg21.link/basic.lookup.argdep">[basic.lookup.argdep]</a>).
 </p>
 </blockquote>
 </li>

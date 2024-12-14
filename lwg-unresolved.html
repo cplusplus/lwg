@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-12-09 at 16:10:47 UTC
+<p>Revised 2024-12-14 at 15:02:41 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -64674,6 +64674,111 @@ Returns <code class='backtick'>{last, last}</code> if no such iterator is found.
 
 </li>
 
+</ol>
+
+
+
+
+
+<hr>
+<h3 id="4180"><a href="#4180">4180</a><sup><a href="https://cplusplus.github.io/LWG/issue4180">(i)</a></sup>. Inconsistent constraints on <code>flat_<i>foo</i>::emplace</code></h3>
+<p><b>Section:</b> 23.6.12.5 <a href="https://wg21.link/flat.multiset.modifiers">[flat.multiset.modifiers]</a>, 23.6.8.7 <a href="https://wg21.link/flat.map.modifiers">[flat.map.modifiers]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Arthur O'Dwyer <b>Opened:</b> 2024-12-09 <b>Last modified:</b> 2024-12-14</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+The usual pattern in 23 <a href="https://wg21.link/containers">[containers]</a> is that <code class='backtick'>x.emplace(args...)</code> has a precondition 
+(23.2.4 <a href="https://wg21.link/sequence.reqmts">[sequence.reqmts]</a> p20, 23.2.7.1 <a href="https://wg21.link/associative.reqmts.general">[associative.reqmts.general]</a> p48) but no 
+<i>Constraints</i> element. That is, <code class='backtick'>emplace</code> is not SFINAE-friendly. And it has only the one overload, 
+so it doesn't need a constraint for purposes of overload resolution.
+<p/>
+No Constraints on <code class='backtick'>emplace</code>: <code class='backtick'>deque</code>, <code class='backtick'>list</code>, <code class='backtick'>vector</code>, <code class='backtick'>containers</code>, <code class='backtick'>associative containers</code>, <code class='backtick'>unordered containers</code>, 
+<code class='backtick'>priority_queue</code>, <code class='backtick'>optional</code>.
+<p/>
+Constraints on <code class='backtick'>emplace</code>: <code class='backtick'>flat_map</code>, <code class='backtick'>flat_multiset</code>, <code class='backtick'>any</code>, <code class='backtick'>expected</code>, <code class='backtick'>variant</code>.
+<p/>
+I believe a <i>Constraints</i> element was accidentally copy-pasted from the spec of <code>flat_map::insert(P&amp;&amp;)</code>
+ &mdash; which does need the constraint because it's part of <code class='backtick'>insert</code>'s large overload set &mdash; to 
+ <code class='backtick'>flat_map::emplace</code>, and then from there to <code class='backtick'>flat_multiset::emplace</code>. The constraint is already (correctly) absent 
+ <code class='backtick'>from flat_set::emplace</code>.
+<p/>
+While we're touching this paragraph, also resolve the vague word "initializes" to "direct-non-list-initializes." 
+Editorially, <code>pair&lt;&hellip;&gt;</code> is a verbose way to spell the <code class='backtick'>value_type</code> of a <code class='backtick'>flat_map</code>; we should 
+be consistent and just say <code class='backtick'>value_type</code>.
+</p>
+
+
+<p id="res-4180"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N4993" title=" Working Draft, Programming Languages — C++">N4993</a>.
+</p>
+
+<blockquote style="note">
+<p>
+[<i>Drafting note</i>: 23.6.11.5 <a href="https://wg21.link/flat.set.modifiers">[flat.set.modifiers]</a> is already OK as far as this issue is concerned: 
+it has no wording for <code class='backtick'>emplace</code>.
+<p/> 
+[flat.multimap.modifiers] is already OK ditto: it does not exist. ]
+</p>
+</blockquote>
+
+<ol>
+<li><p>Modify 23.6.12.5 <a href="https://wg21.link/flat.multiset.modifiers">[flat.multiset.modifiers]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class... Args&gt; iterator emplace(Args&amp;&amp;... args);
+</pre>
+<blockquote>
+<p>
+-1- <i><ins>Mandates</ins><del>Constraints</del></i>: <code>is_constructible_v&lt;value_type, Args...&gt;</code> is <code>true</code>.
+<p/>
+-2- <i>Effects</i>: First, <ins>direct-non-list-</ins>initializes an object <code class='backtick'>t</code> of type <code class='backtick'>value_type</code> with 
+<code>std::forward&lt;Args&gt;(args)...</code>, then inserts <code class='backtick'>t</code> as if by:
+</p>
+<blockquote><pre>
+auto it = ranges::upper_bound(c, t, compare);
+c.insert(it, std::move(t));
+</pre></blockquote>
+<p>
+-3- <i>Returns</i>: An iterator that points to the inserted element.
+</p>
+</blockquote>
+</blockquote>
+
+</li>
+
+<li><p>Modify 23.6.8.7 <a href="https://wg21.link/flat.map.modifiers">[flat.map.modifiers]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class... Args&gt; pair&lt;iterator, bool&gt; emplace(Args&amp;&amp;... args);
+</pre>
+<blockquote>
+<p>
+-1- <i><ins>Mandates</ins><del>Constraints</del></i>: <code>is_constructible_v&lt;<ins>value_type</ins><del>pair&lt;key_type, mapped_type&gt;</del>, Args...&gt;</code> 
+is <code>true</code>.
+<p/>
+-2- <i>Effects</i>: <ins>First, direct-non-list-i</ins><del>I</del>nitializes an object <code class='backtick'>t</code> of type 
+<code><ins>value_type</ins><del>pair&lt;key_type, mapped_type&gt;</del></code> with <code>std::forward&lt;Args&gt;(args)...</code>; 
+if the map already contains an element whose key is equivalent to <code class='backtick'>t.first</code>, <code class='backtick'>*this</code> is unchanged. Otherwise, equivalent to:
+</p>
+<blockquote><pre>
+auto key_it = ranges::upper_bound(c.keys, t.first, compare);
+auto value_it = c.values.begin() + distance(c.keys.begin(), key_it);
+c.keys.insert(key_it, std::move(t.first));
+c.values.insert(value_it, std::move(t.second));
+</pre></blockquote>
+<p>
+-3- <i>Returns</i>: The <code class='backtick'>bool</code> component of the returned pair is <code class='backtick'>true</code> if and only if the insertion took place, and
+the iterator component of the pair points to the element with key equivalent to <code class='backtick'>t.first</code>.
+</p>
+</blockquote>
+</blockquote>
+
+</li>
 </ol>
 
 

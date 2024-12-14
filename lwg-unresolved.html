@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-12-14 at 15:47:42 UTC
+<p>Revised 2024-12-14 at 16:00:05 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -64785,6 +64785,33 @@ the iterator component of the pair points to the element with key equivalent to 
 
 </li>
 </ol>
+
+
+
+
+
+<hr>
+<h3 id="4181"><a href="#4181">4181</a><sup><a href="https://cplusplus.github.io/LWG/issue4181">(i)</a></sup>. Some ranges have negative <code class='backtick'>ssize</code></h3>
+<p><b>Section:</b> 24.7 <a href="https://wg21.link/iterator.range">[iterator.range]</a>, 25.3.11 <a href="https://wg21.link/range.prim.ssize">[range.prim.ssize]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Casey Carter <b>Opened:</b> 2024-12-13 <b>Last modified:</b> 2024-12-14</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#iterator.range">active issues</a> in [iterator.range].</p>
+<p><b>View all other</b> <a href="lwg-index.html#iterator.range">issues</a> in [iterator.range].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+There exist range types <code class='backtick'>R</code> whose size is representable by neither <code class='backtick'>ptrdiff_t</code> nor 
+<code><i>make-signed-like-t</i>&lt;ranges::range_size_t&lt;R&gt;&gt;</code>, specifically <code class='backtick'>views::iota(size_t(0), size_t(-1))</code>. 
+It's unfortunate that <code class='backtick'>std::ssize</code> and <code class='backtick'>ranges::ssize</code> produce a negative size for such ranges even when their 
+difference type is capable of representing their size (see <a href="https://www.godbolt.org/z/599z55Y4f">demo</a>). 
+Perhaps the <code class='backtick'>ssize</code> overloads should return 
+<code>static_cast&lt;common_type_t&lt;ptrdiff_t, iter_difference_t&lt;decltype(<i>meow</i>.begin())&gt;&gt;&gt;(<i>meow</i>.size())</code> 
+instead when the argument <code><i>meow</i></code> models <code class='backtick'>range</code>?
+</p>
+
+
+<p id="res-4181"><b>Proposed resolution:</b></p>
 
 
 

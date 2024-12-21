@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-12-14 at 16:00:05 UTC
+<p>Revised 2024-12-21 at 11:02:22 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -64812,6 +64812,52 @@ instead when the argument <code><i>meow</i></code> models <code class='backtick'
 
 
 <p id="res-4181"><b>Proposed resolution:</b></p>
+
+
+
+
+
+<hr>
+<h3 id="4182"><a href="#4182">4182</a><sup><a href="https://cplusplus.github.io/LWG/issue4182">(i)</a></sup>. Definition of <code class='backtick'>NULL</code> is too broad</h3>
+<p><b>Section:</b> 17.2.3 <a href="https://wg21.link/support.types.nullptr">[support.types.nullptr]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Janet Cobb <b>Opened:</b> 2024-12-09 <b>Last modified:</b> 2024-12-21</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+7.3.12 <a href="https://wg21.link/conv.ptr">[conv.ptr]</a>/1 reads in part: "A <i>null pointer constant</i> is an integer literal (5.13.2 <a href="https://wg21.link/lex.icon">[lex.icon]</a>) 
+with value zero or a prvalue of type <code class='backtick'>std::nullptr_t</code>.".
+<p/>
+17.2.3 <a href="https://wg21.link/support.types.nullptr">[support.types.nullptr]</a>/2 reads: "The macro <code class='backtick'>NULL</code> is an implementation-defined null pointer constant.".
+<p/>
+Together, these imply that <code class='backtick'>#define NULL (::std::unreachable(), nullptr)</code> is a conforming definition. The expression is 
+a prvalue of type <code class='backtick'>std::nullptr_t</code>, so it is a null pointer constant. This makes it implementation-defined whether 
+any program that evaluates <code class='backtick'>NULL</code> has undefined behavior.
+</p>
+
+
+<p id="res-4182"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N5001">N5001</a>.
+</p>
+
+
+<ol>
+<li><p>Modify 17.2.3 <a href="https://wg21.link/support.types.nullptr">[support.types.nullptr]</a> as indicated:</p>
+
+<blockquote>
+<p>
+-2- The macro <code class='backtick'>NULL</code> is an implementation-defined null pointer constant <ins>that is a literal 
+(5.13.2 <a href="https://wg21.link/lex.icon">[lex.icon]</a>, 5.13.8 <a href="https://wg21.link/lex.nullptr">[lex.nullptr]</a>)</ins>.<sup>footnote 161</sup>
+<p/>
+<small>161) Possible definitions include <code class='backtick'>0</code> and <code class='backtick'>0L</code>, but not <code class='backtick'>(void*)0</code>.</small>
+</p>
+</blockquote>
+
+</li>
+
+</ol>
 
 
 

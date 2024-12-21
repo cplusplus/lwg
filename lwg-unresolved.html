@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-12-21 at 13:30:48 UTC
+<p>Revised 2024-12-21 at 13:50:00 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -9408,6 +9408,7 @@ shall be locale sensitive.
  <b>Submitter:</b> Sergey Zubkov <b>Opened:</b> 2013-10-15 <b>Last modified:</b> 2016-02-01</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#re.traits">active issues</a> in [re.traits].</p>
 <p><b>View all other</b> <a href="lwg-index.html#re.traits">issues</a> in [re.traits].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#Open">Open</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -65021,6 +65022,64 @@ usage. Presumably we should say the behavior is undefined in these cases.
 
 
 <p id="res-4185"><b>Proposed resolution:</b></p>
+
+
+
+
+
+<hr>
+<h3 id="4186"><a href="#4186">4186</a><sup><a href="https://cplusplus.github.io/LWG/issue4186">(i)</a></sup>. <code class='backtick'>regex_traits::transform_primary</code> mistakenly detects <code class='backtick'>typeid</code> of a function</h3>
+<p><b>Section:</b> 28.6.6 <a href="https://wg21.link/re.traits">[re.traits]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2024-12-18 <b>Last modified:</b> 2024-12-21</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#re.traits">active issues</a> in [re.traits].</p>
+<p><b>View all other</b> <a href="lwg-index.html#re.traits">issues</a> in [re.traits].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+28.6.6 <a href="https://wg21.link/re.traits">[re.traits]</a>/7 currently says <code>typeid(use_facet&lt;collate&lt;charT&gt;&gt;) == 
+typeid(collate_byname&lt;charT&gt;)</code>, which is always <code class='backtick'>false</code> because 
+<code>use_facet&lt;collate&lt;charT&gt;&gt;</code> is a function template specialization while 
+<code>collate_byname&lt;charT&gt;</code> is a class template specialization. This looks like 
+misuse, and has been present in TR1 (<a href="https://wg21.link/N1836" title=" Draft Technical Report on C++ Library Extensions">N1836</a>).
+<p/>
+Presumably the intended operand is <code>use_facet&lt;collate&lt;charT&gt;&gt;(getloc())</code>.
+</p>
+
+
+<p id="res-4186"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N5001">N5001</a>.
+</p>
+
+<ol>
+<li><p>Modify 28.6.6 <a href="https://wg21.link/re.traits">[re.traits]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+template&lt;class ForwardIterator&gt;
+  string_type transform_primary(ForwardIterator first, ForwardIterator last) const;
+</pre>
+<blockquote>
+<p>
+-7- <i>Effects</i>: If
+</p>
+<blockquote><pre>
+typeid(use_facet&lt;collate&lt;charT&gt;&gt;<ins>(getloc())</ins>) == typeid(collate_byname&lt;charT&gt;)
+</pre></blockquote>
+<p>
+and the form of the sort key returned by <code>collate_byname&lt;charT&gt;::transform(first, last)</code> 
+is known and can be converted into a primary sort key then returns that key, otherwise returns an empty
+string.
+</p>
+</blockquote>
+</blockquote>
+
+
+</li>
+
+</ol>
 
 
 

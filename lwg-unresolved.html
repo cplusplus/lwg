@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2024-12-22 at 11:35:55 UTC
+<p>Revised 2025-01-14 at 12:08:08 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -11554,6 +11554,7 @@ Instantiating <code>A&lt;int&gt;</code> as a result of requiring it to be a comp
  <b>Submitter:</b> Roger Orr <b>Opened:</b> 2015-05-08 <b>Last modified:</b> 2020-09-06</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#ostream.sentry">active issues</a> in [ostream.sentry].</p>
 <p><b>View all other</b> <a href="lwg-index.html#ostream.sentry">issues</a> in [ostream.sentry].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -65171,6 +65172,74 @@ namespace std {
 </li>
 
 </ol>
+
+
+
+
+
+<hr>
+<h3 id="4188"><a href="#4188">4188</a><sup><a href="https://cplusplus.github.io/LWG/issue4188">(i)</a></sup>. <code>ostream::sentry</code> destructor should handle exceptions</h3>
+<p><b>Section:</b> 31.7.6.2.4 <a href="https://wg21.link/ostream.sentry">[ostream.sentry]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Jonathan Wakely <b>Opened:</b> 2025-01-14 <b>Last modified:</b> 2025-01-14</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#ostream.sentry">active issues</a> in [ostream.sentry].</p>
+<p><b>View all other</b> <a href="lwg-index.html#ostream.sentry">issues</a> in [ostream.sentry].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+LWG <a href="lwg-closed.html#397" title="ostream::sentry dtor throws exceptions (Status: NAD Editorial)">397</a><sup><a href="https://cplusplus.github.io/LWG/issue397" title="Latest snapshot">(i)</a></sup> suggested changing 31.7.6.2.4 <a href="https://wg21.link/ostream.sentry">[ostream.sentry]</a> to
+say that the <code class='backtick'>ostream::sentry</code> destructor doesn't throw any exceptions.
+That issue was closed as resolved by LWG <a href="lwg-defects.html#835" title="Tying two streams together (correction to DR 581) (Status: C++11)">835</a><sup><a href="https://cplusplus.github.io/LWG/issue835" title="Latest snapshot">(i)</a></sup> which included
+the "Throws: Nothing" change to the <code class='backtick'>sentry</code> destructor.
+However, that part of the resolution never seems to have been applied to
+the working draft. <a href="https://wg21.link/N3091" title=" Editor's Report">N3091</a> mentions applying LWG 835 for
+<a href="https://wg21.link/N3090" title=" Working Draft, Standard for Programming Language C++">N3090</a> but the destructor change is missing, maybe because
+the paragraph for the sentry destructor had been renumbered from p17 to p4
+and LWG 835 didn't show sufficient context to indicate the intended location.
+</p>
+
+<p>
+The problem described in LWG <a href="lwg-closed.html#397" title="ostream::sentry dtor throws exceptions (Status: NAD Editorial)">397</a><sup><a href="https://cplusplus.github.io/LWG/issue397" title="Latest snapshot">(i)</a></sup> is still present:
+the streambuf operations can fail, and the sentry needs to handle that.
+The changes for LWG <a href="lwg-defects.html#835" title="Tying two streams together (correction to DR 581) (Status: C++11)">835</a><sup><a href="https://cplusplus.github.io/LWG/issue835" title="Latest snapshot">(i)</a></sup> ensure no exception is thrown if
+<code>rdbuf()-&gt;pubsync()</code> returns -1 on failure, but do nothing for
+the case where it throws an exception (the original topic of LWG 397!).
+Because C++11 made <code class='backtick'>~sentry</code> implicitly <code class='backtick'>noexcept</code>,
+an exception from <code class='backtick'>rdbuf()-&gt;pubsync()</code> will terminate the process.
+That needs to be fixed.
+</p>
+
+<p>
+Libstdc++ does terminate if <code class='backtick'>pubsync()</code> throws when called by <code class='backtick'>~sentry</code>.
+Both MSVC and Libc++ silently swallow exceptions.
+It seems preferable to handle the exception and report an error,
+just as we do when <code class='backtick'>pubsync()</code> returns -1.
+</p>
+
+
+
+<p id="res-4188"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N5001">N5001</a>.
+</p>
+
+<ol>
+<li><p>Modify 31.7.6.2.4 <a href="https://wg21.link/ostream.sentry">[ostream.sentry]</a> as indicated:</p>
+
+<blockquote>
+<pre><code>~sentry();</code></pre>
+<blockquote>
+-4- If
+<code>(os.flags() &amp; ios_base::unitbuf) &amp;&amp; !uncaught_exceptions() &amp;&amp; os.good()</code> is <code class='backtick'>true</code>, calls <code>os.rdbuf()-&gt;pubsync()</code>.
+If that function returns −1
+<ins> or exits via an exceptions</ins>,
+sets <code class='backtick'>badbit</code> in <code class='backtick'>os.rdstate()</code> without propagating an exception.
+</blockquote>
+</blockquote>
+</li>
+</ol>
+
 
 
 

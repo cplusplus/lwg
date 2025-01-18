@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2025-01-14 at 12:10:48 UTC
+<p>Revised 2025-01-18 at 13:28:55 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -47228,6 +47228,7 @@ title "<b>Comments</b>" to "<b>Mandates</b>".</p>
  <b>Submitter:</b> Jiang An <b>Opened:</b> 2023-05-03 <b>Last modified:</b> 2024-07-27</p>
 <p><b>Priority: </b>3
 </p>
+<p><b>View other</b> <a href="lwg-index-open.html#version.syn">active issues</a> in [version.syn].</p>
 <p><b>View all other</b> <a href="lwg-index.html#version.syn">issues</a> in [version.syn].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
@@ -65237,6 +65238,62 @@ If that function returns −1
 sets <code class='backtick'>badbit</code> in <code class='backtick'>os.rdstate()</code> without propagating an exception.
 </blockquote>
 </blockquote>
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4189"><a href="#4189">4189</a><sup><a href="https://cplusplus.github.io/LWG/issue4189">(i)</a></sup>. <code class='backtick'>cache_latest_view</code> should be freestanding</h3>
+<p><b>Section:</b> 17.3.2 <a href="https://wg21.link/version.syn">[version.syn]</a>, 25.2 <a href="https://wg21.link/ranges.syn">[ranges.syn]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Hewill Kang <b>Opened:</b> 2024-12-23 <b>Last modified:</b> 2025-01-18</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View other</b> <a href="lwg-index-open.html#version.syn">active issues</a> in [version.syn].</p>
+<p><b>View all other</b> <a href="lwg-index.html#version.syn">issues</a> in [version.syn].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+<code class='backtick'>cache_latest_view</code> can be freestanding, but this never comes up in the discussion, which seems to be an oversight.
+</p>
+
+
+
+<p id="res-4189"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N5001">N5001</a>.
+</p>
+
+<ol>
+<li><p>Modify 17.3.2 <a href="https://wg21.link/version.syn">[version.syn]</a> as indicated:</p>
+
+<blockquote><pre>
+#define __cpp_lib_ranges_cache_latest 202411L // <ins><i>freestanding</i>,</ins> <i>also in</i> &lt;ranges&gt;
+</pre></blockquote>
+
+</li>
+
+<li><p>Modify 25.2 <a href="https://wg21.link/ranges.syn">[ranges.syn]</a> as indicated:</p>
+
+<blockquote><pre>
+#include &lt;compare&gt;              // <i>see 17.11.1 <a href="https://wg21.link/compare.syn">[compare.syn]</a></i>
+#include &lt;initializer_list&gt;     // <i>see 17.10.2 <a href="https://wg21.link/initializer.list.syn">[initializer.list.syn]</a></i>
+#include &lt;iterator&gt;             // <i>see 24.2 <a href="https://wg21.link/iterator.synopsis">[iterator.synopsis]</a></i>
+
+namespace std::ranges {
+  [&hellip;]
+  // <i> [range.cache.latest], cache latest view</i>
+  template&lt;input_range V&gt;
+    requires view&lt;V&gt;
+  class cache_latest_view;                                                                <ins>// <i>freestanding</i></ins>
+  
+  namespace views { inline constexpr <i>unspecified</i> cache_latest = <i>unspecified</i>; }            <ins>// <i>freestanding</i></ins>
+  [&hellip;]
+}
+</pre></blockquote>
 </li>
 </ol>
 

@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Closed Issues List (Revision D125)</h1>
-<p>Revised 2025-01-18 at 16:47:00 UTC
+<p>Revised 2025-01-18 at 19:15:57 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -53566,7 +53566,7 @@ template &lt;class T&gt; constexpr T* launder(T* p) noexcept;
 <blockquote>
 <p>
 -1- <i>Requires:</i> <code>p</code> represents the address <code><i>A</i></code> of a byte in memory. An object <code><i>X</i></code> 
-that is within its lifetime (6.7.3 <a href="https://wg21.link/basic.life">[basic.life]</a>) and whose type is similar (7.3.6 <a href="https://wg21.link/conv.qual">[conv.qual]</a>) to <code>T</code> 
+that is within its lifetime (6.7.4 <a href="https://wg21.link/basic.life">[basic.life]</a>) and whose type is similar (7.3.6 <a href="https://wg21.link/conv.qual">[conv.qual]</a>) to <code>T</code> 
 is located at the address <code><i>A</i></code>. <ins><code><i>X</i></code> shall either be a most derived object, or 
 pointer-interconvertible with a most derived object that is within its lifetime.</ins> All bytes of storage that would be 
 reachable through the result are reachable through <code>p</code> (see below).
@@ -53589,7 +53589,7 @@ template &lt;class T&gt; constexpr T* launder(T* p) noexcept;
 <blockquote>
 <p>
 -1- <i>Requires:</i> <code>p</code> represents the address <code><i>A</i></code> of a byte in memory. An object <code><i>X</i></code> 
-that is within its lifetime (6.7.3 <a href="https://wg21.link/basic.life">[basic.life]</a>) and whose type is similar (7.3.6 <a href="https://wg21.link/conv.qual">[conv.qual]</a>) to <code>T</code> 
+that is within its lifetime (6.7.4 <a href="https://wg21.link/basic.life">[basic.life]</a>) and whose type is similar (7.3.6 <a href="https://wg21.link/conv.qual">[conv.qual]</a>) to <code>T</code> 
 is located at the address <code><i>A</i></code>. <ins>If <code>T</code> is a polymorphic class type, then <code><i>X</i></code> shall 
 be a most derived object.</ins> All bytes of storage that would be reachable through the result are reachable through 
 <code>p</code> (see below).
@@ -54589,7 +54589,7 @@ same rule be added for <code>std::optional</code> as well?
 <p>
 [&hellip;] The contained value shall be allocated in a region of the <code>optional&lt;T&gt;</code> storage suitably aligned 
 for the type <code>T</code>. <ins>It is implementation-defined whether over-aligned types are supported 
-(6.7.6 <a href="https://wg21.link/basic.align">[basic.align]</a>).</ins> When an object of type <code>optional&lt;T&gt;</code> is contextually converted to 
+(6.7.3 <a href="https://wg21.link/basic.align">[basic.align]</a>).</ins> When an object of type <code>optional&lt;T&gt;</code> is contextually converted to 
 <code>bool</code>, the conversion returns <code>true</code> if the object contains a value; otherwise the conversion returns 
 <code>false</code>.
 </p>
@@ -56973,8 +56973,8 @@ This wording is relative to <a href="https://wg21.link/N4901" title=" Working Dr
 <p>
 IMO the UB in 17.13.3 <a href="https://wg21.link/csetjmp.syn">[csetjmp.syn]</a>/2 is because of the design that "every destructor call 
 for an object shall be in effect when the lifetime of that object ends". A similar requirement is 
-in 6.7.3 <a href="https://wg21.link/basic.life">[basic.life]</a>/5, but it's more relaxed than the requirement for <code>setjmp</code>/<code>longjmp</code>.
-It seems better to harmonize the requirements in 6.7.3 <a href="https://wg21.link/basic.life">[basic.life]</a>/5 and 
+in 6.7.4 <a href="https://wg21.link/basic.life">[basic.life]</a>/5, but it's more relaxed than the requirement for <code>setjmp</code>/<code>longjmp</code>.
+It seems better to harmonize the requirements in 6.7.4 <a href="https://wg21.link/basic.life">[basic.life]</a>/5 and 
 17.13.3 <a href="https://wg21.link/csetjmp.syn">[csetjmp.syn]</a>/2, which allows <code>longjmp</code> to skip non-trivial but no-op destructor calls. 
 Given that Microsoft UCRT's <code>longjmp</code> can sometimes (but not always) call destructors, 
 IMO we should say that it's unspecified whether <code>longjmp</code> calls destructor for any object 
@@ -59277,7 +59277,7 @@ This wording is relative to <a href="https://wg21.link/N4958" title=" Working Dr
 <blockquote>
 <p>
 -1- Class template <code>projected</code> is used to constrain algorithms that accept callable objects and projections 
-(3.43 <a href="https://wg21.link/defns.projection">[defns.projection]</a>). It combines an <code>indirectly_readable</code> type <code>I</code> and a callable 
+(3.44 <a href="https://wg21.link/defns.projection">[defns.projection]</a>). It combines an <code>indirectly_readable</code> type <code>I</code> and a callable 
 object type <code>Proj</code> into a new <code>indirectly_readable</code> type whose <code>reference</code> type is the 
 result of applying <code>Proj</code> to the <code>iter_reference_t</code> of <code>I</code>.
 </p>

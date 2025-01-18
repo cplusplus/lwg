@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2025-01-18 at 16:47:00 UTC
+<p>Revised 2025-01-18 at 19:15:57 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -12943,7 +12943,7 @@ The libc++ and MSVC STL implementations only support flat address spaces, and al
 The libstdc++ implementation casts pointer values to <code>uintptr_t</code> if the direct comparison result is unusable 
 in constant evaluation.
 <p/>
-So, I think that we can specify that the implementation-defined strict total order (3.27 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) 
+So, I think that we can specify that the implementation-defined strict total order (3.28 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) 
 generates a core constant expression if and only if the corresponding underlying comparison expression comparing 
 pointer values is a core constant expression. No any other case should be a core constant expression, otherwise 
 we should also make the underlying comparison expression a core constant expression.
@@ -12964,7 +12964,7 @@ and <code>std::is_constant_evaluated</code>.
 <p>
 -2- For templates <code>less</code>, <code>greater</code>, <code>less_equal</code>, and <code>greater_equal</code>, the specializations 
 for any pointer type yield a result consistent with the implementation-defined strict total order over pointers 
-(3.27 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>). [<i>Note 1</i>: If <code>a &lt; b</code> is well-defined for pointers <code>a</code> and 
+(3.28 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>). [<i>Note 1</i>: If <code>a &lt; b</code> is well-defined for pointers <code>a</code> and 
 <code>b</code> of type <code>P</code>, then <code>(a &lt; b) == less&lt;P&gt;()(a, b)</code>, <code>(a &gt; b) == greater&lt;P&gt;()(a, b)</code>, 
 and so forth. &mdash; <i>end note</i>] For template specializations <code>less&lt;void&gt;</code>, <code>greater&lt;void&gt;</code>, 
 <code>less_equal&lt;void&gt;</code>, and <code>greater_equal&lt;void&gt;</code>, if the call operator calls a built-in operator 
@@ -12984,7 +12984,7 @@ built-in comparison expression is a core constant expression.</ins>
 <li><p>(3.1) &mdash; If the expression <code>std::forward&lt;T&gt;(t) == std::forward&lt;U&gt;(u)</code> results in a call 
 to a built-in operator <code>==</code> comparing pointers: returns <code>false</code> if either (the converted value of) <code>t</code> 
 precedes <code>u</code> or <code>u</code> precedes <code>t</code> in the implementation-defined strict total order over pointers 
-(3.27 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) and otherwise <code>true</code>. <ins>The result is a core constant expression if and only 
+(3.28 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) and otherwise <code>true</code>. <ins>The result is a core constant expression if and only 
 if <code>std::forward&lt;T&gt;(t) == std::forward&lt;U&gt;(u)</code> is a core constant expression.</ins></p></li>
 <li><p>(3.2) &mdash; Otherwise, equivalent to: <code>return std::forward&lt;T&gt;(t) == std::forward&lt;U&gt;(u);</code></p></li>
 </ol>
@@ -12999,7 +12999,7 @@ if <code>std::forward&lt;T&gt;(t) == std::forward&lt;U&gt;(u)</code> is a core c
 <ol style="list-style-type: none">
 <li><p>(7.1) &mdash; If the expression <code>std::forward&lt;T&gt;(t) &lt; std::forward&lt;U&gt;(u)</code> results in a call 
 to a built-in operator <code>&lt;</code> comparing pointers: returns <code>true</code> if (the converted value of) <code>t</code> 
-precedes <code>u</code> in the implementation-defined strict total order over pointers (3.27 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) and 
+precedes <code>u</code> in the implementation-defined strict total order over pointers (3.28 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>) and 
 otherwise <code>false</code>. <ins>The result is a core constant expression if and only 
 if <code>std::forward&lt;T&gt;(t) &lt; std::forward&lt;U&gt;(u)</code> is a core constant expression.</ins></p></li>
 <li><p>(7.2) &mdash; Otherwise, equivalent to: <code>return std::forward&lt;T&gt;(t) &lt; std::forward&lt;U&gt;(u);</code></p></li>
@@ -13015,7 +13015,7 @@ if <code>std::forward&lt;T&gt;(t) &lt; std::forward&lt;U&gt;(u)</code> is a core
 <ol style="list-style-type: none">
 <li><p>(3.1) &mdash; If the expression <code>std::forward&lt;T&gt;(t) &lt;=&gt; std::forward&lt;U&gt;(u)</code> results in a call 
 to a built-in operator <code>&lt;=&gt;</code> comparing pointers: returns <code>strong_ordering::less</code> if (the converted value 
-of) <code>t</code> precedes <code>u</code> in the implementation-defined strict total order over pointers (3.27 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>), 
+of) <code>t</code> precedes <code>u</code> in the implementation-defined strict total order over pointers (3.28 <a href="https://wg21.link/defns.order.ptr">[defns.order.ptr]</a>), 
 <code>strong_ordering::greater</code> if <code>u</code> precedes <code>t</code>, and otherwise <code>strong_ordering::equal</code>. 
 <ins>The result is a core constant expression if and only if <code>std::forward&lt;T&gt;(t) &lt;=&gt; std::forward&lt;U&gt;(u)</code> 
 is a core constant expression.</ins></p></li>
@@ -13629,7 +13629,7 @@ This wording is relative to N4606.
 until</del><ins>schedule the shared state to be made ready when</ins> the
 calling thread exits. <ins>This associates a reference to the shared state with the calling thread.</ins> The 
 destruction of each of that thread's objects with thread storage duration 
-(6.7.5.3 <a href="https://wg21.link/basic.stc.thread">[basic.stc.thread]</a>) is sequenced before making that shared state ready. <ins>When the calling 
+(6.7.6.3 <a href="https://wg21.link/basic.stc.thread">[basic.stc.thread]</a>) is sequenced before making that shared state ready. <ins>When the calling 
 thread makes the shared state ready, if the thread holds the last reference to the shared state, the shared state 
 is destroyed. [<i>Note:</i> This means that the shared state may not become ready until after the <em>asynchronous 
 provider</em> has been destroyed. &mdash; <i>end note</i>]</ins>
@@ -22364,7 +22364,7 @@ are not required to diagnose such invalid specializations, but also don't have t
 <blockquote>
 <p>
 -1- <code>reference_wrapper&lt;T&gt;</code> is a <code>CopyConstructible</code> and <code>CopyAssignable</code> wrapper around a reference 
-to an object or function of type <code>T</code>. <ins><code>T</code> shall be a referenceable type (3.44 <a href="https://wg21.link/defns.referenceable">[defns.referenceable]</a>) that 
+to an object or function of type <code>T</code>. <ins><code>T</code> shall be a referenceable type (3.45 <a href="https://wg21.link/defns.referenceable">[defns.referenceable]</a>) that 
 is not a reference type.</ins>
 <p/>
 -2- <code>reference_wrapper&lt;T&gt;</code> shall be a trivially copyable type (6.8 <a href="https://wg21.link/basic.types">[basic.types]</a>).
@@ -22399,7 +22399,7 @@ and because such an element is rarely used to specify class templates. If the co
 the equivalent wording would be:
 </p>
 <blockquote><p>
-<i>Mandates:</i> <code>reference_wrapper</code> is instantiated with a referenceable type (3.44 <a href="https://wg21.link/defns.referenceable">[defns.referenceable]</a>) 
+<i>Mandates:</i> <code>reference_wrapper</code> is instantiated with a referenceable type (3.45 <a href="https://wg21.link/defns.referenceable">[defns.referenceable]</a>) 
 as the argument for the template parameter <code>T</code>.
 </p></blockquote>
 
@@ -22414,7 +22414,7 @@ as the argument for the template parameter <code>T</code>.
 <p>
 -1- <code>reference_wrapper&lt;T&gt;</code> is a <i>Cpp17CopyConstructible</i> and <i>Cpp17CopyAssignable</i> wrapper around a reference
 to an object or function of type <code>T</code>. <ins>If <code>reference_wrapper</code> is instantiated with a non-referenceable type 
-(3.44 <a href="https://wg21.link/defns.referenceable">[defns.referenceable]</a>) as the argument for the template parameter <code>T</code>, the program is ill-formed.</ins>
+(3.45 <a href="https://wg21.link/defns.referenceable">[defns.referenceable]</a>) as the argument for the template parameter <code>T</code>, the program is ill-formed.</ins>
 <p/>
 -2- <code>reference_wrapper&lt;T&gt;</code> is a trivially copyable type (6.8 <a href="https://wg21.link/basic.types">[basic.types]</a>).
 <p/>
@@ -27848,7 +27848,7 @@ element results in undefined behavior.
 <blockquote class="note">
 <p>
 [<i>Drafting note:</i> Interestingly, albey the <i>Requires:</i> element has nearly vanished, the
-issue is still relevant, see D.14 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a>]
+issue is still relevant, see D.13 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a>]
 </p>
 </blockquote>
 
@@ -31782,7 +31782,7 @@ than <code>alignof(T)</code>, <code>required_alignment</code> equals <code>align
 <code>required_alignment</code> equals <code>A</code></ins>.
 <p/>
 -2- [<i>Note:</i> Hardware could require an object referenced by an <code>atomic_ref</code> to have 
-stricter alignment (6.7.6 <a href="https://wg21.link/basic.align">[basic.align]</a>) than other objects of type <code>T</code>. <del>Further, 
+stricter alignment (6.7.3 <a href="https://wg21.link/basic.align">[basic.align]</a>) than other objects of type <code>T</code>. <del>Further, 
 whether operations on an <code>atomic_ref</code> are lock-free could depend on the alignment of the 
 referenced object.</del> For example, lock-free operations on <code>std::complex&lt;double&gt;</code>
 could be supported only if aligned to <code>2*alignof(double)</code>. &mdash; <i>end note</i>]
@@ -34940,7 +34940,7 @@ changes the definition of program-defined type.
 
 <hr>
 <h3 id="3513"><a href="#3513">3513</a><sup><a href="https://cplusplus.github.io/LWG/issue3513">(i)</a></sup>. Fix definition of program-defined based on its uses</h3>
-<p><b>Section:</b> 3.42 <a href="https://wg21.link/defns.prog.def.type">[defns.prog.def.type]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 3.43 <a href="https://wg21.link/defns.prog.def.type">[defns.prog.def.type]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Johel Ernesto Guerrero Pe&ntilde;a <b>Opened:</b> 2020-12-29 <b>Last modified:</b> 2021-01-30</p>
 <p><b>Priority: </b>3
 </p>
@@ -34998,7 +34998,7 @@ This wording is relative to <a href="https://wg21.link/n4878">N4878</a>.
 </p>
 
 <ol>
-<li><p>Modify 3.42 <a href="https://wg21.link/defns.prog.def.type">[defns.prog.def.type]</a> as indicated:</p>
+<li><p>Modify 3.43 <a href="https://wg21.link/defns.prog.def.type">[defns.prog.def.type]</a> as indicated:</p>
 
 <blockquote>
 <b>3.43 [defns.prog.def.type]</b><br/>
@@ -37405,7 +37405,7 @@ in 24.7 <a href="https://wg21.link/iterator.range">[iterator.range]</a> are avai
 <p><b>Discussion:</b></p>
 <p>
 Currently <code>std::basic_stacktrace</code> has an exposition-only <code>std::vector</code> member for 
-storing its elements. According to 16.3.3.5 <a href="https://wg21.link/objects.within.classes">[objects.within.classes]</a>/3, it seems that it is 
+storing its elements. According to 16.3.3.6 <a href="https://wg21.link/objects.within.classes">[objects.within.classes]</a>/3, it seems that it is 
 effectively required that elements of a <code>std::basic_stacktrace</code> are contiguously stored.
 However, the implication seems not used otherwhere. The iterator type of a <code>std::basic_stacktrace</code> 
 is only required to be random access iterator.
@@ -37862,8 +37862,8 @@ Set priority to 3 after reflector poll.
 <p><b>Discussion:</b></p>
 <p>
 20.4.2.3 <a href="https://wg21.link/mem.res.private">[mem.res.private]</a> says that <code>pmr::memory_resource::do_allocate</code> 
-returns "a pointer to allocated storage" and references 6.7.5.5.2 <a href="https://wg21.link/basic.stc.dynamic.allocation">[basic.stc.dynamic.allocation]</a>. 
-But it's not really clear which parts of 6.7.5.5.2 <a href="https://wg21.link/basic.stc.dynamic.allocation">[basic.stc.dynamic.allocation]</a> define 
+returns "a pointer to allocated storage" and references 6.7.6.5.2 <a href="https://wg21.link/basic.stc.dynamic.allocation">[basic.stc.dynamic.allocation]</a>. 
+But it's not really clear which parts of 6.7.6.5.2 <a href="https://wg21.link/basic.stc.dynamic.allocation">[basic.stc.dynamic.allocation]</a> define 
 "allocated storage". <code>pmr::memory_resource::allocate</code> is not "an allocation function" 
 and not a "replaceable allocation function", so "the value returned by a replaceable allocation 
 function is a non-null pointer value" doesn't apply here, and neither does "different from any 
@@ -37875,7 +37875,7 @@ allowed to return the same address twice, without an intervening deallocation? W
 <p/>
 When discussed on the reflector the consensus was that returning null should not be allowed, 
 it should throw an exception or return a valid dereferenceable pointer. The reference to 
-6.7.5.5.2 <a href="https://wg21.link/basic.stc.dynamic.allocation">[basic.stc.dynamic.allocation]</a> doesn't work to specify this though, so we should 
+6.7.6.5.2 <a href="https://wg21.link/basic.stc.dynamic.allocation">[basic.stc.dynamic.allocation]</a> doesn't work to specify this though, so we should 
 restate the requirements without directly using the core wording for <code>operator new</code>.
 <p/>
 It was also suggested that returning the same value should not be allowed without an intervening 
@@ -38404,7 +38404,7 @@ template&lt;class Allocator&gt; struct hash&lt;vector&lt;bool, Allocator&gt;&gt;
 </blockquote>
 </li>
 
-<li><p>Create a new subclause [depr.vector.bool.swap] after D.19 <a href="https://wg21.link/depr.format">[depr.format]</a></p>
+<li><p>Create a new subclause [depr.vector.bool.swap] after D.20 <a href="https://wg21.link/depr.format">[depr.format]</a></p>
 
 <blockquote>
 <p>
@@ -39097,8 +39097,8 @@ values of type <code>I</code> and <code>S</code>.
 </p>
 </blockquote>
 <p>
-It should also be emphasized that the definitions of move construction (3.33 <a href="https://wg21.link/defns.move.constr">[defns.move.constr]</a>) and
-move assignment (3.32 <a href="https://wg21.link/defns.move.assign">[defns.move.assign]</a>) are compatible even for copyable input iterator types, 
+It should also be emphasized that the definitions of move construction (3.34 <a href="https://wg21.link/defns.move.constr">[defns.move.constr]</a>) and
+move assignment (3.33 <a href="https://wg21.link/defns.move.assign">[defns.move.assign]</a>) are compatible even for copyable input iterator types, 
 because these definitions refer just to expression conditions, and not to concrete operator overloads. So as long
 as an implementation applies these expression conditions, we are safe.
 </p>
@@ -49069,7 +49069,7 @@ See also issue <a href="lwg-active.html#2939" title="Some type-completeness cons
 <p><i>[2023-06-12; Varna]</i></p>
 
 <p>During the review <a href="https://wg21.link/P2874R1" title=" Mandating Annex D">P2874R1</a> the group decided to not change the now decided for
-<i>Preconditions:</i> element in D.14 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a> p3 into a <i>Mandates:</i> element 
+<i>Preconditions:</i> element in D.13 <a href="https://wg21.link/depr.meta.types">[depr.meta.types]</a> p3 into a <i>Mandates:</i> element 
 but would like to solve this by this issue.</p>
 
 
@@ -53512,14 +53512,14 @@ operation.
 
 <hr>
 <h3 id="4005"><a href="#4005">4005</a><sup><a href="https://cplusplus.github.io/LWG/issue4005">(i)</a></sup>. "Required behavior" too narrowly defined</h3>
-<p><b>Section:</b> 3.47 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a>, 16.3.2.4 <a href="https://wg21.link/structure.specifications">[structure.specifications]</a>, 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.functions]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 3.48 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a>, 16.3.2.4 <a href="https://wg21.link/structure.specifications">[structure.specifications]</a>, 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.functions]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2023-11-03 <b>Last modified:</b> 2024-06-24</p>
 <p><b>Priority: </b>2
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-The library's definition of the term "required behavior" (3.47 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a>) makes it specific to 
+The library's definition of the term "required behavior" (3.48 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a>) makes it specific to 
 certain replaceable functions such as the replaceable global allocation functions. Notably, it is not one of the elements 
 that are allowed to appear in the descriptions of general function semantics. That is, it isn't in the list in 
 16.3.2.4 <a href="https://wg21.link/structure.specifications">[structure.specifications]</a> p3.
@@ -53534,7 +53534,7 @@ customizable but the customizations are required to behave a certain way.
 <b>Daniel:</b>
 <p/>
 Bullet (2.4) of 16.4.5.8 <a href="https://wg21.link/res.on.functions">[res.on.functions]</a> also contradicts to the more narrow definition of 
-3.47 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a> by suddenly extending it to "destructor operations".
+3.48 <a href="https://wg21.link/defns.required.behavior">[defns.required.behavior]</a> by suddenly extending it to "destructor operations".
 </p>
 
 <p><i>[2024-03-11; Reflector poll]</i></p>
@@ -57438,7 +57438,7 @@ expression that exchanges the denoted values. <code>S</code> is a constant expre
 <ol style="list-style-type: none">
 <li><p><del>(2.3.1) &mdash; <code>T</code> is a literal type (6.8.1 <a href="https://wg21.link/basic.types.general">[basic.types.general]</a>),</del></p></li>
 <li><p>(2.3.2) &mdash; both <code>E1 = std::move(E2)</code> and <code>E2 = std::move(E1)</code> are constant subexpressions 
-(3.14 <a href="https://wg21.link/defns.const.subexpr">[defns.const.subexpr]</a>), and</p></li>
+(3.15 <a href="https://wg21.link/defns.const.subexpr">[defns.const.subexpr]</a>), and</p></li>
 <li><p>(2.3.3) &mdash; the full-expressions of the initializers in the declarations</p>
 <blockquote><pre>
 T t1(std::move(E1));
@@ -64258,9 +64258,9 @@ template&lt;class T&gt; [[nodiscard]] constexpr T* launder(T* p) noexcept;
 -1- <i>Mandates</i>: <code>!is_function_v&lt;T&gt; &amp;&amp; !is_void_v&lt;T&gt;</code> is <code>true</code>.
 <p/>
 -2- <i>Preconditions</i>: <code>p</code> represents the address <i>A</i> of a byte in memory.
-An object <i>X</i> <del>that is within its lifetime (6.7.3 <a href="https://wg21.link/basic.life">[basic.life]</a>) and</del>
+An object <i>X</i> <del>that is within its lifetime (6.7.4 <a href="https://wg21.link/basic.life">[basic.life]</a>) and</del>
 whose type is similar (7.3.6 <a href="https://wg21.link/conv.qual">[conv.qual]</a>) to <code>T</code> is located at the address
-<i>A</i><ins>, and is either within its lifetime (6.7.3 <a href="https://wg21.link/basic.life">[basic.life]</a>) or is an array
+<i>A</i><ins>, and is either within its lifetime (6.7.4 <a href="https://wg21.link/basic.life">[basic.life]</a>) or is an array
 element subobject whose containing array object is within its lifetime</ins>. All bytes of storage
 that would be reachable through (6.8.4 <a href="https://wg21.link/basic.compound">[basic.compound]</a>) the result are reachable through
 <code>p</code>.
@@ -64660,14 +64660,14 @@ operations to throw exceptions. &mdash; <i>end note</i>]
 
 <hr>
 <h3 id="4133"><a href="#4133">4133</a><sup><a href="https://cplusplus.github.io/LWG/issue4133">(i)</a></sup>. <code><i>awaitable-receiver</i></code>'s members are potentially throwing</h3>
-<p><b>Section:</b> 33.12.1 <a href="https://wg21.link/exec.as.awaitable">[exec.as.awaitable]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 33.13.1 <a href="https://wg21.link/exec.as.awaitable">[exec.as.awaitable]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2024-07-30 <b>Last modified:</b> 2024-08-21</p>
 <p><b>Priority: </b>1
 </p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
 <p><b>Discussion:</b></p>
 <p>
-The specification of <code><i>awaitable-receiver</i></code> in 33.12.1 <a href="https://wg21.link/exec.as.awaitable">[exec.as.awaitable]</a>/p4 
+The specification of <code><i>awaitable-receiver</i></code> in 33.13.1 <a href="https://wg21.link/exec.as.awaitable">[exec.as.awaitable]</a>/p4 
 as of <a href="https://wg21.link/N4988" title=" Working Draft, Programming Languages — C++">N4988</a> is not taking into consideration the fact that the <code>resume()</code> 
 and <code>promise()</code> member functions on <code>coroutine_handle&lt;P&gt;</code> are not marked <code>noexcept</code>. 
 <code><i>awaitable-receiver</i></code>'s member functions must all be <code>noexcept</code>, but they are 
@@ -65195,7 +65195,7 @@ consteval bool is_within_lifetime(const <ins>T</ins><del>auto</del>* p) noexcept
 <ins>-?- <i>Mandates</i>: <code>is_object_v&lt;T&gt;</code> is <code>true</code>.</ins>
 <p/>
 -3- <i>Returns</i>: <code>true</code> if <code>p</code> is a pointer to an object that is 
-within its lifetime (6.7.3 <a href="https://wg21.link/basic.life">[basic.life]</a>); otherwise, <code>false</code>.
+within its lifetime (6.7.4 <a href="https://wg21.link/basic.life">[basic.life]</a>); otherwise, <code>false</code>.
 <p/>
 -4- <i>Remarks</i>: During the evaluation of an expression <code>E</code> as a core 
 constant expression, a call to this function is ill-formed unless <code>p</code> 
@@ -65560,7 +65560,7 @@ function-like macros (15.6 <a href="https://wg21.link/cpp.replace">[cpp.replace]
 
 <hr>
 <h3 id="4150"><a href="#4150">4150</a><sup><a href="https://cplusplus.github.io/LWG/issue4150">(i)</a></sup>. The preconditions on <code>run_loop::run()</code> are too strict</h3>
-<p><b>Section:</b> 33.11.1.4 <a href="https://wg21.link/exec.run.loop.members">[exec.run.loop.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+<p><b>Section:</b> 33.12.1.4 <a href="https://wg21.link/exec.run.loop.members">[exec.run.loop.members]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
  <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2024-09-05 <b>Last modified:</b> 2024-09-06</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
@@ -65595,7 +65595,7 @@ This wording is relative to <a href="https://wg21.link/N4988" title=" Working Dr
 </p>
 
 <ol>
-<li><p>Modify 33.11.1.4 <a href="https://wg21.link/exec.run.loop.members">[exec.run.loop.members]</a> as indicated:</p>
+<li><p>Modify 33.12.1.4 <a href="https://wg21.link/exec.run.loop.members">[exec.run.loop.members]</a> as indicated:</p>
 
 <blockquote><pre>
 void run();
@@ -68204,7 +68204,7 @@ This wording is relative to <a href="https://wg21.link/N5001">N5001</a>.
 
 namespace std::ranges {
   [&hellip;]
-  // <i> [range.cache.latest], cache latest view</i>
+  // <i>25.7.34 <a href="https://wg21.link/range.cache.latest">[range.cache.latest]</a>, cache latest view</i>
   template&lt;input_range V&gt;
     requires view&lt;V&gt;
   class cache_latest_view;                                                                <ins>// <i>freestanding</i></ins>

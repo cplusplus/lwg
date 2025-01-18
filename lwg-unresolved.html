@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2025-01-18 at 13:28:55 UTC
+<p>Revised 2025-01-18 at 14:56:59 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -65294,6 +65294,75 @@ namespace std::ranges {
   [&hellip;]
 }
 </pre></blockquote>
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4190"><a href="#4190">4190</a><sup><a href="https://cplusplus.github.io/LWG/issue4190">(i)</a></sup>. Specification of <i>completion-signatures-for</i> in [exec.snd.expos]/p39 is recursive</h3>
+<p><b>Section:</b> 33.9.2 <a href="https://wg21.link/exec.snd.expos">[exec.snd.expos]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2025-01-02 <b>Last modified:</b> 2025-01-18</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+33.9.2 <a href="https://wg21.link/exec.snd.expos">[exec.snd.expos]</a>/p39 reads:
+</p>
+<blockquote style="border-left: 3px solid #ccc;padding-left: 15px;">
+<p>
+For a subexpression <code class='backtick'>sndr</code> let <code class='backtick'>Sndr</code> be <code class='backtick'>decltype((sndr))</code>. Let <code class='backtick'>rcvr</code> be a receiver with an associated
+environment of type <code class='backtick'>Env</code> such that <code>sender_in&lt;Sndr, Env&gt;</code> is <code class='backtick'>true</code>. 
+<code><i>completion-signatures-for</i>&lt;Sndr, Env&gt;</code> denotes a specialization of <code class='backtick'>completion_signatures</code>, 
+the set of whose template arguments correspond to the set of completion operations that are potentially 
+evaluated as a result of starting (33.3 <a href="https://wg21.link/exec.async.ops">[exec.async.ops]</a>) the operation state that results from 
+connecting <code class='backtick'>sndr</code> and <code class='backtick'>rcvr</code>. When <code>sender_in&lt;Sndr, Env&gt;</code> is <code class='backtick'>false</code>, the type denoted
+by <code><i>completion-signatures-for</i>&lt;Sndr, Env&gt;</code>, if any, is not a specialization of 
+<code class='backtick'>completion_signatures</code>.
+</p>
+</blockquote>
+<p>
+This paragraph is trying to specify the return type of <code><i>basic-sender</i>::get_completion_signatures</code>, 
+but it immediately goes off the rails when it tests for the satisfaction of <code>sender_in&lt;Sndr, Env&gt;</code>. 
+The <code>sender_in&lt;Sndr, Env&gt;</code> concept requires that <code>get_completion_signatures(sndr, env)</code> is 
+well-formed and that its type is a specialization of <code>completion_signatures</code>. But the return type of 
+<code class='backtick'>get_completion_signatures(sndr, env)</code> is exactly the thing this para is trying to define!
+</p>
+
+
+<p id="res-4190"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N5001">N5001</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 33.9.2 <a href="https://wg21.link/exec.snd.expos">[exec.snd.expos]</a> as indicated:</p>
+
+<blockquote><p>
+-39- <ins>Let type <code class='backtick'>Sndr</code> be a (possibly <code class='backtick'>const</code>-qualified) specialization of <code><i>basic-sender</i></code> 
+or an lvalue reference of such, and let <code class='backtick'>Rcvr</code> be the type of a receiver with an associated environment 
+of type <code class='backtick'>Env</code>. If the type <code><i>basic-operation</i>&lt;Sndr, Rcvr&gt;</code> is well-formed, let <code class='backtick'>op</code> be 
+an lvalue subexpression of that type.</ins><del>For a subexpression <code class='backtick'>sndr</code> let <code class='backtick'>Sndr</code> be <code class='backtick'>decltype((sndr))</code>. 
+Let <code class='backtick'>rcvr</code> be a receiver with an associated environment of type <code class='backtick'>Env</code> such that <code>sender_in&lt;Sndr, Env&gt;</code> 
+is <code class='backtick'>true</code>.</del> <code><i>completion-signatures-for</i>&lt;Sndr, Env&gt;</code> denotes a specialization of 
+<code class='backtick'>completion_signatures</code>, the set of whose template arguments correspond to the set of completion operations 
+that are potentially evaluated  <ins>(6.3 <a href="https://wg21.link/basic.def.odr">[basic.def.odr]</a>)</ins> as a result of 
+<ins>evaluating <code class='backtick'>op.start()</code>.</ins><del>starting (33.3 <a href="https://wg21.link/exec.async.ops">[exec.async.ops]</a>) the operation state that results from 
+connecting <code class='backtick'>sndr</code> and <code class='backtick'>rcvr</code>. When <code>sender_in&lt;Sndr, Env&gt;</code> is <code class='backtick'>false</code></del><ins>Otherwise</ins>, 
+the type denoted by <code><i>completion-signatures-for</i>&lt;Sndr, Env&gt;</code>, if any, is not a 
+specialization of <code class='backtick'>completion_signatures</code>.
+<p/>
+<i>Recommended practice</i>: When <ins>the type <code><i>basic-operation</i>&lt;Sndr, Rcvr&gt;</code> is 
+ill-formed</ins><del><code>sender_in&lt;Sndr, Env&gt;</code> is <code class='backtick'>false</code></del>, implementations are encouraged 
+to use the type denoted by <code><i>completion-signatures-for</i>&lt;Sndr, Env&gt;</code> to communicate to 
+users why.
+
+</p></blockquote>
 </li>
 </ol>
 

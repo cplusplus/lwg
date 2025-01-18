@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<p>Revised 2025-01-18 at 16:00:41 UTC
+<p>Revised 2025-01-18 at 16:18:29 UTC
 </p><h2>Unresolved Issues</h2>
 <hr>
 <h3 id="423"><a href="#423">423</a><sup><a href="https://cplusplus.github.io/LWG/issue423">(i)</a></sup>. Effects of negative <code>streamsize</code> in iostreams</h3>
@@ -65408,6 +65408,88 @@ are effectively cast to <code>complex&lt;common_type_t&lt;T1, <ins>T3</ins><del>
 <code class='backtick'>T3</code> is <code class='backtick'>double</code> if <code class='backtick'>T2</code> is an integer type and <code class='backtick'>T2</code> otherwise</ins>. If <code>common_type_t&lt;T1, <ins>T3</ins><del>T2</del>&gt;</code> 
 is not well-formed, then the program is ill-formed.
 </p></blockquote>
+</li>
+</ol>
+
+
+
+
+
+
+<hr>
+<h3 id="4192"><a href="#4192">4192</a><sup><a href="https://cplusplus.github.io/LWG/issue4192">(i)</a></sup>. &sect;[ios.base.cons] <code class='backtick'>ios_base</code> members may not have indeterminate values after construction</h3>
+<p><b>Section:</b> 31.5.2.8 <a href="https://wg21.link/ios.base.cons">[ios.base.cons]</a>, 31.5.2.4 <a href="https://wg21.link/ios.base.locales">[ios.base.locales]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
+ <b>Submitter:</b> S. B. Tam <b>Opened:</b> 2025-01-12 <b>Last modified:</b> 2025-01-18</p>
+<p><b>Priority: </b>Not Prioritized
+</p>
+<p><b>View all other</b> <a href="lwg-index.html#ios.base.cons">issues</a> in [ios.base.cons].</p>
+<p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
+<p><b>Discussion:</b></p>
+<p>
+31.5.2.8 <a href="https://wg21.link/ios.base.cons">[ios.base.cons]</a> specifies that
+</p>
+<blockquote style="border-left: 3px solid #ccc;padding-left: 15px;">
+<p>
+Each <code class='backtick'>ios_base</code> member has an indeterminate value after construction.
+</p>
+</blockquote>
+<p>
+However
+</p>
+<ul>
+<li><p>If the <code class='backtick'>ios_base</code> object has static storage duration, the members would have been zero-initialized.</p></li>
+<li><p>If the <code class='backtick'>ios_base</code> object has automatic storage duration, the members would have erroneous values.</p></li>
+</ul>
+<p>
+In either case, the constructor cannot cause the members to have indeterminate values after construction.
+<p/>
+A related problem is that 31.5.2.4 <a href="https://wg21.link/ios.base.locales">[ios.base.locales]</a> requires <code class='backtick'>ios_base::getloc</code> to return:
+</p>
+<blockquote style="border-left: 3px solid #ccc;padding-left: 15px;">
+<p>
+If no locale has been imbued, a copy of the global C++ locale, <code class='backtick'>locale()</code>, in effect at the time of construction.
+</p>
+</blockquote>
+<p>
+However, according to 31.5.2.8 <a href="https://wg21.link/ios.base.cons">[ios.base.cons]</a>, the corresponding member is not initialized 
+until <code class='backtick'>basic_ios::init</code> is called.
+</p>
+
+
+<p id="res-4192"><b>Proposed resolution:</b></p>
+<p>
+This wording is relative to <a href="https://wg21.link/N5001">N5001</a>.
+</p>
+
+<ol>
+
+<li><p>Modify 31.5.2.4 <a href="https://wg21.link/ios.base.locales">[ios.base.locales]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+ios_base();
+</pre>
+<blockquote><p>
+-1- <i>Effects</i>: Each <code class='backtick'>ios_base</code> member has an <ins>unspecified (possibly</ins> indeterminate <ins>or erroneous)</ins> 
+value after construction. The object's members shall be initialized by calling <code class='backtick'>basic_ios::init</code> before the object's 
+first use or before it is destroyed, whichever comes first; otherwise the behavior is undefined.
+</p></blockquote>
+</blockquote>
+</li>
+
+<li><p>Modify 31.5.2.8 <a href="https://wg21.link/ios.base.cons">[ios.base.cons]</a> as indicated:</p>
+
+<blockquote>
+<pre>
+locale getloc() const;
+</pre>
+<blockquote><p>
+-4- <i>Returns</i>: If no locale has been imbued, a copy of the global C++ locale, <code class='backtick'>locale()</code>, 
+in effect at the time of <del>construction</del><ins>the last <code class='backtick'>basic_ios::init</code> call on the current 
+object</ins>. Otherwise, returns the imbued locale, to be used to perform locale-dependent 
+input and output operations.
+</p></blockquote>
+</blockquote>
 </li>
 </ol>
 

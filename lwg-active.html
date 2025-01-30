@@ -67,7 +67,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2025-01-26</td>
+  <td align="left">2025-01-30</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2025-01-26 at 14:52:44 UTC
+<p>Revised 2025-01-30 at 16:55:39 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -68857,8 +68857,8 @@ In either case, twice as many projections as comparisons.
 <hr>
 <h3 id="4197"><a href="#4197">4197</a><sup><a href="https://cplusplus.github.io/LWG/issue4197">(i)</a></sup>. Complexity of <code class='backtick'>std::visit</code> with immediate functions</h3>
 <p><b>Section:</b> 22.6.7 <a href="https://wg21.link/variant.visit">[variant.visit]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Jiang An <b>Opened:</b> 2025-01-26 <b>Last modified:</b> 2025-01-26</p>
-<p><b>Priority: </b>Not Prioritized
+ <b>Submitter:</b> Jiang An <b>Opened:</b> 2025-01-26 <b>Last modified:</b> 2025-01-30</p>
+<p><b>Priority: </b>2
 </p>
 <p><b>View all other</b> <a href="lwg-index.html#variant.visit">issues</a> in [variant.visit].</p>
 <p><b>View all issues with</b> <a href="lwg-status.html#New">New</a> status.</p>
@@ -68873,6 +68873,17 @@ In order to properly handle immediate functions in <code class='backtick'>std::v
 the vtable, or do some non-constant-time lookup each time when calling <code class='backtick'>std::visit</code>. In other words, 
 22.6.7 <a href="https://wg21.link/variant.visit">[variant.visit]</a>/8 seems to be unimplementable when an immediate function is involved.
 </p>
+
+<p><i>[2025-01-01; <a href="https://wg21.link/P3603R0">P3603R0</a> addresses this]</i></p>
+
+
+
+<p><i>[2025-01-30; Reflector poll]</i></p>
+
+<p>
+Set priority to 2 after reflector poll.
+</p>
+
 
 
 <p id="res-4197"><b>Proposed resolution:</b></p>

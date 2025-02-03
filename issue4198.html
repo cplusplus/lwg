@@ -122,28 +122,28 @@ we also need to change how we specify the variant type of <code class='backtick'
 <blockquote>
 Let <code class='backtick'>Sigs</code> be a pack of the arguments to the <code class='backtick'>completion_signatures</code>
 specialization named by
-<code class='backtick'>completion_signatures_of_t&lt;child-type&lt;Sndr&gt;, env_of_t&lt;Rcvr&gt;&gt;</code>.
+<code>completion_signatures_of_t&lt;<i>child-type</i>&lt;Sndr&gt;, env_of_t&lt;Rcvr&gt;&gt;</code>.
 Let <i><code>as-tuple</code></i> be an alias template
 <del>
 that transforms a completion signature <code class='backtick'>Tag(Args...)</code> into
-the tuple specialization <code class='backtick'>decayed-tuple&lt;Tag, Args...&gt;</code>.
+the tuple specialization <code><i>decayed-tuple</i>&lt;Tag, Args...&gt;</code>.
 </del>
 <ins>
-such that <code class='backtick'>as-tuple&lt;Tag(Args...)&gt;</code> denotes
-the tuple specialization <code class='backtick'>decayed-tuple&lt;Tag, Args...&gt;</code>,
-and let is-nothrow-decay-copy-sig be
-a variable template such that
-<code>is-nothrow-decay-copy-sig&lt;Tag(Args...)&gt;</code>
+such that <code><i>as-tuple</i>&lt;Tag(Args...)&gt;</code> denotes
+the tuple specialization <code><i>decayed-tuple</i>&lt;Tag, Args...&gt;</code>,
+and let <code><i>is-nothrow-decay-copy-sig</i></code>
+be a variable template such that
+<code><i>is-nothrow-decay-copy-sig</i>&lt;Tag(Args...)&gt;</code>
 is a core constant expression of type <code class='backtick'>bool const</code> and whose value
 is <code class='backtick'>true</code> if the types <code class='backtick'>Args...</code> are all nothrow decay-copyable, and <code class='backtick'>false</code>
 otherwise.
 Let <i><code>error-completion</code></i> be a pack consisting of the type
 <code class='backtick'>set_error_t(exception_ptr)</code> if
-<code>(is-nothrow-decay-copy-sig&lt;Sigs&gt; &amp;&amp;...)</code>
+<code>(<i>is-nothrow-decay-copy-sig</i>&lt;Sigs&gt; &amp;&amp;...)</code>
 is <code class='backtick'>false</code>, and an empty pack otherwise.
 </ins>
 Then <code class='backtick'>variant_t</code> denotes the type
-<code>variant&lt;monostate, as-tuple&lt;Sigs&gt;...<ins>, <i>error-completion</i>...</ins>&gt;</code>,
+<code>variant&lt;monostate, <i>as-tuple</i>&lt;Sigs&gt;...<ins>, <i>error-completion</i>...</ins>&gt;</code>,
 except with duplicate types removed.
 </blockquote>
 

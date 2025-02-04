@@ -83,7 +83,8 @@ Let <code class='backtick'>sndr</code> and <code class='backtick'>env</code> be 
 If
 <code><i>sender-for</i>&lt;Sndr, <i>decayed-typeof</i>&lt;<i>let-cpo</i>&gt;&gt;</code>
 is <code>false</code>,
-then the expression <code class='backtick'>&lt;i&gt;let-cpo&lt;/i&gt;.transform_env(sndr, env)</code> is ill-formed.
+then the expression <code><i>let-cpo</i>.transform_env(sndr, env)</code>
+is ill-formed.
 Otherwise, it is equal to
 <code><i>JOIN-ENV</i>(<i>let-env</i>(sndr), <i>FWD-ENV</i>(env))</code>.
 </blockquote>

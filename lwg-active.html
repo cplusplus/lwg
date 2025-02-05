@@ -67,7 +67,7 @@
 </tr>
 <tr>
   <td align="left">Date:</td>
-  <td align="left">2025-02-04</td>
+  <td align="left">2025-02-05</td>
 </tr>
 <tr>
   <td align="left">Project:</td>
@@ -79,7 +79,7 @@
 </tr>
 </table>
 <h1>C++ Standard Library Active Issues List (Revision D125)</h1>
-<p>Revised 2025-02-04 at 22:22:18 UTC
+<p>Revised 2025-02-05 at 01:06:23 UTC
 </p>
   <p>Reference ISO/IEC IS 14882:2020(E)</p>
   <p>Also see:</p>
@@ -69676,7 +69676,7 @@ except with duplicate types removed.
 <hr>
 <h3 id="4205"><a href="#4205">4205</a><sup><a href="https://cplusplus.github.io/LWG/issue4205">(i)</a></sup>. <code class='backtick'>let_[*].transform_env</code> is specified in terms of the <code class='backtick'>let_*</code> sender itself instead of its child</h3>
 <p><b>Section:</b> 33.9.12.8 <a href="https://wg21.link/exec.let">[exec.let]</a> <b>Status:</b> <a href="lwg-active.html#New">New</a>
- <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2025-02-04 <b>Last modified:</b> 2025-02-04</p>
+ <b>Submitter:</b> Eric Niebler <b>Opened:</b> 2025-02-04 <b>Last modified:</b> 2025-02-05</p>
 <p><b>Priority: </b>Not Prioritized
 </p>
 <p><b>View other</b> <a href="lwg-index-open.html#exec.let">active issues</a> in [exec.let].</p>
@@ -69726,10 +69726,9 @@ Otherwise, it is equal to
 <del>
 <code><i>JOIN-ENV</i>(<i>let-env</i>(sndr), <i>FWD-ENV</i>(env))</code>.
 </del>
-<ins><pre><code>
-   auto&amp; [_, _, child] = sndr;
-   return <i>JOIN-ENV</i>(<i>let-env</i>(child), <i>FWD-ENV</i>(env));
-</code></pre></ins>
+<pre><code><ins>  auto&amp; [_, _, child] = sndr;
+  return <i>JOIN-ENV</i>(<i>let-env</i>(child), <i>FWD-ENV</i>(env));</ins>
+</code></pre>
 </blockquote>
 </li>
 </ol>
